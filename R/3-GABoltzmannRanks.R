@@ -1,6 +1,3 @@
-source('0-Fn AG Bayesian MDL.R')
-source('1-RandomKeys.R')
-source('2-MaMBOltzmann.R')
 
 GABoltzmannMutation2 <- function(param, Mutation = 0.03, Temperature = 27){
   
