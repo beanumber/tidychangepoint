@@ -1,6 +1,3 @@
-source('Datos.R')
-source('0-Fn AG Bayesian MDL.R')
-source('3-GABoltzmannRanks.R')
 
 
 param <- list(nombre_datos = c("ciclones","O3","O3_U61","PM10","PM10_U100", "DataCPSimRebases")[6],
@@ -38,6 +35,4 @@ param <- list(nombre_datos = c("ciclones","O3","O3_U61","PM10","PM10_U100", "Dat
               print_progress_plots = T,
               value_set_seed = 123) # parametros de dist a priori, cada renglon corresponde a una dist parametro
 
-revisor_param(param)
-
-GABoltzmannMutation2(param)
+usethis::use_data(param, overwrite = TRUE)
