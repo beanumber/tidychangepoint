@@ -7,7 +7,7 @@
 AG_BMDL_1_paso(x, mat_cp, param)
 }
 \arguments{
-\item{x}{}
+\item{x}{a vector}
 
 \item{mat_cp}{}
 

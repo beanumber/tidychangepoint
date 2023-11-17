@@ -270,8 +270,8 @@ revisor_param <- function(param,
 
 #' Algoritmo genético de Bayesian MDL a un paso
 #'
-#' @param x 
-#' @param mat_cp 
+#' @param x a vector 
+#' @param mat_cp a matrix 
 #' @param param 
 #'
 #' @return
