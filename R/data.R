@@ -12,3 +12,7 @@
 #' DataCPSimRebases
 #' @docType data
 "DataCPSimRebases"
+
+#' param
+#' @docType data
+"param"

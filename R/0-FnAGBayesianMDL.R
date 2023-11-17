@@ -339,7 +339,7 @@ AG_BMDL_r_paso <- function(param){
   vec_min_BMDL <- rep(0,param$r)
   # El siguiete for va sobre en cada paso haciendo una nueva generación
   vec_para_for <- 1:param$r
-  pb <- txtProgressBar(min = 1, max = length(vec_para_for), style = 3, width = 60)
+  pb <- utils::txtProgressBar(min = 1, max = length(vec_para_for), style = 3, width = 60)
   par(mfrow=c(2,1),mar = c(1, 4, 2, 2))
   for(i in vec_para_for){
     # Hacemos un paso del AG con el mat_cp anterior
@@ -353,7 +353,7 @@ AG_BMDL_r_paso <- function(param){
      #Imprimimos el porcentaje de progreso
     
     if(param$print_progress_bar) {
-      setTxtProgressBar(pb, i)
+      utils::setTxtProgressBar(pb, i)
      }
     # # Graficamos el valor de BMDL
     # plot(lista_AG$vec_min_BMDL,
@@ -390,7 +390,7 @@ AG_BMDL_r_paso <- function(param){
                        param$r,"_k",
                        param$k,lista_AG$valor_BMDL_minimo,".pdf")
   
-  dev.print(pdf, nombre_pdf,width=16, height=10)
+  grDevices::dev.print(pdf, nombre_pdf,width=16, height=10)
   cat("Se guardo la imagen:\n",nombre_pdf,"\n")
   
   nombre_archivo_AG <- paste0(param$nombre_carpeta_RData,"/Dat_AGBMDL_",param$nombre_datos,"_rf_",
@@ -416,6 +416,7 @@ AG_BMDL_r_paso <- function(param){
 #' @param mat_low_upp 
 #' @param vec_dist_a_priori 
 #' @param mat_phi 
+#' @param ajuste_bloque description
 #'
 #' @return
 #' @export
@@ -837,7 +838,7 @@ graf_puntos_cambio_repetidos <- function(lista_AG) {
                         lista_AG$param$r,"_k",
                         lista_AG$param$k,lista_AG$valor_BMDL_minimo,".pdf"))
   
-  dev.print(pdf, nombre_pdf,width=16, height=10)
+  grDevices::dev.print(pdf, nombre_pdf,width=16, height=10)
   cat("Se guardo la imagen:\n",nombre_pdf,"\n")
 }
 
@@ -1071,10 +1072,10 @@ genera_insumos_bloque_sin_theta <- function(cp,x){
 #' 4 Number of change points in the best chromosomes
 #' 
 #' @export
+#' @import graphics
 #'
 #' @examples
 graficas_BMDL <- function(lista_AG,param) {
-  require(graphics)
   par(mfrow=c(2,2),mar = c(2, 4, 2, 2))
   # 1.- Datos reales
   # plot.stepfun(lista_AG$x, col.vert = "gray20",main="Data",xlim = range(lista_AG$x),ylab="m(t)")

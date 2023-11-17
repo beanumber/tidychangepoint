@@ -29,6 +29,8 @@ Bayesaian_MDL_1_cp(
 \item{vec_dist_a_priori}{}
 
 \item{mat_phi}{}
+
+\item{ajuste_bloque}{description}
 }
 \description{
 Bayesian MDL para un vector de puntos de cambio
