@@ -1,3 +1,4 @@
+globalVariables("x")
 #-------------------------------------------------------------------------#
 #                                                                         #
 #             Funciones de algoritmos geneticos Bayesian MDL              #
