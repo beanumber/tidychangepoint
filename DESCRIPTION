@@ -1,9 +1,18 @@
 Package: BayesianMDLGA
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9002
-Authors@R: 
-    person("First", "Last", , "first.last@example.com", role = c("aut", "cre"),
-           comment = c(ORCID = "YOUR-ORCID-ID"))
+Authors@R: c(
+    person(
+      "Carlos A.", "Taimal", email = "first.last@example.com", 
+      role = c("aut"), comment = c(ORCID = "YOUR-ORCID-ID")
+    ),
+    person(
+      "Biviana", "Suarez Sierra", email = "first.last@example.com", 
+      role = c("aut", "cre"), comment = c(ORCID = "YOUR-ORCID-ID")
+    ),
+    person("Benjamin S.", "Baumer", role = c("ctb"), 
+           comment = c(ORCID = "0000-0002-3279-0516"))
+  )
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
 Encoding: UTF-8
