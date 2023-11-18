@@ -1397,7 +1397,7 @@ MAP_NHPP <- function(initial_val_optim,mat_low_upp,vec_d_i,tau1,tau2,rf_type,vec
   my_fn <- function(theta){  -Bloq_LogPost_NHPP(vec_d_i,tau1,tau2,rf_type,theta,vec_dist_a_priori,mat_phi)}
   my_gn <- function(theta){-D_Bloq_LogPost_NHPP(vec_d_i,tau1,tau2,rf_type,theta,vec_dist_a_priori,mat_phi)}
   # Calculamos el mínimo
-  (val_optimos <- optim(initial_val_optim, fn=my_fn, gr=my_gn,
+  (val_optimos <- stats::optim(initial_val_optim, fn=my_fn, gr=my_gn,
                         lower = mat_low_upp[,1],upper = mat_low_upp[,2], 
                         method = "L-BFGS-B"))
   return(val_optimos)
