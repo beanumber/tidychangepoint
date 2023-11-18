@@ -1354,7 +1354,7 @@ sim_k_cp_BMDL <- function(x,param) {
 #' @param cp vector de extendido de puntos de cambio
 #'
 #' @return regresa la evaluación de la penalización
-#'         P_{\theta,\tau} = \sum_{i=1}^{m+1}\dfrac{\ln(\tau_i-\tau_{i-1})}{2}+\ln(m)+\sum_{i=2}^m\ln(\tau_i)
+#'         $$P_{\theta,\tau} = \sum_{i=1}^{m+1}\dfrac{\ln(\tau_i-\tau_{i-1})}{2}+\ln(m)+\sum_{i=2}^m\ln(\tau_i)$$
 #' @export
 #'
 #' @examples
