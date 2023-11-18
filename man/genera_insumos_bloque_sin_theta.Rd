@@ -14,7 +14,7 @@ tau_{m+1}, 0, ..., 0}
 }
 \value{
 regresa una lista con una matriz de 5 columnas la cual tiene
-los el tau_{i-1}, tau_i, theta\link{1}, theta\link{2} y theta\link{3}, y también
+los el tau_{i-1}, tau_i, theta_1, theta_2 y theta_3, y también
 una lista con los días de cada régimen
 }
 \description{

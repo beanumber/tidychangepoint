@@ -1040,7 +1040,7 @@ grafica_datos_e_intervalos <- function(lista_AG,param){
 #' @param x datos de rebases
 #'
 #' @return regresa una lista con una matriz de 5 columnas la cual tiene 
-#'         los el tau_{i-1}, tau_i, theta[1], theta[2] y theta[3], y también
+#'         los el tau_{i-1}, tau_i, theta_1, theta_2 y theta_3, y también
 #'         una lista con los días de cada régimen
 #' @export
 #'
