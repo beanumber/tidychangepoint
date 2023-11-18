@@ -437,7 +437,6 @@ Bayesaian_MDL_1_cp <- function(cp,x,rf_type,initial_val_optim,mat_low_upp,vec_di
 
 #' Bayesian MDL para un vector de puntos de cambio
 #'
-#' @param cp 
 #' @param x 
 #' @param rf_type 
 #' @param initial_val_optim 
