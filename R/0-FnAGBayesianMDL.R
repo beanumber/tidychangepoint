@@ -275,10 +275,9 @@ revisor_param <- function(param,
 #' @param mat_cp a matrix 
 #' @param param 
 #'
-#' @return
+#' @return A `list` of length 2
 #' @export
 #'
-#' @examples
 AG_BMDL_1_paso <- function(x,mat_cp,param){
   # N <- length(x) # ANTES
   N <- max(x)
