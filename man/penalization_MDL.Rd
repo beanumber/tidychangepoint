@@ -11,7 +11,9 @@ penalization_MDL(cp, rf_type)
 }
 \value{
 regresa la evaluación de la penalización
-$$P_{\theta,\tau} = \sum_{i=1}^{m+1}\dfrac{\ln(\tau_i-\tau_{i-1})}{2}+\ln(m)+\sum_{i=2}^m\ln(\tau_i)$$
+\deqn{
+   P_{\theta,\tau} = \sum_{i=1}^{m+1}\dfrac{\ln(\tau_i-\tau_{i-1})}{2}+\ln(m)+\sum_{i=2}^m\ln(\tau_i)
+ }
 }
 \description{
 Penalización MDL

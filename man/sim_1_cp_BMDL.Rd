@@ -11,18 +11,40 @@ sim_1_cp_BMDL(x, param)
 
 \item{param}{lista de parámetros globales}
 }
-\value{
-regresa un vector de tamaño max_num_cp+3 donde la primera entrada es
-m, la segunda v_0=1, ...., v_{m+1}=N,0,...,0
-por ejemplo: c(4,1,3,8,11,15,20,0,0,0,0) para m=4,max_num_cp=8, N=20.
-Se tienen m puntos de cambio, los cuales \tau_0=1 y \tau_{m+1}= N+1, pero en nuestro caso
-tenemos que los vectores cp tienen c(m,\tau_0=1,\tau_1,...,\tau_{m-1},\tau_m= N,0,0,0)
-por lo cual se nosotros: 1) empieza con el número de puntos de cambio; 2) la
-segunda entrada es un uno; 3) la tercera entrada es el primer punto de cambio;
-4) las siguientes son otros puntos de cambio; 5) la siguiente entrada después de punto de
-cambio tiene el valor  N; y 6) los siguientes son númores cero hasta llenarlo
-para que sea de tamaño max_num_cp
-}
 \description{
 Genera un cromosoma de puntos de cambio para el Bayesian MDL
+}
+\details{
+regresa un vector de tamaño \code{max_num_cp+3} donde la primera entrada es
+m, la segunda \eqn{v_0=1, ...., v_{m+1}=N,0,...,0}
+por ejemplo: \code{c(4,1,3,8,11,15,20,0,0,0,0)} para \code{m=4}, \eqn{max_num_cp=8}, \eqn{N=20}.
+Se tienen m puntos de cambio, los cuales \eqn{\tau_0=1} y \eqn{\tau_{m+1}= N+1}, pero en nuestro caso
+tenemos que los vectores cp tienen \eqn{c(m,\tau_0=1,\tau_1,...,\tau_{m-1},\tau_m= N,0,0,0)}
+por lo cual se nosotros:
+\itemize{
+\item 
+\enumerate{
+\item empieza con el número de puntos de cambio;
+}
+\item 
+\enumerate{
+\item la segunda entrada es un uno;
+}
+\item 
+\enumerate{
+\item la tercera entrada es el primer punto de cambio;
+}
+\item 
+\enumerate{
+\item las siguientes son otros puntos de cambio;
+}
+\item 
+\enumerate{
+\item la siguiente entrada después de punto de cambio tiene el valor  \code{N}; y
+}
+\item 
+\enumerate{
+\item los siguientes son númores cero hasta llenarlo para que sea de tamaño \code{max_num_cp}
+}
+}
 }

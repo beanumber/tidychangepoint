@@ -1238,16 +1238,19 @@ muta_k_cp_BMDL <- function(mat_cp,x,param) {
 #' @param x vector de excedentes
 #' @param param lista de parámetros globales
 #'
-#' @return regresa un vector de tamaño max_num_cp+3 donde la primera entrada es
-#'         m, la segunda v_0=1, ...., v_{m+1}=N,0,...,0
-#'         por ejemplo: c(4,1,3,8,11,15,20,0,0,0,0) para m=4,max_num_cp=8, N=20.
-#'         Se tienen m puntos de cambio, los cuales \tau_0=1 y \tau_{m+1}= N+1, pero en nuestro caso
-#'         tenemos que los vectores cp tienen c(m,\tau_0=1,\tau_1,...,\tau_{m-1},\tau_m= N,0,0,0)
-#'         por lo cual se nosotros: 1) empieza con el número de puntos de cambio; 2) la 
-#'         segunda entrada es un uno; 3) la tercera entrada es el primer punto de cambio; 
-#'         4) las siguientes son otros puntos de cambio; 5) la siguiente entrada después de punto de 
-#'         cambio tiene el valor  N; y 6) los siguientes son númores cero hasta llenarlo 
-#'         para que sea de tamaño max_num_cp
+#' @details
+#' regresa un vector de tamaño `max_num_cp+3` donde la primera entrada es
+#'         m, la segunda \eqn{v_0=1, ...., v_{m+1}=N,0,...,0}
+#' por ejemplo: `c(4,1,3,8,11,15,20,0,0,0,0)` para `m=4`, \eqn{max_num_cp=8}, \eqn{N=20}.
+#'         Se tienen m puntos de cambio, los cuales \eqn{\tau_0=1} y \eqn{\tau_{m+1}= N+1}, pero en nuestro caso
+#'         tenemos que los vectores cp tienen \eqn{c(m,\tau_0=1,\tau_1,...,\tau_{m-1},\tau_m= N,0,0,0)}
+#'         por lo cual se nosotros: 
+#' - 1) empieza con el número de puntos de cambio; 
+#' - 2) la segunda entrada es un uno; 
+#' - 3) la tercera entrada es el primer punto de cambio; 
+#' - 4) las siguientes son otros puntos de cambio; 
+#' - 5) la siguiente entrada después de punto de cambio tiene el valor  `N`; y 
+#' - 6) los siguientes son númores cero hasta llenarlo para que sea de tamaño `max_num_cp`
 #' @export
 #'
 sim_1_cp_BMDL <- function(x,param) {
@@ -1286,7 +1289,9 @@ sim_k_cp_BMDL <- function(x,param) {
 #' @param cp vector de extendido de puntos de cambio
 #'
 #' @return regresa la evaluación de la penalización
-#'         $$P_{\theta,\tau} = \sum_{i=1}^{m+1}\dfrac{\ln(\tau_i-\tau_{i-1})}{2}+\ln(m)+\sum_{i=2}^m\ln(\tau_i)$$
+#'  \deqn{
+#'    P_{\theta,\tau} = \sum_{i=1}^{m+1}\dfrac{\ln(\tau_i-\tau_{i-1})}{2}+\ln(m)+\sum_{i=2}^m\ln(\tau_i)
+#'  }
 #' @export
 #' 
 penalization_MDL <- function(cp, rf_type) { # V02
