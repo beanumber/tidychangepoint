@@ -338,7 +338,7 @@ AG_BMDL_r_paso <- function(param){
   # El siguiete for va sobre en cada paso haciendo una nueva generación
   vec_para_for <- 1:param$r
   pb <- utils::txtProgressBar(min = 1, max = length(vec_para_for), style = 3, width = 60)
-  par(mfrow=c(2,1),mar = c(1, 4, 2, 2))
+  graphics::par(mfrow=c(2,1),mar = c(1, 4, 2, 2))
   for(i in vec_para_for){
     # Hacemos un paso del AG con el mat_cp anterior
     lista_AG_BMDL <- AG_BMDL_1_paso(x,lista_AG_BMDL$mat_cp,param)
@@ -367,7 +367,7 @@ AG_BMDL_r_paso <- function(param){
          main="Repeated change points",ylab="repetitions",xlab="change points index")
   }
   close(pb)
-  par(mfrow=c(1,1))
+  graphics::par(mfrow=c(1,1))
   cat(" \n")
   
   # Obtenemos el valor minimo de todas las evaluaciones 
@@ -786,7 +786,7 @@ graf_puntos_cambio_repetidos <- function(lista_AG) {
   cp_mas_repetidos <- rev(sort(table(historia_mejores_sin_0_1_N)))[1:n_cp_mas_repetidos]
   stats::plot.stepfun(lista_AG$x, col.vert = "gray20",main=paste0("Los ",n_cp_mas_repetidos," CP mas repetidos ",fun_n_genera_texto_dist(lista_AG$param)),
                xlim = range(lista_AG$x))
-  abline(v=as.numeric(names(cp_mas_repetidos)),col="blue")
+  graphics::abline(v=as.numeric(names(cp_mas_repetidos)),col="blue")
   
   
   (nombre_pdf <- paste0(param$nombre_carpeta_pdf, "/Fig_CP_repetidos_",lista_AG$param$nombre_datos,"_rf_",
@@ -816,8 +816,8 @@ grafica_escalonada <- function(res, col_segmets, vec_xlim=NULL,vec_ylim=NULL) {
   lines_segment_NHPP <- function(n, res, col_segmets) {
     res <- c(0,res)
     for(i in 1:n){
-      segments(res[i],i-1,res[i+1],i-1,col=col_segmets)
-      segments(res[i+1],i-1,res[i+1],i,col=col_segmets)
+      graphics::segments(res[i],i-1,res[i+1],i-1,col=col_segmets)
+      graphics::segments(res[i+1],i-1,res[i+1],i,col=col_segmets)
     }
   }
   
@@ -913,8 +913,16 @@ print_step <- function(i_d,i_tau,extra_menos=F,Do_step2=F) {
 #' @export
 #'
 #' @examples
-#' mejor_cp <- historia_mejores[which(Bayesaian_MDL_k_cp(historia_mejores,x,param$rf_type, param$initial_val_optim,param$mat_low_upp, param$vec_dist_a_priori,param$mat_phi)==
-#'                                      min(Bayesaian_MDL_k_cp(historia_mejores,x,param$rf_type, param$initial_val_optim,param$mat_low_upp, param$vec_dist_a_priori,param$mat_phi))),]
+#' \dontrun{
+#' mejor_cp <- historia_mejores[which(
+#'   Bayesaian_MDL_k_cp(
+#'     historia_mejores,x,param$rf_type, param$initial_val_optim,
+#'     param$mat_low_upp, param$vec_dist_a_priori,param$mat_phi
+#'   ) == min(Bayesaian_MDL_k_cp(
+#'     historia_mejores,x,param$rf_type, param$initial_val_optim,
+#'     param$mat_low_upp, param$vec_dist_a_priori,param$mat_phi))
+#'   ),]
+#' }
 
 gen_texto_m <- function(n_puntos_cambio,mas_derecha="") {
   # PRIMER RENGLON
@@ -968,9 +976,9 @@ grafica_datos_e_intervalos <- function(lista_AG,param){
   upp_bond <- stats::qpois(.95,lambda = c(pow(10/sigma[1],alpha[1]), tasa_NHPP))
   low_bond <- stats::qpois(.05,lambda = c(pow(10/sigma[1],alpha[1]), tasa_NHPP))
   mean_NHPP <-  c(pow(10/sigma[1],alpha[1]), tasa_NHPP)
-  lines(c(10, d),upp_bond,col="blue", lwd=2)
-  lines(c(10, d),mean_NHPP,col="red", lwd=2)
-  lines(c(10, d),low_bond,col="blue", lwd=2)
+  graphics::lines(c(10, d),upp_bond,col="blue", lwd=2)
+  graphics::lines(c(10, d),mean_NHPP,col="red", lwd=2)
+  graphics::lines(c(10, d),low_bond,col="blue", lwd=2)
 }
 
 
@@ -1013,7 +1021,7 @@ genera_insumos_bloque_sin_theta <- function(cp,x){
 #' 
 #' @export
 graficas_BMDL <- function(lista_AG,param) {
-  par(mfrow=c(2,2),mar = c(2, 4, 2, 2))
+  graphics::par(mfrow=c(2,2),mar = c(2, 4, 2, 2))
   # 1.- Datos reales
   # plot.stepfun(lista_AG$x, col.vert = "gray20",main="Data",xlim = range(lista_AG$x),ylab="m(t)")
   d<-lista_AG$x
@@ -1039,7 +1047,7 @@ graficas_BMDL <- function(lista_AG,param) {
   plot(table(historia_mejores_sin_0_1_N)/param$r,main="Repeated change points",ylab="repetitions",xlab="change points index")
   # 4.- Number of change points in the best chromosomes
   plot(lista_AG$historia_mejores[,1],ylab="Number of cp",type="l",col="blue",main=paste0("The best chromosomes with",lista_AG$historia_mejores[which.min(lista_AG$vec_min_BMDL),1],"change points "))
-  par(mfrow=c(1,1)) 
+  graphics::par(mfrow=c(1,1)) 
 }
 
 
@@ -1474,9 +1482,9 @@ grafica_ajuste_NHPP <- function(d_i,tau1,tau2,initial_val_optim,mat_low_upp,rf_t
   
   grafica_escalonada(d_i, "black", vec_xlim=NULL,vec_ylim=range(0,length(d_i),upp_bond,low_bond,mean_NHPP))
   
-  lines(t,upp_bond,col="blue")
-  lines(t,mean_NHPP,col="red")
-  lines(t,low_bond,col="blue")
+  graphics::lines(t,upp_bond,col="blue")
+  graphics::lines(t,mean_NHPP,col="red")
+  graphics::lines(t,low_bond,col="blue")
   
   cat("theta=",theta,"\n")
 }
