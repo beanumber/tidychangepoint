@@ -8,6 +8,33 @@ output: github_document
   [![R-CMD-check](https://github.com/c-taimal/BayesianMDLGA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/c-taimal/BayesianMDLGA/actions/workflows/R-CMD-check.yaml)
   <!-- badges: end -->
 
+## Usage
+
+```{r, eval=FALSE}
+remotes::install_github("c-taimal/BayesianMDLGA")
+```
+
+```{r, message=FALSE}
+library(BayesianMDLGA)
+```
+
+
+```{r}
+str(DataCPSim)
+str(DataCPSimRebases)
+str(param)
+str(pm_25)
+```
+
+```{r sim-plot}
+plot(DataCPSim)
+summary(pm_25)
+```
+
+
+
+## Citation
+
 ```{r}
 citation("BayesianMDLGA")
 ```
