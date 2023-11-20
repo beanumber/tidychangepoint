@@ -4,3 +4,4 @@
 ^data-raw$
 ^\.github$
 ^README\.Rmd$
+^README_files$
