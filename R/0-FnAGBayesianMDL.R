@@ -1,4 +1,6 @@
-globalVariables("x")
+globalVariables(
+  c("x", "N", "alpha", "d", "n_puntos_cambio", "param", "pdf", "sigma", "tau")
+)
 #-------------------------------------------------------------------------#
 #                                                                         #
 #             Funciones de algoritmos geneticos Bayesian MDL              #
@@ -827,7 +829,7 @@ graf_puntos_cambio_repetidos <- function(lista_AG) {
   historia_mejores_sin_0_1_N <- lista_AG$historia_mejores[,-1:-2]
   historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[historia_mejores_sin_0_1_N>0 & historia_mejores_sin_0_1_N< max(lista_AG$x)]
   cp_mas_repetidos <- rev(sort(table(historia_mejores_sin_0_1_N)))[1:n_cp_mas_repetidos]
-  plot.stepfun(lista_AG$x, col.vert = "gray20",main=paste0("Los ",n_cp_mas_repetidos," CP mas repetidos ",fun_n_genera_texto_dist(lista_AG$param)),
+  stats::plot.stepfun(lista_AG$x, col.vert = "gray20",main=paste0("Los ",n_cp_mas_repetidos," CP mas repetidos ",fun_n_genera_texto_dist(lista_AG$param)),
                xlim = range(lista_AG$x))
   abline(v=as.numeric(names(cp_mas_repetidos)),col="blue")
   
@@ -1022,8 +1024,8 @@ grafica_datos_e_intervalos <- function(lista_AG,param){
   grafica_escalonada(lista_AG$x, "black")
     
   tasa_NHPP <- funcion_media_acumulada()
-  upp_bond <- qpois(.95,lambda = c(pow(10/sigma[1],alpha[1]), tasa_NHPP))
-  low_bond <- qpois(.05,lambda = c(pow(10/sigma[1],alpha[1]), tasa_NHPP))
+  upp_bond <- stats::qpois(.95,lambda = c(pow(10/sigma[1],alpha[1]), tasa_NHPP))
+  low_bond <- stats::qpois(.05,lambda = c(pow(10/sigma[1],alpha[1]), tasa_NHPP))
   mean_NHPP <-  c(pow(10/sigma[1],alpha[1]), tasa_NHPP)
   lines(c(10, d),upp_bond,col="blue", lwd=2)
   lines(c(10, d),mean_NHPP,col="red", lwd=2)
@@ -1173,7 +1175,7 @@ mata_1_tau_volado <- function(cp, prob_volado) {
   # (m <- cp[1])
   # N <- cp[cp[1]+3]
   (cp_corto <- cp[2:(cp[1]+3)])
-  (cp_corto <- cp_corto[c(TRUE,as.logical(rbinom(cp[1],1,prob_volado)),TRUE)])
+  (cp_corto <- cp_corto[c(TRUE,as.logical(stats::rbinom(cp[1],1,prob_volado)),TRUE)])
   cp <- c(length(cp_corto)-2,cp_corto,rep(0,length(cp)-length(cp_corto)-1))
   return(cp)
 }
@@ -1318,7 +1320,7 @@ muta_k_cp_BMDL <- function(mat_cp,x,param) {
 #' @examples
 sim_1_cp_BMDL <- function(x,param) {
   # Primero simulamos una binomial que va a ser el número de puntos de cambio
-  (m <- min(rbinom(1,max(x),param$prob_inicial),param$max_num_cp-3))
+  (m <- min(stats::rbinom(1,max(x),param$prob_inicial),param$max_num_cp-3))
   # Simulamos los puntos de cambio uniformemente aleatorios 
   (valores_cp <- sort(sample(x[-length(x)],size=m,replace=F)))
   # Genera cromosoma con estructura manejable
@@ -1555,8 +1557,8 @@ grafica_ajuste_NHPP <- function(d_i,tau1,tau2,initial_val_optim,mat_low_upp,rf_t
   
   t <- tau1:tau2
   tasa_NHPP <- mean_fn(t,rf_type,theta)
-  upp_bond <- qpois(.95,lambda = tasa_NHPP)
-  low_bond <- qpois(.05,lambda = tasa_NHPP)
+  upp_bond <- stats::qpois(.95,lambda = tasa_NHPP)
+  low_bond <- stats::qpois(.05,lambda = tasa_NHPP)
   mean_NHPP <- tasa_NHPP
   
   grafica_escalonada(d_i, "black", vec_xlim=NULL,vec_ylim=range(0,length(d_i),upp_bond,low_bond,mean_NHPP))

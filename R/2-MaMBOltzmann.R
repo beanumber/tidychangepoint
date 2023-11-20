@@ -19,8 +19,8 @@ MaMBOltzmann <- function(mat_cp, Fitness, Mutation, Temperature) {
 
 
   while (dim(Offspring)[1] < (k + 1)) {
-    FatherCandidate1 <- length(Rank[Rank <= runif(1, min(Rank), max(Rank))])
-    MotherCandidate1 <- length(Rank[Rank <= runif(1, min(Rank), max(Rank))])
+    FatherCandidate1 <- length(Rank[Rank <= stats::runif(1, min(Rank), max(Rank))])
+    MotherCandidate1 <- length(Rank[Rank <= stats::runif(1, min(Rank), max(Rank))])
 
 
     if (FatherCandidate1 == 1) {
@@ -94,9 +94,9 @@ MaMBOltzmann <- function(mat_cp, Fitness, Mutation, Temperature) {
       )
 
       Child <- unique(sort(Child))
-      Child <- Child[runif(length(Child)) <= 0.5]
+      Child <- Child[stats::runif(length(Child)) <= 0.5]
 
-      MutationRate <- runif(1)
+      MutationRate <- stats::runif(1)
 
       if (MutationRate <= Mutation) {
         Child <- Child + sample(c(-1, 0, 1), size = length(Child), prob = c(0.3, 0.4, 0.3), replace = TRUE)
