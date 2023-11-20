@@ -26,9 +26,9 @@ cambio tau1 y tau2}
 
 \item{theta}{vector de parámetros de verosimilitud del NHPP}
 
-\item{vec_dist_a_priori}{}
+\item{vec_dist_a_priori}{description}
 
-\item{mat_phi}{}
+\item{mat_phi}{description}
 }
 \description{
 Bloque de log posterior NHPP

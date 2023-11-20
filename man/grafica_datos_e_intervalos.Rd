@@ -2,15 +2,27 @@
 % Please edit documentation in R/0-FnAGBayesianMDL.R
 \name{grafica_datos_e_intervalos}
 \alias{grafica_datos_e_intervalos}
+\alias{graficas_BMDL}
 \title{Graficas de los intervalos y los datos}
 \usage{
 grafica_datos_e_intervalos(lista_AG, param)
+
+graficas_BMDL(lista_AG, param)
 }
 \arguments{
-\item{lista_AG}{}
+\item{lista_AG}{description}
 
-\item{param}{}
+\item{param}{description}
+}
+\value{
+una gráfica con :
+1 Datos reales
+2 Evolución del algoritmo genético
+3 Puntos de cambio que más se repitieron
+4 Number of change points in the best chromosomes
 }
 \description{
 Graficas de los intervalos y los datos
+
+Graficas del AG con BMDL
 }

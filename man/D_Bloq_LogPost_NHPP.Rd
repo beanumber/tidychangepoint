@@ -2,6 +2,8 @@
 % Please edit documentation in R/0-FnAGBayesianMDL.R
 \name{D_Bloq_LogPost_NHPP}
 \alias{D_Bloq_LogPost_NHPP}
+\alias{D_Bloq_LogPrio_NHPP}
+\alias{D_Bloq_LogVero_NHPP}
 \title{Derivada bloque de log posterior NHPP}
 \usage{
 D_Bloq_LogPost_NHPP(
@@ -13,22 +15,36 @@ D_Bloq_LogPost_NHPP(
   vec_dist_a_priori,
   mat_phi
 )
+
+D_Bloq_LogPrio_NHPP(vec_dist_a_priori, theta, mat_phi)
+
+D_Bloq_LogVero_NHPP(vec_d_i, tau1, tau2, rf_type, theta)
 }
 \arguments{
-\item{vec_d_i}{}
+\item{vec_d_i}{vector de días en los que hubo revases entre el los puntos de
+cambio tau1 y tau2}
 
-\item{tau1}{}
+\item{tau1}{valor del primer punto de cambio}
 
-\item{tau2}{}
+\item{tau2}{valor del segundo punto de cambio}
 
-\item{rf_type}{}
+\item{rf_type}{nombre de tasa de NHPP}
 
-\item{theta}{}
+\item{theta}{vector de parámetros de verosimilitud del NHPP}
 
-\item{vec_dist_a_priori}{}
+\item{vec_dist_a_priori}{vector que determina cual es la distribución a
+priori de los parametros; por ahora se tiene programado
+vec_dist_a_priori=c("Gamma","Gamma") y
+vec_dist_a_priori=c("Gamma","Gamma","Gamma")}
 
-\item{mat_phi}{}
+\item{mat_phi}{matriz cuyos renglones tiene los parámetros de las
+distribuciones a priori; cada renglón tiene todos los parametros de una
+distribución}
 }
 \description{
 Derivada bloque de log posterior NHPP
+
+Derivada de bloque de log-a priori NHPP
+
+Derivadas de bloque de log-verosimilitud NHPP
 }

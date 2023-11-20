@@ -335,9 +335,7 @@ AG_BMDL_1_paso <- function(x, mat_cp, param) {
 
 
 
-#' Algoritmo genético con  Bayesian-MDL
-#'
-#' @param param
+#' @rdname AG_BMDL_1_paso
 #' @export
 AG_BMDL_r_paso <- function(param) {
   # if(!is.null(param$value_set_seed))
@@ -434,13 +432,13 @@ AG_BMDL_r_paso <- function(param) {
 
 #' Bayesian MDL para un vector de puntos de cambio
 #'
-#' @param cp
-#' @param x
-#' @param rf_type
-#' @param initial_val_optim
-#' @param mat_low_upp
-#' @param vec_dist_a_priori
-#' @param mat_phi
+#' @param cp description
+#' @param x description
+#' @param rf_type description
+#' @param initial_val_optim description
+#' @param mat_low_upp description
+#' @param vec_dist_a_priori description
+#' @param mat_phi description
 #' @param ajuste_bloque description
 #' @export
 Bayesaian_MDL_1_cp <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi, ajuste_bloque) {
@@ -456,14 +454,7 @@ Bayesaian_MDL_1_cp <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, v
 }
 
 #' Bayesian MDL para un vector de puntos de cambio
-#'
-#' @param x
-#' @param rf_type
-#' @param initial_val_optim
-#' @param mat_low_upp
-#' @param vec_dist_a_priori
-#' @param mat_phi
-#'
+#' @rdname Bayesaian_MDL_1_cp
 #' @return regresa un vector de tamaño k (el numero de cromosomas por
 #'   generación) con los valores del bayesian MDL
 #' @export
@@ -485,8 +476,8 @@ Bayesaian_MDL_k_cp <- function(mat_cp, x, rf_type, initial_val_optim, mat_low_up
 #' @param tau2 valor del segundo punto de cambio
 #' @param rf_type nombre de tasa de NHPP
 #' @param theta vector de parámetros de verosimilitud del NHPP
-#' @param vec_dist_a_priori
-#' @param mat_phi
+#' @param vec_dist_a_priori description
+#' @param mat_phi description
 #' @export
 Bloq_LogPost_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta, vec_dist_a_priori, mat_phi) {
   Bloq_LogVero_NHPP(vec_d_i, tau1, tau2, rf_type, theta) +
@@ -496,10 +487,6 @@ Bloq_LogPost_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta, vec_dist_a_pr
 
 
 #' Bloque de log-a priori NHPP
-#'
-#' @param vec_dist_a_priori
-#' @param theta
-#' @param mat_phi
 #' @export
 Bloq_LogPrio_NHPP <- function(vec_dist_a_priori, theta, mat_phi) {
   if (length(vec_dist_a_priori) == 2) {
@@ -576,14 +563,6 @@ Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
 
 
 #' Derivada bloque de log posterior NHPP
-#'
-#' @param vec_d_i
-#' @param tau1
-#' @param tau2
-#' @param rf_type
-#' @param theta
-#' @param vec_dist_a_priori
-#' @param mat_phi
 #' @export
 D_Bloq_LogPost_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta, vec_dist_a_priori, mat_phi) {
   D_Bloq_LogVero_NHPP(vec_d_i, tau1, tau2, rf_type, theta) +
@@ -593,7 +572,7 @@ D_Bloq_LogPost_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta, vec_dist_a_
 
 
 #' Derivada de bloque de log-a priori NHPP
-#'
+#' @rdname D_Bloq_LogPost_NHPP
 #' @param vec_dist_a_priori vector que determina cual es la distribución a
 #'   priori de los parametros; por ahora se tiene programado
 #'   vec_dist_a_priori=c("Gamma","Gamma") y
@@ -633,7 +612,7 @@ D_Bloq_LogPrio_NHPP <- function(vec_dist_a_priori, theta, mat_phi) {
 
 
 #' Derivadas de bloque de log-verosimilitud NHPP
-#'
+#' @rdname D_Bloq_LogPost_NHPP
 #' @param vec_d_i vector de días en los que hubo revases entre el los puntos de
 #'   cambio tau1 y tau2
 #' @param tau1 valor del primer punto de cambio
@@ -781,8 +760,7 @@ extrae_mat_MAP <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_d
 
 
 #' Genera los textos para los pdf y RData de las n distribuciones
-#'
-#' @param param
+#' @param param description
 #' @export
 fun_n_genera_texto_dist <- function(param) {
   texto_n_dist <- NULL
@@ -796,9 +774,9 @@ fun_n_genera_texto_dist <- function(param) {
 }
 
 #' Genera los textos para los pdf y RData de una distribución
-#'
-#' @param dist
-#' @param parametros_dist
+#' @rdname fun_n_genera_texto_dist
+#' @param dist description
+#' @param parametros_dist description
 #' @export
 fun_1_genera_texto_dist <- function(dist, parametros_dist) {
   if (any(dist == c("Gamma", "Unif"))) {
@@ -1006,8 +984,8 @@ gen_texto_m <- function(n_puntos_cambio, mas_derecha = "") {
 
 #' Graficas de los intervalos y los datos
 #'
-#' @param lista_AG
-#' @param param
+#' @param lista_AG description
+#' @param param description
 #' @export
 grafica_datos_e_intervalos <- function(lista_AG, param) {
   # sink("funcion_media_acumulada.txt")
@@ -1055,10 +1033,7 @@ genera_insumos_bloque_sin_theta <- function(cp, x) {
 
 
 #' Graficas del AG con BMDL
-#'
-#' @param lista_AG
-#' @param param
-#'
+#' @rdname grafica_datos_e_intervalos
 #' @return una gráfica con :
 #' 1 Datos reales
 #' 2 Evolución del algoritmo genético
@@ -1171,8 +1146,7 @@ mata_1_tau_volado <- function(cp, prob_volado) {
 }
 
 #' Elimina algunos de las tiempos de cambio de los k cromosomas
-#'
-#' @param prob_volado probabilidad de quitar un tiempo de cambio existente
+#' @rdname mata_1_tau_volado
 #' @param mat_cp matriz cuyos renglones son vectores de cromosomas de tamaño
 #'   max_num_cp con entradas m,tau_0,...,tau_{m+1},0,...,0
 #' @return regresa una matriz a la cual se le quitaron a sus cromosomas algunos
@@ -1285,12 +1259,7 @@ muta_1_cp_BMDL <- function(cp, x, param) {
 }
 
 
-#' Mutaciones un cp en el caso BMDL
-#'
-#' @param mat_cp
-#' @param x
-#' @param param
-#'
+#' @rdname muta_1_cp_BMDL
 #' @return regreas una mat_cp mutada
 #' @export
 muta_k_cp_BMDL <- function(mat_cp, x, param) {
@@ -1334,10 +1303,7 @@ sim_1_cp_BMDL <- function(x, param) {
 
 
 #' Simula k vectores change point para Bayesian MDL
-#'
-#' @param x vector de excedentes
-#' @param param lista de parámetros globales
-#'
+#' @rdname sim_1_cp_BMDL
 #' @return regresa una matriz de k por max_num_cp+3, la cual en cada renglón tiene
 #'         una simulación de un vector de tiempos de cambio
 #' @export
@@ -1559,10 +1525,10 @@ rate_fn <- function(t, rf_type, theta) {
 #' Esta función solo grafica un ajuste de NHPP
 #'
 #' @param d_i vector de días de revases
-#' @param tau1
-#' @param tau2
-#' @param mat_phi
-#' @param mat_low_upp
+#' @param tau1 description
+#' @param tau2 description
+#' @param mat_phi description
+#' @param mat_low_upp description
 #' @export
 #'
 grafica_ajuste_NHPP <- function(d_i, tau1, tau2, initial_val_optim, mat_low_upp, rf_type, vec_dist_a_priori, mat_phi) {

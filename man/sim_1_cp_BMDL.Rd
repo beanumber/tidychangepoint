@@ -2,17 +2,26 @@
 % Please edit documentation in R/0-FnAGBayesianMDL.R
 \name{sim_1_cp_BMDL}
 \alias{sim_1_cp_BMDL}
+\alias{sim_k_cp_BMDL}
 \title{Genera un cromosoma de puntos de cambio para el Bayesian MDL}
 \usage{
 sim_1_cp_BMDL(x, param)
+
+sim_k_cp_BMDL(x, param)
 }
 \arguments{
 \item{x}{vector de excedentes}
 
 \item{param}{lista de parámetros globales}
 }
+\value{
+regresa una matriz de k por max_num_cp+3, la cual en cada renglón tiene
+una simulación de un vector de tiempos de cambio
+}
 \description{
 Genera un cromosoma de puntos de cambio para el Bayesian MDL
+
+Simula k vectores change point para Bayesian MDL
 }
 \details{
 regresa un vector de tamaño \code{max_num_cp+3} donde la primera entrada es

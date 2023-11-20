@@ -2,9 +2,12 @@
 % Please edit documentation in R/0-FnAGBayesianMDL.R
 \name{AG_BMDL_1_paso}
 \alias{AG_BMDL_1_paso}
+\alias{AG_BMDL_r_paso}
 \title{Algoritmo genético de Bayesian MDL a un paso}
 \usage{
 AG_BMDL_1_paso(x, mat_cp, param)
+
+AG_BMDL_r_paso(param)
 }
 \arguments{
 \item{x}{a vector}

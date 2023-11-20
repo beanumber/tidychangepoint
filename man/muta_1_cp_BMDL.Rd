@@ -2,9 +2,12 @@
 % Please edit documentation in R/0-FnAGBayesianMDL.R
 \name{muta_1_cp_BMDL}
 \alias{muta_1_cp_BMDL}
+\alias{muta_k_cp_BMDL}
 \title{Mutaciones un cp en el caso BMDL}
 \usage{
 muta_1_cp_BMDL(cp, x, param)
+
+muta_k_cp_BMDL(mat_cp, x, param)
 }
 \arguments{
 \item{cp}{puntos de cambio}
@@ -15,6 +18,8 @@ muta_1_cp_BMDL(cp, x, param)
 }
 \value{
 regresa un vector mutado
+
+regreas una mat_cp mutada
 }
 \description{
 Mutaciones un cp en el caso BMDL

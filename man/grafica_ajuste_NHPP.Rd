@@ -18,13 +18,13 @@ grafica_ajuste_NHPP(
 \arguments{
 \item{d_i}{vector de días de revases}
 
-\item{tau1}{}
+\item{tau1}{description}
 
-\item{tau2}{}
+\item{tau2}{description}
 
-\item{mat_low_upp}{}
+\item{mat_low_upp}{description}
 
-\item{mat_phi}{}
+\item{mat_phi}{description}
 }
 \description{
 Esta función solo grafica un ajuste de NHPP

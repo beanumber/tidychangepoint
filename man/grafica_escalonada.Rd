@@ -19,7 +19,7 @@ grafica_escalonada(res, col_segmets, vec_xlim = NULL, vec_ylim = NULL)
 Grafica escalonada para un proceso poisson
 }
 \examples{
-res <- c(10,20,33,36,43,51,56,69,82,89)
-grafica_escalonada(res, col_segmets="blue")
+res <- c(10, 20, 33, 36, 43, 51, 56, 69, 82, 89)
+grafica_escalonada(res, col_segmets = "blue")
 
 }

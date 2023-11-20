@@ -2,13 +2,22 @@
 % Please edit documentation in R/0-FnAGBayesianMDL.R
 \name{fun_n_genera_texto_dist}
 \alias{fun_n_genera_texto_dist}
+\alias{fun_1_genera_texto_dist}
 \title{Genera los textos para los pdf y RData de las n distribuciones}
 \usage{
 fun_n_genera_texto_dist(param)
+
+fun_1_genera_texto_dist(dist, parametros_dist)
 }
 \arguments{
-\item{param}{}
+\item{param}{description}
+
+\item{dist}{description}
+
+\item{parametros_dist}{description}
 }
 \description{
 Genera los textos para los pdf y RData de las n distribuciones
+
+Genera los textos para los pdf y RData de una distribución
 }

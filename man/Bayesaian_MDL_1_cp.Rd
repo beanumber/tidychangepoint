@@ -2,6 +2,7 @@
 % Please edit documentation in R/0-FnAGBayesianMDL.R
 \name{Bayesaian_MDL_1_cp}
 \alias{Bayesaian_MDL_1_cp}
+\alias{Bayesaian_MDL_k_cp}
 \title{Bayesian MDL para un vector de puntos de cambio}
 \usage{
 Bayesaian_MDL_1_cp(
@@ -14,24 +15,41 @@ Bayesaian_MDL_1_cp(
   mat_phi,
   ajuste_bloque
 )
+
+Bayesaian_MDL_k_cp(
+  mat_cp,
+  x,
+  rf_type,
+  initial_val_optim,
+  mat_low_upp,
+  vec_dist_a_priori,
+  mat_phi,
+  ajuste_bloque
+)
 }
 \arguments{
-\item{cp}{}
+\item{cp}{description}
 
-\item{x}{}
+\item{x}{description}
 
-\item{rf_type}{}
+\item{rf_type}{description}
 
-\item{initial_val_optim}{}
+\item{initial_val_optim}{description}
 
-\item{mat_low_upp}{}
+\item{mat_low_upp}{description}
 
-\item{vec_dist_a_priori}{}
+\item{vec_dist_a_priori}{description}
 
-\item{mat_phi}{}
+\item{mat_phi}{description}
 
 \item{ajuste_bloque}{description}
 }
+\value{
+regresa un vector de tamaño k (el numero de cromosomas por
+generación) con los valores del bayesian MDL
+}
 \description{
+Bayesian MDL para un vector de puntos de cambio
+
 Bayesian MDL para un vector de puntos de cambio
 }

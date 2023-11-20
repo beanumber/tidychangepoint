@@ -6,13 +6,6 @@
 \usage{
 Bloq_LogPrio_NHPP(vec_dist_a_priori, theta, mat_phi)
 }
-\arguments{
-\item{vec_dist_a_priori}{}
-
-\item{theta}{}
-
-\item{mat_phi}{}
-}
 \description{
 Bloque de log-a priori NHPP
 }
