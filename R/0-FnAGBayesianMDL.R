@@ -317,11 +317,7 @@ AG_BMDL_1_paso <- function(x,mat_cp,param){
 #' Algoritmo genético con  Bayesian-MDL 
 #'
 #' @param param 
-#'
-#' @return
 #' @export
-#'
-#' @examples
 AG_BMDL_r_paso <- function(param){
   #if(!is.null(param$value_set_seed))
   #  set.seed(param$value_set_seed)
@@ -419,11 +415,7 @@ AG_BMDL_r_paso <- function(param){
 #' @param vec_dist_a_priori 
 #' @param mat_phi 
 #' @param ajuste_bloque description
-#'
-#' @return
 #' @export
-#'
-#' @examples
 Bayesaian_MDL_1_cp <- function(cp,x,rf_type,initial_val_optim,mat_low_upp,vec_dist_a_priori,mat_phi,ajuste_bloque) {
   # 1. Obtener los estimadores MAP para cada regimen y guardarlos en mat_MAP
   mat_MAP <- extrae_mat_MAP(cp,x,rf_type,initial_val_optim,mat_low_upp,vec_dist_a_priori,mat_phi,ajuste_bloque) 
@@ -448,8 +440,6 @@ Bayesaian_MDL_1_cp <- function(cp,x,rf_type,initial_val_optim,mat_low_upp,vec_di
 #' @return regresa un vector de tamaño k (el numero de cromosomas por
 #'   generación) con los valores del bayesian MDL
 #' @export
-#'
-#' @examples
 Bayesaian_MDL_k_cp <- function(mat_cp,x,rf_type,initial_val_optim,mat_low_upp,vec_dist_a_priori,mat_phi,ajuste_bloque) {
   # OBS: quizás se podría hacer matricial para que fuera más rápido
   return(apply(mat_cp,1,function(y){Bayesaian_MDL_1_cp(y,x,rf_type,initial_val_optim,mat_low_upp,vec_dist_a_priori,mat_phi,ajuste_bloque)}))
@@ -468,11 +458,7 @@ Bayesaian_MDL_k_cp <- function(mat_cp,x,rf_type,initial_val_optim,mat_low_upp,ve
 #' @param theta vector de parámetros de verosimilitud del NHPP
 #' @param vec_dist_a_priori 
 #' @param mat_phi 
-#'
-#' @return
 #' @export
-#'
-#' @examples
 Bloq_LogPost_NHPP <- function(vec_d_i,tau1,tau2,rf_type,theta,vec_dist_a_priori,mat_phi) {
   Bloq_LogVero_NHPP(vec_d_i,tau1,tau2,rf_type,theta) + 
     Bloq_LogPrio_NHPP(vec_dist_a_priori,theta,mat_phi)
@@ -485,11 +471,7 @@ Bloq_LogPost_NHPP <- function(vec_d_i,tau1,tau2,rf_type,theta,vec_dist_a_priori,
 #' @param vec_dist_a_priori 
 #' @param theta 
 #' @param mat_phi 
-#'
-#' @return
 #' @export
-#'
-#' @examples
 Bloq_LogPrio_NHPP <- function(vec_dist_a_priori,theta,mat_phi) {
   if(length(vec_dist_a_priori)==2){
     if(all(vec_dist_a_priori==c("Gamma","Gamma"))){
@@ -518,11 +500,7 @@ Bloq_LogPrio_NHPP <- function(vec_dist_a_priori,theta,mat_phi) {
 #' @param tau2 valor del segundo punto de cambio
 #' @param rf_type nombre de tasa de NHPP
 #' @param theta vector de parámetros de verosimilitud del NHPP
-#'
-#' @return
 #' @export
-#'
-#' @examples
 Bloq_LogVero_NHPP <- function(vec_d_i,tau1,tau2,rf_type,theta){
   if(rf_type=="W") return( (tau1^theta[1]-tau2^theta[1]) / theta[2]^theta[1] + 
                              length(vec_d_i)*(log(theta[1])-theta[1]*log(theta[2])) + 
@@ -576,11 +554,7 @@ Bloq_LogVero_NHPP <- function(vec_d_i,tau1,tau2,rf_type,theta){
 #' @param theta 
 #' @param vec_dist_a_priori 
 #' @param mat_phi 
-#'
-#' @return
 #' @export
-#'
-#' @examples
 D_Bloq_LogPost_NHPP <- function(vec_d_i,tau1,tau2,rf_type,theta,vec_dist_a_priori,mat_phi) {
   D_Bloq_LogVero_NHPP(vec_d_i,tau1,tau2,rf_type,theta) + 
     D_Bloq_LogPrio_NHPP(vec_dist_a_priori,theta,mat_phi)
@@ -599,10 +573,7 @@ D_Bloq_LogPost_NHPP <- function(vec_d_i,tau1,tau2,rf_type,theta,vec_dist_a_prior
 #'   distribuciones a priori; cada renglón tiene todos los parametros de una
 #'   distribución
 #'
-#' @return
 #' @export
-#'
-#' @examples
 D_Bloq_LogPrio_NHPP <- function(vec_dist_a_priori,theta,mat_phi) {
   if(length(vec_dist_a_priori)==2){
     if(all(vec_dist_a_priori==c("Gamma","Gamma"))){
@@ -638,11 +609,7 @@ D_Bloq_LogPrio_NHPP <- function(vec_dist_a_priori,theta,mat_phi) {
 #' @param tau2 valor del segundo punto de cambio
 #' @param rf_type nombre de tasa de NHPP
 #' @param theta vector de parámetros de verosimilitud del NHPP
-#'
-#' @return
 #' @export
-#'
-#' @examples
 D_Bloq_LogVero_NHPP <- function(vec_d_i,tau1,tau2,rf_type,theta){
   if(rf_type=="W") {
     difN <- length(vec_d_i)
@@ -751,8 +718,6 @@ D_Bloq_LogVero_NHPP <- function(vec_d_i,tau1,tau2,rf_type,theta){
 #'   cada regimen.
 #'
 #' @export
-#'
-#' @examples
 extrae_mat_MAP <- function(cp,x,rf_type,initial_val_optim,mat_low_upp,vec_dist_a_priori,mat_phi,ajuste_bloque) {
   # lista_insumos_bloque <- genera_insumos_bloque(cp,x,theta_mat) ANTES
   lista_insumos_bloque <- genera_insumos_bloque_sin_theta(cp,x)
@@ -781,11 +746,7 @@ extrae_mat_MAP <- function(cp,x,rf_type,initial_val_optim,mat_low_upp,vec_dist_a
 #' Genera los textos para los pdf y RData de las n distribuciones
 #'
 #' @param param 
-#'
-#' @return
 #' @export
-#'
-#' @examples
 fun_n_genera_texto_dist <- function(param){
   texto_n_dist <- NULL
   for(i in 1:length(param$vec_dist_a_priori)) {
@@ -801,11 +762,7 @@ fun_n_genera_texto_dist <- function(param){
 #'
 #' @param dist 
 #' @param parametros_dist 
-#'
-#' @return
 #' @export
-#'
-#' @examples
 fun_1_genera_texto_dist <- function(dist,parametros_dist){
   if(any(dist==c("Gamma","Unif"))){
     texto <- paste0(dist,"(",parametros_dist[1],",",parametros_dist[2],")")
@@ -821,8 +778,6 @@ fun_1_genera_texto_dist <- function(dist,parametros_dist){
 #'
 #' @return guarda un pdf con la gráfica
 #' @export
-#'
-#' @examples
 graf_puntos_cambio_repetidos <- function(lista_AG) {
   # Obtenemos cuantos de los cp mejores se graficarán
   n_cp_mas_repetidos <- lista_AG$param$cuantos_mejores_cp_graf
@@ -850,8 +805,6 @@ graf_puntos_cambio_repetidos <- function(lista_AG) {
 #' @param col_segmets color de las lineas
 #' @param vec_xlim limites en el eje x de la gráfica
 #' @param vec_ylim limites en el eje y de la gráfica
-#'
-#' @return
 #' @export
 #'
 #' @examples
@@ -892,8 +845,6 @@ grafica_escalonada <- function(res, col_segmets, vec_xlim=NULL,vec_ylim=NULL) {
 #'
 #' @return Regresa el texto correspondiente a la variable m
 #' @export
-#'
-#' @examples
 #' 
 
 pow <- function(x,y){x^y}
@@ -905,8 +856,6 @@ pow <- function(x,y){x^y}
 #'
 #' @return Regresa el texto correspondiente a la variable m
 #' @export
-#'
-#' @examples
 #' 
 
 step <- function(x){as.numeric(x>0)}
@@ -920,8 +869,6 @@ step <- function(x){as.numeric(x>0)}
 #'
 #' @return Regresa el texto correspondiente a la variable m
 #' @export
-#'
-#' @examples
 #' 
 print_pow_tau <- function(i_tau,i_sig_alp) {
 paste0("pow(tau[",i_tau,"]/sigma[",i_sig_alp,"],alpha[",i_sig_alp,"])")
@@ -935,8 +882,6 @@ paste0("pow(tau[",i_tau,"]/sigma[",i_sig_alp,"],alpha[",i_sig_alp,"])")
 #'
 #' @return Regresa el texto correspondiente a la variable m
 #' @export
-#'
-#' @examples
 #' 
 
 print_pow_d <- function(i_d,i_sig_alp) {
@@ -968,8 +913,8 @@ print_step <- function(i_d,i_tau,extra_menos=F,Do_step2=F) {
 #' @export
 #'
 #' @examples
-# mejor_cp <- historia_mejores[which(Bayesaian_MDL_k_cp(historia_mejores,x,param$rf_type, param$initial_val_optim,param$mat_low_upp, param$vec_dist_a_priori,param$mat_phi)==
-#                                      min(Bayesaian_MDL_k_cp(historia_mejores,x,param$rf_type, param$initial_val_optim,param$mat_low_upp, param$vec_dist_a_priori,param$mat_phi))),]
+#' mejor_cp <- historia_mejores[which(Bayesaian_MDL_k_cp(historia_mejores,x,param$rf_type, param$initial_val_optim,param$mat_low_upp, param$vec_dist_a_priori,param$mat_phi)==
+#'                                      min(Bayesaian_MDL_k_cp(historia_mejores,x,param$rf_type, param$initial_val_optim,param$mat_low_upp, param$vec_dist_a_priori,param$mat_phi))),]
 
 gen_texto_m <- function(n_puntos_cambio,mas_derecha="") {
   # PRIMER RENGLON
@@ -1010,11 +955,7 @@ gen_texto_m <- function(n_puntos_cambio,mas_derecha="") {
 #'
 #' @param lista_AG 
 #' @param param 
-#'
-#' @return
 #' @export
-#'
-#' @examples
 grafica_datos_e_intervalos <- function(lista_AG,param){
     
   #sink("funcion_media_acumulada.txt")
@@ -1044,8 +985,6 @@ grafica_datos_e_intervalos <- function(lista_AG,param){
 #'         los el tau_{i-1}, tau_i, theta_1, theta_2 y theta_3, y también
 #'         una lista con los días de cada régimen
 #' @export
-#'
-#' @examples
 genera_insumos_bloque_sin_theta <- function(cp,x){
   (cp_corto_cero <- c(0,cp[3:(cp[1]+3)]))
   # Primero calculamos la matriz con taus 
@@ -1073,9 +1012,6 @@ genera_insumos_bloque_sin_theta <- function(cp,x){
 #' 4 Number of change points in the best chromosomes
 #' 
 #' @export
-#' @import graphics
-#'
-#' @examples
 graficas_BMDL <- function(lista_AG,param) {
   par(mfrow=c(2,2),mar = c(2, 4, 2, 2))
   # 1.- Datos reales
@@ -1112,10 +1048,8 @@ graficas_BMDL <- function(lista_AG,param) {
 #' @param padres vector de longitud dos con índice de papa e índice de mama
 #' @param mat_cp matriz con tiempos de cambio de dimension k por max_num_cp
 #'
-#' @return
 #' @export
 #'
-#' @examples
 junta_1_puntos_cambio <- function(padres,mat_cp) {
   # 1.- Juntamos todos los puntos de cambio de los padres; se quitan los puntos
   # de cambio repetidos y el [-1] final es para quitar los ceros
@@ -1146,8 +1080,6 @@ junta_1_puntos_cambio <- function(padres,mat_cp) {
 #' @return regresa una matriz de las mismas dimensiones que mat_cp, pero con los
 #'   nuevos cromosomas
 #' @export
-#'
-#' @examples
 junta_k_puntos_cambio <- function(mat_padres,mat_cp) {
   k <- nrow(mat_cp) # k es el número de padres
   N <- ncol(mat_cp) # N es la dimensión del vector de observaciones
@@ -1168,8 +1100,6 @@ junta_k_puntos_cambio <- function(mat_padres,mat_cp) {
 #'
 #' @return el mismo cromosoma sin algunos de sus puntos de cambio
 #' @export
-#'
-#' @examples
 mata_1_tau_volado <- function(cp, prob_volado) {
   # (cp <- sim_1_cp(N,param) )
   # (m <- cp[1])
@@ -1188,8 +1118,6 @@ mata_1_tau_volado <- function(cp, prob_volado) {
 #' @return regresa una matriz a la cual se le quitaron a sus cromosomas algunos
 #'   puntos de cambio
 #' @export
-#'
-#' @examples
 mata_k_tau_volado <- function(mat_cp,prob_volado){
   for (i in 1:nrow(mat_cp)) {
     mat_cp[i,] <- mata_1_tau_volado(mat_cp[i,],prob_volado)
@@ -1243,8 +1171,7 @@ mean_fn <- function(t,rf_type,theta) {
 #'
 #' @return regresa un vector mutado
 #' @export
-#'
-#' @examples
+#' 
 muta_1_cp_BMDL <- function(cp,x,param) {
   
   
@@ -1289,8 +1216,6 @@ muta_1_cp_BMDL <- function(cp,x,param) {
 #'
 #' @return regreas una mat_cp mutada
 #' @export
-#'
-#' @examples
 muta_k_cp_BMDL <- function(mat_cp,x,param) {
   mat_muta <- matrix(0,param$k,param$max_num_cp)
   for (i in 1:param$k) mat_muta[i,] <- muta_1_cp_BMDL(mat_cp[i,],x,param)
@@ -1317,7 +1242,6 @@ muta_k_cp_BMDL <- function(mat_cp,x,param) {
 #'         para que sea de tamaño max_num_cp
 #' @export
 #'
-#' @examples
 sim_1_cp_BMDL <- function(x,param) {
   # Primero simulamos una binomial que va a ser el número de puntos de cambio
   (m <- min(stats::rbinom(1,max(x),param$prob_inicial),param$max_num_cp-3))
@@ -1337,8 +1261,7 @@ sim_1_cp_BMDL <- function(x,param) {
 #' @return regresa una matriz de k por max_num_cp+3, la cual en cada renglón tiene
 #'         una simulación de un vector de tiempos de cambio
 #' @export
-#'
-#' @examples
+#' 
 sim_k_cp_BMDL <- function(x,param) {
   mat_cp <- matrix(0,param$k,param$max_num_cp)
   for(i in 1:param$k) {
@@ -1357,8 +1280,7 @@ sim_k_cp_BMDL <- function(x,param) {
 #' @return regresa la evaluación de la penalización
 #'         $$P_{\theta,\tau} = \sum_{i=1}^{m+1}\dfrac{\ln(\tau_i-\tau_{i-1})}{2}+\ln(m)+\sum_{i=2}^m\ln(\tau_i)$$
 #' @export
-#'
-#' @examples
+#' 
 penalization_MDL <- function(cp, rf_type) { # V02
   # Se hizo el cambio de multiplicar por en número de parámetros
   # esta función solo es llamada por "penalization_MDL"
@@ -1390,8 +1312,7 @@ penalization_MDL <- function(cp, rf_type) { # V02
 #'
 #' @return regresa un el resultado de optim
 #' @export
-#'
-#' @examples
+#' 
 MAP_NHPP <- function(initial_val_optim,mat_low_upp,vec_d_i,tau1,tau2,rf_type,vec_dist_a_priori,mat_phi){
   # Definimos las funciones que vamos a utilizar para encontrar el mínimo
   my_fn <- function(theta){  -Bloq_LogPost_NHPP(vec_d_i,tau1,tau2,rf_type,theta,vec_dist_a_priori,mat_phi)}
@@ -1416,8 +1337,6 @@ MAP_NHPP <- function(initial_val_optim,mat_low_upp,vec_d_i,tau1,tau2,rf_type,vec
 #'             
 #' @return regresa un vector de probabilidades
 #' @export
-#'
-#' @examples
 probs_vec_MDL <- function(vec_MDL,probs_rank0_MDL1) {
   if(any(is.infinite(vec_MDL))) {
     print("Valor infinito; fun probs_vec_MDL, vec_MDL=")
@@ -1432,11 +1351,8 @@ probs_vec_MDL <- function(vec_MDL,probs_rank0_MDL1) {
 #'
 #' @param vec_probs vector de probabilidades de selección de cada uno de los
 #'   cromosomas
-#'
-#' @return
 #' @export
-#'
-#' @examples
+#' 
 selec_k_pares_de_padres <- function(vec_probs) {
   k <- length(vec_probs)
   (papas <- sample(1:k,size = k,prob = vec_probs,replace = T))
@@ -1464,10 +1380,8 @@ selec_k_pares_de_padres <- function(vec_probs) {
 #' @param source_raiz dirección de donde se toman los archivos a copiar
 #' @param carpeta_destino dirección a donde se quieren copiar los archivos
 #'
-#' @return
 #' @export
-#'
-#' @examples
+#' 
 actualiza_carpeta <- function(comienzos_de_archivo,source_raiz,carpeta_destino) {
   for(comienzo in comienzos_de_archivo) {
     lista_de_archivos <- list.files(source_raiz,pattern=comienzo)
@@ -1542,11 +1456,8 @@ rate_fn <- function(t,rf_type,theta) {
 #' @param tau2 
 #' @param mat_phi 
 #' @param mat_low_upp 
-#'
-#' @return
 #' @export
-#'
-#' @examples
+#' 
 grafica_ajuste_NHPP <- function(d_i,tau1,tau2,initial_val_optim,mat_low_upp,rf_type,vec_dist_a_priori,mat_phi) {
   
   
