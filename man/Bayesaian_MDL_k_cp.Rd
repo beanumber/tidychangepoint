@@ -27,8 +27,6 @@ Bayesaian_MDL_k_cp(
 \item{vec_dist_a_priori}{}
 
 \item{mat_phi}{}
-
-\item{cp}{}
 }
 \value{
 regresa un vector de tamaño k (el numero de cromosomas por
