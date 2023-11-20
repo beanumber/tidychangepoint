@@ -20,15 +20,24 @@ library(BayesianMDLGA)
 
 
 ```{r}
-str(DataCPSim)
-str(DataCPSimRebases)
+str(sims)
 str(param)
 str(pm_25)
+summary(pm_25)
 ```
 
-```{r sim-plot}
-plot(DataCPSim)
-summary(pm_25)
+```{r sim-plot, message=FALSE}
+library(tidyverse)
+sims |>
+  pivot_longer(
+    cols = everything(), 
+    names_to = "set", 
+    values_to = "measurement"
+  ) |>
+  mutate(t = row_number()) |>
+  ggplot(aes(x = t, y = measurement)) +
+  geom_line() +
+  facet_wrap(vars(set), ncol = 1)
 ```
 
 

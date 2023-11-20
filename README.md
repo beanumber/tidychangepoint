@@ -16,16 +16,13 @@ library(BayesianMDLGA)
 ```
 
 ``` r
-str(DataCPSim)
+str(sims)
 ```
 
-    ##  num [1:1096] 35.5 29 35.6 33 29.5 ...
-
-``` r
-str(DataCPSimRebases)
-```
-
-    ##  int [1:360] 20 51 60 221 226 233 271 308 354 415 ...
+    ## Classes 'tbl_df', 'tbl' and 'data.frame':    1096 obs. of  3 variables:
+    ##  $ ts1: num  42.6 39.1 57.5 22.2 66.3 ...
+    ##  $ ts2: num  34.6 32.8 31.6 26.5 29.9 ...
+    ##  $ ts3: num  67.4 32.2 64.8 44.6 65.4 ...
 
 ``` r
 str(param)
@@ -83,12 +80,6 @@ str(pm_25)
     ##  - attr(*, "problems")=<externalptr>
 
 ``` r
-plot(DataCPSim)
-```
-
-![](README_files/figure-gfm/sim-plot-1.png)<!-- -->
-
-``` r
 summary(pm_25)
 ```
 
@@ -99,6 +90,22 @@ summary(pm_25)
     ##  Mean   :288.3  
     ##  3rd Qu.:377.0  
     ##  Max.   :785.0
+
+``` r
+library(tidyverse)
+sims |>
+  pivot_longer(
+    cols = everything(), 
+    names_to = "set", 
+    values_to = "measurement"
+  ) |>
+  mutate(t = row_number()) |>
+  ggplot(aes(x = t, y = measurement)) +
+  geom_line() +
+  facet_wrap(vars(set), ncol = 1)
+```
+
+![](README_files/figure-gfm/sim-plot-1.png)<!-- -->
 
 ## Citation
 

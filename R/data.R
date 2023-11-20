@@ -5,13 +5,10 @@
 #' 
 "pm_25"
 
-#' DataCPSim
+#' Simulated time series data
 #' @docType data
-"DataCPSim"
+"sims"
 
-#' DataCPSimRebases
-#' @docType data
-"DataCPSimRebases"
 
 #' param
 #' @docType data
