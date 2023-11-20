@@ -14,7 +14,7 @@ AG_BMDL_r_paso(param)
 
 \item{mat_cp}{a matrix}
 
-\item{param}{}
+\item{param}{description}
 }
 \value{
 A \code{list} of length 2

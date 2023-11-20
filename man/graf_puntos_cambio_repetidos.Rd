@@ -7,7 +7,7 @@
 graf_puntos_cambio_repetidos(lista_AG)
 }
 \arguments{
-\item{lista_AG}{}
+\item{lista_AG}{description}
 }
 \value{
 guarda un pdf con la gráfica

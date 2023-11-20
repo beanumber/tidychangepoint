@@ -13,7 +13,7 @@ OBSERVACIÓN: Esto regresa numeros negativos, los cuales mientras más negativo 
 dará que es un mejor vector de tiempos de cambio. Es decir, un MDL de -6000 es
 mejor que -4000}
 
-\item{probs_rank0_MDL1}{}
+\item{probs_rank0_MDL1}{description}
 }
 \value{
 regresa un vector de probabilidades

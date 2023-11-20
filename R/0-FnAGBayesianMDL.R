@@ -294,7 +294,7 @@ revisor_param <- function(param,
 #'
 #' @param x a vector
 #' @param mat_cp a matrix
-#' @param param
+#' @param param description
 #'
 #' @return A `list` of length 2
 #' @export
@@ -715,6 +715,7 @@ D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
 
 #' Extrae matriz con estimadores MAP
 #'
+#' @param x description
 #' @param rf_type nombre de tasa de NHPP
 #' @param vec_dist_a_priori nombres de distribuciones a priori
 #' @param mat_phi matriz cuyos renglones tiene los parámetros de las
@@ -725,7 +726,6 @@ D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
 #'   encontrar el mínimo
 #' @param cp vector de tamaño max_num_cp con entradas m, tau_0=1 , ...,
 #'   tau_{m+1}, 0, ..., 0
-#' @param x
 #'
 #' @return regresa una matriz cuya primera columna es la log-posterior evaluada
 #'   en los estimadores MAP; sus siguientes columnas tiene los parametros de
@@ -791,8 +791,7 @@ fun_1_genera_texto_dist <- function(dist, parametros_dist) {
 
 #' Grafica los n puntos de cambio más repetidos sobre el plot.stepfun de los datos
 #'
-#' @param lista_AG
-#'
+#' @param lista_AG description
 #' @return guarda un pdf con la gráfica
 #' @export
 graf_puntos_cambio_repetidos <- function(lista_AG) {
@@ -1387,7 +1386,7 @@ MAP_NHPP <- function(initial_val_optim, mat_low_upp, vec_d_i, tau1, tau2, rf_typ
 #' OBSERVACIÓN: Esto regresa numeros negativos, los cuales mientras más negativo mejor, ya que
 #'             dará que es un mejor vector de tiempos de cambio. Es decir, un MDL de -6000 es
 #'             mejor que -4000
-#' @param probs_rank0_MDL1
+#' @param probs_rank0_MDL1 description
 #'
 #' @return regresa un vector de probabilidades
 #' @export

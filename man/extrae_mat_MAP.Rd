@@ -19,7 +19,7 @@ extrae_mat_MAP(
 \item{cp}{vector de tamaño max_num_cp con entradas m, tau_0=1 , ...,
 tau_{m+1}, 0, ..., 0}
 
-\item{x}{}
+\item{x}{description}
 
 \item{rf_type}{nombre de tasa de NHPP}
 
