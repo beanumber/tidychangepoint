@@ -9,9 +9,12 @@ AG_BMDL_1_paso(x, mat_cp, param)
 \arguments{
 \item{x}{a vector}
 
-\item{mat_cp}{}
+\item{mat_cp}{a matrix}
 
 \item{param}{}
+}
+\value{
+A \code{list} of length 2
 }
 \description{
 Algoritmo genético de Bayesian MDL a un paso
