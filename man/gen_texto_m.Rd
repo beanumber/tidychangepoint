@@ -24,11 +24,12 @@ Genera el texto correspondiente a la variable m para el archivo .txt para JAGS
 \dontrun{
 mejor_cp <- historia_mejores[which(
   Bayesaian_MDL_k_cp(
-    historia_mejores,x,param$rf_type, param$initial_val_optim,
-    param$mat_low_upp, param$vec_dist_a_priori,param$mat_phi
+    historia_mejores, x, param$rf_type, param$initial_val_optim,
+    param$mat_low_upp, param$vec_dist_a_priori, param$mat_phi
   ) == min(Bayesaian_MDL_k_cp(
-    historia_mejores,x,param$rf_type, param$initial_val_optim,
-    param$mat_low_upp, param$vec_dist_a_priori,param$mat_phi))
-  ),]
+    historia_mejores, x, param$rf_type, param$initial_val_optim,
+    param$mat_low_upp, param$vec_dist_a_priori, param$mat_phi
+  ))
+), ]
 }
 }

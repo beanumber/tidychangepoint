@@ -1194,15 +1194,11 @@ mata_k_tau_volado <- function(mat_cp, prob_volado) {
 #'               the Goel–Okumoto (GO), and a generalized Goel–Okumoto (GGO)
 #' @param theta parámetros de mean function.Para
 #'
-#'   W: alpha = theta[1], sigma=theta[2]
-#'
-#'   EW: alpha=theta[1], beta=theta[2] y sigma=theta[3]
-#'
-#'   GGO: alpha=theta[1], beta=theta[2] y gamma=theta[3]
-#'
-#'   MO: alpha=theta[1], beta=theta[2]
-#'
-#'   GO: alpha=theta[1], beta=theta[2]
+#'  - W: \eqn{\alpha = \theta[1], \sigma = \theta[2]}
+#'  - EW: \eqn{\alpha= \theta[1], \beta = \theta[2]} y \eqn{\sigma = \theta[3]}
+#'  - GGO: \eqn{\alpha = \theta[1], \beta = \theta[2]} y \eqn{\gamma = \theta[3]}
+#'  - MO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
+#'  - GO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
 #'
 #' @return regresa la evaluación
 #' @export
@@ -1504,17 +1500,13 @@ actualiza_carpeta <- function(comienzos_de_archivo, source_raiz, carpeta_destino
 #'   exponentiated-Weibull (EW),the Musa–Okumoto (MO), the Goel–Okumoto (GO),
 #'   and a generalized Goel–Okumoto (GGO). Las cuales tienen 3,3,2 y 2
 #'   parámetros
-#' @param theta parámetros de mean function.Para
+#' @param theta parámetros de mean function. Para
 #'
-#'   W: alpha = theta[1], sigma=theta[2]
-#'
-#'   EW: alpha=theta[1], beta=theta[2] y sigma=theta[3]
-#'
-#'   GGO: alpha=theta[1], beta=theta[2] y gamma=theta[3]
-#'
-#'   MO: alpha=theta[1], beta=theta[2]
-#'
-#'   GO: alpha=theta[1], beta=theta[2]
+#'  - W: \eqn{\alpha = \theta[1]}, \eqn{\sigma = \theta[2]}
+#'  - EW: \eqn{\alpha = \theta[1], \beta = \theta[2]} y \eqn{\sigma = \theta[3]}
+#'  - GGO: \eqn{\alpha = \theta[1], \beta = \theta[2]} y \eqn{\gamma = \theta[3]}
+#'  - MO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
+#'  - GO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
 #'
 #' @return regresa la evaluación
 #' @export

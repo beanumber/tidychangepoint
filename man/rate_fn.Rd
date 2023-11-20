@@ -16,17 +16,14 @@ exponentiated-Weibull (EW),the Musa–Okumoto (MO), the Goel–Okumoto (GO),
 and a generalized Goel–Okumoto (GGO). Las cuales tienen 3,3,2 y 2
 parámetros}
 
-\item{theta}{parámetros de mean function.Para
-
-W: alpha = theta\link{1}, sigma=theta\link{2}
-
-EW: alpha=theta\link{1}, beta=theta\link{2} y sigma=theta\link{3}
-
-GGO: alpha=theta\link{1}, beta=theta\link{2} y gamma=theta\link{3}
-
-MO: alpha=theta\link{1}, beta=theta\link{2}
-
-GO: alpha=theta\link{1}, beta=theta\link{2}}
+\item{theta}{parámetros de mean function. Para
+\itemize{
+\item W: \eqn{\alpha = \theta[1]}, \eqn{\sigma = \theta[2]}
+\item EW: \eqn{\alpha = \theta[1], \beta = \theta[2]} y \eqn{\sigma = \theta[3]}
+\item GGO: \eqn{\alpha = \theta[1], \beta = \theta[2]} y \eqn{\gamma = \theta[3]}
+\item MO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
+\item GO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
+}}
 }
 \value{
 regresa la evaluación
@@ -35,12 +32,16 @@ regresa la evaluación
 Evaluanción de rate function (la derivada de la mean)
 }
 \examples{
-t <- c(1.4,2.8); theta <- c(1.2,2.1,3.2)
+t <- c(1.4, 2.8)
+theta <- c(1.2, 2.1, 3.2)
 
-rf_type="EW"; rate_fn(t,rf_type,theta)
-rf_type="GGO"; rate_fn(t,rf_type,theta)
-rf_type="MO"; rate_fn(t,rf_type,theta)
-rf_type="GO"; rate_fn(t,rf_type,theta)
-
+rf_type <- "EW"
+rate_fn(t, rf_type, theta)
+rf_type <- "GGO"
+rate_fn(t, rf_type, theta)
+rf_type <- "MO"
+rate_fn(t, rf_type, theta)
+rf_type <- "GO"
+rate_fn(t, rf_type, theta)
 
 }

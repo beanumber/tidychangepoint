@@ -14,16 +14,13 @@ posibles exponentiated-Weibull (EW),the Musa–Okumoto (MO),
 the Goel–Okumoto (GO), and a generalized Goel–Okumoto (GGO)}
 
 \item{theta}{parámetros de mean function.Para
-
-W: alpha = theta\link{1}, sigma=theta\link{2}
-
-EW: alpha=theta\link{1}, beta=theta\link{2} y sigma=theta\link{3}
-
-GGO: alpha=theta\link{1}, beta=theta\link{2} y gamma=theta\link{3}
-
-MO: alpha=theta\link{1}, beta=theta\link{2}
-
-GO: alpha=theta\link{1}, beta=theta\link{2}}
+\itemize{
+\item W: \eqn{\alpha = \theta[1], \sigma = \theta[2]}
+\item EW: \eqn{\alpha= \theta[1], \beta = \theta[2]} y \eqn{\sigma = \theta[3]}
+\item GGO: \eqn{\alpha = \theta[1], \beta = \theta[2]} y \eqn{\gamma = \theta[3]}
+\item MO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
+\item GO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
+}}
 }
 \value{
 regresa la evaluación
@@ -32,10 +29,15 @@ regresa la evaluación
 Evaluanción de mean function (la integral de la rate)
 }
 \examples{
-t <- c(1.4,2.8); theta <- c(1.2,2.1,3.2)
-rf_type="EW"; mean_fn(t,rf_type,theta)
-rf_type="GGO"; mean_fn(t,rf_type,theta)
-rf_type="MO"; mean_fn(t,rf_type,theta)
-rf_type="GO"; mean_fn(t,rf_type,theta)
+t <- c(1.4, 2.8)
+theta <- c(1.2, 2.1, 3.2)
+rf_type <- "EW"
+mean_fn(t, rf_type, theta)
+rf_type <- "GGO"
+mean_fn(t, rf_type, theta)
+rf_type <- "MO"
+mean_fn(t, rf_type, theta)
+rf_type <- "GO"
+mean_fn(t, rf_type, theta)
 
 }
