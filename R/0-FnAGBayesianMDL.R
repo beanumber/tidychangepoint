@@ -441,6 +441,7 @@ AG_BMDL_r_paso <- function(param) {
 #' @param ajuste_bloque description
 #' @export
 Bayesaian_MDL_1_cp <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi, ajuste_bloque) {
+  N <- max(x)
   # 1. Obtener los estimadores MAP para cada regimen y guardarlos en mat_MAP
   mat_MAP <- extrae_mat_MAP(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi, ajuste_bloque)
   # 2. Evaluar la log-posterior (sumando la primera columna de mat_MAP)
@@ -458,6 +459,7 @@ Bayesaian_MDL_1_cp <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, v
 #'   generación) con los valores del bayesian MDL
 #' @export
 Bayesaian_MDL_k_cp <- function(mat_cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi, ajuste_bloque) {
+  N <- max(x)
   # OBS: quizás se podría hacer matricial para que fuera más rápido
   return(apply(mat_cp, 1, function(y) {
     Bayesaian_MDL_1_cp(y, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi, ajuste_bloque)
@@ -1131,7 +1133,8 @@ penalization_MDL <- function(cp, rf_type) { # V02
   # Se hizo el cambio de multiplicar por en número de parámetros
   # esta función solo es llamada por "penalization_MDL"
   # penalization_MDL <- function(cp) { # antes no recibía rf_type
-
+  eval(parse(text=paste0("x <- ",param$nombre_datos)))
+  N <- max(x)
   # n_param_rf_type es el número de parámetros de la función de tasa del poisson
   n_param_rf_type <- c(2, 3, 3, 2, 2)[rf_type == c("W", "EW", "GGO", "MO", "GO")]
 
