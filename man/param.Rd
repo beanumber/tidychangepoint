@@ -5,12 +5,15 @@
 \alias{param}
 \title{param}
 \format{
-An object of class \code{list} of length 33.
+An object of class \code{list} of length 31.
 }
 \usage{
 param
 }
 \description{
 param
+}
+\seealso{
+\code{\link[=revisor_param]{revisor_param()}}
 }
 \keyword{datasets}

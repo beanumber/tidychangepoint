@@ -45,7 +45,7 @@ Bayesaian_MDL_k_cp(
 \item{ajuste_bloque}{description}
 }
 \value{
-regresa un vector de tamaño k (el numero de cromosomas por
+regresa un vector de tamaño \code{k} (el numero de cromosomas por
 generación) con los valores del bayesian MDL
 }
 \description{

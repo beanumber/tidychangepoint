@@ -295,29 +295,30 @@ revisor_param <- function(param,
 #' 
 #' mat_cp <- sim_k_cp_BMDL(DataCPSimRebases, param)
 #' AG_BMDL_1_paso(DataCPSimRebases, mat_cp, param)
+#' AG_BMDL_1_paso(sims$ts1, mat_cp, param)
 #'
 AG_BMDL_1_paso <- function(x, mat_cp, param) {
   # N <- length(x) # ANTES
   N <- max(x)
   # 1. Evaluación de sus calificaciones
-  (vec_BMDL_k_cp <- Bayesaian_MDL_k_cp(
+  vec_BMDL_k_cp <- Bayesaian_MDL_k_cp(
     mat_cp, x, param$rf_type,
     param$initial_val_optim,
     param$mat_low_upp,
     param$vec_dist_a_priori,
     param$mat_phi,
     param$ajuste_bloque
-  ))
+  )
   # 2. Encontrar sus probabilidades
-  (vec_probs <- probs_vec_MDL(vec_BMDL_k_cp, param$probs_rank0_MDL1))
+  vec_probs <- probs_vec_MDL(vec_BMDL_k_cp, param$probs_rank0_MDL1)
   # 3. Seleccionar dos padres
-  (mat_padres <- selec_k_pares_de_padres(vec_probs))
+  mat_padres <- selec_k_pares_de_padres(vec_probs)
   # 4. Juntar sus puntos de cambio
-  (mat_cp <- junta_k_puntos_cambio(mat_padres, mat_cp))
+  mat_cp <- junta_k_puntos_cambio(mat_padres, mat_cp)
   # 5. Volados para quitar puntos de cambio
-  (mat_cp <- mata_k_tau_volado(mat_cp, param$prob_volado))
+  mat_cp <- mata_k_tau_volado(mat_cp, param$prob_volado)
   # 6. Mutaciones puntos de cambio
-  (mat_cp <- muta_k_cp_BMDL(mat_cp, x, param))
+  mat_cp <- muta_k_cp_BMDL(mat_cp, x, param)
   # (mat_cp <- muta_k_cp(mat_cp,param)) # antes
 
 
@@ -337,6 +338,7 @@ AG_BMDL_1_paso <- function(x, mat_cp, param) {
 #' @examples
 #' \dontrun{
 #' lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
+#' lista_AG <- AG_BMDL_r_paso(sims$ts1, param)
 #' }
 #' 
 AG_BMDL_r_paso <- function(x, param, destdir = tempdir()) {
@@ -446,13 +448,13 @@ Bayesaian_MDL_1_cp <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, v
   # 3. Evaluar la penalización
   penaliza_cp <- penalization_MDL(cp, rf_type, N)
   # 4. Obtener bayesian-MDL de la diferencia de la penalización y la log-posterior
-  (BMDL_1_cp <- penaliza_cp - log_posterior)
+  BMDL_1_cp <- penaliza_cp - log_posterior
   return(BMDL_1_cp)
 }
 
 #' Bayesian MDL para un vector de puntos de cambio
 #' @rdname Bayesaian_MDL_1_cp
-#' @return regresa un vector de tamaño k (el numero de cromosomas por
+#' @return regresa un vector de tamaño `k` (el numero de cromosomas por
 #'   generación) con los valores del bayesian MDL
 #' @export
 Bayesaian_MDL_k_cp <- function(
@@ -1078,28 +1080,35 @@ muta_k_cp_BMDL <- function(mat_cp, x, param) {
 #' @details
 #' regresa un vector de tamaño `max_num_cp+3` donde la primera entrada es
 #'         m, la segunda \eqn{v_0=1, ...., v_{m+1}=N,0,...,0}
-#' por ejemplo: `c(4,1,3,8,11,15,20,0,0,0,0)` para `m=4`, \eqn{max_num_cp=8}, \eqn{N=20}.
-#'         Se tienen m puntos de cambio, los cuales \eqn{\tau_0=1} y \eqn{\tau_{m+1}= N+1}, pero en nuestro caso
-#'         tenemos que los vectores cp tienen \eqn{c(m,\tau_0=1,\tau_1,...,\tau_{m-1},\tau_m= N,0,0,0)}
+#'
+#' por ejemplo: `c(4,1,3,8,11,15,20,0,0,0,0)` para `m=4`, \eqn{max\_num\_cp=8}, \eqn{N=20}.
+#'         Se tienen `m` puntos de cambio, los cuales 
+#'          \eqn{\tau_0=1} y \eqn{\tau_{m+1}= N+1}, 
+#'         pero en nuestro caso
+#'         tenemos que los vectores `cp` tienen \eqn{c(m,\tau_0=1,\tau_1,...,\tau_{m-1},\tau_m= N,0,0,0)}
 #'         por lo cual se nosotros:
-#' - 1) empieza con el número de puntos de cambio;
-#' - 2) la segunda entrada es un uno;
-#' - 3) la tercera entrada es el primer punto de cambio;
-#' - 4) las siguientes son otros puntos de cambio;
-#' - 5) la siguiente entrada después de punto de cambio tiene el valor  `N`; y
-#' - 6) los siguientes son númores cero hasta llenarlo para que sea de tamaño `max_num_cp`
+#' - empieza con el número de puntos de cambio;
+#' - la segunda entrada es un uno;
+#' - la tercera entrada es el primer punto de cambio;
+#' - las siguientes son otros puntos de cambio;
+#' - la siguiente entrada después de punto de cambio tiene el valor  `N`; y
+#' - los siguientes son númores cero hasta llenarlo para que sea de tamaño `max_num_cp`
 #' @export
 #' @examples
 #' sim_1_cp_BMDL(DataCPSimRebases, param)
-#' 
+#' sim_1_cp_BMDL(sims$ts1, param)
+#' sim_1_cp_BMDL(sims$ts2, param)
+#' sim_1_cp_BMDL(sims$ts3, param)
+#' x <- c(4,1,3,8,11,15,20,0,0,0,0)
+#' sim_1_cp_BMDL(x, param)
 #'
 sim_1_cp_BMDL <- function(x, param) {
   # Primero simulamos una binomial que va a ser el número de puntos de cambio
-  (m <- min(stats::rbinom(1, max(x), param$prob_inicial), param$max_num_cp - 3))
+  m <- min(stats::rbinom(1, length(x), param$prob_inicial), param$max_num_cp - 3)
   # Simulamos los puntos de cambio uniformemente aleatorios
-  (valores_cp <- sort(sample(x[-length(x)], size = m, replace = F)))
+  valores_cp <- sort(sample(x[-length(x)], size = m, replace = F))
   # Genera cromosoma con estructura manejable
-  (ans <- c(m, 1, valores_cp, max(x), rep(0, param$max_num_cp - m - 3)))
+  ans <- c(m, 1, valores_cp, max(x), rep(0, param$max_num_cp - m - 3))
   return(ans)
 }
 
@@ -1111,6 +1120,7 @@ sim_1_cp_BMDL <- function(x, param) {
 #' @export
 #' @examples
 #' sim_k_cp_BMDL(DataCPSimRebases, param)
+#' sim_k_cp_BMDL(sims$ts1, param)
 #' 
 #'
 sim_k_cp_BMDL <- function(x, param) {

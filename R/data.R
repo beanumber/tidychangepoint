@@ -11,6 +11,7 @@
 
 #' param
 #' @docType data
+#' @seealso [revisor_param()]
 "param"
 
 #' DataCPSimRebases

@@ -26,42 +26,29 @@ Simula k vectores change point para Bayesian MDL
 \details{
 regresa un vector de tamaño \code{max_num_cp+3} donde la primera entrada es
 m, la segunda \eqn{v_0=1, ...., v_{m+1}=N,0,...,0}
-por ejemplo: \code{c(4,1,3,8,11,15,20,0,0,0,0)} para \code{m=4}, \eqn{max_num_cp=8}, \eqn{N=20}.
-Se tienen m puntos de cambio, los cuales \eqn{\tau_0=1} y \eqn{\tau_{m+1}= N+1}, pero en nuestro caso
-tenemos que los vectores cp tienen \eqn{c(m,\tau_0=1,\tau_1,...,\tau_{m-1},\tau_m= N,0,0,0)}
+
+por ejemplo: \code{c(4,1,3,8,11,15,20,0,0,0,0)} para \code{m=4}, \eqn{max\_num\_cp=8}, \eqn{N=20}.
+Se tienen \code{m} puntos de cambio, los cuales
+\eqn{\tau_0=1} y \eqn{\tau_{m+1}= N+1},
+pero en nuestro caso
+tenemos que los vectores \code{cp} tienen \eqn{c(m,\tau_0=1,\tau_1,...,\tau_{m-1},\tau_m= N,0,0,0)}
 por lo cual se nosotros:
 \itemize{
-\item 
-\enumerate{
 \item empieza con el número de puntos de cambio;
-}
-\item 
-\enumerate{
 \item la segunda entrada es un uno;
-}
-\item 
-\enumerate{
 \item la tercera entrada es el primer punto de cambio;
-}
-\item 
-\enumerate{
 \item las siguientes son otros puntos de cambio;
-}
-\item 
-\enumerate{
 \item la siguiente entrada después de punto de cambio tiene el valor  \code{N}; y
-}
-\item 
-\enumerate{
 \item los siguientes son númores cero hasta llenarlo para que sea de tamaño \code{max_num_cp}
-}
 }
 }
 \examples{
 sim_1_cp_BMDL(DataCPSimRebases, param)
+sim_1_cp_BMDL(sims$ts1, param)
 
 
 sim_k_cp_BMDL(DataCPSimRebases, param)
+sim_k_cp_BMDL(sims$ts1, param)
 
 
 }
