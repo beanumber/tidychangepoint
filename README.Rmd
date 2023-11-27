@@ -40,6 +40,9 @@ sims |>
   facet_wrap(vars(set), ncol = 1)
 ```
 
+```{r AG_BMDL}
+AG_BMDL_r_paso(DataCPSimRebases, param)
+```
 
 
 ## Citation

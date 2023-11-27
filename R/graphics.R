@@ -3,7 +3,13 @@
 #' @param lista_AG description
 #' @return guarda un pdf con la gráfica
 #' @export
-graf_puntos_cambio_repetidos <- function(lista_AG) {
+#' @examples
+#' \dontrun{
+#' lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
+#' graf_puntos_cambio_repetidos(lista_AG)
+#' }
+#' 
+graf_puntos_cambio_repetidos <- function(lista_AG, destdir = tempdir()) {
   # Obtenemos cuantos de los cp mejores se graficarán
   n_cp_mas_repetidos <- lista_AG$param$cuantos_mejores_cp_graf
   historia_mejores_sin_0_1_N <- lista_AG$historia_mejores[, -1:-2]
@@ -14,17 +20,18 @@ graf_puntos_cambio_repetidos <- function(lista_AG) {
                       xlim = range(lista_AG$x)
   )
   graphics::abline(v = as.numeric(names(cp_mas_repetidos)), col = "blue")
-  
-  
-  (nombre_pdf <- paste0(
-    param$nombre_carpeta_pdf, "/Fig_CP_repetidos_", lista_AG$param$nombre_datos, "_rf_",
+
+  nombre_pdf <- paste0(
+    "Fig_CP_repetidos_", lista_AG$param$nombre_datos, "_rf_",
     lista_AG$param$rf_type, "_", fun_n_genera_texto_dist(lista_AG$param), "_r",
     lista_AG$param$r, "_k",
     lista_AG$param$k, lista_AG$valor_BMDL_minimo, ".pdf"
-  ))
+  )
   
-  grDevices::dev.print(pdf, nombre_pdf, width = 16, height = 10)
-  cat("Se guardo la imagen:\n", nombre_pdf, "\n")
+  path <- fs::path(destdir, nombre_pdf)
+  
+  grDevices::dev.print(pdf, path, width = 16, height = 10)
+  message("Se guardo la imagen:\n", path, "\n")
 }
 
 
@@ -72,13 +79,27 @@ grafica_escalonada <- function(res, col_segmets, vec_xlim = NULL, vec_ylim = NUL
 #' @param lista_AG description
 #' @param param description
 #' @export
-grafica_datos_e_intervalos <- function(lista_AG, param) {
+#' @examples
+#' x <- sample(1:1096)
+#' alpha <- runif(6) 
+#' sigma <- runif(6)
+#' tau <- sample(x, 5)
+#' grafica_datos_e_intervalos(
+#'   lista_AG = list(x = x), param,
+#'   n_puntos_cambio = 5, d = x, 
+#'   alpha = alpha, sigma = sigma, tau = tau
+#' )
+#' 
+grafica_datos_e_intervalos <- function(lista_AG, param, n_puntos_cambio, d, alpha, sigma, tau) {
+  # What is d????
+  d <- 5
+  
   # sink("funcion_media_acumulada.txt")
   gen_texto_m(n_puntos_cambio, mas_derecha = "")
   # sink()
   grafica_escalonada(lista_AG$x, "black")
   
-  tasa_NHPP <- funcion_media_acumulada()
+  tasa_NHPP <- funcion_media_acumulada(i = 2, d, alpha, sigma, tau)
   upp_bond <- stats::qpois(.95, lambda = c(pow(10 / sigma[1], alpha[1]), tasa_NHPP))
   low_bond <- stats::qpois(.05, lambda = c(pow(10 / sigma[1], alpha[1]), tasa_NHPP))
   mean_NHPP <- c(pow(10 / sigma[1], alpha[1]), tasa_NHPP)
@@ -97,7 +118,13 @@ grafica_datos_e_intervalos <- function(lista_AG, param) {
 #' 4 Number of change points in the best chromosomes
 #'
 #' @export
-graficas_BMDL <- function(lista_AG, param) {
+#' @examples
+#' \dontrun{
+#' lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
+#' graficas_BMDL(lista_AG, param)
+#' }
+#' 
+graficas_BMDL <- function(lista_AG, param, destdir = tempdir()) {
   graphics::par(mfrow = c(2, 2), mar = c(2, 4, 2, 2))
   # 1.- Datos reales
   # plot.stepfun(lista_AG$x, col.vert = "gray20",main="Data",xlim = range(lista_AG$x),ylab="m(t)")
@@ -115,7 +142,7 @@ graficas_BMDL <- function(lista_AG, param) {
   
   sigma <- mat_MAP[, 3]
   alpha <- mat_MAP[, 2]
-  grafica_datos_e_intervalos(lista_AG, param)
+  grafica_datos_e_intervalos(lista_AG, param, n_puntos_cambio, d, alpha, sigma, tau)
   
   # 2.- Evolución del algoritmo genético
   plot(lista_AG$vec_min_BMDL,
@@ -128,6 +155,16 @@ graficas_BMDL <- function(lista_AG, param) {
   # 4.- Number of change points in the best chromosomes
   plot(lista_AG$historia_mejores[, 1], ylab = "Number of cp", type = "l", col = "blue", main = paste0("The best chromosomes with", lista_AG$historia_mejores[which.min(lista_AG$vec_min_BMDL), 1], "change points "))
   graphics::par(mfrow = c(1, 1))
+  
+  nombre_pdf <- paste0(
+    "Fig_4AGBMDL_", param$nombre_datos, "_rf_",
+    param$rf_type, "_", fun_n_genera_texto_dist(param), "_r",
+    param$r, "_k",
+    param$k, lista_AG$valor_BMDL_minimo, ".pdf"
+  )
+  
+  grDevices::dev.print(pdf, fs::path(destdir, nombre_pdf), width = 16, height = 10)
+  message("Se guardo la imagen:\n", fs::path(destdir, nombre_pdf), "\n")
 }
 
 

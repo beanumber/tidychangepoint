@@ -5,9 +5,17 @@
 \alias{graficas_BMDL}
 \title{Graficas de los intervalos y los datos}
 \usage{
-grafica_datos_e_intervalos(lista_AG, param)
+grafica_datos_e_intervalos(
+  lista_AG,
+  param,
+  n_puntos_cambio,
+  d,
+  alpha,
+  sigma,
+  tau
+)
 
-graficas_BMDL(lista_AG, param)
+graficas_BMDL(lista_AG, param, destdir = tempdir())
 }
 \arguments{
 \item{lista_AG}{description}
@@ -25,4 +33,21 @@ una gráfica con :
 Graficas de los intervalos y los datos
 
 Graficas del AG con BMDL
+}
+\examples{
+x <- sample(1:1096)
+alpha <- runif(6) 
+sigma <- runif(6)
+tau <- sample(x, 5)
+grafica_datos_e_intervalos(
+  lista_AG = list(x = x), param,
+  n_puntos_cambio = 5, d = x, 
+  alpha = alpha, sigma = sigma, tau = tau
+)
+
+\dontrun{
+lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
+graficas_BMDL(lista_AG, param)
+}
+
 }

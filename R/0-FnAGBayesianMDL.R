@@ -31,13 +31,6 @@ globalVariables(
 
 
 
-# cat("\014") # borra consola
-# rm(list=ls())  # Borra todo
-
-# library(openxlsx)
-# library(rio)
-
-
 #' Validador de la lista param para ejecutar el AG-BMDL
 #'
 #' @param param es la lista original de parámetros la cual contiene todos los
@@ -292,12 +285,16 @@ revisor_param <- function(param,
 
 #' Algoritmo genético de Bayesian MDL a un paso
 #'
-#' @param x a vector
+#' @param x a vector. See [DataCPSimRebases]
 #' @param mat_cp a matrix
-#' @param param description
+#' @param param description. See [param].
 #'
 #' @return A `list` of length 2
 #' @export
+#' @examples
+#' 
+#' mat_cp <- sim_k_cp_BMDL(DataCPSimRebases, param)
+#' AG_BMDL_1_paso(DataCPSimRebases, mat_cp, param)
 #'
 AG_BMDL_1_paso <- function(x, mat_cp, param) {
   # N <- length(x) # ANTES
@@ -337,13 +334,14 @@ AG_BMDL_1_paso <- function(x, mat_cp, param) {
 
 #' @rdname AG_BMDL_1_paso
 #' @export
-AG_BMDL_r_paso <- function(param) {
-  # if(!is.null(param$value_set_seed))
-  #  set.seed(param$value_set_seed)
+#' @examples
+#' \dontrun{
+#' lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
+#' }
+#' 
+AG_BMDL_r_paso <- function(x, param, destdir = tempdir()) {
   # Primero obtenemos el vector de la variable cruda
-  eval(parse(text = paste0("x <- ", param$nombre_datos)))
   N <- max(x)
-
 
   # 1. Simular puntos de cambio iniciales
   mat_cp <- sim_k_cp_BMDL(x, param)
@@ -398,30 +396,29 @@ AG_BMDL_r_paso <- function(param) {
   # lista_AG contiene los resultados del algoritmo genético
   lista_AG <- list(x = x, historia_mejores = historia_mejores, lista_AG_BMDL = lista_AG_BMDL, vec_min_BMDL = vec_min_BMDL, valor_BMDL_minimo = valor_BMDL_minimo, cromosoma_minimo_BMDL = cromosoma_minimo_BMDL, minimo_BMDL = minimo_BMDL, param = param)
 
-  graf_puntos_cambio_repetidos(lista_AG)
+  # Write graphics
+  dir_pdf <- fs::path(destdir, param$nombre_carpeta_pdf)
+  if (!dir.exists(dir_pdf)) {
+    dir.create(dir_pdf, recursive = TRUE)
+  }
 
-
-  graficas_BMDL(lista_AG, param)
-
-  nombre_pdf <- paste0(
-    param$nombre_carpeta_pdf, "/Fig_4AGBMDL_", param$nombre_datos, "_rf_",
-    param$rf_type, "_", fun_n_genera_texto_dist(param), "_r",
-    param$r, "_k",
-    param$k, lista_AG$valor_BMDL_minimo, ".pdf"
-  )
-
-  grDevices::dev.print(pdf, nombre_pdf, width = 16, height = 10)
-  cat("Se guardo la imagen:\n", nombre_pdf, "\n")
-
+  graf_puntos_cambio_repetidos(lista_AG, dir_pdf)
+  graficas_BMDL(lista_AG, param, dir_pdf)
+  
+  # Write data
+  dir_data <- fs::path(destdir, param$nombre_carpeta_RData)
+  if (!dir.exists(dir_data)) {
+    dir.create(dir_data, recursive = TRUE)
+  }
   nombre_archivo_AG <- paste0(
-    param$nombre_carpeta_RData, "/Dat_AGBMDL_", param$nombre_datos, "_rf_",
+    "Dat_AGBMDL_", param$nombre_datos, "_rf_",
     param$rf_type, "_", fun_n_genera_texto_dist(param), "_r",
     param$r, "_k",
     param$k, lista_AG$valor_BMDL_minimo, ".RData"
   )
 
-  save(lista_AG, file = nombre_archivo_AG)
-  cat("Se guardo el archivo:\n", nombre_archivo_AG, "\n")
+  save(lista_AG, file = fs::path(dir_data, nombre_archivo_AG))
+  message("Se guardo el archivo:\n", fs::path(dir_data, nombre_archivo_AG), "\n")
 
   return(lista_AG)
 }
@@ -447,7 +444,7 @@ Bayesaian_MDL_1_cp <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, v
   # 2. Evaluar la log-posterior (sumando la primera columna de mat_MAP)
   log_posterior <- sum(mat_MAP[, 1])
   # 3. Evaluar la penalización
-  penaliza_cp <- penalization_MDL(cp, rf_type)
+  penaliza_cp <- penalization_MDL(cp, rf_type, N)
   # 4. Obtener bayesian-MDL de la diferencia de la penalización y la log-posterior
   (BMDL_1_cp <- penaliza_cp - log_posterior)
   return(BMDL_1_cp)
@@ -458,8 +455,10 @@ Bayesaian_MDL_1_cp <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, v
 #' @return regresa un vector de tamaño k (el numero de cromosomas por
 #'   generación) con los valores del bayesian MDL
 #' @export
-Bayesaian_MDL_k_cp <- function(mat_cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi, ajuste_bloque) {
-  N <- max(x)
+Bayesaian_MDL_k_cp <- function(
+    mat_cp, x, rf_type, initial_val_optim, mat_low_upp, 
+    vec_dist_a_priori, mat_phi, ajuste_bloque
+) {
   # OBS: quizás se podría hacer matricial para que fuera más rápido
   return(apply(mat_cp, 1, function(y) {
     Bayesaian_MDL_1_cp(y, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi, ajuste_bloque)
@@ -813,7 +812,7 @@ fun_1_genera_texto_dist <- function(dist, parametros_dist) {
 #'   ))
 #' ), ]
 #' }
-gen_texto_m <- function(n_puntos_cambio, mas_derecha = "") {
+gen_texto_m <- function(n_puntos_cambio, mas_derecha = "", destdir = tempdir()) {
   # PRIMER RENGLON
   j_renglon <- 1
   # texto_m <- paste0("m[i] <- ",print_step("i",j_renglon,T),"*",print_pow_d("i",j_renglon),mas_derecha)
@@ -837,10 +836,10 @@ gen_texto_m <- function(n_puntos_cambio, mas_derecha = "") {
   }
   if (mas_derecha == "") texto_m <- paste0(texto_m, "0")
   # estas tres lineas son nuevas
-  texto_m <- paste0("funcion_media_acumulada<-function(i){", texto_m)
+  texto_m <- paste0("funcion_media_acumulada <- function (i) {", texto_m)
   texto_m <- paste0(texto_m, "}")
 
-  nombre_archivo <- paste0("funcion_media_acumulada.R")
+  nombre_archivo <- fs::path(destdir, paste0("funcion_media_acumulada.R"))
   cat(texto_m, file = nombre_archivo)
   # cat("Se genero el archivo: ",nombre_archivo)
 }
@@ -1074,7 +1073,7 @@ muta_k_cp_BMDL <- function(mat_cp, x, param) {
 #' Genera un cromosoma de puntos de cambio para el Bayesian MDL
 #'
 #' @param x vector de excedentes
-#' @param param lista de parámetros globales
+#' @param param lista de parámetros globales. See [param].
 #'
 #' @details
 #' regresa un vector de tamaño `max_num_cp+3` donde la primera entrada es
@@ -1090,6 +1089,9 @@ muta_k_cp_BMDL <- function(mat_cp, x, param) {
 #' - 5) la siguiente entrada después de punto de cambio tiene el valor  `N`; y
 #' - 6) los siguientes son númores cero hasta llenarlo para que sea de tamaño `max_num_cp`
 #' @export
+#' @examples
+#' sim_1_cp_BMDL(DataCPSimRebases, param)
+#' 
 #'
 sim_1_cp_BMDL <- function(x, param) {
   # Primero simulamos una binomial que va a ser el número de puntos de cambio
@@ -1104,9 +1106,12 @@ sim_1_cp_BMDL <- function(x, param) {
 
 #' Simula k vectores change point para Bayesian MDL
 #' @rdname sim_1_cp_BMDL
-#' @return regresa una matriz de k por max_num_cp+3, la cual en cada renglón tiene
+#' @return regresa una matriz de `k` por `max_num_cp+3`, la cual en cada renglón tiene
 #'         una simulación de un vector de tiempos de cambio
 #' @export
+#' @examples
+#' sim_k_cp_BMDL(DataCPSimRebases, param)
+#' 
 #'
 sim_k_cp_BMDL <- function(x, param) {
   mat_cp <- matrix(0, param$k, param$max_num_cp)
@@ -1128,13 +1133,16 @@ sim_k_cp_BMDL <- function(x, param) {
 #'    P_{\theta,\tau} = \sum_{i=1}^{m+1}\dfrac{\ln(\tau_i-\tau_{i-1})}{2}+\ln(m)+\sum_{i=2}^m\ln(\tau_i)
 #'  }
 #' @export
+#' @examples
+#' mat_cp <- sim_k_cp_BMDL(DataCPSimRebases, param)
+#' penalization_MDL(mat_cp, param$rf_type, N = max(DataCPSimRebases))
+#' 
 #'
-penalization_MDL <- function(cp, rf_type) { # V02
+penalization_MDL <- function(cp, rf_type, N) { # V02
   # Se hizo el cambio de multiplicar por en número de parámetros
   # esta función solo es llamada por "penalization_MDL"
   # penalization_MDL <- function(cp) { # antes no recibía rf_type
-  eval(parse(text=paste0("x <- ",param$nombre_datos)))
-  N <- max(x)
+
   # n_param_rf_type es el número de parámetros de la función de tasa del poisson
   n_param_rf_type <- c(2, 3, 3, 2, 2)[rf_type == c("W", "EW", "GGO", "MO", "GO")]
 

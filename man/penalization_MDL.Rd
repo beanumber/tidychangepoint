@@ -4,7 +4,7 @@
 \alias{penalization_MDL}
 \title{Penalización MDL}
 \usage{
-penalization_MDL(cp, rf_type)
+penalization_MDL(cp, rf_type, N)
 }
 \arguments{
 \item{cp}{vector de extendido de puntos de cambio}
@@ -17,4 +17,10 @@ regresa la evaluación de la penalización
 }
 \description{
 Penalización MDL
+}
+\examples{
+mat_cp <- sim_k_cp_BMDL(DataCPSimRebases, param)
+penalization_MDL(mat_cp, param$rf_type, N = max(DataCPSimRebases))
+
+
 }

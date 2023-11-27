@@ -5,7 +5,7 @@
 \title{gen_texto_m
 Genera el texto correspondiente a la variable m para el archivo .txt para JAGS}
 \usage{
-gen_texto_m(n_puntos_cambio, mas_derecha = "")
+gen_texto_m(n_puntos_cambio, mas_derecha = "", destdir = tempdir())
 }
 \arguments{
 \item{n_puntos_cambio}{numero de puntos de cambio}

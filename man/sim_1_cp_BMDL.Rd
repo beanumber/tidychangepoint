@@ -12,10 +12,10 @@ sim_k_cp_BMDL(x, param)
 \arguments{
 \item{x}{vector de excedentes}
 
-\item{param}{lista de parámetros globales}
+\item{param}{lista de parámetros globales. See \link{param}.}
 }
 \value{
-regresa una matriz de k por max_num_cp+3, la cual en cada renglón tiene
+regresa una matriz de \code{k} por \code{max_num_cp+3}, la cual en cada renglón tiene
 una simulación de un vector de tiempos de cambio
 }
 \description{
@@ -56,4 +56,12 @@ por lo cual se nosotros:
 \item los siguientes son númores cero hasta llenarlo para que sea de tamaño \code{max_num_cp}
 }
 }
+}
+\examples{
+sim_1_cp_BMDL(DataCPSimRebases, param)
+
+
+sim_k_cp_BMDL(DataCPSimRebases, param)
+
+
 }

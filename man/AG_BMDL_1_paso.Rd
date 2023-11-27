@@ -7,18 +7,28 @@
 \usage{
 AG_BMDL_1_paso(x, mat_cp, param)
 
-AG_BMDL_r_paso(param)
+AG_BMDL_r_paso(x, param, destdir = tempdir())
 }
 \arguments{
-\item{x}{a vector}
+\item{x}{a vector. See \link{DataCPSimRebases}}
 
 \item{mat_cp}{a matrix}
 
-\item{param}{description}
+\item{param}{description. See \link{param}.}
 }
 \value{
 A \code{list} of length 2
 }
 \description{
 Algoritmo genético de Bayesian MDL a un paso
+}
+\examples{
+
+mat_cp <- sim_k_cp_BMDL(DataCPSimRebases, param)
+AG_BMDL_1_paso(DataCPSimRebases, mat_cp, param)
+
+\dontrun{
+lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
+}
+
 }

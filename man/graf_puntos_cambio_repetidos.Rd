@@ -4,7 +4,7 @@
 \alias{graf_puntos_cambio_repetidos}
 \title{Grafica los n puntos de cambio más repetidos sobre el plot.stepfun de los datos}
 \usage{
-graf_puntos_cambio_repetidos(lista_AG)
+graf_puntos_cambio_repetidos(lista_AG, destdir = tempdir())
 }
 \arguments{
 \item{lista_AG}{description}
@@ -14,4 +14,11 @@ guarda un pdf con la gráfica
 }
 \description{
 Grafica los n puntos de cambio más repetidos sobre el plot.stepfun de los datos
+}
+\examples{
+\dontrun{
+lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
+graf_puntos_cambio_repetidos(lista_AG)
+}
+
 }

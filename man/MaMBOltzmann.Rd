@@ -7,7 +7,7 @@
 \usage{
 MaMBOltzmann(mat_cp, Fitness, Mutation, Temperature)
 
-GABoltzmannMutation2(param, Mutation = 0.03, Temperature = 27)
+GABoltzmannMutation2(x, param, Mutation = 0.03, Temperature = 27)
 }
 \arguments{
 \item{mat_cp}{description}
@@ -18,8 +18,22 @@ GABoltzmannMutation2(param, Mutation = 0.03, Temperature = 27)
 
 \item{Temperature}{description}
 
-\item{param}{description}
+\item{x}{An \code{integer} vector. See \link{DataCPSimRebases}.}
+
+\item{param}{A \code{list} or parameters. See \link{param}.}
+}
+\value{
+A \code{list} of length 2:
+\itemize{
+\item A \code{numeric} vector of \code{FitnessGeneraciones}
+\item A \code{matrix} with \code{k} rows and \code{N} columns
+}
 }
 \description{
-Boltzman
+What does this function do?
+}
+\examples{
+\dontrun{
+  GABoltzmannMutation2(param)
+}
 }
