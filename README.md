@@ -16,13 +16,10 @@ library(BayesianMDLGA)
 ```
 
 ``` r
-str(sims)
+str(rlnorm_ts_1)
 ```
 
-    ## Classes 'tbl_df', 'tbl' and 'data.frame':    1096 obs. of  3 variables:
-    ##  $ ts1: Time-Series  from 1 to 1096: 42.6 39.1 57.5 22.2 66.3 ...
-    ##  $ ts2: Time-Series  from 1 to 1096: 34.6 32.8 31.6 26.5 29.9 ...
-    ##  $ ts3: Time-Series  from 1 to 1096: 67.4 32.2 64.8 44.6 65.4 ...
+    ##  Time-Series [1:1096] from 1 to 1096: 42.6 39.1 57.5 22.2 66.3 ...
 
 ``` r
 str(param)
@@ -90,43 +87,43 @@ summary(pm_25)
     ##  Max.   :785.0
 
 ``` r
-library(tidyverse)
-sims |>
-  pivot_longer(
-    cols = everything(), 
-    names_to = "set", 
-    values_to = "measurement"
-  ) |>
-  mutate(t = row_number()) |>
-  ggplot(aes(x = t, y = measurement)) +
-  geom_line() +
-  facet_wrap(vars(set), ncol = 1)
+list(rlnorm_ts_1, rlnorm_ts_2, rlnorm_ts_3) |>
+  lapply(plot)
 ```
 
-![](README_files/figure-gfm/sim-plot-1.png)<!-- -->
+![](README_files/figure-gfm/sim-plot-1.png)<!-- -->![](README_files/figure-gfm/sim-plot-2.png)<!-- -->![](README_files/figure-gfm/sim-plot-3.png)<!-- -->
+
+    ## [[1]]
+    ## NULL
+    ## 
+    ## [[2]]
+    ## NULL
+    ## 
+    ## [[3]]
+    ## NULL
 
 ``` r
 AG_BMDL_r_paso(DataCPSimRebases, param)
-AG_BMDL_r_paso(sims$ts3, param)
+AG_BMDL_r_paso(rlnorm_ts_3, param)
 ```
 
 ## `changepoint`
 
 ``` r
-plot(sims$ts1)
+plot(rlnorm_ts_3)
+library(changepoint)
 ```
 
 ![](README_files/figure-gfm/changepoint-1.png)<!-- -->
 
 ``` r
-library(changepoint)
-sims |>
-  map(cpt.meanvar, method = "PELT") |>
+list(rlnorm_ts_1, rlnorm_ts_2, rlnorm_ts_3) |>
+  lapply(cpt.meanvar, method = "PELT") |>
   str()
 ```
 
     ## List of 3
-    ##  $ ts1:Formal class 'cpt' [package "changepoint"] with 12 slots
+    ##  $ :Formal class 'cpt' [package "changepoint"] with 12 slots
     ##   .. ..@ data.set : Time-Series [1:1096] from 1 to 1096: 42.6 39.1 57.5 22.2 66.3 ...
     ##   .. ..@ cpttype  : chr "mean and variance"
     ##   .. ..@ method   : chr "PELT"
@@ -141,7 +138,7 @@ sims |>
     ##   .. .. ..$ variance: num [1:2] 128 424
     ##   .. ..@ date     : chr "Thu Jun  8 14:09:02 2023"
     ##   .. ..@ version  : chr "2.2.4"
-    ##  $ ts2:Formal class 'cpt' [package "changepoint"] with 12 slots
+    ##  $ :Formal class 'cpt' [package "changepoint"] with 12 slots
     ##   .. ..@ data.set : Time-Series [1:1096] from 1 to 1096: 34.6 32.8 31.6 26.5 29.9 ...
     ##   .. ..@ cpttype  : chr "mean and variance"
     ##   .. ..@ method   : chr "PELT"
@@ -156,7 +153,7 @@ sims |>
     ##   .. .. ..$ variance: num [1:3] 106 340 898
     ##   .. ..@ date     : chr "Thu Jun  8 14:09:02 2023"
     ##   .. ..@ version  : chr "2.2.4"
-    ##  $ ts3:Formal class 'cpt' [package "changepoint"] with 12 slots
+    ##  $ :Formal class 'cpt' [package "changepoint"] with 12 slots
     ##   .. ..@ data.set : Time-Series [1:1096] from 1 to 1096: 67.4 32.2 64.8 44.6 65.4 ...
     ##   .. ..@ cpttype  : chr "mean and variance"
     ##   .. ..@ method   : chr "PELT"
@@ -171,6 +168,14 @@ sims |>
     ##   .. .. ..$ variance: num [1:4] 130 330 1032 2267
     ##   .. ..@ date     : chr "Thu Jun  8 14:09:02 2023"
     ##   .. ..@ version  : chr "2.2.4"
+
+``` r
+rlnorm_ts_3 |>
+  cpt.meanvar(method = "PELT") |>
+  plot()
+```
+
+![](README_files/figure-gfm/changepoint-2.png)<!-- -->
 
 ## Citation
 

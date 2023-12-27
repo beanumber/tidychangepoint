@@ -20,39 +20,34 @@ library(BayesianMDLGA)
 
 
 ```{r}
-str(sims)
+str(rlnorm_ts_1)
 str(param)
 str(pm_25)
 summary(pm_25)
 ```
 
 ```{r sim-plot, message=FALSE}
-library(tidyverse)
-sims |>
-  pivot_longer(
-    cols = everything(), 
-    names_to = "set", 
-    values_to = "measurement"
-  ) |>
-  mutate(t = row_number()) |>
-  ggplot(aes(x = t, y = measurement)) +
-  geom_line() +
-  facet_wrap(vars(set), ncol = 1)
+list(rlnorm_ts_1, rlnorm_ts_2, rlnorm_ts_3) |>
+  lapply(plot)
 ```
 
 ```{r AG_BMDL, eval=FALSE}
 AG_BMDL_r_paso(DataCPSimRebases, param)
-AG_BMDL_r_paso(sims$ts3, param)
+AG_BMDL_r_paso(rlnorm_ts_3, param)
 ```
 
 ## `changepoint`
 
 ```{r changepoint, message=FALSE}
-plot(sims$ts1)
+plot(rlnorm_ts_3)
 library(changepoint)
-sims |>
-  map(cpt.meanvar, method = "PELT") |>
+list(rlnorm_ts_1, rlnorm_ts_2, rlnorm_ts_3) |>
+  lapply(cpt.meanvar, method = "PELT") |>
   str()
+
+rlnorm_ts_3 |>
+  cpt.meanvar(method = "PELT") |>
+  plot()
 ```
 
 
