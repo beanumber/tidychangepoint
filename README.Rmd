@@ -42,6 +42,7 @@ sims |>
 
 ```{r AG_BMDL}
 AG_BMDL_r_paso(DataCPSimRebases, param)
+AG_BMDL_r_paso(sims$ts3, param)
 ```
 
 

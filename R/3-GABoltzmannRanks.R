@@ -10,6 +10,7 @@
 #'   - A `matrix` with `k` rows and `N` columns
 #' @examples
 #' \dontrun{
+#'   GABoltzmannMutation2(DataCPSimRebases, param)
 #'   GABoltzmannMutation2(sims$ts1, param)
 #'   
 #' }

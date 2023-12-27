@@ -12,7 +12,8 @@ funcion media
 \examples{
 funcion_media_acumulada(
   i = 1, d = sample(1:1096), alpha = runif(6), 
-  sigma = runif(6), tau = sample(1:1096, 5))
+  sigma = runif(6), tau = sample(1:1096, 5)
+ )
 
 
 }

@@ -26,8 +26,10 @@ Algoritmo genético de Bayesian MDL a un paso
 
 mat_cp <- sim_k_cp_BMDL(DataCPSimRebases, param)
 AG_BMDL_1_paso(DataCPSimRebases, mat_cp, param)
+AG_BMDL_1_paso(sims$ts1, mat_cp, param)
 
 \dontrun{
+lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
 lista_AG <- AG_BMDL_r_paso(sims$ts1, param)
 }
 
