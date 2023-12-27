@@ -40,10 +40,21 @@ sims |>
   facet_wrap(vars(set), ncol = 1)
 ```
 
-```{r AG_BMDL}
+```{r AG_BMDL, eval=FALSE}
 AG_BMDL_r_paso(DataCPSimRebases, param)
 AG_BMDL_r_paso(sims$ts3, param)
 ```
+
+## `changepoint`
+
+```{r changepoint, message=FALSE}
+plot(sims$ts1)
+library(changepoint)
+sims |>
+  map(cpt.meanvar, method = "PELT") |>
+  str()
+```
+
 
 
 ## Citation

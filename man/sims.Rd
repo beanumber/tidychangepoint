@@ -11,6 +11,18 @@ An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) w
 sims
 }
 \description{
-Simulated time series data
+Each column contains a \code{\link[stats:ts]{stats::ts()}} vector.
+\itemize{
+\item For \code{ts1}, there is one changepoint located at 826.
+\item For \code{ts2}, there are two changepoints, located at 366 and 731.
+\item For \code{ts3}, there are three changepoints, located at 548, 823, and 973.
+}
+}
+\examples{
+plot(sims$ts1)
+
+}
+\seealso{
+\code{\link[stats:ts]{stats::ts()}}
 }
 \keyword{datasets}
