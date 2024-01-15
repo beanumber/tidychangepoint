@@ -50,6 +50,15 @@ rlnorm_ts_3 |>
   plot()
 ```
 
+```{r}
+cpt.meanvar(rlnorm_ts_1, method = "PELT", test.stat = "Normal", penalty = "BIC")
+# BIC/SIC
+cpt.meanvar(rlnorm_ts_1, method = "PELT", test.stat = "Normal", penalty = "Manual", pen.value = "3*log(n)")
+
+cpt.meanvar(rlnorm_ts_1, method = "PELT", test.stat = "Normal", penalty = "AIC")
+# AIC
+cpt.meanvar(rlnorm_ts_1, method = "PELT", test.stat = "Normal", penalty = "Manual", pen.value = "2*3")
+```
 
 
 ## Citation

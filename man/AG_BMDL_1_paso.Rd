@@ -30,7 +30,7 @@ AG_BMDL_1_paso(sims$ts1, mat_cp, param)
 
 \dontrun{
 lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
-lista_AG <- AG_BMDL_r_paso(sims$ts1, param)
+lista_AG <- AG_BMDL_r_paso(rlnorm_ts_1, param)
 }
 
 }

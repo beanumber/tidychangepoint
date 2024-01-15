@@ -338,7 +338,7 @@ AG_BMDL_1_paso <- function(x, mat_cp, param) {
 #' @examples
 #' \dontrun{
 #' lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
-#' lista_AG <- AG_BMDL_r_paso(sims$ts1, param)
+#' lista_AG <- AG_BMDL_r_paso(rlnorm_ts_1, param)
 #' }
 #' 
 AG_BMDL_r_paso <- function(x, param, destdir = tempdir()) {
