@@ -1,0 +1,57 @@
+---
+title: "Untitled"
+output: html_document
+date: "2023-12-28"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+library(tidyverse)
+library(BayesianMDLGA)
+```
+
+## `changepoint`
+
+### One changepoint
+
+```{r}
+plot(rlnorm_ts_1)
+rlnorm_ts_1 |>
+  cpt.meanvar(method = "BinSeg")
+rlnorm_ts_1 |>
+  cpt.meanvar(method = "SegNeigh", penalty = "BIC")
+rlnorm_ts_1 |>
+  cpt.meanvar(method = "PELT")
+```
+
+```{r}
+bench::mark(
+  "BinSeg" = rlnorm_ts_1 |>
+    cpt.meanvar(method = "BinSeg") |>
+    cpts(),
+  "SegNeigh" = rlnorm_ts_1 |>
+    cpt.meanvar(method = "SegNeigh", penalty = "BIC") |>
+    cpts(),
+  "PELT" = rlnorm_ts_1 |>
+    cpt.meanvar(method = "PELT") |>
+    cpts(),
+) |>
+  arrange(median)
+```
+
+
+
+### Three changepoints
+
+```{r changepoint, message=FALSE}
+plot(rlnorm_ts_3)
+library(changepoint)
+list(rlnorm_ts_1, rlnorm_ts_2, rlnorm_ts_3) |>
+  lapply(cpt.meanvar, method = "PELT") |>
+  str()
+
+rlnorm_ts_3 |>
+  cpt.meanvar(method = "PELT") |>
+  plot()
+```
+
