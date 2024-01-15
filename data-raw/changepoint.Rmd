@@ -15,6 +15,7 @@ library(BayesianMDLGA)
 ### One changepoint
 
 ```{r}
+library(changepoint)
 plot(rlnorm_ts_1)
 rlnorm_ts_1 |>
   cpt.meanvar(method = "BinSeg")
@@ -45,7 +46,6 @@ bench::mark(
 
 ```{r changepoint, message=FALSE}
 plot(rlnorm_ts_3)
-library(changepoint)
 list(rlnorm_ts_1, rlnorm_ts_2, rlnorm_ts_3) |>
   lapply(cpt.meanvar, method = "PELT") |>
   str()

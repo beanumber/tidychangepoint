@@ -32,7 +32,7 @@ list(rlnorm_ts_1, rlnorm_ts_2, rlnorm_ts_3) |>
 ```
 
 ```{r AG_BMDL, eval=FALSE}
-AG_BMDL_r_paso(DataCPSimRebases, param)
+cpt_ag_bmdl <- AG_BMDL_r_paso(DataCPSimRebases, param)
 AG_BMDL_r_paso(rlnorm_ts_3, param)
 ```
 
@@ -49,6 +49,13 @@ rlnorm_ts_3 |>
   cpt.meanvar(method = "PELT") |>
   plot()
 ```
+
+```{r}
+cpt_ag_bmdl |>
+  cpt_meanvar() |>
+  plot()
+```
+
 
 ```{r}
 cpt.meanvar(rlnorm_ts_1, method = "PELT", test.stat = "Normal", penalty = "BIC")

@@ -45,8 +45,14 @@ cpt_best <- function(lista_AG) {
 cpt_meanvar <- function(lista_AG) {
   x <- methods::new(
     "cpt", 
+    cpttype = "mean and variance",
     data.set = stats::as.ts(lista_AG$x), 
-    cpts = cpt_best(lista_AG)
+    test.stat = "Normal",
+    cpts = cpt_best(lista_AG),
+    param.est = list(
+      mean = mean(lista_AG$x),
+      variance = var(lista_AG$x)
+    )
   )
   return(x)
 }
