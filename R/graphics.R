@@ -4,22 +4,19 @@
 #' @return guarda un pdf con la gráfica
 #' @export
 #' @examples
-#' \dontrun{
-#' lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
 #' plot_cpt_repetidos(lista_AG)
-#' }
 #' 
-plot_cpt_repetidos <- function(cpt_list, destdir = tempdir()) {
+plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(), pdf = FALSE) {
   # Obtenemos cuantos de los cp mejores se graficarán
   n_cp_mas_repetidos <- cpt_list$param$cuantos_mejores_cp_graf
   historia_mejores_sin_0_1_N <- cpt_list$historia_mejores[, -1:-2]
-  historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(cpt_list$x)]
+  historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(cpt_list$data)]
   cp_mas_repetidos <- rev(sort(table(historia_mejores_sin_0_1_N)))[1:n_cp_mas_repetidos]
   stats::plot.stepfun(
-    cpt_list$x,
+    cpt_list$data,
     col.vert = "gray20", 
     main = paste0("Los ", n_cp_mas_repetidos, " CP mas repetidos ", fun_n_genera_texto_dist(cpt_list$param)),
-    xlim = range(cpt_list$x)
+    xlim = range(cpt_list$data)
   )
   graphics::abline(v = as.numeric(names(cp_mas_repetidos)), col = "blue")
 
@@ -32,47 +29,33 @@ plot_cpt_repetidos <- function(cpt_list, destdir = tempdir()) {
   
   path <- fs::path(destdir, nombre_pdf)
   
-  grDevices::dev.print(pdf, path, width = 16, height = 10)
+  if (pdf) {
+    grDevices::dev.print(pdf, path, width = 16, height = 10)
+  }
   message("Se guardo la imagen:\n", path, "\n")
 }
 
 
 #' Grafica escalonada para un proceso poisson
 #'
-#' @param res vector que contiene los lugares donde se quiere un escalón de tamaño 1
-#' @param col_segmets color de las lineas
-#' @param vec_xlim limites en el eje x de la gráfica
-#' @param vec_ylim limites en el eje y de la gráfica
+#' @param x a time series vector
 #' @export
 #'
 #' @examples
-#' res <- c(10, 20, 33, 36, 43, 51, 56, 69, 82, 89)
-#' grafica_escalonada(res, col_segmets = "blue")
+#' plot_exceedances(DataCPSim)
+#' plot_exceedances(rlnorm_ts_1)
+#' plot_exceedances(rlnorm_ts_2)
+#' plot_exceedances(rlnorm_ts_3)
 #'
-grafica_escalonada <- function(res, col_segmets, vec_xlim = NULL, vec_ylim = NULL) {
-  lines_segment_NHPP <- function(n, res, col_segmets) {
-    res <- c(0, res)
-    for (i in 1:n) {
-      graphics::segments(res[i], i - 1, res[i + 1], i - 1, col = col_segmets)
-      graphics::segments(res[i + 1], i - 1, res[i + 1], i, col = col_segmets)
-    }
-  }
-  
-  
-  n <- length(res)
-  # Caso en que no hay vec_xlim
-  if (is.null(vec_xlim)) vec_xlim <- range(0, res)
-  # Caso en que no hay vec_ylim
-  if (is.null(vec_ylim)) vec_ylim <- c(0, n)
-  
+plot_exceedances <- function(x, ...) {
+  z <- which_over_mean(x)
   # Graficando
-  plot(0,
-       ylim = vec_ylim, xlim = vec_xlim, type = "n",
-       xlab = "Time units - t", ylab = "Number of exceedances at t",
-       main = expression(bold(paste("(a) Confidence Interval for fitted m(t|", theta, ")")))
+  plot(
+    x = z, y = 1:length(z), type = "s",
+    xlab = "Time units - t", ylab = "Number of exceedances at t",
+    main = expression(bold(paste("(a) Confidence Interval for fitted m(t|", theta, ")"))), 
+    ...
   )
-  
-  lines_segment_NHPP(n, res, col_segmets)
 }
 
 
@@ -82,26 +65,30 @@ grafica_escalonada <- function(res, col_segmets, vec_xlim = NULL, vec_ylim = NUL
 #' @param param description
 #' @export
 #' @examples
-#' x <- sample(1:1096)
-#' alpha <- runif(6) 
-#' sigma <- runif(6)
-#' tau <- sample(x, 5)
-#' grafica_datos_e_intervalos(
-#'   lista_AG = list(x = x), param,
-#'   n_puntos_cambio = 5, d = x, 
-#'   alpha = alpha, sigma = sigma, tau = tau
-#' )
+#' plot_confint(lista_AG)
 #' 
-grafica_datos_e_intervalos <- function(lista_AG, param, n_puntos_cambio, d, alpha, sigma, tau) {
-  # What is d????
-  d <- 5
+plot_confint <- function(cpt_list) {
+  # plot.stepfun(lista_AG$x, col.vert = "gray20",main="Data",xlim = range(lista_AG$x),ylab="m(t)")
+  mejor_cp <- cpt_list$cromosoma_minimo_BMDL
+  n_puntos_cambio <- mejor_cp[1]
+  tau <- mejor_cp[3:(n_puntos_cambio + 2)]
   
+  cromo <- mejor_cp[1:(n_puntos_cambio + 3)]
+  # cp<-cromo[-c(1,2,(n_puntos_cambio+3))]
+  mat_MAP <- extrae_mat_MAP(
+    cromo, cpt_list$data, cpt_list$param$rf_type, cpt_list$param$initial_val_optim,
+    cpt_list$param$mat_low_upp, cpt_list$param$vec_dist_a_priori, cpt_list$param$mat_phi
+  )
+  
+  sigma <- mat_MAP[, 3]
+  alpha <- mat_MAP[, 2]  
+  d <- 5
   # sink("funcion_media_acumulada.txt")
   gen_texto_m(n_puntos_cambio, mas_derecha = "")
   # sink()
-  grafica_escalonada(lista_AG$x, "black")
+  plot_exceedances(cpt_list$data)
   
-  tasa_NHPP <- funcion_media_acumulada(i = 2, d, alpha, sigma, tau)
+  tasa_NHPP <- funcion_media_acumulada(i = 2, cpt_list$exceedances, alpha, sigma, tau)
   upp_bond <- stats::qpois(.95, lambda = c(pow(10 / sigma[1], alpha[1]), tasa_NHPP))
   low_bond <- stats::qpois(.05, lambda = c(pow(10 / sigma[1], alpha[1]), tasa_NHPP))
   mean_NHPP <- c(pow(10 / sigma[1], alpha[1]), tasa_NHPP)
@@ -121,58 +108,19 @@ grafica_datos_e_intervalos <- function(lista_AG, param, n_puntos_cambio, d, alph
 #'
 #' @export
 #' @examples
-#' \dontrun{
-#' lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
 #' plot_BMDL(lista_AG)
-#' }
 #' 
-plot_BMDL <- function(cpt_list, destdir = tempdir()) {
+plot_BMDL <- function(cpt_list, destdir = tempdir(), pdf = FALSE) {
   graphics::par(mfrow = c(2, 2), mar = c(2, 4, 2, 2))
   # 1.- Datos reales
-  # plot.stepfun(lista_AG$x, col.vert = "gray20",main="Data",xlim = range(lista_AG$x),ylab="m(t)")
-  d <- cpt_list$x
-  mejor_cp <- cpt_list$cromosoma_minimo_BMDL
-  n_puntos_cambio <- mejor_cp[1]
-  tau <- mejor_cp[3:(n_puntos_cambio + 2)]
-  
-  cromo <- mejor_cp[1:(n_puntos_cambio + 3)]
-  # cp<-cromo[-c(1,2,(n_puntos_cambio+3))]
-  mat_MAP <- extrae_mat_MAP(
-    cromo, cpt_list$x, cpt_list$param$rf_type, cpt_list$param$initial_val_optim,
-    cpt_list$param$mat_low_upp, cpt_list$param$vec_dist_a_priori, cpt_list$param$mat_phi
-  )
-  
-  sigma <- mat_MAP[, 3]
-  alpha <- mat_MAP[, 2]
-  grafica_datos_e_intervalos(cpt_list, cpt_list$param, n_puntos_cambio, d, alpha, sigma, tau)
-  
+  plot_confint(cpt_list)
   # 2.- Evolución del algoritmo genético
-  plot(
-    cpt_list$vec_min_BMDL,
-    xlim = c(1, cpt_list$param$r), 
-    type = "l", 
-    col = "blue", 
-    ylab = "BMDL", 
-    xlab = "Generation", 
-    main = paste0("AG rate ", cpt_list$param$rf_type, " and priori ", paste(cpt_list$param$vec_dist_a_priori, collapse = "-"))
-  )
+  plot_evolution(cpt_list)
   # 3.- Puntos de cambio que más se repitieron
-  historia_mejores_sin_0_1_N <- cpt_list$historia_mejores[, -1:-2]
-  historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(cpt_list$x)]
-  plot(
-    table(historia_mejores_sin_0_1_N) / cpt_list$param$r, 
-    main = "Repeated change points", 
-    ylab = "repetitions", 
-    xlab = "change points index"
-  )
+  plot_cpt_repeated(cpt_list)
   # 4.- Number of change points in the best chromosomes
-  plot(
-    cpt_list$historia_mejores[, 1], 
-    ylab = "Number of cp", 
-    type = "l", 
-    col = "blue", 
-    main = paste0("The best chromosomes with", cpt_list$historia_mejores[which.min(cpt_list$vec_min_BMDL), 1], "change points ")
-  )
+  plot_best_chromosome(cpt_list)
+
   graphics::par(mfrow = c(1, 1))
   
   nombre_pdf <- paste0(
@@ -182,11 +130,69 @@ plot_BMDL <- function(cpt_list, destdir = tempdir()) {
     cpt_list$param$k, cpt_list$valor_BMDL_minimo, ".pdf"
   )
   
-  grDevices::dev.print(pdf, fs::path(destdir, nombre_pdf), width = 16, height = 10)
+  if (pdf) {
+    grDevices::dev.print(pdf, fs::path(destdir, nombre_pdf), width = 16, height = 10)
+  }
   message("Se guardo la imagen:\n", fs::path(destdir, nombre_pdf), "\n")
 }
 
+#' @rdname grafica_datos_e_intervalos
+#' @export
+#' @examples
+#' plot_evolution(lista_AG)
+#' plot_evolution(lista_AG, 5)
+#' 
+plot_evolution <- function(cpt_list, i = length(cpt_list$vec_min_BMDL)) {
+  plot(
+    cpt_list$vec_min_BMDL[1:i],
+    xlim = c(1, cpt_list$param$r), 
+    type = "l", 
+    col = "blue", 
+    ylab = "BMDL", 
+    xlab = "Generation", 
+    main = paste0(
+      "AG rate ", cpt_list$param$rf_type, " and priori ", 
+#      paste(cpt_list$param$vec_dist_a_priori, collapse = "-")
+      fun_n_genera_texto_dist(cpt_list$param)
+    )
+  )
+}
 
+#' @rdname grafica_datos_e_intervalos
+#' @export
+#' @examples
+#' plot_cpt_repeated(lista_AG)
+#' plot_cpt_repeated(lista_AG, 5)
+plot_cpt_repeated <- function(cpt_list, i = nrow(cpt_list$historia_mejores)) {
+  historia_mejores_sin_0_1_N <- cpt_list$historia_mejores[1:i, -1:-2]
+  historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[
+    historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(cpt_list$exceedances)
+  ]
+  plot(
+    table(historia_mejores_sin_0_1_N) / cpt_list$param$r, 
+    main = "Repeated change points", 
+    ylab = "repetitions", 
+    xlab = "change points index"
+  )
+}
+
+#' @rdname grafica_datos_e_intervalos
+#' @export
+#' @examples
+#' plot_best_chromosome(lista_AG)
+plot_best_chromosome <- function(cpt_list) {
+  plot(
+    cpt_list$historia_mejores[, 1], 
+    ylab = "Number of cp", 
+    type = "l", 
+    col = "blue", 
+    main = paste(
+      "The best chromosome with", 
+      cpt_list$historia_mejores[which.min(cpt_list$vec_min_BMDL), 1], 
+      "change points "
+    )
+  )
+}
 
 #' Graficando un ajuste de NHPP
 #'
@@ -211,6 +217,7 @@ grafica_ajuste_NHPP <- function(d_i, tau1, tau2, initial_val_optim, mat_low_upp,
   low_bond <- stats::qpois(.05, lambda = tasa_NHPP)
   mean_NHPP <- tasa_NHPP
   
+  # plot_confint
   grafica_escalonada(d_i, "black", vec_xlim = NULL, vec_ylim = range(0, length(d_i), upp_bond, low_bond, mean_NHPP))
   
   graphics::lines(t, upp_bond, col = "blue")

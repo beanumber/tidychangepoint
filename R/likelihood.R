@@ -9,7 +9,7 @@
 #' logLik(mod)
 #' log_likelihood_norm(mod)
 #' log_likelihood_norm_param(rlnorm_ts_1, mean = coef(mod), sd = sqrt(mean(mod$residuals^2)))
-#' likelihood_dnorm(rlnorm_ts_1, mean = mu, sd = sigma)
+#' # likelihood_dnorm(rlnorm_ts_1, mean = mu, sd = sigma)
 #' 
 #' mod_cp <- lm(x ~ t > 826, data = ds)
 #' logLik(mod_cp)
@@ -29,6 +29,9 @@ log_likelihood_norm <- function(mod) {
   return(a + b + c)
 }
 
+#' @rdname log_likelihood_norm
+#' @export
+#' 
 log_likelihood_norm_param <- function(x, mean, sd) {
   n <- length(x)
   a <- -(n / 2) * log(2 * pi)

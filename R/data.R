@@ -31,6 +31,10 @@
 #' @seealso [revisor_param()]
 "param"
 
-#' DataCPSimRebases
+#' DataCPSim
 #' @docType data
-"DataCPSimRebases"
+"DataCPSim"
+
+#' Output from running genetic algorithm on DataCPSim
+#' @docType data
+"lista_AG"

@@ -8,7 +8,6 @@
 #' - For `cpt_meanvar()`, a `ch`
 #' @export
 #' @examples
-#' lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
 #' cpts_list <- cpt_candidates(lista_AG)
 #' cpts <- cpt_meanvar(lista_AG)
 #' class(cpts)
@@ -46,12 +45,12 @@ cpt_meanvar <- function(lista_AG) {
   x <- methods::new(
     "cpt", 
     cpttype = "mean and variance",
-    data.set = stats::as.ts(lista_AG$x), 
+    data.set = stats::as.ts(lista_AG$data), 
     test.stat = "Normal",
     cpts = cpt_best(lista_AG),
     param.est = list(
-      mean = mean(lista_AG$x),
-      variance = var(lista_AG$x)
+      mean = mean(lista_AG$data),
+      variance = stats::var(lista_AG$data)
     )
   )
   return(x)

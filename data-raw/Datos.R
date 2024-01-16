@@ -30,3 +30,9 @@ rlnorm_ts_3 <- c(
   as.ts()
 
 usethis::use_data(rlnorm_ts_3, overwrite = TRUE)
+
+## Genetic algorithm
+
+lista_AG <- AG_BMDL_r_paso(DataCPSim, param)
+usethis::use_data(lista_AG, overwrite = TRUE)
+

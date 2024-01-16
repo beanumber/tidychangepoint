@@ -293,16 +293,15 @@ revisor_param <- function(param,
 #' @export
 #' @examples
 #' 
-#' mat_cp <- sim_k_cp_BMDL(DataCPSimRebases, param)
-#' AG_BMDL_1_paso(DataCPSimRebases, mat_cp, param)
-#' AG_BMDL_1_paso(sims$ts1, mat_cp, param)
+#' mat_cp <- sim_k_cp_BMDL(which_over_mean(DataCPSim), param)
+#' AG_BMDL_1_paso(which_over_mean(DataCPSim), mat_cp, param)
+#' AG_BMDL_1_paso(which_over_mean(rlnorm_ts_1), mat_cp, param)
 #'
 AG_BMDL_1_paso <- function(x, mat_cp, param) {
-  # N <- length(x) # ANTES
-  N <- max(x)
   # 1. Evaluación de sus calificaciones
   vec_BMDL_k_cp <- Bayesaian_MDL_k_cp(
-    mat_cp, x, param$rf_type,
+    mat_cp, x, 
+    param$rf_type,
     param$initial_val_optim,
     param$mat_low_upp,
     param$vec_dist_a_priori,
@@ -337,35 +336,30 @@ AG_BMDL_1_paso <- function(x, mat_cp, param) {
 #' @export
 #' @examples
 #' \dontrun{
-#' lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
+#' lista_AG <- AG_BMDL_r_paso(DataCPSim, param)
 #' lista_AG <- AG_BMDL_r_paso(rlnorm_ts_1, param)
 #' }
 #' 
 AG_BMDL_r_paso <- function(x, param, destdir = tempdir()) {
-  # Primero obtenemos el vector de la variable cruda
-  N <- max(x)
-
-  # 1. Simular puntos de cambio iniciales
-  mat_cp <- sim_k_cp_BMDL(x, param)
-  # Inicializamos lista_AG_BMDL (de esta manero lo podemos meter en el for)
-  lista_AG_BMDL <- list(mat_cp = mat_cp)
-  # historia_mejores guarda los mejores cp de cada generación
-  historia_mejores <- matrix(0, param$r, param$max_num_cp)
-  # vec_min_BMDL guarda los valores mínimos del MDL de cada generación
-  vec_min_BMDL <- rep(0, param$r)
+  # lista_AG contiene los resultados del algoritmo genético
+  lista_AG <- new_cpt_list(x, param = param)
   # El siguiete for va sobre en cada paso haciendo una nueva generación
   vec_para_for <- 1:param$r
   pb <- utils::txtProgressBar(min = 1, max = length(vec_para_for), style = 3, width = 60)
   graphics::par(mfrow = c(2, 1), mar = c(1, 4, 2, 2))
   for (i in vec_para_for) {
     # Hacemos un paso del AG con el mat_cp anterior
-    lista_AG_BMDL <- AG_BMDL_1_paso(x, lista_AG_BMDL$mat_cp, param)
+    lista_AG$lista_AG_BMDL <- AG_BMDL_1_paso(
+      lista_AG$exceedances, 
+      lista_AG$lista_AG_BMDL$mat_cp, 
+      lista_AG$param
+    )
     # Obtenemos el índice del mínimo
-    (i_min_BMDL <- which.min(lista_AG_BMDL$vec_BMDL_k_cp))
+    (i_min_BMDL <- which.min(lista_AG$lista_AG_BMDL$vec_BMDL_k_cp))
     # Guardamos el cromosoma mínimo
-    historia_mejores[i, ] <- lista_AG_BMDL$mat_cp[i_min_BMDL, ]
+    lista_AG$historia_mejores[i, ] <- lista_AG$lista_AG_BMDL$mat_cp[i_min_BMDL, ]
     # Guardamos el BMDL del cromosoma mínimo
-    vec_min_BMDL[i] <- lista_AG_BMDL$vec_BMDL_k_cp[i_min_BMDL]
+    lista_AG$vec_min_BMDL[i] <- lista_AG$lista_AG_BMDL$vec_BMDL_k_cp[i_min_BMDL]
     # Imprimimos el porcentaje de progreso
 
     if (param$print_progress_bar) {
@@ -375,44 +369,20 @@ AG_BMDL_r_paso <- function(x, param, destdir = tempdir()) {
     # plot(lista_AG$vec_min_BMDL,
     #      xlim = c(1,param$r),type="l",col="blue",ylab="BMDL",xlab="Generation",
     #      main=paste0("AG rate ",param$rf_type," and priori ",paste(param$vec_dist_a_priori,collapse = "-")))
-    plot(vec_min_BMDL[1:i],
-      xlim = c(1, param$r), type = "l", col = "blue", ylab = "BMDL", xlab = "Generation",
-      main = paste0("AG rate ", param$rf_type, " and priori ", fun_n_genera_texto_dist(param))
-    )
+    plot_evolution(lista_AG, i)
     # Graficamos los puntos de cambio que más se repitieron
-    historia_mejores_sin_0_1_N <- historia_mejores[1:i, -1:-2]
-    historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < N]
-    plot(table(historia_mejores_sin_0_1_N) / param$r,
-      main = "Repeated change points", ylab = "repetitions", xlab = "change points index"
-    )
+    plot_cpt_repeated(lista_AG, i)
   }
   close(pb)
   graphics::par(mfrow = c(1, 1))
   cat(" \n")
 
   # Obtenemos el valor minimo de todas las evaluaciones
-  valor_BMDL_minimo <- paste0("_BMDL_", floor(min(vec_min_BMDL)))
-  minimo_BMDL <- min(vec_min_BMDL)
-  where_minimo_BMDL <- which.min(vec_min_BMDL)
-  cromosoma_minimo_BMDL <- historia_mejores[where_minimo_BMDL, ]
+  lista_AG$valor_BMDL_minimo <- paste0("_BMDL_", floor(min(lista_AG$vec_min_BMDL)))
+  lista_AG$minimo_BMDL <- min(lista_AG$vec_min_BMDL)
+  where_minimo_BMDL <- which.min(lista_AG$vec_min_BMDL)
+  lista_AG$cromosoma_minimo_BMDL <- lista_AG$historia_mejores[where_minimo_BMDL, ]
 
-  # lista_AG contiene los resultados del algoritmo genético
-  lista_AG <- new_cpt_list(x)
-  lista_AG <- list(
-    x = x, 
-    historia_mejores = historia_mejores, 
-    lista_AG_BMDL = lista_AG_BMDL, 
-    vec_min_BMDL = vec_min_BMDL, 
-    valor_BMDL_minimo = valor_BMDL_minimo, 
-    cromosoma_minimo_BMDL = cromosoma_minimo_BMDL, 
-    minimo_BMDL = minimo_BMDL, 
-    param = param
-  )
-
-  plot_cpt_repetidos(lista_AG)
-  # 4-up plot
-  plot_BMDL(lista_AG)
-  
   # Write data object
   write_cpt_list(lista_AG)
   return(lista_AG)
@@ -1089,11 +1059,9 @@ muta_k_cp_BMDL <- function(mat_cp, x, param) {
 #' @export
 #' @examples
 #' sim_1_cp_BMDL(DataCPSimRebases, param)
-#' sim_1_cp_BMDL(sims$ts1, param)
-#' sim_1_cp_BMDL(sims$ts2, param)
-#' sim_1_cp_BMDL(sims$ts3, param)
-#' x <- c(4,1,3,8,11,15,20,0,0,0,0)
-#' sim_1_cp_BMDL(x, param)
+#' sim_1_cp_BMDL(which_over_mean(rlnorm_ts_1), param)
+#' sim_1_cp_BMDL(which_over_mean(rlnorm_ts_2), param)
+#' sim_1_cp_BMDL(which_over_mean(rlnorm_ts_3), param)
 #'
 sim_1_cp_BMDL <- function(x, param) {
   # Primero simulamos una binomial que va a ser el número de puntos de cambio
@@ -1113,7 +1081,7 @@ sim_1_cp_BMDL <- function(x, param) {
 #' @export
 #' @examples
 #' sim_k_cp_BMDL(DataCPSimRebases, param)
-#' sim_k_cp_BMDL(sims$ts1, param)
+#' sim_k_cp_BMDL(rlnorm_ts_1, param)
 #' 
 #'
 sim_k_cp_BMDL <- function(x, param) {
