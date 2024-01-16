@@ -8,11 +8,11 @@
 \alias{write_cpt_list}
 \title{Class for candidate changepoints}
 \usage{
-new_cpt_list(x = numeric())
+new_cpt_list(x = numeric(), param = list())
 
 validate_cpt_list(x)
 
-cpt_list(x)
+cpt_list(x, ...)
 
 \method{plot}{cpt_list}(x, ...)
 
@@ -25,9 +25,8 @@ write_cpt_list(x, destdir = tempdir())
 Class for candidate changepoints
 }
 \examples{
-cpts <- cpt_list(rlnorm_ts_1)
+cpts <- cpt_list(DataCPSim, param)
 str(cpts)
 plot(cpts)
-lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
 write_cpt_list(lista_AG)
 }

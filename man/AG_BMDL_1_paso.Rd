@@ -24,12 +24,12 @@ Algoritmo genético de Bayesian MDL a un paso
 }
 \examples{
 
-mat_cp <- sim_k_cp_BMDL(DataCPSimRebases, param)
-AG_BMDL_1_paso(DataCPSimRebases, mat_cp, param)
-AG_BMDL_1_paso(sims$ts1, mat_cp, param)
+mat_cp <- sim_k_cp_BMDL(which_over_mean(DataCPSim), param)
+AG_BMDL_1_paso(which_over_mean(DataCPSim), mat_cp, param)
+AG_BMDL_1_paso(which_over_mean(rlnorm_ts_1), mat_cp, param)
 
 \dontrun{
-lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
+lista_AG <- AG_BMDL_r_paso(DataCPSim, param)
 lista_AG <- AG_BMDL_r_paso(rlnorm_ts_1, param)
 }
 

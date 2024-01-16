@@ -28,7 +28,6 @@ score.
 Compatibility with changepoint package
 }
 \examples{
-lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
 cpts_list <- cpt_candidates(lista_AG)
 cpts <- cpt_meanvar(lista_AG)
 class(cpts)

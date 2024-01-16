@@ -2,11 +2,14 @@
 % Please edit documentation in R/likelihood.R
 \name{log_likelihood_norm}
 \alias{log_likelihood_norm}
+\alias{log_likelihood_norm_param}
 \alias{logLik_cp}
 \alias{best_cp}
 \title{Likelihood}
 \usage{
 log_likelihood_norm(mod)
+
+log_likelihood_norm_param(x, mean, sd)
 
 logLik_cp(x, i = 1)
 
@@ -24,7 +27,7 @@ sigma <- sqrt(mean(mod$residuals^2))
 logLik(mod)
 log_likelihood_norm(mod)
 log_likelihood_norm_param(rlnorm_ts_1, mean = coef(mod), sd = sqrt(mean(mod$residuals^2)))
-likelihood_dnorm(rlnorm_ts_1, mean = mu, sd = sigma)
+# likelihood_dnorm(rlnorm_ts_1, mean = mu, sd = sigma)
 
 mod_cp <- lm(x ~ t > 826, data = ds)
 logLik(mod_cp)

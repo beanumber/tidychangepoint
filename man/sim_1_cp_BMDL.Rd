@@ -44,14 +44,12 @@ por lo cual se nosotros:
 }
 \examples{
 sim_1_cp_BMDL(DataCPSimRebases, param)
-sim_1_cp_BMDL(sims$ts1, param)
-sim_1_cp_BMDL(sims$ts2, param)
-sim_1_cp_BMDL(sims$ts3, param)
-x <- c(4,1,3,8,11,15,20,0,0,0,0)
-sim_1_cp_BMDL(x, param)
+sim_1_cp_BMDL(which_over_mean(rlnorm_ts_1), param)
+sim_1_cp_BMDL(which_over_mean(rlnorm_ts_2), param)
+sim_1_cp_BMDL(which_over_mean(rlnorm_ts_3), param)
 
 sim_k_cp_BMDL(DataCPSimRebases, param)
-sim_k_cp_BMDL(sims$ts1, param)
+sim_k_cp_BMDL(rlnorm_ts_1, param)
 
 
 }
