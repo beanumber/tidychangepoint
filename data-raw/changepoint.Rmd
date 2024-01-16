@@ -55,3 +55,12 @@ rlnorm_ts_3 |>
   plot()
 ```
 
+## real data
+
+```{r}
+plot(as.ts(pm_25))
+cpt.meanvar(as.ts(pm_25), method = "PELT", minseglen = 2)
+cpt.meanvar(as.ts(pm_25), method = "BinSeg", minseglen = 2)
+
+```
+

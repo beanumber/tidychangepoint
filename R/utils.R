@@ -24,3 +24,13 @@ pow <- function(x, y) {
 step <- function(x) {
   as.numeric(x > 0)
 }
+
+#' Calculate overages
+#' @export
+#' @param x a time series object
+#' @examples
+#' which_over_mean(DataCPSim)
+
+which_over_mean <- function(x) {
+  which(x > mean(x))
+}
