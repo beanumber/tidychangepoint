@@ -24,9 +24,9 @@ Algoritmo genético de Bayesian MDL a un paso
 }
 \examples{
 
-mat_cp <- sim_k_cp_BMDL(which_over_mean(DataCPSim), param)
-AG_BMDL_1_paso(which_over_mean(DataCPSim), mat_cp, param)
-AG_BMDL_1_paso(which_over_mean(rlnorm_ts_1), mat_cp, param)
+mat_cp <- sim_k_cp_BMDL(exceedances(DataCPSim), param)
+AG_BMDL_1_paso(exceedances(DataCPSim), mat_cp, param)
+AG_BMDL_1_paso(exceedances(rlnorm_ts_1), mat_cp, param)
 
 \dontrun{
 lista_AG <- AG_BMDL_r_paso(DataCPSim, param)

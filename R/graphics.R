@@ -48,7 +48,7 @@ plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(), pdf = FALSE) {
 #' plot_exceedances(rlnorm_ts_3)
 #'
 plot_exceedances <- function(x, ...) {
-  z <- which_over_mean(x)
+  z <- exceedances(x)
   # Graficando
   plot(
     x = z, y = 1:length(z), type = "s",
@@ -166,7 +166,7 @@ plot_evolution <- function(cpt_list, i = length(cpt_list$vec_min_BMDL)) {
 plot_cpt_repeated <- function(cpt_list, i = nrow(cpt_list$historia_mejores)) {
   historia_mejores_sin_0_1_N <- cpt_list$historia_mejores[1:i, -1:-2]
   historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[
-    historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(cpt_list$exceedances)
+    historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(exceedances(cpt_list$data))
   ]
   plot(
     table(historia_mejores_sin_0_1_N) / cpt_list$param$r, 

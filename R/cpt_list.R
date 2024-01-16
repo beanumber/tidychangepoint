@@ -12,11 +12,10 @@ new_cpt_list <- function(x = numeric(), param = list()) {
     list(
       data = stats::as.ts(x),
       n = length(x),
-      exceedances = which_over_mean(x),
       param = param,
       # Inicializamos lista_AG_BMDL (de esta manero lo podemos meter en el for)
       # 1. Simular puntos de cambio iniciales
-      lista_AG_BMDL = list(mat_cp = sim_k_cp_BMDL(which_over_mean(x), param)),
+      lista_AG_BMDL = list(mat_cp = sim_k_cp_BMDL(exceedances(x), param)),
       # historia_mejores guarda los mejores cp de cada generación
       historia_mejores = matrix(0, param$r, param$max_num_cp),
       # vec_min_BMDL guarda los valores mínimos del MDL de cada generación

@@ -293,9 +293,9 @@ revisor_param <- function(param,
 #' @export
 #' @examples
 #' 
-#' mat_cp <- sim_k_cp_BMDL(which_over_mean(DataCPSim), param)
-#' AG_BMDL_1_paso(which_over_mean(DataCPSim), mat_cp, param)
-#' AG_BMDL_1_paso(which_over_mean(rlnorm_ts_1), mat_cp, param)
+#' mat_cp <- sim_k_cp_BMDL(exceedances(DataCPSim), param)
+#' AG_BMDL_1_paso(exceedances(DataCPSim), mat_cp, param)
+#' AG_BMDL_1_paso(exceedances(rlnorm_ts_1), mat_cp, param)
 #'
 AG_BMDL_1_paso <- function(x, mat_cp, param) {
   # 1. Evaluación de sus calificaciones
@@ -350,7 +350,7 @@ AG_BMDL_r_paso <- function(x, param, destdir = tempdir()) {
   for (i in vec_para_for) {
     # Hacemos un paso del AG con el mat_cp anterior
     lista_AG$lista_AG_BMDL <- AG_BMDL_1_paso(
-      lista_AG$exceedances, 
+      exceedances(lista_AG$data), 
       lista_AG$lista_AG_BMDL$mat_cp, 
       lista_AG$param
     )
@@ -1058,10 +1058,10 @@ muta_k_cp_BMDL <- function(mat_cp, x, param) {
 #' - los siguientes son númores cero hasta llenarlo para que sea de tamaño `max_num_cp`
 #' @export
 #' @examples
-#' sim_1_cp_BMDL(DataCPSimRebases, param)
-#' sim_1_cp_BMDL(which_over_mean(rlnorm_ts_1), param)
-#' sim_1_cp_BMDL(which_over_mean(rlnorm_ts_2), param)
-#' sim_1_cp_BMDL(which_over_mean(rlnorm_ts_3), param)
+#' sim_1_cp_BMDL(exceedances(DataCPSim), param)
+#' sim_1_cp_BMDL(exceedances(rlnorm_ts_1), param)
+#' sim_1_cp_BMDL(exceedances(rlnorm_ts_2), param)
+#' sim_1_cp_BMDL(exceedances(rlnorm_ts_3), param)
 #'
 sim_1_cp_BMDL <- function(x, param) {
   # Primero simulamos una binomial que va a ser el número de puntos de cambio

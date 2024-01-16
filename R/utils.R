@@ -29,8 +29,8 @@ step <- function(x) {
 #' @export
 #' @param x a time series object
 #' @examples
-#' which_over_mean(DataCPSim)
+#' exceedances(DataCPSim)
 
-which_over_mean <- function(x) {
+exceedances <- function(x) {
   which(x > mean(x))
 }
