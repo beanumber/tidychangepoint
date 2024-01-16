@@ -395,33 +395,26 @@ AG_BMDL_r_paso <- function(x, param, destdir = tempdir()) {
   minimo_BMDL <- min(vec_min_BMDL)
   where_minimo_BMDL <- which.min(vec_min_BMDL)
   cromosoma_minimo_BMDL <- historia_mejores[where_minimo_BMDL, ]
+
   # lista_AG contiene los resultados del algoritmo genético
-  lista_AG <- list(x = x, historia_mejores = historia_mejores, lista_AG_BMDL = lista_AG_BMDL, vec_min_BMDL = vec_min_BMDL, valor_BMDL_minimo = valor_BMDL_minimo, cromosoma_minimo_BMDL = cromosoma_minimo_BMDL, minimo_BMDL = minimo_BMDL, param = param)
-
-  # Write graphics
-  dir_pdf <- fs::path(destdir, param$nombre_carpeta_pdf)
-  if (!dir.exists(dir_pdf)) {
-    dir.create(dir_pdf, recursive = TRUE)
-  }
-
-  graf_puntos_cambio_repetidos(lista_AG, dir_pdf)
-  graficas_BMDL(lista_AG, param, dir_pdf)
-  
-  # Write data
-  dir_data <- fs::path(destdir, param$nombre_carpeta_RData)
-  if (!dir.exists(dir_data)) {
-    dir.create(dir_data, recursive = TRUE)
-  }
-  nombre_archivo_AG <- paste0(
-    "Dat_AGBMDL_", param$nombre_datos, "_rf_",
-    param$rf_type, "_", fun_n_genera_texto_dist(param), "_r",
-    param$r, "_k",
-    param$k, lista_AG$valor_BMDL_minimo, ".RData"
+  lista_AG <- new_cpt_list(x)
+  lista_AG <- list(
+    x = x, 
+    historia_mejores = historia_mejores, 
+    lista_AG_BMDL = lista_AG_BMDL, 
+    vec_min_BMDL = vec_min_BMDL, 
+    valor_BMDL_minimo = valor_BMDL_minimo, 
+    cromosoma_minimo_BMDL = cromosoma_minimo_BMDL, 
+    minimo_BMDL = minimo_BMDL, 
+    param = param
   )
 
-  save(lista_AG, file = fs::path(dir_data, nombre_archivo_AG))
-  message("Se guardo el archivo:\n", fs::path(dir_data, nombre_archivo_AG), "\n")
-
+  plot_cpt_repetidos(lista_AG)
+  # 4-up plot
+  plot_BMDL(lista_AG)
+  
+  # Write data object
+  write_cpt_list(lista_AG)
   return(lista_AG)
 }
 

@@ -2,7 +2,7 @@
 % Please edit documentation in R/graphics.R
 \name{grafica_datos_e_intervalos}
 \alias{grafica_datos_e_intervalos}
-\alias{graficas_BMDL}
+\alias{plot_BMDL}
 \title{Graficas de los intervalos y los datos}
 \usage{
 grafica_datos_e_intervalos(
@@ -15,7 +15,7 @@ grafica_datos_e_intervalos(
   tau
 )
 
-graficas_BMDL(lista_AG, param, destdir = tempdir())
+plot_BMDL(cpt_list, destdir = tempdir())
 }
 \arguments{
 \item{lista_AG}{description}
@@ -47,7 +47,7 @@ grafica_datos_e_intervalos(
 
 \dontrun{
 lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
-graficas_BMDL(lista_AG, param)
+plot_BMDL(lista_AG)
 }
 
 }

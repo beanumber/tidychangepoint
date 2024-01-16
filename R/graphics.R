@@ -1,31 +1,33 @@
 #' Grafica los n puntos de cambio más repetidos sobre el plot.stepfun de los datos
 #'
-#' @param lista_AG description
+#' @param cpt_list description
 #' @return guarda un pdf con la gráfica
 #' @export
 #' @examples
 #' \dontrun{
 #' lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
-#' graf_puntos_cambio_repetidos(lista_AG)
+#' plot_cpt_repetidos(lista_AG)
 #' }
 #' 
-graf_puntos_cambio_repetidos <- function(lista_AG, destdir = tempdir()) {
+plot_cpt_repetidos <- function(cpt_list, destdir = tempdir()) {
   # Obtenemos cuantos de los cp mejores se graficarán
-  n_cp_mas_repetidos <- lista_AG$param$cuantos_mejores_cp_graf
-  historia_mejores_sin_0_1_N <- lista_AG$historia_mejores[, -1:-2]
-  historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(lista_AG$x)]
+  n_cp_mas_repetidos <- cpt_list$param$cuantos_mejores_cp_graf
+  historia_mejores_sin_0_1_N <- cpt_list$historia_mejores[, -1:-2]
+  historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(cpt_list$x)]
   cp_mas_repetidos <- rev(sort(table(historia_mejores_sin_0_1_N)))[1:n_cp_mas_repetidos]
-  stats::plot.stepfun(lista_AG$x,
-                      col.vert = "gray20", main = paste0("Los ", n_cp_mas_repetidos, " CP mas repetidos ", fun_n_genera_texto_dist(lista_AG$param)),
-                      xlim = range(lista_AG$x)
+  stats::plot.stepfun(
+    cpt_list$x,
+    col.vert = "gray20", 
+    main = paste0("Los ", n_cp_mas_repetidos, " CP mas repetidos ", fun_n_genera_texto_dist(cpt_list$param)),
+    xlim = range(cpt_list$x)
   )
   graphics::abline(v = as.numeric(names(cp_mas_repetidos)), col = "blue")
 
   nombre_pdf <- paste0(
-    "Fig_CP_repetidos_", lista_AG$param$nombre_datos, "_rf_",
-    lista_AG$param$rf_type, "_", fun_n_genera_texto_dist(lista_AG$param), "_r",
-    lista_AG$param$r, "_k",
-    lista_AG$param$k, lista_AG$valor_BMDL_minimo, ".pdf"
+    "Fig_CP_repetidos_", cpt_list$param$nombre_datos, "_rf_",
+    cpt_list$param$rf_type, "_", fun_n_genera_texto_dist(cpt_list$param), "_r",
+    cpt_list$param$r, "_k",
+    cpt_list$param$k, cpt_list$valor_BMDL_minimo, ".pdf"
   )
   
   path <- fs::path(destdir, nombre_pdf)
@@ -121,46 +123,63 @@ grafica_datos_e_intervalos <- function(lista_AG, param, n_puntos_cambio, d, alph
 #' @examples
 #' \dontrun{
 #' lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
-#' graficas_BMDL(lista_AG, param)
+#' plot_BMDL(lista_AG)
 #' }
 #' 
-graficas_BMDL <- function(lista_AG, param, destdir = tempdir()) {
+plot_BMDL <- function(cpt_list, destdir = tempdir()) {
   graphics::par(mfrow = c(2, 2), mar = c(2, 4, 2, 2))
   # 1.- Datos reales
   # plot.stepfun(lista_AG$x, col.vert = "gray20",main="Data",xlim = range(lista_AG$x),ylab="m(t)")
-  d <- lista_AG$x
-  mejor_cp <- lista_AG$cromosoma_minimo_BMDL
+  d <- cpt_list$x
+  mejor_cp <- cpt_list$cromosoma_minimo_BMDL
   n_puntos_cambio <- mejor_cp[1]
   tau <- mejor_cp[3:(n_puntos_cambio + 2)]
   
   cromo <- mejor_cp[1:(n_puntos_cambio + 3)]
   # cp<-cromo[-c(1,2,(n_puntos_cambio+3))]
   mat_MAP <- extrae_mat_MAP(
-    cromo, lista_AG$x, param$rf_type, param$initial_val_optim,
-    param$mat_low_upp, param$vec_dist_a_priori, param$mat_phi
+    cromo, cpt_list$x, cpt_list$param$rf_type, cpt_list$param$initial_val_optim,
+    cpt_list$param$mat_low_upp, cpt_list$param$vec_dist_a_priori, cpt_list$param$mat_phi
   )
   
   sigma <- mat_MAP[, 3]
   alpha <- mat_MAP[, 2]
-  grafica_datos_e_intervalos(lista_AG, param, n_puntos_cambio, d, alpha, sigma, tau)
+  grafica_datos_e_intervalos(cpt_list, cpt_list$param, n_puntos_cambio, d, alpha, sigma, tau)
   
   # 2.- Evolución del algoritmo genético
-  plot(lista_AG$vec_min_BMDL,
-       xlim = c(1, param$r), type = "l", col = "blue", ylab = "BMDL", xlab = "Generation", main = paste0("AG rate ", param$rf_type, " and priori ", paste(param$vec_dist_a_priori, collapse = "-"))
+  plot(
+    cpt_list$vec_min_BMDL,
+    xlim = c(1, cpt_list$param$r), 
+    type = "l", 
+    col = "blue", 
+    ylab = "BMDL", 
+    xlab = "Generation", 
+    main = paste0("AG rate ", cpt_list$param$rf_type, " and priori ", paste(cpt_list$param$vec_dist_a_priori, collapse = "-"))
   )
   # 3.- Puntos de cambio que más se repitieron
-  historia_mejores_sin_0_1_N <- lista_AG$historia_mejores[, -1:-2]
-  historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(lista_AG$x)]
-  plot(table(historia_mejores_sin_0_1_N) / param$r, main = "Repeated change points", ylab = "repetitions", xlab = "change points index")
+  historia_mejores_sin_0_1_N <- cpt_list$historia_mejores[, -1:-2]
+  historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(cpt_list$x)]
+  plot(
+    table(historia_mejores_sin_0_1_N) / cpt_list$param$r, 
+    main = "Repeated change points", 
+    ylab = "repetitions", 
+    xlab = "change points index"
+  )
   # 4.- Number of change points in the best chromosomes
-  plot(lista_AG$historia_mejores[, 1], ylab = "Number of cp", type = "l", col = "blue", main = paste0("The best chromosomes with", lista_AG$historia_mejores[which.min(lista_AG$vec_min_BMDL), 1], "change points "))
+  plot(
+    cpt_list$historia_mejores[, 1], 
+    ylab = "Number of cp", 
+    type = "l", 
+    col = "blue", 
+    main = paste0("The best chromosomes with", cpt_list$historia_mejores[which.min(cpt_list$vec_min_BMDL), 1], "change points ")
+  )
   graphics::par(mfrow = c(1, 1))
   
   nombre_pdf <- paste0(
-    "Fig_4AGBMDL_", param$nombre_datos, "_rf_",
-    param$rf_type, "_", fun_n_genera_texto_dist(param), "_r",
-    param$r, "_k",
-    param$k, lista_AG$valor_BMDL_minimo, ".pdf"
+    "Fig_4AGBMDL_", cpt_list$param$nombre_datos, "_rf_",
+    cpt_list$param$rf_type, "_", fun_n_genera_texto_dist(cpt_list$param), "_r",
+    cpt_list$param$r, "_k",
+    cpt_list$param$k, cpt_list$valor_BMDL_minimo, ".pdf"
   )
   
   grDevices::dev.print(pdf, fs::path(destdir, nombre_pdf), width = 16, height = 10)

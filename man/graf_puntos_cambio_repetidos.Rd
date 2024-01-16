@@ -4,10 +4,10 @@
 \alias{graf_puntos_cambio_repetidos}
 \title{Grafica los n puntos de cambio más repetidos sobre el plot.stepfun de los datos}
 \usage{
-graf_puntos_cambio_repetidos(lista_AG, destdir = tempdir())
+graf_puntos_cambio_repetidos(cpt_list, destdir = tempdir())
 }
 \arguments{
-\item{lista_AG}{description}
+\item{cpt_list}{description}
 }
 \value{
 guarda un pdf con la gráfica

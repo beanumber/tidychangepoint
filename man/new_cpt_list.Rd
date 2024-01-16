@@ -5,6 +5,7 @@
 \alias{validate_cpt_list}
 \alias{cpt_list}
 \alias{plot.cpt_list}
+\alias{write_cpt_list}
 \title{Class for candidate changepoints}
 \usage{
 new_cpt_list(x = numeric())
@@ -14,6 +15,8 @@ validate_cpt_list(x)
 cpt_list(x)
 
 \method{plot}{cpt_list}(x, ...)
+
+write_cpt_list(x, destdir = tempdir())
 }
 \arguments{
 \item{x}{a numeric vector}
@@ -25,4 +28,6 @@ Class for candidate changepoints
 cpts <- cpt_list(rlnorm_ts_1)
 str(cpts)
 plot(cpts)
+lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
+write_cpt_list(lista_AG)
 }
