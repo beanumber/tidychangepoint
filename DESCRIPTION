@@ -1,6 +1,6 @@
 Package: BayesianMDLGA
 Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9008
+Version: 0.0.0.9009
 Authors@R: c(
     person(
       "Carlos A.", "Taimal", email = "first.last@example.com", 

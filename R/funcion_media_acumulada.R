@@ -15,36 +15,47 @@ funcion_media_acumulada <- function(i = 1, d, alpha, sigma, tau) {
     0
 }
 
+#' @export
 #' @examples
-#' y <- sims$ts1
-#' tau <- c(1, 825, 1096)
-#' theta <- data.frame(
-#'   alpha = c(0.4, 1),
-#'   beta = c(1, 2)
-#' )
-#' media_acumulada(tx = 1:length(y), tau, theta)
+#' y <- DataCPSim
+#' tau <- cpt_best(lista_AG)
+#' theta <- cpt_best_params(lista_AG)
+#' media_acumulada(x = lista_AG$data, tau, theta)
 #' 
 
-media_acumulada <- function(tx, tau, theta, dist = "weibull") {
+media_acumulada <- function(x, tau, theta, dist = "weibull") {
   if (dist == "weibull") {
     d <- function(x, a, b) {
 #      -pweibull(x, a, b, lower = FALSE, log = TRUE)
       (x/b)^a
     }
   }
-  regions <- cut(1:length(tx), breaks = tau, include.lowest = TRUE)
+  if (tau[1] != 1) {
+    tau <- c(1, tau)
+  }
+  if (tau[length(tau)] != length(x)) {
+    tau <- c(tau, length(x))
+  }
+  regions <- cut(1:length(x), breaks = tau, include.lowest = TRUE)
   theta <- theta |>
-    mutate(
-      region = unique(regions)
+    dplyr::mutate(
+      region = unique(regions),
+      tau_prev = head(tau, -1),
+      tau_this = tail(tau, -1),
+      m_prev = d(tau_prev, alpha, beta),
+      m_this = d(tau_this, alpha, beta),
+      cum_m_prev = cumsum(m_prev),
+      cum_m_this = cumsum(m_this)
     )
-  tibble(
-    t = tx,
+
+  tibble::tibble(
+    t = x,
     region = regions
   ) |>
-    left_join(theta, by = "region") |>
-    mutate(
+    dplyr::left_join(theta, by = "region") |>
+    dplyr::mutate(
       m_i = d(t, alpha, beta),
-      
+      m = m_i + cum_m_prev + cum_m_this
     )
 }
 

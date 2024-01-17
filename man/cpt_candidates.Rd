@@ -8,7 +8,7 @@
 \usage{
 cpt_candidates(lista_AG)
 
-cpt_best(lista_AG)
+cpt_best(x)
 
 cpt_meanvar(lista_AG)
 }

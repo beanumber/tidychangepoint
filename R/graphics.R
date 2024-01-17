@@ -24,7 +24,8 @@ plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(), pdf = FALSE) {
     "Fig_CP_repetidos_", cpt_list$param$nombre_datos, "_rf_",
     cpt_list$param$rf_type, "_", fun_n_genera_texto_dist(cpt_list$param), "_r",
     cpt_list$param$r, "_k",
-    cpt_list$param$k, cpt_list$valor_BMDL_minimo, ".pdf"
+    cpt_list$param$k, 
+    cpt_best_bmdl_string(cpt_list), ".pdf"
   )
   
   path <- fs::path(destdir, nombre_pdf)
@@ -68,24 +69,17 @@ plot_exceedances <- function(x, ...) {
 #' plot_confint(lista_AG)
 #' 
 plot_confint <- function(cpt_list) {
-  # plot.stepfun(lista_AG$x, col.vert = "gray20",main="Data",xlim = range(lista_AG$x),ylab="m(t)")
-  mejor_cp <- cpt_list$cromosoma_minimo_BMDL
-  n_puntos_cambio <- mejor_cp[1]
-  tau <- mejor_cp[3:(n_puntos_cambio + 2)]
+  tau <- cpt_best(cpt_list)
+  theta <- cpt_best_params(cpt_list)
   
-  cromo <- mejor_cp[1:(n_puntos_cambio + 3)]
-  # cp<-cromo[-c(1,2,(n_puntos_cambio+3))]
-  mat_MAP <- extrae_mat_MAP(
-    cromo, cpt_list$data, cpt_list$param$rf_type, cpt_list$param$initial_val_optim,
-    cpt_list$param$mat_low_upp, cpt_list$param$vec_dist_a_priori, cpt_list$param$mat_phi
-  )
-  
-  sigma <- mat_MAP[, 3]
-  alpha <- mat_MAP[, 2]  
+  sigma <- theta$beta
+  alpha <- theta$alpha
   d <- 5
+  
   # sink("funcion_media_acumulada.txt")
-  gen_texto_m(n_puntos_cambio, mas_derecha = "")
+  gen_texto_m(length(tau), mas_derecha = "")
   # sink()
+  
   plot_exceedances(cpt_list$data)
   
   tasa_NHPP <- funcion_media_acumulada(i = 2, cpt_list$exceedances, alpha, sigma, tau)
@@ -127,7 +121,8 @@ plot_BMDL <- function(cpt_list, destdir = tempdir(), pdf = FALSE) {
     "Fig_4AGBMDL_", cpt_list$param$nombre_datos, "_rf_",
     cpt_list$param$rf_type, "_", fun_n_genera_texto_dist(cpt_list$param), "_r",
     cpt_list$param$r, "_k",
-    cpt_list$param$k, cpt_list$valor_BMDL_minimo, ".pdf"
+    cpt_list$param$k, 
+    cpt_best_bmdl_string(cpt_list), ".pdf"
   )
   
   if (pdf) {
@@ -225,4 +220,18 @@ grafica_ajuste_NHPP <- function(d_i, tau1, tau2, initial_val_optim, mat_low_upp,
   graphics::lines(t, low_bond, col = "blue")
   
   cat("theta=", theta, "\n")
+}
+
+#' @rdname grafica_datos_e_intervalos
+#' @export
+#' @examples
+#' plot_media_acumulada(lista_AG)
+plot_media_acumulada <- function(cpt_list) {
+  plot(cpt_list$data)
+  
+  tau <- cpt_best(cpt_list)
+  graphics::abline(v = tau, lty = 3)
+  
+  m <- media_acumulada(cpt_list$data, tau = cpt_best(cpt_list), theta = cpt_best_params(cpt_list))
+  graphics::lines(x = 1:nrow(m), y = m$m)
 }

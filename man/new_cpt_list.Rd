@@ -5,6 +5,13 @@
 \alias{validate_cpt_list}
 \alias{cpt_list}
 \alias{plot.cpt_list}
+\alias{print.cpt_list}
+\alias{summary.cpt_list}
+\alias{cpt_best_bmdl}
+\alias{cpt_best_bmdl_string}
+\alias{cpt_best_params}
+\alias{chromosome_best}
+\alias{cpt_best}
 \alias{write_cpt_list}
 \title{Class for candidate changepoints}
 \usage{
@@ -15,6 +22,20 @@ validate_cpt_list(x)
 cpt_list(x, ...)
 
 \method{plot}{cpt_list}(x, ...)
+
+\method{print}{cpt_list}(x, ...)
+
+\method{summary}{cpt_list}(object, ...)
+
+cpt_best_bmdl(x)
+
+cpt_best_bmdl_string(x)
+
+cpt_best_params(x)
+
+chromosome_best(x)
+
+cpt_best(x)
 
 write_cpt_list(x, destdir = tempdir())
 }
@@ -28,5 +49,7 @@ Class for candidate changepoints
 cpts <- cpt_list(DataCPSim, param)
 str(cpts)
 plot(cpts)
+cpt_best_params(lista_AG)
+
 write_cpt_list(lista_AG)
 }

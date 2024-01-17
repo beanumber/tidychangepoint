@@ -11,7 +11,7 @@ new_cpt_list <- function(x = numeric(), param = list()) {
   structure(
     list(
       data = stats::as.ts(x),
-      n = length(x),
+#      n = length(x),
       param = param,
       # Inicializamos lista_AG_BMDL (de esta manero lo podemos meter en el for)
       # 1. Simular puntos de cambio iniciales
@@ -55,6 +55,76 @@ plot.cpt_list <- function(x, ...) {
 
 #' @rdname new_cpt_list
 #' @export
+
+print.cpt_list <- function(x, ...) {
+  NextMethod()
+}
+
+#' @rdname new_cpt_list
+#' @export
+
+summary.cpt_list <- function(object, ...) {
+  message("List of changepoints object:")
+  cat(paste("\nn:"), length(object$data))
+  cat(paste("\nBest changepoint set: "))
+  cat(cpt_best(object))
+  cat(paste("\nNumber of changepoints:"), length(cpt_best(object)))
+}
+
+
+#' @rdname new_cpt_list
+#' @export
+
+cpt_best_bmdl <- function(x) {
+  # Obtenemos el valor minimo de todas las evaluaciones
+  min(x$vec_min_BMDL)
+}
+
+#' @rdname new_cpt_list
+#' @export
+cpt_best_bmdl_string <- function(x) {
+  paste0("_BMDL_", floor(min(x$vec_min_BMDL)))
+}
+
+#' @rdname new_cpt_list
+#' @export
+#' @examples
+#' cpt_best_params(lista_AG)
+#' 
+
+cpt_best_params <- function(x) {
+  extrae_mat_MAP(
+    chromosome_best(x), 
+    x$data, 
+    x$param$rf_type, 
+    x$param$initial_val_optim, 
+    x$param$mat_low_upp, 
+    x$param$vec_dist_a_priori, 
+    x$param$mat_phi
+  ) |>
+    as.data.frame()
+}
+
+#' @rdname new_cpt_list
+#' @export
+
+chromosome_best <- function(x) {
+  where_minimo_BMDL <- which.min(x$vec_min_BMDL)
+  chromo_long <- x$historia_mejores[where_minimo_BMDL, ]
+  chromo_long[1:(chromo_long[1] + 3)]
+}
+
+#' @rdname new_cpt_list
+#' @export
+
+cpt_best <- function(x) {
+  chromo <- chromosome_best(x)
+  k <- chromo[1]
+  chromo[3:(k + 2)]
+}
+
+#' @rdname new_cpt_list
+#' @export
 #' @examples
 #' write_cpt_list(lista_AG)
 
@@ -69,7 +139,8 @@ write_cpt_list <- function(x, destdir = tempdir()) {
     "Dat_AGBMDL_", x$param$nombre_datos, "_rf_",
     x$param$rf_type, "_", fun_n_genera_texto_dist(x$param), "_r",
     x$param$r, "_k",
-    x$param$k, x$valor_BMDL_minimo, ".RData"
+    x$param$k, 
+    cpt_best_bmdl_string(x), ".RData"
   )
   
   # Write data

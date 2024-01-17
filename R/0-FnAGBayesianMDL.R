@@ -377,12 +377,6 @@ AG_BMDL_r_paso <- function(x, param, destdir = tempdir()) {
   graphics::par(mfrow = c(1, 1))
   cat(" \n")
 
-  # Obtenemos el valor minimo de todas las evaluaciones
-  lista_AG$valor_BMDL_minimo <- paste0("_BMDL_", floor(min(lista_AG$vec_min_BMDL)))
-  lista_AG$minimo_BMDL <- min(lista_AG$vec_min_BMDL)
-  where_minimo_BMDL <- which.min(lista_AG$vec_min_BMDL)
-  lista_AG$cromosoma_minimo_BMDL <- lista_AG$historia_mejores[where_minimo_BMDL, ]
-
   # Write data object
   write_cpt_list(lista_AG)
   return(lista_AG)
