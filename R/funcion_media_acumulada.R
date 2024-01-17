@@ -17,7 +17,6 @@ funcion_media_acumulada <- function(i = 1, d, alpha, sigma, tau) {
 
 #' @export
 #' @examples
-#' y <- DataCPSim
 #' tau <- cpt_best(lista_AG)
 #' theta <- cpt_best_params(lista_AG)
 #' media_acumulada(x = lista_AG$data, tau, theta)
@@ -40,8 +39,8 @@ media_acumulada <- function(x, tau, theta, dist = "weibull") {
   theta <- theta |>
     dplyr::mutate(
       region = unique(regions),
-      tau_prev = head(tau, -1),
-      tau_this = tail(tau, -1),
+      tau_prev = utils::head(tau, -1),
+      tau_this = utils::tail(tau, -1),
       m_prev = d(tau_prev, alpha, beta),
       m_this = d(tau_this, alpha, beta),
       cum_m_prev = cumsum(m_prev),
@@ -49,8 +48,8 @@ media_acumulada <- function(x, tau, theta, dist = "weibull") {
     )
 
   tibble::tibble(
-    t = x,
-    region = regions
+    t = exceedances(x),
+    region = cut(t, breaks = tau, include.lowest = TRUE)
   ) |>
     dplyr::left_join(theta, by = "region") |>
     dplyr::mutate(
