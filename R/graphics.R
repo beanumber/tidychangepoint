@@ -59,6 +59,16 @@ plot_exceedances <- function(x, ...) {
   )
 }
 
+#' @rdname grafica_datos_e_intervalos
+#' @export
+plot_nhpp <- function(x, ...) {
+  plot(x)
+  graphics::abline(h = mean(x), lty = 3)
+  graphics::points(x = exceedances(x), y = x[exceedances((x))], type = "p", col = "blue")
+  
+  
+}
+
 
 #' Graficas de los intervalos y los datos
 #'
@@ -74,21 +84,21 @@ plot_confint <- function(cpt_list) {
   
   sigma <- theta$beta
   alpha <- theta$alpha
-  d <- 5
   
-  # sink("funcion_media_acumulada.txt")
-  gen_texto_m(length(tau), mas_derecha = "")
-  # sink()
+  f <- generate_mean_cumulative(length(tau))
+  tasa_NHPP <- f(1:length(exceedances(cpt_list$data)), d = exceedances(cpt_list$data), tau, alpha, sigma)
   
   plot_exceedances(cpt_list$data)
-  
-  tasa_NHPP <- funcion_media_acumulada(i = 2, cpt_list$exceedances, alpha, sigma, tau)
+
+#  tasa_NHPP <- funcion_media_acumulada(i = 2, cpt_list$exceedances, alpha, sigma, tau)
+  tasa_NHPP_ben <- media_acumulada(cpt_list$data, tau, theta)[["m"]]
+
   upp_bond <- stats::qpois(.95, lambda = c(pow(10 / sigma[1], alpha[1]), tasa_NHPP))
   low_bond <- stats::qpois(.05, lambda = c(pow(10 / sigma[1], alpha[1]), tasa_NHPP))
   mean_NHPP <- c(pow(10 / sigma[1], alpha[1]), tasa_NHPP)
-  graphics::lines(c(10, d), upp_bond, col = "blue", lwd = 2)
-  graphics::lines(c(10, d), mean_NHPP, col = "red", lwd = 2)
-  graphics::lines(c(10, d), low_bond, col = "blue", lwd = 2)
+  graphics::lines(c(10, exceedances(cpt_list$data)), upp_bond, col = "blue", lwd = 2)
+  graphics::lines(c(10, exceedances(cpt_list$data)), mean_NHPP, col = "red", lwd = 2)
+  graphics::lines(c(10, exceedances(cpt_list$data)), low_bond, col = "blue", lwd = 2)
 }
 
 
@@ -227,11 +237,16 @@ grafica_ajuste_NHPP <- function(d_i, tau1, tau2, initial_val_optim, mat_low_upp,
 #' @examples
 #' plot_media_acumulada(lista_AG)
 plot_media_acumulada <- function(cpt_list) {
+  graphics::par(mfrow = c(2, 1), mar = c(2, 4, 2, 2))
+
   plot(cpt_list$data)
   
   tau <- cpt_best(cpt_list)
   graphics::abline(v = tau, lty = 3)
   
   m <- media_acumulada(cpt_list$data, tau = cpt_best(cpt_list), theta = cpt_best_params(cpt_list))
-  graphics::lines(x = 1:nrow(m), y = m$m)
+  plot(x = c(1, m$t, length(cpt_list$data)), y = c(0, m$m, NA), type = "b")
+  graphics::abline(v = tau, lty = 3)
+  
+  graphics::par(mfrow = c(1, 1))
 }

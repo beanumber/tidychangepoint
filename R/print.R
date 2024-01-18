@@ -25,6 +25,9 @@ print_pow_d <- function(i_d, i_sig_alp) {
   paste0("pow(d[", i_d, "]/sigma[", i_sig_alp, "],alpha[", i_sig_alp, "])")
 }
 
+#' @rdname print_pow_tau
+#' @export
+
 print_step <- function(i_d, i_tau, extra_menos = F, Do_step2 = F) {
   if (Do_step2) {
     if (!extra_menos) texto <- paste0("step2(d[", i_d, "]-tau[", i_tau, "]-0.5)")

@@ -2,9 +2,12 @@
 % Please edit documentation in R/print.R
 \name{print_pow_tau}
 \alias{print_pow_tau}
+\alias{print_step}
 \title{print_pow_tau}
 \usage{
 print_pow_tau(i_tau, i_sig_alp)
+
+print_step(i_d, i_tau, extra_menos = F, Do_step2 = F)
 }
 \arguments{
 \item{n_puntos_cambio}{numero de puntos de cambio}
