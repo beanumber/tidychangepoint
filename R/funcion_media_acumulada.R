@@ -16,6 +16,7 @@ funcion_media_acumulada <- function(i = 1, d, alpha, sigma, tau) {
 }
 
 #' @export
+#' @return a numeric vector of length equal to the [exceedances] of `x`
 #' @examples
 #' tau <- cpt_best(lista_AG)
 #' theta <- cpt_best_params(lista_AG)
@@ -43,8 +44,9 @@ media_acumulada <- function(x, tau, theta, dist = "weibull") {
       tau_this = utils::tail(tau, -1),
       m_prev = ifelse(tau_prev == 1, 0, d(tau_prev, alpha, beta)),
       m_this = d(tau_this, alpha, beta),
-      cum_m_prev = cumsum(dplyr::lag(m_prev, 1, 0)),
-      cum_m_this = cumsum(dplyr::lag(m_this, 1, 0))
+      cum_m_prev = cumsum(m_prev),
+      cum_m_this = cumsum(dplyr::lag(m_this, 1, 0)),
+      cum_m_net = cum_m_this - cum_m_prev
     )
 
   out <- tibble::tibble(
@@ -54,9 +56,9 @@ media_acumulada <- function(x, tau, theta, dist = "weibull") {
     dplyr::left_join(theta_calc, by = "region") |>
     dplyr::mutate(
       m_i = d(t, alpha, beta),
-      m = m_i + cum_m_this - m_prev,
-      m_carlos = m_carlos,
-      equal = m_carlos == m
+      m = m_i + cum_m_net,
+#      m_carlos = m_carlos,
+#      equal = m_carlos == m
     )
   out$m
 }
