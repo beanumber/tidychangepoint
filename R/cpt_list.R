@@ -50,7 +50,7 @@ plot.cpt_list <- function(x, ...) {
   plot(x$data)
 #  plot_cpt_repetidos(x)
   # 4-up plot
-  # plot_BMDL(x)
+  plot_BMDL(x)
 }
 
 #' @rdname new_cpt_list
