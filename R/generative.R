@@ -107,6 +107,9 @@ generate_mean_cumulative <- function(n_puntos_cambio, mas_derecha = "", destdir 
 #'         los el tau_{i-1}, tau_i, theta_1, theta_2 y theta_3, y también
 #'         una lista con los días de cada régimen
 #' @export
+#' @examples
+#' genera_insumos_bloque_sin_theta(chromosome_best(lista_AG), lista_AG$data)
+#' 
 genera_insumos_bloque_sin_theta <- function(cp, x) {
   (cp_corto_cero <- c(0, cp[3:(cp[1] + 3)]))
   # Primero calculamos la matriz con taus
@@ -123,3 +126,17 @@ genera_insumos_bloque_sin_theta <- function(cp, x) {
   return(lista_insumos_bloque)
 }
 
+#' @rdname genera_insumos_bloque_sin_theta
+#' @export
+#' @examples
+#' split_by_tau(lista_AG$data, cpt_best(lista_AG))
+
+split_by_tau <- function(x, tau) {
+  idx <- cut(
+    1:length(x), 
+    breaks = c(0, tau, length(x)), 
+    include.lowest = TRUE, 
+    right = FALSE
+  )
+  split(x, idx)
+}

@@ -91,8 +91,8 @@ plot_confint <- function(cpt_list) {
   plot_exceedances(cpt_list$data)
 
 #  tasa_NHPP <- funcion_media_acumulada(i = 2, cpt_list$exceedances, alpha, sigma, tau)
-  m <- media_acumulada(cpt_list$data, tau, theta)
-
+  m <- media_acumulada(cpt_list$data, tau = tau, theta = theta)
+  
   upp_bond <- stats::qpois(.95, lambda = c(pow(10 / sigma[1], alpha[1]), m))
   low_bond <- stats::qpois(.05, lambda = c(pow(10 / sigma[1], alpha[1]), m))
   mean_NHPP <- c(pow(10 / sigma[1], alpha[1]), m)

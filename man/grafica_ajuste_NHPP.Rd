@@ -29,3 +29,15 @@ grafica_ajuste_NHPP(
 \description{
 Esta función solo grafica un ajuste de NHPP
 }
+\examples{
+grafica_ajuste_NHPP(exceedances(lista_AG$data), 
+tau1 = cpt_best(lista_AG), tau2 = cpt_best(lista_AG),
+lista_AG$param$initial_val_optim, 
+lista_AG$param$mat_low_upp,
+lista_AG$param$rf_type,
+lista_AG$vec_dist_a_priori,
+lista_AG$param$mat_phi
+)
+
+
+}
