@@ -44,8 +44,9 @@ likelihood_dnorm <- function(x, mean, sd) {
   prod(stats::dnorm(x, mean, sd))
 }
 
-#' @rdname log_likelihood_norm
+#' Segment a time series using a single naïve changepoint
 #' @export
+#' 
 
 logLik_cp <- function(x, i = 1) {
   n <- length(x)

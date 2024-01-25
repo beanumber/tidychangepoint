@@ -3,15 +3,12 @@
 \name{log_likelihood_norm}
 \alias{log_likelihood_norm}
 \alias{log_likelihood_norm_param}
-\alias{logLik_cp}
 \alias{best_cp}
 \title{Likelihood}
 \usage{
 log_likelihood_norm(mod)
 
 log_likelihood_norm_param(x, mean, sd)
-
-logLik_cp(x, i = 1)
 
 best_cp(x)
 }
