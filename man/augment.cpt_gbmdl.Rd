@@ -10,7 +10,8 @@
 Broom compatibility layer for changepoint
 }
 \examples{
-cpts <- cpt.meanvar(DataCPSim)
+cpts <- lista_AG
+class(cpts) <- c("cpt_gbmdl", class(cpts))
 y <- augment(cpts)
 class(y)
 y
