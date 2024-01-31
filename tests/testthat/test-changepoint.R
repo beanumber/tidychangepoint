@@ -1,0 +1,10 @@
+test_that("changepoint works", {
+  cpts <- segment(DataCPSim, method = "cpt-pelt")
+  expect_s3_class(cpts, "tidycpt")
+  expect_s4_class(cpts$segmenter, "cpt")
+  expect_s3_class(as.ts(cpts), "ts")
+  expect_s3_class(augment(cpts), "grouped_ts")
+  expect_s3_class(tidy(cpts), "tbl_df")
+  expect_s3_class(glance(cpts), "tbl_df")
+  expect_type(changepoints(cpts), "integer")
+})

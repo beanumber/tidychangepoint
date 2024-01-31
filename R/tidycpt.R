@@ -31,7 +31,8 @@ segment.numeric <- function(x, method = "null", ...) {
 #' segment(DataCPSim, method = "cpt-binseg", penalty = "AIC")
 #' segment(DataCPSim, method = "cpt-segneigh", penalty = "BIC")
 #' segment(DataCPSim, method = "cpt-manual", cpts = c(826))
-#' segment(DataCPSim, method = "cpt-manual", cpts = c(365, 826))
+#' two_cpts <- segment(DataCPSim, method = "cpt-manual", cpts = c(365, 826))
+#' plot(two_cpts)
 #' \dontrun{
 #' segment(DataCPSim, method = "cpt-gbmdl")
 #' }
@@ -42,16 +43,16 @@ segment.ts <- function(x, method = "null", ...) {
   n <- length(x)
   ds <- data.frame(y = x, t = 1:n)
   if (method == "cpt-pelt") {
-    return(changepoint::cpt.meanvar(data = x, method = "PELT", ...))
+    mod <- changepoint::cpt.meanvar(data = x, method = "PELT", ...)
   }
   if (method == "cpt-binseg") {
-    return(changepoint::cpt.meanvar(data = x, method = "BinSeg", ...))
+    mod <- changepoint::cpt.meanvar(data = x, method = "BinSeg", ...)
   }
   if (method == "cpt-segneigh") {
-    return(changepoint::cpt.meanvar(data = x, method = "SegNeigh", ...))
+    mod <- changepoint::cpt.meanvar(data = x, method = "SegNeigh", ...)
   }
   if (method == "cpt-gbmdl") {
-    return(segment_gbmdl(x, param = param, ...))
+    mod <- segment_gbmdl(x, param = param, ...)
   }
   if (method == "cpt-manual") {
     message("\nSegmenting using manually input changepoints...")
@@ -62,10 +63,67 @@ segment.ts <- function(x, method = "null", ...) {
     form <- stats::as.formula(paste("x ~ ", terms))
     mod <- stats::lm(form, data = ds)
     class(mod) <- c("cpt_lm", class(mod))
-    return(mod)
   }
-  
-  mod_null <- lm(y ~ 1, data = ds)
-  class(mod_null) <- c("cpt_lm", class(mod_null))
-  return(mod_null)
+  if (method == "null") {
+    mod <- stats::lm(y ~ 1, data = ds)
+    class(mod) <- c("cpt_lm", class(mod))
+  }
+  # build the tidycpt object
+  obj <- list(segmenter = mod)
+  class(obj) <- c("tidycpt")
+  return(obj)
+}
+
+#' @rdname segment
+#' @export
+as.ts.tidycpt <- function(x, ...) {
+  as.ts(x$segmenter)
+}
+
+#' @rdname segment
+#' @export
+changepoints <- function(x, ...) UseMethod("changepoints")
+
+#' @rdname segment
+#' @export
+changepoints.tidycpt <- function(x, ...) {
+  changepoints(x$segmenter)
+}
+
+#' @rdname segment
+#' @export
+augment.tidycpt <- function(x, ...) {
+  augment(x$segmenter)
+}
+
+#' @rdname segment
+#' @export
+tidy.tidycpt <- function(x, ...) {
+  tidy(x$segmenter)
+}
+
+#' @rdname segment
+#' @export
+glance.tidycpt <- function(x, ...) {
+  glance(x$segmenter)
+}
+
+#' @rdname segment
+#' @export
+
+plot.tidycpt <- function(x, ...) {
+  regions <- summarize2(x)
+  ggplot2::ggplot(
+    data = x, 
+    ggplot2::aes(x = idx, y = y)
+  ) +
+    ggplot2::geom_rect(
+      data = regions,
+      ggplot2::aes(xmin = xmin, xmax = xmax, ymin = 0, ymax = Inf, x = NULL, y = NULL),
+      fill = "grey90"
+    ) +
+    ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = xmax), linetype = 3) +
+    ggplot2::geom_rug(sides = "l") +
+    ggplot2::geom_line() +
+    ggplot2::geom_smooth(method = "lm", formula = "y ~ 1")
 }
