@@ -4,7 +4,7 @@
 \alias{segment}
 \alias{segment.numeric}
 \alias{segment.ts}
-\title{Segment a time series using Genetic BMDL heuristic}
+\title{Segment a time series using a variety of algorithms}
 \usage{
 segment(x, method = "null", ...)
 
@@ -12,10 +12,32 @@ segment(x, method = "null", ...)
 
 \method{segment}{ts}(x, method = "null", ...)
 }
+\arguments{
+\item{x}{a numeric vector coercible into a \link[stats:ts]{stats::ts} object}
+
+\item{method}{a character string indicating the algorithm to use}
+
+\item{...}{arguments passed to methods}
+}
+\value{
+an object of class \code{changepoint::cpt}, \link[stats:lm]{stats::lm}, or \link{cpt_gbmdl}
+}
 \description{
-Segment a time series using Genetic BMDL heuristic
+Segment a time series using a variety of algorithms
 }
 \examples{
 mod_null <- segment(DataCPSim)
 augment(mod_null)
+tidy(mod_null)
+glance(mod_null)
+segment(DataCPSim, method = "cpt-pelt")
+segment(DataCPSim, method = "cpt-pelt", penalty = "AIC")
+segment(DataCPSim, method = "cpt-binseg", penalty = "AIC")
+segment(DataCPSim, method = "cpt-segneigh", penalty = "BIC")
+segment(DataCPSim, method = "cpt-manual", cpts = c(826))
+segment(DataCPSim, method = "cpt-manual", cpts = c(365, 826))
+
+}
+\seealso{
+\code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}
 }
