@@ -15,167 +15,175 @@ remotes::install_github("c-taimal/BayesianMDLGA")
 library(BayesianMDLGA)
 ```
 
+## Tidy methods for changepoint analysis
+
+Consider the following time series:
+
 ``` r
-str(rlnorm_ts_1)
+plot(as.ts(DataCPSim))
 ```
 
-    ##  Time-Series [1:1096] from 1 to 1096: 42.6 39.1 57.5 22.2 66.3 ...
+![](README_files/figure-gfm/rlnorm-plot-1.png)<!-- -->
+
+`tidychangepoint` allows you to use any number of algorithms for
+detecting changepoints in univariate time series with a common,
+`tidyverse`-compliant interface. The `segment()` function takes a
+numeric vector that is coercible into a `ts` object, and a string
+indicating the algorithm you wish you use. `segment()` always returns a
+`tidycpt` object.
 
 ``` r
-str(param)
+cpts <- segment(DataCPSim, method = "cpt-pelt")
 ```
 
-    ## List of 31
-    ##  $ frecuencia_datos       : num 7
-    ##  $ n_datos                : chr "TODOS"
-    ##  $ diarios0_rebases1      : num 0
-    ##  $ r                      : num 50
-    ##  $ k                      : num 50
-    ##  $ penalty                : chr "BMDL"
-    ##  $ max_num_cp             : num 20
-    ##  $ prob_inicial           : num 0.06
-    ##  $ prob_volado            : num 0.5
-    ##  $ probs_muta             : num [1:3] 0.3 0.4 0.3
-    ##  $ mutaciones             : num [1:3] -1 0 1
-    ##  $ dist_extremos          : num 10
-    ##  $ prob_para_sin_cp       : num 0.5
-    ##  $ cp_real                : chr "sin cp_real"
-    ##  $ quita_ini0_fin1        : num 0
-    ##  $ probs_rank0_MDL1       : num 0
-    ##  $ nombre_carpeta_pdf     : chr "Figures"
-    ##  $ nombre_carpeta_RData   : chr "Data"
-    ##  $ cuantos_mejores_cp_graf: num 100
-    ##  $ my_data                : NULL
-    ##  $ minimo_numero_de_cp    : num 1
-    ##  $ probs_nuevos_muta0N    : num [1:3] 0.8 0.1 0.1
-    ##  $ rf_type                : chr "W"
-    ##  $ initial_val_optim      : num [1:2] 0.1 0.5
-    ##  $ mat_low_upp            : num [1:2, 1:2] 1e-04 1e-08 1e+01 1e+05
-    ##  $ vec_dist_a_priori      : chr [1:2] "Gamma" "Gamma"
-    ##  $ mat_phi                : num [1:2, 1:2] 1 3 2 1.2
-    ##  $ ajuste_bloque          : logi TRUE
-    ##  $ print_progress_bar     : logi TRUE
-    ##  $ print_progress_plots   : logi TRUE
-    ##  $ value_set_seed         : num 123
+    ## method: cpt-pelt
 
 ``` r
-str(pm_25)
+class(cpts)
 ```
 
-    ## Classes 'spec_tbl_df', 'tbl_df', 'tbl' and 'data.frame': 1096 obs. of  1 variable:
-    ##  $ PM2.5: num  393 277 303 336 329 201 237 235 292 276 ...
-    ##  - attr(*, "spec")=List of 3
-    ##   ..$ cols   :List of 1
-    ##   .. ..$ PM2.5: list()
-    ##   .. .. ..- attr(*, "class")= chr [1:2] "collector_number" "collector"
-    ##   ..$ default: list()
-    ##   .. ..- attr(*, "class")= chr [1:2] "collector_guess" "collector"
-    ##   ..$ delim  : chr ","
-    ##   ..- attr(*, "class")= chr "col_spec"
-    ##  - attr(*, "problems")=<externalptr>
+    ## [1] "tidycpt"
+
+Various methods are available for `tidycpt` objects. For example,
+`as.ts()` returns the original data as `ts` object, and `changepoints()`
+returns the set of changepoints.
 
 ``` r
-summary(pm_25)
+changepoints(cpts)
 ```
 
-    ##      PM2.5      
-    ##  Min.   : 13.0  
-    ##  1st Qu.:207.0  
-    ##  Median :300.0  
-    ##  Mean   :288.3  
-    ##  3rd Qu.:377.0  
-    ##  Max.   :785.0
+    ## [1] 547 822 972
+
+### `broom` Interface
+
+`tidychangepoint` follows the design interface of the `broom` package.
+Therefore, `augment()`, `tidy()` and `glance()` methods exists for
+`tidycpt` objects.
+
+- `augment()` returns a `tsibble` that is grouped according to the
+  regions defined by the changepoints.
 
 ``` r
-list(rlnorm_ts_1, rlnorm_ts_2, rlnorm_ts_3) |>
-  lapply(plot)
+augment(cpts)
 ```
 
-![](README_files/figure-gfm/sim-plot-1.png)<!-- -->![](README_files/figure-gfm/sim-plot-2.png)<!-- -->![](README_files/figure-gfm/sim-plot-3.png)<!-- -->
+    ## # A tsibble: 1,096 x 3 [1]
+    ## # Groups:    region [4]
+    ##    index     y region 
+    ##    <int> <dbl> <fct>  
+    ##  1     1  35.5 [0,547)
+    ##  2     2  29.0 [0,547)
+    ##  3     3  35.6 [0,547)
+    ##  4     4  33.0 [0,547)
+    ##  5     5  29.5 [0,547)
+    ##  6     6  25.4 [0,547)
+    ##  7     7  28.8 [0,547)
+    ##  8     8  50.3 [0,547)
+    ##  9     9  24.9 [0,547)
+    ## 10    10  58.9 [0,547)
+    ## # ℹ 1,086 more rows
 
-    ## [[1]]
-    ## NULL
-    ## 
-    ## [[2]]
-    ## NULL
-    ## 
-    ## [[3]]
-    ## NULL
+- `tidy()` returns a `tbl` that provides summary statistics for each
+  region
 
 ``` r
-AG_BMDL_r_paso(DataCPSimRebases, param)
-AG_BMDL_r_paso(rlnorm_ts_3, param)
+tidy(cpts)
 ```
 
-## `changepoint`
+    ## # A tibble: 4 × 8
+    ##   region        num_obs  left right   min   max  mean    sd
+    ##   <fct>           <int> <int> <int> <dbl> <dbl> <dbl> <dbl>
+    ## 1 [0,547)           546     1   546  13.7  92.8  35.3  11.3
+    ## 2 [547,822)         275   547   821  20.5 163.   58.1  19.3
+    ## 3 [822,972)         150   822   971  39.2 215.   96.7  30.5
+    ## 4 [972,1.1e+03]     125   972  1096  67.2 299.  156.   49.6
+
+- `glance()` returns a `tbl` that provides summary statistics for the
+  model fit.
 
 ``` r
-plot(rlnorm_ts_3)
-library(changepoint)
+glance(cpts)
 ```
 
-![](README_files/figure-gfm/changepoint-1.png)<!-- -->
+    ## # A tibble: 1 × 8
+    ##   pkg     version algorithm test_stat  MBIC num_cpts num_cpts_max min_seg_length
+    ##   <chr>   <chr>   <chr>     <chr>     <dbl>    <int>        <dbl>          <dbl>
+    ## 1 change… 2.2.4   PELT      Normal     28.0        4          Inf              2
+
+### Other methods
+
+The `plot()` method leverages `ggplot2` to provide an informative plot.
 
 ``` r
-list(rlnorm_ts_1, rlnorm_ts_2, rlnorm_ts_3) |>
-  lapply(cpt.meanvar, method = "PELT") |>
-  str()
+plot(cpts)
 ```
 
-    ## List of 3
-    ##  $ :Formal class 'cpt' [package "changepoint"] with 12 slots
-    ##   .. ..@ data.set : Time-Series [1:1096] from 1 to 1096: 42.6 39.1 57.5 22.2 66.3 ...
-    ##   .. ..@ cpttype  : chr "mean and variance"
-    ##   .. ..@ method   : chr "PELT"
-    ##   .. ..@ test.stat: chr "Normal"
-    ##   .. ..@ pen.type : chr "MBIC"
-    ##   .. ..@ pen.value: num 28
-    ##   .. ..@ minseglen: num 2
-    ##   .. ..@ cpts     : int [1:2] 826 1096
-    ##   .. ..@ ncpts.max: num Inf
-    ##   .. ..@ param.est:List of 2
-    ##   .. .. ..$ mean    : num [1:2] 35.6 60
-    ##   .. .. ..$ variance: num [1:2] 128 424
-    ##   .. ..@ date     : chr "Thu Jun  8 14:09:02 2023"
-    ##   .. ..@ version  : chr "2.2.4"
-    ##  $ :Formal class 'cpt' [package "changepoint"] with 12 slots
-    ##   .. ..@ data.set : Time-Series [1:1096] from 1 to 1096: 34.6 32.8 31.6 26.5 29.9 ...
-    ##   .. ..@ cpttype  : chr "mean and variance"
-    ##   .. ..@ method   : chr "PELT"
-    ##   .. ..@ test.stat: chr "Normal"
-    ##   .. ..@ pen.type : chr "MBIC"
-    ##   .. ..@ pen.value: num 28
-    ##   .. ..@ minseglen: num 2
-    ##   .. ..@ cpts     : int [1:3] 348 731 1096
-    ##   .. ..@ ncpts.max: num Inf
-    ##   .. ..@ param.est:List of 2
-    ##   .. .. ..$ mean    : num [1:3] 34.1 57.3 94.4
-    ##   .. .. ..$ variance: num [1:3] 106 340 898
-    ##   .. ..@ date     : chr "Thu Jun  8 14:09:02 2023"
-    ##   .. ..@ version  : chr "2.2.4"
-    ##  $ :Formal class 'cpt' [package "changepoint"] with 12 slots
-    ##   .. ..@ data.set : Time-Series [1:1096] from 1 to 1096: 67.4 32.2 64.8 44.6 65.4 ...
-    ##   .. ..@ cpttype  : chr "mean and variance"
-    ##   .. ..@ method   : chr "PELT"
-    ##   .. ..@ test.stat: chr "Normal"
-    ##   .. ..@ pen.type : chr "MBIC"
-    ##   .. ..@ pen.value: num 28
-    ##   .. ..@ minseglen: num 2
-    ##   .. ..@ cpts     : int [1:4] 548 817 970 1096
-    ##   .. ..@ ncpts.max: num Inf
-    ##   .. ..@ param.est:List of 2
-    ##   .. .. ..$ mean    : num [1:4] 35.3 58.1 95.7 156.2
-    ##   .. .. ..$ variance: num [1:4] 130 330 1032 2267
-    ##   .. ..@ date     : chr "Thu Jun  8 14:09:02 2023"
-    ##   .. ..@ version  : chr "2.2.4"
+![](README_files/figure-gfm/pelt-plot-1.png)<!-- -->
+
+## Algorithms
+
+### From `changepoint`
+
+The `segment()` function passes argument to the `cpt.meanvar()` function
+from the `changepoint` package, and stores the resulting `cpt` object as
+its `segmenter` object.
 
 ``` r
-rlnorm_ts_3 |>
-  cpt.meanvar(method = "PELT") |>
+x <- changepoint::cpt.meanvar(DataCPSim, method = "PELT")
+identical(x, cpts$segmenter)
+```
+
+    ## [1] TRUE
+
+### Naive methods
+
+`segment()` includes three options for computing changepoints using
+naive methods, all of which return `lm` objects:
+
+- `method = "null"`: returns null model with no changepoints
+
+``` r
+DataCPSim |>
+  segment(method = "null") |>
   plot()
 ```
 
-![](README_files/figure-gfm/changepoint-2.png)<!-- -->
+    ## method: null
+
+![](README_files/figure-gfm/null-plot-1.png)<!-- -->
+
+- `method = "cpt-manual"`: returns a model with changepoints specified
+  manually using the `cpts` argument
+
+``` r
+DataCPSim |>
+  segment(method = "cpt-manual", cpts = c(365, 826)) |>
+  plot()
+```
+
+    ## method: cpt-manual
+
+    ## 
+    ## Segmenting using manually input changepoints...
+
+![](README_files/figure-gfm/manual-plot-1.png)<!-- -->
+
+- `method = "single-best"`: returns the model with at most one
+  changepoint that minimizes the log-likelihood
+
+``` r
+DataCPSim |>
+  segment(method = "single-best") |>
+  plot()
+```
+
+    ## method: single-best
+
+![](README_files/figure-gfm/amoc-plot-1.png)<!-- -->
+
+### Genetic BMDL
+
+TBD
 
 ## Citation
 

@@ -18,55 +18,103 @@ remotes::install_github("c-taimal/BayesianMDLGA")
 library(BayesianMDLGA)
 ```
 
+## Tidy methods for changepoint analysis
+
+Consider the following time series:
+
+```{r rlnorm-plot}
+plot(as.ts(DataCPSim))
+```
+
+`tidychangepoint` allows you to use any number of algorithms for detecting changepoints in univariate time series with a common, `tidyverse`-compliant interface. 
+The `segment()` function takes a numeric vector that is coercible into a `ts` object, and a string indicating the algorithm you wish you use. 
+`segment()` always returns a `tidycpt` object. 
 
 ```{r}
-str(rlnorm_ts_1)
-str(param)
-str(pm_25)
-summary(pm_25)
+cpts <- segment(DataCPSim, method = "cpt-pelt")
+class(cpts)
 ```
 
-```{r sim-plot, message=FALSE}
-list(rlnorm_ts_1, rlnorm_ts_2, rlnorm_ts_3) |>
-  lapply(plot)
+Various methods are available for `tidycpt` objects. 
+For example, `as.ts()` returns the original data as `ts` object, and `changepoints()` returns the set of changepoints. 
+
+```{r}
+changepoints(cpts)
 ```
 
-```{r AG_BMDL, eval=FALSE}
-cpt_ag_bmdl <- AG_BMDL_r_paso(DataCPSimRebases, param)
-AG_BMDL_r_paso(rlnorm_ts_3, param)
+### `broom` Interface
+
+`tidychangepoint` follows the design interface of the `broom` package. 
+Therefore, `augment()`, `tidy()` and `glance()` methods exists for `tidycpt` objects. 
+
+- `augment()` returns a `tsibble` that is grouped according to the regions defined by the changepoints. 
+
+```{r}
+augment(cpts)
 ```
 
-## `changepoint`
+- `tidy()` returns a `tbl` that provides summary statistics for each region
+
+```{r}
+tidy(cpts)
+```
+
+- `glance()` returns a `tbl` that provides summary statistics for the model fit. 
+
+```{r}
+glance(cpts)
+```
+
+### Other methods
+
+The `plot()` method leverages `ggplot2` to provide an informative plot. 
+
+```{r pelt-plot}
+plot(cpts)
+```
+
+## Algorithms
+
+### From `changepoint`
+
+The `segment()` function passes argument to the `cpt.meanvar()` function from the `changepoint` package, and stores the resulting `cpt` object as its `segmenter` object. 
 
 ```{r changepoint, message=FALSE}
-plot(rlnorm_ts_3)
-library(changepoint)
-list(rlnorm_ts_1, rlnorm_ts_2, rlnorm_ts_3) |>
-  lapply(cpt.meanvar, method = "PELT") |>
-  str()
+x <- changepoint::cpt.meanvar(DataCPSim, method = "PELT")
+identical(x, cpts$segmenter)
+```
 
-rlnorm_ts_3 |>
-  cpt.meanvar(method = "PELT") |>
+### Naive methods
+
+`segment()` includes three options for computing changepoints using naive methods, all of which return `lm` objects:
+
+- `method = "null"`: returns null model with no changepoints
+
+```{r null-plot}
+DataCPSim |>
+  segment(method = "null") |>
   plot()
 ```
 
-```{r}
-cpt_ag_bmdl |>
-  cpt_meanvar() |>
+- `method = "cpt-manual"`: returns a model with changepoints specified manually using the `cpts` argument
+
+```{r manual-plot}
+DataCPSim |>
+  segment(method = "cpt-manual", cpts = c(365, 826)) |>
   plot()
 ```
 
+- `method = "single-best"`: returns the model with at most one changepoint that minimizes the log-likelihood
 
-```{r}
-cpt.meanvar(rlnorm_ts_1, method = "PELT", test.stat = "Normal", penalty = "BIC")
-# BIC/SIC
-cpt.meanvar(rlnorm_ts_1, method = "PELT", test.stat = "Normal", penalty = "Manual", pen.value = "3*log(n)")
-
-cpt.meanvar(rlnorm_ts_1, method = "PELT", test.stat = "Normal", penalty = "AIC")
-# AIC
-cpt.meanvar(rlnorm_ts_1, method = "PELT", test.stat = "Normal", penalty = "Manual", pen.value = "2*3")
+```{r amoc-plot}
+DataCPSim |>
+  segment(method = "single-best") |>
+  plot()
 ```
 
+### Genetic BMDL
+
+TBD
 
 ## Citation
 

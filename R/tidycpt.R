@@ -51,6 +51,9 @@ segment.ts <- function(x, method = "null", ...) {
   if (method == "cpt-segneigh") {
     mod <- changepoint::cpt.meanvar(data = x, method = "SegNeigh", ...)
   }
+  if (method == "single-best") {
+    mod <- changepoint::cpt.meanvar(data = x, method = "AMOC", ...)
+  }
   if (method == "cpt-gbmdl") {
     mod <- segment_gbmdl(x, param = param, ...)
   }
