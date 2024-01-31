@@ -36,6 +36,9 @@ segment(DataCPSim, method = "cpt-binseg", penalty = "AIC")
 segment(DataCPSim, method = "cpt-segneigh", penalty = "BIC")
 segment(DataCPSim, method = "cpt-manual", cpts = c(826))
 segment(DataCPSim, method = "cpt-manual", cpts = c(365, 826))
+\dontrun{
+segment(DataCPSim, method = "cpt-gbmdl")
+}
 
 }
 \seealso{

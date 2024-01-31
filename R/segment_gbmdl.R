@@ -3,7 +3,7 @@
 #' @param x a vector that can be coerced into a `ts`
 #' @param param description. See [param].
 #'
-#' @return A `cpt_list` object
+#' @return A `cpt_gbmdl` object
 #' @export
 #' @examples
 #' \dontrun{
@@ -11,9 +11,9 @@
 #' lista_AG <- cpt_bmdl_genetic(rlnorm_ts_1, param)
 #' }
 #' 
-cpt_bmdl_genetic <- function(x, param, destdir = tempdir()) {
+segment_gbmdl <- function(x, param, destdir = tempdir()) {
   # lista_AG contiene los resultados del algoritmo genético
-  lista_AG <- new_cpt_list(x, param = param)
+  lista_AG <- new_cpt_gbmdl(x, param = param)
   # El siguiete for va sobre en cada paso haciendo una nueva generación
   vec_para_for <- 1:param$r
   pb <- utils::txtProgressBar(min = 1, max = length(vec_para_for), style = 3, width = 60)
@@ -49,7 +49,7 @@ cpt_bmdl_genetic <- function(x, param, destdir = tempdir()) {
   cat(" \n")
   
   # Write data object
-  write_cpt_list(lista_AG)
+  write_cpt_gbmdl(lista_AG)
   return(lista_AG)
 }
 

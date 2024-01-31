@@ -32,6 +32,9 @@ segment.numeric <- function(x, method = "null", ...) {
 #' segment(DataCPSim, method = "cpt-segneigh", penalty = "BIC")
 #' segment(DataCPSim, method = "cpt-manual", cpts = c(826))
 #' segment(DataCPSim, method = "cpt-manual", cpts = c(365, 826))
+#' \dontrun{
+#' segment(DataCPSim, method = "cpt-gbmdl")
+#' }
 #' 
 
 segment.ts <- function(x, method = "null", ...) {
@@ -46,6 +49,9 @@ segment.ts <- function(x, method = "null", ...) {
   }
   if (method == "cpt-segneigh") {
     return(changepoint::cpt.meanvar(data = x, method = "SegNeigh", ...))
+  }
+  if (method == "cpt-gbmdl") {
+    return(segment_gbmdl(x, param = param, ...))
   }
   if (method == "cpt-manual") {
     message("\nSegmenting using manually input changepoints...")
