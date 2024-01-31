@@ -19,8 +19,8 @@ Algoritmo genético de Bayesian MDL a un paso
 }
 \examples{
 \dontrun{
-lista_AG <- cpt_bmdl_genetic(DataCPSim, param)
-lista_AG <- cpt_bmdl_genetic(rlnorm_ts_1, param)
+lista_AG_ben <- segment_gbmdl(DataCPSim, param)
+lista_AG <- segment_gbmdl(rlnorm_ts_1, param)
 }
 
 }

@@ -183,7 +183,34 @@ DataCPSim |>
 
 ### Genetic BMDL
 
-TBD
+- `method = "cpt-gbmdl"`: implements the Genetic BMDL heuristic
+
+``` r
+# DataCPSim |>
+#   segment(method = "cpt-gbmdl", param = param)
+changepoints(lista_AG)
+```
+
+    ## [1]  566  694  862  884  915  920  939 1007 1096
+
+``` r
+plot(lista_AG)
+```
+
+![](README_files/figure-gfm/gbmdl-plot-1.png)<!-- -->
+
+Diagnostic plots are also available.
+
+``` r
+plot(lista_AG$segmenter)
+```
+
+![](README_files/figure-gfm/diagnostic-1.png)<!-- -->
+
+    ## Se guardo la imagen:
+    ## /tmp/Rtmp7oYBWD/Fig_4AGBMDL__rf_W_Gamma(1,2)_Gamma(3,1.2)_r50_k50_BMDL_585.pdf
+
+![](README_files/figure-gfm/diagnostic-2.png)<!-- -->
 
 ## Citation
 

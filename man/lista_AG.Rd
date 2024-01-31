@@ -5,7 +5,7 @@
 \alias{lista_AG}
 \title{Output from running genetic algorithm on DataCPSim}
 \format{
-An object of class \code{cpt_list} of length 10.
+An object of class \code{tidycpt} of length 1.
 }
 \usage{
 lista_AG

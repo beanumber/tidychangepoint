@@ -134,7 +134,7 @@ genera_insumos_bloque_sin_theta <- function(cp, x) {
 split_by_tau <- function(x, tau) {
   idx <- cut(
     1:length(x), 
-    breaks = c(0, tau, length(x)), 
+    breaks = unique(c(0, tau, length(x))), 
     include.lowest = TRUE, 
     right = FALSE
   )

@@ -33,6 +33,6 @@ usethis::use_data(rlnorm_ts_3, overwrite = TRUE)
 
 ## Genetic algorithm
 
-lista_AG <- AG_BMDL_r_paso(DataCPSim, param)
+lista_AG <- segment(DataCPSim, method = "cpt-gbmdl", param)
 usethis::use_data(lista_AG, overwrite = TRUE)
 
