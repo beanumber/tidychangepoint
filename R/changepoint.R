@@ -9,26 +9,6 @@
 #' tidy(cpts)
 #' glance(cpts)
 
-augment.cpt <- function(x, ...) {
-  cpt <- changepoint::cpts(x)
-  data <- x@data.set 
-  n <- length(data)
-  data |>
-    tsibble::as_tsibble() |>
-    dplyr::rename(y = value) |>
-    dplyr::mutate(
-      region = cut(
-        index, 
-        breaks = c(0, cpt, n), 
-        include.lowest = TRUE, 
-        right = FALSE)
-    ) |>
-    dplyr::group_by(region)
-}
-
-#' @rdname augment.cpt
-#' @export
-
 glance.cpt <- function(x, ...) {
   out <- tibble::tibble(
     pkg = "changepoint",
@@ -46,7 +26,7 @@ glance.cpt <- function(x, ...) {
   out
 }
 
-#' @rdname augment.cpt
+#' @rdname glance.cpt
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "cpt-pelt")
@@ -56,7 +36,7 @@ as.ts.cpt <- function(x, ...) {
   as.ts(x@data.set)
 }
 
-#' @rdname augment.cpt
+#' @rdname glance.cpt
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "cpt-pelt")

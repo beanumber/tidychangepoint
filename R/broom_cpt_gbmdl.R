@@ -9,25 +9,6 @@
 #' tidy(cpts)
 #' glance(cpts)
 
-augment.cpt_gbmdl <- function(x, ...) {
-  cpt <- cpt_best(x)
-  data <- x$data
-  n <- length(data)
-  data |>
-    tsibble::as_tsibble() |>
-    dplyr::rename(y = value) |>
-    dplyr::mutate(region = cut(
-      index, 
-      breaks = unique(c(0, cpt, n)), 
-      include.lowest = TRUE, 
-      right = FALSE)
-    ) |>
-  dplyr::group_by(region)
-}
-
-#' @rdname augment.cpt_gbmdl
-#' @export
-
 glance.cpt_gbmdl <- function(x, ...) {
   tibble::tibble(
     pkg = "tidychangepoint",
@@ -39,7 +20,7 @@ glance.cpt_gbmdl <- function(x, ...) {
   )
 }
 
-#' @rdname augment.cpt_gbmdl
+#' @rdname glance.cpt_gbmdl
 #' @export
 #' @examples
 #' cpts <- lista_AG
@@ -49,7 +30,7 @@ as.ts.cpt_gbmdl <- function(x, ...) {
   as.ts(x$data)
 }
 
-#' @rdname augment.cpt_gbmdl
+#' @rdname glance.cpt_gbmdl
 #' @export
 changepoints.cpt_gbmdl <- function(x, ...) {
   cpt_best(x) |>

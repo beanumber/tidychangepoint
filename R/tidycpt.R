@@ -93,8 +93,18 @@ changepoints.tidycpt <- function(x, ...) {
 #' @rdname segment
 #' @export
 augment.tidycpt <- function(x, ...) {
-  augment(x$segmenter)
+  tau <- changepoints(x)
+  tau_padded <- unique(c(0, tau, length(as.ts(x))))
+  tibble::enframe(as.ts(x), name = "index", value = "y") |>
+    tsibble::as_tsibble(index = index) |>
+    dplyr::mutate(region = cut(
+      index, 
+      breaks = tau_padded, 
+      include.lowest = TRUE, 
+      right = FALSE)) |>
+    dplyr::group_by(region)
 }
+
 
 #' @rdname segment
 #' @export
