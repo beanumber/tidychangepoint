@@ -1,12 +1,12 @@
-#' Class for candidate changepoints
+#' Class for candidate changepoints using Genetic BMDL heuristic
 #' @export
 #' @param x a numeric vector
 #' @examples
-#' cpts <- cpt_list(DataCPSim, param)
+#' cpts <- cpt_gbmdl(DataCPSim, param)
 #' str(cpts)
 #' plot(cpts)
 
-new_cpt_list <- function(x = numeric(), param = list()) {
+new_cpt_gbmdl <- function(x = numeric(), param = list()) {
   stopifnot(is.numeric(x))
   structure(
     list(
@@ -21,49 +21,49 @@ new_cpt_list <- function(x = numeric(), param = list()) {
       # vec_min_BMDL guarda los valores mínimos del MDL de cada generación
       vec_min_BMDL = rep(0, param$r)
     ), 
-    class = "cpt_list"
+    class = "cpt_gbmdl"
   )
 }
 
-#' @rdname new_cpt_list
+#' @rdname new_cpt_gbmdl
 #' @export
 
-validate_cpt_list <- function(x) {
+validate_cpt_gbmdl <- function(x) {
   if (!stats::is.ts(x$data)) {
     stop("data attribute is not coercible into a ts object.")
   }
   x
 }
 
-#' @rdname new_cpt_list
+#' @rdname new_cpt_gbmdl
 #' @export
 
-cpt_list <- function(x, ...) {
-  obj <- new_cpt_list(x, ...)
-  validate_cpt_list(obj)
+cpt_gbmdl <- function(x, ...) {
+  obj <- new_cpt_gbmdl(x, ...)
+  validate_cpt_gbmdl(obj)
 }
 
-#' @rdname new_cpt_list
+#' @rdname new_cpt_gbmdl
 #' @export
 
-plot.cpt_list <- function(x, ...) {
+plot.cpt_gbmdl <- function(x, ...) {
   plot(x$data)
 #  plot_cpt_repetidos(x)
   # 4-up plot
   plot_BMDL(x)
 }
 
-#' @rdname new_cpt_list
+#' @rdname new_cpt_gbmdl
 #' @export
 
-print.cpt_list <- function(x, ...) {
+print.cpt_gbmdl <- function(x, ...) {
   NextMethod()
 }
 
-#' @rdname new_cpt_list
+#' @rdname new_cpt_gbmdl
 #' @export
 
-summary.cpt_list <- function(object, ...) {
+summary.cpt_gbmdl <- function(object, ...) {
   message("List of changepoints object:")
   cat(paste("\nn:"), length(object$data))
   cat(paste("\nBest changepoint set: "))
@@ -72,7 +72,7 @@ summary.cpt_list <- function(object, ...) {
 }
 
 
-#' @rdname new_cpt_list
+#' @rdname new_cpt_gbmdl
 #' @export
 
 cpt_best_bmdl <- function(x) {
@@ -80,13 +80,13 @@ cpt_best_bmdl <- function(x) {
   min(x$vec_min_BMDL)
 }
 
-#' @rdname new_cpt_list
+#' @rdname new_cpt_gbmdl
 #' @export
 cpt_best_bmdl_string <- function(x) {
   paste0("_BMDL_", floor(min(x$vec_min_BMDL)))
 }
 
-#' @rdname new_cpt_list
+#' @rdname new_cpt_gbmdl
 #' @export
 #' @examples
 #' cpt_best_params(lista_AG)
@@ -107,7 +107,7 @@ cpt_best_params <- function(x) {
   fit_MAP(x$data, tau = cpt_best(x), param = x$param)
 }
 
-#' @rdname new_cpt_list
+#' @rdname new_cpt_gbmdl
 #' @export
 
 chromosome_best <- function(x) {
@@ -116,7 +116,7 @@ chromosome_best <- function(x) {
   chromo_long[1:(chromo_long[1] + 3)]
 }
 
-#' @rdname new_cpt_list
+#' @rdname new_cpt_gbmdl
 #' @export
 
 cpt_best <- function(x) {
@@ -125,12 +125,12 @@ cpt_best <- function(x) {
   chromo[3:(k + 2)]
 }
 
-#' @rdname new_cpt_list
+#' @rdname new_cpt_gbmdl
 #' @export
 #' @examples
-#' write_cpt_list(lista_AG)
+#' write_cpt_gbmdl(lista_AG)
 
-write_cpt_list <- function(x, destdir = tempdir()) {
+write_cpt_gbmdl <- function(x, destdir = tempdir()) {
   
   dir_data <- fs::path(destdir, x$param$nombre_carpeta_RData)
   if (!dir.exists(dir_data)) {
@@ -149,3 +149,4 @@ write_cpt_list <- function(x, destdir = tempdir()) {
   save(x, file = fs::path(dir_data, file_name))
   message("Se guardo el archivo:\n", fs::path(dir_data, file_name), "\n")
 }
+

@@ -36,6 +36,10 @@ Class for segmented time series
 \examples{
 seg <- tbl_cpt(DataCPSim)
 str(seg)
+class(seg)
 summarize2(seg)
 plot(seg)
+tidy(attr(seg, "segmenter"))
+glance(attr(seg, "segmenter"))
+
 }

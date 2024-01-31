@@ -4,8 +4,12 @@
 #' @examples
 #' seg <- tbl_cpt(DataCPSim)
 #' str(seg)
+#' class(seg)
 #' summarize2(seg)
 #' plot(seg)
+#' tidy(attr(seg, "segmenter"))
+#' glance(attr(seg, "segmenter"))
+#' 
 
 new_tbl_cpt <- function(x = numeric(), segmenter = NULL, ...) {
   stopifnot(is.numeric(x))
@@ -18,7 +22,7 @@ new_tbl_cpt <- function(x = numeric(), segmenter = NULL, ...) {
     dplyr::mutate(idx = dplyr::row_number()) |>
     tsibble::as_tsibble(index = idx) |>
     dplyr::group_by(.fitted)
-  
+  attr(obj, "segmenter") <- segmenter
   class(obj) <- c("tbl_cpt", class(obj))
   return(obj)
 }
