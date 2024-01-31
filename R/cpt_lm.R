@@ -17,25 +17,6 @@ augment.cpt_lm <- function(x, ...) {
 
 #' @rdname augment.cpt_lm
 #' @export
-
-tidy.cpt_lm <- function(x, ...) {
-  augment(x) |>
-    dplyr::ungroup() |>
-    # why is this necessary????
-    as.data.frame() |>
-    dplyr::group_by(region) |>
-    dplyr::summarize(
-      num_obs = dplyr::n(),
-      min = min(y),
-      max = max(y),
-      mean = mean(y),
-      sd = sd(y),
-      ... = ...
-    )
-}
-
-#' @rdname augment.cpt_lm
-#' @export
 #' @examples
 #' cpts <- segment(DataCPSim)
 #' as.ts(cpts)

@@ -15,32 +15,15 @@ augment.cpt <- function(x, ...) {
   n <- length(data)
   data |>
     tsibble::as_tsibble() |>
-    dplyr::mutate(region = cut(
-      index, 
-      breaks = c(0, cpt, n), 
-      include.lowest = TRUE, 
-      right = FALSE)
+    dplyr::rename(y = value) |>
+    dplyr::mutate(
+      region = cut(
+        index, 
+        breaks = c(0, cpt, n), 
+        include.lowest = TRUE, 
+        right = FALSE)
     ) |>
-  dplyr::group_by(region)
-}
-
-#' @rdname augment.cpt
-#' @export
-
-tidy.cpt <- function(x, ...) {
-  augment(x) |>
-    dplyr::ungroup() |>
-    # why is this necessary????
-    as.data.frame() |>
-    dplyr::group_by(region) |>
-    dplyr::summarize(
-      num_obs = dplyr::n(),
-      min = min(value),
-      max = max(value),
-      mean = mean(value),
-      sd = sd(value),
-      ... = ...
-    )
+    dplyr::group_by(region)
 }
 
 #' @rdname augment.cpt

@@ -15,6 +15,7 @@ augment.cpt_gbmdl <- function(x, ...) {
   n <- length(data)
   data |>
     tsibble::as_tsibble() |>
+    dplyr::rename(y = value) |>
     dplyr::mutate(region = cut(
       index, 
       breaks = unique(c(0, cpt, n)), 
@@ -22,25 +23,6 @@ augment.cpt_gbmdl <- function(x, ...) {
       right = FALSE)
     ) |>
   dplyr::group_by(region)
-}
-
-#' @rdname augment.cpt_gbmdl
-#' @export
-
-tidy.cpt_gbmdl <- function(x, ...) {
-  augment(x) |>
-    dplyr::ungroup() |>
-    # why is this necessary????
-    as.data.frame() |>
-    dplyr::group_by(region) |>
-    dplyr::summarize(
-      num_obs = dplyr::n(),
-      min = min(value),
-      max = max(value),
-      mean = mean(value),
-      sd = sd(value),
-      ... = ...
-    )
 }
 
 #' @rdname augment.cpt_gbmdl

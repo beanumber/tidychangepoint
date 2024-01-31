@@ -99,7 +99,21 @@ augment.tidycpt <- function(x, ...) {
 #' @rdname segment
 #' @export
 tidy.tidycpt <- function(x, ...) {
-  tidy(x$segmenter)
+  augment(x) |>
+    dplyr::ungroup() |>
+    # why is this necessary????
+    as.data.frame() |>
+    dplyr::group_by(region) |>
+    dplyr::summarize(
+      num_obs = dplyr::n(),
+      left = min(index),
+      right = max(index),
+      min = min(y),
+      max = max(y),
+      mean = mean(y),
+      sd = sd(y),
+      ... = ...
+    )
 }
 
 #' @rdname segment
@@ -125,18 +139,34 @@ regions.tidycpt <- function(x, ...) {
 #' @export
 
 plot.tidycpt <- function(x, ...) {
-  regions <- summarize2(x)
+  regions <- tidy(x)
   ggplot2::ggplot(
-    data = x, 
-    ggplot2::aes(x = idx, y = y)
+    data = augment(x), 
+    ggplot2::aes(x = index, y = y)
   ) +
     ggplot2::geom_rect(
       data = regions,
-      ggplot2::aes(xmin = xmin, xmax = xmax, ymin = 0, ymax = Inf, x = NULL, y = NULL),
+      ggplot2::aes(xmin = left, xmax = right, ymin = 0, ymax = Inf, x = NULL, y = NULL),
       fill = "grey90"
     ) +
-    ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = xmax), linetype = 3) +
+    ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = right), linetype = 3) +
     ggplot2::geom_rug(sides = "l") +
-    ggplot2::geom_line() +
-    ggplot2::geom_smooth(method = "lm", formula = "y ~ 1")
+    ggplot2::geom_line() + 
+    ggplot2::geom_segment(
+      data = regions,
+      ggplot2::aes(x = left, y = mean, xend = right, yend = mean),
+      color = "red"
+    ) +
+    ggplot2::geom_segment(
+      data = regions,
+      ggplot2::aes(x = left, y = mean + 1.96 * sd, xend = right, yend = mean + 1.96 * sd),
+      color = "red",
+      linetype = 3
+    ) +
+    ggplot2::geom_segment(
+      data = regions,
+      ggplot2::aes(x = left, y = mean - 1.96 * sd, xend = right, yend = mean - 1.96 * sd),
+      color = "red",
+      linetype = 3
+    )
 }

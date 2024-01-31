@@ -2,15 +2,12 @@
 % Please edit documentation in R/broom_cpt_gbmdl.R
 \name{augment.cpt_gbmdl}
 \alias{augment.cpt_gbmdl}
-\alias{tidy.cpt_gbmdl}
 \alias{glance.cpt_gbmdl}
 \alias{as.ts.cpt_gbmdl}
 \alias{changepoints.cpt_gbmdl}
 \title{Broom compatibility layer for changepoint}
 \usage{
 \method{augment}{cpt_gbmdl}(x, ...)
-
-\method{tidy}{cpt_gbmdl}(x, ...)
 
 \method{glance}{cpt_gbmdl}(x, ...)
 

@@ -2,15 +2,12 @@
 % Please edit documentation in R/changepoint.R
 \name{augment.cpt}
 \alias{augment.cpt}
-\alias{tidy.cpt}
 \alias{glance.cpt}
 \alias{as.ts.cpt}
 \alias{changepoints.cpt}
 \title{Compatibility layer for changepoint}
 \usage{
 \method{augment}{cpt}(x, ...)
-
-\method{tidy}{cpt}(x, ...)
 
 \method{glance}{cpt}(x, ...)
 

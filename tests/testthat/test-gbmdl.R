@@ -10,4 +10,5 @@ test_that("gbmdl works", {
   expect_s3_class(tidy(x), "tbl_df")
   expect_s3_class(glance(x), "tbl_df")
   expect_type(changepoints(x), "integer")
+  expect_s3_class(plot(x), "gg")
 })
