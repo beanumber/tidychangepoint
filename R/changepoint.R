@@ -1,6 +1,5 @@
 #' Compatibility layer for changepoint
 #' @export
-#' @exportS3Method broom::augment
 #' @examples
 #' cpts <- segment(DataCPSim, method = "cpt-pelt")
 #' class(cpts)
@@ -27,7 +26,6 @@ augment.cpt <- function(x, ...) {
 
 #' @rdname augment.cpt
 #' @export
-#' @exportS3Method broom::tidy
 
 tidy.cpt <- function(x, ...) {
   augment(x) |>
@@ -47,7 +45,6 @@ tidy.cpt <- function(x, ...) {
 
 #' @rdname augment.cpt
 #' @export
-#' @exportS3Method broom::glance
 
 glance.cpt <- function(x, ...) {
   out <- tibble::tibble(
@@ -83,5 +80,6 @@ as.ts.cpt <- function(x, ...) {
 #' changepoints(cpts)
 #' 
 changepoints.cpt <- function(x, ...) {
-  changepoint::cpts(x)
+  changepoint::cpts(x) |>
+    as.integer()
 }

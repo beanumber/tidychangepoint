@@ -2,10 +2,23 @@
 % Please edit documentation in R/cpt_lm.R
 \name{augment.cpt_lm}
 \alias{augment.cpt_lm}
+\alias{tidy.cpt_lm}
+\alias{as.ts.cpt_lm}
+\alias{changepoints.cpt_lm}
 \title{Methods for \code{cpt_lm}}
 \usage{
 \method{augment}{cpt_lm}(x, ...)
+
+\method{tidy}{cpt_lm}(x, ...)
+
+\method{as.ts}{cpt_lm}(x, ...)
+
+\method{changepoints}{cpt_lm}(x, ...)
 }
 \description{
 Methods for \code{cpt_lm}
+}
+\examples{
+cpts <- segment(DataCPSim)
+as.ts(cpts)
 }

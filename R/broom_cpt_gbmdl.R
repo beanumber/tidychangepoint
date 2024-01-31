@@ -1,6 +1,5 @@
 #' Broom compatibility layer for changepoint
 #' @export
-#' @exportS3Method broom::augment
 #' @examples
 #' cpts <- lista_AG
 #' class(cpts) <- c("cpt_gbmdl", class(cpts))
@@ -25,9 +24,8 @@ augment.cpt_gbmdl <- function(x, ...) {
   dplyr::group_by(region)
 }
 
-#' @rdname augment.cpt
+#' @rdname augment.cpt_gbmdl
 #' @export
-#' @exportS3Method broom::tidy
 
 tidy.cpt_gbmdl <- function(x, ...) {
   augment(x) |>
@@ -45,9 +43,8 @@ tidy.cpt_gbmdl <- function(x, ...) {
     )
 }
 
-#' @rdname augment.cpt
+#' @rdname augment.cpt_gbmdl
 #' @export
-#' @exportS3Method broom::glance
 
 glance.cpt_gbmdl <- function(x, ...) {
   tibble::tibble(
@@ -60,12 +57,19 @@ glance.cpt_gbmdl <- function(x, ...) {
   )
 }
 
-#' @rdname augment.cpt
+#' @rdname augment.cpt_gbmdl
 #' @export
 #' @examples
 #' cpts <- lista_AG
 #' class(cpts) <- c("cpt_bmdl", class(cpts))
 #' as.ts(cpts)
 as.ts.cpt_gbmdl <- function(x, ...) {
-  x$data
+  as.ts(x$data)
+}
+
+#' @rdname augment.cpt_gbmdl
+#' @export
+changepoints.cpt_gbmdl <- function(x, ...) {
+  cpt_best(x) |>
+    as.integer()
 }

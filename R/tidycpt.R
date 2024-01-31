@@ -60,7 +60,7 @@ segment.ts <- function(x, method = "null", ...) {
     cpts <- args[["cpts"]]
     terms <- paste("(t > ", cpts, ")") |>
       paste(collapse = "+")
-    form <- stats::as.formula(paste("x ~ ", terms))
+    form <- stats::as.formula(paste("y ~ ", terms))
     mod <- stats::lm(form, data = ds)
     class(mod) <- c("cpt_lm", class(mod))
   }
@@ -107,6 +107,19 @@ tidy.tidycpt <- function(x, ...) {
 glance.tidycpt <- function(x, ...) {
   glance(x$segmenter)
 }
+
+#' @rdname segment
+#' @export
+regions <- function(x, ...) UseMethod("regions")
+
+#' @rdname segment
+#' @export
+regions.tidycpt <- function(x, ...) {
+  tidy(x) |>
+    dplyr::pull(region) |> 
+    levels()
+}
+
 
 #' @rdname segment
 #' @export

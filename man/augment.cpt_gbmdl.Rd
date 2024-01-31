@@ -2,9 +2,21 @@
 % Please edit documentation in R/broom_cpt_gbmdl.R
 \name{augment.cpt_gbmdl}
 \alias{augment.cpt_gbmdl}
+\alias{tidy.cpt_gbmdl}
+\alias{glance.cpt_gbmdl}
+\alias{as.ts.cpt_gbmdl}
+\alias{changepoints.cpt_gbmdl}
 \title{Broom compatibility layer for changepoint}
 \usage{
 \method{augment}{cpt_gbmdl}(x, ...)
+
+\method{tidy}{cpt_gbmdl}(x, ...)
+
+\method{glance}{cpt_gbmdl}(x, ...)
+
+\method{as.ts}{cpt_gbmdl}(x, ...)
+
+\method{changepoints}{cpt_gbmdl}(x, ...)
 }
 \description{
 Broom compatibility layer for changepoint
@@ -17,4 +29,7 @@ class(y)
 y
 tidy(cpts)
 glance(cpts)
+cpts <- lista_AG
+class(cpts) <- c("cpt_bmdl", class(cpts))
+as.ts(cpts)
 }

@@ -10,6 +10,8 @@
 \alias{augment.tidycpt}
 \alias{tidy.tidycpt}
 \alias{glance.tidycpt}
+\alias{regions}
+\alias{regions.tidycpt}
 \alias{plot.tidycpt}
 \title{Segment a time series using a variety of algorithms}
 \usage{
@@ -30,6 +32,10 @@ changepoints(x, ...)
 \method{tidy}{tidycpt}(x, ...)
 
 \method{glance}{tidycpt}(x, ...)
+
+regions(x, ...)
+
+\method{regions}{tidycpt}(x, ...)
 
 \method{plot}{tidycpt}(x, ...)
 }
