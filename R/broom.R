@@ -15,3 +15,9 @@ broom::augment
 #' @importFrom broom glance
 #' @seealso [broom::glance()]
 broom::glance
+
+#' @rdname tidy
+#' @export
+#' @importFrom stats as.ts
+#' @seealso [stats::as.ts()]
+stats::as.ts

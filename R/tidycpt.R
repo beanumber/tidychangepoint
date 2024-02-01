@@ -121,7 +121,7 @@ tidy.tidycpt <- function(x, ...) {
       min = min(y),
       max = max(y),
       mean = mean(y),
-      sd = sd(y),
+      sd = stats::sd(y),
       ... = ...
     )
 }

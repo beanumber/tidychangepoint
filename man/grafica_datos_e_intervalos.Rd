@@ -32,13 +32,13 @@ una gráfica con :
 Graficas del AG con BMDL
 }
 \examples{
-plot_BMDL(lista_AG)
+plot_BMDL(lista_AG$segmenter)
 
-plot_evolution(lista_AG)
-plot_evolution(lista_AG, 5)
+plot_evolution(lista_AG$segmenter)
+plot_evolution(lista_AG$segmenter, 5)
 
-plot_cpt_repeated(lista_AG)
-plot_cpt_repeated(lista_AG, 5)
-plot_best_chromosome(lista_AG)
-plot_media_acumulada(lista_AG)
+plot_cpt_repeated(lista_AG$segmenter)
+plot_cpt_repeated(lista_AG$segmenter, 5)
+plot_best_chromosome(lista_AG$segmenter)
+plot_media_acumulada(lista_AG$segmenter)
 }

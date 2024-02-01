@@ -24,7 +24,8 @@ Imports:
     dplyr,
     fs,
     ggplot2,
-    methods,
+    purrr,
+    readr,
     tibble,
     tsibble
 Depends: 

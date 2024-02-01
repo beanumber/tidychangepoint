@@ -36,9 +36,9 @@ mejor_cp <- historia_mejores[which(
   ))
 ), ]
 }
-d <- exceedances(lista_AG$data)
-tau <- cpt_best(lista_AG)
-theta <- cpt_best_params(lista_AG)
+d <- exceedances(as.ts(lista_AG))
+tau <- changepoints(lista_AG)
+theta <- cpt_best_params(lista_AG$segmenter)
 alpha <- theta$alpha
 sigma <- theta$beta
 f <- generate_mean_cumulative(length(tau))

@@ -2,8 +2,7 @@
 #' @export
 #' @examples
 #' cpts <- lista_AG
-#' class(cpts) <- c("cpt_gbmdl", class(cpts))
-#' y <- augment(cpts)
+#' y <- augment(lista_AG)
 #' class(y)
 #' y
 #' tidy(cpts)
@@ -12,7 +11,7 @@
 glance.cpt_gbmdl <- function(x, ...) {
   tibble::tibble(
     pkg = "tidychangepoint",
-    version = packageVersion("BayesianMDLGA"),
+    version = utils::packageVersion("BayesianMDLGA"),
     algorithm = "GeneticBMDL",
     test_stat = cpt_best_bmdl(x),
     BMDL = cpt_best_bmdl(x),
@@ -23,9 +22,7 @@ glance.cpt_gbmdl <- function(x, ...) {
 #' @rdname glance.cpt_gbmdl
 #' @export
 #' @examples
-#' cpts <- lista_AG
-#' class(cpts) <- c("cpt_bmdl", class(cpts))
-#' as.ts(cpts)
+#' as.ts(lista_AG)
 as.ts.cpt_gbmdl <- function(x, ...) {
   as.ts(x$data)
 }

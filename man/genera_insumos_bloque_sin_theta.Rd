@@ -24,7 +24,7 @@ una lista con los días de cada régimen
 Agrupamos los insumos por bloques
 }
 \examples{
-genera_insumos_bloque_sin_theta(chromosome_best(lista_AG), lista_AG$data)
+genera_insumos_bloque_sin_theta(chromosome_best(lista_AG$segmenter), as.ts(lista_AG))
 
 split_by_tau(as.ts(lista_AG), changepoints(lista_AG))
 }

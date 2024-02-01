@@ -53,9 +53,9 @@ fun_1_genera_texto_dist <- function(dist, parametros_dist) {
 #'   ))
 #' ), ]
 #' }
-#' d <- exceedances(lista_AG$data)
-#' tau <- cpt_best(lista_AG)
-#' theta <- cpt_best_params(lista_AG)
+#' d <- exceedances(as.ts(lista_AG))
+#' tau <- changepoints(lista_AG)
+#' theta <- cpt_best_params(lista_AG$segmenter)
 #' alpha <- theta$alpha
 #' sigma <- theta$beta
 #' f <- generate_mean_cumulative(length(tau))
@@ -108,7 +108,7 @@ generate_mean_cumulative <- function(n_puntos_cambio, mas_derecha = "", destdir 
 #'         una lista con los días de cada régimen
 #' @export
 #' @examples
-#' genera_insumos_bloque_sin_theta(chromosome_best(lista_AG), lista_AG$data)
+#' genera_insumos_bloque_sin_theta(chromosome_best(lista_AG$segmenter), as.ts(lista_AG))
 #' 
 genera_insumos_bloque_sin_theta <- function(cp, x) {
   (cp_corto_cero <- c(0, cp[3:(cp[1] + 3)]))

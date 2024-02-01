@@ -17,13 +17,10 @@ Broom compatibility layer for changepoint
 }
 \examples{
 cpts <- lista_AG
-class(cpts) <- c("cpt_gbmdl", class(cpts))
-y <- augment(cpts)
+y <- augment(lista_AG)
 class(y)
 y
 tidy(cpts)
 glance(cpts)
-cpts <- lista_AG
-class(cpts) <- c("cpt_bmdl", class(cpts))
-as.ts(cpts)
+as.ts(lista_AG)
 }

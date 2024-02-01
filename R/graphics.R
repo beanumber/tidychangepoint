@@ -91,7 +91,7 @@ plot_confint <- function(cpt_list) {
   plot_exceedances(cpt_list$data)
 
 #  tasa_NHPP <- funcion_media_acumulada(i = 2, cpt_list$exceedances, alpha, sigma, tau)
-  m <- media_acumulada(cpt_list$data, tau = tau, theta = theta)
+  m <- media_acumulada(exceedances(cpt_list$data), tau = tau, theta = theta, n = length(cpt_list$data))
   
   upp_bond <- stats::qpois(.95, lambda = c(pow(10 / sigma[1], alpha[1]), m))
   low_bond <- stats::qpois(.05, lambda = c(pow(10 / sigma[1], alpha[1]), m))
@@ -142,7 +142,7 @@ plot_confint2 <- function(x, tau, theta) {
 #'
 #' @export
 #' @examples
-#' plot_BMDL(lista_AG)
+#' plot_BMDL(lista_AG$segmenter)
 #' 
 plot_BMDL <- function(cpt_list, destdir = tempdir(), pdf = FALSE) {
   graphics::par(mfrow = c(2, 2), mar = c(2, 4, 2, 2))
@@ -174,8 +174,8 @@ plot_BMDL <- function(cpt_list, destdir = tempdir(), pdf = FALSE) {
 #' @rdname grafica_datos_e_intervalos
 #' @export
 #' @examples
-#' plot_evolution(lista_AG)
-#' plot_evolution(lista_AG, 5)
+#' plot_evolution(lista_AG$segmenter)
+#' plot_evolution(lista_AG$segmenter, 5)
 #' 
 plot_evolution <- function(cpt_list, i = length(cpt_list$vec_min_BMDL)) {
   plot(
@@ -196,8 +196,8 @@ plot_evolution <- function(cpt_list, i = length(cpt_list$vec_min_BMDL)) {
 #' @rdname grafica_datos_e_intervalos
 #' @export
 #' @examples
-#' plot_cpt_repeated(lista_AG)
-#' plot_cpt_repeated(lista_AG, 5)
+#' plot_cpt_repeated(lista_AG$segmenter)
+#' plot_cpt_repeated(lista_AG$segmenter, 5)
 plot_cpt_repeated <- function(cpt_list, i = nrow(cpt_list$historia_mejores)) {
   historia_mejores_sin_0_1_N <- cpt_list$historia_mejores[1:i, -1:-2]
   historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[
@@ -214,7 +214,7 @@ plot_cpt_repeated <- function(cpt_list, i = nrow(cpt_list$historia_mejores)) {
 #' @rdname grafica_datos_e_intervalos
 #' @export
 #' @examples
-#' plot_best_chromosome(lista_AG)
+#' plot_best_chromosome(lista_AG$segmenter)
 plot_best_chromosome <- function(cpt_list) {
   plot(
     cpt_list$historia_mejores[, 1], 
@@ -240,6 +240,7 @@ plot_best_chromosome <- function(cpt_list) {
 #' @param mat_low_upp description
 #' @export
 #' @examples
+#' \dontrun{
 #' grafica_ajuste_NHPP(exceedances(lista_AG$data), 
 #' tau1 = cpt_best(lista_AG), tau2 = cpt_best(lista_AG),
 #' lista_AG$param$initial_val_optim, 
@@ -248,7 +249,7 @@ plot_best_chromosome <- function(cpt_list) {
 #' lista_AG$vec_dist_a_priori,
 #' lista_AG$param$mat_phi
 #' )
-#' 
+#' }
 #'
 grafica_ajuste_NHPP <- function(d_i, tau1, tau2, 
                                 initial_val_optim, mat_low_upp, rf_type, vec_dist_a_priori, mat_phi) {
@@ -288,7 +289,7 @@ grafica_ajuste_NHPP <- function(d_i, tau1, tau2,
 #' @rdname grafica_datos_e_intervalos
 #' @export
 #' @examples
-#' plot_media_acumulada(lista_AG)
+#' plot_media_acumulada(lista_AG$segmenter)
 plot_media_acumulada <- function(cpt_list) {
   graphics::par(mfrow = c(2, 1), mar = c(2, 4, 2, 2))
 
@@ -298,9 +299,10 @@ plot_media_acumulada <- function(cpt_list) {
   graphics::abline(v = tau, lty = 3)
   
   m <- media_acumulada(
-    cpt_list$data, 
+    exceedances(cpt_list$data), 
     tau = cpt_best(cpt_list), 
-    theta = cpt_best_params(cpt_list)
+    theta = cpt_best_params(cpt_list),
+    n = length(cpt_list$data)
   )
   plot(
     x = c(1, exceedances(cpt_list$data), length(cpt_list$data)), 
