@@ -13,8 +13,8 @@ a numeric vector of length equal to the \link{exceedances} of \code{x}
 Mean cumulative exceedances function
 }
 \examples{
-tau <- cpt_best(lista_AG)
-theta <- cpt_best_params(lista_AG)
-media_acumulada(x = lista_AG$data, tau, theta)
+tau <- changepoints(lista_AG)
+theta <- cpt_best_params(lista_AG$segmenter)
+media_acumulada(x = as.ts(lista_AG), tau, theta)
 
 }

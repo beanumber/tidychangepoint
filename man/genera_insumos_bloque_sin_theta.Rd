@@ -26,5 +26,5 @@ Agrupamos los insumos por bloques
 \examples{
 genera_insumos_bloque_sin_theta(chromosome_best(lista_AG), lista_AG$data)
 
-split_by_tau(lista_AG$data, cpt_best(lista_AG))
+split_by_tau(as.ts(lista_AG), changepoints(lista_AG))
 }

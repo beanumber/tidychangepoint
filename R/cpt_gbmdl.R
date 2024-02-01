@@ -122,7 +122,8 @@ chromosome_best <- function(x) {
 cpt_best <- function(x) {
   chromo <- chromosome_best(x)
   k <- chromo[1]
-  chromo[3:(k + 2)]
+  # trim the endpoints
+  setdiff(chromo[3:(k + 2)], c(0, length(as.ts(x))))
 }
 
 #' @rdname new_cpt_gbmdl

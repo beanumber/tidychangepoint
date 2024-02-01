@@ -35,7 +35,7 @@ cpt_best_params(x)
 
 chromosome_best(x)
 
-cpt_best(lista_AG)
+cpt_best(x)
 
 write_cpt_gbmdl(x, destdir = tempdir())
 }

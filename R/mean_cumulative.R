@@ -2,9 +2,9 @@
 #' @export
 #' @return a numeric vector of length equal to the [exceedances] of `x`
 #' @examples
-#' tau <- cpt_best(lista_AG)
-#' theta <- cpt_best_params(lista_AG)
-#' media_acumulada(x = lista_AG$data, tau, theta)
+#' tau <- changepoints(lista_AG)
+#' theta <- cpt_best_params(lista_AG$segmenter)
+#' media_acumulada(x = as.ts(lista_AG), tau, theta)
 #' 
 
 media_acumulada <- function(x, tau, theta, dist = "weibull") {
@@ -46,4 +46,3 @@ media_acumulada <- function(x, tau, theta, dist = "weibull") {
     )
   out$m
 }
-

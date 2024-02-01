@@ -6,7 +6,7 @@ test_that("cpt_lm works", {
   expect_s3_class(augment(x), "grouped_ts")
   expect_s3_class(tidy(x), "tbl_df")
   expect_equal(nrow(tidy(x)), 1)
-  expect_s3_class(glance(x), "tbl_df")
+  suppressWarnings(expect_s3_class(glance(x), "tbl_df"))
   expect_type(changepoints(x), "integer")
   expect_equal(length(changepoints(x)), 0)
   

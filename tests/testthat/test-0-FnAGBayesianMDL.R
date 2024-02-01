@@ -18,14 +18,23 @@ test_that("RandomKeys works", {
 })
 
 test_that("cpt_list works", {
-  expect_s3_class(lista_AG, "cpt_list")
-  expect_type(lista_AG, "list")
-  expect_equal(lista_AG$minimo_BMDL, cpt_best_bmdl(lista_AG))
-  expect_equal(lista_AG$valor_BMDL_minimo, cpt_best_bmdl_string(lista_AG))
-  chromosome_best(lista_AG)
-  expect_equal(lista_AG$cromosoma_minimo_BMDL[3:6], cpt_best(lista_AG))
+  x <- lista_AG$segmenter
+  expect_s3_class(x, "cpt_gbmdl")
+  expect_type(x, "list")
+  expect_equal(min(x$vec_min_BMDL), cpt_best_bmdl(x))
+  expect_true(all(cpt_best(x) %in% chromosome_best(x)))
 })
 
 test_that("exceedances works", {
   expect_identical(DataCPSimRebases, exceedances(DataCPSim))
 })
+
+test_that("regions works", {
+  tau <- changepoints(lista_AG)
+  expect_equal(tau, cpt_best(lista_AG$segmenter))
+  expect_false(0 %in% tau)
+  expect_false(length(as.ts(lista_AG)) %in% tau)
+  y <- split_by_tau(as.ts(lista_AG), tau)
+  expect_equal(length(y), length(tau) + 1)
+})
+

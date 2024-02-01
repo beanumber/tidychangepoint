@@ -129,7 +129,7 @@ genera_insumos_bloque_sin_theta <- function(cp, x) {
 #' @rdname genera_insumos_bloque_sin_theta
 #' @export
 #' @examples
-#' split_by_tau(lista_AG$data, cpt_best(lista_AG))
+#' split_by_tau(as.ts(lista_AG), changepoints(lista_AG))
 
 split_by_tau <- function(x, tau) {
   idx <- cut(
