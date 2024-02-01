@@ -35,8 +35,8 @@ exceedances <- function(x) {
 }
 
 #' @export
-pad_tau <- function(x, tau) {
-  unique(c(0, tau, length(x)))
+pad_tau <- function(tau, n) {
+  unique(c(0, tau, n))
 }
 
 #' @export

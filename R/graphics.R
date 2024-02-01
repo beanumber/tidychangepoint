@@ -76,7 +76,7 @@ plot_nhpp <- function(x, ...) {
 #' @param param description
 #' @export
 #' @examples
-#' plot_confint(lista_AG)
+#' plot_confint(lista_AG$segmenter)
 #' 
 plot_confint <- function(cpt_list) {
   tau <- cpt_best(cpt_list)
@@ -108,20 +108,24 @@ plot_confint <- function(cpt_list) {
 
 plot_confint2 <- function(x, tau, theta) {
   z <- exceedances(x) |>
-    tibble::enframe(name = "t", value = "num_exceedances") |>
+    tibble::enframe(name = "cum_exceedances", value = "t_exceedance") |>
     # always add the last observation
     dplyr::bind_rows(
-      data.frame(t = length(x), num_exceedances = max(exceedances(x)))
+      data.frame(
+        cum_exceedances = length(exceedances(x)), 
+        t_exceedance = length(x)
+      )
     ) |>
+    dplyr::distinct() |>
     dplyr::mutate(
-      m = media_acumulada(num_exceedances, tau = tau, theta = theta),
+      m = media_acumulada(t_exceedance, tau = tau, theta = theta, n = length(x)),
       lower = stats::qpois(0.05, lambda = m),
       upper = stats::qpois(0.95, lambda = m),
     )
-  ggplot2::ggplot(data = z, ggplot2::aes(x = t, y = num_exceedances)) +
+  ggplot2::ggplot(data = z, ggplot2::aes(x = t_exceedance, y = cum_exceedances)) +
     ggplot2::geom_line() +
-    ggplot2::scale_x_continuous(limits = c(0, length(x))) +
-    ggplot2::scale_y_continuous("Number of Exceedances") +
+    ggplot2::scale_x_continuous("Time Index (t)", limits = c(0, length(x))) +
+    ggplot2::scale_y_continuous("Cumulative Number of Exceedances (N)") +
     ggplot2::geom_line(ggplot2::aes(y = m), color = "red") +
     ggplot2::geom_line(ggplot2::aes(y = lower), color = "blue") +
     ggplot2::geom_line(ggplot2::aes(y = upper), color = "blue")

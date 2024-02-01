@@ -4,7 +4,7 @@
 \alias{media_acumulada}
 \title{Mean cumulative exceedances function}
 \usage{
-media_acumulada(x, tau, theta, dist = "weibull")
+media_acumulada(t, tau, theta, n, dist = "weibull")
 }
 \value{
 a numeric vector of length equal to the \link{exceedances} of \code{x}
@@ -15,6 +15,6 @@ Mean cumulative exceedances function
 \examples{
 tau <- changepoints(lista_AG)
 theta <- cpt_best_params(lista_AG$segmenter)
-media_acumulada(x = as.ts(lista_AG), tau, theta)
+media_acumulada(exceedances(as.ts(lista_AG)), tau, theta, length(as.ts(lista_AG)))
 
 }

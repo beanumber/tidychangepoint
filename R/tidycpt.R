@@ -100,7 +100,7 @@ augment.tidycpt <- function(x, ...) {
   tibble::enframe(as.ts(x), name = "index", value = "y") |>
     tsibble::as_tsibble(index = index) |>
     dplyr::mutate(
-      region = cut_inclusive(index, pad_tau(as.ts(x), tau))
+      region = cut_inclusive(index, pad_tau(tau, length(as.ts(x))))
     ) |>
     dplyr::group_by(region)
 }

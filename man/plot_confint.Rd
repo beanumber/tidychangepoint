@@ -15,6 +15,6 @@ plot_confint(cpt_list)
 Graficas de los intervalos y los datos
 }
 \examples{
-plot_confint(lista_AG)
+plot_confint(lista_AG$segmenter)
 
 }

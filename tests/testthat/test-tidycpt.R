@@ -24,7 +24,7 @@ test_that("utils works", {
   x <- DataCPSim
   expect_true(all(exceedances(x) %in% 1:length(x)))
   
-  y <- pad_tau(x, 826)
+  y <- pad_tau(826, length(x))
   expect_true(0 %in% y)
   expect_true(826 %in% y)
   expect_true(length(x) %in% y)

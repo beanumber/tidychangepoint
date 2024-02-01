@@ -4,18 +4,18 @@
 #' @examples
 #' tau <- changepoints(lista_AG)
 #' theta <- cpt_best_params(lista_AG$segmenter)
-#' media_acumulada(x = as.ts(lista_AG), tau, theta)
+#' media_acumulada(exceedances(as.ts(lista_AG)), tau, theta, length(as.ts(lista_AG)))
 #' 
 
-media_acumulada <- function(x, tau, theta, dist = "weibull") {
+media_acumulada <- function(t, tau, theta, n, dist = "weibull") {
   if (dist == "weibull") {
     d <- function(x, a, b) {
 #      -pweibull(x, a, b, lower = FALSE, log = TRUE)
       (x/b)^a
     }
   }
-  tau_padded <- pad_tau(x, tau)
-  regions <- cut_inclusive(1:length(x), tau_padded)
+  tau_padded <- pad_tau(tau, n)
+  regions <- cut_inclusive(1:n, tau_padded)
   theta_calc <- theta |>
     dplyr::mutate(
       region = unique(regions),
@@ -29,7 +29,7 @@ media_acumulada <- function(x, tau, theta, dist = "weibull") {
     )
 
   out <- tibble::tibble(
-    t = exceedances(x),
+    t = t,
     region = cut_inclusive(t, tau_padded)
   ) |>
     dplyr::left_join(theta_calc, by = "region") |>

@@ -41,7 +41,7 @@ test_that("regions works", {
 test_that("mcddf works", {
   tau <- changepoints(lista_AG)
   theta <- cpt_best_params(lista_AG$segmenter)
-  m <- media_acumulada(x = as.ts(lista_AG), tau, theta)
+  m <- media_acumulada(exceedances(as.ts(lista_AG)), tau, theta, length(as.ts(lista_AG)))
   expect_equal(length(m), length(exceedances(as.ts(lista_AG))))
   
   theta <- data.frame(
@@ -55,8 +55,12 @@ test_that("mcddf works", {
   plot(y)
   
 #  z <- segment_gbmdl(y, param)
-  m <- media_acumulada(x = y, tau, theta)
+  m <- media_acumulada(exceedances(y), tau, theta, length(y))
   m
-  plot_exceedances(y)
+  plot_confint2(y, tau, theta)
+  
+  expect_s3_class(
+    plot_confint2(DataCPSim, tau = 826, theta = data.frame(alpha = c(1, 1), beta = c(1, 2))), "gg"
+  )
 })
 

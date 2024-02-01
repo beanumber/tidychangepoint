@@ -132,6 +132,6 @@ genera_insumos_bloque_sin_theta <- function(cp, x) {
 #' split_by_tau(as.ts(lista_AG), changepoints(lista_AG))
 
 split_by_tau <- function(x, tau) {
-  idx <- cut_inclusive(1:length(x), pad_tau(x, tau))
+  idx <- cut_inclusive(1:length(x), pad_tau(tau, length(x)))
   split(x, idx)
 }
