@@ -43,24 +43,39 @@ test_that("mcddf works", {
   theta <- cpt_best_params(lista_AG$segmenter)
   m <- media_acumulada(exceedances(as.ts(lista_AG)), tau, theta, length(as.ts(lista_AG)))
   expect_equal(length(m), length(exceedances(as.ts(lista_AG))))
-  
-  theta <- data.frame(
-    alpha = c(1, 1), 
-    beta = c(1, 1e8)
-  )
-  tau <- 50
-  
-  y <- c(rep(75, times = 50), rep(25, times = 50)) |>
-    as.ts()
-  plot(y)
-  
-#  z <- segment_gbmdl(y, param)
-  m <- media_acumulada(exceedances(y), tau, theta, length(y))
-  m
-  plot_confint2(y, tau, theta)
-  
-  expect_s3_class(
-    plot_confint2(DataCPSim, tau = 826, theta = data.frame(alpha = c(1, 1), beta = c(1, 2))), "gg"
-  )
 })
 
+
+test_that("parameter fitting works", {
+  # Example 1
+  y <- c(rep(75, times = 50), rep(25, times = 50))
+  tau <- 50
+  theta <- fit_nhpp(y, tau, param = param)
+  expect_lt(abs(theta$alpha[1] - 1), 0.12)
+  
+  m <- media_acumulada(exceedances(y), tau, theta, length(y))
+  expect_equal(media_acumulada(0, tau, theta, length(y)), 0)
+  expect_lt(abs(media_acumulada(50, tau, theta, length(y)) - 50), 1)
+  expect_lt(abs(media_acumulada(100, tau, theta, length(y)) - 50), 3)
+  
+  plot_confint2(y, tau, theta = theta)
+  
+  # Example 2
+  y <- c(rnorm(50, mean = 60, sd = 5), rnorm(50, mean = 40, sd = 5))
+  z <- split(exceedances(y), cut_inclusive(exceedances(y), pad_tau(tau, length(y))))
+
+  theta <- fit_nhpp(y, tau, param = param)
+  theta
+  
+  expect_equal(
+    fit_nhpp_region(t = z[[1]], tau_left = 0, tau_right = tau)$par,
+    theta[1, 2:3] |> unlist() |> unname()
+  )
+  
+  expect_equal(
+    fit_nhpp_region(t = z[[2]], tau_left = tau, tau_right = length(y))$par,
+    theta[2, 2:3] |> unlist() |> unname()
+  )
+
+  plot_confint2(y, tau, theta = theta)
+})

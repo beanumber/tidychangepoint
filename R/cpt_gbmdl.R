@@ -93,18 +93,7 @@ cpt_best_bmdl_string <- function(x) {
 #' 
 
 cpt_best_params <- function(x) {
-  # extrae_mat_MAP(
-  #   chromosome_best(x), 
-  #   x$data, 
-  #   x$param$rf_type, 
-  #   x$param$initial_val_optim, 
-  #   x$param$mat_low_upp, 
-  #   x$param$vec_dist_a_priori, 
-  #   x$param$mat_phi
-  # ) |>
-  #   as.data.frame()
-  
-  fit_MAP(x$data, tau = cpt_best(x), param = x$param)
+  fit_nhpp(x$data, tau = cpt_best(x), param = x$param)
 }
 
 #' @rdname new_cpt_gbmdl

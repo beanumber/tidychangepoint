@@ -1,6 +1,4 @@
-
 #' Bloque de log posterior NHPP
-#'
 #'
 #' @param vec_d_i vector de días en los que hubo revases entre el los puntos de
 #'   cambio tau1 y tau2
@@ -20,8 +18,8 @@ Bloq_LogPost_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta, vec_dist_a_pr
 #' Bloque de log-a priori NHPP
 #' @export
 #' @examples
-#' theta <- cpt_best_params(lista_AG)
-#' Bloq_LogPrio_NHPP(lista_AG$param$vec_dist_a_priori, theta, lista_AG$param$mat_phi)
+#' theta <- cpt_best_params(lista_AG$segmenter)
+#' Bloq_LogPrio_NHPP(param$vec_dist_a_priori, theta, param$mat_phi)
 #' 
 Bloq_LogPrio_NHPP <- function(vec_dist_a_priori, theta, mat_phi) {
   if (length(vec_dist_a_priori) == 2) {
@@ -39,6 +37,7 @@ Bloq_LogPrio_NHPP <- function(vec_dist_a_priori, theta, mat_phi) {
     print("No se tiene registrada esa vec_dist_a_priori; Bloq_LogPrio_NHPP")
   }
 }
+
 
 
 
@@ -265,24 +264,22 @@ D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
 #' @return regresa un el resultado de optim
 #' @export
 #' @examples
-#' MAP_NHPP(
-#'   lista_AG$param$initial_val_optim, 
-#'   lista_AG$param$mat_low_upp,
-#'   exceedances(lista_AG$data),
-#'   0, 575,
-#'   lista_AG$param$rf_type,
-#'   lista_AG$param$vec_dist_a_priori,
-#'   lista_AG$param$mat_phi
-#' )
+#' fit_nhpp_region(exceedances(lista_AG$data), 0, 575)
+#' fit_nhpp_region(exceedances(lista_AG$data), 0, 575, initial_val_optim = c(1, 10))
 #' 
 #'
-MAP_NHPP <- function(initial_val_optim, mat_low_upp, vec_d_i, tau1, tau2, rf_type, vec_dist_a_priori, mat_phi) {
+fit_nhpp_region <- function(t, tau_left, tau_right, 
+                            initial_val_optim = param$initial_val_optim, 
+                            mat_low_upp = param$mat_low_upp, 
+                            rf_type = param$rf_type, 
+                            vec_dist_a_priori = param$vec_dist_a_priori, 
+                            mat_phi = param$mat_phi, ...) {
   # Definimos las funciones que vamos a utilizar para encontrar el mínimo
   my_fn <- function(theta) {
-    -Bloq_LogPost_NHPP(vec_d_i, tau1, tau2, rf_type, theta, vec_dist_a_priori, mat_phi)
+    -Bloq_LogPost_NHPP(t, tau1 = tau_left, tau2 = tau_right, rf_type, theta, vec_dist_a_priori, mat_phi)
   }
   my_gn <- function(theta) {
-    -D_Bloq_LogPost_NHPP(vec_d_i, tau1, tau2, rf_type, theta, vec_dist_a_priori, mat_phi)
+    -D_Bloq_LogPost_NHPP(t, tau1 = tau_left, tau2 = tau_right, rf_type, theta, vec_dist_a_priori, mat_phi)
   }
   # Calculamos el mínimo
   (val_optimos <- stats::optim(
@@ -291,8 +288,49 @@ MAP_NHPP <- function(initial_val_optim, mat_low_upp, vec_d_i, tau1, tau2, rf_typ
     gr = my_gn,
     lower = mat_low_upp[, 1], 
     upper = mat_low_upp[, 2],
-    method = "L-BFGS-B"
+    method = "L-BFGS-B",
+    ... = ...
   ))
   return(val_optimos)
 }
 
+
+#' @export
+#' @examples
+#' fit_nhpp(DataCPSim, tau = 826, param = param)
+#' fit_nhpp(as.ts(lista_AG), tau = changepoints(lista_AG), param)
+
+fit_nhpp <- function(x, tau, param) {
+  ex <- exceedances(x)
+  t_by_tau <- ex |>
+    split(cut_inclusive(ex, pad_tau(tau, length(x))))
+  
+  endpoints <- names(t_by_tau) |>
+    strsplit(split = ",") |>
+    lapply(readr::parse_number)
+  
+  res <- purrr::map2(
+    t_by_tau, 
+    endpoints,
+    ~fit_nhpp_region(.x, .y[1], .y[2])
+  )
+  
+  get_params <- function(z) {
+    cbind(
+      data.frame("log-posterior" = -z$value), 
+      data.frame(t(z$par))
+    )
+  }
+  
+  out <- res |>
+    purrr::map(get_params) |>
+    purrr::list_rbind()
+  
+  if (param$rf_type %in% c("W", "MO", "GO")) {
+    names_params <- c("alpha", "beta")
+  } else {
+    names_params <- c("alpha", "beta", "sigma")
+  }
+  names(out)[2:ncol(out)] <- names_params 
+  return(out)
+}

@@ -346,9 +346,13 @@ Bayesaian_MDL_k_cp <- function(
 #'
 #' @export
 #' @examples
-#' chromo <- chromosome_best(lista_AG)
-#' extrae_mat_MAP(chromo, lista_AG$data, lista_AG$param$rf_type, lista_AG$param$initial_val_optim, 
-#' lista_AG$param$mat_low_upp, lista_AG$param$vec_dist_a_priori, lista_AG$param$mat_phi
+#' chromo <- chromosome_best(lista_AG$segmenter)
+#' extrae_mat_MAP(chromo, as.ts(lista_AG), 
+#'   lista_AG$segmenter$param$rf_type, 
+#'   lista_AG$segmenter$param$initial_val_optim, 
+#'   lista_AG$segmenter$param$mat_low_upp, 
+#'   lista_AG$segmenter$param$vec_dist_a_priori, 
+#'   lista_AG$segmenter$param$mat_phi
 #' )
 extrae_mat_MAP <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi, ajuste_bloque) {
   # lista_insumos_bloque <- genera_insumos_bloque(cp,x,theta_mat) ANTES
@@ -370,11 +374,12 @@ extrae_mat_MAP <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_d
   # El siguiente for va sobre cada
   for (i in 1:n_mle) {
     # MAP_NHPP(initial_val,mat_low_upp,vec_d_i,tau1,tau2,rf_type,vec_dist_a_priori,mat_phi){
-    aux_map <- MAP_NHPP(
-      initial_val_optim, mat_low_upp, 
+    aux_map <- fit_nhpp_region(
       lista_insumos_bloque$lista_dias_regimen[[i]],
       lista_insumos_bloque$mat_tau[i, 1],
-      lista_insumos_bloque$mat_tau[i, 2], rf_type, vec_dist_a_priori, mat_phi
+      lista_insumos_bloque$mat_tau[i, 2], 
+      initial_val_optim, mat_low_upp, 
+      rf_type, vec_dist_a_priori, mat_phi
     )
     # Obs: MAP_NHPP regresa la menos-log-posterior, por eso la multiplicamos por menos
     mat_MAP[i, ] <- c(-aux_map$value, aux_map$par)
@@ -382,46 +387,6 @@ extrae_mat_MAP <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_d
   return(mat_MAP)
 }
 
-fit_MAP <- function(x, tau, param) {
-  x_by_tau <- split_by_tau(x, tau)
-  endpoints <- names(x_by_tau) |>
-    strsplit(split = ",") |>
-    lapply(readr::parse_number)
-  
-  res <- purrr::map2(
-    x_by_tau, 
-    endpoints,
-    ~MAP_NHPP(
-      param$initial_val_optim, 
-      param$mat_low_upp, 
-      .x, 
-      .y[1], 
-      .y[2],
-      param$rf_type, 
-      param$vec_dist_a_priori, 
-      param$mat_phi
-    )
-  )
-  
-  get_params <- function(z) {
-    cbind(
-      data.frame("log-posterior" = -z$value), 
-      data.frame(t(z$par))
-    )
-  }
-  
-  out <- res |>
-    purrr::map(get_params) |>
-    purrr::list_rbind()
-  
-  if (param$rf_type %in% c("W", "MO", "GO")) {
-    names_params <- c("alpha", "beta")
-  } else {
-    names_params <- c("alpha", "beta", "sigma")
-  }
-  names(out)[2:ncol(out)] <- names_params 
-  return(out)
-}
 
 #' Hace un hijo de dos padres
 #'

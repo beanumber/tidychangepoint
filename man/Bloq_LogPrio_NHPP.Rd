@@ -10,7 +10,7 @@ Bloq_LogPrio_NHPP(vec_dist_a_priori, theta, mat_phi)
 Bloque de log-a priori NHPP
 }
 \examples{
-theta <- cpt_best_params(lista_AG)
-Bloq_LogPrio_NHPP(lista_AG$param$vec_dist_a_priori, theta, lista_AG$param$mat_phi)
+theta <- cpt_best_params(lista_AG$segmenter)
+Bloq_LogPrio_NHPP(param$vec_dist_a_priori, theta, param$mat_phi)
 
 }

@@ -263,7 +263,10 @@ grafica_ajuste_NHPP <- function(d_i, tau1, tau2,
     
   vec_d_i <- d_i[d_i > tau1 & d_i < tau2]
   
-  val_optimos <- MAP_NHPP(initial_val_optim, mat_low_upp, vec_d_i, tau1, tau2, rf_type, vec_dist_a_priori, mat_phi)
+  val_optimos <- fit_nhpp_region(
+    vec_d_i, tau1, tau2,
+    initial_val_optim, mat_low_upp, rf_type, vec_dist_a_priori, mat_phi
+  )
   theta <- val_optimos$par
   
   t <- tau1:tau2
