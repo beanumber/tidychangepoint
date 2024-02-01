@@ -30,7 +30,16 @@ step <- function(x) {
 #' @param x a time series object
 #' @examples
 #' exceedances(DataCPSim)
-
 exceedances <- function(x) {
   which(x > mean(x))
+}
+
+#' @export
+pad_tau <- function(x, tau) {
+  unique(c(0, tau, length(x)))
+}
+
+#' @export
+cut_inclusive <- function(x, tau) {
+  cut(x, breaks = tau, include.lowest = TRUE, right = FALSE)
 }

@@ -101,6 +101,32 @@ plot_confint <- function(cpt_list) {
   graphics::lines(y = c(10, exceedances(cpt_list$data)), x = low_bond, col = "blue", lwd = 2)
 }
 
+#' @export
+#' @examples
+#' plot_confint2(DataCPSim, tau = 826, theta = data.frame(alpha = c(1, 1), beta = c(1, 2)))
+#' 
+
+plot_confint2 <- function(x, tau, theta) {
+  z <- exceedances(x) |>
+    tibble::enframe(name = "t", value = "num_exceedances") |>
+    # always add the last observation
+    dplyr::bind_rows(
+      data.frame(t = length(x), num_exceedances = max(exceedances(x)))
+    ) |>
+    dplyr::mutate(
+      m = media_acumulada(num_exceedances, tau = tau, theta = theta),
+      lower = stats::qpois(0.05, lambda = m),
+      upper = stats::qpois(0.95, lambda = m),
+    )
+  ggplot2::ggplot(data = z, ggplot2::aes(x = t, y = num_exceedances)) +
+    ggplot2::geom_line() +
+    ggplot2::scale_x_continuous(limits = c(0, length(x))) +
+    ggplot2::scale_y_continuous("Number of Exceedances") +
+    ggplot2::geom_line(ggplot2::aes(y = m), color = "red") +
+    ggplot2::geom_line(ggplot2::aes(y = lower), color = "blue") +
+    ggplot2::geom_line(ggplot2::aes(y = upper), color = "blue")
+}
+
 
 #' Graficas del AG con BMDL
 #' @rdname grafica_datos_e_intervalos

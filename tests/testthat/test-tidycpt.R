@@ -19,3 +19,24 @@ test_that("tidycpt works", {
   expect_equal(length(changepoints(z)), 2)
   expect_s3_class(plot(z), "gg")
 })
+
+test_that("utils works", {
+  x <- DataCPSim
+  expect_true(all(exceedances(x) %in% 1:length(x)))
+  
+  y <- pad_tau(x, 826)
+  expect_true(0 %in% y)
+  expect_true(826 %in% y)
+  expect_true(length(x) %in% y)
+  
+  z <- cut_inclusive(x, y)
+  expect_equal(length(z), length(x))
+  expect_type(levels(z), "character")
+  expect_length(levels(z), 2)
+  
+  z <- cut_inclusive(1:length(x), y)
+  expect_equal(length(z), length(x))
+  expect_type(levels(z), "character")
+  expect_length(levels(z), 2)
+})
+

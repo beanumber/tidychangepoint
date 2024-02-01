@@ -38,3 +38,25 @@ test_that("regions works", {
   expect_equal(length(y), length(tau) + 1)
 })
 
+test_that("mcddf works", {
+  tau <- changepoints(lista_AG)
+  theta <- cpt_best_params(lista_AG$segmenter)
+  m <- media_acumulada(x = as.ts(lista_AG), tau, theta)
+  expect_equal(length(m), length(exceedances(as.ts(lista_AG))))
+  
+  theta <- data.frame(
+    alpha = c(1, 1), 
+    beta = c(1, 1e8)
+  )
+  tau <- 50
+  
+  y <- c(rep(75, times = 50), rep(25, times = 50)) |>
+    as.ts()
+  plot(y)
+  
+#  z <- segment_gbmdl(y, param)
+  m <- media_acumulada(x = y, tau, theta)
+  m
+  plot_exceedances(y)
+})
+

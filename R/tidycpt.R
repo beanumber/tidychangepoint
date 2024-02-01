@@ -97,14 +97,11 @@ changepoints.tidycpt <- function(x, ...) {
 #' @export
 augment.tidycpt <- function(x, ...) {
   tau <- changepoints(x)
-  tau_padded <- unique(c(0, tau, length(as.ts(x))))
   tibble::enframe(as.ts(x), name = "index", value = "y") |>
     tsibble::as_tsibble(index = index) |>
-    dplyr::mutate(region = cut(
-      index, 
-      breaks = tau_padded, 
-      include.lowest = TRUE, 
-      right = FALSE)) |>
+    dplyr::mutate(
+      region = cut_inclusive(index, pad_tau(as.ts(x), tau))
+    ) |>
     dplyr::group_by(region)
 }
 
