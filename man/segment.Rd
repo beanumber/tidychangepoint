@@ -13,6 +13,8 @@
 \alias{regions}
 \alias{regions.tidycpt}
 \alias{plot.tidycpt}
+\alias{diagnose}
+\alias{diagnose.tidycpt}
 \title{Segment a time series using a variety of algorithms}
 \usage{
 segment(x, method = "null", ...)
@@ -38,6 +40,10 @@ regions(x, ...)
 \method{regions}{tidycpt}(x, ...)
 
 \method{plot}{tidycpt}(x, ...)
+
+diagnose(x, ...)
+
+\method{diagnose}{tidycpt}(x, ...)
 }
 \arguments{
 \item{x}{a numeric vector coercible into a \link[stats:ts]{stats::ts} object}
@@ -67,6 +73,9 @@ plot(two_cpts)
 \dontrun{
 segment(DataCPSim, method = "cpt-gbmdl")
 }
+
+diagnose(segment(DataCPSim, method = "single-best"))
+diagnose(segment(DataCPSim, method = "cpt-pelt"))
 
 }
 \seealso{

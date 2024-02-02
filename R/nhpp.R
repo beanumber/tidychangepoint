@@ -269,11 +269,11 @@ D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
 #' 
 #'
 fit_nhpp_region <- function(t, tau_left, tau_right, 
-                            initial_val_optim = param$initial_val_optim, 
-                            mat_low_upp = param$mat_low_upp, 
-                            rf_type = param$rf_type, 
-                            vec_dist_a_priori = param$vec_dist_a_priori, 
-                            mat_phi = param$mat_phi, ...) {
+                            initial_val_optim = BayesianMDLGA::param$initial_val_optim, 
+                            mat_low_upp = BayesianMDLGA::param$mat_low_upp, 
+                            rf_type = BayesianMDLGA::param$rf_type, 
+                            vec_dist_a_priori = BayesianMDLGA::param$vec_dist_a_priori, 
+                            mat_phi = BayesianMDLGA::param$mat_phi, ...) {
   # Definimos las funciones que vamos a utilizar para encontrar el mínimo
   my_fn <- function(theta) {
     -Bloq_LogPost_NHPP(t, tau1 = tau_left, tau2 = tau_right, rf_type, theta, vec_dist_a_priori, mat_phi)
@@ -297,10 +297,10 @@ fit_nhpp_region <- function(t, tau_left, tau_right,
 
 #' @export
 #' @examples
-#' fit_nhpp(DataCPSim, tau = 826, param = param)
-#' fit_nhpp(as.ts(lista_AG), tau = changepoints(lista_AG), param)
+#' fit_nhpp(DataCPSim, tau = 826)
+#' fit_nhpp(as.ts(lista_AG), tau = changepoints(lista_AG))
 
-fit_nhpp <- function(x, tau, param) {
+fit_nhpp <- function(x, tau) {
   ex <- exceedances(x)
   t_by_tau <- ex |>
     split(cut_inclusive(ex, pad_tau(tau, length(x))))
@@ -314,6 +314,7 @@ fit_nhpp <- function(x, tau, param) {
     endpoints,
     ~fit_nhpp_region(.x, .y[1], .y[2])
   )
+  fit_nhpp_region(t_by_tau[[1]], endpoints[[1]][1], endpoints[[1]][2])
   
   get_params <- function(z) {
     cbind(
@@ -326,7 +327,7 @@ fit_nhpp <- function(x, tau, param) {
     purrr::map(get_params) |>
     purrr::list_rbind()
   
-  if (param$rf_type %in% c("W", "MO", "GO")) {
+  if (BayesianMDLGA::param$rf_type %in% c("W", "MO", "GO")) {
     names_params <- c("alpha", "beta")
   } else {
     names_params <- c("alpha", "beta", "sigma")

@@ -7,6 +7,7 @@ test_that("tidycpt works", {
   expect_s3_class(glance(x), "tbl_df")
   expect_type(changepoints(x), "integer")
   expect_s3_class(plot(x), "gg")
+  expect_s3_class(diagnose(x), "patchwork")
   
   z <- segment(DataCPSim, method = "cpt-manual", cpts = c(365, 826))
   expect_s3_class(z, "tidycpt")
@@ -18,6 +19,7 @@ test_that("tidycpt works", {
   expect_type(changepoints(z), "integer")
   expect_equal(length(changepoints(z)), 2)
   expect_s3_class(plot(z), "gg")
+  expect_s3_class(diagnose(z), "patchwork")
 })
 
 test_that("utils works", {

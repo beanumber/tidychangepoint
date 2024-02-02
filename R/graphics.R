@@ -285,31 +285,3 @@ grafica_ajuste_NHPP <- function(d_i, tau1, tau2,
   
   cat("theta=", theta, "\n")
 }
-
-#' @rdname grafica_datos_e_intervalos
-#' @export
-#' @examples
-#' plot_media_acumulada(lista_AG$segmenter)
-plot_media_acumulada <- function(cpt_list) {
-  graphics::par(mfrow = c(2, 1), mar = c(2, 4, 2, 2))
-
-  plot(cpt_list$data)
-  
-  tau <- cpt_best(cpt_list)
-  graphics::abline(v = tau, lty = 3)
-  
-  m <- media_acumulada(
-    exceedances(cpt_list$data), 
-    tau = cpt_best(cpt_list), 
-    theta = cpt_best_params(cpt_list),
-    n = length(cpt_list$data)
-  )
-  plot(
-    x = c(1, exceedances(cpt_list$data), length(cpt_list$data)), 
-    y = c(0, m * (length(exceedances(cpt_list$data)) / length(cpt_list$data)), NA), 
-    type = "b"
-  )
-  graphics::abline(v = tau, lty = 3)
-  
-  graphics::par(mfrow = c(1, 1))
-}

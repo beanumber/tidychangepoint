@@ -180,3 +180,24 @@ plot.tidycpt <- function(x, ...) {
       linetype = 3
     )
 }
+
+#' @rdname segment
+#' @export
+diagnose <- function(x, ...) UseMethod("diagnose")
+
+#' @rdname segment
+#' @export
+#' @examples
+#' diagnose(segment(DataCPSim, method = "single-best"))
+#' diagnose(segment(DataCPSim, method = "cpt-pelt"))
+#' 
+diagnose.tidycpt <- function(x, ...) {
+  tau <- changepoints(x)
+  theta <- fit_nhpp(as.ts(x), tau)
+
+  patchwork::wrap_plots(
+    plot(x),
+    plot_confint2(as.ts(x), tau, theta),
+    ncol = 1
+  )
+}

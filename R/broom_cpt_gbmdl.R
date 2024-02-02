@@ -33,3 +33,12 @@ changepoints.cpt_gbmdl <- function(x, ...) {
   cpt_best(x) |>
     as.integer()
 }
+
+#' @rdname glance.cpt_gbmdl
+#' @export
+#' @examples
+#' diagnose(lista_AG)
+#' 
+diagnose.cpt_gbmdl <- function(x, ...) {
+  plot_BMDL(x)
+}

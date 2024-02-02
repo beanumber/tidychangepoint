@@ -6,7 +6,6 @@
 \alias{plot_evolution}
 \alias{plot_cpt_repeated}
 \alias{plot_best_chromosome}
-\alias{plot_media_acumulada}
 \title{Graficas del AG con BMDL}
 \usage{
 plot_nhpp(x, ...)
@@ -18,8 +17,6 @@ plot_evolution(cpt_list, i = length(cpt_list$vec_min_BMDL))
 plot_cpt_repeated(cpt_list, i = nrow(cpt_list$historia_mejores))
 
 plot_best_chromosome(cpt_list)
-
-plot_media_acumulada(cpt_list)
 }
 \value{
 una gráfica con :
@@ -40,5 +37,4 @@ plot_evolution(lista_AG$segmenter, 5)
 plot_cpt_repeated(lista_AG$segmenter)
 plot_cpt_repeated(lista_AG$segmenter, 5)
 plot_best_chromosome(lista_AG$segmenter)
-plot_media_acumulada(lista_AG$segmenter)
 }

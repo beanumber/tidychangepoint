@@ -4,6 +4,7 @@
 \alias{glance.cpt_gbmdl}
 \alias{as.ts.cpt_gbmdl}
 \alias{changepoints.cpt_gbmdl}
+\alias{diagnose.cpt_gbmdl}
 \title{Broom compatibility layer for changepoint}
 \usage{
 \method{glance}{cpt_gbmdl}(x, ...)
@@ -11,6 +12,8 @@
 \method{as.ts}{cpt_gbmdl}(x, ...)
 
 \method{changepoints}{cpt_gbmdl}(x, ...)
+
+\method{diagnose}{cpt_gbmdl}(x, ...)
 }
 \description{
 Broom compatibility layer for changepoint
@@ -23,4 +26,6 @@ y
 tidy(cpts)
 glance(cpts)
 as.ts(lista_AG)
+diagnose(lista_AG)
+
 }

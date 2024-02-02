@@ -93,7 +93,7 @@ cpt_best_bmdl_string <- function(x) {
 #' 
 
 cpt_best_params <- function(x) {
-  fit_nhpp(x$data, tau = cpt_best(x), param = x$param)
+  fit_nhpp(x$data, tau = cpt_best(x))
 }
 
 #' @rdname new_cpt_gbmdl

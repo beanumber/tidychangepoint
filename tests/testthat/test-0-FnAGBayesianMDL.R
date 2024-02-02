@@ -51,7 +51,7 @@ test_that("parameter fitting works", {
   y <- test_set(n = 1, seed = 123)
   plot(y)
   tau <- attr(y, "cpt_true")
-  theta <- fit_nhpp(y, tau, param = param)
+  theta <- fit_nhpp(y, tau)
   expect_lt(abs(theta$alpha[1] - 1), 0.05)
   
   m <- media_acumulada(exceedances(y), tau, theta, length(y))
@@ -67,7 +67,7 @@ test_that("parameter fitting works", {
   tau <- attr(y, "cpt_true")
   z <- split(exceedances(y), cut_inclusive(exceedances(y), pad_tau(tau, length(y))))
 
-  theta <- fit_nhpp(y, tau, param = param)
+  theta <- fit_nhpp(y, tau)
   theta
   
   expect_equal(
