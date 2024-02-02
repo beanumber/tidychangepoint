@@ -43,3 +43,24 @@ pad_tau <- function(tau, n) {
 cut_inclusive <- function(x, tau) {
   cut(x, breaks = tau, include.lowest = TRUE, right = FALSE)
 }
+
+#' @export
+test_set <- function(n = 1, sd = 1, seed = NULL) {
+  if (!is.null(seed)) {
+    set.seed(seed)
+  }
+  num_obs <- 1000
+  tau <- sample.int(n = num_obs, size = n) |>
+    sort()
+  means <- sample.int(n = 100, size = n + 1)
+  
+  region_lengths <- tau |>
+    pad_tau(num_obs) |>
+    diff()
+  
+  out <- purrr::map2(region_lengths, means, ~rnorm(.x, mean = .y, sd = sd)) |>
+    c(recursive = TRUE) |>
+    as.ts()
+  attr(out, "cpt_true") <- tau
+  return(out)
+}

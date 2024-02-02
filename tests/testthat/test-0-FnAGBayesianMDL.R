@@ -48,20 +48,23 @@ test_that("mcddf works", {
 
 test_that("parameter fitting works", {
   # Example 1
-  y <- c(rep(75, times = 50), rep(25, times = 50))
-  tau <- 50
+  y <- test_set(n = 1, seed = 123)
+  plot(y)
+  tau <- attr(y, "cpt_true")
   theta <- fit_nhpp(y, tau, param = param)
-  expect_lt(abs(theta$alpha[1] - 1), 0.12)
+  expect_lt(abs(theta$alpha[1] - 1), 0.05)
   
   m <- media_acumulada(exceedances(y), tau, theta, length(y))
   expect_equal(media_acumulada(0, tau, theta, length(y)), 0)
-  expect_lt(abs(media_acumulada(50, tau, theta, length(y)) - 50), 1)
-  expect_lt(abs(media_acumulada(100, tau, theta, length(y)) - 50), 3)
+  expect_lt(abs(media_acumulada(tau, tau, theta, length(y)) - tau), 2)
+  expect_lt(abs(media_acumulada(length(y), tau, theta, length(y)) - tau), 3)
   
   plot_confint2(y, tau, theta = theta)
   
   # Example 2
-  y <- c(rnorm(50, mean = 60, sd = 5), rnorm(50, mean = 40, sd = 5))
+  y <- test_set(n = 1, seed = 456)
+  plot(y)
+  tau <- attr(y, "cpt_true")
   z <- split(exceedances(y), cut_inclusive(exceedances(y), pad_tau(tau, length(y))))
 
   theta <- fit_nhpp(y, tau, param = param)
