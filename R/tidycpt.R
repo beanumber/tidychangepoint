@@ -233,6 +233,8 @@ diagnose <- function(x, ...) UseMethod("diagnose")
 #' diagnose(segment(DataCPSim))
 #' diagnose(segment(DataCPSim, method = "single-best"))
 #' diagnose(segment(DataCPSim, method = "cpt-pelt"))
+#' diagnose(segment(test_set()))
+#' diagnose(segment(test_set(n = 2, sd = 4), method = "cpt-pelt"))
 #' 
 diagnose.tidycpt <- function(x, ...) {
   patchwork::wrap_plots(
