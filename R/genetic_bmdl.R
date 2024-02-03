@@ -35,17 +35,6 @@ globalVariables(
 #'
 #' @param param es la lista original de parámetros la cual contiene todos los
 #'   siguientes
-#' @param nombre_datos esta variable indica la base de datos que se va a ocupar.
-#'   Esta base se toma del archivo "Datos.R"; los posibles valores que toma son
-#'   c("ciclones","O3","O3_U61","PM10","PM10_U100")
-#' @param n_datos Es una variable para hacer pruebas que cirve para tocar un
-#'   subconjunto de los datos, o en caso de ser "TODOS" tomar todos los datos
-#' @param diarios0_rebases1 indicadora si se toman los revasos o los datos
-#'   crudos. En particular se utiliza para el caso de dist="poisson", ya que al
-#'   tomar los datos distribuidos poisson se estará contando el número de
-#'   revases
-#' @param valor_de_rebase es la indicadora del nivel para revase, por lo general
-#'   vale 100
 #' @param r número de generaciones
 #' @param k tamaño de las generaciones
 #' @param penalty tipo de penalidad que se ocupa, por ahora solo se tiene
@@ -125,10 +114,6 @@ globalVariables(
 #' @examples
 #' revisor_param(param)
 revisor_param <- function(param,
-                          nombre_datos = c("ciclones", "O3", "O3_U61", "PM10", "PM10_U100")[5],
-                          n_datos = c("TODOS", 403, 1003)[1], # tomamos todos o un subconjuto de datos
-                          diarios0_rebases1 = 0,
-                          valor_de_rebase = 100,
                           r = 50, # número de generaciones 1000
                           k = 50, # tamaño de generaciones 200
                           penalty = c("MDL", "BMDL")[2],
@@ -161,10 +146,6 @@ revisor_param <- function(param,
   # This version has 33 variables Jan 7 2020
   my_data <- 123
   ejemplo_param <- list(
-    nombre_datos = c("ciclones", "O3", "O3_U61", "PM10", "PM10_U100")[5],
-    n_datos = c("TODOS", 403, 1003)[1], # tomamos todos o un subconjuto de datos
-    diarios0_rebases1 = 0,
-    valor_de_rebase = 100,
     r = 50, # número de generaciones 1000
     k = 50, # tamaño de generaciones 200
     penalty = c("MDL", "BMDL")[2],
@@ -461,7 +442,6 @@ mata_k_tau_volado <- function(mat_cp, prob_volado) {
 #' @export
 #'
 muta_1_cp_BMDL <- function(cp, x, param) {
-  # eval(parse(text=paste0("x <- ",param$nombre_datos)))
   # (cp <- sim_1_cp_BMDL(x,param) )
 
   # En caso de tener muy pocos puntos de cambio, rehacemos el cp

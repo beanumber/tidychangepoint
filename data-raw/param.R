@@ -1,10 +1,6 @@
 
 
 param <- list(
-#  nombre_datos = c("ciclones","O3","O3_U61","PM10","PM10_U100", "DataCPSimRebases")[6],
-  n_datos = c("TODOS",403,1003)[1], # tomamos todos o un subconjuto de datos
-  diarios0_rebases1 = 0,
-#  valor_de_rebase = mean(DataCPSim),
   r = 50, # número de generaciones 1000
   k = 50,  # tamaño de generaciones 200
   penalty = c("MDL","BMDL")[2],

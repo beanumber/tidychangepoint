@@ -113,11 +113,13 @@ cpt_best <- function(x) {
 }
 
 #' @rdname new_cpt_gbmdl
+#' @param data_name_slug character string that will identify the data set used
+#' in the file name
 #' @export
 #' @examples
 #' write_cpt_gbmdl(lista_AG$segmenter)
 
-write_cpt_gbmdl <- function(x, destdir = tempdir()) {
+write_cpt_gbmdl <- function(x, destdir = tempdir(), data_name_slug = "data") {
   
   dir_data <- fs::path(destdir, x$param$nombre_carpeta_RData)
   if (!dir.exists(dir_data)) {
@@ -125,7 +127,7 @@ write_cpt_gbmdl <- function(x, destdir = tempdir()) {
   }
   
   file_name <- paste0(
-    "Dat_AGBMDL_", x$param$nombre_datos, "_rf_",
+    "Dat_AGBMDL_", data_name_slug, "_rf_",
     x$param$rf_type, "_", fun_n_genera_texto_dist(x$param), "_r",
     x$param$r, "_k",
     x$param$k, 

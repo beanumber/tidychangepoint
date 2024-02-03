@@ -6,7 +6,7 @@
 #' @examples
 #' plot_cpt_repetidos(lista_AG$segmenter)
 #' 
-plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(), pdf = FALSE) {
+plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(), data_name_slug = "data", pdf = FALSE) {
   # Obtenemos cuantos de los cp mejores se graficarán
   n_cp_mas_repetidos <- cpt_list$param$cuantos_mejores_cp_graf
   historia_mejores_sin_0_1_N <- cpt_list$historia_mejores[, -1:-2]
@@ -21,7 +21,7 @@ plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(), pdf = FALSE) {
   graphics::abline(v = as.numeric(names(cp_mas_repetidos)), col = "blue")
 
   nombre_pdf <- paste0(
-    "Fig_CP_repetidos_", cpt_list$param$nombre_datos, "_rf_",
+    "Fig_CP_repetidos_", data_name_slug, "_rf_",
     cpt_list$param$rf_type, "_", fun_n_genera_texto_dist(cpt_list$param), "_r",
     cpt_list$param$r, "_k",
     cpt_list$param$k, 
@@ -101,7 +101,7 @@ plot_confint <- function(cpt_list) {
 #' @examples
 #' plot_BMDL(lista_AG$segmenter)
 #' 
-plot_BMDL <- function(cpt_list, destdir = tempdir(), pdf = FALSE) {
+plot_BMDL <- function(cpt_list, destdir = tempdir(), data_name_slug = "data", pdf = FALSE) {
   graphics::par(mfrow = c(2, 2), mar = c(2, 4, 2, 2))
   # 1.- Datos reales
   plot_confint(cpt_list)
@@ -115,7 +115,7 @@ plot_BMDL <- function(cpt_list, destdir = tempdir(), pdf = FALSE) {
   graphics::par(mfrow = c(1, 1))
   
   nombre_pdf <- paste0(
-    "Fig_4AGBMDL_", cpt_list$param$nombre_datos, "_rf_",
+    "Fig_4AGBMDL_", data_name_slug, "_rf_",
     cpt_list$param$rf_type, "_", fun_n_genera_texto_dist(cpt_list$param), "_r",
     cpt_list$param$r, "_k",
     cpt_list$param$k, 
