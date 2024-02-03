@@ -41,7 +41,7 @@ test_that("regions works", {
 test_that("mcddf works", {
   tau <- changepoints(lista_AG)
   theta <- cpt_best_params(lista_AG$segmenter)
-  m <- media_acumulada(exceedances(as.ts(lista_AG)), tau, theta, length(as.ts(lista_AG)))
+  m <- cdf_exceedances_est(exceedances(as.ts(lista_AG)), tau, theta, length(as.ts(lista_AG)))
   expect_equal(length(m), length(exceedances(as.ts(lista_AG))))
 })
 
@@ -54,10 +54,10 @@ test_that("parameter fitting works", {
   theta <- fit_nhpp(y, tau)
   expect_lt(abs(theta$alpha[1] - 1), 0.05)
   
-  m <- media_acumulada(exceedances(y), tau, theta, length(y))
-  expect_equal(media_acumulada(0, tau, theta, length(y)), 0)
-  expect_lt(abs(media_acumulada(tau, tau, theta, length(y)) - tau), 2)
-  expect_lt(abs(media_acumulada(length(y), tau, theta, length(y)) - tau), 3)
+  m <- cdf_exceedances_est(exceedances(y), tau, theta, length(y))
+  expect_equal(cdf_exceedances_est(0, tau, theta, length(y)), 0)
+  expect_lt(abs(cdf_exceedances_est(tau, tau, theta, length(y)) - tau), 2)
+  expect_lt(abs(cdf_exceedances_est(length(y), tau, theta, length(y)) - tau), 3)
   
   plot_mcdf(segment(y, method = "cpt-manual", cpts = tau))
   

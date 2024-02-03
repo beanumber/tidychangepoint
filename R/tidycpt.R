@@ -204,7 +204,7 @@ plot_mcdf <- function(x, ...) {
     ) |>
     dplyr::distinct() |>
     dplyr::mutate(
-      m = media_acumulada(t_exceedance, tau = tau, theta = theta, n = n),
+      m = cdf_exceedances_est(t_exceedance, tau = tau, theta = theta, n = n),
       lower = stats::qpois(0.05, lambda = m),
       upper = stats::qpois(0.95, lambda = m),
     )
