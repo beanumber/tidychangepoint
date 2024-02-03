@@ -4,7 +4,6 @@
 #' @examples
 #' cpts <- cpt_gbmdl(DataCPSim, param)
 #' str(cpts)
-#' plot(cpts)
 
 new_cpt_gbmdl <- function(x = numeric(), param = list()) {
   stopifnot(is.numeric(x))
@@ -29,7 +28,7 @@ new_cpt_gbmdl <- function(x = numeric(), param = list()) {
 #' @export
 
 validate_cpt_gbmdl <- function(x) {
-  if (!stats::is.ts(x$data)) {
+  if (!stats::is.ts(as.ts(x))) {
     stop("data attribute is not coercible into a ts object.")
   }
   x
@@ -47,7 +46,7 @@ cpt_gbmdl <- function(x, ...) {
 #' @export
 
 plot.cpt_gbmdl <- function(x, ...) {
-  plot(x$data)
+  plot(as.ts(x))
 #  plot_cpt_repetidos(x)
   # 4-up plot
   plot_BMDL(x)
@@ -93,7 +92,7 @@ cpt_best_bmdl_string <- function(x) {
 #' 
 
 cpt_best_params <- function(x) {
-  fit_nhpp(x$data, tau = cpt_best(x))
+  fit_nhpp(as.ts(x), tau = cpt_best(x))
 }
 
 #' @rdname new_cpt_gbmdl
@@ -138,5 +137,50 @@ write_cpt_gbmdl <- function(x, destdir = tempdir()) {
   # Write data
   save(x, file = fs::path(dir_data, file_name))
   message("Se guardo el archivo:\n", fs::path(dir_data, file_name), "\n")
+}
+
+#' Broom compatibility layer for changepoint
+#' @export
+#' @examples
+#' cpts <- lista_AG
+#' y <- augment(lista_AG)
+#' class(y)
+#' y
+#' tidy(cpts)
+#' glance(cpts)
+
+glance.cpt_gbmdl <- function(x, ...) {
+  tibble::tibble(
+    pkg = "tidychangepoint",
+    version = utils::packageVersion("tidychangepoint"),
+    algorithm = "GeneticBMDL",
+    test_stat = cpt_best_bmdl(x),
+    BMDL = cpt_best_bmdl(x),
+    num_cpts = length(cpt_best(x)),
+  )
+}
+
+#' @rdname glance.cpt_gbmdl
+#' @export
+#' @examples
+#' as.ts(lista_AG)
+as.ts.cpt_gbmdl <- function(x, ...) {
+  as.ts(x$data)
+}
+
+#' @rdname glance.cpt_gbmdl
+#' @export
+changepoints.cpt_gbmdl <- function(x, ...) {
+  cpt_best(x) |>
+    as.integer()
+}
+
+#' @rdname glance.cpt_gbmdl
+#' @export
+#' @examples
+#' diagnose(lista_AG)
+#' 
+diagnose.cpt_gbmdl <- function(x, ...) {
+  plot_BMDL(x)
 }
 

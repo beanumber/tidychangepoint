@@ -48,7 +48,6 @@ Class for candidate changepoints using Genetic BMDL heuristic
 \examples{
 cpts <- cpt_gbmdl(DataCPSim, param)
 str(cpts)
-plot(cpts)
 cpt_best_params(lista_AG)
 
 write_cpt_gbmdl(lista_AG)
