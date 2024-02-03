@@ -46,8 +46,6 @@ cpt_gbmdl <- function(x, ...) {
 #' @export
 
 plot.cpt_gbmdl <- function(x, ...) {
-  plot(as.ts(x))
-#  plot_cpt_repetidos(x)
   # 4-up plot
   plot_BMDL(x)
 }

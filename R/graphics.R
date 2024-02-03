@@ -59,16 +59,6 @@ plot_exceedances <- function(x, ...) {
   )
 }
 
-#' @rdname grafica_datos_e_intervalos
-#' @export
-plot_nhpp <- function(x, ...) {
-  plot(x)
-  graphics::abline(h = mean(x), lty = 3)
-  graphics::points(x = exceedances(x), y = x[exceedances((x))], type = "p", col = "blue")
-  
-  
-}
-
 
 #' Graficas de los intervalos y los datos
 #'
@@ -194,61 +184,4 @@ plot_best_chromosome <- function(cpt_list) {
       "change points "
     )
   )
-}
-
-#' Graficando un ajuste de NHPP
-#'
-#' Esta función solo grafica un ajuste de NHPP
-#'
-#' @param d_i vector de días de revases
-#' @param tau1 description
-#' @param tau2 description
-#' @param mat_phi description
-#' @param mat_low_upp description
-#' @export
-#' @examples
-#' \dontrun{
-#' grafica_ajuste_NHPP(exceedances(lista_AG$data), 
-#' tau1 = cpt_best(lista_AG), tau2 = cpt_best(lista_AG),
-#' lista_AG$param$initial_val_optim, 
-#' lista_AG$param$mat_low_upp,
-#' lista_AG$param$rf_type,
-#' lista_AG$vec_dist_a_priori,
-#' lista_AG$param$mat_phi
-#' )
-#' }
-#'
-grafica_ajuste_NHPP <- function(d_i, tau1, tau2, 
-                                initial_val_optim, mat_low_upp, rf_type, vec_dist_a_priori, mat_phi) {
-  d_i <- exceedances(lista_AG$data)
-  tau1 = cpt_best(lista_AG) 
-  tau2 = cpt_best(lista_AG)
-  initial_val_optim = lista_AG$param$initial_val_optim
-  mat_low_upp = lista_AG$param$mat_low_upp
-  rf_type = lista_AG$param$rf_type
-  vec_dist_a_priori = lista_AG$vec_dist_a_priori
-  mat_phi = lista_AG$param$mat_phi
-    
-  vec_d_i <- d_i[d_i > tau1 & d_i < tau2]
-  
-  val_optimos <- fit_nhpp_region(
-    vec_d_i, tau1, tau2,
-    initial_val_optim, mat_low_upp, rf_type, vec_dist_a_priori, mat_phi
-  )
-  theta <- val_optimos$par
-  
-  t <- tau1:tau2
-  tasa_NHPP <- mean_fn(t, rf_type, theta)
-  upp_bond <- stats::qpois(.95, lambda = tasa_NHPP)
-  low_bond <- stats::qpois(.05, lambda = tasa_NHPP)
-  mean_NHPP <- tasa_NHPP
-  
-  # plot_confint
-  grafica_escalonada(d_i, "black", vec_xlim = NULL, vec_ylim = range(0, length(d_i), upp_bond, low_bond, mean_NHPP))
-  
-  graphics::lines(t, upp_bond, col = "blue")
-  graphics::lines(t, mean_NHPP, col = "red")
-  graphics::lines(t, low_bond, col = "blue")
-  
-  cat("theta=", theta, "\n")
 }
