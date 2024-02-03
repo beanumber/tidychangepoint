@@ -85,7 +85,6 @@ plot_confint <- function(cpt_list) {
   sigma <- theta$beta
   alpha <- theta$alpha
   
-#  f <- generate_mean_cumulative(length(tau))
 #  tasa_NHPP <- f(1:length(exceedances(cpt_list$data)), d = exceedances(cpt_list$data), tau, alpha, sigma)
   
   plot_exceedances(cpt_list$data)
