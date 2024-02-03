@@ -6,7 +6,6 @@ param <- list(
   max_num_cp = 20,
   prob_inicial = 0.06, # = 0.05 bueno, = 0.2
   # dist = c("log_norm","poisson","DIC log_norm","DIC poisson")[1],  # cambiar para [2]
-  prob_volado = 0.5, # = .5
   probs_muta = c(.3,.4,.3), # c(.3,.4,.3)
   mutaciones = c(-1,0,1),
   dist_extremos = 10,

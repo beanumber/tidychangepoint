@@ -72,7 +72,7 @@ cpt_bmdl_genetic_1 <- function(x, mat_cp, param) {
   # 4. Juntar sus puntos de cambio
   mat_cp <- junta_k_puntos_cambio(mat_padres, mat_cp)
   # 5. Volados para quitar puntos de cambio
-  mat_cp <- mata_k_tau_volado(mat_cp, param$prob_volado)
+  mat_cp <- mata_k_tau_volado(mat_cp)
   # 6. Mutaciones puntos de cambio
   mat_cp <- muta_k_cp_BMDL(mat_cp, x, param)
   # (mat_cp <- muta_k_cp(mat_cp,param)) # antes

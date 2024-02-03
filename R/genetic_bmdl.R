@@ -42,10 +42,6 @@ globalVariables(
 #' @param prob_inicial probabilidad de que en la primera generación un punto
 #'   cualquiera sea punto de cambio. Se recomienda =.5 ya que con esto se
 #'   distribuyen relativamente uniformes los puntos de cambio
-#' @param prob_volado probabilidad de quitar un tiempo de cambio existente
-#'   utilizado por mata_k_tau_volado para quitar elementos de más. Se recomienda
-#'   dejar el valor de 0.5 ya que así al juntar los pc del padre y madre se
-#'   eliminará la mitad de estos
 #' @param probs_muta probabilidades de mutación. Las longitudes de este vector y
 #'   mutaciones tienen que ser iguales; eg si mutaciones=c(-1,0,1) y probs_muta
 #'   = c(.2, .6, .2) entonces se tiene una probabilidad .2 de que el punto de
@@ -100,7 +96,6 @@ revisor_param <- function(param,
                           max_num_cp = 40, #  = 30
                           prob_inicial = 0.01, # = 0.05 bueno, = 0.2
                           # dist = c("log_norm","poisson","DIC log_norm","DIC poisson")[1],  # cambiar para [2]
-                          prob_volado = .6, # = .6
                           probs_muta = c(.4, .2, .4),
                           mutaciones = c(-1, 0, 1),
                           dist_extremos = 10,
@@ -125,7 +120,6 @@ revisor_param <- function(param,
     max_num_cp = 40, #  = 30
     prob_inicial = 0.01, # = 0.05 bueno, = 0.2
     # dist = c("log_norm","poisson","DIC log_norm","DIC poisson")[1],  # cambiar para [2]
-    prob_volado = .6, # = .6
     probs_muta = c(.4, .2, .4),
     mutaciones = c(-1, 0, 1),
     dist_extremos = 10,
@@ -372,10 +366,13 @@ junta_k_puntos_cambio <- function(mat_padres, mat_cp) {
 #' algunas de sus entradas
 #' @param cp vector cromosoma que se va a poner a prueba
 #' @param prob_volado probabilidad de quitar un tiempo de cambio existente
+#'   utilizado por mata_k_tau_volado para quitar elementos de más. Se recomienda
+#'   dejar el valor de 0.5 ya que así al juntar los pc del padre y madre se
+#'   eliminará la mitad de estos
 #'
 #' @return el mismo cromosoma sin algunos de sus puntos de cambio
 #' @export
-mata_1_tau_volado <- function(cp, prob_volado) {
+mata_1_tau_volado <- function(cp, prob_volado = 0.5) {
   # (cp <- sim_1_cp(N,param) )
   # (m <- cp[1])
   # N <- cp[cp[1]+3]
@@ -392,12 +389,11 @@ mata_1_tau_volado <- function(cp, prob_volado) {
 #' @return regresa una matriz a la cual se le quitaron a sus cromosomas algunos
 #'   puntos de cambio
 #' @export
-mata_k_tau_volado <- function(mat_cp, prob_volado) {
+mata_k_tau_volado <- function(mat_cp) {
   for (i in 1:nrow(mat_cp)) {
-    mat_cp[i, ] <- mata_1_tau_volado(mat_cp[i, ], prob_volado)
+    mat_cp[i, ] <- mata_1_tau_volado(mat_cp[i, ])
   }
   return(mat_cp)
-  # return(apply(mat_cp, 1, function(yy){ mata_1_tau_volado(yy,prob_volado)} ) )
 }
 
 #' Mutaciones un cp en el caso BMDL

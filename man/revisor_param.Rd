@@ -10,7 +10,6 @@ revisor_param(
   k = 50,
   max_num_cp = 40,
   prob_inicial = 0.01,
-  prob_volado = 0.6,
   probs_muta = c(0.4, 0.2, 0.4),
   mutaciones = c(-1, 0, 1),
   dist_extremos = 10,
@@ -40,11 +39,6 @@ particular para que todos los cromosomas quepan en una matriz.}
 \item{prob_inicial}{probabilidad de que en la primera generación un punto
 cualquiera sea punto de cambio. Se recomienda =.5 ya que con esto se
 distribuyen relativamente uniformes los puntos de cambio}
-
-\item{prob_volado}{probabilidad de quitar un tiempo de cambio existente
-utilizado por mata_k_tau_volado para quitar elementos de más. Se recomienda
-dejar el valor de 0.5 ya que así al juntar los pc del padre y madre se
-eliminará la mitad de estos}
 
 \item{probs_muta}{probabilidades de mutación. Las longitudes de este vector y
 mutaciones tienen que ser iguales; eg si mutaciones=c(-1,0,1) y probs_muta

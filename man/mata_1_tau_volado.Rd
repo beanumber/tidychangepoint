@@ -5,14 +5,17 @@
 \alias{mata_k_tau_volado}
 \title{Elimina algunos de las tiempos de cambio de un cromosoma}
 \usage{
-mata_1_tau_volado(cp, prob_volado)
+mata_1_tau_volado(cp, prob_volado = 0.5)
 
-mata_k_tau_volado(mat_cp, prob_volado)
+mata_k_tau_volado(mat_cp)
 }
 \arguments{
 \item{cp}{vector cromosoma que se va a poner a prueba}
 
-\item{prob_volado}{probabilidad de quitar un tiempo de cambio existente}
+\item{prob_volado}{probabilidad de quitar un tiempo de cambio existente
+utilizado por mata_k_tau_volado para quitar elementos de más. Se recomienda
+dejar el valor de 0.5 ya que así al juntar los pc del padre y madre se
+eliminará la mitad de estos}
 
 \item{mat_cp}{matriz cuyos renglones son vectores de cromosomas de tamaño
 max_num_cp con entradas m,tau_0,...,tau_{m+1},0,...,0}
