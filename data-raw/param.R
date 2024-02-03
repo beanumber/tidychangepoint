@@ -2,7 +2,6 @@
 
 param <- list(
 #  nombre_datos = c("ciclones","O3","O3_U61","PM10","PM10_U100", "DataCPSimRebases")[6],
-  frecuencia_datos = 7, # e.g., 7 equivale a semanal
   n_datos = c("TODOS",403,1003)[1], # tomamos todos o un subconjuto de datos
   diarios0_rebases1 = 0,
 #  valor_de_rebase = mean(DataCPSim),
@@ -30,11 +29,7 @@ param <- list(
   initial_val_optim = c(.1,.5), # valores iniciales de busqueda del MAP
   mat_low_upp = matrix(c(c(1e-4,1e-8),c(1e+1,1e+5)),nrow = 2), # rango de busqueda de MAP
   vec_dist_a_priori = c("Gamma","Gamma"), # distribuciones a priori
-  mat_phi = matrix(c(1,3,2,1.2),ncol = 2),
-  ajuste_bloque = T,
-  print_progress_bar =T,
-  print_progress_plots = T,
-  value_set_seed = 123
+  mat_phi = matrix(c(1,3,2,1.2),ncol = 2)
 ) # parametros de dist a priori, cada renglon corresponde a una dist parametro
 
 usethis::use_data(param, overwrite = TRUE)

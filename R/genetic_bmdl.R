@@ -38,10 +38,6 @@ globalVariables(
 #' @param nombre_datos esta variable indica la base de datos que se va a ocupar.
 #'   Esta base se toma del archivo "Datos.R"; los posibles valores que toma son
 #'   c("ciclones","O3","O3_U61","PM10","PM10_U100")
-#' @param frecuencia_datos indica se hay que hacer un cambio en la frecuencia de
-#'   los datos. En particular, se utiliza junto con la variable
-#'   diarios0_rebases1 = 1, (si esta última vale 0, frecuencia_datos no tiene
-#'   efecto)
 #' @param n_datos Es una variable para hacer pruebas que cirve para tocar un
 #'   subconjunto de los datos, o en caso de ser "TODOS" tomar todos los datos
 #' @param diarios0_rebases1 indicadora si se toman los revasos o los datos
@@ -130,7 +126,6 @@ globalVariables(
 #' revisor_param(param)
 revisor_param <- function(param,
                           nombre_datos = c("ciclones", "O3", "O3_U61", "PM10", "PM10_U100")[5],
-                          frecuencia_datos = 7, # e.g., 7 equivale a semanal
                           n_datos = c("TODOS", 403, 1003)[1], # tomamos todos o un subconjuto de datos
                           diarios0_rebases1 = 0,
                           valor_de_rebase = 100,
@@ -167,7 +162,6 @@ revisor_param <- function(param,
   my_data <- 123
   ejemplo_param <- list(
     nombre_datos = c("ciclones", "O3", "O3_U61", "PM10", "PM10_U100")[5],
-    frecuencia_datos = 7, # e.g., 7 equivale a semanal
     n_datos = c("TODOS", 403, 1003)[1], # tomamos todos o un subconjuto de datos
     diarios0_rebases1 = 0,
     valor_de_rebase = 100,

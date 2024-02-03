@@ -34,8 +34,7 @@ revisor_param(
   initial_val_optim = c(0.1, 0.5),
   mat_low_upp = matrix(c(c(1e-04, 1e-08), c(10, 1e+05)), nrow = 2),
   vec_dist_a_priori = c("Gamma", "Gamma"),
-  mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2),
-  ajuste_bloque = T
+  mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2)
 )
 }
 \arguments{
@@ -156,10 +155,6 @@ que se utilizan; eg c("Gamma","Gamma") y c("Gamma","Gamma","Gamma")}
 \item{mat_phi}{matriz cuyos renglones tiene los parámetros de las
 distribuciones a priori; cada renglón tiene todos los parametros de una
 distribución}
-
-\item{ajuste_bloque}{en caso de ser TRUE se utiliza el ajuste por bloque de
-NHPP para cada bloque del ajuste; ie, siempre se ajusta como primer bloque
-y se toma en cuenta en que pedazo se empieza}
 }
 \value{
 regresa un mensaje en caso de que no sea de la longitud correcta el

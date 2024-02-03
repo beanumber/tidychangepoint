@@ -63,7 +63,7 @@ cpt_bmdl_genetic_1 <- function(x, mat_cp, param) {
     param$initial_val_optim,
     param$mat_low_upp,
     param$vec_dist_a_priori,
-    param$mat_phi,
+    param$mat_phi
   )
   # 2. Encontrar sus probabilidades
   vec_probs <- probs_vec_MDL(vec_BMDL_k_cp, param$probs_rank0_MDL1)

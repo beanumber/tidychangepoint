@@ -11,8 +11,7 @@ extrae_mat_MAP(
   initial_val_optim,
   mat_low_upp,
   vec_dist_a_priori,
-  mat_phi,
-  ajuste_bloque
+  mat_phi
 )
 }
 \arguments{

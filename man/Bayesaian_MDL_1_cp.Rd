@@ -12,8 +12,7 @@ Bayesaian_MDL_1_cp(
   initial_val_optim,
   mat_low_upp,
   vec_dist_a_priori,
-  mat_phi,
-  ajuste_bloque
+  mat_phi
 )
 
 Bayesaian_MDL_k_cp(
@@ -23,8 +22,7 @@ Bayesaian_MDL_k_cp(
   initial_val_optim,
   mat_low_upp,
   vec_dist_a_priori,
-  mat_phi,
-  ajuste_bloque
+  mat_phi
 )
 }
 \arguments{
@@ -41,8 +39,6 @@ Bayesaian_MDL_k_cp(
 \item{vec_dist_a_priori}{description}
 
 \item{mat_phi}{description}
-
-\item{ajuste_bloque}{description}
 }
 \value{
 regresa un vector de tamaño \code{k} (el numero de cromosomas por
