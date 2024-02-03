@@ -4,7 +4,12 @@
 \alias{plot_cpt_repetidos}
 \title{Grafica los n puntos de cambio más repetidos sobre el plot.stepfun de los datos}
 \usage{
-plot_cpt_repetidos(cpt_list, destdir = tempdir(), pdf = FALSE)
+plot_cpt_repetidos(
+  cpt_list,
+  destdir = tempdir(),
+  data_name_slug = "data",
+  pdf = FALSE
+)
 }
 \arguments{
 \item{cpt_list}{description}

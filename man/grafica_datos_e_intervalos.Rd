@@ -7,7 +7,7 @@
 \alias{plot_best_chromosome}
 \title{Graficas del AG con BMDL}
 \usage{
-plot_BMDL(cpt_list, destdir = tempdir(), pdf = FALSE)
+plot_BMDL(cpt_list, destdir = tempdir(), data_name_slug = "data", pdf = FALSE)
 
 plot_evolution(cpt_list, i = length(cpt_list$vec_min_BMDL))
 

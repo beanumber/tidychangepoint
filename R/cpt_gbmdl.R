@@ -121,7 +121,7 @@ cpt_best <- function(x) {
 
 write_cpt_gbmdl <- function(x, destdir = tempdir(), data_name_slug = "data") {
   
-  dir_data <- fs::path(destdir, x$param$nombre_carpeta_RData)
+  dir_data <- fs::path(destdir)
   if (!dir.exists(dir_data)) {
     dir.create(dir_data, recursive = TRUE)
   }

@@ -37,8 +37,6 @@ globalVariables(
 #'   siguientes
 #' @param r número de generaciones
 #' @param k tamaño de las generaciones
-#' @param penalty tipo de penalidad que se ocupa, por ahora solo se tiene
-#'   programado MDL
 #' @param max_num_cp el máximo número de rebases. Este parámetro se ocupa en
 #'   particular para que todos los cromosomas quepan en una matriz.
 #' @param prob_inicial probabilidad de que en la primera generación un punto
@@ -83,10 +81,6 @@ globalVariables(
 #'   variable se carga la serie con la que se desea hacer las pruebas. En este
 #'   caso, se comenta la entrada llamada my_data para que se pueda correr la
 #'   función
-#' @param nombre_carpeta_pdf normalmente esta carpeta se llama "Figures", y
-#'   contiene las figuras que genera el programa
-#' @param nombre_carpeta_RData normalmente esta carpeta se llama "Data", y
-#'   contiene archivos .RData que tienen los resultados del programa
 #' @param cuantos_mejores_cp_graf al final se generan unas graficas de los
 #'   mejores puntos de cambio, este parámetro dicta cuantos cromosomas se
 #'   graficarán
@@ -116,7 +110,6 @@ globalVariables(
 revisor_param <- function(param,
                           r = 50, # número de generaciones 1000
                           k = 50, # tamaño de generaciones 200
-                          penalty = c("MDL", "BMDL")[2],
                           max_num_cp = 40, #  = 30
                           prob_inicial = 0.01, # = 0.05 bueno, = 0.2
                           # dist = c("log_norm","poisson","DIC log_norm","DIC poisson")[1],  # cambiar para [2]
@@ -129,8 +122,6 @@ revisor_param <- function(param,
                           quita_ini0_fin1 = 0, #
                           probs_rank0_MDL1 = 0,
                           # p_m = 0.2, # ya no se ocupa
-                          nombre_carpeta_pdf = "Figures",
-                          nombre_carpeta_RData = "Data",
                           cuantos_mejores_cp_graf = 100, # cuantos de los mejores cp se graficarán
                           my_data = list(nulo = NULL, "my_data=my_data")[[1]], # se comentó la variable my_data
                           minimo_numero_de_cp = 5, # minimo número de puntos de cambio
@@ -148,7 +139,6 @@ revisor_param <- function(param,
   ejemplo_param <- list(
     r = 50, # número de generaciones 1000
     k = 50, # tamaño de generaciones 200
-    penalty = c("MDL", "BMDL")[2],
     max_num_cp = 40, #  = 30
     prob_inicial = 0.01, # = 0.05 bueno, = 0.2
     # dist = c("log_norm","poisson","DIC log_norm","DIC poisson")[1],  # cambiar para [2]
@@ -161,8 +151,6 @@ revisor_param <- function(param,
     quita_ini0_fin1 = 0, #
     probs_rank0_MDL1 = 0,
     # p_m = 0.2, #ya no se ocupa
-    nombre_carpeta_pdf = "Figures",
-    nombre_carpeta_RData = "Data",
     cuantos_mejores_cp_graf = 100, # cuantos de los mejores cp se graficarán
     my_data = list(nulo = NULL, my_data = my_data)[[1]],
     minimo_numero_de_cp = 5, # minimo número de puntos de cambio

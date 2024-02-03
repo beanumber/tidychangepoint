@@ -6,14 +6,8 @@
 \usage{
 revisor_param(
   param,
-  nombre_datos = c("ciclones", "O3", "O3_U61", "PM10", "PM10_U100")[5],
-  frecuencia_datos = 7,
-  n_datos = c("TODOS", 403, 1003)[1],
-  diarios0_rebases1 = 0,
-  valor_de_rebase = 100,
   r = 50,
   k = 50,
-  penalty = c("MDL", "BMDL")[2],
   max_num_cp = 40,
   prob_inicial = 0.01,
   prob_volado = 0.6,
@@ -24,8 +18,6 @@ revisor_param(
   cp_real = "sin cp_real",
   quita_ini0_fin1 = 0,
   probs_rank0_MDL1 = 0,
-  nombre_carpeta_pdf = "Figures",
-  nombre_carpeta_RData = "Data",
   cuantos_mejores_cp_graf = 100,
   my_data = list(nulo = NULL, "my_data=my_data")[[1]],
   minimo_numero_de_cp = 5,
@@ -41,32 +33,9 @@ revisor_param(
 \item{param}{es la lista original de parámetros la cual contiene todos los
 siguientes}
 
-\item{nombre_datos}{esta variable indica la base de datos que se va a ocupar.
-Esta base se toma del archivo "Datos.R"; los posibles valores que toma son
-c("ciclones","O3","O3_U61","PM10","PM10_U100")}
-
-\item{frecuencia_datos}{indica se hay que hacer un cambio en la frecuencia de
-los datos. En particular, se utiliza junto con la variable
-diarios0_rebases1 = 1, (si esta última vale 0, frecuencia_datos no tiene
-efecto)}
-
-\item{n_datos}{Es una variable para hacer pruebas que cirve para tocar un
-subconjunto de los datos, o en caso de ser "TODOS" tomar todos los datos}
-
-\item{diarios0_rebases1}{indicadora si se toman los revasos o los datos
-crudos. En particular se utiliza para el caso de dist="poisson", ya que al
-tomar los datos distribuidos poisson se estará contando el número de
-revases}
-
-\item{valor_de_rebase}{es la indicadora del nivel para revase, por lo general
-vale 100}
-
 \item{r}{número de generaciones}
 
 \item{k}{tamaño de las generaciones}
-
-\item{penalty}{tipo de penalidad que se ocupa, por ahora solo se tiene
-programado MDL}
 
 \item{max_num_cp}{el máximo número de rebases. Este parámetro se ocupa en
 particular para que todos los cromosomas quepan en una matriz.}
@@ -117,12 +86,6 @@ artículo) o se pueden tomar las probabilidades con respecto a el MDL. La
 diferencia radica en que si se toma con respecto al MDL se tendrá que un
 cromosoma con un gran MDL este tendrá una gran ventaja de ocurrir, en
 cambio cuando solo se tiene rank esta ventaja gran ventaja se reduce}
-
-\item{nombre_carpeta_pdf}{normalmente esta carpeta se llama "Figures", y
-contiene las figuras que genera el programa}
-
-\item{nombre_carpeta_RData}{normalmente esta carpeta se llama "Data", y
-contiene archivos .RData que tienen los resultados del programa}
 
 \item{cuantos_mejores_cp_graf}{al final se generan unas graficas de los
 mejores puntos de cambio, este parámetro dicta cuantos cromosomas se

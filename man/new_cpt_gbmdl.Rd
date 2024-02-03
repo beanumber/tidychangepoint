@@ -37,10 +37,13 @@ chromosome_best(x)
 
 cpt_best(x)
 
-write_cpt_gbmdl(x, destdir = tempdir())
+write_cpt_gbmdl(x, destdir = tempdir(), data_name_slug = "data")
 }
 \arguments{
 \item{x}{a numeric vector}
+
+\item{data_name_slug}{character string that will identify the data set used
+in the file name}
 }
 \description{
 Class for candidate changepoints using Genetic BMDL heuristic

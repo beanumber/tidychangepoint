@@ -3,7 +3,6 @@
 param <- list(
   r = 50, # número de generaciones 1000
   k = 50,  # tamaño de generaciones 200
-  penalty = c("MDL","BMDL")[2],
   max_num_cp = 20,
   prob_inicial = 0.06, # = 0.05 bueno, = 0.2
   # dist = c("log_norm","poisson","DIC log_norm","DIC poisson")[1],  # cambiar para [2]
@@ -15,8 +14,6 @@ param <- list(
   cp_real = "sin cp_real",
   quita_ini0_fin1 = 0, # 
   probs_rank0_MDL1 = 0,
-  nombre_carpeta_pdf = "Figures",
-  nombre_carpeta_RData = "Data",
   cuantos_mejores_cp_graf = 100, # cuantos de los mejores cp se graficarán
   my_data = list(nulo=NULL, my_data=123)[[1]],
   minimo_numero_de_cp = 1, # minimo número de puntos de cambio

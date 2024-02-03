@@ -20,7 +20,7 @@ plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(), data_name_slug = "
   )
   graphics::abline(v = as.numeric(names(cp_mas_repetidos)), col = "blue")
 
-  nombre_pdf <- paste0(
+  filename_pdf <- paste0(
     "Fig_CP_repetidos_", data_name_slug, "_rf_",
     cpt_list$param$rf_type, "_", fun_n_genera_texto_dist(cpt_list$param), "_r",
     cpt_list$param$r, "_k",
@@ -28,7 +28,7 @@ plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(), data_name_slug = "
     cpt_best_bmdl_string(cpt_list), ".pdf"
   )
   
-  path <- fs::path(destdir, nombre_pdf)
+  path <- fs::path(destdir, filename_pdf)
   
   if (pdf) {
     grDevices::dev.print(pdf, path, width = 16, height = 10)
@@ -114,7 +114,7 @@ plot_BMDL <- function(cpt_list, destdir = tempdir(), data_name_slug = "data", pd
 
   graphics::par(mfrow = c(1, 1))
   
-  nombre_pdf <- paste0(
+  filename_pdf <- paste0(
     "Fig_4AGBMDL_", data_name_slug, "_rf_",
     cpt_list$param$rf_type, "_", fun_n_genera_texto_dist(cpt_list$param), "_r",
     cpt_list$param$r, "_k",
@@ -123,9 +123,9 @@ plot_BMDL <- function(cpt_list, destdir = tempdir(), data_name_slug = "data", pd
   )
   
   if (pdf) {
-    grDevices::dev.print(pdf, fs::path(destdir, nombre_pdf), width = 16, height = 10)
+    grDevices::dev.print(pdf, fs::path(destdir, filename_pdf), width = 16, height = 10)
   }
-  message("Se guardo la imagen:\n", fs::path(destdir, nombre_pdf), "\n")
+  message("Se guardo la imagen:\n", fs::path(destdir, filename_pdf), "\n")
 }
 
 #' @rdname grafica_datos_e_intervalos
