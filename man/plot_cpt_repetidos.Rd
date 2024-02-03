@@ -16,6 +16,6 @@ guarda un pdf con la gráfica
 Grafica los n puntos de cambio más repetidos sobre el plot.stepfun de los datos
 }
 \examples{
-plot_cpt_repetidos(lista_AG)
+plot_cpt_repetidos(lista_AG$segmenter)
 
 }

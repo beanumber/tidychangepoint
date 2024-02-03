@@ -86,8 +86,7 @@ cpt_best_bmdl_string <- function(x) {
 #' @rdname new_cpt_gbmdl
 #' @export
 #' @examples
-#' cpt_best_params(lista_AG)
-#' 
+#' cpt_best_params(lista_AG$segmenter)
 
 cpt_best_params <- function(x) {
   fit_nhpp(as.ts(x), tau = cpt_best(x))
@@ -104,6 +103,7 @@ chromosome_best <- function(x) {
 
 #' @rdname new_cpt_gbmdl
 #' @export
+#' 
 
 cpt_best <- function(x) {
   chromo <- chromosome_best(x)
@@ -115,7 +115,7 @@ cpt_best <- function(x) {
 #' @rdname new_cpt_gbmdl
 #' @export
 #' @examples
-#' write_cpt_gbmdl(lista_AG)
+#' write_cpt_gbmdl(lista_AG$segmenter)
 
 write_cpt_gbmdl <- function(x, destdir = tempdir()) {
   

@@ -4,7 +4,7 @@
 #' @return guarda un pdf con la gráfica
 #' @export
 #' @examples
-#' plot_cpt_repetidos(lista_AG)
+#' plot_cpt_repetidos(lista_AG$segmenter)
 #' 
 plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(), pdf = FALSE) {
   # Obtenemos cuantos de los cp mejores se graficarán
