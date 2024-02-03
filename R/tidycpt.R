@@ -178,8 +178,49 @@ plot.tidycpt <- function(x, ...) {
       ggplot2::aes(x = left, y = mean - 1.96 * sd, xend = right, yend = mean - 1.96 * sd),
       color = "red",
       linetype = 3
-    )
+    ) + 
+    ggplot2::scale_x_continuous("Time Index (t)") +
+    ggplot2::scale_y_continuous("Original Measurement")
 }
+
+
+#' @export
+#' @examples
+#' plot_mcdf(DataCPSim, tau = 826, theta = data.frame(alpha = c(1, 1), beta = c(1, 2)))
+
+plot_mcdf <- function(x, ...) {
+  tau <- changepoints(x)
+  theta <- fit_nhpp(as.ts(x), tau)
+  n <- length(as.ts(x))
+  
+  z <- exceedances(as.ts(x)) |>
+    tibble::enframe(name = "cum_exceedances", value = "t_exceedance") |>
+    # always add the last observation
+    dplyr::bind_rows(
+      data.frame(
+        cum_exceedances = length(exceedances(as.ts(x))), 
+        t_exceedance = n
+      )
+    ) |>
+    dplyr::distinct() |>
+    dplyr::mutate(
+      m = media_acumulada(t_exceedance, tau = tau, theta = theta, n = n),
+      lower = stats::qpois(0.05, lambda = m),
+      upper = stats::qpois(0.95, lambda = m),
+    )
+
+  regions <- tidy(x)
+  ggplot2::ggplot(data = z, ggplot2::aes(x = t_exceedance, y = cum_exceedances)) +
+    ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = right), linetype = 3) +
+    ggplot2::geom_line() +
+    ggplot2::scale_x_continuous("Time Index (t)", limits = c(0, n)) +
+    ggplot2::scale_y_continuous("Cumulative Number of Exceedances (N)") +
+    ggplot2::geom_line(ggplot2::aes(y = m), color = "red") +
+    ggplot2::geom_line(ggplot2::aes(y = lower), color = "blue") +
+    ggplot2::geom_line(ggplot2::aes(y = upper), color = "blue")
+}
+
+
 
 #' @rdname segment
 #' @export
@@ -192,12 +233,9 @@ diagnose <- function(x, ...) UseMethod("diagnose")
 #' diagnose(segment(DataCPSim, method = "cpt-pelt"))
 #' 
 diagnose.tidycpt <- function(x, ...) {
-  tau <- changepoints(x)
-  theta <- fit_nhpp(as.ts(x), tau)
-
   patchwork::wrap_plots(
     plot(x),
-    plot_confint2(as.ts(x), tau, theta),
+    plot_mcdf(x),
     ncol = 1
   )
 }
