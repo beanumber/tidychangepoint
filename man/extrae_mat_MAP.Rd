@@ -42,3 +42,13 @@ cada regimen.
 \description{
 Extrae matriz con estimadores MAP
 }
+\examples{
+chromo <- chromosome_best(lista_AG$segmenter)
+extrae_mat_MAP(chromo, as.ts(lista_AG), 
+  lista_AG$segmenter$param$rf_type, 
+  lista_AG$segmenter$param$initial_val_optim, 
+  lista_AG$segmenter$param$mat_low_upp, 
+  lista_AG$segmenter$param$vec_dist_a_priori, 
+  lista_AG$segmenter$param$mat_phi
+)
+}

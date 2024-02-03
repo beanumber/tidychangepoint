@@ -43,12 +43,13 @@ por lo cual se nosotros:
 }
 }
 \examples{
-sim_1_cp_BMDL(DataCPSimRebases, param)
-sim_1_cp_BMDL(sims$ts1, param)
-
+sim_1_cp_BMDL(exceedances(DataCPSim), param)
+sim_1_cp_BMDL(exceedances(rlnorm_ts_1), param)
+sim_1_cp_BMDL(exceedances(rlnorm_ts_2), param)
+sim_1_cp_BMDL(exceedances(rlnorm_ts_3), param)
 
 sim_k_cp_BMDL(DataCPSimRebases, param)
-sim_k_cp_BMDL(sims$ts1, param)
+sim_k_cp_BMDL(rlnorm_ts_1, param)
 
 
 }

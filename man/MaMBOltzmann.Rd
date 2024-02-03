@@ -34,7 +34,8 @@ What does this function do?
 }
 \examples{
 \dontrun{
-  GABoltzmannMutation2(sims$ts1, param)
+  GABoltzmannMutation2(DataCPSimRebases, param)
+  GABoltzmannMutation2(rlnorm_ts_1, param)
   
 }
 }

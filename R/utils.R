@@ -24,3 +24,43 @@ pow <- function(x, y) {
 step <- function(x) {
   as.numeric(x > 0)
 }
+
+#' Calculate overages
+#' @export
+#' @param x a time series object
+#' @examples
+#' exceedances(DataCPSim)
+exceedances <- function(x) {
+  which(x > mean(x))
+}
+
+#' @export
+pad_tau <- function(tau, n) {
+  unique(c(0, tau, n))
+}
+
+#' @export
+cut_inclusive <- function(x, tau) {
+  cut(x, breaks = tau, include.lowest = TRUE, right = FALSE)
+}
+
+#' @export
+test_set <- function(n = 1, sd = 1, seed = NULL) {
+  if (!is.null(seed)) {
+    set.seed(seed)
+  }
+  num_obs <- 1000
+  tau <- sample.int(n = num_obs, size = n) |>
+    sort()
+  means <- sample.int(n = 100, size = n + 1)
+  
+  region_lengths <- tau |>
+    pad_tau(num_obs) |>
+    diff()
+  
+  out <- purrr::map2(region_lengths, means, ~rnorm(.x, mean = .y, sd = sd)) |>
+    c(recursive = TRUE) |>
+    as.ts()
+  attr(out, "cpt_true") <- tau
+  return(out)
+}

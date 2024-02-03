@@ -18,30 +18,115 @@ remotes::install_github("c-taimal/BayesianMDLGA")
 library(BayesianMDLGA)
 ```
 
+## Tidy methods for changepoint analysis
+
+Consider the following time series:
+
+```{r rlnorm-plot}
+plot(as.ts(DataCPSim))
+```
+
+`tidychangepoint` allows you to use any number of algorithms for detecting changepoints in univariate time series with a common, `tidyverse`-compliant interface. 
+The `segment()` function takes a numeric vector that is coercible into a `ts` object, and a string indicating the algorithm you wish you use. 
+`segment()` always returns a `tidycpt` object. 
 
 ```{r}
-str(sims)
-str(param)
-str(pm_25)
-summary(pm_25)
+cpts <- segment(DataCPSim, method = "cpt-pelt")
+class(cpts)
 ```
 
-```{r sim-plot, message=FALSE}
-library(tidyverse)
-sims |>
-  pivot_longer(
-    cols = everything(), 
-    names_to = "set", 
-    values_to = "measurement"
-  ) |>
-  mutate(t = row_number()) |>
-  ggplot(aes(x = t, y = measurement)) +
-  geom_line() +
-  facet_wrap(vars(set), ncol = 1)
+Various methods are available for `tidycpt` objects. 
+For example, `as.ts()` returns the original data as `ts` object, and `changepoints()` returns the set of changepoints. 
+
+```{r}
+changepoints(cpts)
 ```
 
-```{r AG_BMDL}
-AG_BMDL_r_paso(DataCPSimRebases, param)
+### `broom` Interface
+
+`tidychangepoint` follows the design interface of the `broom` package. 
+Therefore, `augment()`, `tidy()` and `glance()` methods exists for `tidycpt` objects. 
+
+- `augment()` returns a `tsibble` that is grouped according to the regions defined by the changepoints. 
+
+```{r}
+augment(cpts)
+```
+
+- `tidy()` returns a `tbl` that provides summary statistics for each region
+
+```{r}
+tidy(cpts)
+```
+
+- `glance()` returns a `tbl` that provides summary statistics for the model fit. 
+
+```{r}
+glance(cpts)
+```
+
+### Other methods
+
+The `plot()` method leverages `ggplot2` to provide an informative plot. 
+
+```{r pelt-plot}
+plot(cpts)
+```
+
+## Algorithms
+
+### From `changepoint`
+
+The `segment()` function passes argument to the `cpt.meanvar()` function from the `changepoint` package, and stores the resulting `cpt` object as its `segmenter` object. 
+
+```{r changepoint, message=FALSE}
+x <- changepoint::cpt.meanvar(DataCPSim, method = "PELT")
+identical(x, cpts$segmenter)
+```
+
+### Naive methods
+
+`segment()` includes three options for computing changepoints using naive methods, all of which return `lm` objects:
+
+- `method = "null"`: returns null model with no changepoints
+
+```{r null-plot}
+DataCPSim |>
+  segment(method = "null") |>
+  plot()
+```
+
+- `method = "cpt-manual"`: returns a model with changepoints specified manually using the `cpts` argument
+
+```{r manual-plot}
+DataCPSim |>
+  segment(method = "cpt-manual", cpts = c(365, 826)) |>
+  plot()
+```
+
+- `method = "single-best"`: returns the model with at most one changepoint that minimizes the log-likelihood
+
+```{r amoc-plot}
+DataCPSim |>
+  segment(method = "single-best") |>
+  plot()
+```
+
+### Genetic BMDL
+
+- `method = "cpt-gbmdl"`: implements the Genetic BMDL heuristic
+
+```{r gbmdl-plot}
+# DataCPSim |>
+#   segment(method = "cpt-gbmdl", param = param)
+changepoints(lista_AG)
+plot(lista_AG)
+```
+
+Diagnostic plots are also available. 
+
+```{r diagnostic}
+plot(lista_AG$segmenter)
 ```
 
 

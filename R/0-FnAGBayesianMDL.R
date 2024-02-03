@@ -283,150 +283,6 @@ revisor_param <- function(param,
 
 
 
-#' Algoritmo genético de Bayesian MDL a un paso
-#'
-#' @param x a vector. See [DataCPSimRebases]
-#' @param mat_cp a matrix
-#' @param param description. See [param].
-#'
-#' @return A `list` of length 2
-#' @export
-#' @examples
-#' 
-#' mat_cp <- sim_k_cp_BMDL(DataCPSimRebases, param)
-#' AG_BMDL_1_paso(DataCPSimRebases, mat_cp, param)
-#' AG_BMDL_1_paso(sims$ts1, mat_cp, param)
-#'
-AG_BMDL_1_paso <- function(x, mat_cp, param) {
-  # N <- length(x) # ANTES
-  N <- max(x)
-  # 1. Evaluación de sus calificaciones
-  vec_BMDL_k_cp <- Bayesaian_MDL_k_cp(
-    mat_cp, x, param$rf_type,
-    param$initial_val_optim,
-    param$mat_low_upp,
-    param$vec_dist_a_priori,
-    param$mat_phi,
-    param$ajuste_bloque
-  )
-  # 2. Encontrar sus probabilidades
-  vec_probs <- probs_vec_MDL(vec_BMDL_k_cp, param$probs_rank0_MDL1)
-  # 3. Seleccionar dos padres
-  mat_padres <- selec_k_pares_de_padres(vec_probs)
-  # 4. Juntar sus puntos de cambio
-  mat_cp <- junta_k_puntos_cambio(mat_padres, mat_cp)
-  # 5. Volados para quitar puntos de cambio
-  mat_cp <- mata_k_tau_volado(mat_cp, param$prob_volado)
-  # 6. Mutaciones puntos de cambio
-  mat_cp <- muta_k_cp_BMDL(mat_cp, x, param)
-  # (mat_cp <- muta_k_cp(mat_cp,param)) # antes
-
-
-  # POR AHORA QUITE LA GENERACIÓN DE NUEVOS PUNTOS DE CAMBIO
-  # 7. Genera nuevos puntos de cambio
-  # mat_cp <- muta_k_nuevos(mat_cp, param$max_num_cp, N, param$p_m)
-
-  # 8. Regresa el resultado
-  return(list(mat_cp = mat_cp, vec_BMDL_k_cp = vec_BMDL_k_cp))
-}
-
-
-
-
-#' @rdname AG_BMDL_1_paso
-#' @export
-#' @examples
-#' \dontrun{
-#' lista_AG <- AG_BMDL_r_paso(DataCPSimRebases, param)
-#' lista_AG <- AG_BMDL_r_paso(sims$ts1, param)
-#' }
-#' 
-AG_BMDL_r_paso <- function(x, param, destdir = tempdir()) {
-  # Primero obtenemos el vector de la variable cruda
-  N <- max(x)
-
-  # 1. Simular puntos de cambio iniciales
-  mat_cp <- sim_k_cp_BMDL(x, param)
-  # Inicializamos lista_AG_BMDL (de esta manero lo podemos meter en el for)
-  lista_AG_BMDL <- list(mat_cp = mat_cp)
-  # historia_mejores guarda los mejores cp de cada generación
-  historia_mejores <- matrix(0, param$r, param$max_num_cp)
-  # vec_min_BMDL guarda los valores mínimos del MDL de cada generación
-  vec_min_BMDL <- rep(0, param$r)
-  # El siguiete for va sobre en cada paso haciendo una nueva generación
-  vec_para_for <- 1:param$r
-  pb <- utils::txtProgressBar(min = 1, max = length(vec_para_for), style = 3, width = 60)
-  graphics::par(mfrow = c(2, 1), mar = c(1, 4, 2, 2))
-  for (i in vec_para_for) {
-    # Hacemos un paso del AG con el mat_cp anterior
-    lista_AG_BMDL <- AG_BMDL_1_paso(x, lista_AG_BMDL$mat_cp, param)
-    # Obtenemos el índice del mínimo
-    (i_min_BMDL <- which.min(lista_AG_BMDL$vec_BMDL_k_cp))
-    # Guardamos el cromosoma mínimo
-    historia_mejores[i, ] <- lista_AG_BMDL$mat_cp[i_min_BMDL, ]
-    # Guardamos el BMDL del cromosoma mínimo
-    vec_min_BMDL[i] <- lista_AG_BMDL$vec_BMDL_k_cp[i_min_BMDL]
-    # Imprimimos el porcentaje de progreso
-
-    if (param$print_progress_bar) {
-      utils::setTxtProgressBar(pb, i)
-    }
-    # # Graficamos el valor de BMDL
-    # plot(lista_AG$vec_min_BMDL,
-    #      xlim = c(1,param$r),type="l",col="blue",ylab="BMDL",xlab="Generation",
-    #      main=paste0("AG rate ",param$rf_type," and priori ",paste(param$vec_dist_a_priori,collapse = "-")))
-    plot(vec_min_BMDL[1:i],
-      xlim = c(1, param$r), type = "l", col = "blue", ylab = "BMDL", xlab = "Generation",
-      main = paste0("AG rate ", param$rf_type, " and priori ", fun_n_genera_texto_dist(param))
-    )
-    # Graficamos los puntos de cambio que más se repitieron
-    historia_mejores_sin_0_1_N <- historia_mejores[1:i, -1:-2]
-    historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < N]
-    plot(table(historia_mejores_sin_0_1_N) / param$r,
-      main = "Repeated change points", ylab = "repetitions", xlab = "change points index"
-    )
-  }
-  close(pb)
-  graphics::par(mfrow = c(1, 1))
-  cat(" \n")
-
-  # Obtenemos el valor minimo de todas las evaluaciones
-  valor_BMDL_minimo <- paste0("_BMDL_", floor(min(vec_min_BMDL)))
-  minimo_BMDL <- min(vec_min_BMDL)
-  where_minimo_BMDL <- which.min(vec_min_BMDL)
-  cromosoma_minimo_BMDL <- historia_mejores[where_minimo_BMDL, ]
-  # lista_AG contiene los resultados del algoritmo genético
-  lista_AG <- list(x = x, historia_mejores = historia_mejores, lista_AG_BMDL = lista_AG_BMDL, vec_min_BMDL = vec_min_BMDL, valor_BMDL_minimo = valor_BMDL_minimo, cromosoma_minimo_BMDL = cromosoma_minimo_BMDL, minimo_BMDL = minimo_BMDL, param = param)
-
-  # Write graphics
-  dir_pdf <- fs::path(destdir, param$nombre_carpeta_pdf)
-  if (!dir.exists(dir_pdf)) {
-    dir.create(dir_pdf, recursive = TRUE)
-  }
-
-  graf_puntos_cambio_repetidos(lista_AG, dir_pdf)
-  graficas_BMDL(lista_AG, param, dir_pdf)
-  
-  # Write data
-  dir_data <- fs::path(destdir, param$nombre_carpeta_RData)
-  if (!dir.exists(dir_data)) {
-    dir.create(dir_data, recursive = TRUE)
-  }
-  nombre_archivo_AG <- paste0(
-    "Dat_AGBMDL_", param$nombre_datos, "_rf_",
-    param$rf_type, "_", fun_n_genera_texto_dist(param), "_r",
-    param$r, "_k",
-    param$k, lista_AG$valor_BMDL_minimo, ".RData"
-  )
-
-  save(lista_AG, file = fs::path(dir_data, nombre_archivo_AG))
-  message("Se guardo el archivo:\n", fs::path(dir_data, nombre_archivo_AG), "\n")
-
-  return(lista_AG)
-}
-
-
-
 
 #' Bayesian MDL para un vector de puntos de cambio
 #'
@@ -469,251 +325,6 @@ Bayesaian_MDL_k_cp <- function(
 
 
 
-#' Bloque de log posterior NHPP
-#'
-#'
-#' @param vec_d_i vector de días en los que hubo revases entre el los puntos de
-#'   cambio tau1 y tau2
-#' @param tau1 valor del primer punto de cambio
-#' @param tau2 valor del segundo punto de cambio
-#' @param rf_type nombre de tasa de NHPP
-#' @param theta vector de parámetros de verosimilitud del NHPP
-#' @param vec_dist_a_priori description
-#' @param mat_phi description
-#' @export
-Bloq_LogPost_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta, vec_dist_a_priori, mat_phi) {
-  Bloq_LogVero_NHPP(vec_d_i, tau1, tau2, rf_type, theta) +
-    Bloq_LogPrio_NHPP(vec_dist_a_priori, theta, mat_phi)
-}
-
-
-
-#' Bloque de log-a priori NHPP
-#' @export
-Bloq_LogPrio_NHPP <- function(vec_dist_a_priori, theta, mat_phi) {
-  if (length(vec_dist_a_priori) == 2) {
-    if (all(vec_dist_a_priori == c("Gamma", "Gamma"))) {
-      return((mat_phi[1, 2] - 1) * log(theta[1]) - mat_phi[1, 1] * theta[1] + # Exp 74 pag 21
-        (mat_phi[2, 2] - 1) * log(theta[2]) - mat_phi[2, 1] * theta[2]) # Exp 75 pag 21
-    }
-  } else if (length(vec_dist_a_priori) == 3) {
-    if (all(vec_dist_a_priori == c("Gamma", "Gamma", "Gamma"))) {
-      return((mat_phi[1, 2] - 1) * log(theta[1]) - mat_phi[1, 1] * theta[1] +
-        (mat_phi[2, 2] - 1) * log(theta[2]) - mat_phi[2, 1] * theta[2] +
-        (mat_phi[3, 2] - 1) * log(theta[3]) - mat_phi[3, 1] * theta[3]) # Antes de la exp 76 pag 22
-    }
-  } else {
-    print("No se tiene registrada esa vec_dist_a_priori; Bloq_LogPrio_NHPP")
-  }
-}
-
-
-
-
-#' Bloque de log-verosimilitud NHPP
-#'
-#' @param vec_d_i vector de días en los que hubo rebases entre el los puntos de
-#'   cambio tau1 y tau2
-#' @param tau1 valor del primer punto de cambio
-#' @param tau2 valor del segundo punto de cambio
-#' @param rf_type nombre de tasa de NHPP
-#' @param theta vector de parámetros de verosimilitud del NHPP
-#' @export
-Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
-  if (rf_type == "W") {
-    return((tau1^theta[1] - tau2^theta[1]) / theta[2]^theta[1] +
-      length(vec_d_i) * (log(theta[1]) - theta[1] * log(theta[2])) +
-      (theta[1] - 1) * sum(log(vec_d_i)))
-  } # Expresion pg 15 entre las expresiones 18 y 19
-  if (rf_type == "EW") {
-    difN <- length(vec_d_i)
-    alpha <- theta[1]
-    beta <- theta[2]
-    sigma <- theta[3]
-    sumd <- sum(vec_d_i)
-    sumlogd <- sum(log(vec_d_i))
-    sumlog1menosed <- sum(log(1 - exp(-(vec_d_i / sigma)^alpha))) # exp 44 pg 18
-    sumlog1menosed2 <- sum(log(1 - (1 - exp(-(vec_d_i / sigma)^alpha))^beta)) # exp 46 pg 18
-    return(-sigma^(-alpha) * sumd^alpha # exp 42 pg 18
-      + (-1 + beta) * sumlog1menosed - sumlog1menosed2 + # exp 44 pg 18
-      (-1 + alpha) * sumlogd + difN * log(alpha * beta) - log(1 - (1 - exp(-(tau1 / sigma)^alpha))^beta) + # exp 43_1+exp 42_1-exp 30 pg 16
-      log(1 - (1 - exp(-(tau2 / sigma)^alpha))^beta) - (-1 + alpha) * difN * log(sigma)) # exp 46-exp 43_2
-  }
-  if (rf_type == "GO") {
-    return(theta[1] * (exp(-theta[2] * tau2) - exp(-theta[2] * tau1)) + length(vec_d_i) * (log(theta[1]) + log(theta[2])) - theta[2] * sum(vec_d_i)) # exp 54 pg 19
-  }
-  if (rf_type == "GGO") {
-    difN <- length(vec_d_i)
-    alpha <- theta[1]
-    beta <- theta[2]
-    sigma <- theta[3]
-    # sumd <- sum(vec_d_i)
-    sumlogd <- sum(log(vec_d_i))
-    sumdasigma <- sum(vec_d_i^sigma)
-    return(alpha * (exp(-beta * tau2^sigma) - exp(-beta * tau1^sigma)) + (-1 + sigma) * sumlogd + difN * (log(alpha) + log(beta) + log(sigma)) - beta * sumdasigma) # exp 63 pg 20
-  }
-  if (rf_type == "MO") {
-    difN <- length(vec_d_i)
-    alpha <- theta[1]
-    beta <- theta[2]
-    sumlogalphamasd <- sum(log(alpha + vec_d_i))
-    return(difN * log(beta) + beta * (log(alpha + tau1) - log(alpha + tau2)) - sumlogalphamasd) # exp 71 pg 21
-  }
-}
-
-
-
-
-#' Derivada bloque de log posterior NHPP
-#' @export
-D_Bloq_LogPost_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta, vec_dist_a_priori, mat_phi) {
-  D_Bloq_LogVero_NHPP(vec_d_i, tau1, tau2, rf_type, theta) +
-    D_Bloq_LogPrio_NHPP(vec_dist_a_priori, theta, mat_phi)
-}
-
-
-
-#' Derivada de bloque de log-a priori NHPP
-#' @rdname D_Bloq_LogPost_NHPP
-#' @param vec_dist_a_priori vector que determina cual es la distribución a
-#'   priori de los parametros; por ahora se tiene programado
-#'   vec_dist_a_priori=c("Gamma","Gamma") y
-#'   vec_dist_a_priori=c("Gamma","Gamma","Gamma")
-#' @param theta vector de parámetros de verosimilitud
-#' @param mat_phi matriz cuyos renglones tiene los parámetros de las
-#'   distribuciones a priori; cada renglón tiene todos los parametros de una
-#'   distribución
-#'
-#' @export
-D_Bloq_LogPrio_NHPP <- function(vec_dist_a_priori, theta, mat_phi) {
-  if (length(vec_dist_a_priori) == 2) {
-    if (all(vec_dist_a_priori == c("Gamma", "Gamma"))) {
-      # Parcial con respecto a alfa
-      p1 <- (-1 - theta[1] * mat_phi[1, 1] + mat_phi[1, 2]) / theta[1]
-      # Parcial con respecto a beta
-      p2 <- (-1 - theta[2] * mat_phi[2, 1] + mat_phi[2, 2]) / theta[2]
-      return(c(p1, p2))
-    }
-  } else if (length(vec_dist_a_priori) == 3) {
-    if (all(vec_dist_a_priori == c("Gamma", "Gamma", "Gamma"))) {
-      # Parcial con respecto a alfa
-      p1 <- (-1 - theta[1] * mat_phi[1, 1] + mat_phi[1, 2]) / theta[1]
-      # Parcial con respecto a beta
-      p2 <- (-1 - theta[2] * mat_phi[2, 1] + mat_phi[2, 2]) / theta[2]
-      # Parcial con respecto a beta
-      p3 <- (-1 - theta[3] * mat_phi[3, 1] + mat_phi[3, 2]) / theta[3]
-      return(c(p1, p2, p3))
-    }
-  } else {
-    print("No se tiene registrada esa vec_dist_a_priori; D_Bloq_LogPrio_NHPP")
-  }
-}
-
-
-
-
-
-#' Derivadas de bloque de log-verosimilitud NHPP
-#' @rdname D_Bloq_LogPost_NHPP
-#' @param vec_d_i vector de días en los que hubo revases entre el los puntos de
-#'   cambio tau1 y tau2
-#' @param tau1 valor del primer punto de cambio
-#' @param tau2 valor del segundo punto de cambio
-#' @param rf_type nombre de tasa de NHPP
-#' @param theta vector de parámetros de verosimilitud del NHPP
-#' @export
-D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
-  if (rf_type == "W") {
-    difN <- length(vec_d_i)
-    alpha <- theta[1]
-    beta <- theta[2]
-    sumlogd <- sum(log(vec_d_i))
-    if (tau1 == 0) { # este es el caso del primer regimen
-      # Parcial de alpha
-      p1 <- difN / alpha + sumlogd - difN * log(beta) + beta^(-alpha) * tau2^alpha * (log(beta) - log(tau2))
-      # Parcial de beta
-      p2 <- alpha * beta^(-1 - alpha) * (-difN * beta^alpha + tau2^alpha)
-    } else { # para los otros regímenes (o bloques)
-      # Parcial de alpha
-      p1 <- difN / alpha + sumlogd + beta^(-alpha) * (-(difN * beta^alpha + tau1^alpha - tau2^alpha) * log(beta) + tau1^alpha * log(tau1) - tau2^alpha * log(tau2))
-      # Parcial de beta
-      p2 <- -alpha * beta^(-1 - alpha) * (difN * beta^alpha + tau1^alpha - tau2^alpha)
-    }
-  }
-
-
-
-  if (rf_type == "EW") {
-    return("Me niego a hacer esta, es muy larga; D_Bloq_LogVero_NHPP")
-  }
-  if (rf_type == "GO") {
-    difN <- length(vec_d_i)
-    alpha <- theta[1]
-    beta <- theta[2]
-    sumd <- sum(vec_d_i)
-
-    if (tau1 == 0) { # este es el caso del primer regimen
-      # Parcial con respecto de alpha
-      p1 <- difN / alpha - exp(-beta * tau1) + exp(-beta * tau2)
-      # Parcial con respecto de beta
-      p2 <- difN / beta - sumd - alpha * exp(-beta * tau2) * tau2
-    } else {
-      # Parcial con respecto de alpha
-      p1 <- difN / alpha - exp(-beta * tau1) + exp(-beta * tau2)
-      # Parcial con respecto de beta
-      p2 <- difN / beta - sumd + alpha * exp(-beta * tau1) * tau1 - alpha * exp(-beta * tau2) * tau2
-    }
-  }
-  if (rf_type == "GGO") {
-    difN <- length(vec_d_i)
-    alpha <- theta[1]
-    beta <- theta[2]
-    sigma <- theta[3]
-    # sumd <- sum(vec_d_i)
-    sumlogd <- sum(log(vec_d_i))
-    sumdasigma <- sum(vec_d_i^sigma)
-    D_sumdasigma <- sum(log(vec_d_i) * vec_d_i^sigma)
-    if (tau1 == 0) { # este es el caso del primer regimen
-      # Parcial con respecto de alpha
-      p1 <- -1 + difN / alpha + exp(-beta * tau2^sigma)
-      # Parcial con respecto de beta
-      p2 <- difN / beta - alpha * exp(-beta * tau2^sigma) * tau2^sigma - sumdasigma
-      # Parcial con respecto de sigma
-      p3 <- difN / sigma + sumlogd - alpha * beta * exp(-beta * tau2^sigma) * tau2^sigma * log(tau2) - beta * D_sumdasigma
-    } else {
-      # Parcial con respecto de alpha
-      p1 <- difN / alpha - exp(-beta * tau1^sigma) + exp(-beta * tau2^sigma)
-      # Parcial con respecto de beta
-      p2 <- difN / beta + alpha * exp(-beta * tau1^sigma) * tau1^sigma - alpha * exp(-beta * tau2^sigma) * tau2^sigma - sumdasigma
-      # Parcial con respecto de sigma
-      p3 <- difN / sigma + sumlogd + alpha * beta * exp(-beta * tau1^sigma) * tau1^sigma * log(tau1) - alpha * beta * exp(-beta * tau2^sigma) * tau2^sigma * log(tau2) - beta * D_sumdasigma
-    }
-  }
-  if (rf_type == "MO") {
-    difN <- length(vec_d_i)
-    alpha <- theta[1]
-    beta <- theta[2]
-    D_sumlogalphamasd <- sum(1 / (alpha + vec_d_i))
-    # OBS: los resultadso tau1==0 y tau1!=0 son iguales, se podría borrar el if
-    if (tau1 == 0) { # este es el caso del primer regimen
-      # Parcial con respecto de alpha
-      p1 <- (beta * tau2) / (alpha^2 + alpha * tau2) - D_sumlogalphamasd
-      # Parcial con respecto de beta
-      p2 <- difN / beta + log(alpha) - log(alpha + tau2)
-    } else {
-      # Parcial con respecto de alpha
-      p1 <- beta * (1 / (alpha + tau1) - 1 / (alpha + tau2)) - D_sumlogalphamasd
-      # Parcial con respecto de beta
-      p2 <- difN / beta + log(alpha + tau1) - log(alpha + tau2)
-    }
-  }
-  if (rf_type %in% c("W", "GO", "MO")) {
-    return(c(p1, p2))
-  } else {
-    return(c(p1, p2, p3))
-  }
-}
-
 
 #' Extrae matriz con estimadores MAP
 #'
@@ -734,10 +345,24 @@ D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
 #'   cada regimen.
 #'
 #' @export
+#' @examples
+#' chromo <- chromosome_best(lista_AG$segmenter)
+#' extrae_mat_MAP(chromo, as.ts(lista_AG), 
+#'   lista_AG$segmenter$param$rf_type, 
+#'   lista_AG$segmenter$param$initial_val_optim, 
+#'   lista_AG$segmenter$param$mat_low_upp, 
+#'   lista_AG$segmenter$param$vec_dist_a_priori, 
+#'   lista_AG$segmenter$param$mat_phi
+#' )
 extrae_mat_MAP <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi, ajuste_bloque) {
   # lista_insumos_bloque <- genera_insumos_bloque(cp,x,theta_mat) ANTES
   lista_insumos_bloque <- genera_insumos_bloque_sin_theta(cp, x)
+  
+  tau <- cp[3:6]
+  x_by_tau <- split_by_tau(x, tau)
+  
   n_mle <- cp[1] + 1
+  n_mle_2 <- length(tau) + 1
 
   if (param$rf_type %in% c("W", "MO", "GO")) dimension_priori <- 2
   if (param$rf_type %in% c("EW", "GGO")) dimension_priori <- 3
@@ -749,130 +374,17 @@ extrae_mat_MAP <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_d
   # El siguiente for va sobre cada
   for (i in 1:n_mle) {
     # MAP_NHPP(initial_val,mat_low_upp,vec_d_i,tau1,tau2,rf_type,vec_dist_a_priori,mat_phi){
-    aux_map <- MAP_NHPP(
-      initial_val_optim, mat_low_upp, lista_insumos_bloque$lista_dias_regimen[[i]],
+    aux_map <- fit_nhpp_region(
+      lista_insumos_bloque$lista_dias_regimen[[i]],
       lista_insumos_bloque$mat_tau[i, 1],
-      lista_insumos_bloque$mat_tau[i, 2], rf_type, vec_dist_a_priori, mat_phi
+      lista_insumos_bloque$mat_tau[i, 2], 
+      initial_val_optim, mat_low_upp, 
+      rf_type, vec_dist_a_priori, mat_phi
     )
     # Obs: MAP_NHPP regresa la menos-log-posterior, por eso la multiplicamos por menos
     mat_MAP[i, ] <- c(-aux_map$value, aux_map$par)
   }
   return(mat_MAP)
-}
-
-
-#' Genera los textos para los pdf y RData de las n distribuciones
-#' @param param description
-#' @export
-fun_n_genera_texto_dist <- function(param) {
-  texto_n_dist <- NULL
-  for (i in 1:length(param$vec_dist_a_priori)) {
-    dist <- param$vec_dist_a_priori[i]
-    parametros_dist <- param$mat_phi[i, ]
-    texto_n_dist <- c(texto_n_dist, fun_1_genera_texto_dist(dist, parametros_dist))
-  }
-  texto_n_dist <- paste(texto_n_dist, collapse = "_")
-  return(texto_n_dist)
-}
-
-#' Genera los textos para los pdf y RData de una distribución
-#' @rdname fun_n_genera_texto_dist
-#' @param dist description
-#' @param parametros_dist description
-#' @export
-fun_1_genera_texto_dist <- function(dist, parametros_dist) {
-  if (any(dist == c("Gamma", "Unif"))) {
-    texto <- paste0(dist, "(", parametros_dist[1], ",", parametros_dist[2], ")")
-  } else {
-    for (i in 1:10) print("no se tiene esta distribución; fun_1_genera_texto_dist")
-  }
-  return(texto)
-}
-
-
-
-
-#' gen_texto_m
-#' Genera el texto correspondiente a la variable m para el archivo .txt para JAGS
-#'
-#' @param n_puntos_cambio numero de puntos de cambio
-#' @param mas_derecha es una variable que fue utilizada para que
-#'  pudiera ejecutarse en R y en JAGS; toma los valores "" (vacío) y "+".
-#'
-#' @return Regresa el texto correspondiente a la variable m
-#' @export
-#'
-#' @examples
-#' \dontrun{
-#' mejor_cp <- historia_mejores[which(
-#'   Bayesaian_MDL_k_cp(
-#'     historia_mejores, x, param$rf_type, param$initial_val_optim,
-#'     param$mat_low_upp, param$vec_dist_a_priori, param$mat_phi
-#'   ) == min(Bayesaian_MDL_k_cp(
-#'     historia_mejores, x, param$rf_type, param$initial_val_optim,
-#'     param$mat_low_upp, param$vec_dist_a_priori, param$mat_phi
-#'   ))
-#' ), ]
-#' }
-gen_texto_m <- function(n_puntos_cambio, mas_derecha = "", destdir = tempdir()) {
-  # PRIMER RENGLON
-  j_renglon <- 1
-  # texto_m <- paste0("m[i] <- ",print_step("i",j_renglon,T),"*",print_pow_d("i",j_renglon),mas_derecha)
-  texto_m <- paste0(print_step("i", j_renglon, T), "*", print_pow_d("i", j_renglon), "+", "\n", mas_derecha)
-  # SEGUNDO RENGLON
-  j_renglon <- 2
-  ini_renglon <- paste0("+ ", print_step("i", j_renglon - 1), "*", print_step("i", j_renglon, T), "*(")
-  pre_med_ren <- print_pow_d("i", j_renglon)
-  med_renglon <- paste0("+", print_pow_tau(j_renglon - 1, j_renglon - 1), "-", print_pow_tau(j_renglon - 1, j_renglon))
-  fin_renglon <- paste0(")", "+", "\n", mas_derecha)
-  ser <- paste0(ini_renglon, pre_med_ren, med_renglon, fin_renglon)
-  texto_m <- paste0(texto_m, ser)
-  # TERCER RENGLON Y OTROS
-  for (j_renglon in 3:(n_puntos_cambio + 1)) {
-    if (j_renglon < (n_puntos_cambio + 1)) ini_renglon <- paste0("+ ", print_step("i", j_renglon - 1), "*", print_step("i", j_renglon, T), "*(")
-    if (j_renglon == (n_puntos_cambio + 1)) ini_renglon <- paste0("+ ", print_step("i", j_renglon - 1), "*(")
-    pre_med_ren <- print_pow_d("i", j_renglon)
-    med_renglon <- paste0("+", print_pow_tau(j_renglon - 1, j_renglon - 1), med_renglon, "-", print_pow_tau(j_renglon - 1, j_renglon))
-    fin_renglon <- paste0(")", "+", "\n", mas_derecha)
-    texto_m <- paste0(texto_m, ini_renglon, pre_med_ren, med_renglon, fin_renglon)
-  }
-  if (mas_derecha == "") texto_m <- paste0(texto_m, "0")
-  # estas tres lineas son nuevas
-  texto_m <- paste0("funcion_media_acumulada <- function (i) {", texto_m)
-  texto_m <- paste0(texto_m, "}")
-
-  nombre_archivo <- fs::path(destdir, paste0("funcion_media_acumulada.R"))
-  cat(texto_m, file = nombre_archivo)
-  # cat("Se genero el archivo: ",nombre_archivo)
-}
-
-
-
-
-#' Agrupamos los insumos por bloques
-#'
-#' @param cp vector de tamaño max_num_cp con entradas m, tau_0=1 , ...,
-#'   tau_{m+1}, 0, ..., 0
-#' @param x datos de rebases
-#'
-#' @return regresa una lista con una matriz de 5 columnas la cual tiene
-#'         los el tau_{i-1}, tau_i, theta_1, theta_2 y theta_3, y también
-#'         una lista con los días de cada régimen
-#' @export
-genera_insumos_bloque_sin_theta <- function(cp, x) {
-  (cp_corto_cero <- c(0, cp[3:(cp[1] + 3)]))
-  # Primero calculamos la matriz con taus
-  # mat_tau_theta <- cbind(matrix(c(cp_corto_cero[-length(cp_corto_cero)],cp_corto_cero[-1]),ncol = 2),t(theta_mat)) # ANTES
-  mat_tau <- matrix(c(cp_corto_cero[-length(cp_corto_cero)], cp_corto_cero[-1]), ncol = 2)
-  # Ahora hacemos una lista de días
-  # Para el resto de la log-veros, hacemos una matriz de dos columnas con los puntos de cambio, para definir los intervalos de regímenes
-  mat_intervalos_cp <- matrix(c(cp_corto_cero[-length(cp_corto_cero)], cp_corto_cero[-1]), ncol = 2)
-  # lista con los días de excedencias en cada regimen
-  (lista_dias_regimen <- apply(mat_intervalos_cp, 1, function(y) {
-    x[x > y[1] & x <= y[2]]
-  }))
-  lista_insumos_bloque <- list(mat_tau = mat_tau, lista_dias_regimen = lista_dias_regimen)
-  return(lista_insumos_bloque)
 }
 
 
@@ -961,55 +473,6 @@ mata_k_tau_volado <- function(mat_cp, prob_volado) {
   # return(apply(mat_cp, 1, function(yy){ mata_1_tau_volado(yy,prob_volado)} ) )
 }
 
-#' Evaluanción de mean function (la integral de la rate)
-#'
-#' @param t valor a evaluar (real)
-#' @param rf_type tipo de mean function (ver libro de Eliane pdf 40 eq (3.12));
-#'               posibles exponentiated-Weibull (EW),the Musa–Okumoto (MO),
-#'               the Goel–Okumoto (GO), and a generalized Goel–Okumoto (GGO)
-#' @param theta parámetros de mean function.Para
-#'
-#'  - W: \eqn{\alpha = \theta[1], \sigma = \theta[2]}
-#'  - EW: \eqn{\alpha= \theta[1], \beta = \theta[2]} y \eqn{\sigma = \theta[3]}
-#'  - GGO: \eqn{\alpha = \theta[1], \beta = \theta[2]} y \eqn{\gamma = \theta[3]}
-#'  - MO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
-#'  - GO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
-#'
-#' @return regresa la evaluación
-#' @export
-#'
-#' @examples
-#' t <- c(1.4, 2.8)
-#' theta <- c(1.2, 2.1, 3.2)
-#' rf_type <- "EW"
-#' mean_fn(t, rf_type, theta)
-#' rf_type <- "GGO"
-#' mean_fn(t, rf_type, theta)
-#' rf_type <- "MO"
-#' mean_fn(t, rf_type, theta)
-#' rf_type <- "GO"
-#' mean_fn(t, rf_type, theta)
-#'
-mean_fn <- function(t, rf_type, theta) {
-  if (rf_type == "W") {
-    return((t / theta[2])^theta[1])
-  }
-  if (rf_type == "EW") {
-    return(-log(1 - (1 - exp(-(t / theta[3])^theta[1]))^theta[2]))
-  }
-  if (rf_type == "GGO") {
-    return(theta[1] * (1 - exp(-theta[2] * t^theta[3])))
-  }
-  if (rf_type == "MO") {
-    return(theta[2] * log(1 + t / theta[1]))
-  }
-  if (rf_type == "GO") {
-    return(theta[1] * (1 - exp(-theta[2] * t)))
-  } else {
-    print("no se tiene esa rf_type; mean_fn")
-  }
-}
-
 #' Mutaciones un cp en el caso BMDL
 #'
 #' @param cp puntos de cambio
@@ -1095,12 +558,10 @@ muta_k_cp_BMDL <- function(mat_cp, x, param) {
 #' - los siguientes son númores cero hasta llenarlo para que sea de tamaño `max_num_cp`
 #' @export
 #' @examples
-#' sim_1_cp_BMDL(DataCPSimRebases, param)
-#' sim_1_cp_BMDL(sims$ts1, param)
-#' sim_1_cp_BMDL(sims$ts2, param)
-#' sim_1_cp_BMDL(sims$ts3, param)
-#' x <- c(4,1,3,8,11,15,20,0,0,0,0)
-#' sim_1_cp_BMDL(x, param)
+#' sim_1_cp_BMDL(exceedances(DataCPSim), param)
+#' sim_1_cp_BMDL(exceedances(rlnorm_ts_1), param)
+#' sim_1_cp_BMDL(exceedances(rlnorm_ts_2), param)
+#' sim_1_cp_BMDL(exceedances(rlnorm_ts_3), param)
 #'
 sim_1_cp_BMDL <- function(x, param) {
   # Primero simulamos una binomial que va a ser el número de puntos de cambio
@@ -1120,7 +581,7 @@ sim_1_cp_BMDL <- function(x, param) {
 #' @export
 #' @examples
 #' sim_k_cp_BMDL(DataCPSimRebases, param)
-#' sim_k_cp_BMDL(sims$ts1, param)
+#' sim_k_cp_BMDL(rlnorm_ts_1, param)
 #' 
 #'
 sim_k_cp_BMDL <- function(x, param) {
@@ -1159,42 +620,6 @@ penalization_MDL <- function(cp, rf_type, N) { # V02
   (cp_corto_cero <- c(0, cp[3:(cp[1] + 3)]))
   # En particular se agregó la parte *n_param_rf_type/2
   return(sum(log(cp_corto_cero[-1] - cp_corto_cero[-cp[1] - 2]) * n_param_rf_type / 2) + log(cp[1]) + sum(log(cp_corto_cero[c(-1, -cp[1] - 2)])) + (cp[1] * log(N)))
-}
-
-
-
-#' Estimadores MAP
-#'
-#' @param vec_d_i vector de días de un régimen
-#' @param tau1 valor del primer punto de cambio
-#' @param tau2 valor del segundo punto de cambio
-#' @param rf_type nombre de tasa de NHPP
-#' @param vec_dist_a_priori nombres de distribuciones a priori
-#' @param mat_phi matriz cuyos renglones tiene los parámetros de las
-#'   distribuciones a priori
-#' @param mat_low_upp matriz con lugares donde buscar; cada renglon es para un
-#'   parámetro del NHPP
-#' @param initial_val_optim valores iniciales que utiliza la función optim para
-#'   encontrar el mínimo
-#'
-#' @return regresa un el resultado de optim
-#' @export
-#'
-MAP_NHPP <- function(initial_val_optim, mat_low_upp, vec_d_i, tau1, tau2, rf_type, vec_dist_a_priori, mat_phi) {
-  # Definimos las funciones que vamos a utilizar para encontrar el mínimo
-  my_fn <- function(theta) {
-    -Bloq_LogPost_NHPP(vec_d_i, tau1, tau2, rf_type, theta, vec_dist_a_priori, mat_phi)
-  }
-  my_gn <- function(theta) {
-    -D_Bloq_LogPost_NHPP(vec_d_i, tau1, tau2, rf_type, theta, vec_dist_a_priori, mat_phi)
-  }
-  # Calculamos el mínimo
-  (val_optimos <- stats::optim(initial_val_optim,
-    fn = my_fn, gr = my_gn,
-    lower = mat_low_upp[, 1], upper = mat_low_upp[, 2],
-    method = "L-BFGS-B"
-  ))
-  return(val_optimos)
 }
 
 
@@ -1274,66 +699,4 @@ actualiza_carpeta <- function(comienzos_de_archivo, source_raiz, carpeta_destino
 }
 
 
-
-
-#' Evaluanción de rate function (la derivada de la mean)
-#'
-#' @param t valor a evaluar (real)
-#' @param rf_type tipo de rate function (ver articulo A Gibbs Sampling Algorithm
-#'   to Estimate the Occurrence of Ozone Exceedances in Mexico City  para el
-#'   caso de Weibull (W) y ver libro de Eliane pdf 40 eq (3.12)); posibles
-#'   exponentiated-Weibull (EW),the Musa–Okumoto (MO), the Goel–Okumoto (GO),
-#'   and a generalized Goel–Okumoto (GGO). Las cuales tienen 3,3,2 y 2
-#'   parámetros
-#' @param theta parámetros de mean function. Para
-#'
-#'  - W: \eqn{\alpha = \theta[1]}, \eqn{\sigma = \theta[2]}
-#'  - EW: \eqn{\alpha = \theta[1], \beta = \theta[2]} y \eqn{\sigma = \theta[3]}
-#'  - GGO: \eqn{\alpha = \theta[1], \beta = \theta[2]} y \eqn{\gamma = \theta[3]}
-#'  - MO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
-#'  - GO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
-#'
-#' @return regresa la evaluación
-#' @export
-#'
-#' @examples
-#' t <- c(1.4, 2.8)
-#' theta <- c(1.2, 2.1, 3.2)
-#'
-#' rf_type <- "EW"
-#' rate_fn(t, rf_type, theta)
-#' rf_type <- "GGO"
-#' rate_fn(t, rf_type, theta)
-#' rf_type <- "MO"
-#' rate_fn(t, rf_type, theta)
-#' rf_type <- "GO"
-#' rate_fn(t, rf_type, theta)
-#'
-rate_fn <- function(t, rf_type, theta) {
-  # W -> theta = c(alpha, sigma)
-  if (rf_type == "W") {
-    return((theta[1] / theta[2]) * (t / theta[2])^(theta[1] - 1))
-  }
-  # EW -> theta = c(alpha,beta,sigma)
-  if (rf_type == "EW") {
-    return(theta[1] * theta[2] * (1 - (exp(-t / theta[3]))^theta[1])^(theta[2] - 1) *
-      (exp(-t / theta[3]))^theta[1] *
-      (t / theta[3])^(theta[1] - 1) /
-      (theta[3] * (1 - (1 - exp(-(t / theta[3])^theta[1]))^theta[2])))
-  }
-  # GGO -> theta = c(alpha,beta,gamma)
-  if (rf_type == "GGO") {
-    return(theta[1] * theta[2] * theta[3] * t^(theta[3] - 1) * exp(-theta[2] * t^theta[3]))
-  }
-  # MO -> theta = c(alpha,beta)
-  if (rf_type == "MO") {
-    return(theta[2] / (t + theta[1]))
-  }
-  # GO -> theta = c(alpha,beta)
-  if (rf_type == "GO") {
-    return(theta[1] * theta[2] * exp(-theta[2] * t))
-  } else {
-    print("no se tiene esa rf_type; rate_fn")
-  }
-}
 
