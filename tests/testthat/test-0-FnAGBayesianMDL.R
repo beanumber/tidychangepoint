@@ -59,7 +59,7 @@ test_that("parameter fitting works", {
   expect_lt(abs(media_acumulada(tau, tau, theta, length(y)) - tau), 2)
   expect_lt(abs(media_acumulada(length(y), tau, theta, length(y)) - tau), 3)
   
-  plot_confint2(y, tau, theta = theta)
+  plot_mcdf(segment(y, method = "cpt-manual", cpts = tau))
   
   # Example 2
   y <- test_set(n = 1, seed = 456)
@@ -80,5 +80,5 @@ test_that("parameter fitting works", {
     theta[2, 2:3] |> unlist() |> unname()
   )
 
-  plot_confint2(y, tau, theta = theta)
+  plot_mcdf(segment(y, method = "cpt-manual", cpts = tau))
 })
