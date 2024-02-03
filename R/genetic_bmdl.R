@@ -62,25 +62,12 @@ globalVariables(
 #'   lanza un volado con probabilidad prob_para_sin_cp, si es cae 1 se regresa
 #'   el cp original, si cae 0 se simula un punto de cambio y se regresa este cp
 #'   con este punto de cambio
-#' @param cp_real en caso de estar haciendo pruebas y conocer los puntos de
-#'   cambio reales da un vector de tamaño max_num_cp con entradas
-#'   m,tau_0,...,tau_{m+1},0,...,0, en particual esto cirve para que al final se
-#'   grafiquen los puntos de cambio reales contra los estimados; en caso de no
-#'   conocer los pc reales, esta variable tiene el valor "sin cp_real"
-#' @param quita_ini0_fin1 es una indicadora para cuando se hacen rebases y la
-#'   serie de tiempo x (la serie original) no es exanctamente de la longitud de
-#'   frecuencia_datos. Entonces se quitan los restantes del final o del
-#'   principio
 #' @param probs_rank0_MDL1 para medir obtener la probabilidad de los padres se
 #'   pueden tomar o las probabilidades con respecto a los rangos (como en el
 #'   artículo) o se pueden tomar las probabilidades con respecto a el MDL. La
 #'   diferencia radica en que si se toma con respecto al MDL se tendrá que un
 #'   cromosoma con un gran MDL este tendrá una gran ventaja de ocurrir, en
 #'   cambio cuando solo se tiene rank esta ventaja gran ventaja se reduce
-#' @param my_data en caso de que se quiera hacer pruebas con otra serie en esta
-#'   variable se carga la serie con la que se desea hacer las pruebas. En este
-#'   caso, se comenta la entrada llamada my_data para que se pueda correr la
-#'   función
 #' @param cuantos_mejores_cp_graf al final se generan unas graficas de los
 #'   mejores puntos de cambio, este parámetro dicta cuantos cromosomas se
 #'   graficarán
@@ -118,12 +105,9 @@ revisor_param <- function(param,
                           mutaciones = c(-1, 0, 1),
                           dist_extremos = 10,
                           prob_para_sin_cp = 0.5,
-                          cp_real = "sin cp_real",
-                          quita_ini0_fin1 = 0, #
                           probs_rank0_MDL1 = 0,
                           # p_m = 0.2, # ya no se ocupa
                           cuantos_mejores_cp_graf = 100, # cuantos de los mejores cp se graficarán
-                          my_data = list(nulo = NULL, "my_data=my_data")[[1]], # se comentó la variable my_data
                           minimo_numero_de_cp = 5, # minimo número de puntos de cambio
                           probs_nuevos_muta0N = c(.5, .2, .2, .1), # probabilidades de mutar 0,1,2,... hasta cierto numero
                           rf_type = c("W", "EW", "GGO", "MO", "GO")[1], # función de tasa de NHPP
@@ -135,7 +119,6 @@ revisor_param <- function(param,
 
   # En esta versión se tienen 31 variables 1 oct 2019
   # This version has 33 variables Jan 7 2020
-  my_data <- 123
   ejemplo_param <- list(
     r = 50, # número de generaciones 1000
     k = 50, # tamaño de generaciones 200
@@ -147,12 +130,9 @@ revisor_param <- function(param,
     mutaciones = c(-1, 0, 1),
     dist_extremos = 10,
     prob_para_sin_cp = 0.5,
-    cp_real = "sin cp_real",
-    quita_ini0_fin1 = 0, #
     probs_rank0_MDL1 = 0,
     # p_m = 0.2, #ya no se ocupa
     cuantos_mejores_cp_graf = 100, # cuantos de los mejores cp se graficarán
-    my_data = list(nulo = NULL, my_data = my_data)[[1]],
     minimo_numero_de_cp = 5, # minimo número de puntos de cambio
     probs_nuevos_muta0N = c(.5, .2, .2, .1), # probabilidades de mutar 0,1,2,... hasta cierto numero
     rf_type = c("W", "EW", "GGO", "MO", "GO")[1], # función de tasa de NHPP

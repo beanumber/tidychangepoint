@@ -15,11 +15,8 @@ revisor_param(
   mutaciones = c(-1, 0, 1),
   dist_extremos = 10,
   prob_para_sin_cp = 0.5,
-  cp_real = "sin cp_real",
-  quita_ini0_fin1 = 0,
   probs_rank0_MDL1 = 0,
   cuantos_mejores_cp_graf = 100,
-  my_data = list(nulo = NULL, "my_data=my_data")[[1]],
   minimo_numero_de_cp = 5,
   probs_nuevos_muta0N = c(0.5, 0.2, 0.2, 0.1),
   rf_type = c("W", "EW", "GGO", "MO", "GO")[1],
@@ -69,17 +66,6 @@ lanza un volado con probabilidad prob_para_sin_cp, si es cae 1 se regresa
 el cp original, si cae 0 se simula un punto de cambio y se regresa este cp
 con este punto de cambio}
 
-\item{cp_real}{en caso de estar haciendo pruebas y conocer los puntos de
-cambio reales da un vector de tamaño max_num_cp con entradas
-m,tau_0,...,tau_{m+1},0,...,0, en particual esto cirve para que al final se
-grafiquen los puntos de cambio reales contra los estimados; en caso de no
-conocer los pc reales, esta variable tiene el valor "sin cp_real"}
-
-\item{quita_ini0_fin1}{es una indicadora para cuando se hacen rebases y la
-serie de tiempo x (la serie original) no es exanctamente de la longitud de
-frecuencia_datos. Entonces se quitan los restantes del final o del
-principio}
-
 \item{probs_rank0_MDL1}{para medir obtener la probabilidad de los padres se
 pueden tomar o las probabilidades con respecto a los rangos (como en el
 artículo) o se pueden tomar las probabilidades con respecto a el MDL. La
@@ -90,11 +76,6 @@ cambio cuando solo se tiene rank esta ventaja gran ventaja se reduce}
 \item{cuantos_mejores_cp_graf}{al final se generan unas graficas de los
 mejores puntos de cambio, este parámetro dicta cuantos cromosomas se
 graficarán}
-
-\item{my_data}{en caso de que se quiera hacer pruebas con otra serie en esta
-variable se carga la serie con la que se desea hacer las pruebas. En este
-caso, se comenta la entrada llamada my_data para que se pueda correr la
-función}
 
 \item{minimo_numero_de_cp}{es la cota inferior del número de puntos de cambio
 que puede tener un cromosoma}

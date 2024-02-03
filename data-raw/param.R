@@ -11,11 +11,8 @@ param <- list(
   mutaciones = c(-1,0,1),
   dist_extremos = 10,
   prob_para_sin_cp = 0.5,
-  cp_real = "sin cp_real",
-  quita_ini0_fin1 = 0, # 
   probs_rank0_MDL1 = 0,
   cuantos_mejores_cp_graf = 100, # cuantos de los mejores cp se graficarán
-  my_data = list(nulo=NULL, my_data=123)[[1]],
   minimo_numero_de_cp = 1, # minimo número de puntos de cambio
   probs_nuevos_muta0N = c(.8,.1,.1), # probabilidades de mutar 0,1,2,... hasta cierto numero
   rf_type = c("W","EW","GGO","MO","GO")[1], # función de tasa de NHPP
