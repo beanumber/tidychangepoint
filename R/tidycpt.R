@@ -186,7 +186,7 @@ plot.tidycpt <- function(x, ...) {
 
 #' @export
 #' @examples
-#' plot_mcdf(DataCPSim, tau = 826, theta = data.frame(alpha = c(1, 1), beta = c(1, 2)))
+#' plot_mcdf(segment(DataCPSim))
 
 plot_mcdf <- function(x, ...) {
   tau <- changepoints(x)
@@ -212,6 +212,7 @@ plot_mcdf <- function(x, ...) {
   regions <- tidy(x)
   ggplot2::ggplot(data = z, ggplot2::aes(x = t_exceedance, y = cum_exceedances)) +
     ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = right), linetype = 3) +
+    ggplot2::geom_abline(intercept = 0, slope = 0.5, linetype = 3) +
     ggplot2::geom_line() +
     ggplot2::scale_x_continuous("Time Index (t)", limits = c(0, n)) +
     ggplot2::scale_y_continuous("Cumulative Number of Exceedances (N)") +
@@ -229,6 +230,7 @@ diagnose <- function(x, ...) UseMethod("diagnose")
 #' @rdname segment
 #' @export
 #' @examples
+#' diagnose(segment(DataCPSim))
 #' diagnose(segment(DataCPSim, method = "single-best"))
 #' diagnose(segment(DataCPSim, method = "cpt-pelt"))
 #' 
