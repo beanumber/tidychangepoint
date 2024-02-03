@@ -4,12 +4,14 @@
 \alias{segment_gbmdl}
 \title{Algoritmo genético de Bayesian MDL a un paso}
 \usage{
-segment_gbmdl(x, param, destdir = tempdir())
+segment_gbmdl(x, param, destdir = tempdir(), show_progress_bar = TRUE)
 }
 \arguments{
 \item{x}{a vector that can be coerced into a \code{ts}}
 
 \item{param}{description. See \link{param}.}
+
+\item{show_progress_bar}{show the progress bar?}
 }
 \value{
 A \code{cpt_gbmdl} object

@@ -121,14 +121,9 @@ globalVariables(
 #' @param mat_phi matriz cuyos renglones tiene los parámetros de las
 #'   distribuciones a priori; cada renglón tiene todos los parametros de una
 #'   distribución
-#' @param value_set_seed valor de la semilla que se utiliza al correr el
-#'   algoritmo genético; puede valer un número (en cuyo caso tomaremos esta
-#'   semilla) o puede valer NULL (en cuyo caso se tomará la semilla existente)
 #' @param ajuste_bloque en caso de ser TRUE se utiliza el ajuste por bloque de
 #'   NHPP para cada bloque del ajuste; ie, siempre se ajusta como primer bloque
 #'   y se toma en cuenta en que pedazo se empieza
-#' @param print_progress_bar print the progress bar
-#' @param print_progress_plots print of the plots of the progress of the algorithm
 #'
 #' @return regresa un mensaje en caso de que no sea de la longitud correcta el
 #'   vector
@@ -168,10 +163,8 @@ revisor_param <- function(param,
                           mat_low_upp = matrix(c(c(1e-4, 1e-8), c(1e+1, 1e+5)), nrow = 2), # rango de busqueda de MAP
                           vec_dist_a_priori = c("Gamma", "Gamma"), # distribuciones a priori
                           mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2),
-                          ajuste_bloque = T,
-                          print_progress_bar = T,
-                          print_progress_plots = T,
-                          value_set_seed = 123) { # parametros de dist a priori, cada renglon corresponde a una dist parametro
+                          ajuste_bloque = T
+                          ) { # parametros de dist a priori, cada renglon corresponde a una dist parametro
 
   # En esta versión se tienen 31 variables 1 oct 2019
   # This version has 33 variables Jan 7 2020
@@ -208,10 +201,7 @@ revisor_param <- function(param,
     mat_low_upp = matrix(c(c(1e-4, 1e-8), c(1e+1, 1e+5)), nrow = 2), # rango de busqueda de MAP
     vec_dist_a_priori = c("Gamma", "Gamma"), # distribuciones a priori
     mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2), # parametros de dist a priori, cada renglon corresponde a una dist parametro
-    ajuste_bloque = T,
-    print_progress_bar = T,
-    print_progress_plots = T,
-    value_set_seed = 123
+    ajuste_bloque = T
   )
 
   error1_bien0 <- 0
@@ -670,32 +660,6 @@ selec_k_pares_de_padres <- function(vec_probs) {
     }
   }
   return(matrix(c(papas, mamas), ncol = 2))
-}
-
-
-
-#' Actualizador de archivos de una carpeta a otra
-#'
-#' @param comienzos_de_archivo este es el vector de los comienzos de los nombres
-#'   de los archivos; eg si comienzos_de_archivo = c("MDL V","Fn AG Bayesian
-#'   MDL.R"), entonces se buscarán los archivos que comienzen con "MDL V" y se
-#'   copiará el archivo con la terminación mas grande, ie si existen los
-#'   archivos "Fn AG Bayesian MDL.R", "MDL V01", "MDL V02", "MDL V03" se copiará
-#'   el archivo "Fn AG Bayesian MDL.R" (por ser único) y el archivo "MDL V03"
-#'   (por ser el que tiene el nombre mas grande alfanumericamente)
-#' @param source_raiz dirección de donde se toman los archivos a copiar
-#' @param carpeta_destino dirección a donde se quieren copiar los archivos
-#'
-#' @export
-#'
-actualiza_carpeta <- function(comienzos_de_archivo, source_raiz, carpeta_destino) {
-  for (comienzo in comienzos_de_archivo) {
-    lista_de_archivos <- list.files(source_raiz, pattern = comienzo)
-    ultimo_archivo <- lista_de_archivos[length(lista_de_archivos)]
-    cat("Se esta copiando el archivo \n\t", ultimo_archivo, "\nen \n\t", source_raiz, "\n")
-    file.copy(ultimo_archivo, carpeta_destino)
-  }
-  cat("Gracias por utilizar el copiador de archivos\n")
 }
 
 
