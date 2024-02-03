@@ -11,7 +11,7 @@
 glance.cpt_gbmdl <- function(x, ...) {
   tibble::tibble(
     pkg = "tidychangepoint",
-    version = utils::packageVersion("BayesianMDLGA"),
+    version = utils::packageVersion("tidychangepoint"),
     algorithm = "GeneticBMDL",
     test_stat = cpt_best_bmdl(x),
     BMDL = cpt_best_bmdl(x),

@@ -2,20 +2,20 @@
 output: github_document
 ---
 
-# BayesianMDLGA
+# tidychangepoint
 
   <!-- badges: start -->
-  [![R-CMD-check](https://github.com/c-taimal/BayesianMDLGA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/c-taimal/BayesianMDLGA/actions/workflows/R-CMD-check.yaml)
+  [![R-CMD-check](https://github.com/c-taimal/tidychangepoint/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/c-taimal/tidychangepoint/actions/workflows/R-CMD-check.yaml)
   <!-- badges: end -->
 
 ## Usage
 
 ```{r, eval=FALSE}
-remotes::install_github("c-taimal/BayesianMDLGA")
+remotes::install_github("beanumber/tidychangepoint")
 ```
 
 ```{r, message=FALSE}
-library(BayesianMDLGA)
+library(tidychangepoint)
 ```
 
 ## Tidy methods for changepoint analysis
@@ -72,6 +72,14 @@ The `plot()` method leverages `ggplot2` to provide an informative plot.
 ```{r pelt-plot}
 plot(cpts)
 ```
+
+The `diagnose()` function shows the empirical cumulative distribution of the exceedances of the time series, as well as how that distribution is modeled as a non-homogeneous Poisson process. 
+
+```{r diagnose}
+diagnose(cpts)
+```
+
+
 
 ## Algorithms
 
@@ -133,6 +141,6 @@ plot(lista_AG$segmenter)
 ## Citation
 
 ```{r}
-citation("BayesianMDLGA")
+citation("tidychangepoint")
 ```
 

@@ -7,6 +7,6 @@
 # * https://testthat.r-lib.org/articles/special-files.html
 
 library(testthat)
-library(BayesianMDLGA)
+library(tidychangepoint)
 
-test_check("BayesianMDLGA")
+test_check("tidychangepoint")

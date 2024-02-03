@@ -1,17 +1,17 @@
-Package: BayesianMDLGA
+Package: tidychangepoint
 Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9011
+Version: 0.0.0.9012
 Authors@R: c(
-    person(
-      "Carlos A.", "Taimal", email = "first.last@example.com", 
-      role = c("aut"), comment = c(ORCID = "YOUR-ORCID-ID")
-    ),
     person(
       "Biviana", "Suarez Sierra", email = "first.last@example.com", 
       role = c("aut", "cre"), comment = c(ORCID = "YOUR-ORCID-ID")
     ),
-    person("Benjamin S.", "Baumer", role = c("ctb"), 
-           comment = c(ORCID = "0000-0002-3279-0516"))
+    person("Benjamin S.", "Baumer", role = c("aut"), 
+           comment = c(ORCID = "0000-0002-3279-0516")),
+    person(
+      "Carlos A.", "Taimal", email = "first.last@example.com", 
+      role = c("aut"), comment = c(ORCID = "YOUR-ORCID-ID")
+    )
   )
 Description: What the package does (one paragraph).
 License: MIT + file LICENSE
@@ -30,7 +30,7 @@ Imports:
     tibble,
     tsibble
 Depends: 
-    R (>= 2.10)
+    R (>= 4.1)
 LazyData: true
 Suggests: 
     knitr,

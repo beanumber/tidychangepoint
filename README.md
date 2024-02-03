@@ -1,18 +1,18 @@
 
-# BayesianMDLGA
+# tidychangepoint
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/c-taimal/BayesianMDLGA/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/c-taimal/BayesianMDLGA/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/c-taimal/tidychangepoint/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/c-taimal/tidychangepoint/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Usage
 
 ``` r
-remotes::install_github("c-taimal/BayesianMDLGA")
+remotes::install_github("beanumber/tidychangepoint")
 ```
 
 ``` r
-library(BayesianMDLGA)
+library(tidychangepoint)
 ```
 
 ## Tidy methods for changepoint analysis
@@ -120,6 +120,16 @@ plot(cpts)
 
 ![](README_files/figure-gfm/pelt-plot-1.png)<!-- -->
 
+The `diagnose()` function shows the empirical cumulative distribution of
+the exceedances of the time series, as well as how that distribution is
+modeled as a non-homogeneous Poisson process.
+
+``` r
+diagnose(cpts)
+```
+
+![](README_files/figure-gfm/diagnose-1.png)<!-- -->
+
 ## Algorithms
 
 ### From `changepoint`
@@ -191,7 +201,7 @@ DataCPSim |>
 changepoints(lista_AG)
 ```
 
-    ## [1]  566  694  862  884  915  920  939 1007 1096
+    ## [1]  566  694  862  884  915  920  939 1007
 
 ``` r
 plot(lista_AG)
@@ -208,17 +218,17 @@ plot(lista_AG$segmenter)
 ![](README_files/figure-gfm/diagnostic-1.png)<!-- -->
 
     ## Se guardo la imagen:
-    ## /tmp/Rtmp7oYBWD/Fig_4AGBMDL__rf_W_Gamma(1,2)_Gamma(3,1.2)_r50_k50_BMDL_585.pdf
+    ## /tmp/RtmpdjUMrf/Fig_4AGBMDL__rf_W_Gamma(1,2)_Gamma(3,1.2)_r50_k50_BMDL_585.pdf
 
 ![](README_files/figure-gfm/diagnostic-2.png)<!-- -->
 
 ## Citation
 
 ``` r
-citation("BayesianMDLGA")
+citation("tidychangepoint")
 ```
 
-    ## To cite package 'BayesianMDLGA' in publications use:
+    ## To cite package 'tidychangepoint' in publications use:
     ## 
     ##   Taimal CA, Suárez-Sierra BM, Rivera JC (2023). "An Exploration of
     ##   Genetic Algorithms Operators for the Detection of Multiple

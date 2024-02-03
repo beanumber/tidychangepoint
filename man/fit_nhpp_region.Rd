@@ -8,11 +8,11 @@ fit_nhpp_region(
   t,
   tau_left,
   tau_right,
-  initial_val_optim = BayesianMDLGA::param$initial_val_optim,
-  mat_low_upp = BayesianMDLGA::param$mat_low_upp,
-  rf_type = BayesianMDLGA::param$rf_type,
-  vec_dist_a_priori = BayesianMDLGA::param$vec_dist_a_priori,
-  mat_phi = BayesianMDLGA::param$mat_phi,
+  initial_val_optim = tidychangepoint::param$initial_val_optim,
+  mat_low_upp = tidychangepoint::param$mat_low_upp,
+  rf_type = tidychangepoint::param$rf_type,
+  vec_dist_a_priori = tidychangepoint::param$vec_dist_a_priori,
+  mat_phi = tidychangepoint::param$mat_phi,
   ...
 )
 }
