@@ -121,9 +121,6 @@ globalVariables(
 #' @param mat_phi matriz cuyos renglones tiene los parámetros de las
 #'   distribuciones a priori; cada renglón tiene todos los parametros de una
 #'   distribución
-#' @param ajuste_bloque en caso de ser TRUE se utiliza el ajuste por bloque de
-#'   NHPP para cada bloque del ajuste; ie, siempre se ajusta como primer bloque
-#'   y se toma en cuenta en que pedazo se empieza
 #'
 #' @return regresa un mensaje en caso de que no sea de la longitud correcta el
 #'   vector
@@ -162,8 +159,7 @@ revisor_param <- function(param,
                           initial_val_optim = c(.1, .5), # valores iniciales de busqueda del MAP
                           mat_low_upp = matrix(c(c(1e-4, 1e-8), c(1e+1, 1e+5)), nrow = 2), # rango de busqueda de MAP
                           vec_dist_a_priori = c("Gamma", "Gamma"), # distribuciones a priori
-                          mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2),
-                          ajuste_bloque = T
+                          mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2)
                           ) { # parametros de dist a priori, cada renglon corresponde a una dist parametro
 
   # En esta versión se tienen 31 variables 1 oct 2019
@@ -200,8 +196,7 @@ revisor_param <- function(param,
     initial_val_optim = c(.1, .5), # valores iniciales de busqueda del MAP
     mat_low_upp = matrix(c(c(1e-4, 1e-8), c(1e+1, 1e+5)), nrow = 2), # rango de busqueda de MAP
     vec_dist_a_priori = c("Gamma", "Gamma"), # distribuciones a priori
-    mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2), # parametros de dist a priori, cada renglon corresponde a una dist parametro
-    ajuste_bloque = T
+    mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2) # parametros de dist a priori, cada renglon corresponde a una dist parametro
   )
 
   error1_bien0 <- 0
@@ -283,12 +278,11 @@ revisor_param <- function(param,
 #' @param mat_low_upp description
 #' @param vec_dist_a_priori description
 #' @param mat_phi description
-#' @param ajuste_bloque description
 #' @export
-Bayesaian_MDL_1_cp <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi, ajuste_bloque) {
+Bayesaian_MDL_1_cp <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi) {
   N <- max(x)
   # 1. Obtener los estimadores MAP para cada regimen y guardarlos en mat_MAP
-  mat_MAP <- extrae_mat_MAP(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi, ajuste_bloque)
+  mat_MAP <- extrae_mat_MAP(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi)
   # 2. Evaluar la log-posterior (sumando la primera columna de mat_MAP)
   log_posterior <- sum(mat_MAP[, 1])
   # 3. Evaluar la penalización
@@ -305,11 +299,11 @@ Bayesaian_MDL_1_cp <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, v
 #' @export
 Bayesaian_MDL_k_cp <- function(
     mat_cp, x, rf_type, initial_val_optim, mat_low_upp, 
-    vec_dist_a_priori, mat_phi, ajuste_bloque
+    vec_dist_a_priori, mat_phi
 ) {
   # OBS: quizás se podría hacer matricial para que fuera más rápido
   return(apply(mat_cp, 1, function(y) {
-    Bayesaian_MDL_1_cp(y, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi, ajuste_bloque)
+    Bayesaian_MDL_1_cp(y, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi)
   }))
 }
 
@@ -344,7 +338,7 @@ Bayesaian_MDL_k_cp <- function(
 #'   lista_AG$segmenter$param$vec_dist_a_priori, 
 #'   lista_AG$segmenter$param$mat_phi
 #' )
-extrae_mat_MAP <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi, ajuste_bloque) {
+extrae_mat_MAP <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi) {
   # lista_insumos_bloque <- genera_insumos_bloque(cp,x,theta_mat) ANTES
   lista_insumos_bloque <- genera_insumos_bloque_sin_theta(cp, x)
   

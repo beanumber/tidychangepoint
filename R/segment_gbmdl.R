@@ -4,6 +4,7 @@
 #' @param param description. See [param].
 #'
 #' @return A `cpt_gbmdl` object
+#' @param show_progress_bar show the progress bar?
 #' @export
 #' @examples
 #' \dontrun{
@@ -11,7 +12,7 @@
 #' lista_AG <- segment_gbmdl(rlnorm_ts_1, param)
 #' }
 #' 
-segment_gbmdl <- function(x, param, destdir = tempdir()) {
+segment_gbmdl <- function(x, param, destdir = tempdir(), show_progress_bar = TRUE) {
   # lista_AG contiene los resultados del algoritmo genético
   lista_AG <- new_cpt_gbmdl(x, param = param)
   # El siguiete for va sobre en cada paso haciendo una nueva generación
@@ -33,7 +34,7 @@ segment_gbmdl <- function(x, param, destdir = tempdir()) {
     lista_AG$vec_min_BMDL[i] <- lista_AG$lista_AG_BMDL$vec_BMDL_k_cp[i_min_BMDL]
     # Imprimimos el porcentaje de progreso
     
-    if (param$print_progress_bar) {
+    if (show_progress_bar) {
       utils::setTxtProgressBar(pb, i)
     }
     # # Graficamos el valor de BMDL
@@ -63,7 +64,6 @@ cpt_bmdl_genetic_1 <- function(x, mat_cp, param) {
     param$mat_low_upp,
     param$vec_dist_a_priori,
     param$mat_phi,
-    param$ajuste_bloque
   )
   # 2. Encontrar sus probabilidades
   vec_probs <- probs_vec_MDL(vec_BMDL_k_cp, param$probs_rank0_MDL1)
