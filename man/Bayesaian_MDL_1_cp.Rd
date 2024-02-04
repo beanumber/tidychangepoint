@@ -3,7 +3,7 @@
 \name{Bayesaian_MDL_1_cp}
 \alias{Bayesaian_MDL_1_cp}
 \alias{Bayesaian_MDL_k_cp}
-\title{Bayesian MDL para un vector de puntos de cambio}
+\title{Validador de la lista param para ejecutar el AG-BMDL}
 \usage{
 Bayesaian_MDL_1_cp(cp, x)
 
@@ -13,6 +13,16 @@ Bayesaian_MDL_k_cp(mat_cp, x)
 \item{cp}{description}
 
 \item{x}{description}
+
+\item{param}{es la lista original de parámetros la cual contiene todos los
+siguientes}
+
+\item{r}{número de generaciones}
+
+\item{k}{tamaño de las generaciones}
+
+\item{max_num_cp}{el máximo número de rebases. Este parámetro se ocupa en
+particular para que todos los cromosomas quepan en una matriz.}
 
 \item{rf_type}{description}
 
@@ -25,7 +35,7 @@ regresa un vector de tamaño \code{k} (el numero de cromosomas por
 generación) con los valores del bayesian MDL
 }
 \description{
-Bayesian MDL para un vector de puntos de cambio
+Validador de la lista param para ejecutar el AG-BMDL
 
 Bayesian MDL para un vector de puntos de cambio
 }

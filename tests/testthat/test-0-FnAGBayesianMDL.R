@@ -1,6 +1,4 @@
-test_that("revisor_param works", {
-  expect_output(revisor_param(param), "valid")
-  expect_error(revisor_param("nothing"))
+test_that("params works", {
   # Validador de la dimensiones de cosas de distribucion a priori
   if (param$rf_type %in% c("W", "MO", "GO")) {
     dim_a_priori <- 2
@@ -13,6 +11,10 @@ test_that("revisor_param works", {
   #  expect_equal(length(param$vec_dist_a_priori), nrow(param$mat_low_upp))
   #  expect_equal(dim(param$mat_phi), dim(param$mat_low_upp))
   #  expect_equal(dim(param$initial_val_optim), dim_a_priori)
+  
+  # Validador de entradas de mat_low_upp
+  # expect_true(!all(param$mat_low_upp[, 2] - param$mat_low_upp[, 1] > 0))
+  
   
 })
 

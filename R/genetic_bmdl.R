@@ -47,59 +47,6 @@ globalVariables(
 #'   distribuciones a priori; cada renglón tiene todos los parametros de una
 #'   distribución
 #'
-#' @return regresa un mensaje en caso de que no sea de la longitud correcta el
-#'   vector
-#' @export
-#'
-#' @examples
-#' revisor_param(param)
-revisor_param <- function(param,
-                          r = 50, # número de generaciones 1000
-                          k = 50, # tamaño de generaciones 200
-                          max_num_cp = 40, #  = 30
-                          rf_type = c("W", "EW", "GGO", "MO", "GO")[1], # función de tasa de NHPP
-                          vec_dist_a_priori = c("Gamma", "Gamma"), # distribuciones a priori
-                          mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2)
-                          ) { # parametros de dist a priori, cada renglon corresponde a una dist parametro
-
-  # En esta versión se tienen 31 variables 1 oct 2019
-  # This version has 33 variables Jan 7 2020
-  ejemplo_param <- list(
-    r = 50, # número de generaciones 1000
-    k = 50, # tamaño de generaciones 200
-    max_num_cp = 40, #  = 30
-    rf_type = c("W", "EW", "GGO", "MO", "GO")[1], # función de tasa de NHPP
-    vec_dist_a_priori = c("Gamma", "Gamma"), # distribuciones a priori
-    mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2) # parametros de dist a priori, cada renglon corresponde a una dist parametro
-  )
-
-  error1_bien0 <- 0
-
-
-
-  # Validador de entradas de mat_low_upp
-  if (!all(param$mat_low_upp[, 2] - param$mat_low_upp[, 1] > 0)) {
-    cat(
-      "La matriz param$mat_low_upp es incorrecta; algunos valores low son",
-      "mayores que contraparte upp\n"
-    )
-  }
-
-
-  if (param$rf_type == "EW") {
-    cat("Recuerda que no se tiene programada la tasa NHPP EW\n")
-    error1_bien0 <- 1
-  }
-  if (error1_bien0 == 1) {
-    cat("EXISTEN ERRORES EN param.\n")
-  } else {
-    cat("The list 'param' is a valid.\n")
-  }
-}
-
-
-
-
 
 
 #' Bayesian MDL para un vector de puntos de cambio
