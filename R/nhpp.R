@@ -258,8 +258,6 @@ D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
 #'   distribuciones a priori
 #' @param mat_low_upp matriz con lugares donde buscar; cada renglon es para un
 #'   parámetro del NHPP
-#' @param initial_val_optim valores iniciales que utiliza la función optim para
-#'   encontrar el mínimo
 #'
 #' @return regresa un el resultado de optim
 #' @export
@@ -269,8 +267,8 @@ D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
 #' 
 #'
 fit_nhpp_region <- function(t, tau_left, tau_right, 
-                            initial_val_optim = tidychangepoint::param$initial_val_optim, 
-                            mat_low_upp = tidychangepoint::param$mat_low_upp, 
+                            initial_val_optim = c(0.1, 0.5), 
+                            mat_low_upp = matrix(c(c(1e-4, 1e-8), c(1e+1, 1e+5)), nrow = 2), 
                             rf_type = tidychangepoint::param$rf_type, 
                             vec_dist_a_priori = tidychangepoint::param$vec_dist_a_priori, 
                             mat_phi = tidychangepoint::param$mat_phi, ...) {

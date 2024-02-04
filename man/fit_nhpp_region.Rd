@@ -8,8 +8,8 @@ fit_nhpp_region(
   t,
   tau_left,
   tau_right,
-  initial_val_optim = tidychangepoint::param$initial_val_optim,
-  mat_low_upp = tidychangepoint::param$mat_low_upp,
+  initial_val_optim = c(0.1, 0.5),
+  mat_low_upp = matrix(c(c(1e-04, 1e-08), c(10, 1e+05)), nrow = 2),
   rf_type = tidychangepoint::param$rf_type,
   vec_dist_a_priori = tidychangepoint::param$vec_dist_a_priori,
   mat_phi = tidychangepoint::param$mat_phi,
@@ -17,9 +17,6 @@ fit_nhpp_region(
 )
 }
 \arguments{
-\item{initial_val_optim}{valores iniciales que utiliza la función optim para
-encontrar el mínimo}
-
 \item{mat_low_upp}{matriz con lugares donde buscar; cada renglon es para un
 parámetro del NHPP}
 

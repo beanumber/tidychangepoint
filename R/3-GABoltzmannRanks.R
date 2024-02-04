@@ -27,10 +27,7 @@ GABoltzmannMutation2 <- function(x, param, Mutation = 0.03, Temperature = 27) {
   BestChromosomes <- matrix(NA, nrow = 1, ncol = ncol(mat_cp))
 
   for (i in 1:param$r) {
-    Fitness <- Bayesaian_MDL_k_cp(
-      mat_cp, x, param$rf_type, param$initial_val_optim,
-      param$mat_low_upp, param$vec_dist_a_priori, param$mat_phi
-    )
+    Fitness <- Bayesaian_MDL_k_cp(mat_cp, x)
 
     FitnessGen[i] <- min(Fitness)
 

@@ -58,26 +58,13 @@ globalVariables(
 #'   lanza un volado con probabilidad prob_para_sin_cp, si es cae 1 se regresa
 #'   el cp original, si cae 0 se simula un punto de cambio y se regresa este cp
 #'   con este punto de cambio
-#' @param probs_rank0_MDL1 para medir obtener la probabilidad de los padres se
-#'   pueden tomar o las probabilidades con respecto a los rangos (como en el
-#'   artículo) o se pueden tomar las probabilidades con respecto a el MDL. La
-#'   diferencia radica en que si se toma con respecto al MDL se tendrá que un
-#'   cromosoma con un gran MDL este tendrá una gran ventaja de ocurrir, en
-#'   cambio cuando solo se tiene rank esta ventaja gran ventaja se reduce
 #' @param cuantos_mejores_cp_graf al final se generan unas graficas de los
 #'   mejores puntos de cambio, este parámetro dicta cuantos cromosomas se
 #'   graficarán
 #' @param minimo_numero_de_cp es la cota inferior del número de puntos de cambio
 #'   que puede tener un cromosoma
-#' @param probs_nuevos_muta0N probabilidades de mutar 0,1,2,...,l hasta cierto
-#'   numero l; eg si vale c(.5,.2,.2,.1) se tiene una probabilidad 0.5 de mutar
-#'   0 (de no mutar), probabilidad 0.2 de mutar 1,, probabilidad 0.2 de mutar 2,
-#'   y, probabilidad 0.1 de mutar 3.
 #' @param rf_type toma valores en c("W","EW","GGO","MO","GO") y es el nombre de
 #'   la función de tasa del NHPP
-#' @param initial_val_optim valores iniciales de busqueda del MAP para los
-#'   parámetros del NHPP
-#' @param mat_low_upp rango de busqueda de los parámetros para el MAP
 #' @param vec_dist_a_priori vector de los nobmres de las distribuciones a priori
 #'   que se utilizan; eg c("Gamma","Gamma") y c("Gamma","Gamma","Gamma")
 #' @param mat_phi matriz cuyos renglones tiene los parámetros de las
@@ -95,19 +82,13 @@ revisor_param <- function(param,
                           k = 50, # tamaño de generaciones 200
                           max_num_cp = 40, #  = 30
                           prob_inicial = 0.01, # = 0.05 bueno, = 0.2
-                          # dist = c("log_norm","poisson","DIC log_norm","DIC poisson")[1],  # cambiar para [2]
                           probs_muta = c(.4, .2, .4),
                           mutaciones = c(-1, 0, 1),
                           dist_extremos = 10,
                           prob_para_sin_cp = 0.5,
-                          probs_rank0_MDL1 = 0,
-                          # p_m = 0.2, # ya no se ocupa
                           cuantos_mejores_cp_graf = 100, # cuantos de los mejores cp se graficarán
                           minimo_numero_de_cp = 5, # minimo número de puntos de cambio
-                          probs_nuevos_muta0N = c(.5, .2, .2, .1), # probabilidades de mutar 0,1,2,... hasta cierto numero
                           rf_type = c("W", "EW", "GGO", "MO", "GO")[1], # función de tasa de NHPP
-                          initial_val_optim = c(.1, .5), # valores iniciales de busqueda del MAP
-                          mat_low_upp = matrix(c(c(1e-4, 1e-8), c(1e+1, 1e+5)), nrow = 2), # rango de busqueda de MAP
                           vec_dist_a_priori = c("Gamma", "Gamma"), # distribuciones a priori
                           mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2)
                           ) { # parametros de dist a priori, cada renglon corresponde a una dist parametro
@@ -119,19 +100,13 @@ revisor_param <- function(param,
     k = 50, # tamaño de generaciones 200
     max_num_cp = 40, #  = 30
     prob_inicial = 0.01, # = 0.05 bueno, = 0.2
-    # dist = c("log_norm","poisson","DIC log_norm","DIC poisson")[1],  # cambiar para [2]
     probs_muta = c(.4, .2, .4),
     mutaciones = c(-1, 0, 1),
     dist_extremos = 10,
     prob_para_sin_cp = 0.5,
-    probs_rank0_MDL1 = 0,
-    # p_m = 0.2, #ya no se ocupa
     cuantos_mejores_cp_graf = 100, # cuantos de los mejores cp se graficarán
     minimo_numero_de_cp = 5, # minimo número de puntos de cambio
-    probs_nuevos_muta0N = c(.5, .2, .2, .1), # probabilidades de mutar 0,1,2,... hasta cierto numero
     rf_type = c("W", "EW", "GGO", "MO", "GO")[1], # función de tasa de NHPP
-    initial_val_optim = c(.1, .5), # valores iniciales de busqueda del MAP
-    mat_low_upp = matrix(c(c(1e-4, 1e-8), c(1e+1, 1e+5)), nrow = 2), # rango de busqueda de MAP
     vec_dist_a_priori = c("Gamma", "Gamma"), # distribuciones a priori
     mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2) # parametros de dist a priori, cada renglon corresponde a una dist parametro
   )
@@ -211,19 +186,17 @@ revisor_param <- function(param,
 #' @param cp description
 #' @param x description
 #' @param rf_type description
-#' @param initial_val_optim description
-#' @param mat_low_upp description
 #' @param vec_dist_a_priori description
 #' @param mat_phi description
 #' @export
-Bayesaian_MDL_1_cp <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi) {
+Bayesaian_MDL_1_cp <- function(cp, x) {
   N <- max(x)
   # 1. Obtener los estimadores MAP para cada regimen y guardarlos en mat_MAP
-  mat_MAP <- extrae_mat_MAP(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi)
+  mat_MAP <- extrae_mat_MAP(cp, x)
   # 2. Evaluar la log-posterior (sumando la primera columna de mat_MAP)
   log_posterior <- sum(mat_MAP[, 1])
   # 3. Evaluar la penalización
-  penaliza_cp <- penalization_MDL(cp, rf_type, N)
+  penaliza_cp <- penalization_MDL(cp, param$rf_type, N)
   # 4. Obtener bayesian-MDL de la diferencia de la penalización y la log-posterior
   BMDL_1_cp <- penaliza_cp - log_posterior
   return(BMDL_1_cp)
@@ -234,13 +207,10 @@ Bayesaian_MDL_1_cp <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, v
 #' @return regresa un vector de tamaño `k` (el numero de cromosomas por
 #'   generación) con los valores del bayesian MDL
 #' @export
-Bayesaian_MDL_k_cp <- function(
-    mat_cp, x, rf_type, initial_val_optim, mat_low_upp, 
-    vec_dist_a_priori, mat_phi
-) {
+Bayesaian_MDL_k_cp <- function(mat_cp, x) {
   # OBS: quizás se podría hacer matricial para que fuera más rápido
   return(apply(mat_cp, 1, function(y) {
-    Bayesaian_MDL_1_cp(y, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi)
+    Bayesaian_MDL_1_cp(y, x)
   }))
 }
 
@@ -254,10 +224,6 @@ Bayesaian_MDL_k_cp <- function(
 #' @param vec_dist_a_priori nombres de distribuciones a priori
 #' @param mat_phi matriz cuyos renglones tiene los parámetros de las
 #'   distribuciones a priori
-#' @param mat_low_upp matriz con lugares donde buscar; cada renglon es para un
-#'   parámetro del NHPP
-#' @param initial_val_optim valores iniciales que utiliza la función optim para
-#'   encontrar el mínimo
 #' @param cp vector de tamaño max_num_cp con entradas m, tau_0=1 , ...,
 #'   tau_{m+1}, 0, ..., 0
 #'
@@ -268,14 +234,8 @@ Bayesaian_MDL_k_cp <- function(
 #' @export
 #' @examples
 #' chromo <- chromosome_best(lista_AG$segmenter)
-#' extrae_mat_MAP(chromo, as.ts(lista_AG), 
-#'   lista_AG$segmenter$param$rf_type, 
-#'   lista_AG$segmenter$param$initial_val_optim, 
-#'   lista_AG$segmenter$param$mat_low_upp, 
-#'   lista_AG$segmenter$param$vec_dist_a_priori, 
-#'   lista_AG$segmenter$param$mat_phi
-#' )
-extrae_mat_MAP <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_dist_a_priori, mat_phi) {
+#' extrae_mat_MAP(chromo, as.ts(lista_AG))
+extrae_mat_MAP <- function(cp, x) {
   # lista_insumos_bloque <- genera_insumos_bloque(cp,x,theta_mat) ANTES
   lista_insumos_bloque <- genera_insumos_bloque_sin_theta(cp, x)
   
@@ -294,13 +254,10 @@ extrae_mat_MAP <- function(cp, x, rf_type, initial_val_optim, mat_low_upp, vec_d
 
   # El siguiente for va sobre cada
   for (i in 1:n_mle) {
-    # MAP_NHPP(initial_val,mat_low_upp,vec_d_i,tau1,tau2,rf_type,vec_dist_a_priori,mat_phi){
     aux_map <- fit_nhpp_region(
       lista_insumos_bloque$lista_dias_regimen[[i]],
       lista_insumos_bloque$mat_tau[i, 1],
-      lista_insumos_bloque$mat_tau[i, 2], 
-      initial_val_optim, mat_low_upp, 
-      rf_type, vec_dist_a_priori, mat_phi
+      lista_insumos_bloque$mat_tau[i, 2]
     )
     # Obs: MAP_NHPP regresa la menos-log-posterior, por eso la multiplicamos por menos
     mat_MAP[i, ] <- c(-aux_map$value, aux_map$par)
@@ -401,11 +358,14 @@ mata_k_tau_volado <- function(mat_cp) {
 #' @param cp puntos de cambio
 #' @param x vector de revases
 #' @param param parametros
-#'
+#' @param probs_nuevos_muta0N probabilidades de mutar 0,1,2,...,l hasta cierto
+#'   numero l; eg si vale c(.5,.2,.2,.1) se tiene una probabilidad 0.5 de mutar
+#'   0 (de no mutar), probabilidad 0.2 de mutar 1,, probabilidad 0.2 de mutar 2,
+#'   y, probabilidad 0.1 de mutar 3.
 #' @return regresa un vector mutado
 #' @export
 #'
-muta_1_cp_BMDL <- function(cp, x, param) {
+muta_1_cp_BMDL <- function(cp, x, param, probs_nuevos_muta0N = c(0.8, 0.1, 0.1)) {
   # (cp <- sim_1_cp_BMDL(x,param) )
 
   # En caso de tener muy pocos puntos de cambio, rehacemos el cp
@@ -427,7 +387,7 @@ muta_1_cp_BMDL <- function(cp, x, param) {
   # Agregamos algunos puntos de cambio aleatoriamente
   if (length(cp_posibles_muta) < param$max_num_cp - 3) {
     # Simulamos cuantos vamos a agregar
-    (cuantos_nuevos <- sample(0:(length(param$probs_nuevos_muta0N) - 1), size = 1, prob = param$probs_nuevos_muta0N))
+    (cuantos_nuevos <- sample(0:(length(probs_nuevos_muta0N) - 1), size = 1, prob = probs_nuevos_muta0N))
     # print(cuantos_nuevos)
     if (length(cp_posibles_muta) < param$max_num_cp + cuantos_nuevos && cuantos_nuevos > 0) {
       cp_posibles_muta <- sort(unique(c(
@@ -553,11 +513,16 @@ penalization_MDL <- function(cp, rf_type, N) { # V02
 #' OBSERVACIÓN: Esto regresa numeros negativos, los cuales mientras más negativo mejor, ya que
 #'             dará que es un mejor vector de tiempos de cambio. Es decir, un MDL de -6000 es
 #'             mejor que -4000
-#' @param probs_rank0_MDL1 description
+#' @param probs_rank0_MDL1 para medir obtener la probabilidad de los padres se
+#'   pueden tomar o las probabilidades con respecto a los rangos (como en el
+#'   artículo) o se pueden tomar las probabilidades con respecto a el MDL. La
+#'   diferencia radica en que si se toma con respecto al MDL se tendrá que un
+#'   cromosoma con un gran MDL este tendrá una gran ventaja de ocurrir, en
+#'   cambio cuando solo se tiene rank esta ventaja gran ventaja se reduce
 #'
 #' @return regresa un vector de probabilidades
 #' @export
-probs_vec_MDL <- function(vec_MDL, probs_rank0_MDL1) {
+probs_vec_MDL <- function(vec_MDL, probs_rank0_MDL1 = 0) {
   if (any(is.infinite(vec_MDL))) {
     print("Valor infinito; fun probs_vec_MDL, vec_MDL=")
     print(vec_MDL)

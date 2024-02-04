@@ -4,7 +4,7 @@
 \alias{probs_vec_MDL}
 \title{Probabilidades a partir de mat_MDL}
 \usage{
-probs_vec_MDL(vec_MDL, probs_rank0_MDL1)
+probs_vec_MDL(vec_MDL, probs_rank0_MDL1 = 0)
 }
 \arguments{
 \item{vec_MDL}{vector con valores MDL
@@ -13,7 +13,12 @@ OBSERVACIÓN: Esto regresa numeros negativos, los cuales mientras más negativo 
 dará que es un mejor vector de tiempos de cambio. Es decir, un MDL de -6000 es
 mejor que -4000}
 
-\item{probs_rank0_MDL1}{description}
+\item{probs_rank0_MDL1}{para medir obtener la probabilidad de los padres se
+pueden tomar o las probabilidades con respecto a los rangos (como en el
+artículo) o se pueden tomar las probabilidades con respecto a el MDL. La
+diferencia radica en que si se toma con respecto al MDL se tendrá que un
+cromosoma con un gran MDL este tendrá una gran ventaja de ocurrir, en
+cambio cuando solo se tiene rank esta ventaja gran ventaja se reduce}
 }
 \value{
 regresa un vector de probabilidades

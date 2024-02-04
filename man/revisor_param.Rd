@@ -14,13 +14,9 @@ revisor_param(
   mutaciones = c(-1, 0, 1),
   dist_extremos = 10,
   prob_para_sin_cp = 0.5,
-  probs_rank0_MDL1 = 0,
   cuantos_mejores_cp_graf = 100,
   minimo_numero_de_cp = 5,
-  probs_nuevos_muta0N = c(0.5, 0.2, 0.2, 0.1),
   rf_type = c("W", "EW", "GGO", "MO", "GO")[1],
-  initial_val_optim = c(0.1, 0.5),
-  mat_low_upp = matrix(c(c(1e-04, 1e-08), c(10, 1e+05)), nrow = 2),
   vec_dist_a_priori = c("Gamma", "Gamma"),
   mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2)
 )
@@ -60,13 +56,6 @@ lanza un volado con probabilidad prob_para_sin_cp, si es cae 1 se regresa
 el cp original, si cae 0 se simula un punto de cambio y se regresa este cp
 con este punto de cambio}
 
-\item{probs_rank0_MDL1}{para medir obtener la probabilidad de los padres se
-pueden tomar o las probabilidades con respecto a los rangos (como en el
-artículo) o se pueden tomar las probabilidades con respecto a el MDL. La
-diferencia radica en que si se toma con respecto al MDL se tendrá que un
-cromosoma con un gran MDL este tendrá una gran ventaja de ocurrir, en
-cambio cuando solo se tiene rank esta ventaja gran ventaja se reduce}
-
 \item{cuantos_mejores_cp_graf}{al final se generan unas graficas de los
 mejores puntos de cambio, este parámetro dicta cuantos cromosomas se
 graficarán}
@@ -74,18 +63,8 @@ graficarán}
 \item{minimo_numero_de_cp}{es la cota inferior del número de puntos de cambio
 que puede tener un cromosoma}
 
-\item{probs_nuevos_muta0N}{probabilidades de mutar 0,1,2,...,l hasta cierto
-numero l; eg si vale c(.5,.2,.2,.1) se tiene una probabilidad 0.5 de mutar
-0 (de no mutar), probabilidad 0.2 de mutar 1,, probabilidad 0.2 de mutar 2,
-y, probabilidad 0.1 de mutar 3.}
-
 \item{rf_type}{toma valores en c("W","EW","GGO","MO","GO") y es el nombre de
 la función de tasa del NHPP}
-
-\item{initial_val_optim}{valores iniciales de busqueda del MAP para los
-parámetros del NHPP}
-
-\item{mat_low_upp}{rango de busqueda de los parámetros para el MAP}
 
 \item{vec_dist_a_priori}{vector de los nobmres de las distribuciones a priori
 que se utilizan; eg c("Gamma","Gamma") y c("Gamma","Gamma","Gamma")}

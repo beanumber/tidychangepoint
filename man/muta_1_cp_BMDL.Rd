@@ -5,7 +5,7 @@
 \alias{muta_k_cp_BMDL}
 \title{Mutaciones un cp en el caso BMDL}
 \usage{
-muta_1_cp_BMDL(cp, x, param)
+muta_1_cp_BMDL(cp, x, param, probs_nuevos_muta0N = c(0.8, 0.1, 0.1))
 
 muta_k_cp_BMDL(mat_cp, x, param)
 }
@@ -15,6 +15,11 @@ muta_k_cp_BMDL(mat_cp, x, param)
 \item{x}{vector de revases}
 
 \item{param}{parametros}
+
+\item{probs_nuevos_muta0N}{probabilidades de mutar 0,1,2,...,l hasta cierto
+numero l; eg si vale c(.5,.2,.2,.1) se tiene una probabilidad 0.5 de mutar
+0 (de no mutar), probabilidad 0.2 de mutar 1,, probabilidad 0.2 de mutar 2,
+y, probabilidad 0.1 de mutar 3.}
 }
 \value{
 regresa un vector mutado

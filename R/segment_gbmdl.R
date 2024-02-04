@@ -57,16 +57,9 @@ segment_gbmdl <- function(x, param, destdir = tempdir(), show_progress_bar = TRU
 
 cpt_bmdl_genetic_1 <- function(x, mat_cp, param) {
   # 1. Evaluación de sus calificaciones
-  vec_BMDL_k_cp <- Bayesaian_MDL_k_cp(
-    mat_cp, x, 
-    param$rf_type,
-    param$initial_val_optim,
-    param$mat_low_upp,
-    param$vec_dist_a_priori,
-    param$mat_phi
-  )
+  vec_BMDL_k_cp <- Bayesaian_MDL_k_cp(mat_cp, x)
   # 2. Encontrar sus probabilidades
-  vec_probs <- probs_vec_MDL(vec_BMDL_k_cp, param$probs_rank0_MDL1)
+  vec_probs <- probs_vec_MDL(vec_BMDL_k_cp)
   # 3. Seleccionar dos padres
   mat_padres <- selec_k_pares_de_padres(vec_probs)
   # 4. Juntar sus puntos de cambio

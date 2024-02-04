@@ -5,25 +5,9 @@
 \alias{Bayesaian_MDL_k_cp}
 \title{Bayesian MDL para un vector de puntos de cambio}
 \usage{
-Bayesaian_MDL_1_cp(
-  cp,
-  x,
-  rf_type,
-  initial_val_optim,
-  mat_low_upp,
-  vec_dist_a_priori,
-  mat_phi
-)
+Bayesaian_MDL_1_cp(cp, x)
 
-Bayesaian_MDL_k_cp(
-  mat_cp,
-  x,
-  rf_type,
-  initial_val_optim,
-  mat_low_upp,
-  vec_dist_a_priori,
-  mat_phi
-)
+Bayesaian_MDL_k_cp(mat_cp, x)
 }
 \arguments{
 \item{cp}{description}
@@ -31,10 +15,6 @@ Bayesaian_MDL_k_cp(
 \item{x}{description}
 
 \item{rf_type}{description}
-
-\item{initial_val_optim}{description}
-
-\item{mat_low_upp}{description}
 
 \item{vec_dist_a_priori}{description}
 

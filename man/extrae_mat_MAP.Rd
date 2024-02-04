@@ -4,15 +4,7 @@
 \alias{extrae_mat_MAP}
 \title{Extrae matriz con estimadores MAP}
 \usage{
-extrae_mat_MAP(
-  cp,
-  x,
-  rf_type,
-  initial_val_optim,
-  mat_low_upp,
-  vec_dist_a_priori,
-  mat_phi
-)
+extrae_mat_MAP(cp, x)
 }
 \arguments{
 \item{cp}{vector de tamaño max_num_cp con entradas m, tau_0=1 , ...,
@@ -21,12 +13,6 @@ tau_{m+1}, 0, ..., 0}
 \item{x}{description}
 
 \item{rf_type}{nombre de tasa de NHPP}
-
-\item{initial_val_optim}{valores iniciales que utiliza la función optim para
-encontrar el mínimo}
-
-\item{mat_low_upp}{matriz con lugares donde buscar; cada renglon es para un
-parámetro del NHPP}
 
 \item{vec_dist_a_priori}{nombres de distribuciones a priori}
 
@@ -43,11 +29,5 @@ Extrae matriz con estimadores MAP
 }
 \examples{
 chromo <- chromosome_best(lista_AG$segmenter)
-extrae_mat_MAP(chromo, as.ts(lista_AG), 
-  lista_AG$segmenter$param$rf_type, 
-  lista_AG$segmenter$param$initial_val_optim, 
-  lista_AG$segmenter$param$mat_low_upp, 
-  lista_AG$segmenter$param$vec_dist_a_priori, 
-  lista_AG$segmenter$param$mat_phi
-)
+extrae_mat_MAP(chromo, as.ts(lista_AG))
 }
