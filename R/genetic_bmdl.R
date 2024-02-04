@@ -39,30 +39,6 @@ globalVariables(
 #' @param k tamaño de las generaciones
 #' @param max_num_cp el máximo número de rebases. Este parámetro se ocupa en
 #'   particular para que todos los cromosomas quepan en una matriz.
-#' @param prob_inicial probabilidad de que en la primera generación un punto
-#'   cualquiera sea punto de cambio. Se recomienda =.5 ya que con esto se
-#'   distribuyen relativamente uniformes los puntos de cambio
-#' @param probs_muta probabilidades de mutación. Las longitudes de este vector y
-#'   mutaciones tienen que ser iguales; eg si mutaciones=c(-1,0,1) y probs_muta
-#'   = c(.2, .6, .2) entonces se tiene una probabilidad .2 de que el punto de
-#'   cambio se desplace a la izquierda, probabilidad .6 de quedar igual, y
-#'   probabilidad . 2 de ser movido a la derecha
-#' @param mutaciones vector con mutaciones posibles; eg si mutaciones=c(-1,0,1)
-#'   entonces un punto de cambio puede ser movido una unidad a la izquierda,
-#'   puede quedarse igual, o moverse una unidad a la derecha
-#' @param dist_extremos distancia entre el primer los puntos de cambio v_0 y v_1
-#'   al igual que entre v_m y v_{m+1}; distancia minima que debe de haber de un
-#'   punto de cambio y los valores 1 y T, donde T es la longitud total de la
-#'   serie
-#' @param prob_para_sin_cp En caso de querer mutar un cp sin puntos de cambio se
-#'   lanza un volado con probabilidad prob_para_sin_cp, si es cae 1 se regresa
-#'   el cp original, si cae 0 se simula un punto de cambio y se regresa este cp
-#'   con este punto de cambio
-#' @param cuantos_mejores_cp_graf al final se generan unas graficas de los
-#'   mejores puntos de cambio, este parámetro dicta cuantos cromosomas se
-#'   graficarán
-#' @param minimo_numero_de_cp es la cota inferior del número de puntos de cambio
-#'   que puede tener un cromosoma
 #' @param rf_type toma valores en c("W","EW","GGO","MO","GO") y es el nombre de
 #'   la función de tasa del NHPP
 #' @param vec_dist_a_priori vector de los nobmres de las distribuciones a priori
@@ -81,13 +57,6 @@ revisor_param <- function(param,
                           r = 50, # número de generaciones 1000
                           k = 50, # tamaño de generaciones 200
                           max_num_cp = 40, #  = 30
-                          prob_inicial = 0.01, # = 0.05 bueno, = 0.2
-                          probs_muta = c(.4, .2, .4),
-                          mutaciones = c(-1, 0, 1),
-                          dist_extremos = 10,
-                          prob_para_sin_cp = 0.5,
-                          cuantos_mejores_cp_graf = 100, # cuantos de los mejores cp se graficarán
-                          minimo_numero_de_cp = 5, # minimo número de puntos de cambio
                           rf_type = c("W", "EW", "GGO", "MO", "GO")[1], # función de tasa de NHPP
                           vec_dist_a_priori = c("Gamma", "Gamma"), # distribuciones a priori
                           mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2)
@@ -99,13 +68,6 @@ revisor_param <- function(param,
     r = 50, # número de generaciones 1000
     k = 50, # tamaño de generaciones 200
     max_num_cp = 40, #  = 30
-    prob_inicial = 0.01, # = 0.05 bueno, = 0.2
-    probs_muta = c(.4, .2, .4),
-    mutaciones = c(-1, 0, 1),
-    dist_extremos = 10,
-    prob_para_sin_cp = 0.5,
-    cuantos_mejores_cp_graf = 100, # cuantos de los mejores cp se graficarán
-    minimo_numero_de_cp = 5, # minimo número de puntos de cambio
     rf_type = c("W", "EW", "GGO", "MO", "GO")[1], # función de tasa de NHPP
     vec_dist_a_priori = c("Gamma", "Gamma"), # distribuciones a priori
     mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2) # parametros de dist a priori, cada renglon corresponde a una dist parametro
@@ -362,23 +324,43 @@ mata_k_tau_volado <- function(mat_cp) {
 #'   numero l; eg si vale c(.5,.2,.2,.1) se tiene una probabilidad 0.5 de mutar
 #'   0 (de no mutar), probabilidad 0.2 de mutar 1,, probabilidad 0.2 de mutar 2,
 #'   y, probabilidad 0.1 de mutar 3.
+#' @param dist_extremos distancia entre el primer los puntos de cambio v_0 y v_1
+#'   al igual que entre v_m y v_{m+1}; distancia minima que debe de haber de un
+#'   punto de cambio y los valores 1 y T, donde T es la longitud total de la
+#'   serie
+#' @param min_num_cpts es la cota inferior del número de puntos de cambio
+#'   que puede tener un cromosoma
+#' @param mutation_possibilities vector con mutaciones posibles; eg si mutaciones=c(-1,0,1)
+#'   entonces un punto de cambio puede ser movido una unidad a la izquierda,
+#'   puede quedarse igual, o moverse una unidad a la derecha
+#' @param mutation_probs probabilidades de mutación. Las longitudes de este vector y
+#'   mutaciones tienen que ser iguales; eg si mutaciones=c(-1,0,1) y probs_muta
+#'   = c(.2, .6, .2) entonces se tiene una probabilidad .2 de que el punto de
+#'   cambio se desplace a la izquierda, probabilidad .6 de quedar igual, y
+#'   probabilidad . 2 de ser movido a la derecha
 #' @return regresa un vector mutado
 #' @export
 #'
-muta_1_cp_BMDL <- function(cp, x, param, probs_nuevos_muta0N = c(0.8, 0.1, 0.1)) {
+muta_1_cp_BMDL <- function(cp, x, param, 
+                           probs_nuevos_muta0N = c(0.8, 0.1, 0.1), 
+                           dist_extremos = 10, 
+                           min_num_cpts = 1, 
+                           mutation_possibilities = c(-1, 0, 1),
+                           mutation_probs = c(0.3, 0.4, 0.3)
+) {
   # (cp <- sim_1_cp_BMDL(x,param) )
 
   # En caso de tener muy pocos puntos de cambio, rehacemos el cp
-  if (cp[1] <= param$minimo_numero_de_cp) {
+  if (cp[1] <= min_num_cpts) {
     return(sim_1_cp_BMDL(x, param))
   }
 
   (cp_posibles_muta <- cp[3:(cp[1] + 2)])
   # Indices mutados
   i_mutados <- sort(unique(sapply(
-    match(cp_posibles_muta, x) + sample(param$mutaciones, size = cp[1], prob = param$probs_muta, replace = T),
+    match(cp_posibles_muta, x) + sample(mutation_possibilities, size = cp[1], prob = mutation_probs, replace = T),
     function(yy) {
-      min(max(yy, param$dist_extremos), length(x) - param$dist_extremos)
+      min(max(yy, dist_extremos), length(x) - dist_extremos)
     }
   )))
   # Perturbamos los tau
@@ -392,7 +374,7 @@ muta_1_cp_BMDL <- function(cp, x, param, probs_nuevos_muta0N = c(0.8, 0.1, 0.1))
     if (length(cp_posibles_muta) < param$max_num_cp + cuantos_nuevos && cuantos_nuevos > 0) {
       cp_posibles_muta <- sort(unique(c(
         cp_posibles_muta,
-        sample(x[param$dist_extremos:(length(x) - param$dist_extremos)], cuantos_nuevos)
+        sample(x[dist_extremos:(length(x) - dist_extremos)], cuantos_nuevos)
       )))
     }
   }
@@ -438,6 +420,9 @@ muta_k_cp_BMDL <- function(mat_cp, x, param) {
 #' - las siguientes son otros puntos de cambio;
 #' - la siguiente entrada después de punto de cambio tiene el valor  `N`; y
 #' - los siguientes son númores cero hasta llenarlo para que sea de tamaño `max_num_cp`
+#' @param prob_inicial probabilidad de que en la primera generación un punto
+#'   cualquiera sea punto de cambio. Se recomienda =.5 ya que con esto se
+#'   distribuyen relativamente uniformes los puntos de cambio
 #' @export
 #' @examples
 #' sim_1_cp_BMDL(exceedances(DataCPSim), param)
@@ -445,9 +430,9 @@ muta_k_cp_BMDL <- function(mat_cp, x, param) {
 #' sim_1_cp_BMDL(exceedances(rlnorm_ts_2), param)
 #' sim_1_cp_BMDL(exceedances(rlnorm_ts_3), param)
 #'
-sim_1_cp_BMDL <- function(x, param) {
+sim_1_cp_BMDL <- function(x, param, prob_inicial = 0.06) {
   # Primero simulamos una binomial que va a ser el número de puntos de cambio
-  m <- min(stats::rbinom(1, length(x), param$prob_inicial), param$max_num_cp - 3)
+  m <- min(stats::rbinom(1, length(x), prob_inicial), param$max_num_cp - 3)
   # Simulamos los puntos de cambio uniformemente aleatorios
   valores_cp <- sort(sample(x[-length(x)], size = m, replace = F))
   # Genera cromosoma con estructura manejable

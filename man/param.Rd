@@ -5,7 +5,7 @@
 \alias{param}
 \title{param}
 \format{
-An object of class \code{list} of length 13.
+An object of class \code{list} of length 6.
 }
 \usage{
 param

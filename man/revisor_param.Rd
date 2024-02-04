@@ -9,13 +9,6 @@ revisor_param(
   r = 50,
   k = 50,
   max_num_cp = 40,
-  prob_inicial = 0.01,
-  probs_muta = c(0.4, 0.2, 0.4),
-  mutaciones = c(-1, 0, 1),
-  dist_extremos = 10,
-  prob_para_sin_cp = 0.5,
-  cuantos_mejores_cp_graf = 100,
-  minimo_numero_de_cp = 5,
   rf_type = c("W", "EW", "GGO", "MO", "GO")[1],
   vec_dist_a_priori = c("Gamma", "Gamma"),
   mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2)
@@ -31,37 +24,6 @@ siguientes}
 
 \item{max_num_cp}{el máximo número de rebases. Este parámetro se ocupa en
 particular para que todos los cromosomas quepan en una matriz.}
-
-\item{prob_inicial}{probabilidad de que en la primera generación un punto
-cualquiera sea punto de cambio. Se recomienda =.5 ya que con esto se
-distribuyen relativamente uniformes los puntos de cambio}
-
-\item{probs_muta}{probabilidades de mutación. Las longitudes de este vector y
-mutaciones tienen que ser iguales; eg si mutaciones=c(-1,0,1) y probs_muta
-= c(.2, .6, .2) entonces se tiene una probabilidad .2 de que el punto de
-cambio se desplace a la izquierda, probabilidad .6 de quedar igual, y
-probabilidad . 2 de ser movido a la derecha}
-
-\item{mutaciones}{vector con mutaciones posibles; eg si mutaciones=c(-1,0,1)
-entonces un punto de cambio puede ser movido una unidad a la izquierda,
-puede quedarse igual, o moverse una unidad a la derecha}
-
-\item{dist_extremos}{distancia entre el primer los puntos de cambio v_0 y v_1
-al igual que entre v_m y v_{m+1}; distancia minima que debe de haber de un
-punto de cambio y los valores 1 y T, donde T es la longitud total de la
-serie}
-
-\item{prob_para_sin_cp}{En caso de querer mutar un cp sin puntos de cambio se
-lanza un volado con probabilidad prob_para_sin_cp, si es cae 1 se regresa
-el cp original, si cae 0 se simula un punto de cambio y se regresa este cp
-con este punto de cambio}
-
-\item{cuantos_mejores_cp_graf}{al final se generan unas graficas de los
-mejores puntos de cambio, este parámetro dicta cuantos cromosomas se
-graficarán}
-
-\item{minimo_numero_de_cp}{es la cota inferior del número de puntos de cambio
-que puede tener un cromosoma}
 
 \item{rf_type}{toma valores en c("W","EW","GGO","MO","GO") y es el nombre de
 la función de tasa del NHPP}

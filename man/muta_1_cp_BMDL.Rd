@@ -5,7 +5,16 @@
 \alias{muta_k_cp_BMDL}
 \title{Mutaciones un cp en el caso BMDL}
 \usage{
-muta_1_cp_BMDL(cp, x, param, probs_nuevos_muta0N = c(0.8, 0.1, 0.1))
+muta_1_cp_BMDL(
+  cp,
+  x,
+  param,
+  probs_nuevos_muta0N = c(0.8, 0.1, 0.1),
+  dist_extremos = 10,
+  min_num_cpts = 1,
+  mutation_possibilities = c(-1, 0, 1),
+  mutation_probs = c(0.3, 0.4, 0.3)
+)
 
 muta_k_cp_BMDL(mat_cp, x, param)
 }
@@ -20,6 +29,24 @@ muta_k_cp_BMDL(mat_cp, x, param)
 numero l; eg si vale c(.5,.2,.2,.1) se tiene una probabilidad 0.5 de mutar
 0 (de no mutar), probabilidad 0.2 de mutar 1,, probabilidad 0.2 de mutar 2,
 y, probabilidad 0.1 de mutar 3.}
+
+\item{dist_extremos}{distancia entre el primer los puntos de cambio v_0 y v_1
+al igual que entre v_m y v_{m+1}; distancia minima que debe de haber de un
+punto de cambio y los valores 1 y T, donde T es la longitud total de la
+serie}
+
+\item{min_num_cpts}{es la cota inferior del número de puntos de cambio
+que puede tener un cromosoma}
+
+\item{mutation_possibilities}{vector con mutaciones posibles; eg si mutaciones=c(-1,0,1)
+entonces un punto de cambio puede ser movido una unidad a la izquierda,
+puede quedarse igual, o moverse una unidad a la derecha}
+
+\item{mutation_probs}{probabilidades de mutación. Las longitudes de este vector y
+mutaciones tienen que ser iguales; eg si mutaciones=c(-1,0,1) y probs_muta
+= c(.2, .6, .2) entonces se tiene una probabilidad .2 de que el punto de
+cambio se desplace a la izquierda, probabilidad .6 de quedar igual, y
+probabilidad . 2 de ser movido a la derecha}
 }
 \value{
 regresa un vector mutado

@@ -8,11 +8,16 @@ plot_cpt_repetidos(
   cpt_list,
   destdir = tempdir(),
   data_name_slug = "data",
-  pdf = FALSE
+  pdf = FALSE,
+  limit = 100
 )
 }
 \arguments{
 \item{cpt_list}{description}
+
+\item{limit}{al final se generan unas graficas de los
+mejores puntos de cambio, este parámetro dicta cuantos cromosomas se
+graficarán}
 }
 \value{
 guarda un pdf con la gráfica

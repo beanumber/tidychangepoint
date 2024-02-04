@@ -1,21 +1,25 @@
 #' Grafica los n puntos de cambio más repetidos sobre el plot.stepfun de los datos
 #'
 #' @param cpt_list description
+#' @param limit al final se generan unas graficas de los
+#'   mejores puntos de cambio, este parámetro dicta cuantos cromosomas se
+#'   graficarán
 #' @return guarda un pdf con la gráfica
 #' @export
 #' @examples
 #' plot_cpt_repetidos(lista_AG$segmenter)
 #' 
-plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(), data_name_slug = "data", pdf = FALSE) {
+plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(), 
+                               data_name_slug = "data", pdf = FALSE, 
+                               limit = 100) {
   # Obtenemos cuantos de los cp mejores se graficarán
-  n_cp_mas_repetidos <- cpt_list$param$cuantos_mejores_cp_graf
   historia_mejores_sin_0_1_N <- cpt_list$historia_mejores[, -1:-2]
   historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(cpt_list$data)]
-  cp_mas_repetidos <- rev(sort(table(historia_mejores_sin_0_1_N)))[1:n_cp_mas_repetidos]
+  cp_mas_repetidos <- rev(sort(table(historia_mejores_sin_0_1_N)))[1:limit]
   stats::plot.stepfun(
     cpt_list$data,
     col.vert = "gray20", 
-    main = paste0("Los ", n_cp_mas_repetidos, " CP mas repetidos ", fun_n_genera_texto_dist(cpt_list$param)),
+    main = paste0("Los ", limit, " CP mas repetidos ", fun_n_genera_texto_dist(cpt_list$param)),
     xlim = range(cpt_list$data)
   )
   graphics::abline(v = as.numeric(names(cp_mas_repetidos)), col = "blue")
