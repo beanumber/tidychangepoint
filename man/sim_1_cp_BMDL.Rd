@@ -5,7 +5,7 @@
 \alias{sim_k_cp_BMDL}
 \title{Genera un cromosoma de puntos de cambio para el Bayesian MDL}
 \usage{
-sim_1_cp_BMDL(x, param)
+sim_1_cp_BMDL(x, param, prob_inicial = 0.06)
 
 sim_k_cp_BMDL(x, param)
 }
@@ -13,6 +13,10 @@ sim_k_cp_BMDL(x, param)
 \item{x}{vector de excedentes}
 
 \item{param}{lista de parámetros globales. See \link{param}.}
+
+\item{prob_inicial}{probabilidad de que en la primera generación un punto
+cualquiera sea punto de cambio. Se recomienda =.5 ya que con esto se
+distribuyen relativamente uniformes los puntos de cambio}
 }
 \value{
 regresa una matriz de \code{k} por \code{max_num_cp+3}, la cual en cada renglón tiene

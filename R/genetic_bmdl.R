@@ -74,50 +74,9 @@ revisor_param <- function(param,
   )
 
   error1_bien0 <- 0
-  if (length(param) != length(ejemplo_param)) {
-    cat(
-      "ERROR in the number of variables of 'param':\nlength(param)=", length(param),
-      " and should be ", length(ejemplo_param), "\n"
-    )
-    cat(
-      "It lacks the variables:\n\t", setdiff(names(ejemplo_param), names(param)), "\n",
-      "and it has the not needed variables:\n\t", setdiff(names(param), names(ejemplo_param)), "\n"
-    )
-    error1_bien0 <- 1
-  }
 
-  # Validador de la dimensiones de cosas de distribucion a priori
-  if (param$rf_type %in% c("W", "MO", "GO")) dimension_priori <- 2
-  if (param$rf_type %in% c("EW", "GGO")) dimension_priori <- 3
-  if (length(param$vec_dist_a_priori) != dimension_priori) {
-    cat(
-      "Problemas con la dimension de param$vec_dist_a_priori:\n",
-      "\t No tiene dimension ", dimension_priori, " como lo requiere la distribucion ", param$rf_type, "\n"
-    )
-    error1_bien0 <- 1
-  }
-  if (nrow(param$mat_phi) != dimension_priori) {
-    cat(
-      "Problemas con el numero de renglones de param$mat_phi: \n",
-      "\t No son ", dimension_priori, " como lo requiere la distribucion ", param$rf_type, "\n"
-    )
-    error1_bien0 <- 1
-  }
-  if (nrow(param$mat_low_upp) != dimension_priori) {
-    cat(
-      "Problemas con el numero de renglones de param$mat_low_upp:\n",
-      "\t No son ", dimension_priori, " como lo requiere la distribucion ", param$rf_type, "\n"
-    )
-    error1_bien0 <- 1
-  }
 
-  if (length(param$initial_val_optim) != dimension_priori) {
-    cat(
-      "Problemas con la longitud de param$initial_val_optim:\n",
-      "\t No tiene longitud ", dimension_priori, " como lo requiere la distribucion ", param$rf_type, "\n"
-    )
-    error1_bien0 <- 1
-  }
+
   # Validador de entradas de mat_low_upp
   if (!all(param$mat_low_upp[, 2] - param$mat_low_upp[, 1] > 0)) {
     cat(
