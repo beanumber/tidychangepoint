@@ -1,36 +1,3 @@
-
-
-#' Genera los textos para los pdf y RData de las n distribuciones
-#' @param param description
-#' @export
-fun_n_genera_texto_dist <- function(param) {
-  texto_n_dist <- NULL
-  for (i in 1:length(param$vec_dist_a_priori)) {
-    dist <- param$vec_dist_a_priori[i]
-    parametros_dist <- param$mat_phi[i, ]
-    texto_n_dist <- c(texto_n_dist, fun_1_genera_texto_dist(dist, parametros_dist))
-  }
-  texto_n_dist <- paste(texto_n_dist, collapse = "_")
-  return(texto_n_dist)
-}
-
-#' Genera los textos para los pdf y RData de una distribución
-#' @rdname fun_n_genera_texto_dist
-#' @param dist description
-#' @param parametros_dist description
-#' @export
-fun_1_genera_texto_dist <- function(dist, parametros_dist) {
-  if (any(dist == c("Gamma", "Unif"))) {
-    texto <- paste0(dist, "(", parametros_dist[1], ",", parametros_dist[2], ")")
-  } else {
-    for (i in 1:10) print("no se tiene esta distribución; fun_1_genera_texto_dist")
-  }
-  return(texto)
-}
-
-
-
-
 #' Agrupamos los insumos por bloques
 #'
 #' @param cp vector de tamaño max_num_cp con entradas m, tau_0=1 , ...,
@@ -60,12 +27,3 @@ genera_insumos_bloque_sin_theta <- function(cp, x) {
   return(lista_insumos_bloque)
 }
 
-#' @rdname genera_insumos_bloque_sin_theta
-#' @export
-#' @examples
-#' split_by_tau(as.ts(lista_AG), changepoints(lista_AG))
-
-split_by_tau <- function(x, tau) {
-  idx <- cut_inclusive(1:length(x), pad_tau(tau, length(x)))
-  split(x, idx)
-}

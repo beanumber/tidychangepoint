@@ -2,12 +2,9 @@
 % Please edit documentation in R/generative.R
 \name{genera_insumos_bloque_sin_theta}
 \alias{genera_insumos_bloque_sin_theta}
-\alias{split_by_tau}
 \title{Agrupamos los insumos por bloques}
 \usage{
 genera_insumos_bloque_sin_theta(cp, x)
-
-split_by_tau(x, tau)
 }
 \arguments{
 \item{cp}{vector de tamaño max_num_cp con entradas m, tau_0=1 , ...,
@@ -26,5 +23,4 @@ Agrupamos los insumos por bloques
 \examples{
 genera_insumos_bloque_sin_theta(chromosome_best(lista_AG$segmenter), as.ts(lista_AG))
 
-split_by_tau(as.ts(lista_AG), changepoints(lista_AG))
 }

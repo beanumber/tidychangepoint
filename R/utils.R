@@ -64,3 +64,26 @@ test_set <- function(n = 1, sd = 1, seed = NULL) {
   attr(out, "cpt_true") <- tau
   return(out)
 }
+
+#' Genera los textos para los pdf y RData de las n distribuciones
+#' @export
+label_priors <- function() {
+  param$mat_phi |>
+    as.data.frame() |>
+    dplyr::mutate(
+      dist = param$vec_dist_a_priori,
+      label = paste0(dist, "(", V1, ", ", V2, ")")
+    ) |>
+    dplyr::pull(label) |>
+    paste0(collapse = "_")
+}
+
+#' @export
+#' @examples
+#' split_by_tau(as.ts(lista_AG), changepoints(lista_AG))
+
+split_by_tau <- function(x, tau) {
+  idx <- cut_inclusive(1:length(x), pad_tau(tau, length(x)))
+  split(x, idx)
+}
+
