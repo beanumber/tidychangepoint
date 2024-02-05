@@ -8,8 +8,8 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' lista_AG_ben <- segment_gbmdl(DataCPSim, param)
-#' lista_AG <- segment_gbmdl(rlnorm_ts_1, param)
+#' x <- segment_gbmdl(DataCPSim, param)
+#' y <- segment_gbmdl(rlnorm_ts_1, param)
 #' }
 #' 
 segment_gbmdl <- function(x, param, destdir = tempdir(), show_progress_bar = TRUE) {
@@ -21,10 +21,9 @@ segment_gbmdl <- function(x, param, destdir = tempdir(), show_progress_bar = TRU
   graphics::par(mfrow = c(2, 1), mar = c(1, 4, 2, 2))
   for (i in vec_para_for) {
     # Hacemos un paso del AG con el mat_cp anterior
-    lista_AG$lista_AG_BMDL <- cpt_bmdl_genetic_1(
+    lista_AG$lista_AG_BMDL <- segment_gbmdl_1(
       exceedances(lista_AG$data), 
-      lista_AG$lista_AG_BMDL$mat_cp, 
-      lista_AG$param
+      lista_AG$lista_AG_BMDL$mat_cp
     )
     # Obtenemos el índice del mínimo
     (i_min_BMDL <- which.min(lista_AG$lista_AG_BMDL$vec_BMDL_k_cp))
@@ -54,8 +53,13 @@ segment_gbmdl <- function(x, param, destdir = tempdir(), show_progress_bar = TRU
   return(lista_AG)
 }
 
+#' @export
+#' @examples
+#' mat_cp <- lista_AG$segmenter$lista_AG_BMDL$mat_cp
+#' segment_gbmdl_1(exceedances(DataCPSim), mat_cp)
+#' 
 
-cpt_bmdl_genetic_1 <- function(x, mat_cp, param) {
+segment_gbmdl_1 <- function(x, mat_cp) {
   # 1. Evaluación de sus calificaciones
   vec_BMDL_k_cp <- Bayesaian_MDL_k_cp(mat_cp, x)
   # 2. Encontrar sus probabilidades
@@ -70,7 +74,6 @@ cpt_bmdl_genetic_1 <- function(x, mat_cp, param) {
   mat_cp <- muta_k_cp_BMDL(mat_cp, x, param)
   # (mat_cp <- muta_k_cp(mat_cp,param)) # antes
   
-  
   # POR AHORA QUITE LA GENERACIÓN DE NUEVOS PUNTOS DE CAMBIO
   # 7. Genera nuevos puntos de cambio
   # mat_cp <- muta_k_nuevos(mat_cp, param$max_num_cp, N, param$p_m)
@@ -79,3 +82,15 @@ cpt_bmdl_genetic_1 <- function(x, mat_cp, param) {
   return(list(mat_cp = mat_cp, vec_BMDL_k_cp = vec_BMDL_k_cp))
 }
 
+
+#' @export
+#' @examples
+#' mat_cp <- lista_AG$segmenter$lista_AG_BMDL$mat_cp
+#' 
+#' Bayesaian_MDL_k_cp(mat_cp, exceedances(DataCPSim))
+#' segment_gbmdl_1_alt(DataCPSim, mat_cp)$bmdl
+
+segment_gbmdl_1_alt <- function(x, mat_cp) {
+  mat_cp_2_tbl(mat_cp) |>
+    dplyr::mutate(bmdl = purrr::map_dbl(tau, bmdl, x = x))
+}

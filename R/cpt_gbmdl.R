@@ -113,6 +113,32 @@ cpt_best <- function(x) {
 }
 
 #' @rdname new_cpt_gbmdl
+#' @export
+#' @examples
+#' chromo <- c(4, 1, 557, 877 , 905, 986, 1096, 0, 0, 0)
+#' chromo2tau(chromo)
+
+chromo2tau <- function(chromo) {
+  k <- chromo[1]
+  # trim the endpoints
+  setdiff(chromo[3:(k + 2)], c(0, length(as.ts(x))))
+}
+
+#' @rdname new_cpt_gbmdl
+#' @export
+#' @examples
+mat_cp_2_tbl <- function(mat_cp) {
+  mat_cp |>
+    apply(1, chromo2tau) |>
+    tibble::tibble() |>
+    setNames("tau") |>
+    dplyr::mutate(
+      m = purrr::map_int(tau, length)
+    )
+}
+
+
+#' @rdname new_cpt_gbmdl
 #' @param data_name_slug character string that will identify the data set used
 #' in the file name
 #' @export

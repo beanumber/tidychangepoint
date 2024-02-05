@@ -12,6 +12,8 @@
 \alias{cpt_best_params}
 \alias{chromosome_best}
 \alias{cpt_best}
+\alias{chromo2tau}
+\alias{mat_cp_2_tbl}
 \alias{write_cpt_gbmdl}
 \title{Class for candidate changepoints using Genetic BMDL heuristic}
 \usage{
@@ -37,6 +39,10 @@ chromosome_best(x)
 
 cpt_best(x)
 
+chromo2tau(chromo)
+
+mat_cp_2_tbl(mat_cp)
+
 write_cpt_gbmdl(x, destdir = tempdir(), data_name_slug = "data")
 }
 \arguments{
@@ -52,5 +58,7 @@ Class for candidate changepoints using Genetic BMDL heuristic
 cpts <- cpt_gbmdl(DataCPSim, param)
 str(cpts)
 cpt_best_params(lista_AG$segmenter)
+chromo <- c(4, 1, 557, 877 , 905, 986, 1096, 0, 0, 0)
+chromo2tau(chromo)
 write_cpt_gbmdl(lista_AG$segmenter)
 }

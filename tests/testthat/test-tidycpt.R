@@ -26,10 +26,15 @@ test_that("utils works", {
   x <- DataCPSim
   expect_true(all(exceedances(x) %in% 1:length(x)))
   
-  y <- pad_tau(826, length(x))
+  tau <- 826
+  y <- pad_tau(tau, length(x))
   expect_true(0 %in% y)
-  expect_true(826 %in% y)
+  expect_true(all(tau %in% y))
   expect_true(length(x) %in% y)
+  expect_equal(unpad_tau(y), tau)
+  expect_false(0 %in% unpad_tau(y))
+  expect_true(all(tau %in% y))
+  expect_false(length(x) %in% unpad_tau(y))
   
   z <- cut_inclusive(x, y)
   expect_equal(length(z), length(x))
@@ -42,3 +47,32 @@ test_that("utils works", {
   expect_length(levels(z), 2)
 })
 
+test_that("penalties work", {
+  mat_cp <- lista_AG$segmenter$lista_AG_BMDL$mat_cp
+  
+  Bayesaian_MDL_k_cp(mat_cp, exceedances(DataCPSim))
+  segment_gbmdl_1_alt(DataCPSim, mat_cp)$bmdl
+  
+  tau <- chromo2tau(mat_cp[1,])
+  Bayesaian_MDL_1_cp(mat_cp[1,], exceedances(DataCPSim))
+  bmdl(DataCPSim, chromo2tau(mat_cp[1,]))
+  
+  # log-posterior
+  extrae_mat_MAP(mat_cp[1,], DataCPSim)
+  fit_nhpp(DataCPSim, tau)
+  
+  penalty_mdl(pad_tau(tau, n = length(as.ts(DataCPSim))))
+  penalization_MDL(mat_cp[1,], "W", N = length(exceedances(DataCPSim)))
+  
+  expect_equal(penalty_mdl(pad_tau(0, n = 1)), -Inf)
+  expect_equal(penalty_mdl(pad_tau(50, n = 100)), 3 * log(50))
+  expect_gt(penalty_mdl(pad_tau(c(25, 50), n = 100)), penalty_mdl(pad_tau(50, n = 100)))
+  
+  x <- test_set()
+  cpt <- attr(x, "cpt_true")
+  expect_gt(penalty_mdl(pad_tau(cpt, length(as.ts(x)))), 0)
+  
+  expect_equal(bmdl(x, 0), -Inf)
+  bmdl(x, cpt)
+  expect_true(all(purrr::map_dbl(runif(10, max = length(as.ts(x))), bmdl, x = x) >= bmdl(x, cpt)))
+})

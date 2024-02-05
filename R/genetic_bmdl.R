@@ -49,6 +49,7 @@ globalVariables(
 #'
 
 
+
 #' Bayesian MDL para un vector de puntos de cambio
 #'
 #' @param cp description
@@ -112,14 +113,14 @@ extrae_mat_MAP <- function(cp, x) {
   
   n_mle <- cp[1] + 1
   n_mle_2 <- length(tau) + 1
-
+  
   if (param$rf_type %in% c("W", "MO", "GO")) dimension_priori <- 2
   if (param$rf_type %in% c("EW", "GGO")) dimension_priori <- 3
-
+  
   mat_MAP <- matrix(0, n_mle, dimension_priori + 1)
-
+  
   colnames(mat_MAP) <- c("log-posterior", "alpha", "beta", "sigma")[1:(dimension_priori + 1)]
-
+  
   # El siguiente for va sobre cada
   for (i in 1:n_mle) {
     aux_map <- fit_nhpp_region(
@@ -363,36 +364,6 @@ sim_k_cp_BMDL <- function(x, param) {
     mat_cp[i, ] <- sim_1_cp_BMDL(x, param)
   }
   return(mat_cp)
-}
-
-
-
-
-#' Penalización MDL
-#'
-#' @param cp vector de extendido de puntos de cambio
-#'
-#' @return regresa la evaluación de la penalización
-#'  \deqn{
-#'    P_{\theta,\tau} = \sum_{i=1}^{m+1}\dfrac{\ln(\tau_i-\tau_{i-1})}{2}+\ln(m)+\sum_{i=2}^m\ln(\tau_i)
-#'  }
-#' @export
-#' @examples
-#' mat_cp <- sim_k_cp_BMDL(DataCPSimRebases, param)
-#' penalization_MDL(mat_cp, param$rf_type, N = max(DataCPSimRebases))
-#' 
-#'
-penalization_MDL <- function(cp, rf_type, N) { # V02
-  # Se hizo el cambio de multiplicar por en número de parámetros
-  # esta función solo es llamada por "penalization_MDL"
-  # penalization_MDL <- function(cp) { # antes no recibía rf_type
-
-  # n_param_rf_type es el número de parámetros de la función de tasa del poisson
-  n_param_rf_type <- c(2, 3, 3, 2, 2)[rf_type == c("W", "EW", "GGO", "MO", "GO")]
-
-  (cp_corto_cero <- c(0, cp[3:(cp[1] + 3)]))
-  # En particular se agregó la parte *n_param_rf_type/2
-  return(sum(log(cp_corto_cero[-1] - cp_corto_cero[-cp[1] - 2]) * n_param_rf_type / 2) + log(cp[1]) + sum(log(cp_corto_cero[c(-1, -cp[1] - 2)])) + (cp[1] * log(N)))
 }
 
 

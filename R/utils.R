@@ -40,6 +40,13 @@ pad_tau <- function(tau, n) {
 }
 
 #' @export
+unpad_tau <- function(padded_tau) {
+  padded_tau |>
+    head(-1) |>
+    tail(-1)
+}
+
+#' @export
 cut_inclusive <- function(x, tau) {
   cut(x, breaks = tau, include.lowest = TRUE, right = FALSE)
 }
