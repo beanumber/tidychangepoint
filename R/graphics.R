@@ -19,14 +19,14 @@ plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(),
   stats::plot.stepfun(
     cpt_list$data,
     col.vert = "gray20", 
-    main = paste0("Los ", limit, " CP mas repetidos ", fun_n_genera_texto_dist(cpt_list$param)),
+    main = paste0("Los ", limit, " CP mas repetidos ", label_priors()),
     xlim = range(cpt_list$data)
   )
   graphics::abline(v = as.numeric(names(cp_mas_repetidos)), col = "blue")
 
   filename_pdf <- paste0(
     "Fig_CP_repetidos_", data_name_slug, "_rf_",
-    cpt_list$param$rf_type, "_", fun_n_genera_texto_dist(cpt_list$param), "_r",
+    cpt_list$param$rf_type, "_", label_priors(), "_r",
     cpt_list$param$r, "_k",
     cpt_list$param$k, 
     cpt_best_bmdl_string(cpt_list), ".pdf"
@@ -78,9 +78,7 @@ plot_confint <- function(cpt_list) {
   
   sigma <- theta$beta
   alpha <- theta$alpha
-  
-#  tasa_NHPP <- f(1:length(exceedances(cpt_list$data)), d = exceedances(cpt_list$data), tau, alpha, sigma)
-  
+
   plot_exceedances(cpt_list$data)
 
   m <- cdf_exceedances_est(exceedances(cpt_list$data), tau = tau, theta = theta, n = length(cpt_list$data))
@@ -88,9 +86,9 @@ plot_confint <- function(cpt_list) {
   upp_bond <- stats::qpois(.95, lambda = c(pow(10 / sigma[1], alpha[1]), m))
   low_bond <- stats::qpois(.05, lambda = c(pow(10 / sigma[1], alpha[1]), m))
   mean_NHPP <- c(pow(10 / sigma[1], alpha[1]), m)
-  graphics::lines(y = c(10, exceedances(cpt_list$data)), x = upp_bond, col = "blue", lwd = 2)
-  graphics::lines(y = c(10, exceedances(cpt_list$data)), x = mean_NHPP, col = "red", lwd = 2)
-  graphics::lines(y = c(10, exceedances(cpt_list$data)), x = low_bond, col = "blue", lwd = 2)
+  graphics::lines(x = c(10, exceedances(cpt_list$data)), y = upp_bond, col = "blue", lwd = 2)
+  graphics::lines(x = c(10, exceedances(cpt_list$data)), y = mean_NHPP, col = "red", lwd = 2)
+  graphics::lines(x = c(10, exceedances(cpt_list$data)), y = low_bond, col = "blue", lwd = 2)
 }
 
 #' Graficas del AG con BMDL
@@ -120,7 +118,7 @@ plot_BMDL <- function(cpt_list, destdir = tempdir(), data_name_slug = "data", pd
   
   filename_pdf <- paste0(
     "Fig_4AGBMDL_", data_name_slug, "_rf_",
-    cpt_list$param$rf_type, "_", fun_n_genera_texto_dist(cpt_list$param), "_r",
+    cpt_list$param$rf_type, "_", label_priors(), "_r",
     cpt_list$param$r, "_k",
     cpt_list$param$k, 
     cpt_best_bmdl_string(cpt_list), ".pdf"
@@ -149,7 +147,7 @@ plot_evolution <- function(cpt_list, i = length(cpt_list$vec_min_BMDL)) {
     main = paste0(
       "AG rate ", cpt_list$param$rf_type, " and priori ", 
 #      paste(cpt_list$param$vec_dist_a_priori, collapse = "-")
-      fun_n_genera_texto_dist(cpt_list$param)
+      label_priors()
     )
   )
 }

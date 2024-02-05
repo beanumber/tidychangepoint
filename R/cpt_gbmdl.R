@@ -128,7 +128,7 @@ write_cpt_gbmdl <- function(x, destdir = tempdir(), data_name_slug = "data") {
   
   file_name <- paste0(
     "Dat_AGBMDL_", data_name_slug, "_rf_",
-    x$param$rf_type, "_", fun_n_genera_texto_dist(x$param), "_r",
+    x$param$rf_type, "_", label_priors(), "_r",
     x$param$r, "_k",
     x$param$k, 
     cpt_best_bmdl_string(x), ".RData"
