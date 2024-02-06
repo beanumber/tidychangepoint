@@ -129,7 +129,7 @@ chromo2tau <- function(chromo) {
 #' @examples
 mat_cp_2_tbl <- function(mat_cp) {
   mat_cp |>
-    apply(1, chromo2tau) |>
+    mat_cp_2_list() |>
     tibble::tibble() |>
     setNames("tau") |>
     dplyr::mutate(
@@ -137,6 +137,12 @@ mat_cp_2_tbl <- function(mat_cp) {
     )
 }
 
+#' @rdname new_cpt_bmdl
+#' @export
+mat_cp_2_list <- function(mat_cp) {
+  mat_cp |>
+    apply(1, chromo2tau)
+}
 
 #' @rdname new_cpt_gbmdl
 #' @param data_name_slug character string that will identify the data set used

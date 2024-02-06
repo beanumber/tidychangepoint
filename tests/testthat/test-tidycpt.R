@@ -51,8 +51,8 @@ test_that("penalties work", {
   mat_cp <- sim_k_cp_BMDL(DataCPSim)
   
   Bayesaian_MDL_k_cp(mat_cp, exceedances(DataCPSim))
-  DataCPSim |>
-    evolve_alt(mat_cp) |>
+  mat_cp |>
+    mat_cp_2_list() |>
     purrr::map_dbl(bmdl, x = DataCPSim)
   
   tau <- chromo2tau(mat_cp[1,])
