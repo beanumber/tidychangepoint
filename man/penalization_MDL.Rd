@@ -19,7 +19,7 @@ regresa la evaluación de la penalización
 Penalización MDL
 }
 \examples{
-mat_cp <- sim_k_cp_BMDL(DataCPSimRebases, param)
+mat_cp <- sim_k_cp_BMDL(DataCPSim)
 penalization_MDL(mat_cp, param$rf_type, N = max(DataCPSimRebases))
 
 

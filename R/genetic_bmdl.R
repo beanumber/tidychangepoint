@@ -332,18 +332,18 @@ muta_k_cp_BMDL <- function(mat_cp, x, param) {
 #'   distribuyen relativamente uniformes los puntos de cambio
 #' @export
 #' @examples
-#' sim_1_cp_BMDL(exceedances(DataCPSim), param)
-#' sim_1_cp_BMDL(exceedances(rlnorm_ts_1), param)
-#' sim_1_cp_BMDL(exceedances(rlnorm_ts_2), param)
-#' sim_1_cp_BMDL(exceedances(rlnorm_ts_3), param)
+#' sim_1_cp_BMDL(exceedances(DataCPSim))
+#' sim_1_cp_BMDL(exceedances(rlnorm_ts_1))
+#' sim_1_cp_BMDL(exceedances(rlnorm_ts_2))
+#' sim_1_cp_BMDL(exceedances(rlnorm_ts_3))
 #'
-sim_1_cp_BMDL <- function(x, param, prob_inicial = 0.06) {
+sim_1_cp_BMDL <- function(x, param, max_num_cp = 20, prob_inicial = 0.06) {
   # Primero simulamos una binomial que va a ser el número de puntos de cambio
-  m <- min(stats::rbinom(1, length(x), prob_inicial), param$max_num_cp - 3)
+  m <- min(stats::rbinom(1, length(x), prob_inicial), max_num_cp - 3)
   # Simulamos los puntos de cambio uniformemente aleatorios
   valores_cp <- sort(sample(x[-length(x)], size = m, replace = F))
   # Genera cromosoma con estructura manejable
-  ans <- c(m, 1, valores_cp, max(x), rep(0, param$max_num_cp - m - 3))
+  ans <- c(m, 1, valores_cp, max(x), rep(0, max_num_cp - m - 3))
   return(ans)
 }
 
@@ -354,14 +354,13 @@ sim_1_cp_BMDL <- function(x, param, prob_inicial = 0.06) {
 #'         una simulación de un vector de tiempos de cambio
 #' @export
 #' @examples
-#' sim_k_cp_BMDL(DataCPSimRebases, param)
-#' sim_k_cp_BMDL(rlnorm_ts_1, param)
-#' 
+#' sim_k_cp_BMDL(DataCPSim)
 #'
-sim_k_cp_BMDL <- function(x, param) {
-  mat_cp <- matrix(0, param$k, param$max_num_cp)
-  for (i in 1:param$k) {
-    mat_cp[i, ] <- sim_1_cp_BMDL(x, param)
+sim_k_cp_BMDL <- function(x, k = 50, max_num_cp = 20) {
+  mat_cp <- matrix(0, k, max_num_cp)
+  exc <- exceedances(x)
+  for (i in 1:k) {
+    mat_cp[i, ] <- sim_1_cp_BMDL(exc)
   }
   return(mat_cp)
 }

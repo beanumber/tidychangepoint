@@ -48,10 +48,12 @@ test_that("utils works", {
 })
 
 test_that("penalties work", {
-  mat_cp <- lista_AG$segmenter$lista_AG_BMDL$mat_cp
+  mat_cp <- sim_k_cp_BMDL(DataCPSim)
   
   Bayesaian_MDL_k_cp(mat_cp, exceedances(DataCPSim))
-  segment_gbmdl_1_alt(DataCPSim, mat_cp)$bmdl
+  DataCPSim |>
+    evolve_alt(mat_cp) |>
+    purrr::map_dbl(bmdl, x = DataCPSim)
   
   tau <- chromo2tau(mat_cp[1,])
   Bayesaian_MDL_1_cp(mat_cp[1,], exceedances(DataCPSim))

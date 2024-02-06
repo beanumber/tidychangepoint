@@ -33,7 +33,7 @@ penalty_mdl <- function(padded_tau) {
 #' bmdl(DataCPSim, tau = changepoints(segment(DataCPSim, method = "cpt-pelt")))
 #' bmdl(DataCPSim, tau = changepoints(segment(DataCPSim, method = "single-best")))
 #' 
-#' 
+
 bmdl <- function(x, tau) {
   # 1. Obtener los estimadores MAP para cada regimen y guardarlos en mat_MAP
   theta <- fit_nhpp(x, tau)
@@ -57,7 +57,7 @@ bmdl <- function(x, tau) {
 #'  }
 #' @export
 #' @examples
-#' mat_cp <- sim_k_cp_BMDL(DataCPSimRebases, param)
+#' mat_cp <- sim_k_cp_BMDL(DataCPSim)
 #' penalization_MDL(mat_cp, param$rf_type, N = max(DataCPSimRebases))
 #' 
 #'

@@ -12,54 +12,49 @@
 #' y <- segment_gbmdl(rlnorm_ts_1, param)
 #' }
 #' 
-segment_gbmdl <- function(x, param, destdir = tempdir(), show_progress_bar = TRUE) {
+segment_gbmdl <- function(x, param, destdir = tempdir(), show_progress_bar = TRUE, write_rda = FALSE) {
   # lista_AG contiene los resultados del algoritmo genético
-  lista_AG <- new_cpt_gbmdl(x, param = param)
-  # El siguiete for va sobre en cada paso haciendo una nueva generación
-  vec_para_for <- 1:param$r
-  pb <- utils::txtProgressBar(min = 1, max = length(vec_para_for), style = 3, width = 60)
+  obj <- new_cpt_gbmdl(x, param = param)
+  
+  pb <- utils::txtProgressBar(min = 1, max = param$r, style = 3, width = 60)
   graphics::par(mfrow = c(2, 1), mar = c(1, 4, 2, 2))
-  for (i in vec_para_for) {
+  for (i in 1:param$r) {
     # Hacemos un paso del AG con el mat_cp anterior
-    lista_AG$lista_AG_BMDL <- segment_gbmdl_1(
-      exceedances(lista_AG$data), 
-      lista_AG$lista_AG_BMDL$mat_cp
-    )
+    vec_BMDL_k_cp <- Bayesaian_MDL_k_cp(obj$mat_cp, exceedances(x))
+    obj$mat_cp <- evolve(exceedances(as.ts(obj)), obj$mat_cp)
+    
     # Obtenemos el índice del mínimo
-    (i_min_BMDL <- which.min(lista_AG$lista_AG_BMDL$vec_BMDL_k_cp))
+    (i_min_BMDL <- which.min(vec_BMDL_k_cp))
     # Guardamos el cromosoma mínimo
-    lista_AG$historia_mejores[i, ] <- lista_AG$lista_AG_BMDL$mat_cp[i_min_BMDL, ]
+    obj$historia_mejores[i, ] <- obj$mat_cp[i_min_BMDL, ]
     # Guardamos el BMDL del cromosoma mínimo
-    lista_AG$vec_min_BMDL[i] <- lista_AG$lista_AG_BMDL$vec_BMDL_k_cp[i_min_BMDL]
+    obj$vec_min_BMDL[i] <- vec_BMDL_k_cp[i_min_BMDL]
     # Imprimimos el porcentaje de progreso
     
     if (show_progress_bar) {
       utils::setTxtProgressBar(pb, i)
     }
-    # # Graficamos el valor de BMDL
-    # plot(lista_AG$vec_min_BMDL,
-    #      xlim = c(1,param$r),type="l",col="blue",ylab="BMDL",xlab="Generation",
-    #      main=paste0("AG rate ",param$rf_type," and priori ",paste(param$vec_dist_a_priori,collapse = "-")))
-    plot_evolution(lista_AG, i)
-    # Graficamos los puntos de cambio que más se repitieron
-    plot_cpt_repeated(lista_AG, i)
+
+    plot_evolution(obj, i)
+    plot_cpt_repeated(obj, i)
   }
   close(pb)
   graphics::par(mfrow = c(1, 1))
-  cat(" \n")
-  
+
   # Write data object
-  write_cpt_gbmdl(lista_AG)
-  return(lista_AG)
+  if (write_rda) {
+    write_cpt_gbmdl(obj)
+  }
+  return(obj)
 }
 
 #' @export
 #' @examples
-#' mat_cp <- lista_AG$segmenter$lista_AG_BMDL$mat_cp
+#' mat_cp <- lista_AG$segmenter$mat_cp
 #' segment_gbmdl_1(exceedances(DataCPSim), mat_cp)
 #' 
 
-segment_gbmdl_1 <- function(x, mat_cp) {
+evolve <- function(x, mat_cp) {
   # 1. Evaluación de sus calificaciones
   vec_BMDL_k_cp <- Bayesaian_MDL_k_cp(mat_cp, x)
   # 2. Encontrar sus probabilidades
@@ -79,18 +74,6 @@ segment_gbmdl_1 <- function(x, mat_cp) {
   # mat_cp <- muta_k_nuevos(mat_cp, param$max_num_cp, N, param$p_m)
   
   # 8. Regresa el resultado
-  return(list(mat_cp = mat_cp, vec_BMDL_k_cp = vec_BMDL_k_cp))
+  return(mat_cp)
 }
 
-
-#' @export
-#' @examples
-#' mat_cp <- lista_AG$segmenter$lista_AG_BMDL$mat_cp
-#' 
-#' Bayesaian_MDL_k_cp(mat_cp, exceedances(DataCPSim))
-#' segment_gbmdl_1_alt(DataCPSim, mat_cp)$bmdl
-
-segment_gbmdl_1_alt <- function(x, mat_cp) {
-  mat_cp_2_tbl(mat_cp) |>
-    dplyr::mutate(bmdl = purrr::map_dbl(tau, bmdl, x = x))
-}

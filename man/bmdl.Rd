@@ -19,5 +19,4 @@ bmdl(DataCPSim, tau = 826)
 bmdl(DataCPSim, tau = changepoints(segment(DataCPSim, method = "cpt-pelt")))
 bmdl(DataCPSim, tau = changepoints(segment(DataCPSim, method = "single-best")))
 
-
 }

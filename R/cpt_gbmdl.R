@@ -14,7 +14,7 @@ new_cpt_gbmdl <- function(x = numeric(), param = list()) {
       param = param,
       # Inicializamos lista_AG_BMDL (de esta manero lo podemos meter en el for)
       # 1. Simular puntos de cambio iniciales
-      lista_AG_BMDL = list(mat_cp = sim_k_cp_BMDL(exceedances(x), param)),
+      mat_cp = sim_k_cp_BMDL(x),
       # historia_mejores guarda los mejores cp de cada generación
       historia_mejores = matrix(0, param$r, param$max_num_cp),
       # vec_min_BMDL guarda los valores mínimos del MDL de cada generación
@@ -121,7 +121,7 @@ cpt_best <- function(x) {
 chromo2tau <- function(chromo) {
   k <- chromo[1]
   # trim the endpoints
-  setdiff(chromo[3:(k + 2)], c(0, length(as.ts(x))))
+  setdiff(chromo[3:(k + 2)], c(0, max(chromo)))
 }
 
 #' @rdname new_cpt_gbmdl

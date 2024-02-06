@@ -5,9 +5,9 @@
 \alias{sim_k_cp_BMDL}
 \title{Genera un cromosoma de puntos de cambio para el Bayesian MDL}
 \usage{
-sim_1_cp_BMDL(x, param, prob_inicial = 0.06)
+sim_1_cp_BMDL(x, param, max_num_cp = 20, prob_inicial = 0.06)
 
-sim_k_cp_BMDL(x, param)
+sim_k_cp_BMDL(x, k = 50, max_num_cp = 20)
 }
 \arguments{
 \item{x}{vector de excedentes}
@@ -47,13 +47,11 @@ por lo cual se nosotros:
 }
 }
 \examples{
-sim_1_cp_BMDL(exceedances(DataCPSim), param)
-sim_1_cp_BMDL(exceedances(rlnorm_ts_1), param)
-sim_1_cp_BMDL(exceedances(rlnorm_ts_2), param)
-sim_1_cp_BMDL(exceedances(rlnorm_ts_3), param)
+sim_1_cp_BMDL(exceedances(DataCPSim))
+sim_1_cp_BMDL(exceedances(rlnorm_ts_1))
+sim_1_cp_BMDL(exceedances(rlnorm_ts_2))
+sim_1_cp_BMDL(exceedances(rlnorm_ts_3))
 
-sim_k_cp_BMDL(DataCPSimRebases, param)
-sim_k_cp_BMDL(rlnorm_ts_1, param)
-
+sim_k_cp_BMDL(DataCPSim)
 
 }
