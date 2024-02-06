@@ -86,12 +86,12 @@ test_that("parameter fitting works", {
   
   expect_equal(
     fit_nhpp_region(t = z[[1]], tau_left = 0, tau_right = tau)$par,
-    theta[1, 2:3] |> unlist() |> unname()
+    theta[1, c("alpha", "beta")] |> unlist() |> unname()
   )
   
   expect_equal(
     fit_nhpp_region(t = z[[2]], tau_left = tau, tau_right = length(y))$par,
-    theta[2, 2:3] |> unlist() |> unname()
+    theta[2, c("alpha", "beta")] |> unlist() |> unname()
   )
 
   plot_mcdf(segment(y, method = "cpt-manual", cpts = tau))

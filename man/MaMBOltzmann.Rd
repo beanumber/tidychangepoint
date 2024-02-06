@@ -18,7 +18,7 @@ GABoltzmannMutation2(x, param, Mutation = 0.03, Temperature = 27)
 
 \item{Temperature}{description}
 
-\item{x}{An \code{integer} vector. See \link{DataCPSimRebases}.}
+\item{x}{An \code{integer} vector. See \code{\link[=exceedances]{exceedances()}}.}
 
 \item{param}{A \code{list} or parameters. See \link{param}.}
 }
@@ -34,7 +34,7 @@ What does this function do?
 }
 \examples{
 \dontrun{
-  GABoltzmannMutation2(DataCPSimRebases, param)
+  GABoltzmannMutation2(exceedances(DataCPSim), param)
   GABoltzmannMutation2(rlnorm_ts_1, param)
   
 }

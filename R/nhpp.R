@@ -302,8 +302,9 @@ fit_nhpp <- function(x, tau) {
   ex <- exceedances(x)
   t_by_tau <- ex |>
     split(cut_inclusive(ex, pad_tau(tau, length(x))))
+  regions = names(t_by_tau)
   
-  endpoints <- names(t_by_tau) |>
+  endpoints <- regions |>
     strsplit(split = ",") |>
     lapply(readr::parse_number)
   
@@ -312,7 +313,7 @@ fit_nhpp <- function(x, tau) {
     endpoints,
     ~fit_nhpp_region(.x, .y[1], .y[2])
   )
-  fit_nhpp_region(t_by_tau[[1]], endpoints[[1]][1], endpoints[[1]][2])
+#  fit_nhpp_region(t_by_tau[[1]], endpoints[[1]][1], endpoints[[1]][2])
   
   get_params <- function(z) {
     cbind(
@@ -330,7 +331,16 @@ fit_nhpp <- function(x, tau) {
   } else {
     names_params <- c("alpha", "beta", "sigma")
   }
-  names(out)[2:ncol(out)] <- names_params 
+  names(out)[2:ncol(out)] <- names_params
+  
+  endpoints_df <- endpoints |>
+    purrr::map(t) |> 
+    purrr::map(as.data.frame) |> 
+    purrr::list_rbind() |>
+    setNames(nm = c("begin", "end"))
+  out <- out |>
+    dplyr::mutate(region = regions, .before = dplyr::everything()) |>
+    dplyr::bind_cols(endpoints_df)
   return(out)
 }
 

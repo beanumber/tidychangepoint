@@ -109,6 +109,10 @@ augment.tidycpt <- function(x, ...) {
 #' @rdname segment
 #' @export
 tidy.tidycpt <- function(x, ...) {
+  tau <- changepoints(x)
+  theta <- fit_nhpp(as.ts(x), tau)
+  n <- length(as.ts(x))
+  
   augment(x) |>
     dplyr::ungroup() |>
     # why is this necessary????
@@ -123,7 +127,8 @@ tidy.tidycpt <- function(x, ...) {
       mean = mean(y),
       sd = stats::sd(y),
       ... = ...
-    )
+    ) |>
+    dplyr::inner_join(theta, by = "region")
 }
 
 #' @rdname segment
