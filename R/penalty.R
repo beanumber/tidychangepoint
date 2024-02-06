@@ -40,9 +40,9 @@ bmdl <- function(x, tau) {
   # 2. Evaluar la log-posterior (sumando la primera columna de mat_MAP)
   log_posterior <- sum(theta$log_posterior)
   # 3. Evaluar la penalización
-  penaliza_cp <- penalty_mdl(pad_tau(tau, n = length(as.ts(x))))
+  penalty <- penalty_mdl(pad_tau(tau, n = length(as.ts(x))))
   # 4. Obtener bayesian-MDL de la diferencia de la penalización y la log-posterior
-  penaliza_cp - log_posterior
+  penalty - log_posterior
 }
 
 

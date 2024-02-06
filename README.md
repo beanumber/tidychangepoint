@@ -90,13 +90,14 @@ augment(cpts)
 tidy(cpts)
 ```
 
-    ## # A tibble: 4 × 8
-    ##   region        num_obs  left right   min   max  mean    sd
-    ##   <fct>           <int> <int> <int> <dbl> <dbl> <dbl> <dbl>
-    ## 1 [0,547)           546     1   546  13.7  92.8  35.3  11.3
-    ## 2 [547,822)         275   547   821  20.5 163.   58.1  19.3
-    ## 3 [822,972)         150   822   971  39.2 215.   96.7  30.5
-    ## 4 [972,1.1e+03]     125   972  1096  67.2 299.  156.   49.6
+    ## # A tibble: 4 × 13
+    ##   region  num_obs  left right   min   max  mean    sd log.posterior alpha   beta
+    ##   <chr>     <int> <int> <int> <dbl> <dbl> <dbl> <dbl>         <dbl> <dbl>  <dbl>
+    ## 1 [0,547)     546     1   546  13.7  92.8  35.3  11.3         -60.1 0.362 0.392 
+    ## 2 [547,8…     275   547   821  20.5 163.   58.1  19.3        -198.  0.657 0.0883
+    ## 3 [822,9…     150   822   971  39.2 215.   96.7  30.5        -150.  0.738 0.0730
+    ## 4 [972,1…     125   972  1096  67.2 299.  156.   49.6        -130.  0.750 0.0697
+    ## # ℹ 2 more variables: begin <dbl>, end <dbl>
 
 - `glance()` returns a `tbl` that provides summary statistics for the
   model fit.
@@ -155,7 +156,7 @@ naive methods, all of which return `lm` objects:
 ``` r
 DataCPSim |>
   segment(method = "null") |>
-  plot()
+  diagnose()
 ```
 
     ## method: null
@@ -168,7 +169,7 @@ DataCPSim |>
 ``` r
 DataCPSim |>
   segment(method = "cpt-manual", cpts = c(365, 826)) |>
-  plot()
+  diagnose()
 ```
 
     ## method: cpt-manual
@@ -184,7 +185,7 @@ DataCPSim |>
 ``` r
 DataCPSim |>
   segment(method = "single-best") |>
-  plot()
+  diagnose()
 ```
 
     ## method: single-best
@@ -215,12 +216,10 @@ Diagnostic plots are also available.
 plot(lista_AG$segmenter)
 ```
 
-![](README_files/figure-gfm/diagnostic-1.png)<!-- -->
-
     ## Se guardo la imagen:
-    ## /tmp/RtmpdjUMrf/Fig_4AGBMDL__rf_W_Gamma(1,2)_Gamma(3,1.2)_r50_k50_BMDL_585.pdf
+    ## /tmp/RtmppNyeGT/Fig_4AGBMDL_data_rf_W_Gamma(1, 2)_Gamma(3, 1.2)_r50_k50_BMDL_585.pdf
 
-![](README_files/figure-gfm/diagnostic-2.png)<!-- -->
+![](README_files/figure-gfm/diagnostic-1.png)<!-- -->
 
 ## Citation
 

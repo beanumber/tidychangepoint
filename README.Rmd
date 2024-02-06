@@ -101,7 +101,7 @@ identical(x, cpts$segmenter)
 ```{r null-plot}
 DataCPSim |>
   segment(method = "null") |>
-  plot()
+  diagnose()
 ```
 
 - `method = "cpt-manual"`: returns a model with changepoints specified manually using the `cpts` argument
@@ -109,7 +109,7 @@ DataCPSim |>
 ```{r manual-plot}
 DataCPSim |>
   segment(method = "cpt-manual", cpts = c(365, 826)) |>
-  plot()
+  diagnose()
 ```
 
 - `method = "single-best"`: returns the model with at most one changepoint that minimizes the log-likelihood
@@ -117,7 +117,7 @@ DataCPSim |>
 ```{r amoc-plot}
 DataCPSim |>
   segment(method = "single-best") |>
-  plot()
+  diagnose()
 ```
 
 ### Genetic BMDL
