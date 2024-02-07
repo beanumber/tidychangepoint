@@ -15,12 +15,12 @@
 #'   
 #' }
 
-GABoltzmannMutation2 <- function(x, param, Mutation = 0.03, Temperature = 27) {
+GABoltzmannMutation2 <- function(x, param, k = 50, Mutation = 0.03, Temperature = 27) {
   N <- max(x)
 
-  mat_cp <- matrix(NA, nrow = param$k, ncol = N)
+  mat_cp <- matrix(NA, nrow = k, ncol = N)
 
-  mat_cp <- t(replicate(param$k, RandomKeys(N)))
+  mat_cp <- t(replicate(k, RandomKeys(N)))
 
   FitnessGen <- numeric(0)
 

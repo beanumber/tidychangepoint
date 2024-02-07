@@ -5,7 +5,7 @@
 
 segment_gbmdl_alt <- function(x, r = 20, destdir = tempdir(), show_progress_bar = TRUE, write_rda = FALSE) {
   # lista_AG contiene los resultados del algoritmo genético
-  obj <- new_cpt_gbmdl(x, param = list(k = 50, r = r, max_num_cp = 20))
+  obj <- new_cpt_gbmdl(x, param = list(k = 50, r = r))
   
   pb <- utils::txtProgressBar(min = 1, max = r, style = 3, width = 60)
   

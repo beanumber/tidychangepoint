@@ -28,7 +28,7 @@ plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(),
     "Fig_CP_repetidos_", data_name_slug, "_rf_",
     cpt_list$param$rf_type, "_", label_priors(), "_r",
     cpt_list$param$r, "_k",
-    cpt_list$param$k, 
+    num_generations(cpt_list), 
     cpt_best_bmdl_string(cpt_list), ".pdf"
   )
   
@@ -120,7 +120,7 @@ plot_BMDL <- function(cpt_list, destdir = tempdir(), data_name_slug = "data", pd
     "Fig_4AGBMDL_", data_name_slug, "_rf_",
     cpt_list$param$rf_type, "_", label_priors(), "_r",
     cpt_list$param$r, "_k",
-    cpt_list$param$k, 
+    num_generations(cpt_list), 
     cpt_best_bmdl_string(cpt_list), ".pdf"
   )
   

@@ -17,7 +17,12 @@
 \alias{write_cpt_gbmdl}
 \title{Class for candidate changepoints using Genetic BMDL heuristic}
 \usage{
-new_cpt_gbmdl(x = numeric(), param = list())
+new_cpt_gbmdl(
+  x = numeric(),
+  param = list(),
+  num_generations = 50,
+  max_num_cp = 20
+)
 
 validate_cpt_gbmdl(x)
 

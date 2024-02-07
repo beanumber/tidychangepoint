@@ -13,7 +13,8 @@ muta_1_cp_BMDL(
   dist_extremos = 10,
   min_num_cpts = 1,
   mutation_possibilities = c(-1, 0, 1),
-  mutation_probs = c(0.3, 0.4, 0.3)
+  mutation_probs = c(0.3, 0.4, 0.3),
+  max_num_cp = 20
 )
 
 muta_k_cp_BMDL(mat_cp, x, param)
@@ -47,6 +48,9 @@ mutaciones tienen que ser iguales; eg si mutaciones=c(-1,0,1) y probs_muta
 = c(.2, .6, .2) entonces se tiene una probabilidad .2 de que el punto de
 cambio se desplace a la izquierda, probabilidad .6 de quedar igual, y
 probabilidad . 2 de ser movido a la derecha}
+
+\item{max_num_cp}{el máximo número de rebases. Este parámetro se ocupa en
+particular para que todos los cromosomas quepan en una matriz.}
 }
 \value{
 regresa un vector mutado

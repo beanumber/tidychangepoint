@@ -37,8 +37,6 @@ globalVariables(
 #'   siguientes
 #' @param r número de generaciones
 #' @param k tamaño de las generaciones
-#' @param max_num_cp el máximo número de rebases. Este parámetro se ocupa en
-#'   particular para que todos los cromosomas quepan en una matriz.
 #' @param rf_type toma valores en c("W","EW","GGO","MO","GO") y es el nombre de
 #'   la función de tasa del NHPP
 #' @param vec_dist_a_priori vector de los nobmres de las distribuciones a priori
@@ -196,6 +194,8 @@ mata_k_tau_volado <- function(mat_cp) {
 #'   = c(.2, .6, .2) entonces se tiene una probabilidad .2 de que el punto de
 #'   cambio se desplace a la izquierda, probabilidad .6 de quedar igual, y
 #'   probabilidad . 2 de ser movido a la derecha
+#' @param max_num_cp el máximo número de rebases. Este parámetro se ocupa en
+#'   particular para que todos los cromosomas quepan en una matriz.
 #' @return regresa un vector mutado
 #' @export
 #'
@@ -204,7 +204,8 @@ muta_1_cp_BMDL <- function(cp, x, param,
                            dist_extremos = 10, 
                            min_num_cpts = 1, 
                            mutation_possibilities = c(-1, 0, 1),
-                           mutation_probs = c(0.3, 0.4, 0.3)
+                           mutation_probs = c(0.3, 0.4, 0.3),
+                           max_num_cp = 20
 ) {
   # (cp <- sim_1_cp_BMDL(x,param) )
 
@@ -225,11 +226,11 @@ muta_1_cp_BMDL <- function(cp, x, param,
   (cp_posibles_muta <- x[i_mutados])
 
   # Agregamos algunos puntos de cambio aleatoriamente
-  if (length(cp_posibles_muta) < param$max_num_cp - 3) {
+  if (length(cp_posibles_muta) < max_num_cp - 3) {
     # Simulamos cuantos vamos a agregar
     (cuantos_nuevos <- sample(0:(length(probs_nuevos_muta0N) - 1), size = 1, prob = probs_nuevos_muta0N))
     # print(cuantos_nuevos)
-    if (length(cp_posibles_muta) < param$max_num_cp + cuantos_nuevos && cuantos_nuevos > 0) {
+    if (length(cp_posibles_muta) < max_num_cp + cuantos_nuevos && cuantos_nuevos > 0) {
       cp_posibles_muta <- sort(unique(c(
         cp_posibles_muta,
         sample(x[dist_extremos:(length(x) - dist_extremos)], cuantos_nuevos)
@@ -240,7 +241,7 @@ muta_1_cp_BMDL <- function(cp, x, param,
   # length(cp_posibles_muta)
 
   # Agregamos las mutaciones a la estructura que utilizamos en los cromosomas
-  cp <- c(length(cp_posibles_muta), 1, cp_posibles_muta, cp[cp[1] + 3], rep(0, param$max_num_cp - length(cp_posibles_muta) - 3))
+  cp <- c(length(cp_posibles_muta), 1, cp_posibles_muta, cp[cp[1] + 3], rep(0, max_num_cp - length(cp_posibles_muta) - 3))
   return(cp)
 }
 
@@ -249,8 +250,10 @@ muta_1_cp_BMDL <- function(cp, x, param,
 #' @return regreas una mat_cp mutada
 #' @export
 muta_k_cp_BMDL <- function(mat_cp, x, param) {
-  mat_muta <- matrix(0, param$k, param$max_num_cp)
-  for (i in 1:param$k) mat_muta[i, ] <- muta_1_cp_BMDL(mat_cp[i, ], x, param)
+  mat_muta <- matrix(0, nrow(mat_cp), ncol(mat_cp))
+  for (i in 1:nrow(mat_cp)) {
+    mat_muta[i, ] <- muta_1_cp_BMDL(mat_cp[i, ], x, param)
+  }
   return(mat_muta)
 }
 

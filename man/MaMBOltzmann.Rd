@@ -7,7 +7,7 @@
 \usage{
 MaMBOltzmann(mat_cp, Fitness, Mutation, Temperature)
 
-GABoltzmannMutation2(x, param, Mutation = 0.03, Temperature = 27)
+GABoltzmannMutation2(x, param, k = 50, Mutation = 0.03, Temperature = 27)
 }
 \arguments{
 \item{mat_cp}{description}

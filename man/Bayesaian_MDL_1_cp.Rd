@@ -21,9 +21,6 @@ siguientes}
 
 \item{k}{tamaño de las generaciones}
 
-\item{max_num_cp}{el máximo número de rebases. Este parámetro se ocupa en
-particular para que todos los cromosomas quepan en una matriz.}
-
 \item{rf_type}{description}
 
 \item{vec_dist_a_priori}{description}

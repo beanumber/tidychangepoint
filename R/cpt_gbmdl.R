@@ -5,7 +5,7 @@
 #' cpts <- cpt_gbmdl(DataCPSim, param)
 #' str(cpts)
 
-new_cpt_gbmdl <- function(x = numeric(), param = list()) {
+new_cpt_gbmdl <- function(x = numeric(), param = list(), num_generations = 50, max_num_cp = 20) {
   stopifnot(is.numeric(x))
   structure(
     list(
@@ -16,7 +16,7 @@ new_cpt_gbmdl <- function(x = numeric(), param = list()) {
       # 1. Simular puntos de cambio iniciales
       mat_cp = sim_k_cp_BMDL(x),
       # historia_mejores guarda los mejores cp de cada generación
-      historia_mejores = matrix(0, param$r, param$max_num_cp),
+      historia_mejores = matrix(0, param$r, max_num_cp),
       # vec_min_BMDL guarda los valores mínimos del MDL de cada generación
       vec_min_BMDL = rep(0, param$r)
     ), 
@@ -144,6 +144,13 @@ mat_cp_2_list <- function(mat_cp) {
     apply(1, chromo2tau)
 }
 
+#' @rdname new_cpt_bmdl
+#' @export
+num_generations <- function(x) {
+  nrow(x$mat_cp)
+}
+
+
 #' @rdname new_cpt_gbmdl
 #' @param data_name_slug character string that will identify the data set used
 #' in the file name
@@ -162,7 +169,7 @@ write_cpt_gbmdl <- function(x, destdir = tempdir(), data_name_slug = "data") {
     "Dat_AGBMDL_", data_name_slug, "_rf_",
     x$param$rf_type, "_", label_priors(), "_r",
     x$param$r, "_k",
-    x$param$k, 
+    num_generations(x),
     cpt_best_bmdl_string(x), ".RData"
   )
   

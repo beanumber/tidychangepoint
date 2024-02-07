@@ -69,10 +69,6 @@ evolve <- function(x, mat_cp) {
   mat_cp <- muta_k_cp_BMDL(mat_cp, x, param)
   # (mat_cp <- muta_k_cp(mat_cp,param)) # antes
   
-  # POR AHORA QUITE LA GENERACIÓN DE NUEVOS PUNTOS DE CAMBIO
-  # 7. Genera nuevos puntos de cambio
-  # mat_cp <- muta_k_nuevos(mat_cp, param$max_num_cp, N, param$p_m)
-  
   # 8. Regresa el resultado
   return(mat_cp)
 }
