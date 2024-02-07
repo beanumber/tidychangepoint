@@ -47,7 +47,7 @@ test_that("regions works", {
   tau <- changepoints(lista_AG)
   expect_equal(tau, cpt_best(lista_AG$segmenter))
   expect_false(0 %in% tau)
-  expect_false(length(as.ts(lista_AG)) %in% tau)
+  expect_false(length(lista_AG) %in% tau)
   y <- split_by_tau(as.ts(lista_AG), tau)
   expect_equal(length(y), length(tau) + 1)
 })
@@ -55,7 +55,7 @@ test_that("regions works", {
 test_that("mcddf works", {
   tau <- changepoints(lista_AG)
   theta <- cpt_best_params(lista_AG$segmenter)
-  m <- cdf_exceedances_est(exceedances(as.ts(lista_AG)), tau, theta, length(as.ts(lista_AG)))
+  m <- cdf_exceedances_est(exceedances(as.ts(lista_AG)), tau, theta, length(lista_AG))
   expect_equal(length(m), length(exceedances(as.ts(lista_AG))))
 })
 

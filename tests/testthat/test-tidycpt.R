@@ -63,7 +63,7 @@ test_that("penalties work", {
   # log-posterior
   fit_nhpp(DataCPSim, tau)
   
-  penalty_mdl(pad_tau(tau, n = length(as.ts(DataCPSim))))
+  penalty_mdl(pad_tau(tau, n = length(DataCPSim)))
   penalization_MDL(mat_cp[1,], "W", N = length(exceedances(DataCPSim)))
   
   expect_equal(penalty_mdl(pad_tau(0, n = 1)), -Inf)
@@ -72,9 +72,9 @@ test_that("penalties work", {
   
   x <- test_set()
   cpt <- attr(x, "cpt_true")
-  expect_gt(penalty_mdl(pad_tau(cpt, length(as.ts(x)))), 0)
+  expect_gt(penalty_mdl(pad_tau(cpt, length(x))), 0)
   
   expect_equal(bmdl(x, 0), -Inf)
   bmdl(x, cpt)
-  expect_true(all(purrr::map_dbl(runif(10, max = length(as.ts(x))), bmdl, x = x) >= bmdl(x, cpt)))
+  expect_true(all(purrr::map_dbl(runif(10, max = length(x)), bmdl, x = x) >= bmdl(x, cpt)))
 })

@@ -10,7 +10,7 @@
 #' @examples
 #' x <- segment(DataCPSim, method = "cpt-pelt")
 #' tau <- changepoints(x)
-#' penalty_mdl(pad_tau(tau, n = length(as.ts(x))))
+#' penalty_mdl(pad_tau(tau, n = length(x)))
 #' 
 
 penalty_mdl <- function(padded_tau) {
@@ -40,7 +40,7 @@ bmdl <- function(x, tau) {
   # 2. Evaluar la log-posterior (sumando la primera columna de mat_MAP)
   log_posterior <- sum(theta$log_posterior)
   # 3. Evaluar la penalización
-  penalty <- penalty_mdl(pad_tau(tau, n = length(as.ts(x))))
+  penalty <- penalty_mdl(pad_tau(tau, n = length(x)))
   # 4. Obtener bayesian-MDL de la diferencia de la penalización y la log-posterior
   penalty - log_posterior
 }

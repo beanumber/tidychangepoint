@@ -85,6 +85,12 @@ as.ts.tidycpt <- function(x, ...) {
 
 #' @rdname segment
 #' @export
+length.tidycpt <- function(x, ...) {
+  length(as.ts(x))
+}
+  
+#' @rdname segment
+#' @export
 changepoints <- function(x, ...) UseMethod("changepoints")
 
 #' @rdname segment
@@ -100,7 +106,7 @@ augment.tidycpt <- function(x, ...) {
   tibble::enframe(as.ts(x), name = "index", value = "y") |>
     tsibble::as_tsibble(index = index) |>
     dplyr::mutate(
-      region = cut_inclusive(index, pad_tau(tau, length(as.ts(x))))
+      region = cut_inclusive(index, pad_tau(tau, length(x)))
     ) |>
     dplyr::group_by(region)
 }
@@ -111,7 +117,7 @@ augment.tidycpt <- function(x, ...) {
 tidy.tidycpt <- function(x, ...) {
   tau <- changepoints(x)
   theta <- fit_nhpp(as.ts(x), tau)
-  n <- length(as.ts(x))
+  n <- length(x)
   
   augment(x) |>
     dplyr::ungroup() |>
@@ -196,7 +202,7 @@ plot.tidycpt <- function(x, ...) {
 plot_mcdf <- function(x, ...) {
   tau <- changepoints(x)
   theta <- fit_nhpp(as.ts(x), tau)
-  n <- length(as.ts(x))
+  n <- length(x)
   
   z <- exceedances(as.ts(x)) |>
     tibble::enframe(name = "cum_exceedances", value = "t_exceedance") |>

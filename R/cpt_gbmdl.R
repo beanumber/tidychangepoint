@@ -109,7 +109,7 @@ cpt_best <- function(x) {
   chromo <- chromosome_best(x)
   k <- chromo[1]
   # trim the endpoints
-  setdiff(chromo[3:(k + 2)], c(0, length(as.ts(x))))
+  setdiff(chromo[3:(k + 2)], c(0, length(x)))
 }
 
 #' @rdname new_cpt_gbmdl
@@ -198,6 +198,15 @@ glance.cpt_gbmdl <- function(x, ...) {
 #' as.ts(lista_AG)
 as.ts.cpt_gbmdl <- function(x, ...) {
   as.ts(x$data)
+}
+
+#' @rdname glance.cpt_gbmdl
+#' @export
+#' @examples
+#' length(lista_AG)
+#' 
+length.cpt_gbmdl <- function(x, ...) {
+  length(as.ts(x))
 }
 
 #' @rdname glance.cpt_gbmdl

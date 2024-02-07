@@ -5,6 +5,7 @@
 \alias{segment.numeric}
 \alias{segment.ts}
 \alias{as.ts.tidycpt}
+\alias{length.tidycpt}
 \alias{changepoints}
 \alias{changepoints.tidycpt}
 \alias{augment.tidycpt}
@@ -24,6 +25,8 @@ segment(x, method = "null", ...)
 \method{segment}{ts}(x, method = "null", ...)
 
 \method{as.ts}{tidycpt}(x, ...)
+
+\method{length}{tidycpt}(x, ...)
 
 changepoints(x, ...)
 
