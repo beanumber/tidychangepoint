@@ -61,7 +61,6 @@ test_that("penalties work", {
   bmdl(DataCPSim, chromo2tau(mat_cp[1,]))
   
   # log-posterior
-  extrae_mat_MAP(mat_cp[1,], DataCPSim)
   fit_nhpp(DataCPSim, tau)
   
   penalty_mdl(pad_tau(tau, n = length(as.ts(DataCPSim))))

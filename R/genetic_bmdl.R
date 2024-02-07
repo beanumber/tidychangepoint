@@ -61,9 +61,9 @@ globalVariables(
 Bayesaian_MDL_1_cp <- function(cp, x) {
   N <- max(x)
   # 1. Obtener los estimadores MAP para cada regimen y guardarlos en mat_MAP
-  mat_MAP <- extrae_mat_MAP(cp, x)
+  mat_MAP <- fit_nhpp(x, chromo2tau(cp))
   # 2. Evaluar la log-posterior (sumando la primera columna de mat_MAP)
-  log_posterior <- sum(mat_MAP[, 1])
+  log_posterior <- sum(mat_MAP$log.posterior)
   # 3. Evaluar la penalización
   penaliza_cp <- penalization_MDL(cp, param$rf_type, N)
   # 4. Obtener bayesian-MDL de la diferencia de la penalización y la log-posterior
@@ -84,55 +84,6 @@ Bayesaian_MDL_k_cp <- function(mat_cp, x) {
 }
 
 
-
-
-#' Extrae matriz con estimadores MAP
-#'
-#' @param x description
-#' @param rf_type nombre de tasa de NHPP
-#' @param vec_dist_a_priori nombres de distribuciones a priori
-#' @param mat_phi matriz cuyos renglones tiene los parámetros de las
-#'   distribuciones a priori
-#' @param cp vector de tamaño max_num_cp con entradas m, tau_0=1 , ...,
-#'   tau_{m+1}, 0, ..., 0
-#'
-#' @return regresa una matriz cuya primera columna es la log-posterior evaluada
-#'   en los estimadores MAP; sus siguientes columnas tiene los parametros de
-#'   cada regimen.
-#'
-#' @export
-#' @examples
-#' chromo <- chromosome_best(lista_AG$segmenter)
-#' extrae_mat_MAP(chromo, as.ts(lista_AG))
-extrae_mat_MAP <- function(cp, x) {
-  # lista_insumos_bloque <- genera_insumos_bloque(cp,x,theta_mat) ANTES
-  lista_insumos_bloque <- genera_insumos_bloque_sin_theta(cp, x)
-  
-  tau <- cp[3:6]
-  x_by_tau <- split_by_tau(x, tau)
-  
-  n_mle <- cp[1] + 1
-  n_mle_2 <- length(tau) + 1
-  
-  if (param$rf_type %in% c("W", "MO", "GO")) dimension_priori <- 2
-  if (param$rf_type %in% c("EW", "GGO")) dimension_priori <- 3
-  
-  mat_MAP <- matrix(0, n_mle, dimension_priori + 1)
-  
-  colnames(mat_MAP) <- c("log-posterior", "alpha", "beta", "sigma")[1:(dimension_priori + 1)]
-  
-  # El siguiente for va sobre cada
-  for (i in 1:n_mle) {
-    aux_map <- fit_nhpp_region(
-      lista_insumos_bloque$lista_dias_regimen[[i]],
-      lista_insumos_bloque$mat_tau[i, 1],
-      lista_insumos_bloque$mat_tau[i, 2]
-    )
-    # Obs: MAP_NHPP regresa la menos-log-posterior, por eso la multiplicamos por menos
-    mat_MAP[i, ] <- c(-aux_map$value, aux_map$par)
-  }
-  return(mat_MAP)
-}
 
 
 #' Hace un hijo de dos padres
