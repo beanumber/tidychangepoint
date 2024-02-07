@@ -27,8 +27,8 @@ plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(),
   filename_pdf <- paste0(
     "Fig_CP_repetidos_", data_name_slug, "_rf_",
     cpt_list$param$rf_type, "_", label_priors(), "_r",
-    cpt_list$param$r, "_k",
-    num_generations(cpt_list), 
+    num_generations(cpt_list), "_k",
+    generation_size(cpt_list), 
     cpt_best_bmdl_string(cpt_list), ".pdf"
   )
   
@@ -119,8 +119,8 @@ plot_BMDL <- function(cpt_list, destdir = tempdir(), data_name_slug = "data", pd
   filename_pdf <- paste0(
     "Fig_4AGBMDL_", data_name_slug, "_rf_",
     cpt_list$param$rf_type, "_", label_priors(), "_r",
-    cpt_list$param$r, "_k",
-    num_generations(cpt_list), 
+    num_generations(cpt_list), "_k",
+    generation_size(cpt_list), 
     cpt_best_bmdl_string(cpt_list), ".pdf"
   )
   
@@ -139,7 +139,7 @@ plot_BMDL <- function(cpt_list, destdir = tempdir(), data_name_slug = "data", pd
 plot_evolution <- function(cpt_list, i = length(cpt_list$vec_min_BMDL)) {
   plot(
     cpt_list$vec_min_BMDL[1:i],
-    xlim = c(1, cpt_list$param$r), 
+    xlim = c(1, num_generations(cpt_list)), 
     type = "l", 
     col = "blue", 
     ylab = "BMDL", 
@@ -163,7 +163,7 @@ plot_cpt_repeated <- function(cpt_list, i = nrow(cpt_list$historia_mejores)) {
     historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(exceedances(cpt_list$data))
   ]
   plot(
-    table(historia_mejores_sin_0_1_N) / cpt_list$param$r, 
+    table(historia_mejores_sin_0_1_N) / num_generations(cpt_list), 
     main = "Repeated change points", 
     ylab = "repetitions", 
     xlab = "change points index"

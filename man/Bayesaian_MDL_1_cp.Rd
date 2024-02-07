@@ -17,10 +17,6 @@ Bayesaian_MDL_k_cp(mat_cp, x)
 \item{param}{es la lista original de parámetros la cual contiene todos los
 siguientes}
 
-\item{r}{número de generaciones}
-
-\item{k}{tamaño de las generaciones}
-
 \item{rf_type}{description}
 
 \item{vec_dist_a_priori}{description}

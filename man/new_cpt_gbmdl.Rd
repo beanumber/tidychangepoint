@@ -21,6 +21,7 @@ new_cpt_gbmdl(
   x = numeric(),
   param = list(),
   num_generations = 50,
+  generation_size = 50,
   max_num_cp = 20
 )
 
@@ -52,6 +53,10 @@ write_cpt_gbmdl(x, destdir = tempdir(), data_name_slug = "data")
 }
 \arguments{
 \item{x}{a numeric vector}
+
+\item{num_generations}{número de generaciones}
+
+\item{generation_size}{tamaño de las generaciones}
 
 \item{data_name_slug}{character string that will identify the data set used
 in the file name}

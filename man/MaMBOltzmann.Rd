@@ -7,7 +7,7 @@
 \usage{
 MaMBOltzmann(mat_cp, Fitness, Mutation, Temperature)
 
-GABoltzmannMutation2(x, param, k = 50, Mutation = 0.03, Temperature = 27)
+GABoltzmannMutation2(x, r = 50, k = 50, Mutation = 0.03, Temperature = 27)
 }
 \arguments{
 \item{mat_cp}{description}
@@ -34,8 +34,8 @@ What does this function do?
 }
 \examples{
 \dontrun{
-  GABoltzmannMutation2(exceedances(DataCPSim), param)
-  GABoltzmannMutation2(rlnorm_ts_1, param)
+  GABoltzmannMutation2(exceedances(DataCPSim))
+  GABoltzmannMutation2(rlnorm_ts_1)
   
 }
 }

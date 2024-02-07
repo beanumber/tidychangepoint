@@ -5,11 +5,11 @@
 
 segment_gbmdl_alt <- function(x, r = 20, destdir = tempdir(), show_progress_bar = TRUE, write_rda = FALSE) {
   # lista_AG contiene los resultados del algoritmo genético
-  obj <- new_cpt_gbmdl(x, param = list(k = 50, r = r))
+  obj <- new_cpt_gbmdl(x, param = list(generation_size = 50, r = r))
   
   pb <- utils::txtProgressBar(min = 1, max = r, style = 3, width = 60)
   
-  basket <- sim_k_cp_BMDL(x, k = 50, max_num_cp = 20) |>
+  basket <- sim_k_cp_BMDL(x, generation_size = generation_size(obj), max_num_cp = 20) |>
     mat_cp_2_tbl() |>
     dplyr::pull(tau)
   keepers <- list()
@@ -49,7 +49,7 @@ segment_gbmdl_alt <- function(x, r = 20, destdir = tempdir(), show_progress_bar 
 #' mat_cp <- lista_AG$segmenter$lista_AG_BMDL$mat_cp
 #' 
 #' Bayesaian_MDL_k_cp(mat_cp, exceedances(DataCPSim))
-#' basket <- sim_k_cp_BMDL(DataCPSim, k = 50, max_num_cp = 20) |>
+#' basket <- sim_k_cp_BMDL(DataCPSim, 50, max_num_cp = 20) |>
 #'   mat_cp_2_tbl() |>
 #'   dplyr::pull(tau)
 #' evolve_alt(DataCPSim, basket) |>

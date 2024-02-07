@@ -35,8 +35,6 @@ globalVariables(
 #'
 #' @param param es la lista original de parámetros la cual contiene todos los
 #'   siguientes
-#' @param r número de generaciones
-#' @param k tamaño de las generaciones
 #' @param rf_type toma valores en c("W","EW","GGO","MO","GO") y es el nombre de
 #'   la función de tasa del NHPP
 #' @param vec_dist_a_priori vector de los nobmres de las distribuciones a priori
@@ -310,10 +308,10 @@ sim_1_cp_BMDL <- function(x, param, max_num_cp = 20, prob_inicial = 0.06) {
 #' @examples
 #' sim_k_cp_BMDL(DataCPSim)
 #'
-sim_k_cp_BMDL <- function(x, k = 50, max_num_cp = 20) {
-  mat_cp <- matrix(0, k, max_num_cp)
+sim_k_cp_BMDL <- function(x, generation_size = 50, max_num_cp = 20) {
+  mat_cp <- matrix(0, generation_size, max_num_cp)
   exc <- exceedances(x)
-  for (i in 1:k) {
+  for (i in 1:generation_size) {
     mat_cp[i, ] <- sim_1_cp_BMDL(exc)
   }
   return(mat_cp)

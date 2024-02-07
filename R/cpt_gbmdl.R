@@ -1,11 +1,17 @@
 #' Class for candidate changepoints using Genetic BMDL heuristic
 #' @export
 #' @param x a numeric vector
+#' @param num_generations número de generaciones
+#' @param generation_size tamaño de las generaciones
 #' @examples
 #' cpts <- cpt_gbmdl(DataCPSim, param)
 #' str(cpts)
 
-new_cpt_gbmdl <- function(x = numeric(), param = list(), num_generations = 50, max_num_cp = 20) {
+new_cpt_gbmdl <- function(x = numeric(), 
+                          param = list(), 
+                          num_generations = 50, 
+                          generation_size = 50, 
+                          max_num_cp = 20) {
   stopifnot(is.numeric(x))
   structure(
     list(
@@ -14,11 +20,11 @@ new_cpt_gbmdl <- function(x = numeric(), param = list(), num_generations = 50, m
       param = param,
       # Inicializamos lista_AG_BMDL (de esta manero lo podemos meter en el for)
       # 1. Simular puntos de cambio iniciales
-      mat_cp = sim_k_cp_BMDL(x),
+      mat_cp = sim_k_cp_BMDL(x, generation_size),
       # historia_mejores guarda los mejores cp de cada generación
-      historia_mejores = matrix(0, param$r, max_num_cp),
+      historia_mejores = matrix(0, num_generations, max_num_cp),
       # vec_min_BMDL guarda los valores mínimos del MDL de cada generación
-      vec_min_BMDL = rep(0, param$r)
+      vec_min_BMDL = rep(0, num_generations)
     ), 
     class = "cpt_gbmdl"
   )
@@ -146,10 +152,21 @@ mat_cp_2_list <- function(mat_cp) {
 
 #' @rdname new_cpt_bmdl
 #' @export
-num_generations <- function(x) {
+max_num_cp <- function(x) {
+  ncol(x$mat_cp)
+}
+
+#' @rdname new_cpt_bmdl
+#' @export
+generation_size <- function(x) {
   nrow(x$mat_cp)
 }
 
+#' @rdname new_cpt_bmdl
+#' @export
+num_generations <- function(x) {
+  length(x$vec_min_BMDL)
+}
 
 #' @rdname new_cpt_gbmdl
 #' @param data_name_slug character string that will identify the data set used
@@ -168,8 +185,8 @@ write_cpt_gbmdl <- function(x, destdir = tempdir(), data_name_slug = "data") {
   file_name <- paste0(
     "Dat_AGBMDL_", data_name_slug, "_rf_",
     x$param$rf_type, "_", label_priors(), "_r",
-    x$param$r, "_k",
-    num_generations(x),
+    num_generations(x), "_k",
+    generation_size(x),
     cpt_best_bmdl_string(x), ".RData"
   )
   

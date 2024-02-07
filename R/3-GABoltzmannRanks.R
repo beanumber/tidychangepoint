@@ -10,12 +10,12 @@
 #'   - A `matrix` with `k` rows and `N` columns
 #' @examples
 #' \dontrun{
-#'   GABoltzmannMutation2(exceedances(DataCPSim), param)
-#'   GABoltzmannMutation2(rlnorm_ts_1, param)
+#'   GABoltzmannMutation2(exceedances(DataCPSim))
+#'   GABoltzmannMutation2(rlnorm_ts_1)
 #'   
 #' }
 
-GABoltzmannMutation2 <- function(x, param, k = 50, Mutation = 0.03, Temperature = 27) {
+GABoltzmannMutation2 <- function(x, r = 50, k = 50, Mutation = 0.03, Temperature = 27) {
   N <- max(x)
 
   mat_cp <- matrix(NA, nrow = k, ncol = N)
@@ -26,7 +26,7 @@ GABoltzmannMutation2 <- function(x, param, k = 50, Mutation = 0.03, Temperature 
 
   BestChromosomes <- matrix(NA, nrow = 1, ncol = ncol(mat_cp))
 
-  for (i in 1:param$r) {
+  for (i in 1:r) {
     Fitness <- Bayesaian_MDL_k_cp(mat_cp, x)
 
     FitnessGen[i] <- min(Fitness)

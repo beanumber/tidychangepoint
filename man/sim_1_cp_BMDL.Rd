@@ -7,7 +7,7 @@
 \usage{
 sim_1_cp_BMDL(x, param, max_num_cp = 20, prob_inicial = 0.06)
 
-sim_k_cp_BMDL(x, k = 50, max_num_cp = 20)
+sim_k_cp_BMDL(x, generation_size = 50, max_num_cp = 20)
 }
 \arguments{
 \item{x}{vector de excedentes}

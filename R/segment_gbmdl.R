@@ -16,9 +16,9 @@ segment_gbmdl <- function(x, param, destdir = tempdir(), show_progress_bar = TRU
   # lista_AG contiene los resultados del algoritmo genético
   obj <- new_cpt_gbmdl(x, param = param)
   
-  pb <- utils::txtProgressBar(min = 1, max = param$r, style = 3, width = 60)
+  pb <- utils::txtProgressBar(min = 1, max = num_generations(obj), style = 3, width = 60)
   graphics::par(mfrow = c(2, 1), mar = c(1, 4, 2, 2))
-  for (i in 1:param$r) {
+  for (i in 1:num_generations(obj)) {
     # Hacemos un paso del AG con el mat_cp anterior
     vec_BMDL_k_cp <- Bayesaian_MDL_k_cp(obj$mat_cp, exceedances(x))
     obj$mat_cp <- evolve(exceedances(obj), obj$mat_cp)
