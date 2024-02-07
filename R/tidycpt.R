@@ -204,12 +204,12 @@ plot_mcdf <- function(x, ...) {
   theta <- fit_nhpp(as.ts(x), tau)
   n <- length(x)
   
-  z <- exceedances(as.ts(x)) |>
+  z <- exceedances(x) |>
     tibble::enframe(name = "cum_exceedances", value = "t_exceedance") |>
     # always add the last observation
     dplyr::bind_rows(
       data.frame(
-        cum_exceedances = length(exceedances(as.ts(x))), 
+        cum_exceedances = length(exceedances(x)), 
         t_exceedance = n
       )
     ) |>

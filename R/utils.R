@@ -31,7 +31,8 @@ step <- function(x) {
 #' @examples
 #' exceedances(DataCPSim)
 exceedances <- function(x) {
-  which(x > mean(x))
+  y <- as.ts(x)
+  which(y > mean(y))
 }
 
 #' @export

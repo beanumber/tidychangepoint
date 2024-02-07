@@ -21,7 +21,7 @@ segment_gbmdl <- function(x, param, destdir = tempdir(), show_progress_bar = TRU
   for (i in 1:param$r) {
     # Hacemos un paso del AG con el mat_cp anterior
     vec_BMDL_k_cp <- Bayesaian_MDL_k_cp(obj$mat_cp, exceedances(x))
-    obj$mat_cp <- evolve(exceedances(as.ts(obj)), obj$mat_cp)
+    obj$mat_cp <- evolve(exceedances(obj), obj$mat_cp)
     
     # Obtenemos el índice del mínimo
     (i_min_BMDL <- which.min(vec_BMDL_k_cp))
