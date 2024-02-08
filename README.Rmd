@@ -126,7 +126,7 @@ DataCPSim |>
 
 ```{r gbmdl-plot}
 # DataCPSim |>
-#   segment(method = "cpt-gbmdl", param = param)
+#   segment(method = "cpt-gbmdl")
 changepoints(lista_AG)
 plot(lista_AG)
 ```

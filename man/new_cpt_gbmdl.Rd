@@ -15,11 +15,14 @@
 \alias{chromo2tau}
 \alias{mat_cp_2_tbl}
 \alias{write_cpt_gbmdl}
+\alias{file_name}
 \title{Class for candidate changepoints using Genetic BMDL heuristic}
 \usage{
 new_cpt_gbmdl(
   x = numeric(),
-  param = list(),
+  nhpp_dist = c("W", "EW", "GGO", "MO", "GO")[1],
+  vec_dist_a_priori = c("Gamma", "Gamma"),
+  mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2),
   num_generations = 50,
   generation_size = 50,
   max_num_cp = 20
@@ -49,10 +52,22 @@ chromo2tau(chromo)
 
 mat_cp_2_tbl(mat_cp)
 
-write_cpt_gbmdl(x, destdir = tempdir(), data_name_slug = "data")
+write_cpt_gbmdl(x, destdir = tempdir())
+
+file_name(x, data_name_slug = "data")
 }
 \arguments{
 \item{x}{a numeric vector}
+
+\item{nhpp_dist}{toma valores en c("W","EW","GGO","MO","GO") y es el nombre de
+la función de tasa del NHPP}
+
+\item{vec_dist_a_priori}{vector de los nobmres de las distribuciones a priori
+que se utilizan; eg c("Gamma","Gamma") y c("Gamma","Gamma","Gamma")}
+
+\item{mat_phi}{matriz cuyos renglones tiene los parámetros de las
+distribuciones a priori; cada renglón tiene todos los parametros de una
+distribución}
 
 \item{num_generations}{número de generaciones}
 
@@ -65,10 +80,11 @@ in the file name}
 Class for candidate changepoints using Genetic BMDL heuristic
 }
 \examples{
-cpts <- cpt_gbmdl(DataCPSim, param)
+cpts <- cpt_gbmdl(DataCPSim)
 str(cpts)
 cpt_best_params(lista_AG$segmenter)
 chromo <- c(4, 1, 557, 877 , 905, 986, 1096, 0, 0, 0)
 chromo2tau(chromo)
 write_cpt_gbmdl(lista_AG$segmenter)
+file_name(cpt_gbmdl(DataCPSim))
 }

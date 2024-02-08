@@ -4,7 +4,6 @@
 #' 
 #' @export
 #' @param x An `integer` vector. See [exceedances()].
-#' @param param A `list` or parameters. See [param].
 #' @return A `list` of length 2:
 #'   - A `numeric` vector of `FitnessGeneraciones`
 #'   - A `matrix` with `k` rows and `N` columns

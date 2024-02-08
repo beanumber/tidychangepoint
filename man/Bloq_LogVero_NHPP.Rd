@@ -4,7 +4,7 @@
 \alias{Bloq_LogVero_NHPP}
 \title{Bloque de log-verosimilitud NHPP}
 \usage{
-Bloq_LogVero_NHPP(vec_d_i, tau1, tau2, rf_type, theta)
+Bloq_LogVero_NHPP(vec_d_i, tau1, tau2, theta, nhpp_dist = "W")
 }
 \arguments{
 \item{vec_d_i}{vector de días en los que hubo rebases entre el los puntos de
@@ -13,8 +13,6 @@ cambio tau1 y tau2}
 \item{tau1}{valor del primer punto de cambio}
 
 \item{tau2}{valor del segundo punto de cambio}
-
-\item{rf_type}{nombre de tasa de NHPP}
 
 \item{theta}{vector de parámetros de verosimilitud del NHPP}
 }

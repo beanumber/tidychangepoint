@@ -26,11 +26,6 @@
 #' @rdname rlnorm_ts_1
 "rlnorm_ts_3"
 
-#' param
-#' @docType data
-#' @seealso [revisor_param()]
-"param"
-
 #' DataCPSim
 #' @docType data
 "DataCPSim"

@@ -4,7 +4,7 @@
 \alias{label_priors}
 \title{Genera los textos para los pdf y RData de las n distribuciones}
 \usage{
-label_priors()
+label_priors(x)
 }
 \description{
 Genera los textos para los pdf y RData de las n distribuciones

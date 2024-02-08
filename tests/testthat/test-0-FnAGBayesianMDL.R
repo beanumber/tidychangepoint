@@ -1,13 +1,14 @@
 test_that("params works", {
   # Validador de la dimensiones de cosas de distribucion a priori
-  if (param$rf_type %in% c("W", "MO", "GO")) {
+  x <- cpt_gbmdl(DataCPSim)
+  if (x$nhpp_dist %in% c("W", "MO", "GO")) {
     dim_a_priori <- 2
   } else {
     dim_a_priori <- 3
   }
   
-  expect_equal(length(param$vec_dist_a_priori), dim_a_priori)
-  expect_equal(length(param$vec_dist_a_priori), nrow(param$mat_phi))
+  expect_equal(length(x$vec_dist_a_priori), dim_a_priori)
+  expect_equal(length(x$vec_dist_a_priori), nrow(x$mat_phi))
   #  expect_equal(length(param$vec_dist_a_priori), nrow(param$mat_low_upp))
   #  expect_equal(dim(param$mat_phi), dim(param$mat_low_upp))
   #  expect_equal(dim(param$initial_val_optim), dim_a_priori)

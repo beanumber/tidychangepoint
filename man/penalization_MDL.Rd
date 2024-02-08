@@ -4,7 +4,7 @@
 \alias{penalization_MDL}
 \title{Penalización MDL}
 \usage{
-penalization_MDL(cp, rf_type, N)
+penalization_MDL(cp, nhpp_dist = "W", N)
 }
 \arguments{
 \item{cp}{vector de extendido de puntos de cambio}
@@ -20,7 +20,7 @@ Penalización MDL
 }
 \examples{
 mat_cp <- sim_k_cp_BMDL(DataCPSim)
-penalization_MDL(mat_cp, param$rf_type, N = max(exceedances(DataCPSim)))
+penalization_MDL(mat_cp, N = max(exceedances(DataCPSim)))
 
 
 }

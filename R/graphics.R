@@ -14,23 +14,17 @@ plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(),
                                limit = 100) {
   # Obtenemos cuantos de los cp mejores se graficarán
   historia_mejores_sin_0_1_N <- cpt_list$historia_mejores[, -1:-2]
-  historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(cpt_list$data)]
+  historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(as.ts(cpt_list))]
   cp_mas_repetidos <- rev(sort(table(historia_mejores_sin_0_1_N)))[1:limit]
   stats::plot.stepfun(
-    cpt_list$data,
+    as.ts(cpt_list),
     col.vert = "gray20", 
-    main = paste0("Los ", limit, " CP mas repetidos ", label_priors()),
-    xlim = range(cpt_list$data)
+    main = paste0("Los ", limit, " CP mas repetidos ", label_priors(cpt_list)),
+    xlim = range(as.ts(cpt_list))
   )
   graphics::abline(v = as.numeric(names(cp_mas_repetidos)), col = "blue")
 
-  filename_pdf <- paste0(
-    "Fig_CP_repetidos_", data_name_slug, "_rf_",
-    cpt_list$param$rf_type, "_", label_priors(), "_r",
-    num_generations(cpt_list), "_k",
-    generation_size(cpt_list), 
-    cpt_best_bmdl_string(cpt_list), ".pdf"
-  )
+  filename_pdf <- paste0("Fig_CP_repetidos_", file_name(cpt_list))
   
   path <- fs::path(destdir, filename_pdf)
   
@@ -67,7 +61,6 @@ plot_exceedances <- function(x, ...) {
 #' Graficas de los intervalos y los datos
 #'
 #' @param lista_AG description
-#' @param param description
 #' @export
 #' @examples
 #' plot_confint(lista_AG$segmenter)
@@ -79,16 +72,16 @@ plot_confint <- function(cpt_list) {
   sigma <- theta$beta
   alpha <- theta$alpha
 
-  plot_exceedances(cpt_list$data)
+  plot_exceedances(as.ts(cpt_list))
 
-  m <- cdf_exceedances_est(exceedances(cpt_list$data), tau = tau, theta = theta, n = length(cpt_list$data))
+  m <- cdf_exceedances_est(exceedances(cpt_list$data), tau = tau, theta = theta, n = length(cpt_list))
   
   upp_bond <- stats::qpois(.95, lambda = c(pow(10 / sigma[1], alpha[1]), m))
   low_bond <- stats::qpois(.05, lambda = c(pow(10 / sigma[1], alpha[1]), m))
   mean_NHPP <- c(pow(10 / sigma[1], alpha[1]), m)
-  graphics::lines(x = c(10, exceedances(cpt_list$data)), y = upp_bond, col = "blue", lwd = 2)
-  graphics::lines(x = c(10, exceedances(cpt_list$data)), y = mean_NHPP, col = "red", lwd = 2)
-  graphics::lines(x = c(10, exceedances(cpt_list$data)), y = low_bond, col = "blue", lwd = 2)
+  graphics::lines(x = c(10, exceedances(cpt_list)), y = upp_bond, col = "blue", lwd = 2)
+  graphics::lines(x = c(10, exceedances(cpt_list)), y = mean_NHPP, col = "red", lwd = 2)
+  graphics::lines(x = c(10, exceedances(cpt_list)), y = low_bond, col = "blue", lwd = 2)
 }
 
 #' Graficas del AG con BMDL
@@ -116,13 +109,7 @@ plot_BMDL <- function(cpt_list, destdir = tempdir(), data_name_slug = "data", pd
 
   graphics::par(mfrow = c(1, 1))
   
-  filename_pdf <- paste0(
-    "Fig_4AGBMDL_", data_name_slug, "_rf_",
-    cpt_list$param$rf_type, "_", label_priors(), "_r",
-    num_generations(cpt_list), "_k",
-    generation_size(cpt_list), 
-    cpt_best_bmdl_string(cpt_list), ".pdf"
-  )
+  filename_pdf <- paste0("Fig_4AGBMDL_", file_name(cpt_list))
   
   if (pdf) {
     grDevices::dev.print(pdf, fs::path(destdir, filename_pdf), width = 16, height = 10)
@@ -145,9 +132,8 @@ plot_evolution <- function(cpt_list, i = length(cpt_list$vec_min_BMDL)) {
     ylab = "BMDL", 
     xlab = "Generation", 
     main = paste0(
-      "AG rate ", cpt_list$param$rf_type, " and priori ", 
-#      paste(cpt_list$param$vec_dist_a_priori, collapse = "-")
-      label_priors()
+      "AG rate ", cpt_list$nhpp_dist, " and priori ", 
+      label_priors(cpt_list)
     )
   )
 }
@@ -160,7 +146,7 @@ plot_evolution <- function(cpt_list, i = length(cpt_list$vec_min_BMDL)) {
 plot_cpt_repeated <- function(cpt_list, i = nrow(cpt_list$historia_mejores)) {
   historia_mejores_sin_0_1_N <- cpt_list$historia_mejores[1:i, -1:-2]
   historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[
-    historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(exceedances(cpt_list$data))
+    historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(exceedances(cpt_list))
   ]
   plot(
     table(historia_mejores_sin_0_1_N) / num_generations(cpt_list), 

@@ -55,7 +55,7 @@ segment.ts <- function(x, method = "null", ...) {
     mod <- changepoint::cpt.meanvar(data = x, method = "AMOC", ...)
   }
   if (method == "cpt-gbmdl") {
-    mod <- segment_gbmdl(x, param = param, ...)
+    mod <- segment_gbmdl(x, ...)
   }
   if (method == "cpt-manual") {
     message("\nSegmenting using manually input changepoints...")

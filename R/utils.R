@@ -43,8 +43,8 @@ pad_tau <- function(tau, n) {
 #' @export
 unpad_tau <- function(padded_tau) {
   padded_tau |>
-    head(-1) |>
-    tail(-1)
+    utils::head(-1) |>
+    utils::tail(-1)
 }
 
 #' @export
@@ -75,11 +75,11 @@ test_set <- function(n = 1, sd = 1, seed = NULL) {
 
 #' Genera los textos para los pdf y RData de las n distribuciones
 #' @export
-label_priors <- function() {
-  param$mat_phi |>
+label_priors <- function(x) {
+  x$mat_phi |>
     as.data.frame() |>
     dplyr::mutate(
-      dist = param$vec_dist_a_priori,
+      dist = x$vec_dist_a_priori,
       label = paste0(dist, "(", V1, ", ", V2, ")")
     ) |>
     dplyr::pull(label) |>

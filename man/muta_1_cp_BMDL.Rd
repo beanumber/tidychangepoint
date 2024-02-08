@@ -8,7 +8,6 @@
 muta_1_cp_BMDL(
   cp,
   x,
-  param,
   probs_nuevos_muta0N = c(0.8, 0.1, 0.1),
   dist_extremos = 10,
   min_num_cpts = 1,
@@ -17,14 +16,12 @@ muta_1_cp_BMDL(
   max_num_cp = 20
 )
 
-muta_k_cp_BMDL(mat_cp, x, param)
+muta_k_cp_BMDL(mat_cp, x)
 }
 \arguments{
 \item{cp}{puntos de cambio}
 
 \item{x}{vector de revases}
-
-\item{param}{parametros}
 
 \item{probs_nuevos_muta0N}{probabilidades de mutar 0,1,2,...,l hasta cierto
 numero l; eg si vale c(.5,.2,.2,.1) se tiene una probabilidad 0.5 de mutar

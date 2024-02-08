@@ -10,17 +10,14 @@ fit_nhpp_region(
   tau_right,
   initial_val_optim = c(0.1, 0.5),
   mat_low_upp = matrix(c(c(1e-04, 1e-08), c(10, 1e+05)), nrow = 2),
-  rf_type = tidychangepoint::param$rf_type,
-  vec_dist_a_priori = tidychangepoint::param$vec_dist_a_priori,
-  mat_phi = tidychangepoint::param$mat_phi,
+  vec_dist_a_priori = c("Gamma", "Gamma"),
+  mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2),
   ...
 )
 }
 \arguments{
 \item{mat_low_upp}{matriz con lugares donde buscar; cada renglon es para un
 parámetro del NHPP}
-
-\item{rf_type}{nombre de tasa de NHPP}
 
 \item{vec_dist_a_priori}{nombres de distribuciones a priori}
 
@@ -40,8 +37,8 @@ regresa un el resultado de optim
 Estimadores MAP
 }
 \examples{
-fit_nhpp_region(exceedances(lista_AG$data), 0, 575)
-fit_nhpp_region(exceedances(lista_AG$data), 0, 575, initial_val_optim = c(1, 10))
+fit_nhpp_region(exceedances(lista_AG), 0, 575)
+fit_nhpp_region(exceedances(lista_AG), 0, 575, initial_val_optim = c(1, 10))
 
 
 }

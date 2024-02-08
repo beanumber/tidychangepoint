@@ -1,11 +1,10 @@
 #' @export
 #' @examples
-#' segment_gbmdl_alt(DataCPSim, r = 20)
-#' 
+#' segment_gbmdl_alt(DataCPSim)
 
-segment_gbmdl_alt <- function(x, r = 20, destdir = tempdir(), show_progress_bar = TRUE, write_rda = FALSE) {
+segment_gbmdl_alt <- function(x, destdir = tempdir(), show_progress_bar = TRUE, write_rda = FALSE) {
   # lista_AG contiene los resultados del algoritmo genético
-  obj <- new_cpt_gbmdl(x, param = list(generation_size = 50, r = r))
+  obj <- new_cpt_gbmdl(x, generation_size = 50, num_generations = 50)
   
   pb <- utils::txtProgressBar(min = 1, max = r, style = 3, width = 60)
   
@@ -80,5 +79,5 @@ evolve_alt <- function(x, cpt_list) {
 #' @export
 
 drop_cpts <- function(x, prob_stay = 0.5) {
-  x[as.logical(rbinom(n = length(x), size = 1, prob = prob_stay))]
+  x[as.logical(stats::rbinom(n = length(x), size = 1, prob = prob_stay))]
 }

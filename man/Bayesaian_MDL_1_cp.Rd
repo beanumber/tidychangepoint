@@ -3,7 +3,7 @@
 \name{Bayesaian_MDL_1_cp}
 \alias{Bayesaian_MDL_1_cp}
 \alias{Bayesaian_MDL_k_cp}
-\title{Validador de la lista param para ejecutar el AG-BMDL}
+\title{Bayesian MDL para un vector de puntos de cambio}
 \usage{
 Bayesaian_MDL_1_cp(cp, x)
 
@@ -13,22 +13,13 @@ Bayesaian_MDL_k_cp(mat_cp, x)
 \item{cp}{description}
 
 \item{x}{description}
-
-\item{param}{es la lista original de parámetros la cual contiene todos los
-siguientes}
-
-\item{rf_type}{description}
-
-\item{vec_dist_a_priori}{description}
-
-\item{mat_phi}{description}
 }
 \value{
 regresa un vector de tamaño \code{k} (el numero de cromosomas por
 generación) con los valores del bayesian MDL
 }
 \description{
-Validador de la lista param para ejecutar el AG-BMDL
+Bayesian MDL para un vector de puntos de cambio
 
 Bayesian MDL para un vector de puntos de cambio
 }

@@ -8,8 +8,6 @@ plot_confint(cpt_list)
 }
 \arguments{
 \item{lista_AG}{description}
-
-\item{param}{description}
 }
 \description{
 Graficas de los intervalos y los datos

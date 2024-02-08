@@ -4,12 +4,12 @@
 \alias{mean_fn}
 \title{Evaluanción de mean function (la integral de la rate)}
 \usage{
-mean_fn(t, rf_type, theta)
+mean_fn(t, nhpp_dist, theta)
 }
 \arguments{
 \item{t}{valor a evaluar (real)}
 
-\item{rf_type}{tipo de mean function (ver libro de Eliane pdf 40 eq (3.12));
+\item{nhpp_dist}{tipo de mean function (ver libro de Eliane pdf 40 eq (3.12));
 posibles exponentiated-Weibull (EW),the Musa–Okumoto (MO),
 the Goel–Okumoto (GO), and a generalized Goel–Okumoto (GGO)}
 
@@ -31,13 +31,13 @@ Evaluanción de mean function (la integral de la rate)
 \examples{
 t <- c(1.4, 2.8)
 theta <- c(1.2, 2.1, 3.2)
-rf_type <- "EW"
-mean_fn(t, rf_type, theta)
-rf_type <- "GGO"
-mean_fn(t, rf_type, theta)
-rf_type <- "MO"
-mean_fn(t, rf_type, theta)
-rf_type <- "GO"
-mean_fn(t, rf_type, theta)
+nhpp_dist <- "EW"
+mean_fn(t, nhpp_dist, theta)
+nhpp_dist <- "GGO"
+mean_fn(t, nhpp_dist, theta)
+nhpp_dist <- "MO"
+mean_fn(t, nhpp_dist, theta)
+nhpp_dist <- "GO"
+mean_fn(t, nhpp_dist, theta)
 
 }

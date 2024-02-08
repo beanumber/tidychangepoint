@@ -4,23 +4,18 @@
 #'   cambio tau1 y tau2
 #' @param tau1 valor del primer punto de cambio
 #' @param tau2 valor del segundo punto de cambio
-#' @param rf_type nombre de tasa de NHPP
 #' @param theta vector de parámetros de verosimilitud del NHPP
 #' @param vec_dist_a_priori description
 #' @param mat_phi description
 #' @export
-Bloq_LogPost_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta, vec_dist_a_priori, mat_phi) {
-  Bloq_LogVero_NHPP(vec_d_i, tau1, tau2, rf_type, theta) +
+Bloq_LogPost_NHPP <- function(vec_d_i, tau1, tau2, theta, vec_dist_a_priori, mat_phi) {
+  Bloq_LogVero_NHPP(vec_d_i, tau1, tau2, theta) +
     Bloq_LogPrio_NHPP(vec_dist_a_priori, theta, mat_phi)
 }
 
 
 #' Bloque de log-a priori NHPP
 #' @export
-#' @examples
-#' theta <- cpt_best_params(lista_AG$segmenter)
-#' Bloq_LogPrio_NHPP(param$vec_dist_a_priori, theta, param$mat_phi)
-#' 
 Bloq_LogPrio_NHPP <- function(vec_dist_a_priori, theta, mat_phi) {
   if (length(vec_dist_a_priori) == 2) {
     if (all(vec_dist_a_priori == c("Gamma", "Gamma"))) {
@@ -48,16 +43,15 @@ Bloq_LogPrio_NHPP <- function(vec_dist_a_priori, theta, mat_phi) {
 #'   cambio tau1 y tau2
 #' @param tau1 valor del primer punto de cambio
 #' @param tau2 valor del segundo punto de cambio
-#' @param rf_type nombre de tasa de NHPP
 #' @param theta vector de parámetros de verosimilitud del NHPP
 #' @export
-Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
-  if (rf_type == "W") {
+Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, theta, nhpp_dist = "W") {
+  if (nhpp_dist == "W") {
     return((tau1^theta[1] - tau2^theta[1]) / theta[2]^theta[1] +
              length(vec_d_i) * (log(theta[1]) - theta[1] * log(theta[2])) +
              (theta[1] - 1) * sum(log(vec_d_i)))
   } # Expresion pg 15 entre las expresiones 18 y 19
-  if (rf_type == "EW") {
+  if (nhpp_dist == "EW") {
     difN <- length(vec_d_i)
     alpha <- theta[1]
     beta <- theta[2]
@@ -71,10 +65,10 @@ Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
              (-1 + alpha) * sumlogd + difN * log(alpha * beta) - log(1 - (1 - exp(-(tau1 / sigma)^alpha))^beta) + # exp 43_1+exp 42_1-exp 30 pg 16
              log(1 - (1 - exp(-(tau2 / sigma)^alpha))^beta) - (-1 + alpha) * difN * log(sigma)) # exp 46-exp 43_2
   }
-  if (rf_type == "GO") {
+  if (nhpp_dist == "GO") {
     return(theta[1] * (exp(-theta[2] * tau2) - exp(-theta[2] * tau1)) + length(vec_d_i) * (log(theta[1]) + log(theta[2])) - theta[2] * sum(vec_d_i)) # exp 54 pg 19
   }
-  if (rf_type == "GGO") {
+  if (nhpp_dist == "GGO") {
     difN <- length(vec_d_i)
     alpha <- theta[1]
     beta <- theta[2]
@@ -84,7 +78,7 @@ Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
     sumdasigma <- sum(vec_d_i^sigma)
     return(alpha * (exp(-beta * tau2^sigma) - exp(-beta * tau1^sigma)) + (-1 + sigma) * sumlogd + difN * (log(alpha) + log(beta) + log(sigma)) - beta * sumdasigma) # exp 63 pg 20
   }
-  if (rf_type == "MO") {
+  if (nhpp_dist == "MO") {
     difN <- length(vec_d_i)
     alpha <- theta[1]
     beta <- theta[2]
@@ -98,8 +92,8 @@ Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
 
 #' Derivada bloque de log posterior NHPP
 #' @export
-D_Bloq_LogPost_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta, vec_dist_a_priori, mat_phi) {
-  D_Bloq_LogVero_NHPP(vec_d_i, tau1, tau2, rf_type, theta) +
+D_Bloq_LogPost_NHPP <- function(vec_d_i, tau1, tau2, theta, vec_dist_a_priori, mat_phi) {
+  D_Bloq_LogVero_NHPP(vec_d_i, tau1, tau2, theta) +
     D_Bloq_LogPrio_NHPP(vec_dist_a_priori, theta, mat_phi)
 }
 
@@ -151,11 +145,11 @@ D_Bloq_LogPrio_NHPP <- function(vec_dist_a_priori, theta, mat_phi) {
 #'   cambio tau1 y tau2
 #' @param tau1 valor del primer punto de cambio
 #' @param tau2 valor del segundo punto de cambio
-#' @param rf_type nombre de tasa de NHPP
+#' @param nhpp_dist nombre de tasa de NHPP
 #' @param theta vector de parámetros de verosimilitud del NHPP
 #' @export
-D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
-  if (rf_type == "W") {
+D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, theta, nhpp_dist = "W") {
+  if (nhpp_dist == "W") {
     difN <- length(vec_d_i)
     alpha <- theta[1]
     beta <- theta[2]
@@ -175,10 +169,10 @@ D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
   
   
   
-  if (rf_type == "EW") {
+  if (nhpp_dist == "EW") {
     return("Me niego a hacer esta, es muy larga; D_Bloq_LogVero_NHPP")
   }
-  if (rf_type == "GO") {
+  if (nhpp_dist == "GO") {
     difN <- length(vec_d_i)
     alpha <- theta[1]
     beta <- theta[2]
@@ -196,7 +190,7 @@ D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
       p2 <- difN / beta - sumd + alpha * exp(-beta * tau1) * tau1 - alpha * exp(-beta * tau2) * tau2
     }
   }
-  if (rf_type == "GGO") {
+  if (nhpp_dist == "GGO") {
     difN <- length(vec_d_i)
     alpha <- theta[1]
     beta <- theta[2]
@@ -221,7 +215,7 @@ D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
       p3 <- difN / sigma + sumlogd + alpha * beta * exp(-beta * tau1^sigma) * tau1^sigma * log(tau1) - alpha * beta * exp(-beta * tau2^sigma) * tau2^sigma * log(tau2) - beta * D_sumdasigma
     }
   }
-  if (rf_type == "MO") {
+  if (nhpp_dist == "MO") {
     difN <- length(vec_d_i)
     alpha <- theta[1]
     beta <- theta[2]
@@ -239,7 +233,7 @@ D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
       p2 <- difN / beta + log(alpha + tau1) - log(alpha + tau2)
     }
   }
-  if (rf_type %in% c("W", "GO", "MO")) {
+  if (nhpp_dist %in% c("W", "GO", "MO")) {
     return(c(p1, p2))
   } else {
     return(c(p1, p2, p3))
@@ -252,7 +246,6 @@ D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
 #' @param vec_d_i vector de días de un régimen
 #' @param tau1 valor del primer punto de cambio
 #' @param tau2 valor del segundo punto de cambio
-#' @param rf_type nombre de tasa de NHPP
 #' @param vec_dist_a_priori nombres de distribuciones a priori
 #' @param mat_phi matriz cuyos renglones tiene los parámetros de las
 #'   distribuciones a priori
@@ -262,22 +255,21 @@ D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, rf_type, theta) {
 #' @return regresa un el resultado de optim
 #' @export
 #' @examples
-#' fit_nhpp_region(exceedances(lista_AG$data), 0, 575)
-#' fit_nhpp_region(exceedances(lista_AG$data), 0, 575, initial_val_optim = c(1, 10))
+#' fit_nhpp_region(exceedances(lista_AG), 0, 575)
+#' fit_nhpp_region(exceedances(lista_AG), 0, 575, initial_val_optim = c(1, 10))
 #' 
 #'
 fit_nhpp_region <- function(t, tau_left, tau_right, 
                             initial_val_optim = c(0.1, 0.5), 
                             mat_low_upp = matrix(c(c(1e-4, 1e-8), c(1e+1, 1e+5)), nrow = 2), 
-                            rf_type = tidychangepoint::param$rf_type, 
-                            vec_dist_a_priori = tidychangepoint::param$vec_dist_a_priori, 
-                            mat_phi = tidychangepoint::param$mat_phi, ...) {
+                            vec_dist_a_priori = c("Gamma", "Gamma"), 
+                            mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2), ...) {
   # Definimos las funciones que vamos a utilizar para encontrar el mínimo
   my_fn <- function(theta) {
-    -Bloq_LogPost_NHPP(t, tau1 = tau_left, tau2 = tau_right, rf_type, theta, vec_dist_a_priori, mat_phi)
+    -Bloq_LogPost_NHPP(t, tau1 = tau_left, tau2 = tau_right, theta, vec_dist_a_priori, mat_phi)
   }
   my_gn <- function(theta) {
-    -D_Bloq_LogPost_NHPP(t, tau1 = tau_left, tau2 = tau_right, rf_type, theta, vec_dist_a_priori, mat_phi)
+    -D_Bloq_LogPost_NHPP(t, tau1 = tau_left, tau2 = tau_right, theta, vec_dist_a_priori, mat_phi)
   }
   # Calculamos el mínimo
   (val_optimos <- stats::optim(
@@ -326,7 +318,8 @@ fit_nhpp <- function(x, tau) {
     purrr::map(get_params) |>
     purrr::list_rbind()
   
-  if (tidychangepoint::param$rf_type %in% c("W", "MO", "GO")) {
+  # to fix and generalize later
+  if ("W" %in% c("W", "MO", "GO")) {
     names_params <- c("alpha", "beta")
   } else {
     names_params <- c("alpha", "beta", "sigma")
@@ -337,7 +330,7 @@ fit_nhpp <- function(x, tau) {
     purrr::map(t) |> 
     purrr::map(as.data.frame) |> 
     purrr::list_rbind() |>
-    setNames(nm = c("begin", "end"))
+    stats::setNames(nm = c("begin", "end"))
   out <- out |>
     dplyr::mutate(region = regions, .before = dplyr::everything()) |>
     dplyr::bind_cols(endpoints_df)

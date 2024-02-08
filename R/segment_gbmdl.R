@@ -1,20 +1,18 @@
 #' Algoritmo genético de Bayesian MDL a un paso
 #'
 #' @param x a vector that can be coerced into a `ts`
-#' @param param description. See [param].
-#'
 #' @return A `cpt_gbmdl` object
 #' @param show_progress_bar show the progress bar?
 #' @export
 #' @examples
 #' \dontrun{
-#' x <- segment_gbmdl(DataCPSim, param)
-#' y <- segment_gbmdl(rlnorm_ts_1, param)
+#' x <- segment_gbmdl(DataCPSim)
+#' y <- segment_gbmdl(rlnorm_ts_1)
 #' }
 #' 
-segment_gbmdl <- function(x, param, destdir = tempdir(), show_progress_bar = TRUE, write_rda = FALSE) {
+segment_gbmdl <- function(x, destdir = tempdir(), show_progress_bar = TRUE, write_rda = FALSE) {
   # lista_AG contiene los resultados del algoritmo genético
-  obj <- new_cpt_gbmdl(x, param = param)
+  obj <- new_cpt_gbmdl(x)
   
   pb <- utils::txtProgressBar(min = 1, max = num_generations(obj), style = 3, width = 60)
   graphics::par(mfrow = c(2, 1), mar = c(1, 4, 2, 2))
@@ -66,7 +64,7 @@ evolve <- function(x, mat_cp) {
   # 5. Volados para quitar puntos de cambio
   mat_cp <- mata_k_tau_volado(mat_cp)
   # 6. Mutaciones puntos de cambio
-  mat_cp <- muta_k_cp_BMDL(mat_cp, x, param)
+  mat_cp <- muta_k_cp_BMDL(mat_cp, x)
   # (mat_cp <- muta_k_cp(mat_cp,param)) # antes
   
   # 8. Regresa el resultado

@@ -4,15 +4,7 @@
 \alias{Bloq_LogPost_NHPP}
 \title{Bloque de log posterior NHPP}
 \usage{
-Bloq_LogPost_NHPP(
-  vec_d_i,
-  tau1,
-  tau2,
-  rf_type,
-  theta,
-  vec_dist_a_priori,
-  mat_phi
-)
+Bloq_LogPost_NHPP(vec_d_i, tau1, tau2, theta, vec_dist_a_priori, mat_phi)
 }
 \arguments{
 \item{vec_d_i}{vector de días en los que hubo revases entre el los puntos de
@@ -21,8 +13,6 @@ cambio tau1 y tau2}
 \item{tau1}{valor del primer punto de cambio}
 
 \item{tau2}{valor del segundo punto de cambio}
-
-\item{rf_type}{nombre de tasa de NHPP}
 
 \item{theta}{vector de parámetros de verosimilitud del NHPP}
 

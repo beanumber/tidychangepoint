@@ -31,18 +31,6 @@ globalVariables(
 
 
 
-#' Validador de la lista param para ejecutar el AG-BMDL
-#'
-#' @param param es la lista original de parámetros la cual contiene todos los
-#'   siguientes
-#' @param rf_type toma valores en c("W","EW","GGO","MO","GO") y es el nombre de
-#'   la función de tasa del NHPP
-#' @param vec_dist_a_priori vector de los nobmres de las distribuciones a priori
-#'   que se utilizan; eg c("Gamma","Gamma") y c("Gamma","Gamma","Gamma")
-#' @param mat_phi matriz cuyos renglones tiene los parámetros de las
-#'   distribuciones a priori; cada renglón tiene todos los parametros de una
-#'   distribución
-#'
 
 
 
@@ -50,18 +38,14 @@ globalVariables(
 #'
 #' @param cp description
 #' @param x description
-#' @param rf_type description
-#' @param vec_dist_a_priori description
-#' @param mat_phi description
 #' @export
 Bayesaian_MDL_1_cp <- function(cp, x) {
-  N <- max(x)
   # 1. Obtener los estimadores MAP para cada regimen y guardarlos en mat_MAP
   mat_MAP <- fit_nhpp(x, chromo2tau(cp))
   # 2. Evaluar la log-posterior (sumando la primera columna de mat_MAP)
   log_posterior <- sum(mat_MAP$log.posterior)
   # 3. Evaluar la penalización
-  penaliza_cp <- penalization_MDL(cp, param$rf_type, N)
+  penaliza_cp <- penalization_MDL(cp, N = max(x))
   # 4. Obtener bayesian-MDL de la diferencia de la penalización y la log-posterior
   BMDL_1_cp <- penaliza_cp - log_posterior
   return(BMDL_1_cp)
@@ -173,7 +157,6 @@ mata_k_tau_volado <- function(mat_cp) {
 #'
 #' @param cp puntos de cambio
 #' @param x vector de revases
-#' @param param parametros
 #' @param probs_nuevos_muta0N probabilidades de mutar 0,1,2,...,l hasta cierto
 #'   numero l; eg si vale c(.5,.2,.2,.1) se tiene una probabilidad 0.5 de mutar
 #'   0 (de no mutar), probabilidad 0.2 de mutar 1,, probabilidad 0.2 de mutar 2,
@@ -197,7 +180,7 @@ mata_k_tau_volado <- function(mat_cp) {
 #' @return regresa un vector mutado
 #' @export
 #'
-muta_1_cp_BMDL <- function(cp, x, param, 
+muta_1_cp_BMDL <- function(cp, x, 
                            probs_nuevos_muta0N = c(0.8, 0.1, 0.1), 
                            dist_extremos = 10, 
                            min_num_cpts = 1, 
@@ -209,7 +192,7 @@ muta_1_cp_BMDL <- function(cp, x, param,
 
   # En caso de tener muy pocos puntos de cambio, rehacemos el cp
   if (cp[1] <= min_num_cpts) {
-    return(sim_1_cp_BMDL(x, param))
+    return(sim_1_cp_BMDL(x))
   }
 
   (cp_posibles_muta <- cp[3:(cp[1] + 2)])
@@ -247,10 +230,10 @@ muta_1_cp_BMDL <- function(cp, x, param,
 #' @rdname muta_1_cp_BMDL
 #' @return regreas una mat_cp mutada
 #' @export
-muta_k_cp_BMDL <- function(mat_cp, x, param) {
+muta_k_cp_BMDL <- function(mat_cp, x) {
   mat_muta <- matrix(0, nrow(mat_cp), ncol(mat_cp))
   for (i in 1:nrow(mat_cp)) {
-    mat_muta[i, ] <- muta_1_cp_BMDL(mat_cp[i, ], x, param)
+    mat_muta[i, ] <- muta_1_cp_BMDL(mat_cp[i, ], x)
   }
   return(mat_muta)
 }
@@ -261,8 +244,6 @@ muta_k_cp_BMDL <- function(mat_cp, x, param) {
 #' Genera un cromosoma de puntos de cambio para el Bayesian MDL
 #'
 #' @param x vector de excedentes
-#' @param param lista de parámetros globales. See [param].
-#'
 #' @details
 #' regresa un vector de tamaño `max_num_cp+3` donde la primera entrada es
 #'         m, la segunda \eqn{v_0=1, ...., v_{m+1}=N,0,...,0}
@@ -289,7 +270,7 @@ muta_k_cp_BMDL <- function(mat_cp, x, param) {
 #' sim_1_cp_BMDL(exceedances(rlnorm_ts_2))
 #' sim_1_cp_BMDL(exceedances(rlnorm_ts_3))
 #'
-sim_1_cp_BMDL <- function(x, param, max_num_cp = 20, prob_inicial = 0.06) {
+sim_1_cp_BMDL <- function(x, max_num_cp = 20, prob_inicial = 0.06) {
   # Primero simulamos una binomial que va a ser el número de puntos de cambio
   m <- min(stats::rbinom(1, length(x), prob_inicial), max_num_cp - 3)
   # Simulamos los puntos de cambio uniformemente aleatorios

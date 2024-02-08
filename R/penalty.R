@@ -58,19 +58,19 @@ bmdl <- function(x, tau) {
 #' @export
 #' @examples
 #' mat_cp <- sim_k_cp_BMDL(DataCPSim)
-#' penalization_MDL(mat_cp, param$rf_type, N = max(exceedances(DataCPSim)))
+#' penalization_MDL(mat_cp, N = max(exceedances(DataCPSim)))
 #' 
 #'
-penalization_MDL <- function(cp, rf_type, N) { # V02
+penalization_MDL <- function(cp, nhpp_dist = "W", N) { # V02
   # Se hizo el cambio de multiplicar por en número de parámetros
   # esta función solo es llamada por "penalization_MDL"
-  # penalization_MDL <- function(cp) { # antes no recibía rf_type
+  # penalization_MDL <- function(cp) { # antes no recibía nhpp_dist
   
-  # n_param_rf_type es el número de parámetros de la función de tasa del poisson
-  n_param_rf_type <- c(2, 3, 3, 2, 2)[rf_type == c("W", "EW", "GGO", "MO", "GO")]
+  # n_param_nhpp_dist es el número de parámetros de la función de tasa del poisson
+  n_param_nhpp_dist <- c(2, 3, 3, 2, 2)[nhpp_dist == c("W", "EW", "GGO", "MO", "GO")]
   
   (cp_corto_cero <- c(0, cp[3:(cp[1] + 3)]))
-  # En particular se agregó la parte *n_param_rf_type/2
-  return(sum(log(cp_corto_cero[-1] - cp_corto_cero[-cp[1] - 2]) * n_param_rf_type / 2) + log(cp[1]) + sum(log(cp_corto_cero[c(-1, -cp[1] - 2)])) + (cp[1] * log(N)))
+  # En particular se agregó la parte *n_param_nhpp_dist/2
+  return(sum(log(cp_corto_cero[-1] - cp_corto_cero[-cp[1] - 2]) * n_param_nhpp_dist / 2) + log(cp[1]) + sum(log(cp_corto_cero[c(-1, -cp[1] - 2)])) + (cp[1] * log(N)))
 }
 

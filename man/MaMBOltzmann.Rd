@@ -19,8 +19,6 @@ GABoltzmannMutation2(x, r = 50, k = 50, Mutation = 0.03, Temperature = 27)
 \item{Temperature}{description}
 
 \item{x}{An \code{integer} vector. See \code{\link[=exceedances]{exceedances()}}.}
-
-\item{param}{A \code{list} or parameters. See \link{param}.}
 }
 \value{
 A \code{list} of length 2:

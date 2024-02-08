@@ -3,12 +3,21 @@
 #' @param x a numeric vector
 #' @param num_generations número de generaciones
 #' @param generation_size tamaño de las generaciones
+#' @param nhpp_dist toma valores en c("W","EW","GGO","MO","GO") y es el nombre de
+#'   la función de tasa del NHPP
+#' @param vec_dist_a_priori vector de los nobmres de las distribuciones a priori
+#'   que se utilizan; eg c("Gamma","Gamma") y c("Gamma","Gamma","Gamma")
+#' @param mat_phi matriz cuyos renglones tiene los parámetros de las
+#'   distribuciones a priori; cada renglón tiene todos los parametros de una
+#'   distribución
 #' @examples
-#' cpts <- cpt_gbmdl(DataCPSim, param)
+#' cpts <- cpt_gbmdl(DataCPSim)
 #' str(cpts)
 
 new_cpt_gbmdl <- function(x = numeric(), 
-                          param = list(), 
+                          nhpp_dist = c("W","EW","GGO","MO","GO")[1], # función de tasa de NHPP
+                          vec_dist_a_priori = c("Gamma", "Gamma"), # distribuciones a priori
+                          mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2),
                           num_generations = 50, 
                           generation_size = 50, 
                           max_num_cp = 20) {
@@ -16,9 +25,9 @@ new_cpt_gbmdl <- function(x = numeric(),
   structure(
     list(
       data = stats::as.ts(x),
-#      n = length(x),
-      param = param,
-      # Inicializamos lista_AG_BMDL (de esta manero lo podemos meter en el for)
+      nhpp_dist = nhpp_dist, 
+      vec_dist_a_priori = vec_dist_a_priori,
+      mat_phi = mat_phi,
       # 1. Simular puntos de cambio iniciales
       mat_cp = sim_k_cp_BMDL(x, generation_size),
       # historia_mejores guarda los mejores cp de cada generación
@@ -68,7 +77,7 @@ print.cpt_gbmdl <- function(x, ...) {
 
 summary.cpt_gbmdl <- function(object, ...) {
   message("List of changepoints object:")
-  cat(paste("\nn:"), length(object$data))
+  cat(paste("\nn:"), length(object))
   cat(paste("\nBest changepoint set: "))
   cat(cpt_best(object))
   cat(paste("\nNumber of changepoints:"), length(cpt_best(object)))
@@ -132,12 +141,11 @@ chromo2tau <- function(chromo) {
 
 #' @rdname new_cpt_gbmdl
 #' @export
-#' @examples
 mat_cp_2_tbl <- function(mat_cp) {
   mat_cp |>
     mat_cp_2_list() |>
     tibble::tibble() |>
-    setNames("tau") |>
+    stats::setNames("tau") |>
     dplyr::mutate(
       m = purrr::map_int(tau, length)
     )
@@ -169,30 +177,42 @@ num_generations <- function(x) {
 }
 
 #' @rdname new_cpt_gbmdl
-#' @param data_name_slug character string that will identify the data set used
-#' in the file name
 #' @export
 #' @examples
 #' write_cpt_gbmdl(lista_AG$segmenter)
 
-write_cpt_gbmdl <- function(x, destdir = tempdir(), data_name_slug = "data") {
+write_cpt_gbmdl <- function(x, destdir = tempdir()) {
   
   dir_data <- fs::path(destdir)
   if (!dir.exists(dir_data)) {
     dir.create(dir_data, recursive = TRUE)
   }
   
-  file_name <- paste0(
-    "Dat_AGBMDL_", data_name_slug, "_rf_",
-    x$param$rf_type, "_", label_priors(), "_r",
-    num_generations(x), "_k",
-    generation_size(x),
-    cpt_best_bmdl_string(x), ".RData"
-  )
+  file_name <- paste0("Dat_AGBMDL_", file_name(x))
   
   # Write data
   save(x, file = fs::path(dir_data, file_name))
   message("Se guardo el archivo:\n", fs::path(dir_data, file_name), "\n")
+}
+
+#' @rdname new_cpt_gbmdl
+#' @param data_name_slug character string that will identify the data set used
+#' in the file name
+#' @export
+#' @examples
+#' file_name(cpt_gbmdl(DataCPSim))
+
+file_name <- function(x, data_name_slug = "data") {
+  paste(
+    "gbmdl", data_name_slug, 
+    "nhpp", x$nhpp_dist, 
+    gsub(" ", "_", label_priors(x)), 
+    "r", num_generations(x), 
+    "k", generation_size(x),
+    cpt_best_bmdl_string(x), 
+    ".rda", 
+    sep = "_"
+  )
 }
 
 #' Broom compatibility layer for changepoint

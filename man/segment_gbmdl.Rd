@@ -6,7 +6,6 @@
 \usage{
 segment_gbmdl(
   x,
-  param,
   destdir = tempdir(),
   show_progress_bar = TRUE,
   write_rda = FALSE
@@ -14,8 +13,6 @@ segment_gbmdl(
 }
 \arguments{
 \item{x}{a vector that can be coerced into a \code{ts}}
-
-\item{param}{description. See \link{param}.}
 
 \item{show_progress_bar}{show the progress bar?}
 }
@@ -27,8 +24,8 @@ Algoritmo genético de Bayesian MDL a un paso
 }
 \examples{
 \dontrun{
-x <- segment_gbmdl(DataCPSim, param)
-y <- segment_gbmdl(rlnorm_ts_1, param)
+x <- segment_gbmdl(DataCPSim)
+y <- segment_gbmdl(rlnorm_ts_1)
 }
 
 }

@@ -4,12 +4,12 @@
 \alias{rate_fn}
 \title{Evaluanción de rate function (la derivada de la mean)}
 \usage{
-rate_fn(t, rf_type, theta)
+rate_fn(t, nhpp_dist = "W", theta)
 }
 \arguments{
 \item{t}{valor a evaluar (real)}
 
-\item{rf_type}{tipo de rate function (ver articulo A Gibbs Sampling Algorithm
+\item{nhpp_dist}{tipo de rate function (ver articulo A Gibbs Sampling Algorithm
 to Estimate the Occurrence of Ozone Exceedances in Mexico City  para el
 caso de Weibull (W) y ver libro de Eliane pdf 40 eq (3.12)); posibles
 exponentiated-Weibull (EW),the Musa–Okumoto (MO), the Goel–Okumoto (GO),
@@ -35,13 +35,13 @@ Evaluanción de rate function (la derivada de la mean)
 t <- c(1.4, 2.8)
 theta <- c(1.2, 2.1, 3.2)
 
-rf_type <- "EW"
-rate_fn(t, rf_type, theta)
-rf_type <- "GGO"
-rate_fn(t, rf_type, theta)
-rf_type <- "MO"
-rate_fn(t, rf_type, theta)
-rf_type <- "GO"
-rate_fn(t, rf_type, theta)
+nhpp_dist <- "EW"
+rate_fn(t, nhpp_dist, theta)
+nhpp_dist <- "GGO"
+rate_fn(t, nhpp_dist, theta)
+nhpp_dist <- "MO"
+rate_fn(t, nhpp_dist, theta)
+nhpp_dist <- "GO"
+rate_fn(t, nhpp_dist, theta)
 
 }
