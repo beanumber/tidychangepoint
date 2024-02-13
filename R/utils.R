@@ -95,3 +95,11 @@ split_by_tau <- function(x, tau) {
   split(x, idx)
 }
 
+#' @export
+#' @examples
+#' deg_free(segment(DataCPSim))
+
+deg_free <- function(x, ...) {
+  attr(logLik(x), "df")
+}
+

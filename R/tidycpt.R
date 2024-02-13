@@ -88,7 +88,7 @@ as.ts.tidycpt <- function(x, ...) {
 length.tidycpt <- function(x, ...) {
   length(as.ts(x))
 }
-  
+
 #' @rdname segment
 #' @export
 changepoints <- function(x, ...) UseMethod("changepoints")
@@ -108,7 +108,7 @@ logLik.tidycpt <- function(x, ...) {
 #' @rdname segment
 #' @export
 nobs.tidycpt <- function(x, ...) {
-  length(x, ...)
+  nobs(x$segmenter)
 }
 
 #' @rdname segment
@@ -236,7 +236,7 @@ plot_mcdf <- function(x, ...) {
       lower = stats::qpois(0.05, lambda = m),
       upper = stats::qpois(0.95, lambda = m),
     )
-
+  
   regions <- tidy(x)
   ggplot2::ggplot(data = z, ggplot2::aes(x = t_exceedance, y = cum_exceedances)) +
     ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = right), linetype = 3) +
