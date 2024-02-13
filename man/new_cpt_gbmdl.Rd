@@ -7,6 +7,8 @@
 \alias{plot.cpt_gbmdl}
 \alias{print.cpt_gbmdl}
 \alias{summary.cpt_gbmdl}
+\alias{nobs.cpt_gbmdl}
+\alias{logLik.cpt_gbmdl}
 \alias{cpt_best_bmdl}
 \alias{cpt_best_bmdl_string}
 \alias{cpt_best_params}
@@ -37,6 +39,10 @@ cpt_gbmdl(x, ...)
 \method{print}{cpt_gbmdl}(x, ...)
 
 \method{summary}{cpt_gbmdl}(object, ...)
+
+\method{nobs}{cpt_gbmdl}(x, ...)
+
+\method{logLik}{cpt_gbmdl}(x, ...)
 
 cpt_best_bmdl(x)
 

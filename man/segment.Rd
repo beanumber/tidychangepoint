@@ -8,6 +8,7 @@
 \alias{length.tidycpt}
 \alias{changepoints}
 \alias{changepoints.tidycpt}
+\alias{logLik.tidycpt}
 \alias{augment.tidycpt}
 \alias{tidy.tidycpt}
 \alias{glance.tidycpt}
@@ -31,6 +32,8 @@ segment(x, method = "null", ...)
 changepoints(x, ...)
 
 \method{changepoints}{tidycpt}(x, ...)
+
+\method{logLik}{tidycpt}(x, ...)
 
 \method{augment}{tidycpt}(x, ...)
 

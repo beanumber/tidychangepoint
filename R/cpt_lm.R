@@ -3,6 +3,7 @@
 #' @examples
 #' cpts <- segment(DataCPSim)
 #' as.ts(cpts)
+#' changepoints(cpts)
 
 as.ts.cpt_lm <- function(x, ...) {
   as.ts(x$model$y)

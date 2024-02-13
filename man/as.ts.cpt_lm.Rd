@@ -15,4 +15,5 @@ Methods for \code{cpt_lm}
 \examples{
 cpts <- segment(DataCPSim)
 as.ts(cpts)
+changepoints(cpts)
 }

@@ -83,6 +83,22 @@ summary.cpt_gbmdl <- function(object, ...) {
   cat(paste("\nNumber of changepoints:"), length(cpt_best(object)))
 }
 
+#' @rdname new_cpt_gbmdl
+#' @export
+nobs.cpt_gbmdl <- function(x, ...) {
+  length(as.ts(x))
+}
+
+#' @rdname new_cpt_gbmdl
+#' @export
+logLik.cpt_gbmdl <- function(x, ...) {
+  # need to make this work
+  out <- -3248
+  # Bloq_LogVero_NHPP(x, ...)
+  attr(out, "df") <- length(cpt_best(x))
+  class(out) <- "logLik"
+  return(out)
+}
 
 #' @rdname new_cpt_gbmdl
 #' @export
@@ -232,6 +248,9 @@ glance.cpt_gbmdl <- function(x, ...) {
     algorithm = "GeneticBMDL",
     test_stat = cpt_best_bmdl(x),
     BMDL = cpt_best_bmdl(x),
+    logLik = logLik(x),
+    AIC = AIC(x),
+    BIC = BIC(x),
     num_cpts = length(cpt_best(x)),
   )
 }

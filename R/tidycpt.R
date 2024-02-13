@@ -101,6 +101,12 @@ changepoints.tidycpt <- function(x, ...) {
 
 #' @rdname segment
 #' @export
+logLik.tidycpt <- function(x, ...) {
+  logLik(x$segmenter)
+}
+
+#' @rdname segment
+#' @export
 augment.tidycpt <- function(x, ...) {
   tau <- changepoints(x)
   tibble::enframe(as.ts(x), name = "index", value = "y") |>
