@@ -7,8 +7,15 @@ test_that("tidycpt works", {
   expect_true(all(c("alpha", "beta", "region") %in% names(tidy(x))))
   expect_s3_class(glance(x), "tbl_df")
   expect_type(changepoints(x), "integer")
+  expect_equal(AIC(x), as.numeric(-2 * logLik(x) + 2 * deg_free(x)))
+  expect_equal(BIC(x), as.numeric(-2 * logLik(x) + log(nobs(x)) * deg_free(x)))
   expect_s3_class(plot(x), "gg")
   expect_s3_class(diagnose(x), "patchwork")
+  
+  # AIC, BIC not quite right
+  library(tidychangepoint)
+  glance(segment(DataCPSim, method = "cpt-pelt", penalty = "AIC")) |> dplyr::select(dplyr::matches("IC|Lik"))
+  glance(segment(DataCPSim, method = "cpt-pelt", penalty = "BIC")) |> dplyr::select(dplyr::matches("IC|Lik"))
   
   z <- segment(DataCPSim, method = "cpt-manual", cpts = c(365, 826))
   expect_s3_class(z, "tidycpt")
@@ -19,6 +26,8 @@ test_that("tidycpt works", {
   expect_s3_class(glance(z), "tbl_df")
   expect_type(changepoints(z), "integer")
   expect_equal(length(changepoints(z)), 2)
+  expect_equal(AIC(z), as.numeric(-2 * logLik(z) + 2 * deg_free(z)))
+  expect_equal(BIC(z), as.numeric(-2 * logLik(z) + log(nobs(z)) * deg_free(z)))
   expect_s3_class(plot(z), "gg")
   expect_s3_class(diagnose(z), "patchwork")
 })
