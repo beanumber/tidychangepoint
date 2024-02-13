@@ -40,6 +40,41 @@ as.ts.cpt <- function(x, ...) {
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "cpt-pelt")
+#' nobs(cpts)
+#' 
+nobs.cpt <- function(x, ...) {
+  length(as.ts(x@data.set))
+}
+
+#' @rdname glance.cpt
+#' @export
+#' @examples
+#' cpts <- segment(DataCPSim, method = "cpt-pelt", penalty = "BIC")
+#' logLik(cpts)
+#' cpts <- segment(DataCPSim, method = "cpt-pelt", penalty = "AIC")
+#' logLik(cpts)
+#' 
+logLik.cpt <- function(x, ...) {
+  ll <- NULL
+  n_par <- length(x@cpts)
+  if (x@pen.type == "AIC") {
+    ll <- (2 * n_par - length(x@pen.value)) / 2
+  } 
+  if (x@pen.type == "BIC") {
+    ll <- (log(nobs(x)) * n_par - length(x@pen.value)) / 2
+  } 
+  if (is.null(ll)) {
+    ll <- 0
+  }
+  attr(ll, "df") <- length(x@cpts)
+  class(ll) <- "logLik"
+  return(ll)
+}
+
+#' @rdname glance.cpt
+#' @export
+#' @examples
+#' cpts <- segment(DataCPSim, method = "cpt-pelt")
 #' changepoints(cpts)
 #' 
 changepoints.cpt <- function(x, ...) {

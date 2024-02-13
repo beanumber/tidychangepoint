@@ -3,12 +3,18 @@
 \name{glance.cpt}
 \alias{glance.cpt}
 \alias{as.ts.cpt}
+\alias{nobs.cpt}
+\alias{logLik.cpt}
 \alias{changepoints.cpt}
 \title{Compatibility layer for changepoint}
 \usage{
 \method{glance}{cpt}(x, ...)
 
 \method{as.ts}{cpt}(x, ...)
+
+\method{nobs}{cpt}(x, ...)
+
+\method{logLik}{cpt}(x, ...)
 
 \method{changepoints}{cpt}(x, ...)
 }
@@ -25,6 +31,14 @@ tidy(cpts)
 glance(cpts)
 cpts <- segment(DataCPSim, method = "cpt-pelt")
 as.ts(cpts)
+
+cpts <- segment(DataCPSim, method = "cpt-pelt")
+nobs(cpts)
+
+cpts <- segment(DataCPSim, method = "cpt-pelt", penalty = "BIC")
+logLik(cpts)
+cpts <- segment(DataCPSim, method = "cpt-pelt", penalty = "AIC")
+logLik(cpts)
 
 cpts <- segment(DataCPSim, method = "cpt-pelt")
 changepoints(cpts)

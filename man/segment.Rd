@@ -9,6 +9,7 @@
 \alias{changepoints}
 \alias{changepoints.tidycpt}
 \alias{logLik.tidycpt}
+\alias{nobs.tidycpt}
 \alias{augment.tidycpt}
 \alias{tidy.tidycpt}
 \alias{glance.tidycpt}
@@ -34,6 +35,8 @@ changepoints(x, ...)
 \method{changepoints}{tidycpt}(x, ...)
 
 \method{logLik}{tidycpt}(x, ...)
+
+\method{nobs}{tidycpt}(x, ...)
 
 \method{augment}{tidycpt}(x, ...)
 

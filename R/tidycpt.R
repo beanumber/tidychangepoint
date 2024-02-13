@@ -107,6 +107,12 @@ logLik.tidycpt <- function(x, ...) {
 
 #' @rdname segment
 #' @export
+nobs.tidycpt <- function(x, ...) {
+  length(x, ...)
+}
+
+#' @rdname segment
+#' @export
 augment.tidycpt <- function(x, ...) {
   tau <- changepoints(x)
   tibble::enframe(as.ts(x), name = "index", value = "y") |>
@@ -146,7 +152,12 @@ tidy.tidycpt <- function(x, ...) {
 #' @rdname segment
 #' @export
 glance.tidycpt <- function(x, ...) {
-  glance(x$segmenter)
+  glance(x$segmenter) |>
+    dplyr::mutate(
+      s3_logLik = logLik(x),
+      s3_AIC = AIC(x),
+      s3_BIC = BIC(x)
+    )
 }
 
 #' @rdname segment
