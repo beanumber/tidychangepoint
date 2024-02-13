@@ -1,6 +1,6 @@
 #' Grafica los n puntos de cambio más repetidos sobre el plot.stepfun de los datos
 #'
-#' @param cpt_list description
+#' @param x description
 #' @param limit al final se generan unas graficas de los
 #'   mejores puntos de cambio, este parámetro dicta cuantos cromosomas se
 #'   graficarán
@@ -9,22 +9,22 @@
 #' @examples
 #' plot_cpt_repetidos(lista_AG$segmenter)
 #' 
-plot_cpt_repetidos <- function(cpt_list, destdir = tempdir(), 
+plot_cpt_repetidos <- function(x, destdir = tempdir(), 
                                data_name_slug = "data", pdf = FALSE, 
                                limit = 100) {
   # Obtenemos cuantos de los cp mejores se graficarán
-  historia_mejores_sin_0_1_N <- cpt_list$historia_mejores[, -1:-2]
-  historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(as.ts(cpt_list))]
+  historia_mejores_sin_0_1_N <- x$historia_mejores[, -1:-2]
+  historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(as.ts(x))]
   cp_mas_repetidos <- rev(sort(table(historia_mejores_sin_0_1_N)))[1:limit]
   stats::plot.stepfun(
-    as.ts(cpt_list),
+    as.ts(x),
     col.vert = "gray20", 
-    main = paste0("Los ", limit, " CP mas repetidos ", label_priors(cpt_list)),
-    xlim = range(as.ts(cpt_list))
+    main = paste0("Los ", limit, " CP mas repetidos ", label_priors(x)),
+    xlim = range(as.ts(x))
   )
   graphics::abline(v = as.numeric(names(cp_mas_repetidos)), col = "blue")
 
-  filename_pdf <- paste0("Fig_CP_repetidos_", file_name(cpt_list))
+  filename_pdf <- paste0("Fig_CP_repetidos_", file_name(x))
   
   path <- fs::path(destdir, filename_pdf)
   
@@ -65,23 +65,23 @@ plot_exceedances <- function(x, ...) {
 #' @examples
 #' plot_confint(lista_AG$segmenter)
 #' 
-plot_confint <- function(cpt_list) {
-  tau <- cpt_best(cpt_list)
-  theta <- cpt_best_params(cpt_list)
+plot_confint <- function(x) {
+  tau <- cpt_best(x)
+  theta <- cpt_best_params(x)
   
   sigma <- theta$beta
   alpha <- theta$alpha
 
-  plot_exceedances(as.ts(cpt_list))
+  plot_exceedances(as.ts(x))
 
-  m <- cdf_exceedances_est(exceedances(cpt_list$data), tau = tau, theta = theta, n = length(cpt_list))
+  m <- cdf_exceedances_est(exceedances(x$data), tau = tau, theta = theta, n = length(x))
   
   upp_bond <- stats::qpois(.95, lambda = c(pow(10 / sigma[1], alpha[1]), m))
   low_bond <- stats::qpois(.05, lambda = c(pow(10 / sigma[1], alpha[1]), m))
   mean_NHPP <- c(pow(10 / sigma[1], alpha[1]), m)
-  graphics::lines(x = c(10, exceedances(cpt_list)), y = upp_bond, col = "blue", lwd = 2)
-  graphics::lines(x = c(10, exceedances(cpt_list)), y = mean_NHPP, col = "red", lwd = 2)
-  graphics::lines(x = c(10, exceedances(cpt_list)), y = low_bond, col = "blue", lwd = 2)
+  graphics::lines(x = c(10, exceedances(x)), y = upp_bond, col = "blue", lwd = 2)
+  graphics::lines(x = c(10, exceedances(x)), y = mean_NHPP, col = "red", lwd = 2)
+  graphics::lines(x = c(10, exceedances(x)), y = low_bond, col = "blue", lwd = 2)
 }
 
 #' Graficas del AG con BMDL
@@ -96,20 +96,20 @@ plot_confint <- function(cpt_list) {
 #' @examples
 #' plot_BMDL(lista_AG$segmenter)
 #' 
-plot_BMDL <- function(cpt_list, destdir = tempdir(), data_name_slug = "data", pdf = FALSE) {
+plot_BMDL <- function(x, destdir = tempdir(), data_name_slug = "data", pdf = FALSE) {
   graphics::par(mfrow = c(2, 2), mar = c(2, 4, 2, 2))
   # 1.- Datos reales
-  plot_confint(cpt_list)
+  plot_confint(x)
   # 2.- Evolución del algoritmo genético
-  plot_evolution(cpt_list)
+  plot_evolution(x)
   # 3.- Puntos de cambio que más se repitieron
-  plot_cpt_repeated(cpt_list)
+  plot_cpt_repeated(x)
   # 4.- Number of change points in the best chromosomes
-  plot_best_chromosome(cpt_list)
+  plot_best_chromosome(x)
 
   graphics::par(mfrow = c(1, 1))
   
-  filename_pdf <- paste0("Fig_4AGBMDL_", file_name(cpt_list))
+  filename_pdf <- paste0("Fig_4AGBMDL_", file_name(x))
   
   if (pdf) {
     grDevices::dev.print(pdf, fs::path(destdir, filename_pdf), width = 16, height = 10)
@@ -123,17 +123,17 @@ plot_BMDL <- function(cpt_list, destdir = tempdir(), data_name_slug = "data", pd
 #' plot_evolution(lista_AG$segmenter)
 #' plot_evolution(lista_AG$segmenter, 5)
 #' 
-plot_evolution <- function(cpt_list, i = length(cpt_list$vec_min_BMDL)) {
+plot_evolution <- function(x, i = length(x$vec_min_BMDL)) {
   plot(
-    cpt_list$vec_min_BMDL[1:i],
-    xlim = c(1, num_generations(cpt_list)), 
+    x$vec_min_BMDL[1:i],
+    xlim = c(1, num_generations(x)), 
     type = "l", 
     col = "blue", 
     ylab = "BMDL", 
     xlab = "Generation", 
     main = paste0(
-      "AG rate ", cpt_list$nhpp_dist, " and priori ", 
-      label_priors(cpt_list)
+      "AG rate ", x$nhpp_dist, " and priori ", 
+      label_priors(x)
     )
   )
 }
@@ -143,13 +143,13 @@ plot_evolution <- function(cpt_list, i = length(cpt_list$vec_min_BMDL)) {
 #' @examples
 #' plot_cpt_repeated(lista_AG$segmenter)
 #' plot_cpt_repeated(lista_AG$segmenter, 5)
-plot_cpt_repeated <- function(cpt_list, i = nrow(cpt_list$historia_mejores)) {
-  historia_mejores_sin_0_1_N <- cpt_list$historia_mejores[1:i, -1:-2]
+plot_cpt_repeated <- function(x, i = nrow(x$historia_mejores)) {
+  historia_mejores_sin_0_1_N <- x$historia_mejores[1:i, -1:-2]
   historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[
-    historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(exceedances(cpt_list))
+    historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(exceedances(x))
   ]
   plot(
-    table(historia_mejores_sin_0_1_N) / num_generations(cpt_list), 
+    table(historia_mejores_sin_0_1_N) / num_generations(x), 
     main = "Repeated change points", 
     ylab = "repetitions", 
     xlab = "change points index"
@@ -160,15 +160,15 @@ plot_cpt_repeated <- function(cpt_list, i = nrow(cpt_list$historia_mejores)) {
 #' @export
 #' @examples
 #' plot_best_chromosome(lista_AG$segmenter)
-plot_best_chromosome <- function(cpt_list) {
+plot_best_chromosome <- function(x) {
   plot(
-    cpt_list$historia_mejores[, 1], 
+    x$historia_mejores[, 1], 
     ylab = "Number of cp", 
     type = "l", 
     col = "blue", 
     main = paste(
       "The best chromosome with", 
-      cpt_list$historia_mejores[which.min(cpt_list$vec_min_BMDL), 1], 
+      x$historia_mejores[which.min(x$vec_min_BMDL), 1], 
       "change points "
     )
   )

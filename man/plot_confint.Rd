@@ -4,7 +4,7 @@
 \alias{plot_confint}
 \title{Graficas de los intervalos y los datos}
 \usage{
-plot_confint(cpt_list)
+plot_confint(x)
 }
 \arguments{
 \item{lista_AG}{description}

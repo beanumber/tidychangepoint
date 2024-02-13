@@ -5,7 +5,7 @@
 \title{Grafica los n puntos de cambio más repetidos sobre el plot.stepfun de los datos}
 \usage{
 plot_cpt_repetidos(
-  cpt_list,
+  x,
   destdir = tempdir(),
   data_name_slug = "data",
   pdf = FALSE,
@@ -13,7 +13,7 @@ plot_cpt_repetidos(
 )
 }
 \arguments{
-\item{cpt_list}{description}
+\item{x}{description}
 
 \item{limit}{al final se generan unas graficas de los
 mejores puntos de cambio, este parámetro dicta cuantos cromosomas se

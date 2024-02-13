@@ -7,13 +7,13 @@
 \alias{plot_best_chromosome}
 \title{Graficas del AG con BMDL}
 \usage{
-plot_BMDL(cpt_list, destdir = tempdir(), data_name_slug = "data", pdf = FALSE)
+plot_BMDL(x, destdir = tempdir(), data_name_slug = "data", pdf = FALSE)
 
-plot_evolution(cpt_list, i = length(cpt_list$vec_min_BMDL))
+plot_evolution(x, i = length(x$vec_min_BMDL))
 
-plot_cpt_repeated(cpt_list, i = nrow(cpt_list$historia_mejores))
+plot_cpt_repeated(x, i = nrow(x$historia_mejores))
 
-plot_best_chromosome(cpt_list)
+plot_best_chromosome(x)
 }
 \value{
 una gráfica con :
