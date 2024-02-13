@@ -55,17 +55,9 @@ nobs.cpt <- function(x, ...) {
 #' logLik(cpts)
 #' 
 logLik.cpt <- function(x, ...) {
-  ll <- NULL
-  n_par <- length(x@cpts)
-  if (x@pen.type == "AIC") {
-    ll <- (2 * n_par - length(x@pen.value)) / 2
-  } 
-  if (x@pen.type == "BIC") {
-    ll <- (log(nobs(x)) * n_par - length(x@pen.value)) / 2
-  } 
-  if (is.null(ll)) {
-    ll <- 0
-  }
+  message("intercepting...")
+  y <- changepoint::likelihood(x)
+  ll <- -y[1] / 2
   attr(ll, "df") <- length(x@cpts)
   class(ll) <- "logLik"
   return(ll)

@@ -14,8 +14,10 @@ test_that("tidycpt works", {
   
   # AIC, BIC not quite right
   library(tidychangepoint)
-  glance(segment(DataCPSim, method = "cpt-pelt", penalty = "AIC")) |> dplyr::select(dplyr::matches("IC|Lik"))
-  glance(segment(DataCPSim, method = "cpt-pelt", penalty = "BIC")) |> dplyr::select(dplyr::matches("IC|Lik"))
+  pelt_bic <- segment(DataCPSim, method = "cpt-pelt", penalty = "BIC")
+  pelt_bic |>
+    glance() |> 
+    dplyr::select(dplyr::matches("IC|Lik"))
   
   z <- segment(DataCPSim, method = "cpt-manual", cpts = c(365, 826))
   expect_s3_class(z, "tidycpt")

@@ -138,8 +138,8 @@ tidy.tidycpt <- function(x, ...) {
     dplyr::group_by(region) |>
     dplyr::summarize(
       num_obs = dplyr::n(),
-      left = min(index),
-      right = max(index),
+#      left = min(index),
+#      right = max(index),
       min = min(y),
       max = max(y),
       mean = mean(y),
