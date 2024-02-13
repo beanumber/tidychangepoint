@@ -42,8 +42,8 @@ as.ts.cpt <- function(x, ...) {
 #' cpts <- segment(DataCPSim, method = "cpt-pelt")
 #' nobs(cpts)
 #' 
-nobs.cpt <- function(x, ...) {
-  length(as.ts(x@data.set))
+nobs.cpt <- function(object, ...) {
+  length(as.ts(object@data.set))
 }
 
 #' @rdname glance.cpt
@@ -54,11 +54,11 @@ nobs.cpt <- function(x, ...) {
 #' cpts <- segment(DataCPSim, method = "cpt-pelt", penalty = "AIC")
 #' logLik(cpts)
 #' 
-logLik.cpt <- function(x, ...) {
+logLik.cpt <- function(object, ...) {
   message("intercepting...")
-  y <- changepoint::likelihood(x)
+  y <- changepoint::likelihood(object)
   ll <- -y[1] / 2
-  attr(ll, "df") <- length(x@cpts)
+  attr(ll, "df") <- length(object@cpts)
   class(ll) <- "logLik"
   return(ll)
 }

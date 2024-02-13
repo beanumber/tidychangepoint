@@ -40,9 +40,9 @@ cpt_gbmdl(x, ...)
 
 \method{summary}{cpt_gbmdl}(object, ...)
 
-\method{nobs}{cpt_gbmdl}(x, ...)
+\method{nobs}{cpt_gbmdl}(object, ...)
 
-\method{logLik}{cpt_gbmdl}(x, ...)
+\method{logLik}{cpt_gbmdl}(object, ...)
 
 cpt_best_bmdl(x)
 

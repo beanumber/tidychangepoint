@@ -34,9 +34,9 @@ changepoints(x, ...)
 
 \method{changepoints}{tidycpt}(x, ...)
 
-\method{logLik}{tidycpt}(x, ...)
+\method{logLik}{tidycpt}(object, ...)
 
-\method{nobs}{tidycpt}(x, ...)
+\method{nobs}{tidycpt}(object, ...)
 
 \method{augment}{tidycpt}(x, ...)
 

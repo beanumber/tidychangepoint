@@ -12,9 +12,9 @@
 
 \method{as.ts}{cpt}(x, ...)
 
-\method{nobs}{cpt}(x, ...)
+\method{nobs}{cpt}(object, ...)
 
-\method{logLik}{cpt}(x, ...)
+\method{logLik}{cpt}(object, ...)
 
 \method{changepoints}{cpt}(x, ...)
 }

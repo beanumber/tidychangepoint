@@ -101,14 +101,14 @@ changepoints.tidycpt <- function(x, ...) {
 
 #' @rdname segment
 #' @export
-logLik.tidycpt <- function(x, ...) {
-  logLik(x$segmenter)
+logLik.tidycpt <- function(object, ...) {
+  logLik(object$segmenter)
 }
 
 #' @rdname segment
 #' @export
-nobs.tidycpt <- function(x, ...) {
-  nobs(x$segmenter)
+nobs.tidycpt <- function(object, ...) {
+  nobs(object$segmenter)
 }
 
 #' @rdname segment
@@ -184,26 +184,26 @@ plot.tidycpt <- function(x, ...) {
   ) +
     ggplot2::geom_rect(
       data = regions,
-      ggplot2::aes(xmin = left, xmax = right, ymin = 0, ymax = Inf, x = NULL, y = NULL),
+      ggplot2::aes(xmin = begin, xmax = end, ymin = 0, ymax = Inf, x = NULL, y = NULL),
       fill = "grey90"
     ) +
-    ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = right), linetype = 3) +
+    ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = end), linetype = 3) +
     ggplot2::geom_rug(sides = "l") +
     ggplot2::geom_line() + 
     ggplot2::geom_segment(
       data = regions,
-      ggplot2::aes(x = left, y = mean, xend = right, yend = mean),
+      ggplot2::aes(x = begin, y = mean, xend = end, yend = mean),
       color = "red"
     ) +
     ggplot2::geom_segment(
       data = regions,
-      ggplot2::aes(x = left, y = mean + 1.96 * sd, xend = right, yend = mean + 1.96 * sd),
+      ggplot2::aes(x = begin, y = mean + 1.96 * sd, xend = end, yend = mean + 1.96 * sd),
       color = "red",
       linetype = 3
     ) +
     ggplot2::geom_segment(
       data = regions,
-      ggplot2::aes(x = left, y = mean - 1.96 * sd, xend = right, yend = mean - 1.96 * sd),
+      ggplot2::aes(x = begin, y = mean - 1.96 * sd, xend = end, yend = mean - 1.96 * sd),
       color = "red",
       linetype = 3
     ) + 
@@ -239,7 +239,7 @@ plot_mcdf <- function(x, ...) {
   
   regions <- tidy(x)
   ggplot2::ggplot(data = z, ggplot2::aes(x = t_exceedance, y = cum_exceedances)) +
-    ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = right), linetype = 3) +
+    ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = end), linetype = 3) +
     ggplot2::geom_abline(intercept = 0, slope = 0.5, linetype = 3) +
     ggplot2::geom_line() +
     ggplot2::scale_x_continuous("Time Index (t)", limits = c(0, n)) +
