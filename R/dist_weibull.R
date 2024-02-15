@@ -59,17 +59,23 @@ mweibull <- function(x, shape, scale = 1) {
 
 #' @export
 
-hyperparameters_weibull <- function(...) {
+parameters_weibull <- function(...) {
   list(
     shape = list(
       dist = "gamma",
       shape = 1,
-      rate = 2
+      rate = 2,
+      initial_value = 0.1,
+      lower_bound = 0.0001,
+      upper_bound = 1
     ),
     scale = list(
       dist = "gamma",
       shape = 3,
-      rate = 1.2
+      rate = 1.2,
+      initial_value = 0.5,
+      lower_bound = 1e-8,
+      upper_bound = 100000
     )
   )
 }
@@ -88,14 +94,15 @@ log_likelihood_region_weibull <- function(t, tau_left, tau_right, theta) {
 #' @export
 #' @examples
 #' log_prior_region_weibull(theta = c(0.5, 2))
-log_prior_region_weibull <- function(theta, hyperparameters = hyperparameters_weibull()) {
-  shape <- hyperparameters[["shape"]]
-  scale <- hyperparameters[["scale"]]
+log_prior_region_weibull <- function(theta, params = parameters_weibull()) {
+  # a.k.a. the shape parameter for the Weibull distribution
+  alpha <- hyperparameters[["shape"]]
+  # a.k.a. the scale parameter for the Weibull distribution
+  beta <- hyperparameters[["scale"]]
 
-  (scale$shape - 1) * log(theta[1]) - shape$shape * theta[1] + # Exp 74 pag 21
-    (scale$rate - 1) * log(theta[2]) - shape$rate * theta[2] # Exp 75 pag 21
+  (alpha$rate - 1) * log(theta[1]) - alpha$shape * theta[1] + # Exp 74 pag 21
+    (beta$rate - 1) * log(theta[2]) - beta$shape * theta[2] # Exp 75 pag 21
 }
-
 
 #' Derivada de bloque de log-a priori NHPP
 #' @rdname D_Bloq_LogPost_NHPP
@@ -111,7 +118,7 @@ log_prior_region_weibull <- function(theta, hyperparameters = hyperparameters_we
 #' @export
 #' @examples
 #' D_log_prior_region_weibull(theta = c(0.5, 2))
-D_log_prior_region_weibull <- function(theta, hyperparameters = hyperparameters_weibull()) {
+D_log_prior_region_weibull <- function(theta, params = parameters_weibull()) {
   shape <- hyperparameters[["shape"]]
   scale <- hyperparameters[["scale"]]
   # Parcial con respecto a alfa

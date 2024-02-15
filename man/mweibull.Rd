@@ -4,10 +4,14 @@
 \alias{mweibull}
 \title{Evaluanción de mean function (la integral de la rate)}
 \usage{
-mweibull(t, theta)
+mweibull(x, shape, scale = 1)
 }
 \arguments{
 \item{t}{valor a evaluar (real)}
+
+\item{nhpp_dist}{tipo de mean function (ver libro de Eliane pdf 40 eq (3.12));
+posibles exponentiated-Weibull (EW),the Musa–Okumoto (MO),
+the Goel–Okumoto (GO), and a generalized Goel–Okumoto (GGO)}
 
 \item{theta}{parámetros de mean function.Para
 \itemize{
@@ -17,10 +21,6 @@ mweibull(t, theta)
 \item MO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
 \item GO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
 }}
-
-\item{nhpp_dist}{tipo de mean function (ver libro de Eliane pdf 40 eq (3.12));
-posibles exponentiated-Weibull (EW),the Musa–Okumoto (MO),
-the Goel–Okumoto (GO), and a generalized Goel–Okumoto (GGO)}
 }
 \value{
 regresa la evaluación
@@ -29,8 +29,12 @@ regresa la evaluación
 Evaluanción de mean function (la integral de la rate)
 }
 \examples{
-t <- c(1.4, 2.8)
-theta <- c(1.2, 2.1, 3.2)
-mweibull(t, nhpp_dist, theta)
+mweibull(1, shape = 1, scale = 1)
+plot(x = 1:10, y = mweibull(1:10, shape = 1, scale = 1))
+plot(x = 1:10, y = mweibull(1:10, shape = 1, scale = 2))
+plot(x = 1:10, y = mweibull(1:10, shape = 0.5, scale = 2))
+plot(x = 1:10, y = mweibull(1:10, shape = 0.5, scale = 100))
+plot(x = 1:10, y = mweibull(1:10, shape = 2, scale = 2))
+plot(x = 1:10, y = mweibull(1:10, shape = 2, scale = 100))
 
 }

@@ -20,7 +20,7 @@ D_log_likelihood_region_musaokomoto(
   nhpp_dist = "W"
 )
 
-D_log_prior_region_weibull(theta, hyperparameters)
+D_log_prior_region_weibull(theta, params = parameters_weibull())
 
 D_log_likelihood_region_weibull(vec_d_i, tau1, tau2, theta, nhpp_dist = "W")
 
@@ -65,4 +65,7 @@ Derivada bloque de log posterior NHPP
 Derivada de bloque de log-a priori NHPP
 
 Derivadas de bloque de log-verosimilitud NHPP
+}
+\examples{
+D_log_prior_region_weibull(theta = c(0.5, 2))
 }
