@@ -22,7 +22,7 @@ D_log_likelihood_region_musaokomoto(
 
 D_log_prior_region_weibull(theta, params = parameters_weibull())
 
-D_log_likelihood_region_weibull(vec_d_i, tau1, tau2, theta, nhpp_dist = "W")
+D_log_likelihood_region_weibull(t, tau_left, tau_right, theta)
 
 D_Bloq_LogPost_NHPP(vec_d_i, tau1, tau2, theta, vec_dist_a_priori, mat_phi)
 
@@ -41,6 +41,10 @@ cambio tau1 y tau2}
 \item{tau2}{valor del segundo punto de cambio}
 
 \item{nhpp_dist}{nombre de tasa de NHPP}
+
+\item{tau_left}{valor del primer punto de cambio}
+
+\item{tau_right}{valor del segundo punto de cambio}
 
 \item{vec_dist_a_priori}{vector que determina cual es la distribución a
 priori de los parametros; por ahora se tiene programado
@@ -68,4 +72,6 @@ Derivadas de bloque de log-verosimilitud NHPP
 }
 \examples{
 D_log_prior_region_weibull(theta = c(0.5, 2))
+
+D_log_likelihood_region_weibull(DataCPSim, 0, 575, theta = c(0.5, 2))
 }

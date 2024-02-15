@@ -25,7 +25,18 @@ test_that("weibull works", {
     purrr::map_dbl(~log_prior_region_weibull(theta = c(0.5, .x))) |>
     expect_type("double")
   
+  expect_equal(
+    D_Bloq_LogVero_NHPP(exceedances(DataCPSim), 0, 575, theta = c(0.5, 2), nhpp_dist = "W"),
+    D_log_likelihood_region_weibull(exceedances(DataCPSim), 0, 575, theta = c(0.5, 2))
+  )
+  expect_equal(
+    D_log_prior_region_weibull(theta = c(0.5, 2)),
+    D_Bloq_LogPrio_NHPP(c("Gamma", "Gamma"), theta = c(0.5, 2), mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2))
+  )
   
+  fit_nhpp_region(exceedances(lista_AG), 0, 575)
+  fit_nhpp_region_alt(exceedances(lista_AG), 0, 575)
+
   # Example 1
   y <- test_set(n = 1, seed = 123)
   plot(y)

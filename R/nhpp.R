@@ -284,24 +284,28 @@ fit_nhpp_region <- function(t, tau_left, tau_right,
   return(val_optimos)
 }
 
+#' @export
+#' @examples
+#' fit_nhpp_region_alt(exceedances(lista_AG), 0, 575)
+#' fit_nhpp_region(exceedances(lista_AG), 0, 575, initial_val_optim = c(1, 10))
 fit_nhpp_region_alt <- function(exc, tau_left, tau_right, 
-                            initial_val_optim = c(0.1, 0.5), 
-                            mat_low_upp = matrix(c(c(1e-4, 1e-8), c(1e+1, 1e+5)), nrow = 2), ...) {
+                                params = parameters_weibull(), ...) {
   # Definimos las funciones que vamos a utilizar para encontrar el mínimo
   my_fn <- function(theta) {
     - (log_likelihood_region_weibull(exc, tau_left, tau_right, theta = theta) + 
          log_prior_region_weibull(theta = theta))
   }
   my_gn <- function(theta) {
-    -D_Bloq_LogPost_NHPP(exc, tau1 = tau_left, tau2 = tau_right, theta, vec_dist_a_priori, mat_phi)
+    - (D_log_likelihood_region_weibull(exc, tau_left, tau_right, theta = theta) + 
+         D_log_prior_region_weibull(theta = theta))
   }
   # Calculamos el mínimo
   (val_optimos <- stats::optim(
-    initial_val_optim,
+    c(params$shape$initial_value, params$scale$initial_value),
     fn = my_fn, 
     gr = my_gn,
-    lower = mat_low_upp[, 1], 
-    upper = mat_low_upp[, 2],
+    lower = c(params$shape$lower_bound, params$scale$lower_bound), 
+    upper = c(params$shape$upper_bound, params$scale$upper_bound),
     method = "L-BFGS-B",
     ... = ...
   ))
