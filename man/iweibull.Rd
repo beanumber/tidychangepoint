@@ -4,10 +4,17 @@
 \alias{iweibull}
 \title{Evaluanción de rate function (la derivada de la mean)}
 \usage{
-iweibull(t, theta)
+iweibull(x, shape, scale = 1)
 }
 \arguments{
 \item{t}{valor a evaluar (real)}
+
+\item{nhpp_dist}{tipo de rate function (ver articulo A Gibbs Sampling Algorithm
+to Estimate the Occurrence of Ozone Exceedances in Mexico City  para el
+caso de Weibull (W) y ver libro de Eliane pdf 40 eq (3.12)); posibles
+exponentiated-Weibull (EW),the Musa–Okumoto (MO), the Goel–Okumoto (GO),
+and a generalized Goel–Okumoto (GGO). Las cuales tienen 3,3,2 y 2
+parámetros}
 
 \item{theta}{parámetros de mean function. Para
 \itemize{
@@ -17,13 +24,6 @@ iweibull(t, theta)
 \item MO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
 \item GO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
 }}
-
-\item{nhpp_dist}{tipo de rate function (ver articulo A Gibbs Sampling Algorithm
-to Estimate the Occurrence of Ozone Exceedances in Mexico City  para el
-caso de Weibull (W) y ver libro de Eliane pdf 40 eq (3.12)); posibles
-exponentiated-Weibull (EW),the Musa–Okumoto (MO), the Goel–Okumoto (GO),
-and a generalized Goel–Okumoto (GGO). Las cuales tienen 3,3,2 y 2
-parámetros}
 }
 \value{
 regresa la evaluación
@@ -32,15 +32,6 @@ regresa la evaluación
 Evaluanción de rate function (la derivada de la mean)
 }
 \examples{
-t <- c(1.4, 2.8)
-theta <- c(1.2, 2.1, 3.2)
-
-rate_fn(t, nhpp_dist, theta)
-nhpp_dist <- "GGO"
-rate_fn(t, nhpp_dist, theta)
-nhpp_dist <- "MO"
-rate_fn(t, nhpp_dist, theta)
-nhpp_dist <- "GO"
-rate_fn(t, nhpp_dist, theta)
-
+iweibull(1, shape = 1, scale = 1)
+plot(x = 1:10, y = iweibull(1:10, shape = 2, scale = 2))
 }

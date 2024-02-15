@@ -10,6 +10,6 @@ log_likelihood_region_weibull(t, tau_left, tau_right, theta)
 Log-likelihood
 }
 \examples{
-log_likelihood_region(DataCPSim, 0, 575, theta = c(0.5, 0.5))
+log_likelihood_region_weibull(DataCPSim, 0, 575, theta = c(0.5, 2))
 
 }

@@ -19,20 +19,11 @@
 #' @export
 #'
 #' @examples
-#' t <- c(1.4, 2.8)
-#' theta <- c(1.2, 2.1, 3.2)
-#'
-#' rate_fn(t, nhpp_dist, theta)
-#' nhpp_dist <- "GGO"
-#' rate_fn(t, nhpp_dist, theta)
-#' nhpp_dist <- "MO"
-#' rate_fn(t, nhpp_dist, theta)
-#' nhpp_dist <- "GO"
-#' rate_fn(t, nhpp_dist, theta)
-#'
-iweibull <- function(t, theta) {
-  # W -> theta = c(alpha, sigma)
-  (theta[1] / theta[2]) * (t / theta[2])^(theta[1] - 1)
+#' iweibull(1, shape = 1, scale = 1)
+#' plot(x = 1:10, y = iweibull(1:10, shape = 2, scale = 2))
+
+iweibull <- function(x, shape, scale = 1) {
+  (shape / scale) * (x / scale)^(shape - 1)
 }
 
 
@@ -54,30 +45,39 @@ iweibull <- function(t, theta) {
 #' @export
 #'
 #' @examples
-#' t <- c(1.4, 2.8)
-#' theta <- c(1.2, 2.1, 3.2)
-#' mweibull(t, nhpp_dist, theta)
+#' mweibull(1, shape = 1, scale = 1)
+#' plot(x = 1:10, y = mweibull(1:10, shape = 1, scale = 1))
+#' plot(x = 1:10, y = mweibull(1:10, shape = 1, scale = 2))
+#' plot(x = 1:10, y = mweibull(1:10, shape = 0.5, scale = 2))
+#' plot(x = 1:10, y = mweibull(1:10, shape = 0.5, scale = 100))
+#' plot(x = 1:10, y = mweibull(1:10, shape = 2, scale = 2))
+#' plot(x = 1:10, y = mweibull(1:10, shape = 2, scale = 100))
 #'
-mweibull <- function(t, theta) {
-  (t / theta[2])^theta[1]
+mweibull <- function(x, shape, scale = 1) {
+  (x / scale)^shape
 }
 
 #' @export
-#' @examples
-#' f <- cum_mean(lista_AG)
-#' f(0, alpha = 1, beta = 2)
-#' 
-cum_mean <- function(x, ...) {
-  if (x$nhpp_dist == "W") {
-    return(function(x, alpha, beta) (x/beta)^alpha)
-  }
-  return(NULL)
+
+hyperparameters_weibull <- function(...) {
+  list(
+    shape = list(
+      dist = "gamma",
+      shape = 1,
+      rate = 2
+    ),
+    scale = list(
+      dist = "gamma",
+      shape = 3,
+      rate = 1.2
+    )
+  )
 }
 
 #' Log-likelihood
 #' @export
 #' @examples
-#' log_likelihood_region(DataCPSim, 0, 575, theta = c(0.5, 0.5))
+#' log_likelihood_region_weibull(DataCPSim, 0, 575, theta = c(0.5, 2))
 #' 
 log_likelihood_region_weibull <- function(t, tau_left, tau_right, theta) {
   (tau_left^theta[1] - tau_right^theta[1]) / theta[2]^theta[1] +
@@ -87,17 +87,13 @@ log_likelihood_region_weibull <- function(t, tau_left, tau_right, theta) {
 
 #' @export
 #' @examples
-#' hyper <- data.frame(
-#'   hyperprior_shape = c(1, 3),
-#'   hyperprior_scale = c(2, 1.2)
-#' )
-#' log_prior_region(theta = c(0.5, 0.5), hyper)
-log_prior_region_weibull <- function(theta, hyperparameters) {
-  x <- hyperparameters$hyperprior_shape
-  y <- hyperparameters$hyperprior_scale
-  
-  (y[1] - 1) * log(theta[1]) - x[1] * theta[1] + # Exp 74 pag 21
-    (y[2] - 1) * log(theta[2]) - x[2] * theta[2] # Exp 75 pag 21
+#' log_prior_region_weibull(theta = c(0.5, 2))
+log_prior_region_weibull <- function(theta, hyperparameters = hyperparameters_weibull()) {
+  shape <- hyperparameters[["shape"]]
+  scale <- hyperparameters[["scale"]]
+
+  (scale$shape - 1) * log(theta[1]) - shape$shape * theta[1] + # Exp 74 pag 21
+    (scale$rate - 1) * log(theta[2]) - shape$rate * theta[2] # Exp 75 pag 21
 }
 
 
@@ -113,13 +109,15 @@ log_prior_region_weibull <- function(theta, hyperparameters) {
 #'   distribución
 #'
 #' @export
-D_log_prior_region_weibull <- function(theta, hyperparameters) {
-  x <- hyperparameters$hyperprior_shape
-  y <- hyperparameters$hyperprior_scale
+#' @examples
+#' D_log_prior_region_weibull(theta = c(0.5, 2))
+D_log_prior_region_weibull <- function(theta, hyperparameters = hyperparameters_weibull()) {
+  shape <- hyperparameters[["shape"]]
+  scale <- hyperparameters[["scale"]]
   # Parcial con respecto a alfa
-  p1 <- (-1 - theta[1] * x[1] + y[1]) / theta[1]
+  p1 <- (-1 - theta[1] * shape$shape + scale$shape) / theta[1]
   # Parcial con respecto a beta
-  p2 <- (-1 - theta[2] * x[2] + y[2]) / theta[2]
+  p2 <- (-1 - theta[2] * shape$rate + scale$rate) / theta[2]
   return(c(p1, p2))
 }
 

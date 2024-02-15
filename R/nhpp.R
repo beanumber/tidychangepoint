@@ -348,10 +348,7 @@ fit_nhpp <- function(x, tau) {
 
 cdf_exceedances_est <- function(t, tau, theta, n, dist = "weibull") {
   if (dist == "weibull") {
-    d <- function(x, a, b) {
-      #      -pweibull(x, a, b, lower = FALSE, log = TRUE)
-      (x/b)^a
-    }
+    d <- mweibull
   }
   tau_padded <- pad_tau(tau, n)
   regions <- cut_inclusive(1:n, tau_padded)
