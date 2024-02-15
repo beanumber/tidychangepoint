@@ -80,7 +80,38 @@ test_that("parameter fitting works", {
   plot(y)
   tau <- attr(y, "cpt_true")
   theta <- fit_nhpp(y, tau)
+  plot_mcdf(segment(y, method = "cpt-manual", cpts = tau))
   expect_lt(abs(theta$alpha[1] - 1), 0.05)
+  
+  expect_equal(-1000, log_likelihood_region(y, 0, 1000, theta = c(1, 1)))
+  expect_equal(-Inf, log_likelihood_region(y, 0, 1000, theta = c(0, 1)))
+  log_likelihood_region(y, 0, 1000, theta = c(exp(1), 1))
+  log_likelihood_region(y, 0, 1000, theta = c(1, 10000))
+  expect_equal(-1000 * (1/exp(1) + 1), log_likelihood_region(y, 0, 1000, theta = c(1, exp(1))))
+  
+  expect_equal(
+    log_likelihood_region(y, 0, 1000, theta = c(1, 1)),
+    log_likelihood_region(y, 0, 416, theta = c(1, 1)) + log_likelihood_region(y, 416, 1000, theta = c(1, 1))
+  )
+
+  log_likelihood_region(y, 0, 416, theta = c(1, 1)) + log_likelihood_region(y, 416, 1000, theta = c(1.1, 1000))
+  
+  f <- function(x) log_likelihood_region(y, 0, 1000, theta = c(x, 1))
+  g <- function(x) log_likelihood_region(y, 0, 1000, theta = c(1, x))
+  h <- function(x) {
+    log_likelihood_region(y, 0, x, theta = c(1, 1)) +
+    log_likelihood_region(y, x, 1000, theta = c(1, 1))
+  }
+  
+  1:100 |>
+    purrr::map_dbl(f)
+  
+  1:100 |>
+    purrr::map_dbl(g)
+  
+  1:1000 |>
+    purrr::map_dbl(h)
+  
   
   m <- cdf_exceedances_est(exceedances(y), tau, theta, length(y))
   expect_equal(cdf_exceedances_est(0, tau, theta, length(y)), 0)
