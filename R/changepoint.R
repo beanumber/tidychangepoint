@@ -55,8 +55,9 @@ nobs.cpt <- function(object, ...) {
 #' logLik(cpts)
 #' 
 logLik.cpt <- function(object, ...) {
-  message("intercepting...")
-  y <- changepoint::likelihood(object)
+#  message("intercepting...")
+  y <- changepoint::likelihood(object) |>
+    suppressWarnings()
   ll <- -y[1] / 2
   attr(ll, "df") <- length(object@cpts)
   class(ll) <- "logLik"

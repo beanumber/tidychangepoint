@@ -67,7 +67,7 @@ parameters_weibull <- function(...) {
       rate = 2,
       initial_value = 0.1,
       lower_bound = 0.0001,
-      upper_bound = 1
+      upper_bound = 10
     ),
     scale = list(
       dist = "gamma",
