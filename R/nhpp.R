@@ -52,7 +52,7 @@ fit_nhpp <- function(x, tau) {
   
   get_params <- function(z) {
     cbind(
-      data.frame("log-posterior" = -z$value), 
+      data.frame("log_posterior" = -z$value), 
       data.frame(t(z$par))
     )
   }

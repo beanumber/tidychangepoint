@@ -156,7 +156,8 @@ glance.tidycpt <- function(x, ...) {
     dplyr::mutate(
       s3_logLik = logLik(x),
       s3_AIC = AIC(x),
-      s3_BIC = BIC(x)
+      s3_BIC = BIC(x),
+      s3_BMDL = bmdl(x, changepoints(x))
     )
 }
 
