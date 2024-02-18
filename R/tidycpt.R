@@ -33,6 +33,7 @@ segment.numeric <- function(x, method = "null", ...) {
 #' segment(DataCPSim, method = "cpt-manual", cpts = c(826))
 #' two_cpts <- segment(DataCPSim, method = "cpt-manual", cpts = c(365, 826))
 #' plot(two_cpts)
+#' diagnose(two_cpts)
 #' \dontrun{
 #' segment(DataCPSim, method = "cpt-gbmdl")
 #' }
@@ -72,7 +73,10 @@ segment.ts <- function(x, method = "null", ...) {
     class(mod) <- c("cpt_lm", class(mod))
   }
   # build the tidycpt object
-  obj <- list(segmenter = mod)
+  obj <- list(
+    segmenter = mod,
+    nhpp = fit_nhpp(as.ts(x), changepoints(mod))
+  )
   class(obj) <- c("tidycpt")
   return(obj)
 }
@@ -128,7 +132,7 @@ augment.tidycpt <- function(x, ...) {
 #' @export
 tidy.tidycpt <- function(x, ...) {
   tau <- changepoints(x)
-  theta <- fit_nhpp(as.ts(x), tau)
+  theta <- x$nhpp
   n <- length(x)
   
   augment(x) |>
@@ -168,7 +172,7 @@ regions <- function(x, ...) UseMethod("regions")
 #' @rdname segment
 #' @export
 regions.tidycpt <- function(x, ...) {
-  tidy(x) |>
+  x$nhpp |>
     dplyr::pull(region) |> 
     levels()
 }
@@ -219,7 +223,7 @@ plot.tidycpt <- function(x, ...) {
 
 plot_mcdf <- function(x, ...) {
   tau <- changepoints(x)
-  theta <- fit_nhpp(as.ts(x), tau)
+  theta <- tidy(x)
   n <- length(x)
   
   z <- exceedances(x) |>
