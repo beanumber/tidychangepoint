@@ -116,7 +116,7 @@ Bayesaian_MDL_1_cp <- function(cp, x) {
   # 1. Obtener los estimadores MAP para cada regimen y guardarlos en mat_MAP
   mat_MAP <- fit_nhpp(x, chromo2tau(cp))
   # 2. Evaluar la log-posterior (sumando la primera columna de mat_MAP)
-  log_posterior <- sum(mat_MAP$log.posterior)
+  log_posterior <- sum(mat_MAP$log_posterior)
   # 3. Evaluar la penalización
   penaliza_cp <- penalization_MDL(cp, N = max(x))
   # 4. Obtener bayesian-MDL de la diferencia de la penalización y la log-posterior

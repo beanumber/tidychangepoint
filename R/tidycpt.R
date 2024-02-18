@@ -111,6 +111,20 @@ logLik.tidycpt <- function(object, ...) {
 
 #' @rdname segment
 #' @export
+MBIC <- function(object, ...) UseMethod("MBIC")
+
+#' @rdname segment
+#' @export
+MBIC.tidycpt <- function(object, k, n, p, const = 4) {
+  # stolen from bigstep::mbic()
+  stopifnot(n > 0, k >= 0, p > 0, p/const > 1, p/k >= 1)
+  bic <- BIC(object, ...)
+  mbic_v <- bic(loglik, k, n) + 2 * k * log(p/const - 1)
+  return(mbic_v)
+}
+
+#' @rdname segment
+#' @export
 nobs.tidycpt <- function(object, ...) {
   nobs(object$segmenter)
 }
