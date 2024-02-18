@@ -9,6 +9,10 @@ test_that("gbmdl works", {
   expect_type(changepoints(x), "integer")
   expect_type(nobs(x), "integer")
   expect_s3_class(plot(x), "gg")
+  
+  expect_s3_class(logLik(x), "logLik")
+  expect_type(AIC(x), "double")
+  expect_type(BIC(x), "double")
 })
 
 test_that("params works", {

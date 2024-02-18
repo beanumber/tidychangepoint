@@ -92,12 +92,17 @@ nobs.cpt_gbmdl <- function(object, ...) {
 #' @rdname new_cpt_gbmdl
 #' @export
 logLik.cpt_gbmdl <- function(object, ...) {
-  # need to make this work
-  out <- -3248
-  # Bloq_LogVero_NHPP(x, ...)
-  attr(out, "df") <- length(cpt_best(object))
-  class(out) <- "logLik"
-  return(out)
+  regions <- fit_nhpp(object, tau = changepoints(object))
+  log_likes <- regions |>
+    dplyr::mutate(theta = map2(alpha, beta, c)) |>
+    select(exceedances, begin, end, theta) |>
+    purrr::pmap_dbl(
+      function(exceedances, begin, end, theta) log_likelihood_region_weibull(exceedances, begin, end, theta)
+    ) |>
+    sum()
+  attr(log_likes, "df") <- length(changepoints(object))
+  class(log_likes) <- "logLik"
+  return(log_likes)
 }
 
 #' @rdname new_cpt_gbmdl

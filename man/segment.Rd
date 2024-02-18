@@ -81,7 +81,7 @@ two_cpts <- segment(DataCPSim, method = "cpt-manual", cpts = c(365, 826))
 plot(two_cpts)
 diagnose(two_cpts)
 \dontrun{
-segment(DataCPSim, method = "cpt-gbmdl")
+x <- segment(DataCPSim, method = "cpt-gbmdl")
 }
 
 diagnose(segment(DataCPSim))

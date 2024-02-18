@@ -35,7 +35,7 @@ segment.numeric <- function(x, method = "null", ...) {
 #' plot(two_cpts)
 #' diagnose(two_cpts)
 #' \dontrun{
-#' segment(DataCPSim, method = "cpt-gbmdl")
+#' x <- segment(DataCPSim, method = "cpt-gbmdl")
 #' }
 #' 
 
