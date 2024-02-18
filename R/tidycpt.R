@@ -226,8 +226,8 @@ plot_mcdf <- function(x, ...) {
     # always add the last observation
     dplyr::bind_rows(
       data.frame(
-        cum_exceedances = length(exceedances(x)), 
-        t_exceedance = n
+        cum_exceedances = c(0, length(exceedances(x))), 
+        t_exceedance = c(0, n)
       )
     ) |>
     dplyr::distinct() |>
