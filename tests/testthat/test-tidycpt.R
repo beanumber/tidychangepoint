@@ -1,3 +1,7 @@
+test_that("data works", {
+  expect_s3_class(bogota_pm, "tbl_ts")
+})
+
 test_that("tidycpt works", {
   x <- segment(DataCPSim, method = "cpt-pelt")
   expect_s3_class(x, "tidycpt")
