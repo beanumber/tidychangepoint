@@ -76,9 +76,9 @@ plot_confint <- function(x) {
 
   m <- cdf_exceedances_est(exceedances(x$data), tau = tau, theta = theta, n = length(x))
   
-  upp_bond <- stats::qpois(.95, lambda = c(pow(10 / sigma[1], alpha[1]), m))
-  low_bond <- stats::qpois(.05, lambda = c(pow(10 / sigma[1], alpha[1]), m))
-  mean_NHPP <- c(pow(10 / sigma[1], alpha[1]), m)
+  upp_bond <- stats::qpois(.95, lambda = c((10 / sigma[1])^alpha[1], m))
+  low_bond <- stats::qpois(.05, lambda = c((10 / sigma[1])^alpha[1], m))
+  mean_NHPP <- c((10 / sigma[1])^alpha[1], m)
   graphics::lines(x = c(10, exceedances(x)), y = upp_bond, col = "blue", lwd = 2)
   graphics::lines(x = c(10, exceedances(x)), y = mean_NHPP, col = "red", lwd = 2)
   graphics::lines(x = c(10, exceedances(x)), y = low_bond, col = "blue", lwd = 2)
