@@ -9,6 +9,8 @@
 \alias{changepoints}
 \alias{changepoints.tidycpt}
 \alias{logLik.tidycpt}
+\alias{MBIC}
+\alias{MBIC.tidycpt}
 \alias{nobs.tidycpt}
 \alias{augment.tidycpt}
 \alias{tidy.tidycpt}
@@ -35,6 +37,10 @@ changepoints(x, ...)
 \method{changepoints}{tidycpt}(x, ...)
 
 \method{logLik}{tidycpt}(object, ...)
+
+MBIC(object, ...)
+
+\method{MBIC}{tidycpt}(object, ...)
 
 \method{nobs}{tidycpt}(object, ...)
 
@@ -90,6 +96,9 @@ diagnose(segment(DataCPSim, method = "cpt-pelt"))
 diagnose(segment(test_set()))
 diagnose(segment(test_set(n = 2, sd = 4), method = "cpt-pelt"))
 
+}
+\references{
+Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
 }
 \seealso{
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}

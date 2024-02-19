@@ -114,13 +114,13 @@ logLik.tidycpt <- function(object, ...) {
 MBIC <- function(object, ...) UseMethod("MBIC")
 
 #' @rdname segment
+#' @references Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
 #' @export
-MBIC.tidycpt <- function(object, k, n, p, const = 4) {
-  # stolen from bigstep::mbic()
-  stopifnot(n > 0, k >= 0, p > 0, p/const > 1, p/k >= 1)
-  bic <- BIC(object, ...)
-  mbic_v <- bic(loglik, k, n) + 2 * k * log(p/const - 1)
-  return(mbic_v)
+MBIC.tidycpt <- function(object, ...) {
+  tau <- changepoints(object)
+  m <- length(tau)
+  r <- tau / length(object)
+  -(1/2) * (3 * m * log(length(object)) + sum(r)) 
 }
 
 #' @rdname segment
@@ -175,6 +175,7 @@ glance.tidycpt <- function(x, ...) {
       s3_logLik = logLik(x),
       s3_AIC = AIC(x),
       s3_BIC = BIC(x),
+      s3_MBIC = MBIC(x),
       s3_BMDL = bmdl(x, changepoints(x))
     )
 }
