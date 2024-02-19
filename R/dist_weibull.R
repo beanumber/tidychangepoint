@@ -1,5 +1,6 @@
 #' Weibull distribution functions
-#' #'
+#' 
+#' @inheritParams stats::dweibull
 #' @param t valor a evaluar (real)
 #' @param nhpp_dist tipo de rate function (ver articulo A Gibbs Sampling Algorithm
 #'   to Estimate the Occurrence of Ozone Exceedances in Mexico City  para el

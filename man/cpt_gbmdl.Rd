@@ -4,6 +4,24 @@
 \alias{cpt_gbmdl}
 \alias{validate_cpt_gbmdl}
 \alias{new_cpt_gbmdl}
+\alias{plot.cpt_gbmdl}
+\alias{print.cpt_gbmdl}
+\alias{summary.cpt_gbmdl}
+\alias{nobs.cpt_gbmdl}
+\alias{logLik.cpt_gbmdl}
+\alias{cpt_best_bmdl}
+\alias{cpt_best_bmdl_string}
+\alias{cpt_best_params}
+\alias{chromosome_best}
+\alias{cpt_best}
+\alias{chromo2tau}
+\alias{mat_cp_2_tbl}
+\alias{mat_cp_2_list}
+\alias{max_num_cp}
+\alias{generation_size}
+\alias{num_generations}
+\alias{write_cpt_gbmdl}
+\alias{file_name}
 \title{Class for candidate changepoints using Genetic BMDL heuristic}
 \usage{
 cpt_gbmdl(x, ...)
@@ -19,9 +37,47 @@ new_cpt_gbmdl(
   generation_size = 50,
   max_num_cp = 20
 )
+
+\method{plot}{cpt_gbmdl}(x, ...)
+
+\method{print}{cpt_gbmdl}(x, ...)
+
+\method{summary}{cpt_gbmdl}(object, ...)
+
+\method{nobs}{cpt_gbmdl}(object, ...)
+
+\method{logLik}{cpt_gbmdl}(object, ...)
+
+cpt_best_bmdl(x)
+
+cpt_best_bmdl_string(x)
+
+cpt_best_params(x)
+
+chromosome_best(x)
+
+cpt_best(x)
+
+chromo2tau(chromo)
+
+mat_cp_2_tbl(mat_cp)
+
+mat_cp_2_list(mat_cp)
+
+max_num_cp(x)
+
+generation_size(x)
+
+num_generations(x)
+
+write_cpt_gbmdl(x, destdir = tempdir())
+
+file_name(x, data_name_slug = "data")
 }
 \arguments{
 \item{x}{a numeric vector}
+
+\item{...}{arguments passed to methods}
 
 \item{nhpp_dist}{toma valores en c("W","EW","GGO","MO","GO") y es el nombre de
 la función de tasa del NHPP}
@@ -36,6 +92,9 @@ distribución}
 \item{num_generations}{número de generaciones}
 
 \item{generation_size}{tamaño de las generaciones}
+
+\item{data_name_slug}{character string that will identify the data set used
+in the file name}
 }
 \description{
 Class for candidate changepoints using Genetic BMDL heuristic
@@ -43,4 +102,9 @@ Class for candidate changepoints using Genetic BMDL heuristic
 \examples{
 cpts <- cpt_gbmdl(DataCPSim)
 str(cpts)
+cpt_best_params(lista_AG$segmenter)
+chromo <- c(4, 1, 557, 877 , 905, 986, 1096, 0, 0, 0)
+chromo2tau(chromo)
+write_cpt_gbmdl(lista_AG$segmenter)
+file_name(cpt_gbmdl(DataCPSim))
 }

@@ -1,4 +1,5 @@
 #' Calculate overages
+#' 
 #' @export
 #' @param x a time series object
 #' @examples
@@ -8,11 +9,15 @@ exceedances <- function(x) {
   which(y > mean(y))
 }
 
+#' @rdname exceedances
+#' @param tau a numeric vector of changepoints
+#' @param n the length of the original time series
 #' @export
 pad_tau <- function(tau, n) {
   unique(c(0, tau, n))
 }
 
+#' @rdname exceedances
 #' @export
 unpad_tau <- function(padded_tau) {
   padded_tau |>
@@ -20,11 +25,13 @@ unpad_tau <- function(padded_tau) {
     utils::tail(-1)
 }
 
+#' @rdname exceedances
 #' @export
 cut_inclusive <- function(x, tau) {
   cut(x, breaks = tau, include.lowest = TRUE, right = FALSE)
 }
 
+#' @rdname exceedances
 #' @export
 test_set <- function(n = 1, sd = 1, seed = NULL) {
   if (!is.null(seed)) {
@@ -46,7 +53,7 @@ test_set <- function(n = 1, sd = 1, seed = NULL) {
   return(out)
 }
 
-#' Genera los textos para los pdf y RData de las n distribuciones
+#' @rdname exceedances
 #' @export
 label_priors <- function(x) {
   x$mat_phi |>

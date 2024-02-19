@@ -7,8 +7,7 @@
 \alias{log_prior_region_weibull}
 \alias{D_log_prior_region_weibull}
 \alias{D_log_likelihood_region_weibull}
-\title{Weibull distribution functions
-#'}
+\title{Weibull distribution functions}
 \usage{
 iweibull(x, shape, scale = 1)
 
@@ -23,6 +22,8 @@ D_log_prior_region_weibull(theta, params = parameters_weibull())
 D_log_likelihood_region_weibull(t, tau_left, tau_right, theta)
 }
 \arguments{
+\item{shape, scale}{shape and scale parameters, the latter defaulting to 1.}
+
 \item{t}{valor a evaluar (real)}
 
 \item{tau_left}{valor del primer punto de cambio}
@@ -43,7 +44,6 @@ regresa la evaluación
 }
 \description{
 Weibull distribution functions
-#'
 }
 \examples{
 iweibull(1, shape = 1, scale = 1)

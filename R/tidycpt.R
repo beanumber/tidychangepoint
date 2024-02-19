@@ -44,7 +44,7 @@ segment.numeric <- function(x, method = "null", ...) {
 #' - `single-best`: Uses the AMOC criteria as implemented by 
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
 #' - `cpt-gbmdl`: Uses the Genetic BMDL heuristic as implemented by 
-#'   [segment_gbmdl()]. The `segmenter` is of class [cpt-gbmdl].
+#'   [segment_gbmdl()]. The `segmenter` is of class [cpt_gbmdl].
 #' - `cpt-manual`: Uses the vector of changepoints in the `cpts` arugment and
 #'   [stats::lm()]. The `segmenter` is of class `lm`.
 #' - `null`: The default. Uses [stats::lm()] with no changepoints. 

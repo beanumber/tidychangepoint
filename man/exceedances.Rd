@@ -2,11 +2,26 @@
 % Please edit documentation in R/utils.R
 \name{exceedances}
 \alias{exceedances}
+\alias{pad_tau}
+\alias{unpad_tau}
+\alias{cut_inclusive}
+\alias{test_set}
+\alias{label_priors}
 \alias{split_by_tau}
 \alias{deg_free}
 \title{Calculate overages}
 \usage{
 exceedances(x)
+
+pad_tau(tau, n)
+
+unpad_tau(padded_tau)
+
+cut_inclusive(x, tau)
+
+test_set(n = 1, sd = 1, seed = NULL)
+
+label_priors(x)
 
 split_by_tau(x, tau)
 
@@ -14,6 +29,10 @@ deg_free(x, ...)
 }
 \arguments{
 \item{x}{a time series object}
+
+\item{tau}{a numeric vector of changepoints}
+
+\item{n}{the length of the original time series}
 }
 \description{
 Calculate overages

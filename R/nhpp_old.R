@@ -13,8 +13,7 @@ Bloq_LogPost_NHPP <- function(vec_d_i, tau1, tau2, theta, vec_dist_a_priori, mat
     Bloq_LogPrio_NHPP(vec_dist_a_priori, theta, mat_phi)
 }
 
-
-#' Bloque de log-a priori NHPP
+#' @rdname Bloq_LogPost_NHPP
 #' @export
 Bloq_LogPrio_NHPP <- function(vec_dist_a_priori, theta, mat_phi) {
   if (length(vec_dist_a_priori) == 2) {
@@ -33,17 +32,7 @@ Bloq_LogPrio_NHPP <- function(vec_dist_a_priori, theta, mat_phi) {
   }
 }
 
-
-
-
-
-#' Bloque de log-verosimilitud NHPP
-#'
-#' @param vec_d_i vector de días en los que hubo rebases entre el los puntos de
-#'   cambio tau1 y tau2
-#' @param tau1 valor del primer punto de cambio
-#' @param tau2 valor del segundo punto de cambio
-#' @param theta vector de parámetros de verosimilitud del NHPP
+#' @rdname Bloq_LogPost_NHPP
 #' @export
 Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, theta, nhpp_dist = "W") {
   if (nhpp_dist == "W") {
@@ -87,10 +76,7 @@ Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, theta, nhpp_dist = "W") {
   }
 }
 
-
-
-
-#' Derivada bloque de log posterior NHPP
+#' @rdname Bloq_LogPost_NHPP
 #' @export
 D_Bloq_LogPost_NHPP <- function(vec_d_i, tau1, tau2, theta, vec_dist_a_priori, mat_phi) {
   D_Bloq_LogVero_NHPP(vec_d_i, tau1, tau2, theta) +
@@ -98,9 +84,7 @@ D_Bloq_LogPost_NHPP <- function(vec_d_i, tau1, tau2, theta, vec_dist_a_priori, m
 }
 
 
-
-#' Derivada de bloque de log-a priori NHPP
-#' @rdname D_Bloq_LogPost_NHPP
+#' @rdname Bloq_LogPost_NHPP
 #' @param vec_dist_a_priori vector que determina cual es la distribución a
 #'   priori de los parametros; por ahora se tiene programado
 #'   vec_dist_a_priori=c("Gamma","Gamma") y
@@ -136,17 +120,8 @@ D_Bloq_LogPrio_NHPP <- function(vec_dist_a_priori, theta, mat_phi) {
 }
 
 
-
-
-
-#' Derivadas de bloque de log-verosimilitud NHPP
-#' @rdname D_Bloq_LogPost_NHPP
-#' @param vec_d_i vector de días en los que hubo revases entre el los puntos de
-#'   cambio tau1 y tau2
-#' @param tau1 valor del primer punto de cambio
-#' @param tau2 valor del segundo punto de cambio
+#' @rdname Bloq_LogPost_NHPP
 #' @param nhpp_dist nombre de tasa de NHPP
-#' @param theta vector de parámetros de verosimilitud del NHPP
 #' @export
 D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, theta, nhpp_dist = "W") {
   if (nhpp_dist == "W") {
@@ -241,17 +216,17 @@ D_Bloq_LogVero_NHPP <- function(vec_d_i, tau1, tau2, theta, nhpp_dist = "W") {
 }
 
 
-#' Estimadores MAP
-#'
+#' @rdname Bloq_LogPost_NHPP
 #' @param vec_d_i vector de días de un régimen
-#' @param tau1 valor del primer punto de cambio
-#' @param tau2 valor del segundo punto de cambio
+#' @param tau_left valor del primer punto de cambio
+#' @param tau_right valor del segundo punto de cambio
+#' @param initial_val_optim initial values for optimization
 #' @param vec_dist_a_priori nombres de distribuciones a priori
 #' @param mat_phi matriz cuyos renglones tiene los parámetros de las
 #'   distribuciones a priori
 #' @param mat_low_upp matriz con lugares donde buscar; cada renglon es para un
 #'   parámetro del NHPP
-#'
+#' @param ... arguments passed to [stats::optim()]
 #' @return regresa un el resultado de optim
 #' @export
 #' @examples

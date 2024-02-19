@@ -2,24 +2,73 @@
 % Please edit documentation in R/nhpp_old.R
 \name{Bloq_LogPost_NHPP}
 \alias{Bloq_LogPost_NHPP}
+\alias{Bloq_LogPrio_NHPP}
+\alias{Bloq_LogVero_NHPP}
+\alias{D_Bloq_LogPost_NHPP}
+\alias{D_Bloq_LogPrio_NHPP}
+\alias{D_Bloq_LogVero_NHPP}
+\alias{fit_nhpp_region}
 \title{Bloque de log posterior NHPP}
 \usage{
 Bloq_LogPost_NHPP(vec_d_i, tau1, tau2, theta, vec_dist_a_priori, mat_phi)
+
+Bloq_LogPrio_NHPP(vec_dist_a_priori, theta, mat_phi)
+
+Bloq_LogVero_NHPP(vec_d_i, tau1, tau2, theta, nhpp_dist = "W")
+
+D_Bloq_LogPost_NHPP(vec_d_i, tau1, tau2, theta, vec_dist_a_priori, mat_phi)
+
+D_Bloq_LogPrio_NHPP(vec_dist_a_priori, theta, mat_phi)
+
+D_Bloq_LogVero_NHPP(vec_d_i, tau1, tau2, theta, nhpp_dist = "W")
+
+fit_nhpp_region(
+  t,
+  tau_left,
+  tau_right,
+  initial_val_optim = c(0.1, 0.5),
+  mat_low_upp = matrix(c(c(1e-04, 1e-08), c(10, 1e+05)), nrow = 2),
+  vec_dist_a_priori = c("Gamma", "Gamma"),
+  mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2),
+  ...
+)
 }
 \arguments{
-\item{vec_d_i}{vector de días en los que hubo revases entre el los puntos de
-cambio tau1 y tau2}
+\item{vec_d_i}{vector de días de un régimen}
 
 \item{tau1}{valor del primer punto de cambio}
 
 \item{tau2}{valor del segundo punto de cambio}
 
-\item{theta}{vector de parámetros de verosimilitud del NHPP}
+\item{theta}{vector de parámetros de verosimilitud}
 
-\item{vec_dist_a_priori}{description}
+\item{vec_dist_a_priori}{nombres de distribuciones a priori}
 
-\item{mat_phi}{description}
+\item{mat_phi}{matriz cuyos renglones tiene los parámetros de las
+distribuciones a priori}
+
+\item{nhpp_dist}{nombre de tasa de NHPP}
+
+\item{tau_left}{valor del primer punto de cambio}
+
+\item{tau_right}{valor del segundo punto de cambio}
+
+\item{initial_val_optim}{initial values for optimization}
+
+\item{mat_low_upp}{matriz con lugares donde buscar; cada renglon es para un
+parámetro del NHPP}
+
+\item{...}{arguments passed to \code{\link[stats:optim]{stats::optim()}}}
+}
+\value{
+regresa un el resultado de optim
 }
 \description{
 Bloque de log posterior NHPP
+}
+\examples{
+fit_nhpp_region(exceedances(lista_AG), 0, 575)
+fit_nhpp_region(exceedances(lista_AG), 0, 575, initial_val_optim = c(1, 10))
+
+
 }

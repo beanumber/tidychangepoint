@@ -45,7 +45,7 @@ on the value of the \code{method} argument:
 \item \code{single-best}: Uses the AMOC criteria as implemented by
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
 \item \code{cpt-gbmdl}: Uses the Genetic BMDL heuristic as implemented by
-\code{\link[=segment_gbmdl]{segment_gbmdl()}}. The \code{segmenter} is of class \link{cpt-gbmdl}.
+\code{\link[=segment_gbmdl]{segment_gbmdl()}}. The \code{segmenter} is of class \link{cpt_gbmdl}.
 \item \code{cpt-manual}: Uses the vector of changepoints in the \code{cpts} arugment and
 \code{\link[stats:lm]{stats::lm()}}. The \code{segmenter} is of class \code{lm}.
 \item \code{null}: The default. Uses \code{\link[stats:lm]{stats::lm()}} with no changepoints.
