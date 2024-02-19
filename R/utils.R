@@ -86,6 +86,7 @@ label_priors <- function(x) {
     paste0(collapse = "_")
 }
 
+#' @rdname exceedances
 #' @export
 #' @examples
 #' split_by_tau(as.ts(lista_AG), changepoints(lista_AG))
@@ -95,6 +96,7 @@ split_by_tau <- function(x, tau) {
   split(x, idx)
 }
 
+#' @rdname exceedances
 #' @export
 #' @examples
 #' deg_free(segment(DataCPSim))

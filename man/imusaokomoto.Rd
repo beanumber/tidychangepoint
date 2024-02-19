@@ -2,30 +2,57 @@
 % Please edit documentation in R/dist_musa-okumoto.R
 \name{imusaokomoto}
 \alias{imusaokomoto}
+\alias{mmusaokomoto}
+\alias{log_likelihood_region_musaokomoto}
+\alias{log_prior_region_musaokomoto}
+\alias{D_log_prior_region_musaokomoto}
+\alias{D_log_likelihood_region_musaokomoto}
 \title{Evaluanción de rate function (la derivada de la mean)}
 \usage{
 imusaokomoto(t, theta)
+
+mmusaokomoto(t, theta)
+
+log_likelihood_region_musaokomoto(t, tau_left, tau_right, theta)
+
+log_prior_region_musaokomoto(theta, hyperparameters)
+
+D_log_prior_region_musaokomoto(theta, hyperparameters)
+
+D_log_likelihood_region_musaokomoto(
+  vec_d_i,
+  tau1,
+  tau2,
+  theta,
+  nhpp_dist = "W"
+)
 }
 \arguments{
 \item{t}{valor a evaluar (real)}
 
-\item{theta}{parámetros de mean function. Para
-\itemize{
-\item W: \eqn{\alpha = \theta[1]}, \eqn{\sigma = \theta[2]}
-\item EW: \eqn{\alpha = \theta[1], \beta = \theta[2]} y \eqn{\sigma = \theta[3]}
-\item GGO: \eqn{\alpha = \theta[1], \beta = \theta[2]} y \eqn{\gamma = \theta[3]}
-\item MO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
-\item GO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
-}}
+\item{theta}{vector de parámetros de verosimilitud del NHPP}
 
-\item{nhpp_dist}{tipo de rate function (ver articulo A Gibbs Sampling Algorithm
-to Estimate the Occurrence of Ozone Exceedances in Mexico City  para el
-caso de Weibull (W) y ver libro de Eliane pdf 40 eq (3.12)); posibles
-exponentiated-Weibull (EW),the Musa–Okumoto (MO), the Goel–Okumoto (GO),
-and a generalized Goel–Okumoto (GGO). Las cuales tienen 3,3,2 y 2
-parámetros}
+\item{vec_d_i}{vector de días en los que hubo revases entre el los puntos de
+cambio tau1 y tau2}
+
+\item{tau1}{valor del primer punto de cambio}
+
+\item{tau2}{valor del segundo punto de cambio}
+
+\item{nhpp_dist}{nombre de tasa de NHPP}
+
+\item{vec_dist_a_priori}{vector que determina cual es la distribución a
+priori de los parametros; por ahora se tiene programado
+vec_dist_a_priori=c("Gamma","Gamma") y
+vec_dist_a_priori=c("Gamma","Gamma","Gamma")}
+
+\item{mat_phi}{matriz cuyos renglones tiene los parámetros de las
+distribuciones a priori; cada renglón tiene todos los parametros de una
+distribución}
 }
 \value{
+regresa la evaluación
+
 regresa la evaluación
 }
 \description{
@@ -37,4 +64,15 @@ theta <- c(1.2, 2.1, 3.2)
 
 imusaokomoto(t, nhpp_dist, theta)
 
+t <- c(1.4, 2.8)
+theta <- c(1.2, 2.1, 3.2)
+mmusaokomoto(t, nhpp_dist, theta)
+
+log_likelihood_region(DataCPSim, 0, 575, theta = c(0.5, 0.5))
+
+hyper <- data.frame(
+  hyperprior_shape = c(1, 3),
+  hyperprior_scale = c(2, 1.2)
+)
+log_prior_region(theta = c(0.5, 0.5), hyper)
 }

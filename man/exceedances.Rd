@@ -2,9 +2,15 @@
 % Please edit documentation in R/utils.R
 \name{exceedances}
 \alias{exceedances}
+\alias{split_by_tau}
+\alias{deg_free}
 \title{Calculate overages}
 \usage{
 exceedances(x)
+
+split_by_tau(x, tau)
+
+deg_free(x, ...)
 }
 \arguments{
 \item{x}{a time series object}
@@ -14,4 +20,6 @@ Calculate overages
 }
 \examples{
 exceedances(DataCPSim)
+split_by_tau(as.ts(lista_AG), changepoints(lista_AG))
+deg_free(segment(DataCPSim))
 }

@@ -78,6 +78,7 @@ segment_gbmdl <- function(x, destdir = tempdir(), show_progress_bar = TRUE, writ
   return(obj)
 }
 
+#' @rdname segment_gbmdl
 #' @export
 #' @examples
 #' mat_cp <- lista_AG$segmenter$mat_cp

@@ -1,3 +1,5 @@
+#' Alternate implementation of Genetic BMDL algorithm
+#' @rdname segment_gbmdl
 #' @export
 #' @examples
 #' segment_gbmdl_alt(DataCPSim)
@@ -43,6 +45,7 @@ segment_gbmdl_alt <- function(x, destdir = tempdir(), show_progress_bar = TRUE, 
 }
 
 
+#' @rdname segment_gbmdl
 #' @export
 #' @examples
 #' mat_cp <- lista_AG$segmenter$lista_AG_BMDL$mat_cp

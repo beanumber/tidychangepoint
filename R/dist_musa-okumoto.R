@@ -1,5 +1,3 @@
-
-
 #' Evaluanción de rate function (la derivada de la mean)
 #'
 #' @param t valor a evaluar (real)
@@ -32,8 +30,7 @@ imusaokomoto <- function(t, theta) {
 }
 
 
-#' Evaluanción de mean function (la integral de la rate)
-#'
+#' @rdname imusaokomoto
 #' @param t valor a evaluar (real)
 #' @param nhpp_dist tipo de mean function (ver libro de Eliane pdf 40 eq (3.12));
 #'               posibles exponentiated-Weibull (EW),the Musa–Okumoto (MO),
@@ -59,7 +56,7 @@ mmusaokomoto <- function(t, theta) {
 }
 
 
-#' Log-likelihood
+#' @rdname imusaokomoto
 #' @export
 #' @examples
 #' log_likelihood_region(DataCPSim, 0, 575, theta = c(0.5, 0.5))
@@ -70,6 +67,7 @@ log_likelihood_region_musaokomoto <- function(t, tau_left, tau_right, theta) {
     (theta[1] - 1) * sum(log(t))
 }
 
+#' @rdname imusaokomoto
 #' @export
 #' @examples
 #' hyper <- data.frame(
@@ -86,8 +84,7 @@ log_prior_region_musaokomoto<- function(theta, hyperparameters) {
 }
 
 
-#' Derivada de bloque de log-a priori NHPP
-#' @rdname D_Bloq_LogPost_NHPP
+#' @rdname imusaokomoto
 #' @param vec_dist_a_priori vector que determina cual es la distribución a
 #'   priori de los parametros; por ahora se tiene programado
 #'   vec_dist_a_priori=c("Gamma","Gamma") y
@@ -108,8 +105,7 @@ D_log_prior_region_musaokomoto <- function(theta, hyperparameters) {
   return(c(p1, p2))
 }
 
-#' Derivadas de bloque de log-verosimilitud NHPP
-#' @rdname D_Bloq_LogPost_NHPP
+#' @rdname imusaokomoto
 #' @param vec_d_i vector de días en los que hubo revases entre el los puntos de
 #'   cambio tau1 y tau2
 #' @param tau1 valor del primer punto de cambio

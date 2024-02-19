@@ -16,6 +16,10 @@
 \alias{cpt_best}
 \alias{chromo2tau}
 \alias{mat_cp_2_tbl}
+\alias{mat_cp_2_list}
+\alias{max_num_cp}
+\alias{generation_size}
+\alias{num_generations}
 \alias{write_cpt_gbmdl}
 \alias{file_name}
 \title{Class for candidate changepoints using Genetic BMDL heuristic}
@@ -57,6 +61,14 @@ cpt_best(x)
 chromo2tau(chromo)
 
 mat_cp_2_tbl(mat_cp)
+
+mat_cp_2_list(mat_cp)
+
+max_num_cp(x)
+
+generation_size(x)
+
+num_generations(x)
 
 write_cpt_gbmdl(x, destdir = tempdir())
 

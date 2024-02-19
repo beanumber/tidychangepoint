@@ -26,7 +26,6 @@ Imports:
     ggplot2,
     patchwork,
     purrr,
-    readr,
     tibble,
     tsibble
 Depends: 

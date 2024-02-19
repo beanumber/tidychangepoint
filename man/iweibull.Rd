@@ -2,36 +2,64 @@
 % Please edit documentation in R/dist_weibull.R
 \name{iweibull}
 \alias{iweibull}
-\title{Evaluanción de rate function (la derivada de la mean)}
+\alias{mweibull}
+\alias{log_likelihood_region_weibull}
+\alias{log_prior_region_weibull}
+\alias{D_log_prior_region_weibull}
+\alias{D_log_likelihood_region_weibull}
+\title{Weibull distribution functions
+#'}
 \usage{
 iweibull(x, shape, scale = 1)
+
+mweibull(x, shape, scale = 1)
+
+log_likelihood_region_weibull(t, tau_left, tau_right, theta)
+
+log_prior_region_weibull(theta, params = parameters_weibull())
+
+D_log_prior_region_weibull(theta, params = parameters_weibull())
+
+D_log_likelihood_region_weibull(t, tau_left, tau_right, theta)
 }
 \arguments{
 \item{t}{valor a evaluar (real)}
 
-\item{nhpp_dist}{tipo de rate function (ver articulo A Gibbs Sampling Algorithm
-to Estimate the Occurrence of Ozone Exceedances in Mexico City  para el
-caso de Weibull (W) y ver libro de Eliane pdf 40 eq (3.12)); posibles
-exponentiated-Weibull (EW),the Musa–Okumoto (MO), the Goel–Okumoto (GO),
-and a generalized Goel–Okumoto (GGO). Las cuales tienen 3,3,2 y 2
-parámetros}
+\item{tau_left}{valor del primer punto de cambio}
 
-\item{theta}{parámetros de mean function. Para
-\itemize{
-\item W: \eqn{\alpha = \theta[1]}, \eqn{\sigma = \theta[2]}
-\item EW: \eqn{\alpha = \theta[1], \beta = \theta[2]} y \eqn{\sigma = \theta[3]}
-\item GGO: \eqn{\alpha = \theta[1], \beta = \theta[2]} y \eqn{\gamma = \theta[3]}
-\item MO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
-\item GO: \eqn{\alpha = \theta[1], \beta = \theta[2]}
-}}
+\item{tau_right}{valor del segundo punto de cambio}
+
+\item{theta}{vector de parámetros de verosimilitud del NHPP}
+
+\item{vec_d_i}{vector de días en los que hubo revases entre el los puntos de
+cambio tau_left y tau_right}
+
+\item{nhpp_dist}{nombre de tasa de NHPP}
 }
 \value{
 regresa la evaluación
+
+regresa la evaluación
 }
 \description{
-Evaluanción de rate function (la derivada de la mean)
+Weibull distribution functions
+#'
 }
 \examples{
 iweibull(1, shape = 1, scale = 1)
 plot(x = 1:10, y = iweibull(1:10, shape = 2, scale = 2))
+mweibull(1, shape = 1, scale = 1)
+plot(x = 1:10, y = mweibull(1:10, shape = 1, scale = 1))
+plot(x = 1:10, y = mweibull(1:10, shape = 1, scale = 2))
+plot(x = 1:10, y = mweibull(1:10, shape = 0.5, scale = 2))
+plot(x = 1:10, y = mweibull(1:10, shape = 0.5, scale = 100))
+plot(x = 1:10, y = mweibull(1:10, shape = 2, scale = 2))
+plot(x = 1:10, y = mweibull(1:10, shape = 2, scale = 100))
+
+log_likelihood_region_weibull(DataCPSim, 0, 575, theta = c(0.5, 2))
+
+log_prior_region_weibull(theta = c(0.5, 2))
+D_log_prior_region_weibull(theta = c(0.5, 2))
+
+D_log_likelihood_region_weibull(DataCPSim, 0, 575, theta = c(0.5, 2))
 }

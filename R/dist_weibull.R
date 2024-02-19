@@ -1,5 +1,5 @@
-#' Evaluanción de rate function (la derivada de la mean)
-#'
+#' Weibull distribution functions
+#' #'
 #' @param t valor a evaluar (real)
 #' @param nhpp_dist tipo de rate function (ver articulo A Gibbs Sampling Algorithm
 #'   to Estimate the Occurrence of Ozone Exceedances in Mexico City  para el
@@ -27,8 +27,7 @@ iweibull <- function(x, shape, scale = 1) {
 }
 
 
-#' Evaluanción de mean function (la integral de la rate)
-#'
+#' @rdname iweibull
 #' @param t valor a evaluar (real)
 #' @param nhpp_dist tipo de mean function (ver libro de Eliane pdf 40 eq (3.12));
 #'               posibles exponentiated-Weibull (EW),the Musa–Okumoto (MO),
@@ -80,7 +79,7 @@ parameters_weibull <- function(...) {
   )
 }
 
-#' Log-likelihood
+#' @rdname iweibull
 #' @export
 #' @examples
 #' log_likelihood_region_weibull(DataCPSim, 0, 575, theta = c(0.5, 2))
@@ -91,6 +90,7 @@ log_likelihood_region_weibull <- function(t, tau_left, tau_right, theta) {
     (theta[1] - 1) * sum(log(t))
 }
 
+#' @rdname iweibull
 #' @export
 #' @examples
 #' log_prior_region_weibull(theta = c(0.5, 2))
@@ -104,17 +104,7 @@ log_prior_region_weibull <- function(theta, params = parameters_weibull()) {
     (beta$rate - 1) * log(theta[2]) - beta$shape * theta[2] # Exp 75 pag 21
 }
 
-#' Derivada de bloque de log-a priori NHPP
-#' @rdname D_Bloq_LogPost_NHPP
-#' @param vec_dist_a_priori vector que determina cual es la distribución a
-#'   priori de los parametros; por ahora se tiene programado
-#'   vec_dist_a_priori=c("Gamma","Gamma") y
-#'   vec_dist_a_priori=c("Gamma","Gamma","Gamma")
-#' @param theta vector de parámetros de verosimilitud
-#' @param mat_phi matriz cuyos renglones tiene los parámetros de las
-#'   distribuciones a priori; cada renglón tiene todos los parametros de una
-#'   distribución
-#'
+#' @rdname iweibull
 #' @export
 #' @examples
 #' D_log_prior_region_weibull(theta = c(0.5, 2))
@@ -128,8 +118,7 @@ D_log_prior_region_weibull <- function(theta, params = parameters_weibull()) {
   return(c(p1, p2))
 }
 
-#' Derivadas de bloque de log-verosimilitud NHPP
-#' @rdname D_Bloq_LogPost_NHPP
+#' @rdname iweibull
 #' @param vec_d_i vector de días en los que hubo revases entre el los puntos de
 #'   cambio tau_left y tau_right
 #' @param tau_left valor del primer punto de cambio

@@ -4,22 +4,6 @@
 \alias{segment}
 \alias{segment.numeric}
 \alias{segment.ts}
-\alias{as.ts.tidycpt}
-\alias{length.tidycpt}
-\alias{changepoints}
-\alias{changepoints.tidycpt}
-\alias{logLik.tidycpt}
-\alias{MBIC}
-\alias{MBIC.tidycpt}
-\alias{nobs.tidycpt}
-\alias{augment.tidycpt}
-\alias{tidy.tidycpt}
-\alias{glance.tidycpt}
-\alias{regions}
-\alias{regions.tidycpt}
-\alias{plot.tidycpt}
-\alias{diagnose}
-\alias{diagnose.tidycpt}
 \title{Segment a time series using a variety of algorithms}
 \usage{
 segment(x, method = "null", ...)
@@ -27,51 +11,47 @@ segment(x, method = "null", ...)
 \method{segment}{numeric}(x, method = "null", ...)
 
 \method{segment}{ts}(x, method = "null", ...)
-
-\method{as.ts}{tidycpt}(x, ...)
-
-\method{length}{tidycpt}(x, ...)
-
-changepoints(x, ...)
-
-\method{changepoints}{tidycpt}(x, ...)
-
-\method{logLik}{tidycpt}(object, ...)
-
-MBIC(object, ...)
-
-\method{MBIC}{tidycpt}(object, ...)
-
-\method{nobs}{tidycpt}(object, ...)
-
-\method{augment}{tidycpt}(x, ...)
-
-\method{tidy}{tidycpt}(x, ...)
-
-\method{glance}{tidycpt}(x, ...)
-
-regions(x, ...)
-
-\method{regions}{tidycpt}(x, ...)
-
-\method{plot}{tidycpt}(x, ...)
-
-diagnose(x, ...)
-
-\method{diagnose}{tidycpt}(x, ...)
 }
 \arguments{
 \item{x}{a numeric vector coercible into a \link[stats:ts]{stats::ts} object}
 
-\item{method}{a character string indicating the algorithm to use}
+\item{method}{a character string indicating the algorithm to use. See Details.}
 
 \item{...}{arguments passed to methods}
 }
 \value{
-an object of class \code{changepoint::cpt}, \link[stats:lm]{stats::lm}, or \link{cpt_gbmdl}
+an object of class \code{tidycpt}. Every \code{tidycpt} object contains:
+\itemize{
+\item \code{segmenter}: The object returned by the underlying function.
+\item \code{nhpp}: A \code{tbl_df} showing the best fit parameters for each region, as
+defined by the chnagepoint set returned by \code{changepoints()}. These parameters
+are fit using the non-homogeneous Poisson process model in \code{\link[=fit_nhpp]{fit_nhpp()}}.
+}
 }
 \description{
-Segment a time series using a variety of algorithms
+A wrapper function that encapsulates various algorithms for detecting changepoint
+sets in univariate time series.
+}
+\details{
+Currently, \code{\link[=segment]{segment()}} can use the following algorithms, depending
+on the value of the \code{method} argument:
+\itemize{
+\item \code{cpt-pelt}: Uses the PELT algorithm as implemented in
+\code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
+\item \code{cpt-binseg}: Uses the Binary Segmentation algorithm as implemented by
+\code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
+\item \code{cpt-segneigh}: Uses the Segmented Neighborhood algorithm as implemented by
+\code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
+\item \code{single-best}: Uses the AMOC criteria as implemented by
+\code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
+\item \code{cpt-gbmdl}: Uses the Genetic BMDL heuristic as implemented by
+\code{\link[=segment_gbmdl]{segment_gbmdl()}}. The \code{segmenter} is of class \link{cpt-gbmdl}.
+\item \code{cpt-manual}: Uses the vector of changepoints in the \code{cpts} arugment and
+\code{\link[stats:lm]{stats::lm()}}. The \code{segmenter} is of class \code{lm}.
+\item \code{null}: The default. Uses \code{\link[stats:lm]{stats::lm()}} with no changepoints.
+The \code{segmenter} is of class \code{lm}.
+\link[stats:lm]{stats::lm}, or \link{cpt_gbmdl}
+}
 }
 \examples{
 mod_null <- segment(DataCPSim)
@@ -90,15 +70,6 @@ diagnose(two_cpts)
 x <- segment(DataCPSim, method = "cpt-gbmdl")
 }
 
-diagnose(segment(DataCPSim))
-diagnose(segment(DataCPSim, method = "single-best"))
-diagnose(segment(DataCPSim, method = "cpt-pelt"))
-diagnose(segment(test_set()))
-diagnose(segment(test_set(n = 2, sd = 4), method = "cpt-pelt"))
-
-}
-\references{
-Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
 }
 \seealso{
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}

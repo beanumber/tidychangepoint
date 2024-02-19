@@ -4,16 +4,22 @@
 \name{reexports}
 \alias{reexports}
 \alias{tidy}
-\title{Broom compatibility layer}
-\seealso{
-\code{\link[broom:reexports]{broom::tidy()}}
-}
+\alias{augment}
+\alias{glance}
+\alias{as.ts}
+\alias{logLik}
+\alias{AIC}
+\alias{BIC}
+\alias{nobs}
+\title{Objects exported from other packages}
 \keyword{internal}
 \description{
 These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{broom}{\code{\link[broom:reexports]{tidy}}}
+  \item{broom}{\code{\link[broom:reexports]{augment}}, \code{\link[broom:reexports]{glance}}, \code{\link[broom:reexports]{tidy}}}
+
+  \item{stats}{\code{\link[stats]{AIC}}, \code{\link[stats:AIC]{BIC}}, \code{\link[stats:ts]{as.ts}}, \code{\link[stats]{logLik}}, \code{\link[stats]{nobs}}}
 }}
 

@@ -1,4 +1,5 @@
 #' Class for candidate changepoints using Genetic BMDL heuristic
+#' 
 #' @export
 #' @param x a numeric vector
 #' @param num_generations número de generaciones
@@ -94,8 +95,8 @@ nobs.cpt_gbmdl <- function(object, ...) {
 logLik.cpt_gbmdl <- function(object, ...) {
   regions <- fit_nhpp(object, tau = changepoints(object))
   log_likes <- regions |>
-    dplyr::mutate(theta = map2(alpha, beta, c)) |>
-    select(exceedances, begin, end, theta) |>
+    dplyr::mutate(theta = purrr::map2(alpha, beta, c)) |>
+    dplyr::select(exceedances, begin, end, theta) |>
     purrr::pmap_dbl(
       function(exceedances, begin, end, theta) log_likelihood_region_weibull(exceedances, begin, end, theta)
     ) |>
@@ -172,26 +173,26 @@ mat_cp_2_tbl <- function(mat_cp) {
     )
 }
 
-#' @rdname new_cpt_bmdl
+#' @rdname new_cpt_gbmdl
 #' @export
 mat_cp_2_list <- function(mat_cp) {
   mat_cp |>
     apply(1, chromo2tau)
 }
 
-#' @rdname new_cpt_bmdl
+#' @rdname new_cpt_gbmdl
 #' @export
 max_num_cp <- function(x) {
   ncol(x$mat_cp)
 }
 
-#' @rdname new_cpt_bmdl
+#' @rdname new_cpt_gbmdl
 #' @export
 generation_size <- function(x) {
   nrow(x$mat_cp)
 }
 
-#' @rdname new_cpt_bmdl
+#' @rdname new_cpt_gbmdl
 #' @export
 num_generations <- function(x) {
   length(x$vec_min_BMDL)

@@ -1,9 +1,12 @@
 #' Segment a time series using a variety of algorithms
+#' 
+#' @description
+#' A wrapper function that encapsulates various algorithms for detecting changepoint
+#' sets in univariate time series. 
+#' 
 #' @param x a numeric vector coercible into a [stats::ts] object
-#' @param method a character string indicating the algorithm to use
+#' @param method a character string indicating the algorithm to use. See Details.
 #' @param ... arguments passed to methods
-#' @return an object of class `changepoint::cpt`, [stats::lm], or [cpt_gbmdl]
-#' @seealso [changepoint::cpt.meanvar()]
 #' @export
 #' @examples
 #' mod_null <- segment(DataCPSim)
@@ -25,6 +28,29 @@ segment.numeric <- function(x, method = "null", ...) {
 
 #' @rdname segment
 #' @export
+#' @return an object of class `tidycpt`. Every `tidycpt` object contains:
+#' - `segmenter`: The object returned by the underlying function. 
+#' - `nhpp`: A `tbl_df` showing the best fit parameters for each region, as 
+#'   defined by the chnagepoint set returned by `changepoints()`. These parameters
+#'   are fit using the non-homogeneous Poisson process model in [fit_nhpp()].
+#' @details Currently, [segment()] can use the following algorithms, depending
+#' on the value of the `method` argument:
+#' - `cpt-pelt`: Uses the PELT algorithm as implemented in 
+#'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
+#' - `cpt-binseg`: Uses the Binary Segmentation algorithm as implemented by 
+#'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
+#' - `cpt-segneigh`: Uses the Segmented Neighborhood algorithm as implemented by 
+#'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
+#' - `single-best`: Uses the AMOC criteria as implemented by 
+#'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
+#' - `cpt-gbmdl`: Uses the Genetic BMDL heuristic as implemented by 
+#'   [segment_gbmdl()]. The `segmenter` is of class [cpt-gbmdl].
+#' - `cpt-manual`: Uses the vector of changepoints in the `cpts` arugment and
+#'   [stats::lm()]. The `segmenter` is of class `lm`.
+#' - `null`: The default. Uses [stats::lm()] with no changepoints. 
+#'   The `segmenter` is of class `lm`.
+#' [stats::lm], or [cpt_gbmdl]
+#' @seealso [changepoint::cpt.meanvar()]
 #' @examples
 #' segment(DataCPSim, method = "cpt-pelt")
 #' segment(DataCPSim, method = "cpt-pelt", penalty = "AIC")
@@ -81,39 +107,44 @@ segment.ts <- function(x, method = "null", ...) {
   return(obj)
 }
 
-#' @rdname segment
-#' @export
-as.ts.tidycpt <- function(x, ...) {
-  as.ts(x$segmenter)
-}
-
-#' @rdname segment
-#' @export
-length.tidycpt <- function(x, ...) {
-  length(as.ts(x))
-}
-
-#' @rdname segment
+#' Generic functions for tidycpt objects
+#' 
+#' @param x A `tidycpt` object
+#' @param ... arguments passed to methods
 #' @export
 changepoints <- function(x, ...) UseMethod("changepoints")
 
-#' @rdname segment
+#' @rdname changepoints
 #' @export
 changepoints.tidycpt <- function(x, ...) {
   changepoints(x$segmenter)
 }
 
-#' @rdname segment
+#' @rdname changepoints
+#' @export
+as.ts.tidycpt <- function(x, ...) {
+  as.ts(x$segmenter)
+}
+
+#' @rdname changepoints
+#' @export
+length.tidycpt <- function(x, ...) {
+  length(as.ts(x))
+}
+
+#' @rdname changepoints
+#' @param object A `tidycpt` object
+#' @seealso [stats::logLik()]
 #' @export
 logLik.tidycpt <- function(object, ...) {
   logLik(object$segmenter)
 }
 
-#' @rdname segment
+#' @rdname changepoints
 #' @export
 MBIC <- function(object, ...) UseMethod("MBIC")
 
-#' @rdname segment
+#' @rdname changepoints
 #' @references Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
 #' @export
 MBIC.tidycpt <- function(object, ...) {
@@ -123,13 +154,15 @@ MBIC.tidycpt <- function(object, ...) {
   -(1/2) * (3 * m * log(length(object)) + sum(r)) 
 }
 
-#' @rdname segment
+#' @rdname changepoints
+#' @seealso [stats::nobs()]
 #' @export
 nobs.tidycpt <- function(object, ...) {
   nobs(object$segmenter)
 }
 
-#' @rdname segment
+#' @rdname changepoints
+#' @seealso [broom::augment()]
 #' @export
 augment.tidycpt <- function(x, ...) {
   tau <- changepoints(x)
@@ -142,7 +175,8 @@ augment.tidycpt <- function(x, ...) {
 }
 
 
-#' @rdname segment
+#' @rdname changepoints
+#' @seealso [broom::tidy()]
 #' @export
 tidy.tidycpt <- function(x, ...) {
   tau <- changepoints(x)
@@ -167,7 +201,8 @@ tidy.tidycpt <- function(x, ...) {
     dplyr::inner_join(theta, by = "region")
 }
 
-#' @rdname segment
+#' @rdname changepoints
+#' @seealso [broom::glance()]
 #' @export
 glance.tidycpt <- function(x, ...) {
   glance(x$segmenter) |>
@@ -180,11 +215,11 @@ glance.tidycpt <- function(x, ...) {
     )
 }
 
-#' @rdname segment
+#' @rdname changepoints
 #' @export
 regions <- function(x, ...) UseMethod("regions")
 
-#' @rdname segment
+#' @rdname changepoints
 #' @export
 regions.tidycpt <- function(x, ...) {
   x$nhpp |>
@@ -192,8 +227,7 @@ regions.tidycpt <- function(x, ...) {
     levels()
 }
 
-
-#' @rdname segment
+#' @rdname changepoints
 #' @export
 
 plot.tidycpt <- function(x, ...) {
@@ -232,6 +266,7 @@ plot.tidycpt <- function(x, ...) {
 }
 
 
+#' @rdname changepoints
 #' @export
 #' @examples
 #' plot_mcdf(segment(DataCPSim))
@@ -269,13 +304,11 @@ plot_mcdf <- function(x, ...) {
     ggplot2::geom_line(ggplot2::aes(y = upper), color = "blue")
 }
 
-
-
-#' @rdname segment
+#' @rdname changepoints
 #' @export
 diagnose <- function(x, ...) UseMethod("diagnose")
 
-#' @rdname segment
+#' @rdname changepoints
 #' @export
 #' @examples
 #' diagnose(segment(DataCPSim))

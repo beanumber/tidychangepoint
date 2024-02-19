@@ -1,3 +1,4 @@
+#' @rdname fit_nhpp
 #' @export
 #' @examples
 #' fit_nhpp_region_alt(exceedances(lista_AG), 0, 575)
@@ -27,6 +28,17 @@ fit_nhpp_region_alt <- function(exc, tau_left, tau_right,
 }
 
 
+#' Fit a non-homogeneous Poisson process model to the exceedances of a time series. 
+#' 
+#' @description
+#' Any times series can be modeled as a non-homogeneous Poisson process of the
+#' locations of the exceedances of the mean of the series. This function
+#' uses the [bmdl()] criteria to determine the best fit parameters for each 
+#' region defined by the changepoint set returned by [changepoints()].
+#' @param x A time series
+#' @param tau A vector of changepoints. 
+#' @return A `tbl_df` with each row representing one region. 
+#' 
 #' @export
 #' @examples
 #' fit_nhpp(DataCPSim, tau = 826)
