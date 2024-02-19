@@ -18,6 +18,11 @@
 
 \method{diagnose}{cpt_gbmdl}(x, ...)
 }
+\arguments{
+\item{x}{A \code{cpt_gbmdl} object}
+
+\item{...}{arguments passed to methods}
+}
 \description{
 Broom compatibility layer for changepoint
 }

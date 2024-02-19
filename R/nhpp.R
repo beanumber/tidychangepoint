@@ -85,6 +85,11 @@ fit_nhpp <- function(x, tau) {
 }
 
 #' Mean cumulative exceedances function
+#' @param t The exceedances of a time series
+#' @param tau A set of changepoints
+#' @param theta A data.frame of best-fit parameters
+#' @param n the legnth of the original time series
+#' @param dist Name of the distribution
 #' @export
 #' @return a numeric vector of length equal to the [exceedances] of `x`
 #' @examples

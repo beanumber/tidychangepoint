@@ -22,7 +22,7 @@
 #' t <- c(1.4, 2.8)
 #' theta <- c(1.2, 2.1, 3.2)
 #'
-#' imusaokomoto(t, nhpp_dist, theta)
+#' imusaokomoto(t, theta)
 #'
 imusaokomoto <- function(t, theta) {
   # MO -> theta = c(alpha,beta)
@@ -49,7 +49,7 @@ imusaokomoto <- function(t, theta) {
 #' @examples
 #' t <- c(1.4, 2.8)
 #' theta <- c(1.2, 2.1, 3.2)
-#' mmusaokomoto(t, nhpp_dist, theta)
+#' mmusaokomoto(t, theta)
 #'
 mmusaokomoto <- function(t, theta) {
   theta[2] * log(1 + t / theta[1])
@@ -59,7 +59,7 @@ mmusaokomoto <- function(t, theta) {
 #' @rdname imusaokomoto
 #' @export
 #' @examples
-#' log_likelihood_region(DataCPSim, 0, 575, theta = c(0.5, 0.5))
+#' log_likelihood_region_musaokomoto(DataCPSim, 0, 575, theta = c(0.5, 0.5))
 #' 
 log_likelihood_region_musaokomoto <- function(t, tau_left, tau_right, theta) {
   (tau_left^theta[1] - tau_right^theta[1]) / theta[2]^theta[1] +
@@ -74,8 +74,8 @@ log_likelihood_region_musaokomoto <- function(t, tau_left, tau_right, theta) {
 #'   hyperprior_shape = c(1, 3),
 #'   hyperprior_scale = c(2, 1.2)
 #' )
-#' log_prior_region(theta = c(0.5, 0.5), hyper)
-log_prior_region_musaokomoto<- function(theta, hyperparameters) {
+#' log_prior_region_musaokomoto(theta = c(0.5, 0.5), hyper)
+log_prior_region_musaokomoto <- function(theta, hyperparameters) {
   x <- hyperparameters$hyperprior_shape
   y <- hyperparameters$hyperprior_scale
   

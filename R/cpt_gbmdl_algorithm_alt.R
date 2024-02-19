@@ -2,19 +2,22 @@
 #' @rdname segment_gbmdl
 #' @export
 #' @examples
+#' \dontrun{
 #' segment_gbmdl_alt(DataCPSim)
+#' }
 
 segment_gbmdl_alt <- function(x, destdir = tempdir(), show_progress_bar = TRUE, write_rda = FALSE) {
   # lista_AG contiene los resultados del algoritmo genético
   obj <- new_cpt_gbmdl(x, generation_size = 50, num_generations = 50)
   
-  pb <- utils::txtProgressBar(min = 1, max = r, style = 3, width = 60)
+  
+  pb <- utils::txtProgressBar(min = 1, max = num_generations(obj), style = 3, width = 60)
   
   basket <- sim_k_cp_BMDL(x, generation_size = generation_size(obj), max_num_cp = 20) |>
     mat_cp_2_tbl() |>
     dplyr::pull(tau)
   keepers <- list()
-  for (i in 1:r) {
+  for (i in 1:num_generations(obj)) {
     these_bmdls <- basket |>
       purrr::map_dbl(bmdl, x = x)
       
@@ -48,6 +51,7 @@ segment_gbmdl_alt <- function(x, destdir = tempdir(), show_progress_bar = TRUE, 
 #' @rdname segment_gbmdl
 #' @export
 #' @examples
+#' \dontrun{
 #' mat_cp <- lista_AG$segmenter$lista_AG_BMDL$mat_cp
 #' 
 #' Bayesaian_MDL_k_cp(mat_cp, exceedances(DataCPSim))
@@ -56,6 +60,7 @@ segment_gbmdl_alt <- function(x, destdir = tempdir(), show_progress_bar = TRUE, 
 #'   dplyr::pull(tau)
 #' evolve_alt(DataCPSim, basket) |>
 #'   lapply(bmdl, x = DataCPSim)
+#'   }
 
 evolve_alt <- function(x, cpt_list) {
   k <- length(cpt_list)

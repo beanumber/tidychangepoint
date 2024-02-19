@@ -1,4 +1,6 @@
 #' Methods for `cpt_lm`
+#' @param x A `cpt_lm` object
+#' @param ... arguments passed to methods
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim)

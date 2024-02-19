@@ -18,6 +18,13 @@
 
 \method{changepoints}{cpt}(x, ...)
 }
+\arguments{
+\item{x}{A \code{cpt} object returned by \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}}
+
+\item{...}{arguments passed to methods}
+
+\item{object}{A \code{cpt} object.}
+}
 \description{
 Compatibility layer for changepoint
 }

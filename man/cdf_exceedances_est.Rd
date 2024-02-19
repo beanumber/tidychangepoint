@@ -6,6 +6,17 @@
 \usage{
 cdf_exceedances_est(t, tau, theta, n, dist = "weibull")
 }
+\arguments{
+\item{t}{The exceedances of a time series}
+
+\item{tau}{A set of changepoints}
+
+\item{theta}{A data.frame of best-fit parameters}
+
+\item{n}{the legnth of the original time series}
+
+\item{dist}{Name of the distribution}
+}
 \value{
 a numeric vector of length equal to the \link{exceedances} of \code{x}
 }

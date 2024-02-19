@@ -1,4 +1,6 @@
 #' Compatibility layer for changepoint
+#' @param x A `cpt` object returned by [changepoint::cpt.meanvar()]
+#' @param ... arguments passed to methods
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "cpt-pelt")
@@ -37,6 +39,7 @@ as.ts.cpt <- function(x, ...) {
 }
 
 #' @rdname glance.cpt
+#' @param object A `cpt` object.
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "cpt-pelt")

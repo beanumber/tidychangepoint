@@ -33,8 +33,10 @@ globalVariables(
 #' Algoritmo genético de Bayesian MDL a un paso
 #'
 #' @param x a vector that can be coerced into a `ts`
-#' @return A `cpt_gbmdl` object
+#' @param destdir Directory to stare files
 #' @param show_progress_bar show the progress bar?
+#' @param write_rda Write the data to `destdir`? 
+#' @return A `cpt_gbmdl` object
 #' @export
 #' @examples
 #' \dontrun{
@@ -78,12 +80,14 @@ segment_gbmdl <- function(x, destdir = tempdir(), show_progress_bar = TRUE, writ
   return(obj)
 }
 
-#' @rdname segment_gbmdl
+#' Generate a list of candidate changepoints using a genetic algorithm
+#' 
+#' @param x A time series object
+#' @param mat_cp A matrix containing a list of candidate chromosomes
 #' @export
 #' @examples
 #' mat_cp <- lista_AG$segmenter$mat_cp
-#' segment_gbmdl_1(exceedances(DataCPSim), mat_cp)
-#' 
+#' evolve(exceedances(DataCPSim), mat_cp)
 
 evolve <- function(x, mat_cp) {
   # 1. Evaluación de sus calificaciones
@@ -104,14 +108,8 @@ evolve <- function(x, mat_cp) {
   return(mat_cp)
 }
 
-
-
-
-
-#' Bayesian MDL para un vector de puntos de cambio
-#'
-#' @param cp description
-#' @param x description
+#' @rdname evolve
+#' @param cp A set of changepoints
 #' @export
 Bayesaian_MDL_1_cp <- function(cp, x) {
   # 1. Obtener los estimadores MAP para cada regimen y guardarlos en mat_MAP
@@ -125,8 +123,7 @@ Bayesaian_MDL_1_cp <- function(cp, x) {
   return(BMDL_1_cp)
 }
 
-#' Bayesian MDL para un vector de puntos de cambio
-#' @rdname Bayesaian_MDL_1_cp
+#' @rdname evolve
 #' @return regresa un vector de tamaño `k` (el numero de cromosomas por
 #'   generación) con los valores del bayesian MDL
 #' @export
@@ -138,15 +135,9 @@ Bayesaian_MDL_k_cp <- function(mat_cp, x) {
 }
 
 
-
-
-#' Hace un hijo de dos padres
-#'
+#' @rdname evolve
 #' @param padres vector de longitud dos con índice de papa e índice de mama
-#' @param mat_cp matriz con tiempos de cambio de dimension k por max_num_cp
-#'
 #' @export
-#'
 junta_1_puntos_cambio <- function(padres, mat_cp) {
   # 1.- Juntamos todos los puntos de cambio de los padres; se quitan los puntos
   # de cambio repetidos y el [-1] final es para quitar los ceros
@@ -170,13 +161,9 @@ junta_1_puntos_cambio <- function(padres, mat_cp) {
 }
 
 
-#' Hace k hijos de k parejas de padres
-#'
-#' @param parejas_padres matriz de kx2 la cual contiene en sus renglones las
+#' @rdname evolve
+#' @param mat_padres matriz de kx2 la cual contiene en sus renglones las
 #'   parejas de padres
-#' @param mat_cp matriz con cromosomas cambio de tamaño max_num_cp con entradas
-#'   m,tau_0=1,...,tau_{m+1}=N,0,...,0
-#'
 #' @return regresa una matriz de las mismas dimensiones que mat_cp, pero con los
 #'   nuevos cromosomas
 #' @export
@@ -191,10 +178,7 @@ junta_k_puntos_cambio <- function(mat_padres, mat_cp) {
 }
 
 
-#' Elimina algunos de las tiempos de cambio de un cromosoma
-#'
-#' Regresa un vector del mismo tamaño que cp pero despues de eliminar
-#' algunas de sus entradas
+#' @rdname evolve
 #' @param cp vector cromosoma que se va a poner a prueba
 #' @param prob_volado probabilidad de quitar un tiempo de cambio existente
 #'   utilizado por mata_k_tau_volado para quitar elementos de más. Se recomienda
@@ -213,10 +197,7 @@ mata_1_tau_volado <- function(cp, prob_volado = 0.5) {
   return(cp)
 }
 
-#' Elimina algunos de las tiempos de cambio de los k cromosomas
-#' @rdname mata_1_tau_volado
-#' @param mat_cp matriz cuyos renglones son vectores de cromosomas de tamaño
-#'   max_num_cp con entradas m,tau_0,...,tau_{m+1},0,...,0
+#' @rdname evolve
 #' @return regresa una matriz a la cual se le quitaron a sus cromosomas algunos
 #'   puntos de cambio
 #' @export
@@ -227,10 +208,7 @@ mata_k_tau_volado <- function(mat_cp) {
   return(mat_cp)
 }
 
-#' Mutaciones un cp en el caso BMDL
-#'
-#' @param cp puntos de cambio
-#' @param x vector de revases
+#' @rdname evolve
 #' @param probs_nuevos_muta0N probabilidades de mutar 0,1,2,...,l hasta cierto
 #'   numero l; eg si vale c(.5,.2,.2,.1) se tiene una probabilidad 0.5 de mutar
 #'   0 (de no mutar), probabilidad 0.2 de mutar 1,, probabilidad 0.2 de mutar 2,
@@ -301,7 +279,7 @@ muta_1_cp_BMDL <- function(cp, x,
 }
 
 
-#' @rdname muta_1_cp_BMDL
+#' @rdname evolve
 #' @return regreas una mat_cp mutada
 #' @export
 muta_k_cp_BMDL <- function(mat_cp, x) {
@@ -315,9 +293,7 @@ muta_k_cp_BMDL <- function(mat_cp, x) {
 
 
 
-#' Genera un cromosoma de puntos de cambio para el Bayesian MDL
-#'
-#' @param x vector de excedentes
+#' @rdname evolve
 #' @details
 #' regresa un vector de tamaño `max_num_cp+3` donde la primera entrada es
 #'         m, la segunda \eqn{v_0=1, ...., v_{m+1}=N,0,...,0}
@@ -355,8 +331,7 @@ sim_1_cp_BMDL <- function(x, max_num_cp = 20, prob_inicial = 0.06) {
 }
 
 
-#' Simula k vectores change point para Bayesian MDL
-#' @rdname sim_1_cp_BMDL
+#' @rdname evolve
 #' @return regresa una matriz de `k` por `max_num_cp+3`, la cual en cada renglón tiene
 #'         una simulación de un vector de tiempos de cambio
 #' @export
@@ -374,8 +349,7 @@ sim_k_cp_BMDL <- function(x, generation_size = 50, max_num_cp = 20) {
 
 
 
-#' Probabilidades a partir de mat_MDL
-#'
+#' @rdname evolve
 #' @param vec_MDL vector con valores MDL
 #'
 #' OBSERVACIÓN: Esto regresa numeros negativos, los cuales mientras más negativo mejor, ya que
@@ -404,8 +378,7 @@ probs_vec_MDL <- function(vec_MDL, probs_rank0_MDL1 = 0) {
 }
 
 
-#' Seleciona k pares de padres
-#'
+#' @rdname evolve
 #' @param vec_probs vector de probabilidades de selección de cada uno de los
 #'   cromosomas
 #' @export
@@ -426,6 +399,3 @@ selec_k_pares_de_padres <- function(vec_probs) {
   }
   return(matrix(c(papas, mamas), ncol = 2))
 }
-
-
-

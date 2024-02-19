@@ -7,9 +7,9 @@
 bmdl(x, tau)
 }
 \arguments{
-\item{x}{description}
+\item{x}{A times series object}
 
-\item{cp}{description}
+\item{tau}{A set of changepoints}
 }
 \description{
 Bayesian MDL para un vector de puntos de cambio

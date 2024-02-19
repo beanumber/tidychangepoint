@@ -1,6 +1,9 @@
 #' Grafica los n puntos de cambio más repetidos sobre el plot.stepfun de los datos
 #'
-#' @param x description
+#' @param x A `cpt_gbmdl` object
+#' @param destdir Directory in which to store the plots
+#' @param data_name_slug character vector added to the file name
+#' @param pdf Save the plot as a PDF? 
 #' @param limit al final se generan unas graficas de los
 #'   mejores puntos de cambio, este parámetro dicta cuantos cromosomas se
 #'   graficarán
@@ -35,11 +38,9 @@ plot_cpt_repetidos <- function(x, destdir = tempdir(),
 }
 
 
-#' Grafica escalonada para un proceso poisson
-#'
-#' @param x a time series vector
+#' @rdname plot_cpt_repetidos
+#' @param ... arguments passed to [plot()]
 #' @export
-#'
 #' @examples
 #' plot_exceedances(DataCPSim)
 #' plot_exceedances(rlnorm_ts_1)
@@ -58,13 +59,11 @@ plot_exceedances <- function(x, ...) {
 }
 
 
-#' Graficas de los intervalos y los datos
-#'
-#' @param lista_AG description
+#' @rdname plot_cpt_repetidos
 #' @export
 #' @examples
 #' plot_confint(lista_AG$segmenter)
-#' 
+
 plot_confint <- function(x) {
   tau <- cpt_best(x)
   theta <- cpt_best_params(x)
@@ -84,8 +83,7 @@ plot_confint <- function(x) {
   graphics::lines(x = c(10, exceedances(x)), y = low_bond, col = "blue", lwd = 2)
 }
 
-#' Graficas del AG con BMDL
-#' @rdname grafica_datos_e_intervalos
+#' @rdname plot_cpt_repetidos
 #' @return una gráfica con :
 #' 1 Datos reales
 #' 2 Evolución del algoritmo genético
@@ -117,12 +115,13 @@ plot_BMDL <- function(x, destdir = tempdir(), data_name_slug = "data", pdf = FAL
   message("Se guardo la imagen:\n", fs::path(destdir, filename_pdf), "\n")
 }
 
-#' @rdname grafica_datos_e_intervalos
+#' @rdname plot_cpt_repetidos
+#' @param i Index of generation up to which you want to plot
 #' @export
 #' @examples
 #' plot_evolution(lista_AG$segmenter)
 #' plot_evolution(lista_AG$segmenter, 5)
-#' 
+
 plot_evolution <- function(x, i = length(x$vec_min_BMDL)) {
   plot(
     x$vec_min_BMDL[1:i],
@@ -138,7 +137,7 @@ plot_evolution <- function(x, i = length(x$vec_min_BMDL)) {
   )
 }
 
-#' @rdname grafica_datos_e_intervalos
+#' @rdname plot_cpt_repetidos
 #' @export
 #' @examples
 #' plot_cpt_repeated(lista_AG$segmenter)
@@ -156,7 +155,7 @@ plot_cpt_repeated <- function(x, i = nrow(x$historia_mejores)) {
   )
 }
 
-#' @rdname grafica_datos_e_intervalos
+#' @rdname plot_cpt_repetidos
 #' @export
 #' @examples
 #' plot_best_chromosome(lista_AG$segmenter)

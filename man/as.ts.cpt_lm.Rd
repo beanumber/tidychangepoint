@@ -9,6 +9,11 @@
 
 \method{changepoints}{cpt_lm}(x, ...)
 }
+\arguments{
+\item{x}{A \code{cpt_lm} object}
+
+\item{...}{arguments passed to methods}
+}
 \description{
 Methods for \code{cpt_lm}
 }

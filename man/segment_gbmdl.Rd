@@ -3,7 +3,6 @@
 %   R/cpt_gbmdl_algorithm_alt.R
 \name{segment_gbmdl}
 \alias{segment_gbmdl}
-\alias{evolve}
 \alias{segment_gbmdl_alt}
 \alias{evolve_alt}
 \title{Algoritmo genético de Bayesian MDL a un paso}
@@ -14,8 +13,6 @@ segment_gbmdl(
   show_progress_bar = TRUE,
   write_rda = FALSE
 )
-
-evolve(x, mat_cp)
 
 segment_gbmdl_alt(
   x,
@@ -29,7 +26,11 @@ evolve_alt(x, cpt_list)
 \arguments{
 \item{x}{a vector that can be coerced into a \code{ts}}
 
+\item{destdir}{Directory to stare files}
+
 \item{show_progress_bar}{show the progress bar?}
+
+\item{write_rda}{Write the data to \code{destdir}?}
 }
 \value{
 A \code{cpt_gbmdl} object
@@ -45,10 +46,10 @@ x <- segment_gbmdl(DataCPSim)
 y <- segment_gbmdl(rlnorm_ts_1)
 }
 
-mat_cp <- lista_AG$segmenter$mat_cp
-segment_gbmdl_1(exceedances(DataCPSim), mat_cp)
-
+\dontrun{
 segment_gbmdl_alt(DataCPSim)
+}
+\dontrun{
 mat_cp <- lista_AG$segmenter$lista_AG_BMDL$mat_cp
 
 Bayesaian_MDL_k_cp(mat_cp, exceedances(DataCPSim))
@@ -57,4 +58,5 @@ basket <- sim_k_cp_BMDL(DataCPSim, 50, max_num_cp = 20) |>
   dplyr::pull(tau)
 evolve_alt(DataCPSim, basket) |>
   lapply(bmdl, x = DataCPSim)
+  }
 }

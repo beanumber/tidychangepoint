@@ -6,7 +6,7 @@
 #' @returns A [tsibble::tsibble()]
 #' 
 #' @examples
-#' str(bogota_pm)
+#' class(bogota_pm)
 #' 
 #' 
 "bogota_pm"

@@ -25,8 +25,8 @@ penalty_mdl <- function(padded_tau) {
 
 #' Bayesian MDL para un vector de puntos de cambio
 #'
-#' @param cp description
-#' @param x description
+#' @param x A times series object
+#' @param tau A set of changepoints
 #' @export
 #' @examples
 #' bmdl(DataCPSim, tau = 826)

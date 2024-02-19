@@ -18,7 +18,7 @@ Particulate matter of less than 2.5 microns of diameter in Bogotá, Colombia.
 Daily readings from 2018-2020 are included.
 }
 \examples{
-str(bogota_pm)
+class(bogota_pm)
 
 
 }

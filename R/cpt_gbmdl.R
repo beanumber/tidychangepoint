@@ -1,6 +1,26 @@
 #' Class for candidate changepoints using Genetic BMDL heuristic
 #' 
 #' @export
+#' @examples
+#' cpts <- cpt_gbmdl(DataCPSim)
+#' str(cpts)
+
+cpt_gbmdl <- function(x, ...) {
+  obj <- new_cpt_gbmdl(x, ...)
+  validate_cpt_gbmdl(obj)
+}
+
+#' @rdname cpt_gbmdl
+#' @export
+
+validate_cpt_gbmdl <- function(x) {
+  if (!stats::is.ts(as.ts(x))) {
+    stop("data attribute is not coercible into a ts object.")
+  }
+  x
+}
+
+#' @rdname cpt_gbmdl
 #' @param x a numeric vector
 #' @param num_generations número de generaciones
 #' @param generation_size tamaño de las generaciones
@@ -11,9 +31,7 @@
 #' @param mat_phi matriz cuyos renglones tiene los parámetros de las
 #'   distribuciones a priori; cada renglón tiene todos los parametros de una
 #'   distribución
-#' @examples
-#' cpts <- cpt_gbmdl(DataCPSim)
-#' str(cpts)
+#' @export
 
 new_cpt_gbmdl <- function(x = numeric(), 
                           nhpp_dist = c("W","EW","GGO","MO","GO")[1], # función de tasa de NHPP
@@ -38,24 +56,6 @@ new_cpt_gbmdl <- function(x = numeric(),
     ), 
     class = "cpt_gbmdl"
   )
-}
-
-#' @rdname new_cpt_gbmdl
-#' @export
-
-validate_cpt_gbmdl <- function(x) {
-  if (!stats::is.ts(as.ts(x))) {
-    stop("data attribute is not coercible into a ts object.")
-  }
-  x
-}
-
-#' @rdname new_cpt_gbmdl
-#' @export
-
-cpt_gbmdl <- function(x, ...) {
-  obj <- new_cpt_gbmdl(x, ...)
-  validate_cpt_gbmdl(obj)
 }
 
 #' @rdname new_cpt_gbmdl
@@ -238,6 +238,8 @@ file_name <- function(x, data_name_slug = "data") {
 }
 
 #' Broom compatibility layer for changepoint
+#' @param x A `cpt_gbmdl` object
+#' @param ... arguments passed to methods
 #' @export
 #' @examples
 #' cpts <- lista_AG

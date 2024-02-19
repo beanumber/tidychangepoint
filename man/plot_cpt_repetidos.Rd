@@ -2,6 +2,12 @@
 % Please edit documentation in R/cpt_gbmdl_graphics.R
 \name{plot_cpt_repetidos}
 \alias{plot_cpt_repetidos}
+\alias{plot_exceedances}
+\alias{plot_confint}
+\alias{plot_BMDL}
+\alias{plot_evolution}
+\alias{plot_cpt_repeated}
+\alias{plot_best_chromosome}
 \title{Grafica los n puntos de cambio más repetidos sobre el plot.stepfun de los datos}
 \usage{
 plot_cpt_repetidos(
@@ -11,16 +17,44 @@ plot_cpt_repetidos(
   pdf = FALSE,
   limit = 100
 )
+
+plot_exceedances(x, ...)
+
+plot_confint(x)
+
+plot_BMDL(x, destdir = tempdir(), data_name_slug = "data", pdf = FALSE)
+
+plot_evolution(x, i = length(x$vec_min_BMDL))
+
+plot_cpt_repeated(x, i = nrow(x$historia_mejores))
+
+plot_best_chromosome(x)
 }
 \arguments{
-\item{x}{description}
+\item{x}{A \code{cpt_gbmdl} object}
+
+\item{destdir}{Directory in which to store the plots}
+
+\item{data_name_slug}{character vector added to the file name}
+
+\item{pdf}{Save the plot as a PDF?}
 
 \item{limit}{al final se generan unas graficas de los
 mejores puntos de cambio, este parámetro dicta cuantos cromosomas se
 graficarán}
+
+\item{...}{arguments passed to \code{\link[=plot]{plot()}}}
+
+\item{i}{Index of generation up to which you want to plot}
 }
 \value{
 guarda un pdf con la gráfica
+
+una gráfica con :
+1 Datos reales
+2 Evolución del algoritmo genético
+3 Puntos de cambio que más se repitieron
+4 Number of change points in the best chromosomes
 }
 \description{
 Grafica los n puntos de cambio más repetidos sobre el plot.stepfun de los datos
@@ -28,4 +62,17 @@ Grafica los n puntos de cambio más repetidos sobre el plot.stepfun de los datos
 \examples{
 plot_cpt_repetidos(lista_AG$segmenter)
 
+plot_exceedances(DataCPSim)
+plot_exceedances(rlnorm_ts_1)
+plot_exceedances(rlnorm_ts_2)
+plot_exceedances(rlnorm_ts_3)
+
+plot_confint(lista_AG$segmenter)
+plot_BMDL(lista_AG$segmenter)
+
+plot_evolution(lista_AG$segmenter)
+plot_evolution(lista_AG$segmenter, 5)
+plot_cpt_repeated(lista_AG$segmenter)
+plot_cpt_repeated(lista_AG$segmenter, 5)
+plot_best_chromosome(lista_AG$segmenter)
 }

@@ -62,17 +62,17 @@ Evaluanción de rate function (la derivada de la mean)
 t <- c(1.4, 2.8)
 theta <- c(1.2, 2.1, 3.2)
 
-imusaokomoto(t, nhpp_dist, theta)
+imusaokomoto(t, theta)
 
 t <- c(1.4, 2.8)
 theta <- c(1.2, 2.1, 3.2)
-mmusaokomoto(t, nhpp_dist, theta)
+mmusaokomoto(t, theta)
 
-log_likelihood_region(DataCPSim, 0, 575, theta = c(0.5, 0.5))
+log_likelihood_region_musaokomoto(DataCPSim, 0, 575, theta = c(0.5, 0.5))
 
 hyper <- data.frame(
   hyperprior_shape = c(1, 3),
   hyperprior_scale = c(2, 1.2)
 )
-log_prior_region(theta = c(0.5, 0.5), hyper)
+log_prior_region_musaokomoto(theta = c(0.5, 0.5), hyper)
 }
