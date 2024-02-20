@@ -95,6 +95,9 @@ segment.ts <- function(x, method = "null", ...) {
   if (method == "cpt-manual") {
     message("\nSegmenting using manually input changepoints...")
     args <- list(...)
+    if(!"cpts" %in% names(args)) {
+      stop("Please supply the cpts argument to use the cpt-manual algorithm.")
+    }
     cpts <- args[["cpts"]]
     terms <- paste("(t > ", cpts, ")") |>
       paste(collapse = "+")

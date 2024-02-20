@@ -36,6 +36,10 @@ test_that("tidycpt works", {
   expect_equal(BIC(z), as.numeric(-2 * logLik(z) + log(nobs(z)) * deg_free(z)))
   expect_s3_class(plot(z), "gg")
   expect_s3_class(diagnose(z), "patchwork")
+  
+  expect_s3_class(segment(bogota_pm, method = "cpt-manual", cpts = c(500, 850)), "tidycpt")
+  expect_error(segment(bogota_pm, method = "cpt-manual", tau = c(500, 850)), "cpts")
+  
 })
 
 test_that("utils works", {
