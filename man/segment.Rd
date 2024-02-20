@@ -2,18 +2,21 @@
 % Please edit documentation in R/tidycpt.R
 \name{segment}
 \alias{segment}
+\alias{segment.tbl_ts}
 \alias{segment.numeric}
 \alias{segment.ts}
 \title{Segment a time series using a variety of algorithms}
 \usage{
 segment(x, method = "null", ...)
 
+\method{segment}{tbl_ts}(x, method = "null", ...)
+
 \method{segment}{numeric}(x, method = "null", ...)
 
 \method{segment}{ts}(x, method = "null", ...)
 }
 \arguments{
-\item{x}{a numeric vector coercible into a \link[stats:ts]{stats::ts} object}
+\item{x}{a \link[tsibble:tsibble]{tsibble::tsibble} or numeric vector coercible into a \link[stats:ts]{stats::ts} object}
 
 \item{method}{a character string indicating the algorithm to use. See Details.}
 

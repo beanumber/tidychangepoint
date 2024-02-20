@@ -4,7 +4,7 @@
 #' A wrapper function that encapsulates various algorithms for detecting changepoint
 #' sets in univariate time series. 
 #' 
-#' @param x a numeric vector coercible into a [stats::ts] object
+#' @param x a [tsibble::tsibble] or numeric vector coercible into a [stats::ts] object
 #' @param method a character string indicating the algorithm to use. See Details.
 #' @param ... arguments passed to methods
 #' @export
@@ -18,7 +18,15 @@ segment <- function(x, method = "null", ...) UseMethod("segment")
 
 #' @rdname segment
 #' @export
+segment.tbl_ts <- function(x, method = "null", ...) {
+  if (!stats::is.ts(stats::as.ts(x))) {
+    stop("x is not coercible into a ts object.")
+  }
+  segment(as.ts(x), method = method, ... = ...)
+}
 
+#' @rdname segment
+#' @export
 segment.numeric <- function(x, method = "null", ...) {
   if (!stats::is.ts(stats::as.ts(x))) {
     stop("x is not coercible into a ts object.")
