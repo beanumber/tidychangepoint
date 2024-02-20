@@ -90,14 +90,14 @@ augment(cpts)
 tidy(cpts)
 ```
 
-    ## # A tibble: 4 × 13
-    ##   region  num_obs  left right   min   max  mean    sd log.posterior alpha   beta
-    ##   <chr>     <int> <int> <int> <dbl> <dbl> <dbl> <dbl>         <dbl> <dbl>  <dbl>
-    ## 1 [0,547)     546     1   546  13.7  92.8  35.3  11.3         -60.1 0.362 0.392 
-    ## 2 [547,8…     275   547   821  20.5 163.   58.1  19.3        -198.  0.657 0.0883
-    ## 3 [822,9…     150   822   971  39.2 215.   96.7  30.5        -150.  0.738 0.0730
-    ## 4 [972,1…     125   972  1096  67.2 299.  156.   49.6        -130.  0.750 0.0697
-    ## # ℹ 2 more variables: begin <dbl>, end <dbl>
+    ## # A tibble: 4 × 12
+    ##   region   num_obs   min   max  mean    sd exceedances begin   end log_posterior
+    ##   <chr>      <int> <dbl> <dbl> <dbl> <dbl> <named lis> <dbl> <int>         <dbl>
+    ## 1 [0,547)      546  13.7  92.8  35.3  11.3 <int [11]>      0   547         -60.1
+    ## 2 [547,82…     275  20.5 163.   58.1  19.3 <int [95]>    547   822        -198. 
+    ## 3 [822,97…     150  39.2 215.   96.7  30.5 <int [129]>   822   972        -150. 
+    ## 4 [972,1.…     125  67.2 299.  156.   49.6 <int [125]>   972  1096        -126. 
+    ## # ℹ 2 more variables: alpha <dbl>, beta <dbl>
 
 - `glance()` returns a `tbl` that provides summary statistics for the
   model fit.
@@ -106,10 +106,12 @@ tidy(cpts)
 glance(cpts)
 ```
 
-    ## # A tibble: 1 × 8
+    ## # A tibble: 1 × 13
     ##   pkg     version algorithm test_stat  MBIC num_cpts num_cpts_max min_seg_length
     ##   <chr>   <chr>   <chr>     <chr>     <dbl>    <int>        <dbl>          <dbl>
     ## 1 change… 2.2.4   PELT      Normal     28.0        4          Inf              2
+    ## # ℹ 5 more variables: s3_logLik <logLik>, s3_AIC <dbl>, s3_BIC <dbl>,
+    ## #   s3_MBIC <dbl>, s3_BMDL <dbl>
 
 ### Other methods
 
@@ -198,11 +200,11 @@ DataCPSim |>
 
 ``` r
 # DataCPSim |>
-#   segment(method = "cpt-gbmdl", param = param)
+#   segment(method = "cpt-gbmdl")
 changepoints(lista_AG)
 ```
 
-    ## [1]  566  694  862  884  915  920  939 1007
+    ## [1]  780  851  859  863  866  872 1035
 
 ``` r
 plot(lista_AG)
@@ -217,7 +219,7 @@ plot(lista_AG$segmenter)
 ```
 
     ## Se guardo la imagen:
-    ## /tmp/RtmppNyeGT/Fig_4AGBMDL_data_rf_W_Gamma(1, 2)_Gamma(3, 1.2)_r50_k50_BMDL_585.pdf
+    ## /tmp/RtmpDLelFR/Fig_4AGBMDL_gbmdl_data_nhpp_W_Gamma(1,_2)_Gamma(3,_1.2)_r_50_k_50__BMDL_25_.rda
 
 ![](README_files/figure-gfm/diagnostic-1.png)<!-- -->
 
