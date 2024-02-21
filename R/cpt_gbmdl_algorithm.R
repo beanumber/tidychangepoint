@@ -52,7 +52,7 @@ segment_gbmdl <- function(x, destdir = tempdir(), show_progress_bar = TRUE, writ
   graphics::par(mfrow = c(2, 1), mar = c(1, 4, 2, 2))
   for (i in 1:num_generations(obj)) {
     # Hacemos un paso del AG con el mat_cp anterior
-    vec_BMDL_k_cp <- Bayesaian_MDL_k_cp(obj$mat_cp, exceedances(x))
+    vec_BMDL_k_cp <- Bayesaian_MDL_k_cp(obj$mat_cp, x)
     obj$mat_cp <- evolve(exceedances(obj), obj$mat_cp)
     
     # Obtenemos el índice del mínimo

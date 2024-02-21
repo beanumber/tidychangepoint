@@ -76,14 +76,14 @@ test_that("utils works", {
 test_that("penalties work", {
   mat_cp <- sim_k_cp_BMDL(DataCPSim)
   
-  Bayesaian_MDL_k_cp(mat_cp, exceedances(DataCPSim))
+  Bayesaian_MDL_k_cp(mat_cp, DataCPSim)
   mat_cp |>
     mat_cp_2_list() |>
     purrr::map(fit_nhpp, x = DataCPSim) |>
     purrr::map_dbl(BMDL)
   
   tau <- chromo2tau(mat_cp[1,])
-  Bayesaian_MDL_1_cp(mat_cp[1,], exceedances(DataCPSim))
+  Bayesaian_MDL_1_cp(mat_cp[1,], DataCPSim)
   fit_nhpp(DataCPSim, chromo2tau(mat_cp[1,])) |>
     BMDL()
   
