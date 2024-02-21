@@ -105,3 +105,10 @@ test_that("penalties work", {
   true_bmdl <- fit_nhpp(x, cpt) |> BMDL()
   expect_type(true_bmdl, "double")
 })
+
+
+test_that("performance comparison works", {
+  BMDL(lista_AG)
+  BMDL(segment(DataCPSim, method = "cpt-pelt"))
+  BMDL(segment(DataCPSim, method = "random", num_generations = 20))
+})

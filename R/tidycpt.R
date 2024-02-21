@@ -65,6 +65,7 @@ segment.numeric <- function(x, method = "null", ...) {
 #' segment(DataCPSim, method = "cpt-pelt", penalty = "AIC")
 #' segment(DataCPSim, method = "cpt-binseg", penalty = "AIC")
 #' segment(DataCPSim, method = "cpt-segneigh", penalty = "BIC")
+#' segment(DataCPSim, method = "random", num_generations = 10)
 #' segment(DataCPSim, method = "cpt-manual", cpts = c(826))
 #' two_cpts <- segment(DataCPSim, method = "cpt-manual", cpts = c(365, 826))
 #' plot(two_cpts)
@@ -75,6 +76,7 @@ segment.numeric <- function(x, method = "null", ...) {
 #' 
 
 segment.ts <- function(x, method = "null", ...) {
+  args <- list(...)
   message(paste("method:", method))
   n <- length(x)
   ds <- data.frame(y = x, t = 1:n)
@@ -93,9 +95,25 @@ segment.ts <- function(x, method = "null", ...) {
   if (method == "cpt-gbmdl") {
     mod <- segment_gbmdl(x, ...)
   }
+  if (method == "random") {   
+    if("num_generations" %in% names(args)) {
+      num_generations <- args[["num_generations"]]
+    } else {
+      num_generations <- 50
+    }
+    cpts <- random_cpts(x, n = num_generations)
+    bmdls <- cpts |>
+      purrr::map(~fit_nhpp(x, tau = .x)) |>
+      purrr::map_dbl(BMDL)
+    best_cpt <- cpts[[which.min(bmdls)]]
+    terms <- paste("(t > ", best_cpt, ")") |>
+      paste(collapse = "+")
+    form <- stats::as.formula(paste("y ~ ", terms))
+    mod <- stats::lm(form, data = ds)
+    class(mod) <- c("cpt_lm", class(mod))
+  }
   if (method == "cpt-manual") {
     message("\nSegmenting using manually input changepoints...")
-    args <- list(...)
     if(!"cpts" %in% names(args)) {
       stop("Please supply the cpts argument to use the cpt-manual algorithm.")
     }

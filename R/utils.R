@@ -61,7 +61,7 @@ test_set <- function(n = 1, sd = 1, seed = NULL) {
 random_cpts <- function(x, n = 10, k = round(log(length(as.ts(x)))), ...) {
   sizes <- rpois(n, lambda = k)
   sizes |>
-    purrr::map(~sort(sample.int(n = length(as.ts(x)), size = .x)))
+    purrr::map(~sort(sample.int(n = length(as.ts(x)) - 1, size = .x)))
 }
   
   
