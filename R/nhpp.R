@@ -97,7 +97,10 @@ fit_nhpp <- function(x, tau) {
 #' @rdname fit_nhpp
 #' @export
 logLik.nhpp <- function(object, ...) {
-  sum(object$logLik)
+  ll <- sum(object$logLik)
+  attr(ll, "df") <- length(changepoints(object))
+  class(ll) <- "logLik"
+  return(ll)
 }
 
 #' @rdname fit_nhpp
@@ -106,6 +109,16 @@ BMDL.nhpp <- function(x, ...) {
   tau <- changepoints(x)
   n <- max(x$end)
   penalty_mdl(pad_tau(tau, n)) - sum(x$log_posterior)
+}
+
+#' @rdname fit_nhpp
+#' @references Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
+#' @export
+MBIC.nhpp <- function(object, ...) {
+  tau <- changepoints(object)
+  m <- length(tau)
+  r <- tau / length(object)
+  -(1/2) * (3 * m * log(length(object)) + sum(r)) 
 }
 
 #' @rdname fit_nhpp

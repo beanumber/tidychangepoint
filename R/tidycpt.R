@@ -170,10 +170,7 @@ MBIC <- function(object, ...) UseMethod("MBIC")
 #' @references Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
 #' @export
 MBIC.tidycpt <- function(object, ...) {
-  tau <- changepoints(object)
-  m <- length(tau)
-  r <- tau / length(object)
-  -(1/2) * (3 * m * log(length(object)) + sum(r)) 
+  MBIC(object$nhpp)
 }
 
 #' @rdname changepoints

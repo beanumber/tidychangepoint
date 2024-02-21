@@ -2,6 +2,7 @@
 
 S3method(BMDL,nhpp)
 S3method(BMDL,tidycpt)
+S3method(MBIC,nhpp)
 S3method(MBIC,tidycpt)
 S3method(as.ts,cpt)
 S3method(as.ts,cpt_gbmdl)

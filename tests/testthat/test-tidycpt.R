@@ -110,5 +110,6 @@ test_that("penalties work", {
 test_that("performance comparison works", {
   BMDL(lista_AG)
   BMDL(segment(DataCPSim, method = "cpt-pelt"))
-  BMDL(segment(DataCPSim, method = "random", num_generations = 20))
+  x <- segment(DataCPSim, method = "random", num_generations = 20)
+  BMDL(x)
 })

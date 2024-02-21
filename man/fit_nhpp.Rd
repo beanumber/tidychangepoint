@@ -5,6 +5,7 @@
 \alias{fit_nhpp}
 \alias{logLik.nhpp}
 \alias{BMDL.nhpp}
+\alias{MBIC.nhpp}
 \alias{changepoints.nhpp}
 \title{Fit a non-homogeneous Poisson process model to the exceedances of a time series.}
 \usage{
@@ -21,6 +22,8 @@ fit_nhpp(x, tau)
 \method{logLik}{nhpp}(object, ...)
 
 \method{BMDL}{nhpp}(x, ...)
+
+\method{MBIC}{nhpp}(object, ...)
 
 \method{changepoints}{nhpp}(x, ...)
 }
@@ -43,4 +46,7 @@ fit_nhpp_region_alt(exceedances(lista_AG), 0, 575)
 fit_nhpp_region(exceedances(lista_AG), 0, 575, initial_val_optim = c(1, 10))
 fit_nhpp(DataCPSim, tau = 826)
 fit_nhpp(as.ts(lista_AG), tau = changepoints(lista_AG))
+}
+\references{
+Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
 }

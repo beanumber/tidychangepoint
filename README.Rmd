@@ -120,6 +120,14 @@ DataCPSim |>
   diagnose()
 ```
 
+- `method = "random"`: returns the best model from a random collection
+
+```{r random-plot}
+DataCPSim |>
+  segment(method = "random", num_generations = 20) |>
+  diagnose()
+```
+
 ### Genetic BMDL
 
 - `method = "cpt-gbmdl"`: implements the Genetic BMDL heuristic

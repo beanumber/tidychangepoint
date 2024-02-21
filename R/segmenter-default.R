@@ -64,6 +64,15 @@ evaluate <- function(x, ...) {
     dplyr::mutate(
       nhpp = purrr::map(changepoints, ~fit_nhpp(x = as.ts(x), tau = .x)),
       bmdl = purrr::map_dbl(nhpp, BMDL)
+    )
+  ll <- x$candidates$nhpp |>
+    purrr::map(logLik)
+  x$candidates$logLik <- as.numeric(ll)
+  x$candidates <- x$candidates |>
+    dplyr::mutate(
+      AIC = purrr::map_dbl(nhpp, AIC),
+      BIC = purrr::map_dbl(nhpp, BIC),
+      MBIC = purrr::map_dbl(nhpp, MBIC),
     ) |>
     dplyr::arrange(bmdl)
   x

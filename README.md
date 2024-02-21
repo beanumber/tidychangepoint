@@ -90,14 +90,14 @@ augment(cpts)
 tidy(cpts)
 ```
 
-    ## # A tibble: 4 × 12
+    ## # A tibble: 4 × 13
     ##   region   num_obs   min   max  mean    sd exceedances begin   end log_posterior
     ##   <chr>      <int> <dbl> <dbl> <dbl> <dbl> <named lis> <dbl> <int>         <dbl>
     ## 1 [0,547)      546  13.7  92.8  35.3  11.3 <int [11]>      0   547         -60.1
     ## 2 [547,82…     275  20.5 163.   58.1  19.3 <int [95]>    547   822        -198. 
     ## 3 [822,97…     150  39.2 215.   96.7  30.5 <int [129]>   822   972        -150. 
     ## 4 [972,1.…     125  67.2 299.  156.   49.6 <int [125]>   972  1096        -126. 
-    ## # ℹ 2 more variables: alpha <dbl>, beta <dbl>
+    ## # ℹ 3 more variables: logLik <dbl>, alpha <dbl>, beta <dbl>
 
 - `glance()` returns a `tbl` that provides summary statistics for the
   model fit.
@@ -110,8 +110,8 @@ glance(cpts)
     ##   pkg     version algorithm test_stat  MBIC num_cpts num_cpts_max min_seg_length
     ##   <chr>   <chr>   <chr>     <chr>     <dbl>    <int>        <dbl>          <dbl>
     ## 1 change… 2.2.4   PELT      Normal     28.0        4          Inf              2
-    ## # ℹ 5 more variables: s3_logLik <logLik>, s3_AIC <dbl>, s3_BIC <dbl>,
-    ## #   s3_MBIC <dbl>, s3_BMDL <dbl>
+    ## # ℹ 5 more variables: nhpp_logLik <logLik>, nhpp_AIC <dbl>, nhpp_BIC <dbl>,
+    ## #   nhpp_MBIC <dbl>, nhpp_BMDL <dbl>
 
 ### Other methods
 
@@ -165,19 +165,16 @@ DataCPSim |>
 
 ![](README_files/figure-gfm/null-plot-1.png)<!-- -->
 
-- `method = "cpt-manual"`: returns a model with changepoints specified
+- `method = "manual"`: returns a model with changepoints specified
   manually using the `cpts` argument
 
 ``` r
 DataCPSim |>
-  segment(method = "cpt-manual", cpts = c(365, 826)) |>
+  segment(method = "manual", cpts = c(365, 826)) |>
   diagnose()
 ```
 
-    ## method: cpt-manual
-
-    ## 
-    ## Segmenting using manually input changepoints...
+    ## method: manual
 
 ![](README_files/figure-gfm/manual-plot-1.png)<!-- -->
 
@@ -194,6 +191,18 @@ DataCPSim |>
 
 ![](README_files/figure-gfm/amoc-plot-1.png)<!-- -->
 
+- `method = "random"`: returns the best model from a random collection
+
+``` r
+DataCPSim |>
+  segment(method = "random", num_generations = 20) |>
+  diagnose()
+```
+
+    ## method: random
+
+![](README_files/figure-gfm/random-plot-1.png)<!-- -->
+
 ### Genetic BMDL
 
 - `method = "cpt-gbmdl"`: implements the Genetic BMDL heuristic
@@ -204,7 +213,7 @@ DataCPSim |>
 changepoints(lista_AG)
 ```
 
-    ## [1]  780  851  859  863  866  872 1035
+    ## [1]  868  870 1017 1019 1086
 
 ``` r
 plot(lista_AG)
@@ -219,7 +228,7 @@ plot(lista_AG$segmenter)
 ```
 
     ## Se guardo la imagen:
-    ## /tmp/RtmpDLelFR/Fig_4AGBMDL_gbmdl_data_nhpp_W_Gamma(1,_2)_Gamma(3,_1.2)_r_50_k_50__BMDL_25_.rda
+    ## /tmp/RtmpATdCbA/Fig_4AGBMDL_gbmdl_data_nhpp_W_Gamma(1,_2)_Gamma(3,_1.2)_r_50_k_50__BMDL_599_.rda
 
 ![](README_files/figure-gfm/diagnostic-1.png)<!-- -->
 
