@@ -6,6 +6,7 @@
 \alias{unpad_tau}
 \alias{cut_inclusive}
 \alias{test_set}
+\alias{random_cpts}
 \alias{label_priors}
 \alias{split_by_tau}
 \alias{deg_free}
@@ -20,6 +21,8 @@ unpad_tau(padded_tau)
 cut_inclusive(x, tau)
 
 test_set(n = 1, sd = 1, seed = NULL)
+
+random_cpts(x, n = 10, k = round(log(length(as.ts(x)))), ...)
 
 label_priors(x)
 
@@ -39,6 +42,8 @@ Calculate overages
 }
 \examples{
 exceedances(DataCPSim)
+random_cpts(DataCPSim, n = 5)
+
 split_by_tau(as.ts(lista_AG), changepoints(lista_AG))
 deg_free(segment(DataCPSim))
 }
