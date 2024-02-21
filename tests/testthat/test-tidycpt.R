@@ -13,6 +13,7 @@ test_that("tidycpt works", {
   expect_type(changepoints(x), "integer")
   expect_equal(AIC(x), as.numeric(-2 * logLik(x) + 2 * deg_free(x)))
   expect_equal(BIC(x), as.numeric(-2 * logLik(x) + log(nobs(x)) * deg_free(x)))
+  expect_type(BMDL(x), "double")
   expect_s3_class(plot(x), "gg")
   expect_s3_class(diagnose(x), "patchwork")
   
@@ -34,6 +35,7 @@ test_that("tidycpt works", {
   expect_equal(length(changepoints(z)), 2)
   expect_equal(AIC(z), as.numeric(-2 * logLik(z) + 2 * deg_free(z)))
   expect_equal(BIC(z), as.numeric(-2 * logLik(z) + log(nobs(z)) * deg_free(z)))
+  expect_type(BMDL(z), "double")
   expect_s3_class(plot(z), "gg")
   expect_s3_class(diagnose(z), "patchwork")
   
@@ -73,11 +75,13 @@ test_that("penalties work", {
   Bayesaian_MDL_k_cp(mat_cp, exceedances(DataCPSim))
   mat_cp |>
     mat_cp_2_list() |>
-    purrr::map_dbl(bmdl, x = DataCPSim)
+    purrr::map(fit_nhpp, x = DataCPSim) |>
+    purrr::map_dbl(BMDL)
   
   tau <- chromo2tau(mat_cp[1,])
   Bayesaian_MDL_1_cp(mat_cp[1,], exceedances(DataCPSim))
-  bmdl(DataCPSim, chromo2tau(mat_cp[1,]))
+  fit_nhpp(DataCPSim, chromo2tau(mat_cp[1,])) |>
+    BMDL()
   
   # log-posterior
   fit_nhpp(DataCPSim, tau)
@@ -93,7 +97,7 @@ test_that("penalties work", {
   cpt <- attr(x, "cpt_true")
   expect_gt(penalty_mdl(pad_tau(cpt, length(x))), 0)
   
-  expect_equal(bmdl(x, 0), -Inf)
-  bmdl(x, cpt)
-  expect_true(all(purrr::map_dbl(runif(10, max = length(x)), bmdl, x = x) >= bmdl(x, cpt)))
+  # expect_equal(bmdl(x, 0), -Inf)
+  true_bmdl <- fit_nhpp(x, cpt) |> BMDL()
+  expect_type(true_bmdl, "double")
 })

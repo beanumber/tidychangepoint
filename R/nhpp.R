@@ -24,6 +24,10 @@ fit_nhpp_region_alt <- function(exc, tau_left, tau_right,
     method = "L-BFGS-B",
     ... = ...
   ))
+  
+  val_optimos$logLik <- exc |>
+    log_likelihood_region_weibull(tau_left, tau_right, theta = val_optimos$par)
+  
   return(val_optimos)
 }
 
@@ -33,7 +37,7 @@ fit_nhpp_region_alt <- function(exc, tau_left, tau_right,
 #' @description
 #' Any times series can be modeled as a non-homogeneous Poisson process of the
 #' locations of the exceedances of the mean of the series. This function
-#' uses the [bmdl()] criteria to determine the best fit parameters for each 
+#' uses the [BMDL()] criteria to determine the best fit parameters for each 
 #' region defined by the changepoint set returned by [changepoints()].
 #' @param x A time series
 #' @param tau A vector of changepoints. 
@@ -64,7 +68,10 @@ fit_nhpp <- function(x, tau) {
   
   get_params <- function(z) {
     cbind(
-      data.frame("log_posterior" = -z$value), 
+      data.frame(
+        "log_posterior" = -z$value,
+        "logLik" = z$logLik
+      ), 
       data.frame(t(z$par))
     )
   }
@@ -79,10 +86,36 @@ fit_nhpp <- function(x, tau) {
   } else {
     names_params <- c("alpha", "beta", "sigma")
   }
-  names(out)[2:ncol(out)] <- names_params
+  names(out)[3:ncol(out)] <- names_params
   
-  return(dplyr::bind_cols(regions_df, out))
+  out <- dplyr::bind_cols(regions_df, out)
+  class(out) <- c("nhpp", class(out))
+  
+  return(out)
 }
+
+#' @rdname fit_nhpp
+#' @export
+logLik.nhpp <- function(object, ...) {
+  sum(object$logLik)
+}
+
+#' @rdname fit_nhpp
+#' @export
+BMDL.nhpp <- function(x, ...) {
+  tau <- changepoints(x)
+  n <- max(x$end)
+  penalty_mdl(pad_tau(tau, n)) - sum(x$log_posterior)
+}
+
+#' @rdname fit_nhpp
+#' @export
+changepoints.nhpp <- function(x, ...) {
+  c(x$begin, x$end) |>
+    unique() |>
+    unpad_tau()
+}
+
 
 #' Mean cumulative exceedances function
 #' @param t The exceedances of a time series

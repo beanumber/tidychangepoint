@@ -23,30 +23,6 @@ penalty_mdl <- function(padded_tau) {
 }
 
 
-#' Bayesian MDL para un vector de puntos de cambio
-#'
-#' @param x A times series object
-#' @param tau A set of changepoints
-#' @export
-#' @examples
-#' bmdl(DataCPSim, tau = 826)
-#' bmdl(DataCPSim, tau = changepoints(segment(DataCPSim, method = "cpt-pelt")))
-#' bmdl(DataCPSim, tau = changepoints(segment(DataCPSim, method = "single-best")))
-#' 
-
-bmdl <- function(x, tau) {
-  # 1. Obtener los estimadores MAP para cada regimen y guardarlos en mat_MAP
-  theta <- fit_nhpp(x, tau)
-  # 2. Evaluar la log-posterior (sumando la primera columna de mat_MAP)
-  log_posterior <- sum(theta$log_posterior)
-  # 3. Evaluar la penalización
-  penalty <- penalty_mdl(pad_tau(tau, n = length(x)))
-  # 4. Obtener bayesian-MDL de la diferencia de la penalización y la log-posterior
-  penalty - log_posterior
-}
-
-
-
 #' Penalización MDL
 #'
 #' @param cp vector de extendido de puntos de cambio

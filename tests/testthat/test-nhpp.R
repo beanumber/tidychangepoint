@@ -7,6 +7,13 @@ test_that("mcddf works", {
 })
 
 
+test_that("BMDL works", {
+  y <- test_set(n = 1, seed = 123)
+  seg <- segment(y, method = "cpt-pelt")
+  expect_s3_class(logLik(seg), "logLik")
+  expect_type(BMDL(seg), "double")
+})
+
 test_that("parameter fitting works", {
   # Example 1
   y <- test_set(n = 1, seed = 123)

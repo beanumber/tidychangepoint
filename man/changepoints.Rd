@@ -8,6 +8,8 @@
 \alias{logLik.tidycpt}
 \alias{MBIC}
 \alias{MBIC.tidycpt}
+\alias{BMDL}
+\alias{BMDL.tidycpt}
 \alias{nobs.tidycpt}
 \alias{augment.tidycpt}
 \alias{tidy.tidycpt}
@@ -33,6 +35,10 @@ changepoints(x, ...)
 MBIC(object, ...)
 
 \method{MBIC}{tidycpt}(object, ...)
+
+BMDL(x, ...)
+
+\method{BMDL}{tidycpt}(x, ...)
 
 \method{nobs}{tidycpt}(object, ...)
 
@@ -65,6 +71,12 @@ diagnose(x, ...)
 Generic functions for tidycpt objects
 }
 \examples{
+x <- segment(DataCPSim, method = "cpt-pelt")
+BMDL(x)
+y <- segment(DataCPSim, method = "cpt-manual", cpts = 826)
+BMDL(y)
+z <- segment(DataCPSim, method = "single-best")
+BMDL(z)
 plot_mcdf(segment(DataCPSim))
 diagnose(segment(DataCPSim))
 diagnose(segment(DataCPSim, method = "single-best"))

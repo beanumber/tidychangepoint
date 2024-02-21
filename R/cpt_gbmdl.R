@@ -96,13 +96,7 @@ nobs.cpt_gbmdl <- function(object, ...) {
 #' @export
 logLik.cpt_gbmdl <- function(object, ...) {
   regions <- fit_nhpp(object, tau = changepoints(object))
-  log_likes <- regions |>
-    dplyr::mutate(theta = purrr::map2(alpha, beta, c)) |>
-    dplyr::select(exceedances, begin, end, theta) |>
-    purrr::pmap_dbl(
-      function(exceedances, begin, end, theta) log_likelihood_region_weibull(exceedances, begin, end, theta)
-    ) |>
-    sum()
+  log_likes <- sum(regions$logLik)
   attr(log_likes, "df") <- length(changepoints(object))
   class(log_likes) <- "logLik"
   return(log_likes)

@@ -41,6 +41,7 @@ segment.numeric <- function(x, method = "null", ...) {
 #' - `nhpp`: A `tbl_df` showing the best fit parameters for each region, as 
 #'   defined by the chnagepoint set returned by `changepoints()`. These parameters
 #'   are fit using the non-homogeneous Poisson process model in [fit_nhpp()].
+#'   This object also has class `nhpp`
 #' @details Currently, [segment()] can use the following algorithms, depending
 #' on the value of the `method` argument:
 #' - `cpt-pelt`: Uses the PELT algorithm as implemented in 
@@ -148,7 +149,10 @@ length.tidycpt <- function(x, ...) {
 #' @seealso [stats::logLik()]
 #' @export
 logLik.tidycpt <- function(object, ...) {
-  logLik(object$segmenter)
+  ll <- logLik(object$nhpp)
+  attr(ll, "df") <- length(changepoints(object))
+  class(ll) <- "logLik"
+  return(ll)
 }
 
 #' @rdname changepoints
@@ -164,6 +168,26 @@ MBIC.tidycpt <- function(object, ...) {
   r <- tau / length(object)
   -(1/2) * (3 * m * log(length(object)) + sum(r)) 
 }
+
+#' @rdname changepoints
+#' @export
+
+BMDL <- function(x, ...) UseMethod("BMDL")
+
+#' @rdname changepoints
+#' @export
+#' @examples
+#' x <- segment(DataCPSim, method = "cpt-pelt")
+#' BMDL(x)
+#' y <- segment(DataCPSim, method = "cpt-manual", cpts = 826)
+#' BMDL(y)
+#' z <- segment(DataCPSim, method = "single-best")
+#' BMDL(z)
+
+BMDL.tidycpt <- function(x, ...) {
+  BMDL(x$nhpp)
+}
+
 
 #' @rdname changepoints
 #' @seealso [stats::nobs()]
@@ -218,11 +242,11 @@ tidy.tidycpt <- function(x, ...) {
 glance.tidycpt <- function(x, ...) {
   glance(x$segmenter) |>
     dplyr::mutate(
-      s3_logLik = logLik(x),
-      s3_AIC = AIC(x),
-      s3_BIC = BIC(x),
-      s3_MBIC = MBIC(x),
-      s3_BMDL = bmdl(x, changepoints(x))
+      nhpp_logLik = logLik(x),
+      nhpp_AIC = AIC(x),
+      nhpp_BIC = BIC(x),
+      nhpp_MBIC = MBIC(x),
+      nhpp_BMDL = BMDL(x)
     )
 }
 

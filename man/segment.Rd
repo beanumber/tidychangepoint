@@ -29,6 +29,7 @@ an object of class \code{tidycpt}. Every \code{tidycpt} object contains:
 \item \code{nhpp}: A \code{tbl_df} showing the best fit parameters for each region, as
 defined by the chnagepoint set returned by \code{changepoints()}. These parameters
 are fit using the non-homogeneous Poisson process model in \code{\link[=fit_nhpp]{fit_nhpp()}}.
+This object also has class \code{nhpp}
 }
 }
 \description{

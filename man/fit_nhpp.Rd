@@ -3,6 +3,9 @@
 \name{fit_nhpp_region_alt}
 \alias{fit_nhpp_region_alt}
 \alias{fit_nhpp}
+\alias{logLik.nhpp}
+\alias{BMDL.nhpp}
+\alias{changepoints.nhpp}
 \title{Fit a non-homogeneous Poisson process model to the exceedances of a time series.}
 \usage{
 fit_nhpp_region_alt(
@@ -14,6 +17,12 @@ fit_nhpp_region_alt(
 )
 
 fit_nhpp(x, tau)
+
+\method{logLik}{nhpp}(object, ...)
+
+\method{BMDL}{nhpp}(x, ...)
+
+\method{changepoints}{nhpp}(x, ...)
 }
 \arguments{
 \item{x}{A time series}
@@ -26,7 +35,7 @@ A \code{tbl_df} with each row representing one region.
 \description{
 Any times series can be modeled as a non-homogeneous Poisson process of the
 locations of the exceedances of the mean of the series. This function
-uses the \code{\link[=bmdl]{bmdl()}} criteria to determine the best fit parameters for each
+uses the \code{\link[=BMDL]{BMDL()}} criteria to determine the best fit parameters for each
 region defined by the changepoint set returned by \code{\link[=changepoints]{changepoints()}}.
 }
 \examples{
