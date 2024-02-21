@@ -6,8 +6,8 @@
 \alias{seg_default}
 \alias{as.ts.seg_default}
 \alias{changepoints.seg_default}
+\alias{evaluate}
 \alias{glance.seg_default}
-\alias{logLik.seg_default}
 \title{Default class for candidate changepoint sets}
 \usage{
 new_seg_default(x = numeric(), cpt_list = list(), params = list(), ...)
@@ -20,9 +20,9 @@ seg_default(x, ...)
 
 \method{changepoints}{seg_default}(x, ...)
 
-\method{glance}{seg_default}(x, ...)
+evaluate(x, ...)
 
-\method{logLik}{seg_default}(x, ...)
+\method{glance}{seg_default}(x, ...)
 }
 \arguments{
 \item{x}{a numeric vector coercible into a \code{ts} object}

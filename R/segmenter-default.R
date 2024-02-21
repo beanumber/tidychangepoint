@@ -14,11 +14,12 @@ new_seg_default <- function(x = numeric(), cpt_list = list(), params = list(), .
   structure(
     list(
       data = stats::as.ts(x),
-      cpt_list = cpt_list,
+      candidates = tibble::tibble(changepoints = cpt_list),
       params = params
     ), 
     class = "seg_default"
-  )
+  ) |>
+  evaluate()
 }
 
 #' @rdname new_seg_default
@@ -48,12 +49,7 @@ as.ts.seg_default <- function(x, ...) {
 #' @rdname new_seg_default
 #' @export
 changepoints.seg_default <- function(x, ...) {
-  x$cpt_list |>
-    tibble::enframe(name = "id", value = "changepoints") |>
-    dplyr::mutate(
-      nhpp = purrr::map(changepoints, ~fit_nhpp(x = as.ts(x), tau = .x)),
-      bmdl = purrr::map_dbl(nhpp, BMDL)
-    ) |>
+  x$candidates |>
     dplyr::arrange(bmdl) |>
     utils::head(1) |>
     dplyr::pull(changepoints) |>
@@ -63,22 +59,23 @@ changepoints.seg_default <- function(x, ...) {
 
 #' @rdname new_seg_default
 #' @export
-glance.seg_default <- function(x, ...) {
-  tibble::tibble(
-    algorithm = NA,
-    params = list(x$params)
-  )
+evaluate <- function(x, ...) {
+  x$candidates <- x$candidates |>
+    dplyr::mutate(
+      nhpp = purrr::map(changepoints, ~fit_nhpp(x = as.ts(x), tau = .x)),
+      bmdl = purrr::map_dbl(nhpp, BMDL)
+    ) |>
+    dplyr::arrange(bmdl)
+  x
 }
 
 
 #' @rdname new_seg_default
 #' @export
-logLik.seg_default <- function(x, ...) {
-  # need to make this work
-  out <- -3248
-  # Bloq_LogVero_NHPP(x, ...)
-  attr(out, "df") <- length(cpt_best(x))
-  class(out) <- "logLik"
-  return(out)
+glance.seg_default <- function(x, ...) {
+  tibble::tibble(
+    algorithm = NA,
+    params = list(x$params)
+  )
 }
 
