@@ -54,10 +54,10 @@ segment.numeric <- function(x, method = "null", ...) {
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
 #' - `cpt-gbmdl`: Uses the Genetic BMDL heuristic as implemented by 
 #'   [segment_gbmdl()]. The `segmenter` is of class [cpt_gbmdl].
-#' - `cpt-manual`: Uses the vector of changepoints in the `cpts` arugment and
-#'   [stats::lm()]. The `segmenter` is of class `lm`.
+#' - `manual`: Uses the vector of changepoints in the `cpts` arugment and
+#'   [stats::lm()]. The `segmenter` is of class `seg_default`.
 #' - `null`: The default. Uses [stats::lm()] with no changepoints. 
-#'   The `segmenter` is of class `lm`.
+#'   The `segmenter` is of class `seg_default`.
 #' [stats::lm], or [cpt_gbmdl]
 #' @seealso [changepoint::cpt.meanvar()]
 #' @examples
@@ -66,8 +66,8 @@ segment.numeric <- function(x, method = "null", ...) {
 #' segment(DataCPSim, method = "cpt-binseg", penalty = "AIC")
 #' segment(DataCPSim, method = "cpt-segneigh", penalty = "BIC")
 #' segment(DataCPSim, method = "random", num_generations = 10)
-#' segment(DataCPSim, method = "cpt-manual", cpts = c(826))
-#' two_cpts <- segment(DataCPSim, method = "cpt-manual", cpts = c(365, 826))
+#' segment(DataCPSim, method = "manual", cpts = c(826))
+#' two_cpts <- segment(DataCPSim, method = "manual", cpts = c(365, 826))
 #' plot(two_cpts)
 #' diagnose(two_cpts)
 #' \dontrun{
@@ -102,31 +102,20 @@ segment.ts <- function(x, method = "null", ...) {
       num_generations <- 50
     }
     cpts <- random_cpts(x, n = num_generations)
-    bmdls <- cpts |>
-      purrr::map(~fit_nhpp(x, tau = .x)) |>
-      purrr::map_dbl(BMDL)
-    best_cpt <- cpts[[which.min(bmdls)]]
-    terms <- paste("(t > ", best_cpt, ")") |>
-      paste(collapse = "+")
-    form <- stats::as.formula(paste("y ~ ", terms))
-    mod <- stats::lm(form, data = ds)
-    class(mod) <- c("cpt_lm", class(mod))
+    mod <- new_seg_default(x, cpt_list = cpts)
   }
-  if (method == "cpt-manual") {
-    message("\nSegmenting using manually input changepoints...")
+  if (method == "manual") {
     if(!"cpts" %in% names(args)) {
-      stop("Please supply the cpts argument to use the cpt-manual algorithm.")
+      stop("Please supply the cpts argument to use the manual algorithm.")
     }
     cpts <- args[["cpts"]]
-    terms <- paste("(t > ", cpts, ")") |>
-      paste(collapse = "+")
-    form <- stats::as.formula(paste("y ~ ", terms))
-    mod <- stats::lm(form, data = ds)
-    class(mod) <- c("cpt_lm", class(mod))
+    if (!is.list(cpts)) {
+      cpts <- list(cpts)
+    }
+    mod <- new_seg_default(x, cpt_list = cpts)
   }
   if (method == "null") {
-    mod <- stats::lm(y ~ 1, data = ds)
-    class(mod) <- c("cpt_lm", class(mod))
+    mod <- new_seg_default(x)
   }
   # build the tidycpt object
   obj <- list(
@@ -197,7 +186,7 @@ BMDL <- function(x, ...) UseMethod("BMDL")
 #' @examples
 #' x <- segment(DataCPSim, method = "cpt-pelt")
 #' BMDL(x)
-#' y <- segment(DataCPSim, method = "cpt-manual", cpts = 826)
+#' y <- segment(DataCPSim, method = "manual", cpts = 826)
 #' BMDL(y)
 #' z <- segment(DataCPSim, method = "single-best")
 #' BMDL(z)
@@ -350,9 +339,9 @@ plot_bmdl <- function(x, ...) {
     tibble::enframe(name = "generation", value = "bmdl")
 
   g <- ggplot2::ggplot(data = bmdl_random, ggplot2::aes(x = generation, y = bmdl)) +
-    ggplot2::geom_hline(aes(yintercept = bmdl_null), linetype = 3, color = "red") +
-    ggplot2::geom_hline(aes(yintercept = bmdl_one), linetype = 3, color = "green") +
-    ggplot2::geom_hline(aes(yintercept = bmdl_pelt), linetype = 3, color = "blue") +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = bmdl_null), linetype = 3, color = "red") +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = bmdl_one), linetype = 3, color = "green") +
+    ggplot2::geom_hline(ggplot2::aes(yintercept = bmdl_pelt), linetype = 3, color = "blue") +
     ggplot2::geom_line(linetype = 2) +
     ggplot2::geom_smooth(data = bmdl_random, se = 0) +
     ggplot2::scale_x_continuous("Generation of Candidate Changepoints") +
@@ -360,10 +349,10 @@ plot_bmdl <- function(x, ...) {
       
   if ("cpt_gbmdl" %in% class(x$segmenter)) {
     g <- g + 
-      ggplot2::geom_line(data = bmdl_gbmdl, aes(y = nhpp_bmdl), color = "gold") +
-      ggplot2::geom_smooth(data = bmdl_gbmdl, aes(y = nhpp_bmdl), se = 0, color = "gold") +
-      ggplot2::geom_line(data = bmdl_gbmdl, aes(y = gbmdl), color = "pink") +
-      ggplot2::geom_smooth(data = bmdl_gbmdl, aes(y = gbmdl), se = 0, color = "pink")
+      ggplot2::geom_line(data = bmdl_gbmdl, ggplot2::aes(y = nhpp_bmdl), color = "gold") +
+      ggplot2::geom_smooth(data = bmdl_gbmdl, ggplot2::aes(y = nhpp_bmdl), se = 0, color = "gold") +
+      ggplot2::geom_line(data = bmdl_gbmdl, ggplot2::aes(y = gbmdl), color = "pink") +
+      ggplot2::geom_smooth(data = bmdl_gbmdl, ggplot2::aes(y = gbmdl), se = 0, color = "pink")
   }
   g
 }

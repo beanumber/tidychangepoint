@@ -1,6 +1,6 @@
 Package: tidychangepoint
 Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9015
+Version: 0.0.0.9016
 Authors@R: c(
     person(
       "Biviana", "Suarez Sierra", email = "first.last@example.com", 

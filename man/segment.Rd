@@ -50,10 +50,10 @@ on the value of the \code{method} argument:
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
 \item \code{cpt-gbmdl}: Uses the Genetic BMDL heuristic as implemented by
 \code{\link[=segment_gbmdl]{segment_gbmdl()}}. The \code{segmenter} is of class \link{cpt_gbmdl}.
-\item \code{cpt-manual}: Uses the vector of changepoints in the \code{cpts} arugment and
-\code{\link[stats:lm]{stats::lm()}}. The \code{segmenter} is of class \code{lm}.
+\item \code{manual}: Uses the vector of changepoints in the \code{cpts} arugment and
+\code{\link[stats:lm]{stats::lm()}}. The \code{segmenter} is of class \code{seg_default}.
 \item \code{null}: The default. Uses \code{\link[stats:lm]{stats::lm()}} with no changepoints.
-The \code{segmenter} is of class \code{lm}.
+The \code{segmenter} is of class \code{seg_default}.
 \link[stats:lm]{stats::lm}, or \link{cpt_gbmdl}
 }
 }
@@ -67,8 +67,8 @@ segment(DataCPSim, method = "cpt-pelt", penalty = "AIC")
 segment(DataCPSim, method = "cpt-binseg", penalty = "AIC")
 segment(DataCPSim, method = "cpt-segneigh", penalty = "BIC")
 segment(DataCPSim, method = "random", num_generations = 10)
-segment(DataCPSim, method = "cpt-manual", cpts = c(826))
-two_cpts <- segment(DataCPSim, method = "cpt-manual", cpts = c(365, 826))
+segment(DataCPSim, method = "manual", cpts = c(826))
+two_cpts <- segment(DataCPSim, method = "manual", cpts = c(365, 826))
 plot(two_cpts)
 diagnose(two_cpts)
 \dontrun{

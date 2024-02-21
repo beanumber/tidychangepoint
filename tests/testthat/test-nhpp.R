@@ -20,7 +20,7 @@ test_that("parameter fitting works", {
   plot(y)
   tau <- attr(y, "cpt_true")
   theta <- fit_nhpp(y, tau)
-  plot_mcdf(segment(y, method = "cpt-manual", cpts = tau))
+  plot_mcdf(segment(y, method = "manual", cpts = tau))
   expect_lt(abs(theta$alpha[1] - 1), 0.05)
   
   m <- cdf_exceedances_est(exceedances(y), tau, theta, length(y))
@@ -28,7 +28,7 @@ test_that("parameter fitting works", {
   expect_lt(abs(cdf_exceedances_est(tau, tau, theta, length(y)) - tau), 2)
   expect_lt(abs(cdf_exceedances_est(length(y), tau, theta, length(y)) - tau), 3)
   
-  plot_mcdf(segment(y, method = "cpt-manual", cpts = tau))
+  plot_mcdf(segment(y, method = "manual", cpts = tau))
   
   # Example 2
   y <- test_set(n = 1, seed = 456)
@@ -49,5 +49,5 @@ test_that("parameter fitting works", {
     theta[2, c("alpha", "beta")] |> unlist() |> unname()
   )
   
-  plot_mcdf(segment(y, method = "cpt-manual", cpts = tau))
+  plot_mcdf(segment(y, method = "manual", cpts = tau))
 })

@@ -76,7 +76,7 @@ Generic functions for tidycpt objects
 \examples{
 x <- segment(DataCPSim, method = "cpt-pelt")
 BMDL(x)
-y <- segment(DataCPSim, method = "cpt-manual", cpts = 826)
+y <- segment(DataCPSim, method = "manual", cpts = 826)
 BMDL(y)
 z <- segment(DataCPSim, method = "single-best")
 BMDL(z)

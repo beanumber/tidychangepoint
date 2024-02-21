@@ -104,11 +104,11 @@ DataCPSim |>
   diagnose()
 ```
 
-- `method = "cpt-manual"`: returns a model with changepoints specified manually using the `cpts` argument
+- `method = "manual"`: returns a model with changepoints specified manually using the `cpts` argument
 
 ```{r manual-plot}
 DataCPSim |>
-  segment(method = "cpt-manual", cpts = c(365, 826)) |>
+  segment(method = "manual", cpts = c(365, 826)) |>
   diagnose()
 ```
 

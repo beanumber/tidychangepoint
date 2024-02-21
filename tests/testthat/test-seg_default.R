@@ -1,7 +1,7 @@
-test_that("cpt_lm works", {
+test_that("seg_default works", {
   x <- segment(DataCPSim)
   expect_s3_class(x, "tidycpt")
-  expect_s3_class(x$segmenter, "cpt_lm")
+  expect_s3_class(x$segmenter, "seg_default")
   expect_s3_class(as.ts(x), "ts")
   expect_s3_class(augment(x), "grouped_ts")
   expect_s3_class(tidy(x), "tbl_df")
@@ -14,9 +14,9 @@ test_that("cpt_lm works", {
   expect_equal(BIC(x), as.numeric(-2 * logLik(x) + log(nobs(x)) * deg_free(x)))
 
   
-  y <- segment(DataCPSim, method = "cpt-manual", cpts = c(826))
+  y <- segment(DataCPSim, method = "manual", cpts = c(826))
   expect_s3_class(y, "tidycpt")
-  expect_s3_class(y$segmenter, "cpt_lm")
+  expect_s3_class(y$segmenter, "seg_default")
   expect_s3_class(as.ts(y), "ts")
   expect_s3_class(augment(y), "grouped_ts")
   expect_s3_class(tidy(y), "tbl_df")
@@ -28,9 +28,9 @@ test_that("cpt_lm works", {
   expect_equal(AIC(x), as.numeric(-2 * logLik(x) + 2 * deg_free(x)))
   expect_equal(BIC(x), as.numeric(-2 * logLik(x) + log(nobs(x)) * deg_free(x)))
   
-  z <- segment(DataCPSim, method = "cpt-manual", cpts = c(365, 826))
+  z <- segment(DataCPSim, method = "manual", cpts = c(365, 826))
   expect_s3_class(z, "tidycpt")
-  expect_s3_class(z$segmenter, "cpt_lm")
+  expect_s3_class(z$segmenter, "seg_default")
   expect_s3_class(as.ts(z), "ts")
   expect_s3_class(augment(z), "grouped_ts")
   expect_s3_class(tidy(z), "tbl_df")
@@ -42,4 +42,16 @@ test_that("cpt_lm works", {
   
   expect_equal(AIC(z), as.numeric(-2 * logLik(z) + 2 * deg_free(z)))
   expect_equal(BIC(z), as.numeric(-2 * logLik(z) + log(nobs(z)) * deg_free(z)))
+  
+})
+
+test_that("random works", {
+  x <- segment(DataCPSim, method = "random")
+  expect_s3_class(x, "tidycpt")
+  expect_s3_class(x$segmenter, "seg_default")
+  expect_s3_class(as.ts(x), "ts")
+  expect_s3_class(augment(x), "grouped_ts")
+  expect_s3_class(tidy(x), "tbl_df")
+  suppressWarnings(expect_s3_class(glance(x), "tbl_df"))
+  expect_type(changepoints(x), "integer")
 })

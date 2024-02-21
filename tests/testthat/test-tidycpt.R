@@ -24,7 +24,7 @@ test_that("tidycpt works", {
     glance() |> 
     dplyr::select(dplyr::matches("IC|Lik"))
   
-  z <- segment(DataCPSim, method = "cpt-manual", cpts = c(365, 826))
+  z <- segment(DataCPSim, method = "manual", cpts = c(365, 826))
   expect_s3_class(z, "tidycpt")
   expect_s3_class(as.ts(z), "ts")
   expect_s3_class(augment(z), "grouped_ts")
@@ -39,8 +39,8 @@ test_that("tidycpt works", {
   expect_s3_class(plot(z), "gg")
   expect_s3_class(diagnose(z), "patchwork")
   
-  expect_s3_class(segment(bogota_pm, method = "cpt-manual", cpts = c(500, 850)), "tidycpt")
-  expect_error(segment(bogota_pm, method = "cpt-manual", tau = c(500, 850)), "cpts")
+  expect_s3_class(segment(bogota_pm, method = "manual", cpts = c(500, 850)), "tidycpt")
+  expect_error(segment(bogota_pm, method = "manual", tau = c(500, 850)), "cpts")
   
 })
 

@@ -53,7 +53,7 @@ test_that("weibull works", {
   plot(y)
   tau <- attr(y, "cpt_true")
   theta <- fit_nhpp(y, tau)
-  diagnose(segment(y, method = "cpt-manual", cpts = tau))
+  diagnose(segment(y, method = "manual", cpts = tau))
   
   theta_true <- c(0.972236, 0.83897783)
   log_prior_region_weibull(theta = theta_true)
