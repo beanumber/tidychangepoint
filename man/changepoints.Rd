@@ -82,7 +82,8 @@ z <- segment(DataCPSim, method = "single-best")
 BMDL(z)
 plot_bmdl(segment(DataCPSim))
 \dontrun{
-plot_bmdl(segment(DataCPSim, method = "cpt-gbmdl"))
+h <- segment(DataCPSim, method = "cpt-gbmdl")
+plot_bmdl(h)
 }
 plot_mcdf(segment(DataCPSim))
 diagnose(segment(DataCPSim))

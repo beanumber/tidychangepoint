@@ -305,7 +305,8 @@ plot.tidycpt <- function(x, ...) {
 #' @examples
 #' plot_bmdl(segment(DataCPSim))
 #' \dontrun{
-#' plot_bmdl(segment(DataCPSim, method = "cpt-gbmdl"))
+#' h <- segment(DataCPSim, method = "cpt-gbmdl")
+#' plot_bmdl(h)
 #' }
 plot_bmdl <- function(x, ...) {
   bmdl_null <- segment(as.ts(x), method = "null") |> BMDL()
@@ -318,8 +319,9 @@ plot_bmdl <- function(x, ...) {
       mat_cp_2_list() |>
       purrr::map(~fit_nhpp(x = as.ts(x), tau = .x)) |>
       purrr::map_dbl(BMDL) |>
-      tibble::enframe(name = "generation", value = "bmdl")
-    k <- num_generations(x)
+      tibble::enframe(name = "generation", value = "nhpp_bmdl")
+    bmdl_gbmdl$gbmdl <- x$segmenter$vec_min_BMDL
+    k <- num_generations(x$segmenter)
   } else {
     k <- 50
   }
@@ -334,14 +336,16 @@ plot_bmdl <- function(x, ...) {
     ggplot2::geom_hline(aes(yintercept = bmdl_one), linetype = 3, color = "green") +
     ggplot2::geom_hline(aes(yintercept = bmdl_pelt), linetype = 3, color = "blue") +
     ggplot2::geom_line(linetype = 2) +
-    ggplot2::geom_smooth(data = bmdl_random) +
+    ggplot2::geom_smooth(data = bmdl_random, se = 0) +
     ggplot2::scale_x_continuous("Generation of Candidate Changepoints") +
     ggplot2::scale_y_continuous("BMDL")
       
   if ("cpt_gbmdl" %in% class(x$segmenter)) {
     g <- g + 
-      ggplot2::geom_line(data = bmdl_gbmdl, color = "gold") +
-      ggplot2::geom_smooth(data = bmdl_gbmdl, color = "gold")
+      ggplot2::geom_line(data = bmdl_gbmdl, aes(y = nhpp_bmdl), color = "gold") +
+      ggplot2::geom_smooth(data = bmdl_gbmdl, aes(y = nhpp_bmdl), se = 0, color = "gold") +
+      ggplot2::geom_line(data = bmdl_gbmdl, aes(y = gbmdl), color = "pink") +
+      ggplot2::geom_smooth(data = bmdl_gbmdl, aes(y = gbmdl), se = 0, color = "pink")
   }
   g
 }
