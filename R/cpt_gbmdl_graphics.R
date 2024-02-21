@@ -92,9 +92,9 @@ plot_confint <- function(x) {
 #'
 #' @export
 #' @examples
-#' plot_BMDL(lista_AG$segmenter)
+#' plot_gbmdl(lista_AG$segmenter)
 #' 
-plot_BMDL <- function(x, destdir = tempdir(), data_name_slug = "data", pdf = FALSE) {
+plot_gbmdl <- function(x, destdir = tempdir(), data_name_slug = "data", pdf = FALSE) {
   graphics::par(mfrow = c(2, 2), mar = c(2, 4, 2, 2))
   # 1.- Datos reales
   plot_confint(x)

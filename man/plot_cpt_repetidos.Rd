@@ -4,7 +4,7 @@
 \alias{plot_cpt_repetidos}
 \alias{plot_exceedances}
 \alias{plot_confint}
-\alias{plot_BMDL}
+\alias{plot_gbmdl}
 \alias{plot_evolution}
 \alias{plot_cpt_repeated}
 \alias{plot_best_chromosome}
@@ -22,7 +22,7 @@ plot_exceedances(x, ...)
 
 plot_confint(x)
 
-plot_BMDL(x, destdir = tempdir(), data_name_slug = "data", pdf = FALSE)
+plot_gbmdl(x, destdir = tempdir(), data_name_slug = "data", pdf = FALSE)
 
 plot_evolution(x, i = length(x$vec_min_BMDL))
 
@@ -68,7 +68,7 @@ plot_exceedances(rlnorm_ts_2)
 plot_exceedances(rlnorm_ts_3)
 
 plot_confint(lista_AG$segmenter)
-plot_BMDL(lista_AG$segmenter)
+plot_gbmdl(lista_AG$segmenter)
 
 plot_evolution(lista_AG$segmenter)
 plot_evolution(lista_AG$segmenter, 5)

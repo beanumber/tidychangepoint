@@ -65,7 +65,7 @@ new_cpt_gbmdl <- function(x = numeric(),
 
 plot.cpt_gbmdl <- function(x, ...) {
   # 4-up plot
-  plot_BMDL(x)
+  plot_gbmdl(x)
 }
 
 #' @rdname cpt_gbmdl
@@ -289,6 +289,6 @@ changepoints.cpt_gbmdl <- function(x, ...) {
 #' diagnose(lista_AG)
 #' 
 diagnose.cpt_gbmdl <- function(x, ...) {
-  plot_BMDL(x)
+  plot_gbmdl(x)
 }
 
