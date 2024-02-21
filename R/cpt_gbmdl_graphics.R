@@ -65,8 +65,8 @@ plot_exceedances <- function(x, ...) {
 #' plot_confint(lista_AG$segmenter)
 
 plot_confint <- function(x) {
-  tau <- cpt_best(x)
-  theta <- cpt_best_params(x)
+  tau <- changepoints(x)
+  theta <- fit_nhpp(x, tau)
   
   sigma <- theta$beta
   alpha <- theta$alpha
@@ -131,7 +131,7 @@ plot_evolution <- function(x, i = length(x$vec_min_BMDL)) {
     ylab = "BMDL", 
     xlab = "Generation", 
     main = paste0(
-      "AG rate ", x$nhpp_dist, " and priori ", 
+      "AG rate ", x$params$nhpp_dist, " and priori ", 
       label_priors(x)
     )
   )

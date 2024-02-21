@@ -43,21 +43,17 @@ new_cpt_gbmdl <- function(x = numeric(),
                           generation_size = 50, 
                           max_num_cp = 20) {
   stopifnot(is.numeric(x))
-  structure(
-    list(
-      data = stats::as.ts(x),
-      nhpp_dist = nhpp_dist, 
-      vec_dist_a_priori = vec_dist_a_priori,
-      mat_phi = mat_phi,
-      # 1. Simular puntos de cambio iniciales
-      mat_cp = sim_k_cp_BMDL(x, generation_size),
-      # historia_mejores guarda los mejores cp de cada generación
-      historia_mejores = matrix(0, num_generations, max_num_cp),
-      # vec_min_BMDL guarda los valores mínimos del MDL de cada generación
-      vec_min_BMDL = rep(0, num_generations)
-    ), 
-    class = "cpt_gbmdl"
-  )
+  out <- new_seg_default(x, params = list(
+    nhpp_dist = nhpp_dist, 
+    vec_dist_a_priori = vec_dist_a_priori,
+    mat_phi = mat_phi
+  ))
+  out$mat_cp = sim_k_cp_BMDL(x, generation_size)
+  out$historia_mejores = matrix(0, num_generations, max_num_cp)
+  out$vec_min_BMDL = rep(0, num_generations)
+  
+  class(out) <- c("cpt_gbmdl", class(out))
+  return(out)
 }
 
 #' @rdname cpt_gbmdl
@@ -66,40 +62,6 @@ new_cpt_gbmdl <- function(x = numeric(),
 plot.cpt_gbmdl <- function(x, ...) {
   # 4-up plot
   plot_gbmdl(x)
-}
-
-#' @rdname cpt_gbmdl
-#' @export
-
-print.cpt_gbmdl <- function(x, ...) {
-  NextMethod()
-}
-
-#' @rdname cpt_gbmdl
-#' @export
-
-summary.cpt_gbmdl <- function(object, ...) {
-  message("List of changepoints object:")
-  cat(paste("\nn:"), length(object))
-  cat(paste("\nBest changepoint set: "))
-  cat(cpt_best(object))
-  cat(paste("\nNumber of changepoints:"), length(cpt_best(object)))
-}
-
-#' @rdname cpt_gbmdl
-#' @export
-nobs.cpt_gbmdl <- function(object, ...) {
-  length(as.ts(object))
-}
-
-#' @rdname cpt_gbmdl
-#' @export
-logLik.cpt_gbmdl <- function(object, ...) {
-  regions <- fit_nhpp(object, tau = changepoints(object))
-  log_likes <- sum(regions$logLik)
-  attr(log_likes, "df") <- length(changepoints(object))
-  class(log_likes) <- "logLik"
-  return(log_likes)
 }
 
 #' @rdname cpt_gbmdl
@@ -118,31 +80,11 @@ cpt_best_bmdl_string <- function(x) {
 
 #' @rdname cpt_gbmdl
 #' @export
-#' @examples
-#' cpt_best_params(lista_AG$segmenter)
-
-cpt_best_params <- function(x) {
-  fit_nhpp(as.ts(x), tau = cpt_best(x))
-}
-
-#' @rdname cpt_gbmdl
-#' @export
 
 chromosome_best <- function(x) {
   where_minimo_BMDL <- which.min(x$vec_min_BMDL)
   chromo_long <- x$historia_mejores[where_minimo_BMDL, ]
   chromo_long[1:(chromo_long[1] + 3)]
-}
-
-#' @rdname cpt_gbmdl
-#' @export
-#' 
-
-cpt_best <- function(x) {
-  chromo <- chromosome_best(x)
-  k <- chromo[1]
-  # trim the endpoints
-  setdiff(chromo[3:(k + 2)], c(0, length(x)))
 }
 
 #' @rdname cpt_gbmdl
@@ -223,7 +165,7 @@ write_cpt_gbmdl <- function(x, destdir = tempdir()) {
 file_name <- function(x, data_name_slug = "data") {
   paste(
     "gbmdl", data_name_slug, 
-    "nhpp", x$nhpp_dist, 
+    "nhpp", x$params$nhpp_dist, 
     gsub(" ", "_", label_priors(x)), 
     "r", num_generations(x), 
     "k", generation_size(x),
@@ -255,31 +197,17 @@ glance.cpt_gbmdl <- function(x, ...) {
     logLik = logLik(x),
     AIC = AIC(x),
     BIC = BIC(x),
-    num_cpts = length(cpt_best(x)),
+    num_cpts = length(changepoints(x)),
   )
 }
 
 #' @rdname glance.cpt_gbmdl
 #' @export
-#' @examples
-#' as.ts(lista_AG)
-as.ts.cpt_gbmdl <- function(x, ...) {
-  as.ts(x$data)
-}
-
-#' @rdname glance.cpt_gbmdl
-#' @export
-#' @examples
-#' length(lista_AG)
-#' 
-length.cpt_gbmdl <- function(x, ...) {
-  length(as.ts(x))
-}
-
-#' @rdname glance.cpt_gbmdl
-#' @export
 changepoints.cpt_gbmdl <- function(x, ...) {
-  cpt_best(x) |>
+  chromo <- chromosome_best(x)
+  k <- chromo[1]
+  # trim the endpoints
+  setdiff(chromo[3:(k + 2)], c(0, length(x))) |>
     as.integer()
 }
 

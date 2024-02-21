@@ -69,10 +69,10 @@ random_cpts <- function(x, n = 10, k = round(log(length(as.ts(x)))), ...) {
 #' @rdname exceedances
 #' @export
 label_priors <- function(x) {
-  x$mat_phi |>
+  x$params$mat_phi |>
     as.data.frame() |>
     dplyr::mutate(
-      dist = x$vec_dist_a_priori,
+      dist = x$params$vec_dist_a_priori,
       label = paste0(dist, "(", V1, ", ", V2, ")")
     ) |>
     dplyr::pull(label) |>

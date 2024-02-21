@@ -48,6 +48,18 @@ as.ts.seg_default <- function(x, ...) {
 
 #' @rdname new_seg_default
 #' @export
+nobs.seg_default <- function(object, ...) {
+  length(as.ts(object))
+}
+
+#' @rdname new_seg_default
+#' @export
+length.seg_default <- function(x, ...) {
+  length(as.ts(x))
+}
+
+#' @rdname new_seg_default
+#' @export
 changepoints.seg_default <- function(x, ...) {
   x$candidates |>
     dplyr::arrange(bmdl) |>
@@ -56,6 +68,17 @@ changepoints.seg_default <- function(x, ...) {
     purrr::pluck(1) |>
     as.integer()
 }
+
+#' @rdname new_seg_default
+#' @export
+logLik.seg_default <- function(object, ...) {
+  regions <- fit_nhpp(object, tau = changepoints(object))
+  log_likes <- sum(regions$logLik)
+  attr(log_likes, "df") <- length(changepoints(object))
+  class(log_likes) <- "logLik"
+  return(log_likes)
+}
+
 
 #' @rdname new_seg_default
 #' @export
