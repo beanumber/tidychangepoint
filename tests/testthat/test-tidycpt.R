@@ -67,6 +67,10 @@ test_that("utils works", {
   expect_equal(length(z), length(x))
   expect_type(levels(z), "character")
   expect_length(levels(z), 2)
+  
+  r <- random_cpts(DataCPSim, n = 5)
+  expect_type(r, "list")
+  expect_true(all(purrr::map(r, typeof) == "integer"))
 })
 
 test_that("penalties work", {

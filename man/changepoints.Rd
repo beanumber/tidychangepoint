@@ -17,6 +17,7 @@
 \alias{regions}
 \alias{regions.tidycpt}
 \alias{plot.tidycpt}
+\alias{plot_bmdl}
 \alias{plot_mcdf}
 \alias{diagnose}
 \alias{diagnose.tidycpt}
@@ -54,6 +55,8 @@ regions(x, ...)
 
 \method{plot}{tidycpt}(x, ...)
 
+plot_bmdl(x, ...)
+
 plot_mcdf(x, ...)
 
 diagnose(x, ...)
@@ -77,6 +80,10 @@ y <- segment(DataCPSim, method = "cpt-manual", cpts = 826)
 BMDL(y)
 z <- segment(DataCPSim, method = "single-best")
 BMDL(z)
+plot_bmdl(segment(DataCPSim))
+\dontrun{
+plot_bmdl(segment(DataCPSim, method = "cpt-gbmdl"))
+}
 plot_mcdf(segment(DataCPSim))
 diagnose(segment(DataCPSim))
 diagnose(segment(DataCPSim, method = "single-best"))

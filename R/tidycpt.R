@@ -300,6 +300,51 @@ plot.tidycpt <- function(x, ...) {
     ggplot2::scale_y_continuous("Original Measurement")
 }
 
+#' @rdname changepoints
+#' @export
+#' @examples
+#' plot_bmdl(segment(DataCPSim))
+#' \dontrun{
+#' plot_bmdl(segment(DataCPSim, method = "cpt-gbmdl"))
+#' }
+plot_bmdl <- function(x, ...) {
+  bmdl_null <- segment(as.ts(x), method = "null") |> BMDL()
+  bmdl_one <- segment(as.ts(x), method = "single-best") |> BMDL()
+  bmdl_pelt <- segment(as.ts(x), method = "cpt-pelt") |> BMDL()
+  
+  # won't have to do this once we fix bug...
+  if ("cpt_gbmdl" %in% class(x$segmenter)) {
+    bmdl_gbmdl <- x$segmenter$historia_mejores |>
+      mat_cp_2_list() |>
+      purrr::map(~fit_nhpp(x = as.ts(x), tau = .x)) |>
+      purrr::map_dbl(BMDL) |>
+      tibble::enframe(name = "generation", value = "bmdl")
+    k <- num_generations(x)
+  } else {
+    k <- 50
+  }
+  
+  bmdl_random <- random_cpts(x = as.ts(x), n = k) |>
+    purrr::map(~fit_nhpp(x = as.ts(x), tau = .x)) |>
+    purrr::map_dbl(BMDL) |>
+    tibble::enframe(name = "generation", value = "bmdl")
+
+  g <- ggplot2::ggplot(data = bmdl_random, ggplot2::aes(x = generation, y = bmdl)) +
+    ggplot2::geom_hline(aes(yintercept = bmdl_null), linetype = 3, color = "red") +
+    ggplot2::geom_hline(aes(yintercept = bmdl_one), linetype = 3, color = "green") +
+    ggplot2::geom_hline(aes(yintercept = bmdl_pelt), linetype = 3, color = "blue") +
+    ggplot2::geom_line(linetype = 2) +
+    ggplot2::geom_smooth(data = bmdl_random) +
+    ggplot2::scale_x_continuous("Generation of Candidate Changepoints") +
+    ggplot2::scale_y_continuous("BMDL")
+      
+  if ("cpt_gbmdl" %in% class(x$segmenter)) {
+    g <- g + 
+      ggplot2::geom_line(data = bmdl_gbmdl, color = "gold") +
+      ggplot2::geom_smooth(data = bmdl_gbmdl, color = "gold")
+  }
+  g
+}
 
 #' @rdname changepoints
 #' @export
