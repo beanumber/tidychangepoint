@@ -57,6 +57,7 @@ mweibull <- function(x, shape, scale = 1) {
   (x / scale)^shape
 }
 
+#' @rdname iweibull
 #' @export
 
 parameters_weibull <- function(...) {

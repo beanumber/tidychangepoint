@@ -45,7 +45,7 @@ write_cpt_gbmdl(x, destdir = tempdir())
 
 file_name(x, data_name_slug = "data")
 
-\method{BMDL}{seg_default}(x)
+\method{BMDL}{seg_default}(x, ...)
 }
 \arguments{
 \item{x}{a numeric vector}

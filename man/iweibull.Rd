@@ -3,6 +3,7 @@
 \name{iweibull}
 \alias{iweibull}
 \alias{mweibull}
+\alias{parameters_weibull}
 \alias{log_likelihood_region_weibull}
 \alias{log_prior_region_weibull}
 \alias{D_log_prior_region_weibull}
@@ -12,6 +13,8 @@
 iweibull(x, shape, scale = 1)
 
 mweibull(x, shape, scale = 1)
+
+parameters_weibull(...)
 
 log_likelihood_region_weibull(t, tau_left, tau_right, theta)
 

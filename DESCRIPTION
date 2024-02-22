@@ -27,6 +27,7 @@ Imports:
     patchwork,
     purrr,
     tibble,
+    tidyr,
     tsibble
 Depends: 
     R (>= 4.1)

@@ -59,7 +59,7 @@ test_set <- function(n = 1, sd = 1, seed = NULL) {
 #' random_cpts(DataCPSim, n = 5)
 #' 
 random_cpts <- function(x, n = 10, k = round(log(length(as.ts(x)))), ...) {
-  sizes <- rpois(n, lambda = k)
+  sizes <- stats::rpois(n, lambda = k)
   sizes |>
     purrr::map(~sort(sample.int(n = length(as.ts(x)) - 1, size = .x)))
 }

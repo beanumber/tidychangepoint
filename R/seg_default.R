@@ -71,7 +71,7 @@ changepoints.seg_default <- function(x, ...) {
 #' @rdname cpt_gbmdl
 #' @export
 
-BMDL.seg_default <- function(x) {
+BMDL.seg_default <- function(x, ...) {
   x$candidates |>
     dplyr::arrange(bmdl) |>
     utils::head(1) |>
@@ -114,7 +114,7 @@ evaluate_cpts.tbl_df <- function(x, ...) {
   } else {
     ds <- args[[".data"]]
   }
-  if (!is.ts(as.ts(ds))) {
+  if (!stats::is.ts(as.ts(ds))) {
     stop(".data must be coercible into a time series")
   }
   y <- x |>

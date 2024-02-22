@@ -15,6 +15,8 @@ segment_gbmdl(
 \arguments{
 \item{x}{a vector that can be coerced into a \code{ts}}
 
+\item{num_generations}{Number of generations to evolve}
+
 \item{destdir}{Directory to stare files}
 
 \item{show_progress_bar}{show the progress bar?}

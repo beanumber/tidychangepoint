@@ -365,12 +365,5 @@ diagnose <- function(x, ...) UseMethod("diagnose")
 #' diagnose(segment(test_set(n = 2, sd = 4), method = "cpt-pelt"))
 #' 
 diagnose.tidycpt <- function(x, ...) {
-  patchwork::wrap_plots(
-    plot(x),
-    plot_mcdf(x),
-    plot(x$segmenter),
-    diagnose(x$segmenter),
-    ncol = 2,
-    byrow = FALSE
-  )
+  patchwork::wrap_plots(plot(x), plot_mcdf(x), ncol = 1)
 }
