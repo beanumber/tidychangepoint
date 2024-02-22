@@ -132,17 +132,21 @@ DataCPSim |>
 
 - `method = "cpt-gbmdl"`: implements the Genetic BMDL heuristic
 
-```{r gbmdl-plot}
+```{r gbmdl-tidyplot}
 # DataCPSim |>
 #   segment(method = "cpt-gbmdl")
 changepoints(lista_AG)
-plot(lista_AG)
+diagnose(lista_AG)
 ```
 
 Diagnostic plots are also available. 
 
-```{r diagnostic}
+```{r plot-gbmdl}
 plot(lista_AG$segmenter)
+```
+
+```{r diagnostic}
+diagnose(lista_AG$segmenter)
 ```
 
 

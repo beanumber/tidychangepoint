@@ -131,6 +131,10 @@ modeled as a non-homogeneous Poisson process.
 diagnose(cpts)
 ```
 
+    ## Warning: Removed 2 rows containing missing values (`geom_line()`).
+    ## Removed 2 rows containing missing values (`geom_line()`).
+    ## Removed 2 rows containing missing values (`geom_line()`).
+
 ![](README_files/figure-gfm/diagnose-1.png)<!-- -->
 
 ## Algorithms
@@ -163,6 +167,10 @@ DataCPSim |>
 
     ## method: null
 
+    ## Warning: Removed 2 rows containing missing values (`geom_line()`).
+    ## Removed 2 rows containing missing values (`geom_line()`).
+    ## Removed 2 rows containing missing values (`geom_line()`).
+
 ![](README_files/figure-gfm/null-plot-1.png)<!-- -->
 
 - `method = "manual"`: returns a model with changepoints specified
@@ -175,6 +183,10 @@ DataCPSim |>
 ```
 
     ## method: manual
+
+    ## Warning: Removed 2 rows containing missing values (`geom_line()`).
+    ## Removed 2 rows containing missing values (`geom_line()`).
+    ## Removed 2 rows containing missing values (`geom_line()`).
 
 ![](README_files/figure-gfm/manual-plot-1.png)<!-- -->
 
@@ -189,6 +201,10 @@ DataCPSim |>
 
     ## method: single-best
 
+    ## Warning: Removed 2 rows containing missing values (`geom_line()`).
+    ## Removed 2 rows containing missing values (`geom_line()`).
+    ## Removed 2 rows containing missing values (`geom_line()`).
+
 ![](README_files/figure-gfm/amoc-plot-1.png)<!-- -->
 
 - `method = "random"`: returns the best model from a random collection
@@ -200,6 +216,10 @@ DataCPSim |>
 ```
 
     ## method: random
+
+    ## Warning: Removed 2 rows containing missing values (`geom_line()`).
+    ## Removed 2 rows containing missing values (`geom_line()`).
+    ## Removed 2 rows containing missing values (`geom_line()`).
 
 ![](README_files/figure-gfm/random-plot-1.png)<!-- -->
 
@@ -213,13 +233,17 @@ DataCPSim |>
 changepoints(lista_AG)
 ```
 
-    ## [1]  868  870 1017 1019 1086
+    ## [1] 548 830
 
 ``` r
-plot(lista_AG)
+diagnose(lista_AG)
 ```
 
-![](README_files/figure-gfm/gbmdl-plot-1.png)<!-- -->
+    ## Warning: Removed 2 rows containing missing values (`geom_line()`).
+    ## Removed 2 rows containing missing values (`geom_line()`).
+    ## Removed 2 rows containing missing values (`geom_line()`).
+
+![](README_files/figure-gfm/gbmdl-tidyplot-1.png)<!-- -->
 
 Diagnostic plots are also available.
 
@@ -227,8 +251,23 @@ Diagnostic plots are also available.
 plot(lista_AG$segmenter)
 ```
 
-    ## Se guardo la imagen:
-    ## /tmp/RtmpATdCbA/Fig_4AGBMDL_gbmdl_data_nhpp_W_Gamma(1,_2)_Gamma(3,_1.2)_r_50_k_50__BMDL_599_.rda
+    ## method: null
+
+    ## method: single-best
+
+    ## method: cpt-pelt
+
+    ## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+
+![](README_files/figure-gfm/plot-gbmdl-1.png)<!-- -->
+
+``` r
+diagnose(lista_AG$segmenter)
+```
+
+    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
+
+    ## Warning: Removed 2 rows containing missing values (`geom_bar()`).
 
 ![](README_files/figure-gfm/diagnostic-1.png)<!-- -->
 
