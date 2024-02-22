@@ -137,6 +137,8 @@ evaluate_cpts.tbl_df <- function(x, ...) {
 #' @export
 glance.seg_default <- function(x, ...) {
   tibble::tibble(
+    pkg = "tidychangepoint",
+    version = utils::packageVersion("tidychangepoint"),
     algorithm = NA,
     params = list(x$params)
   )

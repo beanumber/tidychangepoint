@@ -160,11 +160,8 @@ glance.cpt_gbmdl <- function(x, ...) {
     pkg = "tidychangepoint",
     version = utils::packageVersion("tidychangepoint"),
     algorithm = "GeneticBMDL",
-    BMDL = BMDL(x),
-    logLik = logLik(x),
-    AIC = AIC(x),
-    BIC = BIC(x),
-    num_cpts = length(changepoints(x)),
+    params = list(x$params),
+    num_cpts = length(changepoints(x))
   )
 }
 
