@@ -83,7 +83,7 @@ mat_cp_2_tbl <- function(mat_cp) {
 #' @export
 mat_cp_2_list <- function(mat_cp) {
   mat_cp |>
-    apply(1, chromo2tau)
+    apply(1, chromo2tau, simplify = FALSE)
 }
 
 #' @rdname cpt_gbmdl

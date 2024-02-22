@@ -31,6 +31,7 @@ Algoritmo genético de Bayesian MDL a un paso
 \dontrun{
 x <- segment_gbmdl(DataCPSim, num_generations = 10)
 y <- segment_gbmdl(rlnorm_ts_1)
+z <- segment_gbmdl(bogota_pm$particulate_matter)
 }
 
 }
