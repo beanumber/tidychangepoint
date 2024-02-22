@@ -202,16 +202,6 @@ glance.cpt_gbmdl <- function(x, ...) {
 
 #' @rdname glance.cpt_gbmdl
 #' @export
-changepoints.cpt_gbmdl <- function(x, ...) {
-  chromo <- chromosome_best(x)
-  k <- chromo[1]
-  # trim the endpoints
-  setdiff(chromo[3:(k + 2)], c(0, length(x))) |>
-    as.integer()
-}
-
-#' @rdname glance.cpt_gbmdl
-#' @export
 #' @examples
 #' diagnose(lista_AG)
 #' 

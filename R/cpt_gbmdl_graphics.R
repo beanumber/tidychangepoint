@@ -122,9 +122,9 @@ plot_gbmdl <- function(x, destdir = tempdir(), data_name_slug = "data", pdf = FA
 #' plot_evolution(lista_AG$segmenter)
 #' plot_evolution(lista_AG$segmenter, 5)
 
-plot_evolution <- function(x, i = length(x$vec_min_BMDL)) {
+plot_evolution <- function(x, i = nrow(x$candidates)) {
   plot(
-    x$vec_min_BMDL[1:i],
+    x$candidates$bmdl[1:i],
     xlim = c(1, num_generations(x)), 
     type = "l", 
     col = "blue", 
@@ -142,13 +142,13 @@ plot_evolution <- function(x, i = length(x$vec_min_BMDL)) {
 #' @examples
 #' plot_cpt_repeated(lista_AG$segmenter)
 #' plot_cpt_repeated(lista_AG$segmenter, 5)
-plot_cpt_repeated <- function(x, i = nrow(x$historia_mejores)) {
-  historia_mejores_sin_0_1_N <- x$historia_mejores[1:i, -1:-2]
-  historia_mejores_sin_0_1_N <- historia_mejores_sin_0_1_N[
-    historia_mejores_sin_0_1_N > 0 & historia_mejores_sin_0_1_N < max(exceedances(x))
-  ]
+plot_cpt_repeated <- function(x, i = nrow(x$candidates)) {
+  freq <- x$candidates[1:i, ] |>
+    dplyr::pull(changepoints) |>
+    unlist() |>
+    table()
   plot(
-    table(historia_mejores_sin_0_1_N) / num_generations(x), 
+    freq / num_generations(x), 
     main = "Repeated change points", 
     ylab = "repetitions", 
     xlab = "change points index"
@@ -160,14 +160,16 @@ plot_cpt_repeated <- function(x, i = nrow(x$historia_mejores)) {
 #' @examples
 #' plot_best_chromosome(lista_AG$segmenter)
 plot_best_chromosome <- function(x) {
+  lengths <- x$candidates$changepoints |> 
+    purrr::map_int(length)
   plot(
-    x$historia_mejores[, 1], 
+    lengths, 
     ylab = "Number of cp", 
     type = "l", 
     col = "blue", 
     main = paste(
-      "The best chromosome with", 
-      x$historia_mejores[which.min(x$vec_min_BMDL), 1], 
+      "The best chromosome has", 
+      min(lengths), 
       "change points "
     )
   )

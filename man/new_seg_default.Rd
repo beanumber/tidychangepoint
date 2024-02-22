@@ -5,8 +5,14 @@
 \alias{validate_seg_default}
 \alias{seg_default}
 \alias{as.ts.seg_default}
+\alias{nobs.seg_default}
+\alias{length.seg_default}
 \alias{changepoints.seg_default}
-\alias{evaluate}
+\alias{logLik.seg_default}
+\alias{evaluate_cpts}
+\alias{evaluate_cpts.seg_default}
+\alias{evaluate_cpts.list}
+\alias{evaluate_cpts.tbl_df}
 \alias{glance.seg_default}
 \title{Default class for candidate changepoint sets}
 \usage{
@@ -18,9 +24,21 @@ seg_default(x, ...)
 
 \method{as.ts}{seg_default}(x, ...)
 
+\method{nobs}{seg_default}(object, ...)
+
+\method{length}{seg_default}(x, ...)
+
 \method{changepoints}{seg_default}(x, ...)
 
-evaluate(x, ...)
+\method{logLik}{seg_default}(object, ...)
+
+evaluate_cpts(x, ...)
+
+\method{evaluate_cpts}{seg_default}(x, ...)
+
+\method{evaluate_cpts}{list}(x, ...)
+
+\method{evaluate_cpts}{tbl_df}(x, ...)
 
 \method{glance}{seg_default}(x, ...)
 }

@@ -24,9 +24,9 @@ plot_confint(x)
 
 plot_gbmdl(x, destdir = tempdir(), data_name_slug = "data", pdf = FALSE)
 
-plot_evolution(x, i = length(x$vec_min_BMDL))
+plot_evolution(x, i = nrow(x$candidates))
 
-plot_cpt_repeated(x, i = nrow(x$historia_mejores))
+plot_cpt_repeated(x, i = nrow(x$candidates))
 
 plot_best_chromosome(x)
 }
