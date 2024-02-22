@@ -12,7 +12,7 @@
 \alias{num_generations}
 \alias{write_cpt_gbmdl}
 \alias{file_name}
-\alias{cpt_best_bmdl}
+\alias{BMDL.seg_default}
 \title{Class for candidate changepoints using Genetic BMDL heuristic}
 \usage{
 cpt_gbmdl(x, ...)
@@ -45,7 +45,7 @@ write_cpt_gbmdl(x, destdir = tempdir())
 
 file_name(x, data_name_slug = "data")
 
-cpt_best_bmdl(x)
+\method{BMDL}{seg_default}(x)
 }
 \arguments{
 \item{x}{a numeric vector}

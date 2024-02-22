@@ -137,7 +137,7 @@ file_name <- function(x, data_name_slug = "data") {
     gsub(" ", "_", label_priors(x)), 
     "r", num_generations(x), 
     "k", generation_size(x),
-    paste0("_BMDL_", floor(cpt_best_bmdl(x))), 
+    paste0("_BMDL_", floor(BMDL(x))), 
     ".rda", 
     sep = "_"
   )
@@ -160,7 +160,7 @@ glance.cpt_gbmdl <- function(x, ...) {
     pkg = "tidychangepoint",
     version = utils::packageVersion("tidychangepoint"),
     algorithm = "GeneticBMDL",
-    BMDL = cpt_best_bmdl(x),
+    BMDL = BMDL(x),
     logLik = logLik(x),
     AIC = AIC(x),
     BIC = BIC(x),

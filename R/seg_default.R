@@ -71,7 +71,7 @@ changepoints.seg_default <- function(x, ...) {
 #' @rdname cpt_gbmdl
 #' @export
 
-cpt_best_bmdl <- function(x) {
+BMDL.seg_default <- function(x) {
   x$candidates |>
     dplyr::arrange(bmdl) |>
     utils::head(1) |>

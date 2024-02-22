@@ -70,7 +70,7 @@ str(seg)
 as.ts(seg)
 changepoints(seg)
 diagnose(lista_AG)
-
+diagnose(lista_AG$segmenter)
 plot_best_chromosome(lista_AG$segmenter)
 plot_cpt_repeated(lista_AG$segmenter)
 plot_cpt_repeated(lista_AG$segmenter, 5)

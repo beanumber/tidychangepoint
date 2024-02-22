@@ -53,7 +53,7 @@ test_that("cpt_list works", {
   x <- lista_AG$segmenter
   expect_s3_class(x, "cpt_gbmdl")
   expect_type(x, "list")
-  expect_equal(min(x$candidates$bmdl), cpt_best_bmdl(x))
+  expect_equal(min(x$candidates$bmdl), BMDL(x))
 })
 
 test_that("exceedances works", {
