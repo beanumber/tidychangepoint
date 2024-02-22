@@ -16,6 +16,8 @@
 \alias{glance.seg_default}
 \alias{plot.seg_default}
 \alias{diagnose.seg_default}
+\alias{plot_best_chromosome}
+\alias{plot_cpt_repeated}
 \title{Default class for candidate changepoint sets}
 \usage{
 new_seg_default(x = numeric(), cpt_list = list(), params = list(), ...)
@@ -47,6 +49,10 @@ evaluate_cpts(x, ...)
 \method{plot}{seg_default}(x, ...)
 
 \method{diagnose}{seg_default}(x, ...)
+
+plot_best_chromosome(x)
+
+plot_cpt_repeated(x, i = nrow(x$candidates))
 }
 \arguments{
 \item{x}{a numeric vector coercible into a \code{ts} object}
@@ -65,4 +71,7 @@ as.ts(seg)
 changepoints(seg)
 diagnose(lista_AG)
 
+plot_best_chromosome(lista_AG$segmenter)
+plot_cpt_repeated(lista_AG$segmenter)
+plot_cpt_repeated(lista_AG$segmenter, 5)
 }

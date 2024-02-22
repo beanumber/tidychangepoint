@@ -18,14 +18,14 @@ test_that("gbmdl works", {
 test_that("params works", {
   # Validador de la dimensiones de cosas de distribucion a priori
   x <- cpt_gbmdl(DataCPSim)
-  if (x$nhpp_dist %in% c("W", "MO", "GO")) {
+  if (x$params$nhpp_dist %in% c("W", "MO", "GO")) {
     dim_a_priori <- 2
   } else {
     dim_a_priori <- 3
   }
   
-  expect_equal(length(x$vec_dist_a_priori), dim_a_priori)
-  expect_equal(length(x$vec_dist_a_priori), nrow(x$mat_phi))
+  expect_equal(length(x$params$vec_dist_a_priori), dim_a_priori)
+  expect_equal(length(x$params$vec_dist_a_priori), nrow(x$params$mat_phi))
   #  expect_equal(length(param$vec_dist_a_priori), nrow(param$mat_low_upp))
   #  expect_equal(dim(param$mat_phi), dim(param$mat_low_upp))
   #  expect_equal(dim(param$initial_val_optim), dim_a_priori)
@@ -53,8 +53,7 @@ test_that("cpt_list works", {
   x <- lista_AG$segmenter
   expect_s3_class(x, "cpt_gbmdl")
   expect_type(x, "list")
-  expect_equal(min(x$vec_min_BMDL), cpt_best_bmdl(x))
-  expect_true(all(cpt_best(x) %in% chromosome_best(x)))
+  expect_equal(min(x$candidates$bmdl), cpt_best_bmdl(x))
 })
 
 test_that("exceedances works", {
@@ -63,7 +62,7 @@ test_that("exceedances works", {
 
 test_that("regions works", {
   tau <- changepoints(lista_AG)
-  expect_equal(tau, cpt_best(lista_AG$segmenter))
+  expect_equal(tau, changepoints(lista_AG$segmenter))
   expect_false(0 %in% tau)
   expect_false(length(lista_AG) %in% tau)
   y <- split_by_tau(as.ts(lista_AG), tau)

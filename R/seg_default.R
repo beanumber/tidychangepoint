@@ -154,13 +154,17 @@ plot.seg_default <- function(x, ...) {
 #' @export
 #' @examples
 #' diagnose(lista_AG)
-#' 
+#' diagnose(lista_AG$segmenter)
 diagnose.seg_default <- function(x, ...) {
-  plot_gbmdl(x)
+  patchwork::wrap_plots(
+    plot_best_chromosome(x),
+    plot_cpt_repeated(x),
+    ncol = 1
+  )
 }
 
 
-#' @rdname plot_cpt_repetidos
+#' @rdname new_seg_default
 #' @export
 #' @examples
 #' plot_best_chromosome(lista_AG$segmenter)
@@ -185,4 +189,20 @@ plot_best_chromosome <- function(x) {
     ggplot2::labs(
       title = paste("The best changepoint set has", best |> dplyr::pull(cpt_length), "change points")
     )
+}
+
+#' @rdname new_seg_default
+#' @export
+#' @examples
+#' plot_cpt_repeated(lista_AG$segmenter)
+#' plot_cpt_repeated(lista_AG$segmenter, 5)
+plot_cpt_repeated <- function(x, i = nrow(x$candidates)) {
+  x$candidates |>
+    dplyr::slice(1:i) |>
+    select(changepoints) |>
+    tidyr::unnest(changepoints) |>
+    ggplot2::ggplot(ggplot2::aes(x = changepoints)) +
+    ggplot2::geom_histogram() +
+    ggplot2::scale_x_continuous("Change point index") +
+    ggplot2::scale_y_continuous(paste("Frequency of Appearance in", i, "Generations"))
 }

@@ -409,6 +409,7 @@ diagnose.tidycpt <- function(x, ...) {
   patchwork::wrap_plots(
     plot(x),
     plot_mcdf(x),
-    ncol = 1
+    diagnose(x$segmenter),
+    ncol = 2
   )
 }

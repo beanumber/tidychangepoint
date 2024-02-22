@@ -1,7 +1,7 @@
 
 test_that("mcddf works", {
   tau <- changepoints(lista_AG)
-  theta <- cpt_best_params(lista_AG$segmenter)
+  theta <- fit_nhpp(lista_AG$segmenter, tau)
   m <- cdf_exceedances_est(exceedances(lista_AG), tau, theta, length(lista_AG))
   expect_equal(length(m), length(exceedances(lista_AG)))
 })

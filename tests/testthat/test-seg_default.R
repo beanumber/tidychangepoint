@@ -13,6 +13,9 @@ test_that("seg_default works", {
   expect_equal(AIC(x), as.numeric(-2 * logLik(x) + 2 * deg_free(x)))
   expect_equal(BIC(x), as.numeric(-2 * logLik(x) + log(nobs(x)) * deg_free(x)))
 
+  expect_s3_class(evaluate_cpts(x$segmenter), "tbl_df")
+  expect_s3_class(evaluate_cpts(list(), .data = DataCPSim), "tbl_df")
+  expect_s3_class(evaluate_cpts(tibble::tibble(changepoints = list(826)), .data = DataCPSim), "tbl_df")
   
   y <- segment(DataCPSim, method = "manual", cpts = c(826))
   expect_s3_class(y, "tidycpt")
