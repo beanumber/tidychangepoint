@@ -164,6 +164,46 @@ diagnose.seg_default <- function(x, ...) {
 }
 
 
+#' @rdname changepoints
+#' @export
+#' @examples
+#' plot_history(segment(DataCPSim, method = "random", k = 10)$segmenter)
+#' plot_history(lista_AG$segmenter)
+plot_history <- function(x, ...) {
+  methods <- c("null", "single-best", "cpt-pelt")
+  bmdls <- methods |>
+    purrr::map(~segment(as.ts(x), method = .x)) |>
+    purrr::map_dbl(BMDL)
+  
+  guidelines <- tibble::tibble(
+    method = c(class(x)[1], methods),
+    bmdl = c(BMDL(x), bmdls)
+  )
+  
+  bmdl_seg <- x$candidates |>
+    dplyr::mutate(
+      num_generation = dplyr::row_number()
+    )
+  k <- num_generations(x)
+  
+  ggplot2::ggplot(data = bmdl_seg, ggplot2::aes(x = num_generation, y = bmdl)) +
+    ggplot2::geom_hline(
+      data = guidelines, 
+      ggplot2::aes(yintercept = bmdl, color = method), 
+      linetype = 2
+    ) +
+    ggplot2::geom_line() +
+    ggplot2::geom_point(data = bmdl_seg |> dplyr::arrange(bmdl) |> utils::head(1)) +
+    ggplot2::geom_smooth(se = 0) + 
+    ggplot2::scale_x_continuous("Generation of Candidate Changepoints") +
+    ggplot2::scale_y_continuous("BMDL") +
+    ggplot2::labs(
+      title = "Evolution of BMDL scores",
+      subtitle = "Comparison with other known algorithms"
+    )
+}
+
+
 #' @rdname new_seg_default
 #' @export
 #' @examples
@@ -199,7 +239,7 @@ plot_best_chromosome <- function(x) {
 plot_cpt_repeated <- function(x, i = nrow(x$candidates)) {
   x$candidates |>
     dplyr::slice(1:i) |>
-    select(changepoints) |>
+    dplyr::select(changepoints) |>
     tidyr::unnest(changepoints) |>
     ggplot2::ggplot(ggplot2::aes(x = changepoints)) +
     ggplot2::geom_histogram() +
