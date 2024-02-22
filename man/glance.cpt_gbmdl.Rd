@@ -2,12 +2,9 @@
 % Please edit documentation in R/cpt_gbmdl.R
 \name{glance.cpt_gbmdl}
 \alias{glance.cpt_gbmdl}
-\alias{diagnose.cpt_gbmdl}
 \title{Broom compatibility layer for changepoint}
 \usage{
 \method{glance}{cpt_gbmdl}(x, ...)
-
-\method{diagnose}{cpt_gbmdl}(x, ...)
 }
 \arguments{
 \item{x}{A \code{cpt_gbmdl} object}
@@ -24,6 +21,4 @@ class(y)
 y
 tidy(cpts)
 glance(cpts)
-diagnose(lista_AG)
-
 }

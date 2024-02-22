@@ -14,6 +14,8 @@
 \alias{evaluate_cpts.list}
 \alias{evaluate_cpts.tbl_df}
 \alias{glance.seg_default}
+\alias{plot.seg_default}
+\alias{diagnose.seg_default}
 \title{Default class for candidate changepoint sets}
 \usage{
 new_seg_default(x = numeric(), cpt_list = list(), params = list(), ...)
@@ -41,6 +43,10 @@ evaluate_cpts(x, ...)
 \method{evaluate_cpts}{tbl_df}(x, ...)
 
 \method{glance}{seg_default}(x, ...)
+
+\method{plot}{seg_default}(x, ...)
+
+\method{diagnose}{seg_default}(x, ...)
 }
 \arguments{
 \item{x}{a numeric vector coercible into a \code{ts} object}
@@ -57,4 +63,6 @@ seg <- seg_default(DataCPSim)
 str(seg)
 as.ts(seg)
 changepoints(seg)
+diagnose(lista_AG)
+
 }

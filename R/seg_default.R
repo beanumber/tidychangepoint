@@ -68,6 +68,16 @@ changepoints.seg_default <- function(x, ...) {
     as.integer()
 }
 
+#' @rdname cpt_gbmdl
+#' @export
+
+cpt_best_bmdl <- function(x) {
+  x$candidates |>
+    dplyr::arrange(bmdl) |>
+    utils::head(1) |>
+    dplyr::pull(bmdl)
+}
+
 #' @rdname new_seg_default
 #' @export
 logLik.seg_default <- function(object, ...) {
@@ -132,3 +142,47 @@ glance.seg_default <- function(x, ...) {
   )
 }
 
+#' @rdname new_seg_default
+#' @export
+
+plot.seg_default <- function(x, ...) {
+  # 4-up plot
+  plot_gbmdl(x)
+}
+
+#' @rdname new_seg_default
+#' @export
+#' @examples
+#' diagnose(lista_AG)
+#' 
+diagnose.seg_default <- function(x, ...) {
+  plot_gbmdl(x)
+}
+
+
+#' @rdname plot_cpt_repetidos
+#' @export
+#' @examples
+#' plot_best_chromosome(lista_AG$segmenter)
+plot_best_chromosome <- function(x) {
+  d <- x$candidates |> 
+    dplyr::mutate(
+      num_generation = dplyr::row_number(),
+      cpt_length = purrr::map_int(changepoints, length)
+    )
+  best <- d |> 
+    dplyr::arrange(bmdl) |> 
+    utils::head(1)
+  ggplot2::ggplot(d, ggplot2::aes(x = num_generation, y = cpt_length)) +
+    ggplot2::geom_hline(
+      yintercept = best |> dplyr::pull(cpt_length),
+      linetype = 3,
+      color = "blue"
+    ) +
+    ggplot2::geom_line() +
+    ggplot2::scale_x_continuous("Generation") +
+    ggplot2::scale_y_continuous("Number of changepoints in set") +
+    ggplot2::labs(
+      title = paste("The best changepoint set has", best |> dplyr::pull(cpt_length), "change points")
+    )
+}

@@ -39,51 +39,6 @@ plot_cpt_repetidos <- function(x, destdir = tempdir(),
 
 
 #' @rdname plot_cpt_repetidos
-#' @param ... arguments passed to [plot()]
-#' @export
-#' @examples
-#' plot_exceedances(DataCPSim)
-#' plot_exceedances(rlnorm_ts_1)
-#' plot_exceedances(rlnorm_ts_2)
-#' plot_exceedances(rlnorm_ts_3)
-#'
-plot_exceedances <- function(x, ...) {
-  z <- exceedances(x)
-  # Graficando
-  plot(
-    x = z, y = 1:length(z), type = "s",
-    xlab = "Time units - t", ylab = "Number of exceedances at t",
-    main = expression(bold(paste("(a) Confidence Interval for fitted m(t|", theta, ")"))), 
-    ...
-  )
-}
-
-
-#' @rdname plot_cpt_repetidos
-#' @export
-#' @examples
-#' plot_confint(lista_AG$segmenter)
-
-plot_confint <- function(x) {
-  tau <- changepoints(x)
-  theta <- fit_nhpp(x, tau)
-  
-  sigma <- theta$beta
-  alpha <- theta$alpha
-
-  plot_exceedances(as.ts(x))
-
-  m <- cdf_exceedances_est(exceedances(x$data), tau = tau, theta = theta, n = length(x))
-  
-  upp_bond <- stats::qpois(.95, lambda = c((10 / sigma[1])^alpha[1], m))
-  low_bond <- stats::qpois(.05, lambda = c((10 / sigma[1])^alpha[1], m))
-  mean_NHPP <- c((10 / sigma[1])^alpha[1], m)
-  graphics::lines(x = c(10, exceedances(x)), y = upp_bond, col = "blue", lwd = 2)
-  graphics::lines(x = c(10, exceedances(x)), y = mean_NHPP, col = "red", lwd = 2)
-  graphics::lines(x = c(10, exceedances(x)), y = low_bond, col = "blue", lwd = 2)
-}
-
-#' @rdname plot_cpt_repetidos
 #' @return una gráfica con :
 #' 1 Datos reales
 #' 2 Evolución del algoritmo genético
@@ -116,28 +71,6 @@ plot_gbmdl <- function(x, destdir = tempdir(), data_name_slug = "data", pdf = FA
 }
 
 #' @rdname plot_cpt_repetidos
-#' @param i Index of generation up to which you want to plot
-#' @export
-#' @examples
-#' plot_evolution(lista_AG$segmenter)
-#' plot_evolution(lista_AG$segmenter, 5)
-
-plot_evolution <- function(x, i = nrow(x$candidates)) {
-  plot(
-    x$candidates$bmdl[1:i],
-    xlim = c(1, num_generations(x)), 
-    type = "l", 
-    col = "blue", 
-    ylab = "BMDL", 
-    xlab = "Generation", 
-    main = paste0(
-      "AG rate ", x$params$nhpp_dist, " and priori ", 
-      label_priors(x)
-    )
-  )
-}
-
-#' @rdname plot_cpt_repetidos
 #' @export
 #' @examples
 #' plot_cpt_repeated(lista_AG$segmenter)
@@ -155,22 +88,3 @@ plot_cpt_repeated <- function(x, i = nrow(x$candidates)) {
   )
 }
 
-#' @rdname plot_cpt_repetidos
-#' @export
-#' @examples
-#' plot_best_chromosome(lista_AG$segmenter)
-plot_best_chromosome <- function(x) {
-  lengths <- x$candidates$changepoints |> 
-    purrr::map_int(length)
-  plot(
-    lengths, 
-    ylab = "Number of cp", 
-    type = "l", 
-    col = "blue", 
-    main = paste(
-      "The best chromosome has", 
-      min(lengths), 
-      "change points "
-    )
-  )
-}

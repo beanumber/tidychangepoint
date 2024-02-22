@@ -57,37 +57,6 @@ new_cpt_gbmdl <- function(x = numeric(),
 
 #' @rdname cpt_gbmdl
 #' @export
-
-plot.cpt_gbmdl <- function(x, ...) {
-  # 4-up plot
-  plot_gbmdl(x)
-}
-
-#' @rdname cpt_gbmdl
-#' @export
-
-cpt_best_bmdl <- function(x) {
-  # Obtenemos el valor minimo de todas las evaluaciones
-  min(x$vec_min_BMDL)
-}
-
-#' @rdname cpt_gbmdl
-#' @export
-cpt_best_bmdl_string <- function(x) {
-  paste0("_BMDL_", floor(min(x$vec_min_BMDL)))
-}
-
-#' @rdname cpt_gbmdl
-#' @export
-
-chromosome_best <- function(x) {
-  where_minimo_BMDL <- which.min(x$vec_min_BMDL)
-  chromo_long <- x$historia_mejores[where_minimo_BMDL, ]
-  chromo_long[1:(chromo_long[1] + 3)]
-}
-
-#' @rdname cpt_gbmdl
-#' @export
 #' @examples
 #' chromo <- c(4, 1, 557, 877 , 905, 986, 1096, 0, 0, 0)
 #' chromo2tau(chromo)
@@ -168,7 +137,7 @@ file_name <- function(x, data_name_slug = "data") {
     gsub(" ", "_", label_priors(x)), 
     "r", num_generations(x), 
     "k", generation_size(x),
-    cpt_best_bmdl_string(x), 
+    paste0("_BMDL_", floor(cpt_best_bmdl(x))), 
     ".rda", 
     sep = "_"
   )
@@ -191,7 +160,6 @@ glance.cpt_gbmdl <- function(x, ...) {
     pkg = "tidychangepoint",
     version = utils::packageVersion("tidychangepoint"),
     algorithm = "GeneticBMDL",
-    test_stat = cpt_best_bmdl(x),
     BMDL = cpt_best_bmdl(x),
     logLik = logLik(x),
     AIC = AIC(x),
@@ -200,12 +168,4 @@ glance.cpt_gbmdl <- function(x, ...) {
   )
 }
 
-#' @rdname glance.cpt_gbmdl
-#' @export
-#' @examples
-#' diagnose(lista_AG)
-#' 
-diagnose.cpt_gbmdl <- function(x, ...) {
-  plot_gbmdl(x)
-}
 
