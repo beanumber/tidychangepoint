@@ -25,7 +25,7 @@ Mean cumulative exceedances function
 }
 \examples{
 tau <- changepoints(lista_AG)
-theta <- cpt_best_params(lista_AG$segmenter)
+theta <- fit_nhpp(lista_AG$segmenter, tau)
 cdf_exceedances_est(exceedances(as.ts(lista_AG)), tau, theta, length(lista_AG))
 
 }

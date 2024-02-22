@@ -14,12 +14,11 @@ new_seg_default <- function(x = numeric(), cpt_list = list(), params = list(), .
   structure(
     list(
       data = stats::as.ts(x),
-      candidates = tibble::tibble(changepoints = cpt_list),
+      candidates = evaluate_cpts(cpt_list, .data = stats::as.ts(x)),
       params = params
     ), 
     class = "seg_default"
-  ) |>
-  evaluate()
+  )
 }
 
 #' @rdname new_seg_default
@@ -79,28 +78,50 @@ logLik.seg_default <- function(object, ...) {
   return(log_likes)
 }
 
+#' @rdname new_seg_default
+#' @export
+evaluate_cpts <- function(x, ...) UseMethod("evaluate_cpts")
 
 #' @rdname new_seg_default
 #' @export
-evaluate <- function(x, ...) {
-  x$candidates <- x$candidates |>
+evaluate_cpts.seg_default <- function(x, ...) {
+  evaluate_cpts(x$candidates, .data = as.ts(x), ...)
+}
+
+#' @rdname new_seg_default
+#' @export
+evaluate_cpts.list <- function(x, ...) {
+  tibble::tibble(changepoints = x) |>
+    evaluate_cpts(...)
+}
+
+#' @rdname new_seg_default
+#' @export
+evaluate_cpts.tbl_df <- function(x, ...) {
+  args <- list(...)
+  if (!".data" %in% names(args)) {
+    stop("This method requires a .data argument")
+  } else {
+    ds <- args[[".data"]]
+  }
+  if (!is.ts(as.ts(ds))) {
+    stop(".data must be coercible into a time series")
+  }
+  y <- x |>
     dplyr::mutate(
-      nhpp = purrr::map(changepoints, ~fit_nhpp(x = as.ts(x), tau = .x)),
+      nhpp = purrr::map(changepoints, ~fit_nhpp(x = as.ts(ds), tau = .x)),
       bmdl = purrr::map_dbl(nhpp, BMDL)
     )
-  ll <- x$candidates$nhpp |>
+  ll <- y$nhpp |>
     purrr::map(logLik)
-  x$candidates$logLik <- as.numeric(ll)
-  x$candidates <- x$candidates |>
+  y$logLik <- as.numeric(ll)
+  y |>
     dplyr::mutate(
       AIC = purrr::map_dbl(nhpp, AIC),
       BIC = purrr::map_dbl(nhpp, BIC),
       MBIC = purrr::map_dbl(nhpp, MBIC),
-    ) |>
-    dplyr::arrange(bmdl)
-  x
+    )
 }
-
 
 #' @rdname new_seg_default
 #' @export

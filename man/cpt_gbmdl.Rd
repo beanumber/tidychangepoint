@@ -5,15 +5,9 @@
 \alias{validate_cpt_gbmdl}
 \alias{new_cpt_gbmdl}
 \alias{plot.cpt_gbmdl}
-\alias{print.cpt_gbmdl}
-\alias{summary.cpt_gbmdl}
-\alias{nobs.cpt_gbmdl}
-\alias{logLik.cpt_gbmdl}
 \alias{cpt_best_bmdl}
 \alias{cpt_best_bmdl_string}
-\alias{cpt_best_params}
 \alias{chromosome_best}
-\alias{cpt_best}
 \alias{chromo2tau}
 \alias{mat_cp_2_tbl}
 \alias{mat_cp_2_list}
@@ -40,23 +34,11 @@ new_cpt_gbmdl(
 
 \method{plot}{cpt_gbmdl}(x, ...)
 
-\method{print}{cpt_gbmdl}(x, ...)
-
-\method{summary}{cpt_gbmdl}(object, ...)
-
-\method{nobs}{cpt_gbmdl}(object, ...)
-
-\method{logLik}{cpt_gbmdl}(object, ...)
-
 cpt_best_bmdl(x)
 
 cpt_best_bmdl_string(x)
 
-cpt_best_params(x)
-
 chromosome_best(x)
-
-cpt_best(x)
 
 chromo2tau(chromo)
 
@@ -102,7 +84,6 @@ Class for candidate changepoints using Genetic BMDL heuristic
 \examples{
 cpts <- cpt_gbmdl(DataCPSim)
 str(cpts)
-cpt_best_params(lista_AG$segmenter)
 chromo <- c(4, 1, 557, 877 , 905, 986, 1096, 0, 0, 0)
 chromo2tau(chromo)
 write_cpt_gbmdl(lista_AG$segmenter)

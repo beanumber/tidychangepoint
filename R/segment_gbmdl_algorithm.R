@@ -40,39 +40,48 @@ globalVariables(
 #' @export
 #' @examples
 #' \dontrun{
-#' x <- segment_gbmdl(DataCPSim)
+#' x <- segment_gbmdl(DataCPSim, num_generations = 10)
 #' y <- segment_gbmdl(rlnorm_ts_1)
 #' }
 #' 
-segment_gbmdl <- function(x, destdir = tempdir(), show_progress_bar = TRUE, write_rda = FALSE) {
+segment_gbmdl <- function(x, num_generations = 50, 
+                          destdir = tempdir(), 
+                          show_progress_bar = TRUE, write_rda = FALSE) {
   # lista_AG contiene los resultados del algoritmo genético
-  obj <- new_cpt_gbmdl(x)
+  obj <- new_cpt_gbmdl(x, num_generations = num_generations)
   
   pb <- utils::txtProgressBar(min = 1, max = num_generations(obj), style = 3, width = 60)
-  graphics::par(mfrow = c(2, 1), mar = c(1, 4, 2, 2))
+#  graphics::par(mfrow = c(2, 1), mar = c(1, 4, 2, 2))
+  
+  best_cpts <- list()
+  
   for (i in 1:num_generations(obj)) {
-    # Hacemos un paso del AG con el mat_cp anterior
-    vec_BMDL_k_cp <- Bayesaian_MDL_k_cp(obj$mat_cp, x)
-    obj$mat_cp <- evolve(exceedances(obj), obj$mat_cp)
+
+    this_generation <- obj$mat_cp |>
+      mat_cp_2_list() |>
+      evaluate_cpts(.data = as.ts(obj))
     
-    # Obtenemos el índice del mínimo
-    (i_min_BMDL <- which.min(vec_BMDL_k_cp))
-    # Guardamos el cromosoma mínimo
-    obj$historia_mejores[i, ] <- obj$mat_cp[i_min_BMDL, ]
-    # Guardamos el BMDL del cromosoma mínimo
-    obj$vec_min_BMDL[i] <- vec_BMDL_k_cp[i_min_BMDL]
+    best_cpts[[i]] <- this_generation |>
+      dplyr::arrange(bmdl) |>
+      utils::head(1)
+    
     # Imprimimos el porcentaje de progreso
-    
     if (show_progress_bar) {
       utils::setTxtProgressBar(pb, i)
     }
     
-    plot_evolution(obj, i)
-    plot_cpt_repeated(obj, i)
+    obj$mat_cp <- evolve(
+      exceedances(obj), 
+      obj$mat_cp, 
+      this_generation |> dplyr::pull(bmdl)
+    )
+#    plot_evolution(obj, i)
+#    plot_cpt_repeated(obj, i)
   }
   close(pb)
-  graphics::par(mfrow = c(1, 1))
-  
+#  graphics::par(mfrow = c(1, 1))
+  obj$candidates <- best_cpts |>
+    dplyr::bind_rows()
   # Write data object
   if (write_rda) {
     write_cpt_gbmdl(obj)
@@ -87,13 +96,12 @@ segment_gbmdl <- function(x, destdir = tempdir(), show_progress_bar = TRUE, writ
 #' @export
 #' @examples
 #' mat_cp <- lista_AG$segmenter$mat_cp
-#' evolve(exceedances(DataCPSim), mat_cp)
+#' bmdls <- mat_cp |> mat_cp_2_list() |> evaluate_cpts(.data = as.ts(DataCPSim)) |> dplyr::pull(bmdl)
+#' evolve(exceedances(DataCPSim), mat_cp, bmdls)
 
-evolve <- function(x, mat_cp) {
-  # 1. Evaluación de sus calificaciones
-  vec_BMDL_k_cp <- Bayesaian_MDL_k_cp(mat_cp, x)
+evolve <- function(x, mat_cp, these_bmdls) {
   # 2. Encontrar sus probabilidades
-  vec_probs <- probs_vec_MDL(vec_BMDL_k_cp)
+  vec_probs <- probs_vec_MDL(these_bmdls)
   # 3. Seleccionar dos padres
   mat_padres <- selec_k_pares_de_padres(vec_probs)
   # 4. Juntar sus puntos de cambio
@@ -366,8 +374,8 @@ sim_k_cp_BMDL <- function(x, generation_size = 50, max_num_cp = 20) {
 #' @export
 probs_vec_MDL <- function(vec_MDL, probs_rank0_MDL1 = 0) {
   if (any(is.infinite(vec_MDL))) {
-    print("Valor infinito; fun probs_vec_MDL, vec_MDL=")
-    print(vec_MDL)
+    warning("Valor infinito; fun probs_vec_MDL, vec_MDL=")
+    message(vec_MDL)
   }
   if (probs_rank0_MDL1 == 0) {
     return(rank(-vec_MDL))

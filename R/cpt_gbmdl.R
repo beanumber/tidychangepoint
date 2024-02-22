@@ -44,13 +44,12 @@ new_cpt_gbmdl <- function(x = numeric(),
                           max_num_cp = 20) {
   stopifnot(is.numeric(x))
   out <- new_seg_default(x, params = list(
+    num_generations = num_generations, 
     nhpp_dist = nhpp_dist, 
     vec_dist_a_priori = vec_dist_a_priori,
     mat_phi = mat_phi
   ))
-  out$mat_cp = sim_k_cp_BMDL(x, generation_size)
-  out$historia_mejores = matrix(0, num_generations, max_num_cp)
-  out$vec_min_BMDL = rep(0, num_generations)
+  out$mat_cp <- sim_k_cp_BMDL(x, generation_size)
   
   class(out) <- c("cpt_gbmdl", class(out))
   return(out)
@@ -133,7 +132,7 @@ generation_size <- function(x) {
 #' @rdname cpt_gbmdl
 #' @export
 num_generations <- function(x) {
-  length(x$vec_min_BMDL)
+  x$params$num_generations
 }
 
 #' @rdname cpt_gbmdl
