@@ -315,12 +315,15 @@ plot.tidycpt <- function(x, ...) {
 #' plot_mcdf(segment(DataCPSim))
 
 plot_mcdf <- function(x, ...) {
-  tau <- changepoints(x)
-  theta <- tidy(x)
   n <- length(x)
   
   z <- exceedances(x) |>
     tibble::enframe(name = "cum_exceedances", value = "t_exceedance") |>
+    dplyr::mutate(
+      m = mcdf(x$nhpp),
+      lower = stats::qpois(0.05, lambda = m),
+      upper = stats::qpois(0.95, lambda = m),
+    ) |>
     # always add the last observation
     dplyr::bind_rows(
       data.frame(
@@ -328,12 +331,7 @@ plot_mcdf <- function(x, ...) {
         t_exceedance = c(0, n)
       )
     ) |>
-    dplyr::distinct() |>
-    dplyr::mutate(
-      m = cdf_exceedances_est(t_exceedance, tau = tau, theta = theta, n = n),
-      lower = stats::qpois(0.05, lambda = m),
-      upper = stats::qpois(0.95, lambda = m),
-    )
+    dplyr::distinct()
   
   regions <- tidy(x)
   ggplot2::ggplot(data = z, ggplot2::aes(x = t_exceedance, y = cum_exceedances)) +

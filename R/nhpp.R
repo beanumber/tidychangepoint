@@ -131,26 +131,26 @@ changepoints.nhpp <- function(x, ...) {
 
 
 #' Mean cumulative exceedances function
-#' @param t The exceedances of a time series
-#' @param tau A set of changepoints
-#' @param theta A data.frame of best-fit parameters
-#' @param n the legnth of the original time series
+#' @param x An `nhpp` object
 #' @param dist Name of the distribution
 #' @export
 #' @return a numeric vector of length equal to the [exceedances] of `x`
 #' @examples
-#' tau <- changepoints(lista_AG)
-#' theta <- fit_nhpp(lista_AG$segmenter, tau)
-#' cdf_exceedances_est(exceedances(as.ts(lista_AG)), tau, theta, length(lista_AG))
+#' nhpp <- fit_nhpp(lista_AG$segmenter, tau = changepoints(lista_AG))
+#' mcdf(nhpp)
 #' 
 
-cdf_exceedances_est <- function(t, tau, theta, n, dist = "weibull") {
+mcdf <- function(x, dist = "weibull") {
   if (dist == "weibull") {
     d <- mweibull
   }
+  t <- x$exceedances |>
+    purrr::list_c()
+  n <- max(x$end)
+  tau <- changepoints(x)
   tau_padded <- pad_tau(tau, n)
   regions <- cut_inclusive(1:n, tau_padded)
-  theta_calc <- theta |>
+  theta_calc <- x |>
     dplyr::mutate(
       region = unique(regions),
       tau_prev = utils::head(tau_padded, -1),

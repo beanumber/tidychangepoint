@@ -2,7 +2,7 @@
 test_that("mcddf works", {
   tau <- changepoints(lista_AG)
   theta <- fit_nhpp(lista_AG$segmenter, tau)
-  m <- cdf_exceedances_est(exceedances(lista_AG), tau, theta, length(lista_AG))
+  m <- mcdf(theta)
   expect_equal(length(m), length(exceedances(lista_AG)))
 })
 
@@ -23,10 +23,7 @@ test_that("parameter fitting works", {
   plot_mcdf(segment(y, method = "manual", cpts = tau))
   expect_lt(abs(theta$alpha[1] - 1), 0.05)
   
-  m <- cdf_exceedances_est(exceedances(y), tau, theta, length(y))
-  expect_equal(cdf_exceedances_est(0, tau, theta, length(y)), 0)
-  expect_lt(abs(cdf_exceedances_est(tau, tau, theta, length(y)) - tau), 2)
-  expect_lt(abs(cdf_exceedances_est(length(y), tau, theta, length(y)) - tau), 3)
+  m <- mcdf(theta)
   
   plot_mcdf(segment(y, method = "manual", cpts = tau))
   
