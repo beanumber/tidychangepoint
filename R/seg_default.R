@@ -146,8 +146,7 @@ glance.seg_default <- function(x, ...) {
 #' @export
 
 plot.seg_default <- function(x, ...) {
-  # 4-up plot
-  plot_gbmdl(x)
+  plot_history(x)
 }
 
 #' @rdname new_seg_default
@@ -186,6 +185,10 @@ plot_history <- function(x, ...) {
     )
   k <- num_generations(x)
   
+  best <- bmdl_seg |> 
+    dplyr::arrange(bmdl) |> 
+    utils::head(1)
+  
   ggplot2::ggplot(data = bmdl_seg, ggplot2::aes(x = num_generation, y = bmdl)) +
     ggplot2::geom_hline(
       data = guidelines, 
@@ -193,7 +196,8 @@ plot_history <- function(x, ...) {
       linetype = 2
     ) +
     ggplot2::geom_line() +
-    ggplot2::geom_point(data = bmdl_seg |> dplyr::arrange(bmdl) |> utils::head(1)) +
+    ggplot2::geom_vline(xintercept = best$num_generation, linetype = 3) + 
+    ggplot2::geom_point(data = best) +
     ggplot2::geom_smooth(se = 0) + 
     ggplot2::scale_x_continuous("Generation of Candidate Changepoints") +
     ggplot2::scale_y_continuous("BMDL") +
@@ -223,11 +227,14 @@ plot_best_chromosome <- function(x) {
       linetype = 3,
       color = "blue"
     ) +
+    ggplot2::geom_vline(xintercept = best$num_generation, linetype = 3) + 
     ggplot2::geom_line() +
-    ggplot2::scale_x_continuous("Generation") +
+    ggplot2::geom_point(data = best) +
+    ggplot2::scale_x_continuous("Generation of Candidate Changepoints") +
     ggplot2::scale_y_continuous("Number of changepoints in set") +
     ggplot2::labs(
-      title = paste("The best changepoint set has", best |> dplyr::pull(cpt_length), "change points")
+      title = "Evolution of changepoint set size",
+      subtitle = paste("The best changepoint set has", best |> dplyr::pull(cpt_length), "change points")
     )
 }
 
@@ -237,12 +244,27 @@ plot_best_chromosome <- function(x) {
 #' plot_cpt_repeated(lista_AG$segmenter)
 #' plot_cpt_repeated(lista_AG$segmenter, 5)
 plot_cpt_repeated <- function(x, i = nrow(x$candidates)) {
+  
   x$candidates |>
     dplyr::slice(1:i) |>
     dplyr::select(changepoints) |>
     tidyr::unnest(changepoints) |>
     ggplot2::ggplot(ggplot2::aes(x = changepoints)) +
+    ggplot2::geom_vline(
+      data = changepoints(x) |>
+        tibble::enframe(), 
+      ggplot2::aes(xintercept = value), 
+      linetype = 3
+    ) +
     ggplot2::geom_histogram() +
-    ggplot2::scale_x_continuous("Change point index") +
-    ggplot2::scale_y_continuous(paste("Frequency of Appearance in", i, "Generations"))
+    ggplot2::scale_x_continuous(
+      "Time Index (t)",
+      limits = c(0, length(as.ts(x)))
+    ) +
+    ggplot2::scale_y_continuous(
+      paste("Frequency of Appearance in", i, "Generations")
+    ) +
+    ggplot2::labs(
+      title = "Histogram of changepoint selections"
+    )
 }

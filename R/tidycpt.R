@@ -281,6 +281,7 @@ plot.tidycpt <- function(x, ...) {
       fill = "grey90"
     ) +
     ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = end), linetype = 3) +
+    ggplot2::geom_hline(yintercept = mean(as.ts(x)), linetype = 3) +
     ggplot2::geom_rug(sides = "l") +
     ggplot2::geom_line() + 
     ggplot2::geom_segment(
@@ -301,7 +302,11 @@ plot.tidycpt <- function(x, ...) {
       linetype = 3
     ) + 
     ggplot2::scale_x_continuous("Time Index (t)") +
-    ggplot2::scale_y_continuous("Original Measurement")
+    ggplot2::scale_y_continuous("Original Measurement") + 
+    ggplot2::labs(
+      title = "Original times series",
+      subtitle = paste("Mean value is", round(mean(as.ts(x)), 2))
+    )
 }
 
 #' @rdname changepoints
@@ -339,7 +344,11 @@ plot_mcdf <- function(x, ...) {
     ggplot2::scale_y_continuous("Cumulative Number of Exceedances (N)") +
     ggplot2::geom_line(ggplot2::aes(y = m), color = "red") +
     ggplot2::geom_line(ggplot2::aes(y = lower), color = "blue") +
-    ggplot2::geom_line(ggplot2::aes(y = upper), color = "blue")
+    ggplot2::geom_line(ggplot2::aes(y = upper), color = "blue") +
+    ggplot2::labs(
+      title = "Exceedances of the mean over time",
+      subtitle = paste("Total exceedances:", length(exceedances(x)))
+    )
 }
 
 #' @rdname changepoints
@@ -359,7 +368,9 @@ diagnose.tidycpt <- function(x, ...) {
   patchwork::wrap_plots(
     plot(x),
     plot_mcdf(x),
+    plot(x$segmenter),
     diagnose(x$segmenter),
-    ncol = 2
+    ncol = 2,
+    byrow = FALSE
   )
 }

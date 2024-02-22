@@ -74,11 +74,8 @@ diagnose(x, ...)
 Generic functions for tidycpt objects
 }
 \examples{
-plot_history(segment(DataCPSim))
-\dontrun{
-h <- segment(DataCPSim, method = "cpt-gbmdl")
-plot_history(h)
-}
+plot_history(segment(DataCPSim, method = "random", k = 10)$segmenter)
+plot_history(lista_AG$segmenter)
 x <- segment(DataCPSim, method = "cpt-pelt")
 BMDL(x)
 y <- segment(DataCPSim, method = "manual", cpts = 826)
