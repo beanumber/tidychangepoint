@@ -1,9 +1,9 @@
 #' @rdname fit_nhpp
 #' @export
 #' @examples
-#' fit_nhpp_region_alt(exceedances(lista_AG), 0, 575)
+#' fit_nhpp_region(exceedances(lista_AG), 0, 575)
 #' fit_nhpp_region(exceedances(lista_AG), 0, 575, initial_val_optim = c(1, 10))
-fit_nhpp_region_alt <- function(exc, tau_left, tau_right, 
+fit_nhpp_region <- function(exc, tau_left, tau_right, 
                                 params = parameters_weibull(), ...) {
   # Definimos las funciones que vamos a utilizar para encontrar el mínimo
   my_fn <- function(theta) {
@@ -62,7 +62,7 @@ fit_nhpp <- function(x, tau) {
   
   res <- regions_df |>
     purrr::pmap(
-      function(region, exceedances, begin, end) fit_nhpp_region_alt(exceedances, begin, end)
+      function(region, exceedances, begin, end) fit_nhpp_region(exceedances, begin, end)
     )
 #  fit_nhpp_region(t_by_tau[[1]], endpoints[[1]][1], endpoints[[1]][2])
   

@@ -34,17 +34,6 @@ test_that("parameter fitting works", {
   z <- split(exceedances(y), cut_inclusive(exceedances(y), pad_tau(tau, length(y))))
   
   theta <- fit_nhpp(y, tau)
-  theta
-  
-  expect_equal(
-    fit_nhpp_region(t = z[[1]], tau_left = 0, tau_right = tau)$par,
-    theta[1, c("alpha", "beta")] |> unlist() |> unname()
-  )
-  
-  expect_equal(
-    fit_nhpp_region(t = z[[2]], tau_left = tau, tau_right = length(y))$par,
-    theta[2, c("alpha", "beta")] |> unlist() |> unname()
-  )
   
   plot_mcdf(segment(y, method = "manual", cpts = tau))
 })
