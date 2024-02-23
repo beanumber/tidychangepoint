@@ -23,7 +23,6 @@
 \alias{regions}
 \alias{regions.tidycpt}
 \alias{plot.tidycpt}
-\alias{plot_mcdf}
 \alias{diagnose}
 \alias{diagnose.tidycpt}
 \alias{file_name}
@@ -73,8 +72,6 @@ regions(x, ...)
 
 \method{plot}{tidycpt}(x, ...)
 
-plot_mcdf(x, ...)
-
 diagnose(x, ...)
 
 \method{diagnose}{tidycpt}(x, ...)
@@ -103,7 +100,6 @@ y <- segment(DataCPSim, method = "manual", cpts = 826)
 BMDL(y)
 z <- segment(DataCPSim, method = "single-best")
 BMDL(z)
-plot_mcdf(segment(DataCPSim))
 diagnose(segment(DataCPSim))
 diagnose(segment(DataCPSim, method = "single-best"))
 diagnose(segment(DataCPSim, method = "cpt-pelt"))

@@ -343,46 +343,6 @@ plot.tidycpt <- function(x, ...) {
 
 #' @rdname changepoints
 #' @export
-#' @examples
-#' plot_mcdf(segment(DataCPSim))
-
-plot_mcdf <- function(x, ...) {
-  n <- length(x)
-  
-  z <- exceedances(x) |>
-    tibble::enframe(name = "cum_exceedances", value = "t_exceedance") |>
-    dplyr::mutate(
-      m = mcdf(x$nhpp),
-      lower = stats::qpois(0.05, lambda = m),
-      upper = stats::qpois(0.95, lambda = m),
-    ) |>
-    # always add the last observation
-    dplyr::bind_rows(
-      data.frame(
-        cum_exceedances = c(0, length(exceedances(x))), 
-        t_exceedance = c(0, n)
-      )
-    ) |>
-    dplyr::distinct()
-  
-  regions <- tidy(x)
-  ggplot2::ggplot(data = z, ggplot2::aes(x = t_exceedance, y = cum_exceedances)) +
-    ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = end), linetype = 3) +
-    ggplot2::geom_abline(intercept = 0, slope = 0.5, linetype = 3) +
-    ggplot2::geom_line() +
-    ggplot2::scale_x_continuous("Time Index (t)", limits = c(0, n)) +
-    ggplot2::scale_y_continuous("Cumulative Number of Exceedances (N)") +
-    ggplot2::geom_line(ggplot2::aes(y = m), color = "red") +
-    ggplot2::geom_line(ggplot2::aes(y = lower), color = "blue") +
-    ggplot2::geom_line(ggplot2::aes(y = upper), color = "blue") +
-    ggplot2::labs(
-      title = "Exceedances of the mean over time",
-      subtitle = paste("Total exceedances:", length(exceedances(x)))
-    )
-}
-
-#' @rdname changepoints
-#' @export
 diagnose <- function(x, ...) UseMethod("diagnose")
 
 #' @rdname changepoints
@@ -395,7 +355,7 @@ diagnose <- function(x, ...) UseMethod("diagnose")
 #' diagnose(segment(test_set(n = 2, sd = 4), method = "cpt-pelt"))
 #' 
 diagnose.tidycpt <- function(x, ...) {
-  patchwork::wrap_plots(plot(x), plot_mcdf(x), ncol = 1)
+  patchwork::wrap_plots(plot(x), plot(x$nhpp), ncol = 1)
 }
 
 #' @rdname changepoints

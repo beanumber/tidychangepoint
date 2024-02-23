@@ -3,16 +3,20 @@
 \name{fit_nhpp_region}
 \alias{fit_nhpp_region}
 \alias{fit_nhpp}
+\alias{length.nhpp}
 \alias{logLik.nhpp}
 \alias{BMDL.nhpp}
 \alias{MBIC.nhpp}
 \alias{changepoints.nhpp}
 \alias{exceedances.nhpp}
+\alias{plot.nhpp}
 \title{Fit a non-homogeneous Poisson process model to the exceedances of a time series.}
 \usage{
 fit_nhpp_region(exc, tau_left, tau_right, params = parameters_weibull(), ...)
 
 fit_nhpp(x, tau)
+
+\method{length}{nhpp}(x, ...)
 
 \method{logLik}{nhpp}(object, ...)
 
@@ -23,6 +27,8 @@ fit_nhpp(x, tau)
 \method{changepoints}{nhpp}(x, ...)
 
 \method{exceedances}{nhpp}(x, ...)
+
+\method{plot}{nhpp}(x, ...)
 }
 \arguments{
 \item{exc}{Output from \code{\link[=exceedances]{exceedances()}}}
@@ -50,6 +56,7 @@ region defined by the changepoint set returned by \code{\link[=changepoints]{cha
 fit_nhpp_region(exceedances(lista_AG), 0, 575)
 fit_nhpp(DataCPSim, tau = 826)
 fit_nhpp(as.ts(lista_AG), tau = changepoints(lista_AG))
+plot(fit_nhpp(DataCPSim, tau = 826))
 }
 \references{
 Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}

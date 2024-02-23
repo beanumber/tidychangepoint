@@ -105,6 +105,12 @@ fit_nhpp <- function(x, tau) {
 
 #' @rdname fit_nhpp
 #' @export
+length.nhpp <- function(x, ...) {
+  max(x$end)
+}
+
+#' @rdname fit_nhpp
+#' @export
 logLik.nhpp <- function(object, ...) {
   ll <- sum(object$logLik)
   attr(ll, "df") <- length(changepoints(object))
@@ -161,19 +167,17 @@ mcdf <- function(x, dist = "weibull") {
   if (dist == "weibull") {
     d <- mweibull
   }
-  t <- x$exceedances |>
-    purrr::list_c()
-  n <- max(x$end)
+  t <- exceedances(x)
+  n <- length(x)
   tau <- changepoints(x)
   tau_padded <- pad_tau(tau, n)
-  regions <- cut_inclusive(1:n, tau_padded)
+
   theta_calc <- x |>
+    # why????
+    tibble::as_tibble() |>
     dplyr::mutate(
-      region = unique(regions),
-      tau_prev = utils::head(tau_padded, -1),
-      tau_this = utils::tail(tau_padded, -1),
-      m_prev = ifelse(tau_prev == 1, 0, d(tau_prev, alpha, beta)),
-      m_this = d(tau_this, alpha, beta),
+      m_prev = ifelse(begin == 1, 0, d(begin, alpha, beta)),
+      m_this = d(end, alpha, beta),
       cum_m_prev = cumsum(m_prev),
       cum_m_this = cumsum(dplyr::lag(m_this, 1, 0)),
       cum_m_net = cum_m_this - cum_m_prev
@@ -192,3 +196,43 @@ mcdf <- function(x, dist = "weibull") {
     )
   out$m
 }
+
+#' @rdname fit_nhpp
+#' @export
+#' @examples
+#' plot(fit_nhpp(DataCPSim, tau = 826))
+
+plot.nhpp <- function(x, ...) {
+  n <- length(x)
+  
+  z <- exceedances(x) |>
+    tibble::enframe(name = "cum_exceedances", value = "t_exceedance") |>
+    dplyr::mutate(
+      m = mcdf(x),
+      lower = stats::qpois(0.05, lambda = m),
+      upper = stats::qpois(0.95, lambda = m),
+    ) |>
+    # always add the last observation
+    dplyr::bind_rows(
+      data.frame(
+        cum_exceedances = c(0, length(exceedances(x))), 
+        t_exceedance = c(0, n)
+      )
+    ) |>
+    dplyr::distinct()
+  
+  ggplot2::ggplot(data = z, ggplot2::aes(x = t_exceedance, y = cum_exceedances)) +
+    ggplot2::geom_vline(data = x, ggplot2::aes(xintercept = end), linetype = 3) +
+    ggplot2::geom_abline(intercept = 0, slope = 0.5, linetype = 3) +
+    ggplot2::geom_line() +
+    ggplot2::scale_x_continuous("Time Index (t)", limits = c(0, n)) +
+    ggplot2::scale_y_continuous("Cumulative Number of Exceedances (N)") +
+    ggplot2::geom_line(ggplot2::aes(y = m), color = "red") +
+    ggplot2::geom_line(ggplot2::aes(y = lower), color = "blue") +
+    ggplot2::geom_line(ggplot2::aes(y = upper), color = "blue") +
+    ggplot2::labs(
+      title = "Exceedances of the mean over time",
+      subtitle = paste("Total exceedances:", length(exceedances(x)))
+    )
+}
+
