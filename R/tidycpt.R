@@ -1,3 +1,9 @@
+globalVariables(c(
+  "index", "region", "algorithm", "label", "filename", "y", "begin", "end", 
+  "sd", "num_generation", "method", "m", "t_exceedance", "cum_exceedances",
+  "lower", "upper"
+))
+
 #' Segment a time series using a variety of algorithms
 #' 
 #' @description
@@ -278,6 +284,10 @@ glance.tidycpt <- function(x, ...) {
 
 #' @rdname changepoints
 #' @export
+params <- function(x, ...) UseMethod("params")
+
+#' @rdname changepoints
+#' @export
 regions <- function(x, ...) UseMethod("regions")
 
 #' @rdname changepoints
@@ -403,7 +413,7 @@ file_name <- function(x, data_name_slug = "data") {
         data_name_slug, 
         algorithm,
         floor(BMDL(x)),
-        x$segmenter$params |> cli::hash_obj_md5(),
+        params(x$segmenter) |> cli::hash_obj_md5(),
         sep = "_"
       ),
       filename = paste0(label, ".rda")

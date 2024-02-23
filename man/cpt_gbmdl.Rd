@@ -59,6 +59,13 @@ distribución}
 \item{num_generations}{número de generaciones}
 
 \item{generation_size}{tamaño de las generaciones}
+
+\item{max_num_cp}{el máximo número de rebases. Este parámetro se ocupa en
+particular para que todos los cromosomas quepan en una matriz.}
+
+\item{chromo}{Chromosome, from a row of the matrix \code{mat_cp}}
+
+\item{mat_cp}{A matrix containing a list of candidate chromosomes}
 }
 \description{
 Class for candidate changepoints using Genetic BMDL heuristic

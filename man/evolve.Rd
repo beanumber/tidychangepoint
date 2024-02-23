@@ -50,6 +50,8 @@ selec_k_pares_de_padres(vec_probs)
 
 \item{mat_cp}{A matrix containing a list of candidate chromosomes}
 
+\item{these_bmdls}{vector of \code{\link[=BMDL]{BMDL()}} scores}
+
 \item{padres}{vector de longitud dos con índice de papa e índice de mama}
 
 \item{mat_padres}{matriz de kx2 la cual contiene en sus renglones las
@@ -91,6 +93,8 @@ particular para que todos los cromosomas quepan en una matriz.}
 \item{prob_inicial}{probabilidad de que en la primera generación un punto
 cualquiera sea punto de cambio. Se recomienda =.5 ya que con esto se
 distribuyen relativamente uniformes los puntos de cambio}
+
+\item{generation_size}{tamaño de las generaciones}
 
 \item{vec_MDL}{vector con valores MDL
 

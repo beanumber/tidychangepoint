@@ -4,22 +4,16 @@
 \alias{segment_gbmdl}
 \title{Algoritmo genético de Bayesian MDL a un paso}
 \usage{
-segment_gbmdl(
-  x,
-  num_generations = 50,
-  destdir = tempdir(),
-  show_progress_bar = TRUE,
-  write_rda = FALSE
-)
+segment_gbmdl(x, num_generations = 50, show_progress_bar = TRUE)
 }
 \arguments{
 \item{x}{a vector that can be coerced into a \code{ts}}
 
 \item{num_generations}{Number of generations to evolve}
 
-\item{destdir}{Directory to stare files}
-
 \item{show_progress_bar}{show the progress bar?}
+
+\item{destdir}{Directory to stare files}
 
 \item{write_rda}{Write the data to \code{destdir}?}
 }

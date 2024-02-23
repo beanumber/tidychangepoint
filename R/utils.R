@@ -1,4 +1,4 @@
-#' @rdname exceedances
+#' Utility functions
 #' @param tau a numeric vector of changepoints
 #' @param n the length of the original time series
 #' @export
@@ -6,7 +6,7 @@ pad_tau <- function(tau, n) {
   unique(c(0, tau, n))
 }
 
-#' @rdname exceedances
+#' @rdname pad_tau
 #' @export
 unpad_tau <- function(padded_tau) {
   padded_tau |>
@@ -14,13 +14,13 @@ unpad_tau <- function(padded_tau) {
     utils::tail(-1)
 }
 
-#' @rdname exceedances
+#' @rdname pad_tau
 #' @export
 cut_inclusive <- function(x, tau) {
   cut(x, breaks = tau, include.lowest = TRUE, right = FALSE)
 }
 
-#' @rdname exceedances
+#' @rdname pad_tau
 #' @export
 test_set <- function(n = 1, sd = 1, seed = NULL) {
   if (!is.null(seed)) {
@@ -42,7 +42,7 @@ test_set <- function(n = 1, sd = 1, seed = NULL) {
   return(out)
 }
 
-#' @rdname exceedances
+#' @rdname pad_tau
 #' @export
 #' @examples
 #' random_cpts(DataCPSim, n = 5)
@@ -53,22 +53,7 @@ random_cpts <- function(x, n = 10, k = round(log(length(as.ts(x)))), ...) {
     purrr::map(~sort(sample.int(n = length(as.ts(x)) - 1, size = .x)))
 }
   
-  
-
-#' @rdname exceedances
-#' @export
-label_priors <- function(x) {
-  x$params$mat_phi |>
-    as.data.frame() |>
-    dplyr::mutate(
-      dist = x$params$vec_dist_a_priori,
-      label = paste0(dist, "(", V1, ", ", V2, ")")
-    ) |>
-    dplyr::pull(label) |>
-    paste0(collapse = "_")
-}
-
-#' @rdname exceedances
+#' @rdname pad_tau
 #' @export
 #' @examples
 #' split_by_tau(as.ts(lista_AG), changepoints(lista_AG))
@@ -78,7 +63,7 @@ split_by_tau <- function(x, tau) {
   split(x, idx)
 }
 
-#' @rdname exceedances
+#' @rdname pad_tau
 #' @export
 #' @examples
 #' deg_free(segment(DataCPSim))

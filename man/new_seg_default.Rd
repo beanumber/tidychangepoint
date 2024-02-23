@@ -14,6 +14,7 @@
 \alias{evaluate_cpts.seg_default}
 \alias{evaluate_cpts.list}
 \alias{evaluate_cpts.tbl_df}
+\alias{params.seg_default}
 \alias{glance.seg_default}
 \alias{plot.seg_default}
 \alias{diagnose.seg_default}
@@ -46,6 +47,8 @@ evaluate_cpts(x, ...)
 \method{evaluate_cpts}{list}(x, ...)
 
 \method{evaluate_cpts}{tbl_df}(x, ...)
+
+\method{params}{seg_default}(x, ...)
 
 \method{glance}{seg_default}(x, ...)
 

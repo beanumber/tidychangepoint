@@ -1,3 +1,5 @@
+globalVariables(c("bmdl", "nhpp", "cpt_length", "value"))
+
 #' Default class for candidate changepoint sets
 #' @export
 #' @param x a numeric vector coercible into a `ts` object
@@ -138,6 +140,13 @@ evaluate_cpts.tbl_df <- function(x, ...) {
       MBIC = purrr::map_dbl(nhpp, MBIC),
     )
 }
+
+#' @rdname new_seg_default
+#' @export
+params.seg_default <- function(x, ...) {
+  x$params
+}
+
 
 #' @rdname new_seg_default
 #' @export

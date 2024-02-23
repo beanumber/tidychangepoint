@@ -2,6 +2,7 @@
 % Please edit documentation in R/changepoint.R
 \name{glance.cpt}
 \alias{glance.cpt}
+\alias{params.cpt}
 \alias{as.ts.cpt}
 \alias{nobs.cpt}
 \alias{logLik.cpt}
@@ -9,6 +10,8 @@
 \title{Compatibility layer for changepoint}
 \usage{
 \method{glance}{cpt}(x, ...)
+
+\method{params}{cpt}(x, ...)
 
 \method{as.ts}{cpt}(x, ...)
 

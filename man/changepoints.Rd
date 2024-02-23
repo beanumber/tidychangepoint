@@ -19,6 +19,7 @@
 \alias{augment.tidycpt}
 \alias{tidy.tidycpt}
 \alias{glance.tidycpt}
+\alias{params}
 \alias{regions}
 \alias{regions.tidycpt}
 \alias{plot.tidycpt}
@@ -63,6 +64,8 @@ BMDL(x, ...)
 \method{tidy}{tidycpt}(x, ...)
 
 \method{glance}{tidycpt}(x, ...)
+
+params(x, ...)
 
 regions(x, ...)
 

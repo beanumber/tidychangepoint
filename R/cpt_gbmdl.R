@@ -33,6 +33,8 @@ validate_cpt_gbmdl <- function(x) {
 #' @param mat_phi matriz cuyos renglones tiene los parámetros de las
 #'   distribuciones a priori; cada renglón tiene todos los parametros de una
 #'   distribución
+#' @param max_num_cp el máximo número de rebases. Este parámetro se ocupa en
+#'   particular para que todos los cromosomas quepan en una matriz.
 #' @export
 
 new_cpt_gbmdl <- function(x = numeric(), 
@@ -56,6 +58,7 @@ new_cpt_gbmdl <- function(x = numeric(),
 }
 
 #' @rdname cpt_gbmdl
+#' @param chromo Chromosome, from a row of the matrix `mat_cp`
 #' @export
 #' @examples
 #' chromo <- c(4, 1, 557, 877 , 905, 986, 1096, 0, 0, 0)
@@ -68,6 +71,7 @@ chromo2tau <- function(chromo) {
 }
 
 #' @rdname cpt_gbmdl
+#' @param mat_cp A matrix containing a list of candidate chromosomes
 #' @export
 mat_cp_2_tbl <- function(mat_cp) {
   mat_cp |>
@@ -120,5 +124,3 @@ glance.cpt_gbmdl <- function(x, ...) {
   NextMethod(x) |>
     dplyr::mutate(algorithm = "GeneticBMDL")
 }
-
-

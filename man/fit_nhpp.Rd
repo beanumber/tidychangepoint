@@ -25,6 +25,14 @@ fit_nhpp(x, tau)
 \method{exceedances}{nhpp}(x, ...)
 }
 \arguments{
+\item{exc}{Output from \code{\link[=exceedances]{exceedances()}}}
+
+\item{tau_left}{right-most changepoint}
+
+\item{params}{Output from \code{\link[=parameters_weibull]{parameters_weibull()}}}
+
+\item{...}{arguments passed to \code{\link[stats:optim]{stats::optim()}}}
+
 \item{x}{A time series}
 
 \item{tau}{A vector of changepoints.}
@@ -40,7 +48,6 @@ region defined by the changepoint set returned by \code{\link[=changepoints]{cha
 }
 \examples{
 fit_nhpp_region(exceedances(lista_AG), 0, 575)
-fit_nhpp_region(exceedances(lista_AG), 0, 575, initial_val_optim = c(1, 10))
 fit_nhpp(DataCPSim, tau = 826)
 fit_nhpp(as.ts(lista_AG), tau = changepoints(lista_AG))
 }

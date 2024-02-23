@@ -1,8 +1,17 @@
+globalVariables(c(
+  "tau_prev", "tau_this", "m_prev", "m_this", "cum_m_this", "cum_m_prev", "m_i",
+  "cum_m_net"
+))
+
 #' @rdname fit_nhpp
+#' @param exc Output from [exceedances()]
+#' @param tau_left left-most changepoint
+#' @param tau_left right-most changepoint
+#' @param params Output from [parameters_weibull()]
+#' @param ... arguments passed to [stats::optim()]
 #' @export
 #' @examples
 #' fit_nhpp_region(exceedances(lista_AG), 0, 575)
-#' fit_nhpp_region(exceedances(lista_AG), 0, 575, initial_val_optim = c(1, 10))
 fit_nhpp_region <- function(exc, tau_left, tau_right, 
                                 params = parameters_weibull(), ...) {
   # Definimos las funciones que vamos a utilizar para encontrar el mínimo

@@ -1,3 +1,5 @@
+globalVariables("Bayesaian_MDL_k_cp")
+
 #' @rdname MaMBOltzmann
 #' @description
 #' What does this function do? 

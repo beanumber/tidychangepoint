@@ -90,6 +90,7 @@ segment_gbmdl <- function(x, num_generations = 50, show_progress_bar = TRUE) {
 #' 
 #' @param x A time series object
 #' @param mat_cp A matrix containing a list of candidate chromosomes
+#' @param these_bmdls vector of [BMDL()] scores
 #' @export
 #' @examples
 #' mat_cp <- lista_AG$segmenter$mat_cp
@@ -311,6 +312,7 @@ sim_1_cp_BMDL <- function(x, max_num_cp = 20, prob_inicial = 0.06) {
 
 
 #' @rdname evolve
+#' @param generation_size tamaño de las generaciones
 #' @return regresa una matriz de `k` por `max_num_cp+3`, la cual en cada renglón tiene
 #'         una simulación de un vector de tiempos de cambio
 #' @export
