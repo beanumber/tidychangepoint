@@ -4,7 +4,7 @@
 \alias{penalty_mdl}
 \title{Penalización MDL}
 \usage{
-penalty_mdl(padded_tau)
+penalty_mdl(padded_tau, N = NULL)
 }
 \arguments{
 \item{cp}{vector de extendido de puntos de cambio}

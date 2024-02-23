@@ -13,13 +13,19 @@
 #' penalty_mdl(pad_tau(tau, n = length(x)))
 #' 
 
-penalty_mdl <- function(padded_tau) {
+penalty_mdl <- function(padded_tau, N = NULL) {
   tau <- unpad_tau(padded_tau)
   m <- length(tau)
+  if (!is.null(N)) {
+    extra_term <- m * log(N)
+  } else {
+    extra_term <- 0
+  }
   2 * sum(log(diff(padded_tau)) / 2) + 
     log(m) + 
-    sum(log(tau))
-  # + m * log(m)????
+    sum(log(tau)) +
+    # is this last term necessary???
+    extra_term
 }
 
 
@@ -47,6 +53,11 @@ penalization_MDL <- function(cp, nhpp_dist = "W", N) { # V02
   
   (cp_corto_cero <- c(0, cp[3:(cp[1] + 3)]))
   # En particular se agregó la parte *n_param_nhpp_dist/2
-  return(sum(log(cp_corto_cero[-1] - cp_corto_cero[-cp[1] - 2]) * n_param_nhpp_dist / 2) + log(cp[1]) + sum(log(cp_corto_cero[c(-1, -cp[1] - 2)])) + (cp[1] * log(N)))
+  return(
+    sum(log(cp_corto_cero[-1] - cp_corto_cero[-cp[1] - 2]) * n_param_nhpp_dist / 2) + 
+      log(cp[1]) + 
+      sum(log(cp_corto_cero[c(-1, -cp[1] - 2)])) + 
+      (cp[1] * log(N))
+  )
 }
 

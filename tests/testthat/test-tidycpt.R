@@ -74,6 +74,7 @@ test_that("utils works", {
 })
 
 test_that("penalties work", {
+  library(tidychangepoint)
   mat_cp <- sim_k_cp_BMDL(DataCPSim)
   
   Bayesaian_MDL_k_cp(mat_cp, DataCPSim)
@@ -81,16 +82,16 @@ test_that("penalties work", {
     mat_cp_2_list() |>
     purrr::map(fit_nhpp, x = DataCPSim) |>
     purrr::map_dbl(BMDL)
-  
+
   tau <- chromo2tau(mat_cp[1,])
-  Bayesaian_MDL_1_cp(mat_cp[1,], DataCPSim)
-  fit_nhpp(DataCPSim, chromo2tau(mat_cp[1,])) |>
+  a <- Bayesaian_MDL_1_cp(mat_cp[1,], DataCPSim)
+  b <- fit_nhpp(DataCPSim, chromo2tau(mat_cp[1,])) |>
     BMDL()
   
   # log-posterior
   fit_nhpp(DataCPSim, tau)
   
-  penalty_mdl(pad_tau(tau, n = length(DataCPSim)))
+  penalty_mdl(pad_tau(tau, n = length(DataCPSim)), length(exceedances(DataCPSim)))
   penalization_MDL(mat_cp[1,], "W", N = length(exceedances(DataCPSim)))
   
   expect_equal(penalty_mdl(pad_tau(0, n = 1)), -Inf)
