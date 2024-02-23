@@ -118,32 +118,6 @@ evolve <- function(x, mat_cp, these_bmdls) {
   return(mat_cp)
 }
 
-#' @rdname evolve
-#' @param cp A set of changepoints
-#' @export
-Bayesaian_MDL_1_cp <- function(cp, x) {
-  # 1. Obtener los estimadores MAP para cada regimen y guardarlos en mat_MAP
-  mat_MAP <- fit_nhpp(x, chromo2tau(cp))
-  # 2. Evaluar la log-posterior (sumando la primera columna de mat_MAP)
-  log_posterior <- sum(mat_MAP$log_posterior)
-  # 3. Evaluar la penalización
-  penaliza_cp <- penalization_MDL(cp, N = max(x))
-  # 4. Obtener bayesian-MDL de la diferencia de la penalización y la log-posterior
-  BMDL_1_cp <- penaliza_cp - log_posterior
-  return(BMDL_1_cp)
-}
-
-#' @rdname evolve
-#' @return regresa un vector de tamaño `k` (el numero de cromosomas por
-#'   generación) con los valores del bayesian MDL
-#' @export
-Bayesaian_MDL_k_cp <- function(mat_cp, x) {
-  # OBS: quizás se podría hacer matricial para que fuera más rápido
-  return(apply(mat_cp, 1, function(y) {
-    Bayesaian_MDL_1_cp(y, x)
-  }))
-}
-
 
 #' @rdname evolve
 #' @param padres vector de longitud dos con índice de papa e índice de mama

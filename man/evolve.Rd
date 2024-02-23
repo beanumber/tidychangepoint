@@ -2,8 +2,6 @@
 % Please edit documentation in R/segment_gbmdl_algorithm.R
 \name{evolve}
 \alias{evolve}
-\alias{Bayesaian_MDL_1_cp}
-\alias{Bayesaian_MDL_k_cp}
 \alias{junta_1_puntos_cambio}
 \alias{junta_k_puntos_cambio}
 \alias{mata_1_tau_volado}
@@ -17,10 +15,6 @@
 \title{Generate a list of candidate changepoints using a genetic algorithm}
 \usage{
 evolve(x, mat_cp, these_bmdls)
-
-Bayesaian_MDL_1_cp(cp, x)
-
-Bayesaian_MDL_k_cp(mat_cp, x)
 
 junta_1_puntos_cambio(padres, mat_cp)
 
@@ -56,12 +50,12 @@ selec_k_pares_de_padres(vec_probs)
 
 \item{mat_cp}{A matrix containing a list of candidate chromosomes}
 
-\item{cp}{vector cromosoma que se va a poner a prueba}
-
 \item{padres}{vector de longitud dos con índice de papa e índice de mama}
 
 \item{mat_padres}{matriz de kx2 la cual contiene en sus renglones las
 parejas de padres}
+
+\item{cp}{vector cromosoma que se va a poner a prueba}
 
 \item{prob_volado}{probabilidad de quitar un tiempo de cambio existente
 utilizado por mata_k_tau_volado para quitar elementos de más. Se recomienda
@@ -115,9 +109,6 @@ cambio cuando solo se tiene rank esta ventaja gran ventaja se reduce}
 cromosomas}
 }
 \value{
-regresa un vector de tamaño \code{k} (el numero de cromosomas por
-generación) con los valores del bayesian MDL
-
 regresa una matriz de las mismas dimensiones que mat_cp, pero con los
 nuevos cromosomas
 
