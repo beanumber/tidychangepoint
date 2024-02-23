@@ -1,6 +1,5 @@
 #' Weibull distribution functions
 #' 
-#' @inheritParams stats::dweibull
 #' @param x A numeric vector
 #' @param shape Shape parameter for Weibull distribution. See [stats::dweibull()].
 #' @param scale Scale parameter for Weibull distribution. See [stats::dweibull()].

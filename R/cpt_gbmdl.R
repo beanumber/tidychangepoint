@@ -71,35 +71,11 @@ chromo2tau <- function(chromo) {
 }
 
 #' @rdname cpt_gbmdl
-#' @param mat_cp A matrix containing a list of candidate chromosomes
-#' @export
-mat_cp_2_tbl <- function(mat_cp) {
-  mat_cp |>
-    mat_cp_2_list() |>
-    tibble::tibble() |>
-    stats::setNames("tau") |>
-    dplyr::mutate(
-      m = purrr::map_int(tau, length)
-    )
-}
-
-#' @rdname cpt_gbmdl
+#' @param mat_cp A matrix of potential changepoints
 #' @export
 mat_cp_2_list <- function(mat_cp) {
   mat_cp |>
     apply(1, chromo2tau, simplify = FALSE)
-}
-
-#' @rdname cpt_gbmdl
-#' @export
-max_num_cp <- function(x) {
-  ncol(x$mat_cp)
-}
-
-#' @rdname cpt_gbmdl
-#' @export
-generation_size <- function(x) {
-  nrow(x$mat_cp)
 }
 
 #' @rdname cpt_gbmdl

@@ -5,10 +5,7 @@
 \alias{validate_cpt_gbmdl}
 \alias{new_cpt_gbmdl}
 \alias{chromo2tau}
-\alias{mat_cp_2_tbl}
 \alias{mat_cp_2_list}
-\alias{max_num_cp}
-\alias{generation_size}
 \alias{num_generations}
 \alias{BMDL.seg_default}
 \title{Class for candidate changepoints using Genetic BMDL heuristic}
@@ -29,13 +26,7 @@ new_cpt_gbmdl(
 
 chromo2tau(chromo)
 
-mat_cp_2_tbl(mat_cp)
-
 mat_cp_2_list(mat_cp)
-
-max_num_cp(x)
-
-generation_size(x)
 
 num_generations(x)
 
@@ -65,7 +56,7 @@ particular para que todos los cromosomas quepan en una matriz.}
 
 \item{chromo}{Chromosome, from a row of the matrix \code{mat_cp}}
 
-\item{mat_cp}{A matrix containing a list of candidate chromosomes}
+\item{mat_cp}{A matrix of potential changepoints}
 }
 \description{
 Class for candidate changepoints using Genetic BMDL heuristic
