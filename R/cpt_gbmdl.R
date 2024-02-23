@@ -104,26 +104,6 @@ num_generations <- function(x) {
   x$params$num_generations
 }
 
-#' @rdname cpt_gbmdl
-#' @export
-#' @examples
-#' write_cpt_gbmdl(lista_AG$segmenter)
-
-write_cpt_gbmdl <- function(x, destdir = tempdir()) {
-  
-  dir_data <- fs::path(destdir)
-  if (!dir.exists(dir_data)) {
-    dir.create(dir_data, recursive = TRUE)
-  }
-  
-  file_name <- paste0("Dat_AGBMDL_", file_name(x))
-  
-  # Write data
-  save(x, file = fs::path(dir_data, file_name))
-  message("Se guardo el archivo:\n", fs::path(dir_data, file_name), "\n")
-}
-
-
 #' Broom compatibility layer for changepoint
 #' @param x A `cpt_gbmdl` object
 #' @param ... arguments passed to methods

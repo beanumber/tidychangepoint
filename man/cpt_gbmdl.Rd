@@ -10,7 +10,6 @@
 \alias{max_num_cp}
 \alias{generation_size}
 \alias{num_generations}
-\alias{write_cpt_gbmdl}
 \alias{BMDL.seg_default}
 \title{Class for candidate changepoints using Genetic BMDL heuristic}
 \usage{
@@ -39,8 +38,6 @@ max_num_cp(x)
 generation_size(x)
 
 num_generations(x)
-
-write_cpt_gbmdl(x, destdir = tempdir())
 
 \method{BMDL}{seg_default}(x, ...)
 }
@@ -71,5 +68,4 @@ cpts <- cpt_gbmdl(DataCPSim)
 str(cpts)
 chromo <- c(4, 1, 557, 877 , 905, 986, 1096, 0, 0, 0)
 chromo2tau(chromo)
-write_cpt_gbmdl(lista_AG$segmenter)
 }
