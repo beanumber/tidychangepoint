@@ -17,7 +17,7 @@ test_that("gbmdl works", {
 
 test_that("params works", {
   # Validador de la dimensiones de cosas de distribucion a priori
-  x <- cpt_gbmdl(DataCPSim)
+  x <- new_cpt_gbmdl(DataCPSim)
   if (x$params$nhpp_dist %in% c("W", "MO", "GO")) {
     dim_a_priori <- 2
   } else {

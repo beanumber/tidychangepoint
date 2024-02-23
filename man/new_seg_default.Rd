@@ -72,6 +72,8 @@ plot_cpt_repeated(x, i = nrow(x$candidates))
 \arguments{
 \item{x}{a numeric vector coercible into a \code{ts} object}
 
+\item{algorithm}{Algorithm used to find the changepoints}
+
 \item{cpt_list}{a possibly empty \code{list()} of candidate changepoints}
 
 \item{params}{a possibly empty \code{list()} of parameters}

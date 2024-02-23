@@ -3,6 +3,7 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value"))
 #' Default class for candidate changepoint sets
 #' @export
 #' @param x a numeric vector coercible into a `ts` object
+#' @param algorithm Algorithm used to find the changepoints
 #' @param cpt_list a possibly empty `list()` of candidate changepoints
 #' @param params a possibly empty `list()` of parameters
 #' @param ... currently ignored
