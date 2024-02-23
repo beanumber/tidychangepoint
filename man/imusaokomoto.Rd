@@ -32,6 +32,12 @@ D_log_likelihood_region_musaokomoto(
 
 \item{theta}{vector de parámetros de verosimilitud del NHPP}
 
+\item{tau_left}{valor del primer punto de cambio}
+
+\item{tau_right}{valor del segundo punto de cambio}
+
+\item{hyperparameters}{Hyperparameters}
+
 \item{vec_d_i}{vector de días en los que hubo revases entre el los puntos de
 cambio tau1 y tau2}
 
@@ -40,15 +46,6 @@ cambio tau1 y tau2}
 \item{tau2}{valor del segundo punto de cambio}
 
 \item{nhpp_dist}{nombre de tasa de NHPP}
-
-\item{vec_dist_a_priori}{vector que determina cual es la distribución a
-priori de los parametros; por ahora se tiene programado
-vec_dist_a_priori=c("Gamma","Gamma") y
-vec_dist_a_priori=c("Gamma","Gamma","Gamma")}
-
-\item{mat_phi}{matriz cuyos renglones tiene los parámetros de las
-distribuciones a priori; cada renglón tiene todos los parametros de una
-distribución}
 }
 \value{
 regresa la evaluación

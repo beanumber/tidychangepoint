@@ -12,10 +12,6 @@ segment_gbmdl(x, num_generations = 50, show_progress_bar = TRUE)
 \item{num_generations}{Number of generations to evolve}
 
 \item{show_progress_bar}{show the progress bar?}
-
-\item{destdir}{Directory to stare files}
-
-\item{write_rda}{Write the data to \code{destdir}?}
 }
 \value{
 A \code{cpt_gbmdl} object

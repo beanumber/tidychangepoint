@@ -5,6 +5,7 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value"))
 #' @param x a numeric vector coercible into a `ts` object
 #' @param cpt_list a possibly empty `list()` of candidate changepoints
 #' @param params a possibly empty `list()` of parameters
+#' @param ... currently ignored
 #' @examples
 #' seg <- seg_default(DataCPSim)
 #' str(seg)
@@ -54,6 +55,7 @@ exceedances.seg_default <- function(x, ...) {
 }
 
 #' @rdname new_seg_default
+#' @param object A `seg_default` object
 #' @export
 nobs.seg_default <- function(object, ...) {
   length(as.ts(object))
@@ -257,6 +259,7 @@ plot_best_chromosome <- function(x) {
 }
 
 #' @rdname new_seg_default
+#' @param i index of candidates to show
 #' @export
 #' @examples
 #' plot_cpt_repeated(lista_AG$segmenter)

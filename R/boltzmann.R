@@ -6,6 +6,8 @@ globalVariables("Bayesaian_MDL_k_cp")
 #' 
 #' @export
 #' @param x An `integer` vector. See [exceedances()].
+#' @param r number of generations
+#' @param k size of generation
 #' @return A `list` of length 2:
 #'   - A `numeric` vector of `FitnessGeneraciones`
 #'   - A `matrix` with `k` rows and `N` columns

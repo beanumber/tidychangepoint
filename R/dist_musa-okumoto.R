@@ -57,6 +57,7 @@ mmusaokomoto <- function(t, theta) {
 
 
 #' @rdname imusaokomoto
+#' @inheritParams log_likelihood_region_weibull
 #' @export
 #' @examples
 #' log_likelihood_region_musaokomoto(DataCPSim, 0, 575, theta = c(0.5, 0.5))
@@ -68,6 +69,7 @@ log_likelihood_region_musaokomoto <- function(t, tau_left, tau_right, theta) {
 }
 
 #' @rdname imusaokomoto
+#' @param hyperparameters Hyperparameters
 #' @export
 #' @examples
 #' hyper <- data.frame(
@@ -85,15 +87,7 @@ log_prior_region_musaokomoto <- function(theta, hyperparameters) {
 
 
 #' @rdname imusaokomoto
-#' @param vec_dist_a_priori vector que determina cual es la distribución a
-#'   priori de los parametros; por ahora se tiene programado
-#'   vec_dist_a_priori=c("Gamma","Gamma") y
-#'   vec_dist_a_priori=c("Gamma","Gamma","Gamma")
-#' @param theta vector de parámetros de verosimilitud
-#' @param mat_phi matriz cuyos renglones tiene los parámetros de las
-#'   distribuciones a priori; cada renglón tiene todos los parametros de una
-#'   distribución
-#'
+#' @inheritParams D_log_prior_region_weibull
 #' @export
 D_log_prior_region_musaokomoto <- function(theta, hyperparameters) {
   x <- hyperparameters$hyperprior_shape

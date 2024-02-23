@@ -33,7 +33,9 @@ fit_nhpp(x, tau)
 \arguments{
 \item{exc}{Output from \code{\link[=exceedances]{exceedances()}}}
 
-\item{tau_left}{right-most changepoint}
+\item{tau_left}{left-most changepoint}
+
+\item{tau_right}{right-most changepoint}
 
 \item{params}{Output from \code{\link[=parameters_weibull]{parameters_weibull()}}}
 
@@ -42,6 +44,8 @@ fit_nhpp(x, tau)
 \item{x}{A time series}
 
 \item{tau}{A vector of changepoints.}
+
+\item{object}{An \code{nhpp} object}
 }
 \value{
 A \code{tbl_df} with each row representing one region.

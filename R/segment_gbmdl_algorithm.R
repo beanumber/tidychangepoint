@@ -34,9 +34,7 @@ globalVariables(
 #'
 #' @param x a vector that can be coerced into a `ts`
 #' @param num_generations Number of generations to evolve
-#' @param destdir Directory to stare files
 #' @param show_progress_bar show the progress bar?
-#' @param write_rda Write the data to `destdir`? 
 #' @return A `cpt_gbmdl` object
 #' @export
 #' @examples

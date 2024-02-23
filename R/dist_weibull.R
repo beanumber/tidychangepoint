@@ -1,13 +1,9 @@
 #' Weibull distribution functions
 #' 
 #' @inheritParams stats::dweibull
-#' @param t valor a evaluar (real)
-#' @param nhpp_dist tipo de rate function (ver articulo A Gibbs Sampling Algorithm
-#'   to Estimate the Occurrence of Ozone Exceedances in Mexico City  para el
-#'   caso de Weibull (W) y ver libro de Eliane pdf 40 eq (3.12)); posibles
-#'   exponentiated-Weibull (EW),the Musa–Okumoto (MO), the Goel–Okumoto (GO),
-#'   and a generalized Goel–Okumoto (GGO). Las cuales tienen 3,3,2 y 2
-#'   parámetros
+#' @param x A numeric vector
+#' @param shape Shape parameter for Weibull distribution. See [stats::dweibull()].
+#' @param scale Scale parameter for Weibull distribution. See [stats::dweibull()].
 #' @param theta parámetros de mean function. Para
 #'
 #'  - W: \eqn{\alpha = \theta[1]}, \eqn{\sigma = \theta[2]}
@@ -18,7 +14,7 @@
 #'
 #' @return regresa la evaluación
 #' @export
-#'
+#' @seealso [stats::dweibull()]
 #' @examples
 #' iweibull(1, shape = 1, scale = 1)
 #' plot(x = 1:10, y = iweibull(1:10, shape = 2, scale = 2))
@@ -29,10 +25,6 @@ iweibull <- function(x, shape, scale = 1) {
 
 
 #' @rdname iweibull
-#' @param t valor a evaluar (real)
-#' @param nhpp_dist tipo de mean function (ver libro de Eliane pdf 40 eq (3.12));
-#'               posibles exponentiated-Weibull (EW),the Musa–Okumoto (MO),
-#'               the Goel–Okumoto (GO), and a generalized Goel–Okumoto (GGO)
 #' @param theta parámetros de mean function.Para
 #'
 #'  - W: \eqn{\alpha = \theta[1], \sigma = \theta[2]}
@@ -58,6 +50,7 @@ mweibull <- function(x, shape, scale = 1) {
 }
 
 #' @rdname iweibull
+#' @param ... currently ignored
 #' @export
 
 parameters_weibull <- function(...) {
@@ -93,6 +86,7 @@ log_likelihood_region_weibull <- function(t, tau_left, tau_right, theta) {
 }
 
 #' @rdname iweibull
+#' @param params Possibly modified output from [parameters_weibull()]
 #' @export
 #' @examples
 #' log_prior_region_weibull(theta = c(0.5, 2))
@@ -121,11 +115,9 @@ D_log_prior_region_weibull <- function(theta, params = parameters_weibull()) {
 }
 
 #' @rdname iweibull
-#' @param vec_d_i vector de días en los que hubo revases entre el los puntos de
-#'   cambio tau_left y tau_right
+#' @param t vector of exceedances
 #' @param tau_left valor del primer punto de cambio
 #' @param tau_right valor del segundo punto de cambio
-#' @param nhpp_dist nombre de tasa de NHPP
 #' @param theta vector de parámetros de verosimilitud del NHPP
 #' @export
 #' @examples

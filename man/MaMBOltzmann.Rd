@@ -12,6 +12,10 @@ MaMBOltzmann(mat_cp, Fitness, Mutation, Temperature)
 \arguments{
 \item{x}{An \code{integer} vector. See \code{\link[=exceedances]{exceedances()}}.}
 
+\item{r}{number of generations}
+
+\item{k}{size of generation}
+
 \item{Mutation}{description}
 
 \item{Temperature}{description}

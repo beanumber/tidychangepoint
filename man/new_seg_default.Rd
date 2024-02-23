@@ -66,6 +66,12 @@ plot_cpt_repeated(x, i = nrow(x$candidates))
 \item{cpt_list}{a possibly empty \code{list()} of candidate changepoints}
 
 \item{params}{a possibly empty \code{list()} of parameters}
+
+\item{...}{currently ignored}
+
+\item{object}{A \code{seg_default} object}
+
+\item{i}{index of candidates to show}
 }
 \description{
 Default class for candidate changepoint sets

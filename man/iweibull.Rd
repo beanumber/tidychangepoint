@@ -25,9 +25,15 @@ D_log_prior_region_weibull(theta, params = parameters_weibull())
 D_log_likelihood_region_weibull(t, tau_left, tau_right, theta)
 }
 \arguments{
-\item{shape, scale}{shape and scale parameters, the latter defaulting to 1.}
+\item{x}{A numeric vector}
 
-\item{t}{valor a evaluar (real)}
+\item{shape}{Shape parameter for Weibull distribution. See \code{\link[stats:Weibull]{stats::dweibull()}}.}
+
+\item{scale}{Scale parameter for Weibull distribution. See \code{\link[stats:Weibull]{stats::dweibull()}}.}
+
+\item{...}{currently ignored}
+
+\item{t}{vector of exceedances}
 
 \item{tau_left}{valor del primer punto de cambio}
 
@@ -35,10 +41,7 @@ D_log_likelihood_region_weibull(t, tau_left, tau_right, theta)
 
 \item{theta}{vector de parámetros de verosimilitud del NHPP}
 
-\item{vec_d_i}{vector de días en los que hubo revases entre el los puntos de
-cambio tau_left y tau_right}
-
-\item{nhpp_dist}{nombre de tasa de NHPP}
+\item{params}{Possibly modified output from \code{\link[=parameters_weibull]{parameters_weibull()}}}
 }
 \value{
 regresa la evaluación
@@ -65,4 +68,7 @@ log_prior_region_weibull(theta = c(0.5, 2))
 D_log_prior_region_weibull(theta = c(0.5, 2))
 
 D_log_likelihood_region_weibull(DataCPSim, 0, 575, theta = c(0.5, 2))
+}
+\seealso{
+\code{\link[stats:Weibull]{stats::dweibull()}}
 }

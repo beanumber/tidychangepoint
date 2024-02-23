@@ -23,9 +23,8 @@ test_that("BMDL works", {
 test_that("parameter fitting works", {
   # Example 1
   y <- test_set(n = 1, seed = 123)
-  plot(y)
   tau <- attr(y, "cpt_true")
   theta <- fit_nhpp(y, tau)
-  plot_mcdf(segment(y, method = "manual", cpts = tau))
+  diagnose(segment(y, method = "manual", cpts = tau))
   expect_lt(abs(theta$alpha[1] - 1), 0.05)
 })

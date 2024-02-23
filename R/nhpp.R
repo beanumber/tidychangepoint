@@ -6,7 +6,7 @@ globalVariables(c(
 #' @rdname fit_nhpp
 #' @param exc Output from [exceedances()]
 #' @param tau_left left-most changepoint
-#' @param tau_left right-most changepoint
+#' @param tau_right right-most changepoint
 #' @param params Output from [parameters_weibull()]
 #' @param ... arguments passed to [stats::optim()]
 #' @export
@@ -110,6 +110,7 @@ length.nhpp <- function(x, ...) {
 }
 
 #' @rdname fit_nhpp
+#' @param object An `nhpp` object
 #' @export
 logLik.nhpp <- function(object, ...) {
   ll <- sum(object$logLik)

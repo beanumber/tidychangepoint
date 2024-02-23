@@ -7,6 +7,7 @@ pad_tau <- function(tau, n) {
 }
 
 #' @rdname pad_tau
+#' @param padded_tau Output from [pad_tau()]
 #' @export
 unpad_tau <- function(padded_tau) {
   padded_tau |>
@@ -15,12 +16,16 @@ unpad_tau <- function(padded_tau) {
 }
 
 #' @rdname pad_tau
+#' @param x A numeric vector
 #' @export
 cut_inclusive <- function(x, tau) {
   cut(x, breaks = tau, include.lowest = TRUE, right = FALSE)
 }
 
 #' @rdname pad_tau
+#' @param n Number of changepoints
+#' @param sd Standard deviation passed to [stats::rnorm()]
+#' @param seed Value passed to [base::set.seed()]
 #' @export
 test_set <- function(n = 1, sd = 1, seed = NULL) {
   if (!is.null(seed)) {
@@ -43,6 +48,8 @@ test_set <- function(n = 1, sd = 1, seed = NULL) {
 }
 
 #' @rdname pad_tau
+#' @param k Rate function for Poisson distribution of mean changepoint set length. 
+#' @param ... currently ignored
 #' @export
 #' @examples
 #' random_cpts(DataCPSim, n = 5)

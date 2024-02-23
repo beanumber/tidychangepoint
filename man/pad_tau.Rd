@@ -27,7 +27,19 @@ deg_free(x, ...)
 \arguments{
 \item{tau}{a numeric vector of changepoints}
 
-\item{n}{the length of the original time series}
+\item{n}{Number of changepoints}
+
+\item{padded_tau}{Output from \code{\link[=pad_tau]{pad_tau()}}}
+
+\item{x}{A numeric vector}
+
+\item{sd}{Standard deviation passed to \code{\link[stats:Normal]{stats::rnorm()}}}
+
+\item{seed}{Value passed to \code{\link[base:Random]{base::set.seed()}}}
+
+\item{k}{Rate function for Poisson distribution of mean changepoint set length.}
+
+\item{...}{currently ignored}
 }
 \description{
 Utility functions

@@ -7,7 +7,9 @@
 penalty_mdl(padded_tau, N = NULL)
 }
 \arguments{
-\item{cp}{vector de extendido de puntos de cambio}
+\item{padded_tau}{Output from \code{\link[=pad_tau]{pad_tau()}}}
+
+\item{N}{The length of the time series?}
 }
 \value{
 regresa la evaluación de la penalización

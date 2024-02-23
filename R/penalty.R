@@ -1,7 +1,7 @@
 #' Penalización MDL
 #'
-#' @param cp vector de extendido de puntos de cambio
-#'
+#' @param padded_tau Output from [pad_tau()]
+#' @param N The length of the time series?
 #' @return regresa la evaluación de la penalización
 #'  \deqn{
 #'    P_{\theta,\tau} = \sum_{i=1}^{m+1}\dfrac{\ln(\tau_i-\tau_{i-1})}{2}+\ln(m)+\sum_{i=2}^m\ln(\tau_i)
