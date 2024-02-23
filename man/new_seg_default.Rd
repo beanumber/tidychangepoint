@@ -5,6 +5,7 @@
 \alias{validate_seg_default}
 \alias{seg_default}
 \alias{as.ts.seg_default}
+\alias{exceedances.seg_default}
 \alias{nobs.seg_default}
 \alias{length.seg_default}
 \alias{changepoints.seg_default}
@@ -27,6 +28,8 @@ validate_seg_default(x)
 seg_default(x, ...)
 
 \method{as.ts}{seg_default}(x, ...)
+
+\method{exceedances}{seg_default}(x, ...)
 
 \method{nobs}{seg_default}(object, ...)
 

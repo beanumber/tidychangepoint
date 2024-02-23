@@ -1,14 +1,3 @@
-#' Calculate overages
-#' 
-#' @export
-#' @param x a time series object
-#' @examples
-#' exceedances(DataCPSim)
-exceedances <- function(x) {
-  y <- as.ts(x)
-  which(y > mean(y))
-}
-
 #' @rdname exceedances
 #' @param tau a numeric vector of changepoints
 #' @param n the length of the original time series

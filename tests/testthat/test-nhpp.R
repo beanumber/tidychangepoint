@@ -1,3 +1,13 @@
+test_that("generics works", {
+  tau <- changepoints(lista_AG)
+  theta <- fit_nhpp(lista_AG$segmenter, tau)
+  
+  expect_type(changepoints(theta), "integer")
+  expect_type(exceedances(theta), "integer")
+  expect_s3_class(logLik(theta), "logLik")
+  expect_type(BMDL(theta), "double")
+  expect_type(MBIC(theta), "double")
+})
 
 test_that("mcddf works", {
   tau <- changepoints(lista_AG)

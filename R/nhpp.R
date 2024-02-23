@@ -108,7 +108,7 @@ logLik.nhpp <- function(object, ...) {
 BMDL.nhpp <- function(x, ...) {
   tau <- changepoints(x)
   n <- max(x$end)
-  penalty_mdl(pad_tau(tau, n)) - sum(x$log_posterior)
+  penalty_mdl(pad_tau(tau, n), N = length(exceedances(x))) - sum(x$log_posterior)
 }
 
 #' @rdname fit_nhpp
@@ -126,7 +126,15 @@ MBIC.nhpp <- function(object, ...) {
 changepoints.nhpp <- function(x, ...) {
   c(x$begin, x$end) |>
     unique() |>
-    unpad_tau()
+    unpad_tau() |>
+    as.integer()
+}
+
+#' @rdname fit_nhpp
+#' @export
+exceedances.nhpp <- function(x, ...) {
+  x$exceedances |>
+    purrr::list_c()
 }
 
 

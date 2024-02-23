@@ -7,6 +7,7 @@
 \alias{BMDL.nhpp}
 \alias{MBIC.nhpp}
 \alias{changepoints.nhpp}
+\alias{exceedances.nhpp}
 \title{Fit a non-homogeneous Poisson process model to the exceedances of a time series.}
 \usage{
 fit_nhpp_region(exc, tau_left, tau_right, params = parameters_weibull(), ...)
@@ -20,6 +21,8 @@ fit_nhpp(x, tau)
 \method{MBIC}{nhpp}(object, ...)
 
 \method{changepoints}{nhpp}(x, ...)
+
+\method{exceedances}{nhpp}(x, ...)
 }
 \arguments{
 \item{x}{A time series}

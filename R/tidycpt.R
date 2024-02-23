@@ -147,6 +147,28 @@ as.ts.tidycpt <- function(x, ...) {
 
 #' @rdname changepoints
 #' @export
+exceedances <- function(x, ...) UseMethod("exceedances")
+
+#' @rdname changepoints
+#' @export
+exceedances.tidycpt <- function(x, ...) {
+  exceedances(as.ts(x))
+}
+
+#' @rdname changepoints
+#' @export
+exceedances.ts <- function(x, ...) {
+  exceedances(as.double(x))
+}
+
+#' @rdname changepoints
+#' @export
+exceedances.double <- function(x, ...) {
+  which(x > mean(x, ...))
+}
+
+#' @rdname changepoints
+#' @export
 length.tidycpt <- function(x, ...) {
   length(as.ts(x))
 }

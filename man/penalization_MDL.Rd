@@ -9,12 +9,6 @@ penalization_MDL(cp, nhpp_dist = "W", N)
 \arguments{
 \item{cp}{vector de extendido de puntos de cambio}
 }
-\value{
-regresa la evaluación de la penalización
-\deqn{
-   P_{\theta,\tau} = \sum_{i=1}^{m+1}\dfrac{\ln(\tau_i-\tau_{i-1})}{2}+\ln(m)+\sum_{i=2}^m\ln(\tau_i)
- }
-}
 \description{
 Penalización MDL
 }

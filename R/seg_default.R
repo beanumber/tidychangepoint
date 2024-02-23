@@ -47,6 +47,12 @@ as.ts.seg_default <- function(x, ...) {
 
 #' @rdname new_seg_default
 #' @export
+exceedances.seg_default <- function(x, ...) {
+  exceedances(as.ts(x))
+}
+
+#' @rdname new_seg_default
+#' @export
 nobs.seg_default <- function(object, ...) {
   length(as.ts(object))
 }
