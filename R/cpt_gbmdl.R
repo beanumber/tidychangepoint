@@ -123,25 +123,6 @@ write_cpt_gbmdl <- function(x, destdir = tempdir()) {
   message("Se guardo el archivo:\n", fs::path(dir_data, file_name), "\n")
 }
 
-#' @rdname cpt_gbmdl
-#' @param data_name_slug character string that will identify the data set used
-#' in the file name
-#' @export
-#' @examples
-#' file_name(cpt_gbmdl(DataCPSim))
-
-file_name <- function(x, data_name_slug = "data") {
-  paste(
-    "gbmdl", data_name_slug, 
-    "nhpp", x$params$nhpp_dist, 
-    gsub(" ", "_", label_priors(x)), 
-    "r", num_generations(x), 
-    "k", generation_size(x),
-    paste0("_BMDL_", floor(BMDL(x))), 
-    ".rda", 
-    sep = "_"
-  )
-}
 
 #' Broom compatibility layer for changepoint
 #' @param x A `cpt_gbmdl` object
@@ -156,13 +137,8 @@ file_name <- function(x, data_name_slug = "data") {
 #' glance(cpts)
 
 glance.cpt_gbmdl <- function(x, ...) {
-  tibble::tibble(
-    pkg = "tidychangepoint",
-    version = utils::packageVersion("tidychangepoint"),
-    algorithm = "GeneticBMDL",
-    params = list(x$params),
-    num_cpts = length(changepoints(x))
-  )
+  NextMethod(x) |>
+    dplyr::mutate(algorithm = "GeneticBMDL")
 }
 
 

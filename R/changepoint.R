@@ -12,20 +12,21 @@
 #' glance(cpts)
 
 glance.cpt <- function(x, ...) {
-  out <- tibble::tibble(
-    pkg = "changepoint",
-    version = x@version,
-    algorithm = x@method,
+  params <- list(
     test_stat = x@test.stat,
-    # x@pen.type: need tidy eval in here somewhere????
     penalty = x@pen.value,
-    num_cpts = length(x@cpts),
     num_cpts_max = x@ncpts.max,
     min_seg_length = x@minseglen
   )
   # hack
-  names(out)[5] <- x@pen.type
-  out
+  names(params)[2] <- x@pen.type
+  tibble::tibble(
+    pkg = "changepoint",
+    version = x@version,
+    algorithm = x@method,
+    params = list(params),
+    num_cpts = length(changepoints(x))
+  )
 }
 
 #' @rdname glance.cpt

@@ -365,3 +365,26 @@ diagnose <- function(x, ...) UseMethod("diagnose")
 diagnose.tidycpt <- function(x, ...) {
   patchwork::wrap_plots(plot(x), plot_mcdf(x), ncol = 1)
 }
+
+#' @rdname changepoints
+#' @param data_name_slug character string that will identify the data set used
+#' in the file name
+#' @export
+#' @examples
+#' file_name(segment(DataCPSim, method = "cpt-pelt"))
+
+file_name <- function(x, data_name_slug = "data") {
+  glance(x) |>
+    dplyr::select(dplyr::matches("algorithm|params|nhpp_BMDL")) |>
+    dplyr::mutate(
+      label = paste(
+        data_name_slug, 
+        algorithm,
+        floor(BMDL(x)),
+        x$segmenter$params |> cli::hash_obj_md5(),
+        sep = "_"
+      ),
+      filename = paste0(label, ".rda")
+    ) |>
+    dplyr::pull(filename)
+}

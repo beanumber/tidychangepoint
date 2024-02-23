@@ -11,7 +11,6 @@
 \alias{generation_size}
 \alias{num_generations}
 \alias{write_cpt_gbmdl}
-\alias{file_name}
 \alias{BMDL.seg_default}
 \title{Class for candidate changepoints using Genetic BMDL heuristic}
 \usage{
@@ -43,8 +42,6 @@ num_generations(x)
 
 write_cpt_gbmdl(x, destdir = tempdir())
 
-file_name(x, data_name_slug = "data")
-
 \method{BMDL}{seg_default}(x, ...)
 }
 \arguments{
@@ -65,9 +62,6 @@ distribución}
 \item{num_generations}{número de generaciones}
 
 \item{generation_size}{tamaño de las generaciones}
-
-\item{data_name_slug}{character string that will identify the data set used
-in the file name}
 }
 \description{
 Class for candidate changepoints using Genetic BMDL heuristic
@@ -78,5 +72,4 @@ str(cpts)
 chromo <- c(4, 1, 557, 877 , 905, 986, 1096, 0, 0, 0)
 chromo2tau(chromo)
 write_cpt_gbmdl(lista_AG$segmenter)
-file_name(cpt_gbmdl(DataCPSim))
 }

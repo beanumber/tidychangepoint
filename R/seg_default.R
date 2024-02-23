@@ -140,7 +140,8 @@ glance.seg_default <- function(x, ...) {
     pkg = "tidychangepoint",
     version = utils::packageVersion("tidychangepoint"),
     algorithm = NA,
-    params = list(x$params)
+    params = list(x$params),
+    num_cpts = length(changepoints(x))
   )
 }
 

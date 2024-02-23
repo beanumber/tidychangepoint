@@ -21,6 +21,7 @@
 \alias{plot_mcdf}
 \alias{diagnose}
 \alias{diagnose.tidycpt}
+\alias{file_name}
 \title{Generic functions for tidycpt objects}
 \usage{
 plot_history(x, ...)
@@ -62,6 +63,8 @@ plot_mcdf(x, ...)
 diagnose(x, ...)
 
 \method{diagnose}{tidycpt}(x, ...)
+
+file_name(x, data_name_slug = "data")
 }
 \arguments{
 \item{x}{A \code{tidycpt} object}
@@ -69,6 +72,9 @@ diagnose(x, ...)
 \item{...}{arguments passed to methods}
 
 \item{object}{A \code{tidycpt} object}
+
+\item{data_name_slug}{character string that will identify the data set used
+in the file name}
 }
 \description{
 Generic functions for tidycpt objects
@@ -89,6 +95,7 @@ diagnose(segment(DataCPSim, method = "cpt-pelt"))
 diagnose(segment(test_set()))
 diagnose(segment(test_set(n = 2, sd = 4), method = "cpt-pelt"))
 
+file_name(segment(DataCPSim, method = "cpt-pelt"))
 }
 \references{
 Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
