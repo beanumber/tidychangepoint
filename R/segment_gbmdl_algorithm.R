@@ -46,9 +46,7 @@ globalVariables(
 #' z <- segment_gbmdl(bogota_pm$particulate_matter)
 #' }
 #' 
-segment_gbmdl <- function(x, num_generations = 50, 
-                          destdir = tempdir(), 
-                          show_progress_bar = TRUE, write_rda = FALSE) {
+segment_gbmdl <- function(x, num_generations = 50, show_progress_bar = TRUE) {
   # lista_AG contiene los resultados del algoritmo genético
   obj <- new_cpt_gbmdl(x, num_generations = num_generations)
   
@@ -84,10 +82,7 @@ segment_gbmdl <- function(x, num_generations = 50,
 #  graphics::par(mfrow = c(1, 1))
   obj$candidates <- best_cpts |>
     dplyr::bind_rows()
-  # Write data object
-  if (write_rda) {
-    write_cpt_gbmdl(obj)
-  }
+
   return(obj)
 }
 

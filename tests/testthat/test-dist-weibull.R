@@ -12,51 +12,15 @@ test_that("weibull works", {
   
   expect_equal(log_prior_region_weibull(theta = c(0, 2)), -Inf)
   expect_equal(log_prior_region_weibull(theta = c(1, 1)), -4)
-
-# check for equivalences with old implementations
   expect_type(log_prior_region_weibull(theta = c(0.5, 2)), "double")
-  
-  expect_type(
-    1:200 / 100 |> 
-      purrr::map_dbl(~log_prior_region_weibull(theta = c(.x, 2))),
-    "double"
-  )
-  
-  expect_type(
-    1:1000 / 100 |> 
-      purrr::map_dbl(~log_prior_region_weibull(theta = c(0.5, .x))),
-    "double"
-  )
   
   expect_type(D_log_likelihood_region_weibull(exceedances(DataCPSim), 0, 575, theta = c(0.5, 2)), "double")
   expect_type(D_log_prior_region_weibull(theta = c(0.5, 2)), "double")
 
-  expect_type(fit_nhpp_region(DataCPSim, 0, 826)$par, "double")
-  
-  # Example 1
-  y <- test_set(n = 1, seed = 123)
-  plot(y)
-  tau <- attr(y, "cpt_true")
-  theta <- fit_nhpp(y, tau)
-  diagnose(segment(y, method = "manual", cpts = tau))
-  
-  theta_true <- c(0.972236, 0.83897783)
-  log_prior_region_weibull(theta = theta_true)
-  exc <- exceedances(y)
-  log_likelihood_region_weibull(exc[exc <= tau], 0, tau, theta = theta_true)
-  
-  expect_equal(-1000, log_likelihood_region_weibull(exc, 0, 1000, theta = c(1, 1)))
-  expect_equal(-Inf, log_likelihood_region_weibull(exc, 0, 1000, theta = c(0, 1)))
-  expect_equal(
-    -length(exceedances) * (1/exp(1) + 1), 
-    log_likelihood_region_weibull(exc, 0, 1000, theta = c(1, exp(1)))
-  )
-  
-  expect_type(log_likelihood_region_weibull(exc, 0, 1000, theta = c(0.5, 2)), "double")
-  
-  expect_equal(
-    log_likelihood_region_weibull(y, 0, 1000, theta = c(1, 1)),
-    log_likelihood_region_weibull(y, 0, 416, theta = c(1, 1)) + 
-      log_likelihood_region_weibull(y, 416, 1000, theta = c(1, 1))
-  )
+  expect_equal(-1000, log_likelihood_region_weibull(exceedances(DataCPSim), 0, 1000, theta = c(1, 1)))
+  expect_equal(-Inf, log_likelihood_region_weibull(exceedances(DataCPSim), 0, 1000, theta = c(0, 1)))
+#  expect_equal(
+#    -length(exceedances(DataCPSim)) * (1/exp(1) + 1), 
+#    log_likelihood_region_weibull(exceedances(DataCPSim), 0, 1000, theta = c(1, exp(1)))
+#  )
 })

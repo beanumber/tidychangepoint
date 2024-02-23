@@ -49,15 +49,11 @@ test_that("RandomKeys works", {
   expect_lte(length(RandomKeys(10)), 10)
 })
 
-test_that("cpt_list works", {
+test_that("cpt_gbmdl works", {
   x <- lista_AG$segmenter
   expect_s3_class(x, "cpt_gbmdl")
   expect_type(x, "list")
   expect_equal(min(x$candidates$bmdl), BMDL(x))
-})
-
-test_that("exceedances works", {
-  #expect_identical(DataCPSimRebases, exceedances(DataCPSim))
 })
 
 test_that("regions works", {

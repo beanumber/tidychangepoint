@@ -7,11 +7,7 @@ test_that("generics works", {
   expect_s3_class(logLik(theta), "logLik")
   expect_type(BMDL(theta), "double")
   expect_type(MBIC(theta), "double")
-})
-
-test_that("mcddf works", {
-  tau <- changepoints(lista_AG)
-  theta <- fit_nhpp(lista_AG$segmenter, tau)
+  
   m <- mcdf(theta)
   expect_equal(length(m), length(exceedances(lista_AG)))
 })
@@ -32,18 +28,4 @@ test_that("parameter fitting works", {
   theta <- fit_nhpp(y, tau)
   plot_mcdf(segment(y, method = "manual", cpts = tau))
   expect_lt(abs(theta$alpha[1] - 1), 0.05)
-  
-  m <- mcdf(theta)
-  
-  plot_mcdf(segment(y, method = "manual", cpts = tau))
-  
-  # Example 2
-  y <- test_set(n = 1, seed = 456)
-  plot(y)
-  tau <- attr(y, "cpt_true")
-  z <- split(exceedances(y), cut_inclusive(exceedances(y), pad_tau(tau, length(y))))
-  
-  theta <- fit_nhpp(y, tau)
-  
-  plot_mcdf(segment(y, method = "manual", cpts = tau))
 })
