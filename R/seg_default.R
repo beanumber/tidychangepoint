@@ -78,7 +78,7 @@ changepoints.seg_default <- function(x, ...) {
     as.integer()
 }
 
-#' @rdname cpt_gbmdl
+#' @rdname new_seg_default
 #' @export
 
 BMDL.seg_default <- function(x, ...) {

@@ -48,19 +48,6 @@ test_set <- function(n = 1, sd = 1, seed = NULL) {
 }
 
 #' @rdname pad_tau
-#' @param k Rate function for Poisson distribution of mean changepoint set length. 
-#' @param ... currently ignored
-#' @export
-#' @examples
-#' random_cpts(DataCPSim, n = 5)
-#' 
-random_cpts <- function(x, n = 10, k = round(log(length(as.ts(x)))), ...) {
-  sizes <- stats::rpois(n, lambda = k)
-  sizes |>
-    purrr::map(~sort(sample.int(n = length(as.ts(x)) - 1, size = .x)))
-}
-  
-#' @rdname pad_tau
 #' @export
 #' @examples
 #' split_by_tau(as.ts(lista_AG), changepoints(lista_AG))
@@ -75,7 +62,7 @@ split_by_tau <- function(x, tau) {
 #' @examples
 #' deg_free(segment(DataCPSim))
 
-deg_free <- function(x, ...) {
+deg_free <- function(x) {
   attr(logLik(x), "df")
 }
 

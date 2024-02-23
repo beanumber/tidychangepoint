@@ -1,29 +1,6 @@
 #' Class for candidate changepoints using Genetic BMDL heuristic
 #' 
 #' @param x an object coercible into a time series object via [stats::as.ts()]
-#' @param ... arguments passed to methods
-#' @export
-#' @examples
-#' cpts <- cpt_gbmdl(DataCPSim)
-#' str(cpts)
-
-cpt_gbmdl <- function(x, ...) {
-  obj <- new_cpt_gbmdl(x, ...)
-  validate_cpt_gbmdl(obj)
-}
-
-#' @rdname cpt_gbmdl
-#' @export
-
-validate_cpt_gbmdl <- function(x) {
-  if (!stats::is.ts(as.ts(x))) {
-    stop("data attribute is not coercible into a ts object.")
-  }
-  x
-}
-
-#' @rdname cpt_gbmdl
-#' @param x a numeric vector
 #' @param num_generations número de generaciones
 #' @param generation_size tamaño de las generaciones
 #' @param nhpp_dist toma valores en c("W","EW","GGO","MO","GO") y es el nombre de
@@ -35,6 +12,7 @@ validate_cpt_gbmdl <- function(x) {
 #'   distribución
 #' @param max_num_cp el máximo número de rebases. Este parámetro se ocupa en
 #'   particular para que todos los cromosomas quepan en una matriz.
+#' @param ... arguments passed to methods
 #' @export
 
 new_cpt_gbmdl <- function(x = numeric(), 
@@ -43,7 +21,7 @@ new_cpt_gbmdl <- function(x = numeric(),
                           mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2),
                           num_generations = 50, 
                           generation_size = 50, 
-                          max_num_cp = 20) {
+                          max_num_cp = 20, ...) {
   stopifnot(is.numeric(x))
   out <- new_seg_default(x, params = list(
     num_generations = num_generations, 
@@ -57,7 +35,7 @@ new_cpt_gbmdl <- function(x = numeric(),
   return(out)
 }
 
-#' @rdname cpt_gbmdl
+#' @rdname new_cpt_gbmdl
 #' @param chromo Chromosome, from a row of the matrix `mat_cp`
 #' @export
 #' @examples
@@ -70,7 +48,7 @@ chromo2tau <- function(chromo) {
   setdiff(chromo[3:(k + 2)], c(0, max(chromo)))
 }
 
-#' @rdname cpt_gbmdl
+#' @rdname new_cpt_gbmdl
 #' @param mat_cp A matrix of potential changepoints
 #' @export
 mat_cp_2_list <- function(mat_cp) {
@@ -78,7 +56,7 @@ mat_cp_2_list <- function(mat_cp) {
     apply(1, chromo2tau, simplify = FALSE)
 }
 
-#' @rdname cpt_gbmdl
+#' @rdname new_cpt_gbmdl
 #' @export
 num_generations <- function(x) {
   x$params$num_generations
