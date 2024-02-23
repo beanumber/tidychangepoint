@@ -5,7 +5,6 @@
 \alias{unpad_tau}
 \alias{cut_inclusive}
 \alias{test_set}
-\alias{random_cpts}
 \alias{split_by_tau}
 \alias{deg_free}
 \title{Utility functions}
@@ -18,11 +17,9 @@ cut_inclusive(x, tau)
 
 test_set(n = 1, sd = 1, seed = NULL)
 
-random_cpts(x, n = 10, k = round(log(length(as.ts(x)))), ...)
-
 split_by_tau(x, tau)
 
-deg_free(x, ...)
+deg_free(x)
 }
 \arguments{
 \item{tau}{a numeric vector of changepoints}
@@ -36,17 +33,11 @@ deg_free(x, ...)
 \item{sd}{Standard deviation passed to \code{\link[stats:Normal]{stats::rnorm()}}}
 
 \item{seed}{Value passed to \code{\link[base:Random]{base::set.seed()}}}
-
-\item{k}{Rate function for Poisson distribution of mean changepoint set length.}
-
-\item{...}{currently ignored}
 }
 \description{
 Utility functions
 }
 \examples{
-random_cpts(DataCPSim, n = 5)
-
 split_by_tau(as.ts(lista_AG), changepoints(lista_AG))
 deg_free(segment(DataCPSim))
 }

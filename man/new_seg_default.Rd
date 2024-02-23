@@ -9,6 +9,7 @@
 \alias{nobs.seg_default}
 \alias{length.seg_default}
 \alias{changepoints.seg_default}
+\alias{BMDL.seg_default}
 \alias{logLik.seg_default}
 \alias{evaluate_cpts}
 \alias{evaluate_cpts.seg_default}
@@ -22,7 +23,13 @@
 \alias{plot_cpt_repeated}
 \title{Default class for candidate changepoint sets}
 \usage{
-new_seg_default(x = numeric(), cpt_list = list(), params = list(), ...)
+new_seg_default(
+  x = numeric(),
+  algorithm = NA,
+  cpt_list = list(),
+  params = list(),
+  ...
+)
 
 validate_seg_default(x)
 
@@ -37,6 +44,8 @@ seg_default(x, ...)
 \method{length}{seg_default}(x, ...)
 
 \method{changepoints}{seg_default}(x, ...)
+
+\method{BMDL}{seg_default}(x, ...)
 
 \method{logLik}{seg_default}(object, ...)
 
