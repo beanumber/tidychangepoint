@@ -23,12 +23,16 @@ new_cpt_gbmdl <- function(x = numeric(),
                           generation_size = 50, 
                           max_num_cp = 20, ...) {
   stopifnot(is.numeric(x))
-  out <- new_seg_default(x, params = list(
-    num_generations = num_generations, 
-    nhpp_dist = nhpp_dist, 
-    vec_dist_a_priori = vec_dist_a_priori,
-    mat_phi = mat_phi
-  ))
+  out <- new_seg_default(
+    x, 
+    algorithm = "GeneticBMDL", 
+    params = list(
+      num_generations = num_generations, 
+      nhpp_dist = nhpp_dist, 
+      vec_dist_a_priori = vec_dist_a_priori,
+      mat_phi = mat_phi
+    )
+  )
   out$mat_cp <- sim_k_cp_BMDL(x, generation_size)
   
   class(out) <- c("cpt_gbmdl", class(out))
@@ -60,21 +64,4 @@ mat_cp_2_list <- function(mat_cp) {
 #' @export
 num_generations <- function(x) {
   x$params$num_generations
-}
-
-#' Broom compatibility layer for changepoint
-#' @param x A `cpt_gbmdl` object
-#' @param ... arguments passed to methods
-#' @export
-#' @examples
-#' cpts <- lista_AG
-#' y <- augment(lista_AG)
-#' class(y)
-#' y
-#' tidy(cpts)
-#' glance(cpts)
-
-glance.cpt_gbmdl <- function(x, ...) {
-  NextMethod(x) |>
-    dplyr::mutate(algorithm = "GeneticBMDL")
 }

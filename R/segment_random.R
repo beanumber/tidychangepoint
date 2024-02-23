@@ -8,7 +8,13 @@
 #' 
 segment_random <- function(x, num_generations = 10, ...) {
   cpts <- random_cpts(x, n = num_generations)
-  new_seg_default(x, cpt_list = cpts, ...)
+  new_seg_default(
+    x, 
+    algorithm = "random",
+    cpt_list = cpts, 
+    params = list(num_generations = num_generations), 
+    ...
+  )
 }
 
 #' @rdname segment_random

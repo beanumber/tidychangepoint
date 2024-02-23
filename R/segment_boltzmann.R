@@ -1,6 +1,6 @@
 globalVariables("Bayesaian_MDL_k_cp")
 
-#' @rdname MaMBOltzmann
+#' Segment a times series using Boltzmann criteria for a genetic algorithm
 #' @description
 #' What does this function do? 
 #' 
@@ -8,6 +8,8 @@ globalVariables("Bayesaian_MDL_k_cp")
 #' @param x An `integer` vector. See [exceedances()].
 #' @param r number of generations
 #' @param k size of generation
+#' @param Mutation description
+#' @param Temperature description
 #' @return A `list` of length 2:
 #'   - A `numeric` vector of `FitnessGeneraciones`
 #'   - A `matrix` with `k` rows and `N` columns
@@ -55,11 +57,9 @@ segment_boltzmann <- function(x, r = 10, k = 50, Mutation = 0.03, Temperature = 
 }
 
 
-#' Boltzman
+#' @rdname segment_boltzmann
 #' @param mat_cp description
 #' @param Fitness description
-#' @param Mutation description
-#' @param Temperature description
 #' @export
 
 MaMBOltzmann <- function(mat_cp, Fitness, Mutation, Temperature) {

@@ -12,11 +12,15 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value"))
 #' as.ts(seg)
 #' changepoints(seg)
 
-new_seg_default <- function(x = numeric(), cpt_list = list(), params = list(), ...) {
+new_seg_default <- function(x = numeric(), 
+                            algorithm = NA, 
+                            cpt_list = list(), 
+                            params = list(), ...) {
   stopifnot(is.numeric(x))
   structure(
     list(
       data = stats::as.ts(x),
+      algorithm = algorithm,
       candidates = evaluate_cpts(cpt_list, .data = stats::as.ts(x)),
       params = params
     ), 
@@ -156,7 +160,7 @@ glance.seg_default <- function(x, ...) {
   tibble::tibble(
     pkg = "tidychangepoint",
     version = utils::packageVersion("tidychangepoint"),
-    algorithm = NA,
+    algorithm = x$algorithm,
     params = list(x$params),
     num_cpts = length(changepoints(x))
   )
