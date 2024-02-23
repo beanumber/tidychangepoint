@@ -13,13 +13,13 @@ globalVariables("Bayesaian_MDL_k_cp")
 #'   - A `matrix` with `k` rows and `N` columns
 #' @examples
 #' \dontrun{
-#'   GABoltzmannMutation2(exceedances(DataCPSim))
-#'   GABoltzmannMutation2(rlnorm_ts_1)
+#' x <- segment_boltzmann(DataCPSim, r = 5)
+#' y <- segment_boltzmann(rlnorm_ts_1)
 #'   
 #' }
 
-GABoltzmannMutation2 <- function(x, r = 50, k = 50, Mutation = 0.03, Temperature = 27) {
-  N <- max(x)
+segment_boltzmann <- function(x, r = 10, k = 50, Mutation = 0.03, Temperature = 27) {
+  N <- max(exceedances(x))
 
   mat_cp <- matrix(NA, nrow = k, ncol = N)
 
@@ -30,9 +30,13 @@ GABoltzmannMutation2 <- function(x, r = 50, k = 50, Mutation = 0.03, Temperature
   BestChromosomes <- matrix(NA, nrow = 1, ncol = ncol(mat_cp))
 
   for (i in 1:r) {
-    Fitness <- Bayesaian_MDL_k_cp(mat_cp, x)
-
-    FitnessGen[i] <- min(Fitness)
+    this_generation <- mat_cp |>
+      mat_cp_2_list() |>
+      evaluate_cpts(.data = as.ts(x))
+    
+    Fitness <- this_generation$bmdl
+    
+    FitnessGen[i] <- min(this_generation$bmdl)
 
     BestChromosomes <- rbind(
       BestChromosomes,
@@ -59,6 +63,7 @@ GABoltzmannMutation2 <- function(x, r = 50, k = 50, Mutation = 0.03, Temperature
 #' @export
 
 MaMBOltzmann <- function(mat_cp, Fitness, Mutation, Temperature) {
+  N <- ncol(mat_cp)
   FitnessMatrix <- data.frame(
     Index = rank(-Fitness),
     MDLScore = sort(Fitness,
