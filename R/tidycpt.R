@@ -146,6 +146,7 @@ tidy.tidycpt <- function(x, ...) {
 glance.tidycpt <- function(x, ...) {
   glance(x$segmenter) |>
     dplyr::mutate(
+      elapsed_time = x$elapsed_time,
       nhpp_logLik = logLik(x),
       nhpp_AIC = AIC(x),
       nhpp_BIC = BIC(x),

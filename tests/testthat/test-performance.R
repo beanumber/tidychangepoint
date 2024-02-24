@@ -13,7 +13,7 @@ test_that("test_sets works", {
   readr::write_rds(test_sets, file = here::here("tests/testthat/test_sets.rda"))
 })
 
-test_that("performance works", {
+test_that("algs works", {
   skip()
   test_sets <- readr::read_rds(here::here("tests/testthat/test_sets.rda"))
   test_sets <- test_sets |>
@@ -22,7 +22,12 @@ test_that("performance works", {
       genetic = purrr::map(data, segment, method = "cpt-gbmdl", num_generations = 10),
       bmdl_gbmdl = purrr::map_dbl(genetic, BMDL)
     )
+  readr::write_rds(test_sets, file = here::here("tests/testthat/test_sets.rda"))
+})
   
+test_that("performance works", {
+  skip()
+  test_sets <- readr::read_rds(here::here("tests/testthat/test_sets.rda"))
   test_long <- test_sets |>
     dplyr::select(ncpts_true, contains("bmdl")) |>
     tidyr::pivot_longer(cols = -ncpts_true, names_to = "algorithm", values_to = "bmdl")
@@ -37,3 +42,26 @@ test_that("performance works", {
       subtitle = paste(nrow(test_sets), "test data sets")
     )
 })
+
+test_that("running time works", {
+  skip()
+  test_sets <- readr::read_rds(here::here("tests/testthat/test_sets.rda"))
+  test_long <- test_sets |>
+    dplyr::mutate(
+      pelt_time = purrr::map_dbl(pelt, purrr::pluck, "elapsed_time"),
+      genetic_time = purrr::map_dbl(genetic, purrr::pluck, "elapsed_time")
+    ) |>
+    dplyr::select(ncpts_true, contains("time")) |>
+    tidyr::pivot_longer(cols = -ncpts_true, names_to = "algorithm", values_to = "time")
+  
+  ggplot2::ggplot(test_long, ggplot2::aes(x = ncpts_true, y = time, color = algorithm)) +
+    ggplot2::geom_point() +
+    ggplot2::geom_smooth(se = 0) + 
+    ggplot2::scale_x_continuous("True number of changepoints") +
+    ggplot2::scale_y_continuous("Elapsed time (seconds)") +
+    ggplot2::labs(
+      title = "Comparison of running time across algorithms",
+      subtitle = paste(nrow(test_sets), "test data sets")
+    )
+})
+

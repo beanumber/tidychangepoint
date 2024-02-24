@@ -71,15 +71,15 @@ segment.numeric <- function(x, method = "null", ...) {
 #' plot(two_cpts)
 #' diagnose(two_cpts)
 #' \dontrun{
-#' x <- segment(DataCPSim, method = "cpt-gbmdl")
+#' x <- segment(DataCPSim, method = "cpt-gbmdl", num_generations = 10)
 #' }
 #' 
 
 segment.ts <- function(x, method = "null", ...) {
   args <- list(...)
   message(paste("method:", method))
-  n <- length(x)
-  ds <- data.frame(y = x, t = 1:n)
+  begin <- Sys.time()
+  
   if (method == "cpt-pelt") {
     mod <- changepoint::cpt.meanvar(data = x, method = "PELT", ...)
   }
@@ -114,7 +114,8 @@ segment.ts <- function(x, method = "null", ...) {
   # build the tidycpt object
   obj <- list(
     segmenter = mod,
-    nhpp = fit_nhpp(as.ts(x), changepoints(mod))
+    nhpp = fit_nhpp(as.ts(x), changepoints(mod)),
+    elapsed_time = Sys.time() - begin
   )
   class(obj) <- c("tidycpt")
   return(obj)
