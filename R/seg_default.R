@@ -200,7 +200,6 @@ diagnose.seg_default <- function(x, ...) {
 #' @export
 #' @examples
 #' x <- segment(DataCPSim, method = "random", k = 10)
-#' plot_history(x)
 #' plot_history(x$segmenter)
 plot_history <- function(x, ...) {
   methods <- c("null", "single-best", "pelt")
@@ -217,8 +216,7 @@ plot_history <- function(x, ...) {
     dplyr::mutate(
       num_generation = dplyr::row_number()
     )
-  k <- num_generations(x)
-  
+
   best <- bmdl_seg |> 
     dplyr::arrange(bmdl) |> 
     utils::head(1)
@@ -246,7 +244,7 @@ plot_history <- function(x, ...) {
 #' @export
 #' @examples
 #' x <- segment(DataCPSim, method = "random", k = 10)
-#' plot_best_chromosome(x)
+#' plot_best_chromosome(x$segmenter)
 plot_best_chromosome <- function(x) {
   d <- x$candidates |> 
     dplyr::mutate(
@@ -278,8 +276,8 @@ plot_best_chromosome <- function(x) {
 #' @export
 #' @examples
 #' x <- segment(DataCPSim, method = "random", k = 10)
-#' plot_cpt_repeated(x)
-#' plot_cpt_repeated(x, 5)
+#' plot_cpt_repeated(x$segmenter)
+#' plot_cpt_repeated(x$segmenter, 5)
 plot_cpt_repeated <- function(x, i = nrow(x$candidates)) {
   
   x$candidates |>

@@ -53,12 +53,11 @@ segment.numeric <- function(x, method = "null", ...) {
 #' - `single-best`: Uses the AMOC criteria as implemented by 
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
 #' - `gbmdl`: Uses the Genetic BMDL heuristic as implemented by 
-#'   [segment_gbmdl()]. The `segmenter` is of class [new_cpt_gbmdl].
+#'   [segment_gbmdl()]. The `segmenter` is of class [seg_default()].
 #' - `manual`: Uses the vector of changepoints in the `cpts` arugment and
-#'   [stats::lm()]. The `segmenter` is of class `seg_default`.
+#'   [stats::lm()]. The `segmenter` is of class [seg_default()]`.
 #' - `null`: The default. Uses [stats::lm()] with no changepoints. 
-#'   The `segmenter` is of class `seg_default`.
-#' [stats::lm], or [new_cpt_gbmdl]
+#'   The `segmenter` is of class [seg_default()]`.
 #' @seealso [changepoint::cpt.meanvar()]
 #' @examples
 #' segment(DataCPSim, method = "pelt")

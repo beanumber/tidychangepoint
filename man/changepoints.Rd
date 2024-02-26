@@ -86,8 +86,8 @@ in the file name}
 Generic functions for tidycpt objects
 }
 \examples{
-plot_history(segment(DataCPSim, method = "random", k = 10)$segmenter)
-plot_history(lista_AG$segmenter)
+x <- segment(DataCPSim, method = "random", k = 10)
+plot_history(x$segmenter)
 x <- segment(DataCPSim, method = "pelt")
 BMDL(x)
 y <- segment(DataCPSim, method = "manual", cpts = 826)
