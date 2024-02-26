@@ -10,6 +10,7 @@ globalVariables("Bayesaian_MDL_k_cp")
 #' @param generation_size size of generation
 #' @param mutation_rate description
 #' @param temperature description
+#' @param show_progress_bar show a progress bar? 
 #' @return A `list` of length 2:
 #'   - A `numeric` vector of `FitnessGeneraciones`
 #'   - A `matrix` with `k` rows and `N` columns
@@ -73,7 +74,7 @@ segment_boltzmann <- function(x,
 #' @param Fitness description
 #' @export
 
-evolve_boltzmann <- function(mat_cp, Fitness, Mutation, Temperature) {
+evolve_boltzmann <- function(mat_cp, Fitness, mutation_rate, temperature) {
   N <- ncol(mat_cp)
   FitnessMatrix <- data.frame(
     Index = rank(-Fitness),
@@ -133,11 +134,11 @@ evolve_boltzmann <- function(mat_cp, Fitness, Mutation, Temperature) {
     }
     
     
-    FCBoltzmann1 <- exp(-FitnessMatrix[FatherCandidate1, "MDLScore"] / Temperature) / sum(exp(-FitnessMatrix$MDLScore / Temperature))
-    FCBoltzmann2 <- exp(-FitnessMatrix[FatherCandidate2, "MDLScore"] / Temperature) / sum(exp(-FitnessMatrix$MDLScore / Temperature))
+    FCBoltzmann1 <- exp(-FitnessMatrix[FatherCandidate1, "MDLScore"] / temperature) / sum(exp(-FitnessMatrix$MDLScore / temperature))
+    FCBoltzmann2 <- exp(-FitnessMatrix[FatherCandidate2, "MDLScore"] / temperature) / sum(exp(-FitnessMatrix$MDLScore / temperature))
     
-    MCBoltzmann1 <- exp(-FitnessMatrix[MotherCandidate1, "MDLScore"] / Temperature) / sum(exp(-FitnessMatrix$MDLScore / Temperature))
-    MCBoltzmann2 <- exp(-FitnessMatrix[MotherCandidate2, "MDLScore"] / Temperature) / sum(exp(-FitnessMatrix$MDLScore / Temperature))
+    MCBoltzmann1 <- exp(-FitnessMatrix[MotherCandidate1, "MDLScore"] / temperature) / sum(exp(-FitnessMatrix$MDLScore / temperature))
+    MCBoltzmann2 <- exp(-FitnessMatrix[MotherCandidate2, "MDLScore"] / temperature) / sum(exp(-FitnessMatrix$MDLScore / temperature))
     
     
     if (FCBoltzmann2 < FCBoltzmann1) {
@@ -167,7 +168,7 @@ evolve_boltzmann <- function(mat_cp, Fitness, Mutation, Temperature) {
       
       MutationRate <- stats::runif(1)
       
-      if (MutationRate <= Mutation) {
+      if (MutationRate <= mutation_rate) {
         Child <- Child + sample(c(-1, 0, 1), size = length(Child), prob = c(0.3, 0.4, 0.3), replace = TRUE)
       }
       

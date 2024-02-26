@@ -10,6 +10,7 @@
 \alias{MBIC.nhpp}
 \alias{changepoints.nhpp}
 \alias{exceedances.nhpp}
+\alias{mcdf}
 \alias{plot.nhpp}
 \title{Fit a non-homogeneous Poisson process model to the exceedances of a time series.}
 \usage{
@@ -19,7 +20,7 @@ fit_nhpp(x, tau)
 
 \method{length}{nhpp}(x, ...)
 
-\method{nobs}{nhpp}(x, ...)
+\method{nobs}{nhpp}(object, ...)
 
 \method{logLik}{nhpp}(object, ...)
 
@@ -30,6 +31,8 @@ fit_nhpp(x, tau)
 \method{changepoints}{nhpp}(x, ...)
 
 \method{exceedances}{nhpp}(x, ...)
+
+mcdf(x, dist = "weibull")
 
 \method{plot}{nhpp}(x, ...)
 }
@@ -44,14 +47,18 @@ fit_nhpp(x, tau)
 
 \item{...}{arguments passed to \code{\link[stats:optim]{stats::optim()}}}
 
-\item{x}{A time series}
+\item{x}{An \code{nhpp} object}
 
 \item{tau}{A vector of changepoints.}
 
 \item{object}{An \code{nhpp} object}
+
+\item{dist}{Name of the distribution}
 }
 \value{
 A \code{tbl_df} with each row representing one region.
+
+a numeric vector of length equal to the \link{exceedances} of \code{x}
 }
 \description{
 Any times series can be modeled as a non-homogeneous Poisson process of the
@@ -63,6 +70,9 @@ region defined by the changepoint set returned by \code{\link[=changepoints]{cha
 fit_nhpp_region(exceedances(lista_AG), 0, 575)
 fit_nhpp(DataCPSim, tau = 826)
 fit_nhpp(as.ts(lista_AG), tau = changepoints(lista_AG))
+nhpp <- fit_nhpp(lista_AG$segmenter, tau = changepoints(lista_AG))
+mcdf(nhpp)
+
 plot(fit_nhpp(DataCPSim, tau = 826))
 }
 \references{

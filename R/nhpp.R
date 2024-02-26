@@ -111,8 +111,8 @@ length.nhpp <- function(x, ...) {
 
 #' @rdname fit_nhpp
 #' @export
-nobs.nhpp <- function(x, ...) {
-  max(x$end)
+nobs.nhpp <- function(object, ...) {
+  max(object$end)
 }
 
 #' @rdname fit_nhpp
@@ -160,7 +160,7 @@ exceedances.nhpp <- function(x, ...) {
 }
 
 
-#' Mean cumulative exceedances function
+#' @rdname fit_nhpp
 #' @param x An `nhpp` object
 #' @param dist Name of the distribution
 #' @export

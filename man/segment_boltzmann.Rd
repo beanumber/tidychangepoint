@@ -14,7 +14,7 @@ segment_boltzmann(
   show_progress_bar = TRUE
 )
 
-evolve_boltzmann(mat_cp, Fitness, Mutation, Temperature)
+evolve_boltzmann(mat_cp, Fitness, mutation_rate, temperature)
 }
 \arguments{
 \item{x}{An \code{integer} vector. See \code{\link[=exceedances]{exceedances()}}.}
@@ -26,6 +26,8 @@ evolve_boltzmann(mat_cp, Fitness, Mutation, Temperature)
 \item{mutation_rate}{description}
 
 \item{temperature}{description}
+
+\item{show_progress_bar}{show a progress bar?}
 
 \item{mat_cp}{description}
 
