@@ -4,14 +4,41 @@
 \alias{segment_gbmdl}
 \title{Algoritmo genético de Bayesian MDL a un paso}
 \usage{
-segment_gbmdl(x, num_generations = 50, show_progress_bar = TRUE)
+segment_gbmdl(
+  x,
+  num_generations = 50,
+  nhpp_dist = c("W", "EW", "GGO", "MO", "GO")[1],
+  vec_dist_a_priori = c("Gamma", "Gamma"),
+  mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2),
+  generation_size = 50,
+  max_num_cp = 20,
+  show_progress_bar = TRUE,
+  ...
+)
 }
 \arguments{
-\item{x}{a vector that can be coerced into a \code{ts}}
+\item{x}{an object coercible into a time series object via \code{\link[stats:ts]{stats::as.ts()}}}
 
 \item{num_generations}{Number of generations to evolve}
 
+\item{nhpp_dist}{toma valores en c("W","EW","GGO","MO","GO") y es el nombre de
+la función de tasa del NHPP}
+
+\item{vec_dist_a_priori}{vector de los nobmres de las distribuciones a priori
+que se utilizan; eg c("Gamma","Gamma") y c("Gamma","Gamma","Gamma")}
+
+\item{mat_phi}{matriz cuyos renglones tiene los parámetros de las
+distribuciones a priori; cada renglón tiene todos los parametros de una
+distribución}
+
+\item{generation_size}{tamaño de las generaciones}
+
+\item{max_num_cp}{el máximo número de rebases. Este parámetro se ocupa en
+particular para que todos los cromosomas quepan en una matriz.}
+
 \item{show_progress_bar}{show the progress bar?}
+
+\item{...}{arguments passed to methods}
 }
 \value{
 A \code{cpt_gbmdl} object

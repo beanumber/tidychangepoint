@@ -38,6 +38,6 @@ deg_free(x)
 Utility functions
 }
 \examples{
-split_by_tau(as.ts(lista_AG), changepoints(lista_AG))
+split_by_tau(DataCPSim, c(365, 826))
 deg_free(segment(DataCPSim))
 }

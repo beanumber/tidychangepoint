@@ -12,6 +12,8 @@
 \alias{sim_k_cp_BMDL}
 \alias{probs_vec_MDL}
 \alias{selec_k_pares_de_padres}
+\alias{chromo2tau}
+\alias{mat_cp_2_list}
 \title{Generate a list of candidate changepoints using a genetic algorithm}
 \usage{
 evolve_gbmdl(x, mat_cp, these_bmdls)
@@ -44,11 +46,15 @@ sim_k_cp_BMDL(x, generation_size = 50, max_num_cp = 20)
 probs_vec_MDL(vec_MDL, probs_rank0_MDL1 = 0)
 
 selec_k_pares_de_padres(vec_probs)
+
+chromo2tau(chromo)
+
+mat_cp_2_list(mat_cp)
 }
 \arguments{
 \item{x}{A time series object}
 
-\item{mat_cp}{A matrix containing a list of candidate chromosomes}
+\item{mat_cp}{A matrix of potential changepoints}
 
 \item{these_bmdls}{vector of \code{\link[=BMDL]{BMDL()}} scores}
 
@@ -111,6 +117,8 @@ cambio cuando solo se tiene rank esta ventaja gran ventaja se reduce}
 
 \item{vec_probs}{vector de probabilidades de selección de cada uno de los
 cromosomas}
+
+\item{chromo}{Chromosome, from a row of the matrix \code{mat_cp}}
 }
 \value{
 regresa una matriz de las mismas dimensiones que mat_cp, pero con los
@@ -153,7 +161,7 @@ por lo cual se nosotros:
 }
 }
 \examples{
-mat_cp <- lista_AG$segmenter$mat_cp
+mat_cp <- sim_k_cp_BMDL(DataCPSim)
 bmdls <- mat_cp |> mat_cp_2_list() |> evaluate_cpts(.data = as.ts(DataCPSim)) |> dplyr::pull(bmdl)
 evolve_gbmdl(exceedances(DataCPSim), mat_cp, bmdls)
 sim_1_cp_BMDL(exceedances(DataCPSim))
@@ -163,4 +171,6 @@ sim_1_cp_BMDL(exceedances(rlnorm_ts_3))
 
 sim_k_cp_BMDL(DataCPSim)
 
+chromo <- c(4, 1, 557, 877 , 905, 986, 1096, 0, 0, 0)
+chromo2tau(chromo)
 }

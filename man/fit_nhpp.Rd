@@ -69,8 +69,8 @@ region defined by the changepoint set returned by \code{\link[=changepoints]{cha
 \examples{
 fit_nhpp_region(exceedances(DataCPSim), 0, 575)
 fit_nhpp(DataCPSim, tau = 826)
-fit_nhpp(as.ts(lista_AG), tau = changepoints(lista_AG))
-nhpp <- fit_nhpp(lista_AG$segmenter, tau = changepoints(lista_AG))
+fit_nhpp(DataCPSim, tau = changepoints(segment(DataCPSim, method = "pelt")))
+nhpp <- fit_nhpp(DataCPSim, tau = 826)
 mcdf(nhpp)
 
 plot(fit_nhpp(DataCPSim, tau = 826))
