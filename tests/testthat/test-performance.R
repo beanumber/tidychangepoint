@@ -33,10 +33,10 @@ test_that("performance works", {
     tidyr::pivot_longer(cols = -ncpts_true, names_to = "algorithm", values_to = "bmdl")
   
   ggplot2::ggplot(test_long, ggplot2::aes(x = ncpts_true, y = bmdl, color = algorithm)) +
-    ggplot2::geom_point() +
+    ggplot2::geom_jitter(width = 0.1, alpha = 0.8) +
     ggplot2::geom_smooth(se = 0) + 
     ggplot2::scale_x_continuous("True number of changepoints") +
-    ggplot2::scale_y_continuous("BDML") +
+    ggplot2::scale_y_continuous("BMDL") +
     ggplot2::labs(
       title = "Comparison of BMDL scores across algorithms",
       subtitle = paste(nrow(test_sets), "test data sets")
