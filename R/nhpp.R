@@ -11,7 +11,7 @@ globalVariables(c(
 #' @param ... arguments passed to [stats::optim()]
 #' @export
 #' @examples
-#' fit_nhpp_region(exceedances(lista_AG), 0, 575)
+#' fit_nhpp_region(exceedances(DataCPSim), 0, 575)
 fit_nhpp_region <- function(exc, tau_left, tau_right, 
                                 params = parameters_weibull(), ...) {
   # Definimos las funciones que vamos a utilizar para encontrar el mínimo
@@ -55,7 +55,7 @@ fit_nhpp_region <- function(exc, tau_left, tau_right,
 #' @export
 #' @examples
 #' fit_nhpp(DataCPSim, tau = 826)
-#' fit_nhpp(as.ts(lista_AG), tau = changepoints(lista_AG))
+#' fit_nhpp(DataCPSim, tau = changepoints(segment(DataCPSim, method = "pelt")))
 
 fit_nhpp <- function(x, tau) {
   exc <- exceedances(x)
@@ -166,7 +166,7 @@ exceedances.nhpp <- function(x, ...) {
 #' @export
 #' @return a numeric vector of length equal to the [exceedances] of `x`
 #' @examples
-#' nhpp <- fit_nhpp(lista_AG$segmenter, tau = changepoints(lista_AG))
+#' nhpp <- fit_nhpp(DataCPSim, tau = 826)
 #' mcdf(nhpp)
 #' 
 

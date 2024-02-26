@@ -21,7 +21,7 @@ regresa la evaluación de la penalización
 Penalización MDL
 }
 \examples{
-x <- segment(DataCPSim, method = "cpt-pelt")
+x <- segment(DataCPSim, method = "pelt")
 tau <- changepoints(x)
 penalty_mdl(pad_tau(tau, n = length(x)))
 

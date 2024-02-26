@@ -32,25 +32,25 @@
 Compatibility layer for changepoint
 }
 \examples{
-cpts <- segment(DataCPSim, method = "cpt-pelt")
+cpts <- segment(DataCPSim, method = "pelt")
 class(cpts)
 y <- augment(cpts)
 class(y)
 y
 tidy(cpts)
 glance(cpts)
-cpts <- segment(DataCPSim, method = "cpt-pelt")
+cpts <- segment(DataCPSim, method = "pelt")
 as.ts(cpts)
 
-cpts <- segment(DataCPSim, method = "cpt-pelt")
+cpts <- segment(DataCPSim, method = "pelt")
 nobs(cpts)
 
-cpts <- segment(DataCPSim, method = "cpt-pelt", penalty = "BIC")
+cpts <- segment(DataCPSim, method = "pelt", penalty = "BIC")
 logLik(cpts)
-cpts <- segment(DataCPSim, method = "cpt-pelt", penalty = "AIC")
+cpts <- segment(DataCPSim, method = "pelt", penalty = "AIC")
 logLik(cpts)
 
-cpts <- segment(DataCPSim, method = "cpt-pelt")
+cpts <- segment(DataCPSim, method = "pelt")
 changepoints(cpts)
 
 }

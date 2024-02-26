@@ -45,7 +45,6 @@ globalVariables(
 #' }
 #' 
 segment_gbmdl <- function(x, num_generations = 50, show_progress_bar = TRUE) {
-  # lista_AG contiene los resultados del algoritmo genético
   obj <- new_cpt_gbmdl(x, num_generations = num_generations)
   
   pb <- utils::txtProgressBar(min = 1, max = num_generations(obj), style = 3, width = 60)
@@ -92,7 +91,7 @@ segment_gbmdl <- function(x, num_generations = 50, show_progress_bar = TRUE) {
 #' @param these_bmdls vector of [BMDL()] scores
 #' @export
 #' @examples
-#' mat_cp <- lista_AG$segmenter$mat_cp
+#' mat_cp <- sim_k_cp_BMDL(DataCPSim)
 #' bmdls <- mat_cp |> mat_cp_2_list() |> evaluate_cpts(.data = as.ts(DataCPSim)) |> dplyr::pull(bmdl)
 #' evolve_gbmdl(exceedances(DataCPSim), mat_cp, bmdls)
 

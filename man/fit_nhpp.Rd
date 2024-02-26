@@ -67,7 +67,7 @@ uses the \code{\link[=BMDL]{BMDL()}} criteria to determine the best fit paramete
 region defined by the changepoint set returned by \code{\link[=changepoints]{changepoints()}}.
 }
 \examples{
-fit_nhpp_region(exceedances(lista_AG), 0, 575)
+fit_nhpp_region(exceedances(DataCPSim), 0, 575)
 fit_nhpp(DataCPSim, tau = 826)
 fit_nhpp(as.ts(lista_AG), tau = changepoints(lista_AG))
 nhpp <- fit_nhpp(lista_AG$segmenter, tau = changepoints(lista_AG))

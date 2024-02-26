@@ -31,7 +31,7 @@ The `segment()` function takes a numeric vector that is coercible into a `ts` ob
 `segment()` always returns a `tidycpt` object. 
 
 ```{r}
-cpts <- segment(DataCPSim, method = "cpt-pelt")
+cpts <- segment(DataCPSim, method = "pelt")
 class(cpts)
 ```
 
@@ -130,23 +130,23 @@ DataCPSim |>
 
 ### Genetic BMDL
 
-- `method = "cpt-gbmdl"`: implements the Genetic BMDL heuristic
+- `method = "gbmdl"`: implements the Genetic BMDL heuristic
 
 ```{r gbmdl-tidyplot}
-# DataCPSim |>
-#   segment(method = "cpt-gbmdl")
-changepoints(lista_AG)
-diagnose(lista_AG)
+x <- DataCPSim |>
+  segment(method = "gbmdl", num_generations = 5)
+changepoints(x)
+diagnose(x)
 ```
 
 Diagnostic plots are also available. 
 
 ```{r plot-gbmdl}
-plot(lista_AG$segmenter)
+plot(x$segmenter)
 ```
 
 ```{r diagnostic}
-diagnose(lista_AG$segmenter)
+diagnose(x$segmenter)
 ```
 
 

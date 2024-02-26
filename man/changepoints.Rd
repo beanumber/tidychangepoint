@@ -20,8 +20,6 @@
 \alias{tidy.tidycpt}
 \alias{glance.tidycpt}
 \alias{params}
-\alias{regions}
-\alias{regions.tidycpt}
 \alias{plot.tidycpt}
 \alias{diagnose}
 \alias{diagnose.tidycpt}
@@ -66,10 +64,6 @@ BMDL(x, ...)
 
 params(x, ...)
 
-regions(x, ...)
-
-\method{regions}{tidycpt}(x, ...)
-
 \method{plot}{tidycpt}(x, ...)
 
 diagnose(x, ...)
@@ -94,7 +88,7 @@ Generic functions for tidycpt objects
 \examples{
 plot_history(segment(DataCPSim, method = "random", k = 10)$segmenter)
 plot_history(lista_AG$segmenter)
-x <- segment(DataCPSim, method = "cpt-pelt")
+x <- segment(DataCPSim, method = "pelt")
 BMDL(x)
 y <- segment(DataCPSim, method = "manual", cpts = 826)
 BMDL(y)
@@ -102,11 +96,11 @@ z <- segment(DataCPSim, method = "single-best")
 BMDL(z)
 diagnose(segment(DataCPSim))
 diagnose(segment(DataCPSim, method = "single-best"))
-diagnose(segment(DataCPSim, method = "cpt-pelt"))
+diagnose(segment(DataCPSim, method = "pelt"))
 diagnose(segment(test_set()))
-diagnose(segment(test_set(n = 2, sd = 4), method = "cpt-pelt"))
+diagnose(segment(test_set(n = 2, sd = 4), method = "pelt"))
 
-file_name(segment(DataCPSim, method = "cpt-pelt"))
+file_name(segment(DataCPSim, method = "pelt"))
 }
 \references{
 Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}

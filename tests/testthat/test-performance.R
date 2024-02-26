@@ -8,7 +8,7 @@ test_that("test_sets works", {
       ncpts_true = purrr::map_int(cpt_true, length),
       nhpp_true = purrr::map2(data, cpt_true, fit_nhpp),
       bmdl_true = purrr::map_dbl(nhpp_true, BMDL),
-      pelt = purrr::map(data, segment, method = "cpt-pelt"),
+      pelt = purrr::map(data, segment, method = "pelt"),
     )
   readr::write_rds(test_sets, file = here::here("tests/testthat/test_sets.rda"))
 })
@@ -19,7 +19,7 @@ test_that("algs works", {
   test_sets <- test_sets |>
     dplyr::mutate(
       bmdl_pelt = purrr::map_dbl(pelt, BMDL),
-      genetic = purrr::map(data, segment, method = "cpt-gbmdl", num_generations = 10),
+      genetic = purrr::map(data, segment, method = "gbmdl", num_generations = 10),
       bmdl_gbmdl = purrr::map_dbl(genetic, BMDL)
     )
   readr::write_rds(test_sets, file = here::here("tests/testthat/test_sets.rda"))

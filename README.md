@@ -33,10 +33,10 @@ indicating the algorithm you wish you use. `segment()` always returns a
 `tidycpt` object.
 
 ``` r
-cpts <- segment(DataCPSim, method = "cpt-pelt")
+cpts <- segment(DataCPSim, method = "pelt")
 ```
 
-    ## method: cpt-pelt
+    ## method: pelt
 
 ``` r
 class(cpts)
@@ -106,12 +106,12 @@ tidy(cpts)
 glance(cpts)
 ```
 
-    ## # A tibble: 1 × 13
-    ##   pkg     version algorithm test_stat  MBIC num_cpts num_cpts_max min_seg_length
-    ##   <chr>   <chr>   <chr>     <chr>     <dbl>    <int>        <dbl>          <dbl>
-    ## 1 change… 2.2.4   PELT      Normal     28.0        4          Inf              2
-    ## # ℹ 5 more variables: nhpp_logLik <logLik>, nhpp_AIC <dbl>, nhpp_BIC <dbl>,
-    ## #   nhpp_MBIC <dbl>, nhpp_BMDL <dbl>
+    ## # A tibble: 1 × 11
+    ##   pkg         version algorithm params       num_cpts elapsed_time   nhpp_logLik
+    ##   <chr>       <chr>   <chr>     <list>          <int> <drtn>         <logLik>   
+    ## 1 changepoint 2.2.4   PELT      <named list>        3 0.1117537 secs -525.8797  
+    ## # ℹ 4 more variables: nhpp_AIC <dbl>, nhpp_BIC <dbl>, nhpp_MBIC <dbl>,
+    ## #   nhpp_BMDL <dbl>
 
 ### Other methods
 
@@ -131,9 +131,12 @@ modeled as a non-homogeneous Poisson process.
 diagnose(cpts)
 ```
 
-    ## Warning: Removed 2 rows containing missing values (`geom_line()`).
-    ## Removed 2 rows containing missing values (`geom_line()`).
-    ## Removed 2 rows containing missing values (`geom_line()`).
+    ## Warning: Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
+    ## Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
+    ## Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
 
 ![](README_files/figure-gfm/diagnose-1.png)<!-- -->
 
@@ -167,9 +170,12 @@ DataCPSim |>
 
     ## method: null
 
-    ## Warning: Removed 2 rows containing missing values (`geom_line()`).
-    ## Removed 2 rows containing missing values (`geom_line()`).
-    ## Removed 2 rows containing missing values (`geom_line()`).
+    ## Warning: Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
+    ## Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
+    ## Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
 
 ![](README_files/figure-gfm/null-plot-1.png)<!-- -->
 
@@ -184,9 +190,12 @@ DataCPSim |>
 
     ## method: manual
 
-    ## Warning: Removed 2 rows containing missing values (`geom_line()`).
-    ## Removed 2 rows containing missing values (`geom_line()`).
-    ## Removed 2 rows containing missing values (`geom_line()`).
+    ## Warning: Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
+    ## Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
+    ## Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
 
 ![](README_files/figure-gfm/manual-plot-1.png)<!-- -->
 
@@ -201,9 +210,12 @@ DataCPSim |>
 
     ## method: single-best
 
-    ## Warning: Removed 2 rows containing missing values (`geom_line()`).
-    ## Removed 2 rows containing missing values (`geom_line()`).
-    ## Removed 2 rows containing missing values (`geom_line()`).
+    ## Warning: Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
+    ## Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
+    ## Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
 
 ![](README_files/figure-gfm/amoc-plot-1.png)<!-- -->
 
@@ -217,57 +229,86 @@ DataCPSim |>
 
     ## method: random
 
-    ## Warning: Removed 2 rows containing missing values (`geom_line()`).
-    ## Removed 2 rows containing missing values (`geom_line()`).
-    ## Removed 2 rows containing missing values (`geom_line()`).
+    ## Warning: Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
+    ## Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
+    ## Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
 
 ![](README_files/figure-gfm/random-plot-1.png)<!-- -->
 
 ### Genetic BMDL
 
-- `method = "cpt-gbmdl"`: implements the Genetic BMDL heuristic
+- `method = "gbmdl"`: implements the Genetic BMDL heuristic
 
 ``` r
-# DataCPSim |>
-#   segment(method = "cpt-gbmdl")
-changepoints(lista_AG)
+x <- DataCPSim |>
+  segment(method = "gbmdl", num_generations = 5)
 ```
 
-    ## [1] 548 830
+    ## method: gbmdl
+
+    ##   |                                                                    |                                                            |   0%  |                                                                    |===============                                             |  25%  |                                                                    |==============================                              |  50%  |                                                                    |=============================================               |  75%  |                                                                    |============================================================| 100%
 
 ``` r
-diagnose(lista_AG)
+changepoints(x)
 ```
 
-    ## Warning: Removed 2 rows containing missing values (`geom_line()`).
-    ## Removed 2 rows containing missing values (`geom_line()`).
-    ## Removed 2 rows containing missing values (`geom_line()`).
+    ## [1] 415 488 824
+
+``` r
+diagnose(x)
+```
+
+    ## Warning: Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
+    ## Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
+    ## Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_line()`).
 
 ![](README_files/figure-gfm/gbmdl-tidyplot-1.png)<!-- -->
 
 Diagnostic plots are also available.
 
 ``` r
-plot(lista_AG$segmenter)
+plot(x$segmenter)
 ```
 
     ## method: null
 
     ## method: single-best
 
-    ## method: cpt-pelt
+    ## method: pelt
 
     ## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
+
+    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric,
+    ## : span too small.  fewer data values than degrees of freedom.
+
+    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric,
+    ## : pseudoinverse used at 0.98
+
+    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric,
+    ## : neighborhood radius 2.02
+
+    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric,
+    ## : reciprocal condition number 0
+
+    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric,
+    ## : There are other near singularities as well. 4.0804
 
 ![](README_files/figure-gfm/plot-gbmdl-1.png)<!-- -->
 
 ``` r
-diagnose(lista_AG$segmenter)
+diagnose(x$segmenter)
 ```
 
     ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
 
-    ## Warning: Removed 2 rows containing missing values (`geom_bar()`).
+    ## Warning: Removed 2 rows containing missing values or values outside the scale range
+    ## (`geom_bar()`).
 
 ![](README_files/figure-gfm/diagnostic-1.png)<!-- -->
 

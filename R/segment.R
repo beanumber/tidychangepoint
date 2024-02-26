@@ -44,15 +44,15 @@ segment.numeric <- function(x, method = "null", ...) {
 #'   This object also has class `nhpp`
 #' @details Currently, [segment()] can use the following algorithms, depending
 #' on the value of the `method` argument:
-#' - `cpt-pelt`: Uses the PELT algorithm as implemented in 
+#' - `pelt`: Uses the PELT algorithm as implemented in 
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
-#' - `cpt-binseg`: Uses the Binary Segmentation algorithm as implemented by 
+#' - `binseg`: Uses the Binary Segmentation algorithm as implemented by 
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
-#' - `cpt-segneigh`: Uses the Segmented Neighborhood algorithm as implemented by 
+#' - `segneigh`: Uses the Segmented Neighborhood algorithm as implemented by 
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
 #' - `single-best`: Uses the AMOC criteria as implemented by 
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
-#' - `cpt-gbmdl`: Uses the Genetic BMDL heuristic as implemented by 
+#' - `gbmdl`: Uses the Genetic BMDL heuristic as implemented by 
 #'   [segment_gbmdl()]. The `segmenter` is of class [new_cpt_gbmdl].
 #' - `manual`: Uses the vector of changepoints in the `cpts` arugment and
 #'   [stats::lm()]. The `segmenter` is of class `seg_default`.
@@ -61,17 +61,17 @@ segment.numeric <- function(x, method = "null", ...) {
 #' [stats::lm], or [new_cpt_gbmdl]
 #' @seealso [changepoint::cpt.meanvar()]
 #' @examples
-#' segment(DataCPSim, method = "cpt-pelt")
-#' segment(DataCPSim, method = "cpt-pelt", penalty = "AIC")
-#' segment(DataCPSim, method = "cpt-binseg", penalty = "AIC")
-#' segment(DataCPSim, method = "cpt-segneigh", penalty = "BIC")
+#' segment(DataCPSim, method = "pelt")
+#' segment(DataCPSim, method = "pelt", penalty = "AIC")
+#' segment(DataCPSim, method = "binseg", penalty = "AIC")
+#' segment(DataCPSim, method = "segneigh", penalty = "BIC")
 #' segment(DataCPSim, method = "random", num_generations = 10)
 #' segment(DataCPSim, method = "manual", cpts = c(826))
 #' two_cpts <- segment(DataCPSim, method = "manual", cpts = c(365, 826))
 #' plot(two_cpts)
 #' diagnose(two_cpts)
 #' \dontrun{
-#' x <- segment(DataCPSim, method = "cpt-gbmdl", num_generations = 10)
+#' x <- segment(DataCPSim, method = "gbmdl", num_generations = 10)
 #' }
 #' 
 
@@ -80,19 +80,19 @@ segment.ts <- function(x, method = "null", ...) {
   message(paste("method:", method))
   begin <- Sys.time()
   
-  if (method == "cpt-pelt") {
+  if (method == "pelt") {
     mod <- changepoint::cpt.meanvar(data = x, method = "PELT", ...)
   }
-  if (method == "cpt-binseg") {
+  if (method == "binseg") {
     mod <- changepoint::cpt.meanvar(data = x, method = "BinSeg", ...)
   }
-  if (method == "cpt-segneigh") {
+  if (method == "segneigh") {
     mod <- changepoint::cpt.meanvar(data = x, method = "SegNeigh", ...)
   }
   if (method == "single-best") {
     mod <- changepoint::cpt.meanvar(data = x, method = "AMOC", ...)
   }
-  if (method == "cpt-gbmdl") {
+  if (method == "gbmdl") {
     mod <- segment_gbmdl(x, ...)
   }
   if (method == "boltzmann") {

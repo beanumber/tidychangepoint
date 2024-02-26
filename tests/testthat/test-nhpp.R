@@ -1,6 +1,5 @@
 test_that("generics works", {
-  tau <- changepoints(lista_AG)
-  theta <- fit_nhpp(lista_AG$segmenter, tau)
+  theta <- fit_nhpp(DataCPSim, tau = 826)
   
   expect_type(changepoints(theta), "integer")
   expect_type(exceedances(theta), "integer")
@@ -9,13 +8,13 @@ test_that("generics works", {
   expect_type(MBIC(theta), "double")
   
   m <- mcdf(theta)
-  expect_equal(length(m), length(exceedances(lista_AG)))
+  expect_equal(length(m), length(exceedances(theta)))
 })
 
 
 test_that("BMDL works", {
   y <- test_set(n = 1, seed = 123)
-  seg <- segment(y, method = "cpt-pelt")
+  seg <- segment(y, method = "pelt")
   expect_s3_class(logLik(seg), "logLik")
   expect_type(BMDL(seg), "double")
 })

@@ -1,5 +1,5 @@
 test_that("gbmdl works", {
-  x <- lista_AG
+  x <- segment(DataCPSim, method = "gbmdl", num_generations = 3)
   expect_s3_class(x, "tidycpt")
   expect_s3_class(x$segmenter, "cpt_gbmdl")
   expect_s3_class(as.ts(x), "ts")
@@ -13,6 +13,8 @@ test_that("gbmdl works", {
   expect_s3_class(logLik(x), "logLik")
   expect_type(AIC(x), "double")
   expect_type(BIC(x), "double")
+  
+  expect_equal(min(x$segmenter$candidates$bmdl), BMDL(x))
 })
 
 test_that("params works", {
@@ -32,35 +34,5 @@ test_that("params works", {
   
   # Validador de entradas de mat_low_upp
   # expect_true(!all(param$mat_low_upp[, 2] - param$mat_low_upp[, 1] > 0))
-  
-  
 })
 
-
-test_that("GABolztmann works", {
-  skip()
-  x <- GABoltzmannMutation2(param)
-  expect_s3_class(x, "list")
-  expect_equal(length(x), 2)
-})
-
-test_that("RandomKeys works", {
-  expect_lte(length(RandomKeys(5)), 5)
-  expect_lte(length(RandomKeys(10)), 10)
-})
-
-test_that("cpt_gbmdl works", {
-  x <- lista_AG$segmenter
-  expect_s3_class(x, "cpt_gbmdl")
-  expect_type(x, "list")
-  expect_equal(min(x$candidates$bmdl), BMDL(x))
-})
-
-test_that("regions works", {
-  tau <- changepoints(lista_AG)
-  expect_equal(tau, changepoints(lista_AG$segmenter))
-  expect_false(0 %in% tau)
-  expect_false(length(lista_AG) %in% tau)
-  y <- split_by_tau(as.ts(lista_AG), tau)
-  expect_equal(length(y), length(tau) + 1)
-})

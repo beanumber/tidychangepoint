@@ -40,15 +40,15 @@ sets in univariate time series.
 Currently, \code{\link[=segment]{segment()}} can use the following algorithms, depending
 on the value of the \code{method} argument:
 \itemize{
-\item \code{cpt-pelt}: Uses the PELT algorithm as implemented in
+\item \code{pelt}: Uses the PELT algorithm as implemented in
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
-\item \code{cpt-binseg}: Uses the Binary Segmentation algorithm as implemented by
+\item \code{binseg}: Uses the Binary Segmentation algorithm as implemented by
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
-\item \code{cpt-segneigh}: Uses the Segmented Neighborhood algorithm as implemented by
+\item \code{segneigh}: Uses the Segmented Neighborhood algorithm as implemented by
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
 \item \code{single-best}: Uses the AMOC criteria as implemented by
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
-\item \code{cpt-gbmdl}: Uses the Genetic BMDL heuristic as implemented by
+\item \code{gbmdl}: Uses the Genetic BMDL heuristic as implemented by
 \code{\link[=segment_gbmdl]{segment_gbmdl()}}. The \code{segmenter} is of class \link{new_cpt_gbmdl}.
 \item \code{manual}: Uses the vector of changepoints in the \code{cpts} arugment and
 \code{\link[stats:lm]{stats::lm()}}. The \code{segmenter} is of class \code{seg_default}.
@@ -62,17 +62,17 @@ mod_null <- segment(DataCPSim)
 augment(mod_null)
 tidy(mod_null)
 glance(mod_null)
-segment(DataCPSim, method = "cpt-pelt")
-segment(DataCPSim, method = "cpt-pelt", penalty = "AIC")
-segment(DataCPSim, method = "cpt-binseg", penalty = "AIC")
-segment(DataCPSim, method = "cpt-segneigh", penalty = "BIC")
+segment(DataCPSim, method = "pelt")
+segment(DataCPSim, method = "pelt", penalty = "AIC")
+segment(DataCPSim, method = "binseg", penalty = "AIC")
+segment(DataCPSim, method = "segneigh", penalty = "BIC")
 segment(DataCPSim, method = "random", num_generations = 10)
 segment(DataCPSim, method = "manual", cpts = c(826))
 two_cpts <- segment(DataCPSim, method = "manual", cpts = c(365, 826))
 plot(two_cpts)
 diagnose(two_cpts)
 \dontrun{
-x <- segment(DataCPSim, method = "cpt-gbmdl", num_generations = 10)
+x <- segment(DataCPSim, method = "gbmdl", num_generations = 10)
 }
 
 }

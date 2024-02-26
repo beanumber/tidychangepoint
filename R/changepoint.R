@@ -3,7 +3,7 @@
 #' @param ... arguments passed to methods
 #' @export
 #' @examples
-#' cpts <- segment(DataCPSim, method = "cpt-pelt")
+#' cpts <- segment(DataCPSim, method = "pelt")
 #' class(cpts)
 #' y <- augment(cpts)
 #' class(y)
@@ -38,7 +38,7 @@ params.cpt <- function(x, ...) {
 #' @rdname glance.cpt
 #' @export
 #' @examples
-#' cpts <- segment(DataCPSim, method = "cpt-pelt")
+#' cpts <- segment(DataCPSim, method = "pelt")
 #' as.ts(cpts)
 #' 
 as.ts.cpt <- function(x, ...) {
@@ -49,7 +49,7 @@ as.ts.cpt <- function(x, ...) {
 #' @param object A `cpt` object.
 #' @export
 #' @examples
-#' cpts <- segment(DataCPSim, method = "cpt-pelt")
+#' cpts <- segment(DataCPSim, method = "pelt")
 #' nobs(cpts)
 #' 
 nobs.cpt <- function(object, ...) {
@@ -59,9 +59,9 @@ nobs.cpt <- function(object, ...) {
 #' @rdname glance.cpt
 #' @export
 #' @examples
-#' cpts <- segment(DataCPSim, method = "cpt-pelt", penalty = "BIC")
+#' cpts <- segment(DataCPSim, method = "pelt", penalty = "BIC")
 #' logLik(cpts)
-#' cpts <- segment(DataCPSim, method = "cpt-pelt", penalty = "AIC")
+#' cpts <- segment(DataCPSim, method = "pelt", penalty = "AIC")
 #' logLik(cpts)
 #' 
 logLik.cpt <- function(object, ...) {
@@ -77,7 +77,7 @@ logLik.cpt <- function(object, ...) {
 #' @rdname glance.cpt
 #' @export
 #' @examples
-#' cpts <- segment(DataCPSim, method = "cpt-pelt")
+#' cpts <- segment(DataCPSim, method = "pelt")
 #' changepoints(cpts)
 #' 
 changepoints.cpt <- function(x, ...) {

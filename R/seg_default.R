@@ -184,8 +184,9 @@ plot.seg_default <- function(x, ...) {
 #' @rdname new_seg_default
 #' @export
 #' @examples
-#' diagnose(lista_AG)
-#' diagnose(lista_AG$segmenter)
+#' x <- segment(DataCPSim, method = "random", num_generations = 5)
+#' diagnose(x)
+#' diagnose(x$segmenter)
 diagnose.seg_default <- function(x, ...) {
   patchwork::wrap_plots(
     plot_best_chromosome(x),
@@ -198,10 +199,11 @@ diagnose.seg_default <- function(x, ...) {
 #' @rdname changepoints
 #' @export
 #' @examples
-#' plot_history(segment(DataCPSim, method = "random", k = 10)$segmenter)
-#' plot_history(lista_AG$segmenter)
+#' x <- segment(DataCPSim, method = "random", k = 10)
+#' plot_history(x)
+#' plot_history(x$segmenter)
 plot_history <- function(x, ...) {
-  methods <- c("null", "single-best", "cpt-pelt")
+  methods <- c("null", "single-best", "pelt")
   bmdls <- methods |>
     purrr::map(~segment(as.ts(x), method = .x)) |>
     purrr::map_dbl(BMDL)
@@ -243,7 +245,8 @@ plot_history <- function(x, ...) {
 #' @rdname new_seg_default
 #' @export
 #' @examples
-#' plot_best_chromosome(lista_AG$segmenter)
+#' x <- segment(DataCPSim, method = "random", k = 10)
+#' plot_best_chromosome(x)
 plot_best_chromosome <- function(x) {
   d <- x$candidates |> 
     dplyr::mutate(
@@ -274,8 +277,9 @@ plot_best_chromosome <- function(x) {
 #' @param i index of candidates to show
 #' @export
 #' @examples
-#' plot_cpt_repeated(lista_AG$segmenter)
-#' plot_cpt_repeated(lista_AG$segmenter, 5)
+#' x <- segment(DataCPSim, method = "random", k = 10)
+#' plot_cpt_repeated(x)
+#' plot_cpt_repeated(x, 5)
 plot_cpt_repeated <- function(x, i = nrow(x$candidates)) {
   
   x$candidates |>

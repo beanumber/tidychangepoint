@@ -50,7 +50,7 @@ test_set <- function(n = 1, sd = 1, seed = NULL) {
 #' @rdname pad_tau
 #' @export
 #' @examples
-#' split_by_tau(as.ts(lista_AG), changepoints(lista_AG))
+#' split_by_tau(DataCPSim, c(365, 826))
 
 split_by_tau <- function(x, tau) {
   idx <- cut_inclusive(1:length(x), pad_tau(tau, length(x)))

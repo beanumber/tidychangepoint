@@ -3,7 +3,7 @@ test_that("data works", {
 })
 
 test_that("tidycpt works", {
-  x <- segment(DataCPSim, method = "cpt-pelt")
+  x <- segment(DataCPSim, method = "pelt")
   expect_s3_class(x, "tidycpt")
   expect_s3_class(as.ts(x), "ts")
   expect_s3_class(augment(x), "grouped_ts")
@@ -19,7 +19,7 @@ test_that("tidycpt works", {
   
   # AIC, BIC not quite right
   library(tidychangepoint)
-  pelt_bic <- segment(DataCPSim, method = "cpt-pelt", penalty = "BIC")
+  pelt_bic <- segment(DataCPSim, method = "pelt", penalty = "BIC")
   pelt_bic |>
     glance() |> 
     dplyr::select(dplyr::matches("IC|Lik"))
@@ -42,6 +42,17 @@ test_that("tidycpt works", {
   expect_s3_class(segment(bogota_pm, method = "manual", cpts = c(500, 850)), "tidycpt")
   expect_error(segment(bogota_pm, method = "manual", tau = c(500, 850)), "cpts")
   
+})
+
+test_that("regions works", {
+  x <- segment(DataCPSim, method = "pelt")
+  tau <- changepoints(x)
+  expect_equal(tau, changepoints(x$segmenter))
+  expect_equal(tau, changepoints(x$nhpp))
+  expect_false(0 %in% tau)
+  expect_false(length(x) %in% tau)
+  y <- split_by_tau(as.ts(x), tau)
+  expect_equal(length(y), length(tau) + 1)
 })
 
 test_that("utils works", {
@@ -106,12 +117,13 @@ test_that("penalties work", {
 
 
 test_that("performance comparison works", {
+  x <- segment(DataCPSim, method = "gbmdl", num_generations = 10)
   expect_lt(
-    BMDL(lista_AG),
-    BMDL(segment(DataCPSim, method = "cpt-pelt"))
+    BMDL(x),
+    BMDL(segment(DataCPSim, method = "pelt"))
   )
   expect_lt(
-    BMDL(lista_AG),
+    BMDL(x),
     BMDL(segment(DataCPSim, method = "random", num_generations = 20))
   )
 })

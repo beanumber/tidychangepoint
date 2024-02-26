@@ -1,5 +1,5 @@
 test_that("changepoint works", {
-  x <- segment(DataCPSim, method = "cpt-pelt")
+  x <- segment(DataCPSim, method = "pelt")
   expect_s3_class(x, "tidycpt")
   expect_s4_class(x$segmenter, "cpt")
   expect_s3_class(as.ts(x), "ts")
@@ -12,7 +12,7 @@ test_that("changepoint works", {
   expect_equal(BIC(x), as.numeric(-2 * logLik(x) + log(nobs(x)) * deg_free(x)))
   
   
-  x <- segment(DataCPSim, method = "cpt-binseg")
+  x <- segment(DataCPSim, method = "binseg")
   expect_s3_class(x, "tidycpt")
   expect_s4_class(x$segmenter, "cpt")
   expect_s3_class(as.ts(x), "ts")

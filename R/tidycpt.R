@@ -81,7 +81,7 @@ BMDL <- function(x, ...) UseMethod("BMDL")
 #' @rdname changepoints
 #' @export
 #' @examples
-#' x <- segment(DataCPSim, method = "cpt-pelt")
+#' x <- segment(DataCPSim, method = "pelt")
 #' BMDL(x)
 #' y <- segment(DataCPSim, method = "manual", cpts = 826)
 #' BMDL(y)
@@ -161,18 +161,6 @@ params <- function(x, ...) UseMethod("params")
 
 #' @rdname changepoints
 #' @export
-regions <- function(x, ...) UseMethod("regions")
-
-#' @rdname changepoints
-#' @export
-regions.tidycpt <- function(x, ...) {
-  x$nhpp |>
-    dplyr::pull(region) |> 
-    levels()
-}
-
-#' @rdname changepoints
-#' @export
 
 plot.tidycpt <- function(x, ...) {
   regions <- tidy(x)
@@ -223,9 +211,9 @@ diagnose <- function(x, ...) UseMethod("diagnose")
 #' @examples
 #' diagnose(segment(DataCPSim))
 #' diagnose(segment(DataCPSim, method = "single-best"))
-#' diagnose(segment(DataCPSim, method = "cpt-pelt"))
+#' diagnose(segment(DataCPSim, method = "pelt"))
 #' diagnose(segment(test_set()))
-#' diagnose(segment(test_set(n = 2, sd = 4), method = "cpt-pelt"))
+#' diagnose(segment(test_set(n = 2, sd = 4), method = "pelt"))
 #' 
 diagnose.tidycpt <- function(x, ...) {
   patchwork::wrap_plots(plot(x), plot(x$nhpp), ncol = 1)
@@ -236,7 +224,7 @@ diagnose.tidycpt <- function(x, ...) {
 #' in the file name
 #' @export
 #' @examples
-#' file_name(segment(DataCPSim, method = "cpt-pelt"))
+#' file_name(segment(DataCPSim, method = "pelt"))
 
 file_name <- function(x, data_name_slug = "data") {
   glance(x) |>
