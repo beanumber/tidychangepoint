@@ -6,54 +6,65 @@ globalVariables("Bayesaian_MDL_k_cp")
 #' 
 #' @export
 #' @param x An `integer` vector. See [exceedances()].
-#' @param r number of generations
-#' @param k size of generation
-#' @param Mutation description
-#' @param Temperature description
+#' @param num_generations number of generations
+#' @param generation_size size of generation
+#' @param mutation_rate description
+#' @param temperature description
 #' @return A `list` of length 2:
 #'   - A `numeric` vector of `FitnessGeneraciones`
 #'   - A `matrix` with `k` rows and `N` columns
 #' @examples
 #' \dontrun{
-#' x <- segment_boltzmann(DataCPSim, r = 5)
+#' x <- segment(DataCPSim, method = "boltzmann", num_generations = 5)
 #' y <- segment_boltzmann(rlnorm_ts_1)
 #'   
 #' }
 
-segment_boltzmann <- function(x, r = 10, k = 50, Mutation = 0.03, Temperature = 27) {
+segment_boltzmann <- function(x, 
+                              num_generations = 10, 
+                              generation_size = 50, 
+                              mutation_rate = 0.03, 
+                              temperature = 27,
+                              show_progress_bar = TRUE) {
+  obj <- new_seg_default(x, algorithm = "boltzmann", params = list(
+    num_generations = num_generations,
+    generation_size = generation_size,
+    mutation_rate = mutation_rate,
+    temperature = temperature
+  ))
+  
   N <- max(exceedances(x))
 
-  mat_cp <- matrix(NA, nrow = k, ncol = N)
+  mat_cp <- matrix(NA, nrow = obj$params$num_generations, ncol = N)
+  mat_cp <- t(replicate(obj$params$generation_size, RandomKeys(N)))
 
-  mat_cp <- t(replicate(k, RandomKeys(N)))
+  best_cpts <- list()
+  pb <- utils::txtProgressBar(min = 1, max = obj$params$num_generations, style = 3, width = 60)
 
-  FitnessGen <- numeric(0)
-
-  BestChromosomes <- matrix(NA, nrow = 1, ncol = ncol(mat_cp))
-
-  for (i in 1:r) {
+  for (i in 1:obj$params$num_generations) {
+    if (show_progress_bar) {
+      utils::setTxtProgressBar(pb, i)
+    }
     this_generation <- mat_cp |>
       mat_cp_2_list() |>
       evaluate_cpts(.data = as.ts(x))
     
-    Fitness <- this_generation$bmdl
-    
-    FitnessGen[i] <- min(this_generation$bmdl)
+    best_cpts[[i]] <- this_generation |>
+      dplyr::arrange(bmdl) |>
+      utils::head(1)
 
-    BestChromosomes <- rbind(
-      BestChromosomes,
-      mat_cp[which(Fitness == FitnessGen[i]), ]
-    )
-
-    mat_cp <- MaMBOltzmann(mat_cp, Fitness, Mutation, Temperature)
+    mat_cp <- mat_cp |>
+      evolve_boltzmann(
+        this_generation$bmdl, 
+        obj$params$mutation_rate, 
+        obj$params$temperature
+      )
   }
 
-  ListResults <- list(
-    FitnessGeneraciones = FitnessGen,
-    MejoresCromosomas = BestChromosomes[-1, ]
-  )
-
-  ListResults
+  obj$candidates <- best_cpts |>
+    dplyr::bind_rows()
+  
+  return(obj)
 }
 
 
@@ -62,7 +73,7 @@ segment_boltzmann <- function(x, r = 10, k = 50, Mutation = 0.03, Temperature = 
 #' @param Fitness description
 #' @export
 
-MaMBOltzmann <- function(mat_cp, Fitness, Mutation, Temperature) {
+evolve_boltzmann <- function(mat_cp, Fitness, Mutation, Temperature) {
   N <- ncol(mat_cp)
   FitnessMatrix <- data.frame(
     Index = rank(-Fitness),

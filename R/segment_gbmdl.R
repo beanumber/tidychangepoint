@@ -68,13 +68,14 @@ segment_gbmdl <- function(x, num_generations = 50, show_progress_bar = TRUE) {
       utils::setTxtProgressBar(pb, i)
     }
     
-    obj$mat_cp <- evolve(
-      exceedances(obj), 
-      obj$mat_cp, 
-      this_generation |> dplyr::pull(bmdl)
-    )
-#    plot_evolution(obj, i)
-#    plot_cpt_repeated(obj, i)
+    obj$mat_cp <- obj |>
+      exceedances() |>
+      evolve_gbmdl(
+        obj$mat_cp, 
+        this_generation |> dplyr::pull(bmdl)
+      )
+    #    plot_evolution(obj, i)
+    #    plot_cpt_repeated(obj, i)
   }
   close(pb)
 #  graphics::par(mfrow = c(1, 1))
@@ -93,9 +94,9 @@ segment_gbmdl <- function(x, num_generations = 50, show_progress_bar = TRUE) {
 #' @examples
 #' mat_cp <- lista_AG$segmenter$mat_cp
 #' bmdls <- mat_cp |> mat_cp_2_list() |> evaluate_cpts(.data = as.ts(DataCPSim)) |> dplyr::pull(bmdl)
-#' evolve(exceedances(DataCPSim), mat_cp, bmdls)
+#' evolve_gbmdl(exceedances(DataCPSim), mat_cp, bmdls)
 
-evolve <- function(x, mat_cp, these_bmdls) {
+evolve_gbmdl <- function(x, mat_cp, these_bmdls) {
   # 2. Encontrar sus probabilidades
   vec_probs <- probs_vec_MDL(these_bmdls)
   # 3. Seleccionar dos padres
@@ -113,7 +114,7 @@ evolve <- function(x, mat_cp, these_bmdls) {
 }
 
 
-#' @rdname evolve
+#' @rdname evolve_gbmdl
 #' @param padres vector de longitud dos con índice de papa e índice de mama
 #' @export
 junta_1_puntos_cambio <- function(padres, mat_cp) {
@@ -139,7 +140,7 @@ junta_1_puntos_cambio <- function(padres, mat_cp) {
 }
 
 
-#' @rdname evolve
+#' @rdname evolve_gbmdl
 #' @param mat_padres matriz de kx2 la cual contiene en sus renglones las
 #'   parejas de padres
 #' @return regresa una matriz de las mismas dimensiones que mat_cp, pero con los
@@ -156,7 +157,7 @@ junta_k_puntos_cambio <- function(mat_padres, mat_cp) {
 }
 
 
-#' @rdname evolve
+#' @rdname evolve_gbmdl
 #' @param cp vector cromosoma que se va a poner a prueba
 #' @param prob_volado probabilidad de quitar un tiempo de cambio existente
 #'   utilizado por mata_k_tau_volado para quitar elementos de más. Se recomienda
@@ -175,7 +176,7 @@ mata_1_tau_volado <- function(cp, prob_volado = 0.5) {
   return(cp)
 }
 
-#' @rdname evolve
+#' @rdname evolve_gbmdl
 #' @return regresa una matriz a la cual se le quitaron a sus cromosomas algunos
 #'   puntos de cambio
 #' @export
@@ -186,7 +187,7 @@ mata_k_tau_volado <- function(mat_cp) {
   return(mat_cp)
 }
 
-#' @rdname evolve
+#' @rdname evolve_gbmdl
 #' @param probs_nuevos_muta0N probabilidades de mutar 0,1,2,...,l hasta cierto
 #'   numero l; eg si vale c(.5,.2,.2,.1) se tiene una probabilidad 0.5 de mutar
 #'   0 (de no mutar), probabilidad 0.2 de mutar 1,, probabilidad 0.2 de mutar 2,
@@ -257,7 +258,7 @@ muta_1_cp_BMDL <- function(cp, x,
 }
 
 
-#' @rdname evolve
+#' @rdname evolve_gbmdl
 #' @return regreas una mat_cp mutada
 #' @export
 muta_k_cp_BMDL <- function(mat_cp, x) {
@@ -271,7 +272,7 @@ muta_k_cp_BMDL <- function(mat_cp, x) {
 
 
 
-#' @rdname evolve
+#' @rdname evolve_gbmdl
 #' @details
 #' regresa un vector de tamaño `max_num_cp+3` donde la primera entrada es
 #'         m, la segunda \eqn{v_0=1, ...., v_{m+1}=N,0,...,0}
@@ -309,7 +310,7 @@ sim_1_cp_BMDL <- function(x, max_num_cp = 20, prob_inicial = 0.06) {
 }
 
 
-#' @rdname evolve
+#' @rdname evolve_gbmdl
 #' @param generation_size tamaño de las generaciones
 #' @return regresa una matriz de `k` por `max_num_cp+3`, la cual en cada renglón tiene
 #'         una simulación de un vector de tiempos de cambio
@@ -328,7 +329,7 @@ sim_k_cp_BMDL <- function(x, generation_size = 50, max_num_cp = 20) {
 
 
 
-#' @rdname evolve
+#' @rdname evolve_gbmdl
 #' @param vec_MDL vector con valores MDL
 #'
 #' OBSERVACIÓN: Esto regresa numeros negativos, los cuales mientras más negativo mejor, ya que
@@ -357,7 +358,7 @@ probs_vec_MDL <- function(vec_MDL, probs_rank0_MDL1 = 0) {
 }
 
 
-#' @rdname evolve
+#' @rdname evolve_gbmdl
 #' @param vec_probs vector de probabilidades de selección de cada uno de los
 #'   cromosomas
 #' @export

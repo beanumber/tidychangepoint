@@ -7,6 +7,7 @@
 \alias{as.ts.seg_default}
 \alias{exceedances.seg_default}
 \alias{nobs.seg_default}
+\alias{num_candidates}
 \alias{length.seg_default}
 \alias{changepoints.seg_default}
 \alias{BMDL.seg_default}
@@ -40,6 +41,8 @@ seg_default(x, ...)
 \method{exceedances}{seg_default}(x, ...)
 
 \method{nobs}{seg_default}(object, ...)
+
+num_candidates(x)
 
 \method{length}{seg_default}(x, ...)
 

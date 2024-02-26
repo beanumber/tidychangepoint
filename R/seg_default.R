@@ -68,6 +68,13 @@ nobs.seg_default <- function(object, ...) {
 
 #' @rdname new_seg_default
 #' @export
+num_candidates <- function(x) {
+  nrow(x$candidates)
+}
+
+
+#' @rdname new_seg_default
+#' @export
 length.seg_default <- function(x, ...) {
   length(as.ts(x))
 }

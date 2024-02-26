@@ -2,23 +2,30 @@
 % Please edit documentation in R/segment_boltzmann.R
 \name{segment_boltzmann}
 \alias{segment_boltzmann}
-\alias{MaMBOltzmann}
+\alias{evolve_boltzmann}
 \title{Segment a times series using Boltzmann criteria for a genetic algorithm}
 \usage{
-segment_boltzmann(x, r = 10, k = 50, Mutation = 0.03, Temperature = 27)
+segment_boltzmann(
+  x,
+  num_generations = 10,
+  generation_size = 50,
+  mutation_rate = 0.03,
+  temperature = 27,
+  show_progress_bar = TRUE
+)
 
-MaMBOltzmann(mat_cp, Fitness, Mutation, Temperature)
+evolve_boltzmann(mat_cp, Fitness, Mutation, Temperature)
 }
 \arguments{
 \item{x}{An \code{integer} vector. See \code{\link[=exceedances]{exceedances()}}.}
 
-\item{r}{number of generations}
+\item{num_generations}{number of generations}
 
-\item{k}{size of generation}
+\item{generation_size}{size of generation}
 
-\item{Mutation}{description}
+\item{mutation_rate}{description}
 
-\item{Temperature}{description}
+\item{temperature}{description}
 
 \item{mat_cp}{description}
 
@@ -36,7 +43,7 @@ What does this function do?
 }
 \examples{
 \dontrun{
-x <- segment_boltzmann(DataCPSim, r = 5)
+x <- segment_boltzmann(DataCPSim, num_generations = 5)
 y <- segment_boltzmann(rlnorm_ts_1)
   
 }
