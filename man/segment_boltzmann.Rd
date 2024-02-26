@@ -43,7 +43,7 @@ What does this function do?
 }
 \examples{
 \dontrun{
-x <- segment_boltzmann(DataCPSim, num_generations = 5)
+x <- segment(DataCPSim, method = "boltzmann", num_generations = 5)
 y <- segment_boltzmann(rlnorm_ts_1)
   
 }

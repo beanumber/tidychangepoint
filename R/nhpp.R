@@ -110,6 +110,12 @@ length.nhpp <- function(x, ...) {
 }
 
 #' @rdname fit_nhpp
+#' @export
+nobs.nhpp <- function(x, ...) {
+  max(x$end)
+}
+
+#' @rdname fit_nhpp
 #' @param object An `nhpp` object
 #' @export
 logLik.nhpp <- function(object, ...) {

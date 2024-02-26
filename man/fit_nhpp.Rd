@@ -4,6 +4,7 @@
 \alias{fit_nhpp_region}
 \alias{fit_nhpp}
 \alias{length.nhpp}
+\alias{nobs.nhpp}
 \alias{logLik.nhpp}
 \alias{BMDL.nhpp}
 \alias{MBIC.nhpp}
@@ -17,6 +18,8 @@ fit_nhpp_region(exc, tau_left, tau_right, params = parameters_weibull(), ...)
 fit_nhpp(x, tau)
 
 \method{length}{nhpp}(x, ...)
+
+\method{nobs}{nhpp}(x, ...)
 
 \method{logLik}{nhpp}(object, ...)
 
