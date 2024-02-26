@@ -20,7 +20,7 @@ test_that("BMDL works", {
 
   expect_equal(fit_nhpp(y, c(0, 500, 2000)), fit_nhpp(y, 500))
   
-  z <- segment(y, method = "null")
+  z <- segment(DataCPSim, method = "null")
   expect_equal(BMDL(z), -Inf)
 })
 

@@ -2,7 +2,7 @@
 # tidychangepoint
 
 <!-- badges: start -->
-[![R-CMD-check](https://github.com/c-taimal/tidychangepoint/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/c-taimal/tidychangepoint/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/beanumber/tidychangepoint/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/beanumber/tidychangepoint/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
 ## Usage
@@ -92,7 +92,7 @@ tidy(cpts)
 
     ## # A tibble: 4 × 13
     ##   region   num_obs   min   max  mean    sd exceedances begin   end log_posterior
-    ##   <chr>      <int> <dbl> <dbl> <dbl> <dbl> <named lis> <dbl> <int>         <dbl>
+    ##   <chr>      <int> <dbl> <dbl> <dbl> <dbl> <named lis> <dbl> <dbl>         <dbl>
     ## 1 [0,547)      546  13.7  92.8  35.3  11.3 <int [11]>      0   547         -60.1
     ## 2 [547,82…     275  20.5 163.   58.1  19.3 <int [95]>    547   822        -198. 
     ## 3 [822,97…     150  39.2 215.   96.7  30.5 <int [129]>   822   972        -150. 
@@ -109,7 +109,7 @@ glance(cpts)
     ## # A tibble: 1 × 11
     ##   pkg         version algorithm params       num_cpts elapsed_time   nhpp_logLik
     ##   <chr>       <chr>   <chr>     <list>          <int> <drtn>         <logLik>   
-    ## 1 changepoint 2.2.4   PELT      <named list>        3 0.1117537 secs -525.8797  
+    ## 1 changepoint 2.2.4   PELT      <named list>        3 0.1093771 secs -525.8797  
     ## # ℹ 4 more variables: nhpp_AIC <dbl>, nhpp_BIC <dbl>, nhpp_MBIC <dbl>,
     ## #   nhpp_BMDL <dbl>
 
@@ -255,7 +255,7 @@ x <- DataCPSim |>
 changepoints(x)
 ```
 
-    ## [1] 415 488 824
+    ## [1] 562 649 864
 
 ``` r
 diagnose(x)
