@@ -216,16 +216,19 @@ plot.nhpp <- function(x, ...) {
   z <- exceedances(x) |>
     tibble::enframe(name = "cum_exceedances", value = "t_exceedance") |>
     dplyr::mutate(
-      m = mcdf(x),
-      lower = stats::qpois(0.05, lambda = m),
-      upper = stats::qpois(0.95, lambda = m),
+      m = mcdf(x)
     ) |>
     # always add the last observation
     dplyr::bind_rows(
       data.frame(
         cum_exceedances = c(0, length(exceedances(x))), 
-        t_exceedance = c(0, n)
+        t_exceedance = c(0, n),
+        m = c(0, length(exceedances(x)))
       )
+    ) |>
+    dplyr::mutate(
+      lower = stats::qpois(0.05, lambda = m),
+      upper = stats::qpois(0.95, lambda = m),
     ) |>
     dplyr::distinct()
   
