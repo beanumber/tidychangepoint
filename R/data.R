@@ -39,3 +39,7 @@
 #' Output from running genetic algorithm on DataCPSim
 #' @docType data
 "lista_AG"
+
+#' Differences between leagues in Major League Baseball
+#' @docType data
+"mlb_hrs"
