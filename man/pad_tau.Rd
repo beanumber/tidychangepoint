@@ -3,6 +3,7 @@
 \name{pad_tau}
 \alias{pad_tau}
 \alias{unpad_tau}
+\alias{is_valid_tau}
 \alias{cut_inclusive}
 \alias{test_set}
 \alias{split_by_tau}
@@ -12,6 +13,8 @@
 pad_tau(tau, n)
 
 unpad_tau(padded_tau)
+
+is_valid_tau(tau, n)
 
 cut_inclusive(x, tau)
 
@@ -38,6 +41,12 @@ deg_free(x)
 Utility functions
 }
 \examples{
+is_valid_tau(0, length(DataCPSim))
+is_valid_tau(1, length(DataCPSim))
+is_valid_tau(826, length(DataCPSim))
+is_valid_tau(1096, length(DataCPSim))
+is_valid_tau(1097, length(DataCPSim))
+
 split_by_tau(DataCPSim, c(365, 826))
 deg_free(segment(DataCPSim))
 }

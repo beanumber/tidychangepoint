@@ -59,14 +59,15 @@ fit_nhpp_region <- function(exc, tau_left, tau_right,
 
 fit_nhpp <- function(x, tau) {
   exc <- exceedances(x)
+  padded_tau <- pad_tau(tau, length(x))
   exc_by_tau <- exc |>
-    split(cut_inclusive(exc, pad_tau(tau, length(x))))
+    split(cut_inclusive(exc, padded_tau))
 
   regions_df <- tibble::tibble(
     region = names(exc_by_tau),
     exceedances = exc_by_tau,
-    begin = c(0, tau),
-    end = c(tau, length(x))
+    begin = utils::head(padded_tau, -1),
+    end = utils::tail(padded_tau, -1)
   )
   
   res <- regions_df |>

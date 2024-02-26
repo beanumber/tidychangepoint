@@ -17,6 +17,11 @@ test_that("BMDL works", {
   seg <- segment(y, method = "pelt")
   expect_s3_class(logLik(seg), "logLik")
   expect_type(BMDL(seg), "double")
+
+  expect_equal(fit_nhpp(y, c(0, 500, 2000)), fit_nhpp(y, 500))
+  
+  z <- segment(y, method = "null")
+  expect_equal(BMDL(z), -Inf)
 })
 
 test_that("parameter fitting works", {

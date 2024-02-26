@@ -3,6 +3,9 @@
 #' @param n the length of the original time series
 #' @export
 pad_tau <- function(tau, n) {
+  if (!is_valid_tau(tau, n)) {
+    tau <- tau[tau >= 1 & tau <= n]
+  }
   unique(c(0, tau, n))
 }
 
@@ -13,6 +16,19 @@ unpad_tau <- function(padded_tau) {
   padded_tau |>
     utils::head(-1) |>
     utils::tail(-1)
+}
+
+#' @rdname pad_tau
+#' @export
+#' @examples
+#' is_valid_tau(0, length(DataCPSim))
+#' is_valid_tau(1, length(DataCPSim))
+#' is_valid_tau(826, length(DataCPSim))
+#' is_valid_tau(1096, length(DataCPSim))
+#' is_valid_tau(1097, length(DataCPSim))
+#' 
+is_valid_tau <- function(tau, n) {
+  all(tau %in% 1:n)
 }
 
 #' @rdname pad_tau

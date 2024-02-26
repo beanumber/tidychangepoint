@@ -68,6 +68,13 @@ test_that("utils works", {
   expect_false(0 %in% unpad_tau(y))
   expect_true(all(tau %in% y))
   expect_false(length(x) %in% unpad_tau(y))
+  expect_equal(y, pad_tau(c(826, 283764), length(x)))
+  
+  expect_false(is_valid_tau(0, length(x)))
+  expect_true(is_valid_tau(1, length(x)))
+  expect_true(is_valid_tau(826, length(x)))
+  expect_true(is_valid_tau(length(x), length(x)))
+  expect_false(is_valid_tau(length(x) + 1, length(x)))
   
   z <- cut_inclusive(x, y)
   expect_equal(length(z), length(x))
