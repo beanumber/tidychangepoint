@@ -14,7 +14,7 @@
 glance.cpt <- function(x, ...) {
   tibble::tibble(
     pkg = "changepoint",
-    version = x@version,
+    version = package_version(x@version),
     algorithm = x@method,
     params = list(params(x)),
     num_cpts = length(changepoints(x))
