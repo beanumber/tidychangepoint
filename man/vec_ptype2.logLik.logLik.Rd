@@ -19,7 +19,6 @@ a <- logLik(lm(mpg ~ disp, data = mtcars))
 b <- logLik(lm(mpg ~ am, data = mtcars))
 vec_ptype2(a, b)
 c(a, b)
-dplyr::bind_rows(tibble::tibble(ll = a), tibble::tibble(ll = b))
 vec_cast(a, b)
 }
 \seealso{
