@@ -82,3 +82,22 @@ deg_free <- function(x) {
   attr(logLik(x), "df")
 }
 
+#' Vectors implementation for logLik
+#' @export
+#' @inheritParams vctrs::vec_ptype2
+#' @seealso [stats::logLik()]
+#' @examples
+#' a <- logLik(lm(mpg ~ disp, data = mtcars))
+#' b <- logLik(lm(mpg ~ am, data = mtcars))
+#' vec_ptype2(a, b)
+#' c(a, b)
+#' vec_cast(a, b)
+vec_ptype2.logLik.logLik <- function(x, y, ...) {
+  x
+}
+
+#' @rdname vec_ptype2
+#' @export
+vec_cast.logLik.logLik <- function(x, to, ...) {
+  x
+}

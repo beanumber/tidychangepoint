@@ -130,10 +130,5 @@ test_that("performance comparison works", {
   expect_gt(BMDL(x), BMDL(y))
   expect_gt(BMDL(z), BMDL(y))
   
-  vec_cast.logLik.logLik <- function(x, to, ...) {
-    x
-  }
-  c(logLik(x), logLik(y), logLik(z)) |> purrr::map(str)
-  dplyr::bind_rows(glance(x), glance(y), glance(z))
-  
+  expect_s3_class(dplyr::bind_rows(glance(x), glance(y), glance(z)), "tbl_df")
 })

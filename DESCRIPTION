@@ -1,6 +1,6 @@
 Package: tidychangepoint
 Title: What the Package Does (One Line, Title Case)
-Version: 0.0.0.9019
+Version: 0.0.0.9020
 Authors@R: c(
     person(
       "Biviana", "Suarez Sierra", email = "first.last@example.com", 
@@ -28,7 +28,8 @@ Imports:
     purrr,
     tibble,
     tidyr,
-    tsibble
+    tsibble,
+    vctrs
 Depends: 
     R (>= 4.1)
 LazyData: true
