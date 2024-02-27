@@ -124,13 +124,16 @@ test_that("penalties work", {
 
 
 test_that("performance comparison works", {
-  x <- segment(DataCPSim, method = "gbmdl", num_generations = 10)
-  expect_lt(
-    BMDL(x),
-    BMDL(segment(DataCPSim, method = "pelt"))
-  )
-  expect_lt(
-    BMDL(x),
-    BMDL(segment(DataCPSim, method = "random", num_generations = 20))
-  )
+  x <- segment(DataCPSim, method = "pelt")
+  y <- segment(DataCPSim, method = "gbmdl", num_generations = 10)
+  z <- segment(DataCPSim, method = "random", num_generations = 20)
+  expect_gt(BMDL(x), BMDL(y))
+  expect_gt(BMDL(z), BMDL(y))
+  
+  vec_cast.logLik.logLik <- function(x, to, ...) {
+    x
+  }
+  c(logLik(x), logLik(y), logLik(z)) |> purrr::map(str)
+  dplyr::bind_rows(glance(x), glance(y), glance(z))
+  
 })
