@@ -42,7 +42,7 @@ exceedances.ts <- function(x, ...) {
 #' @rdname changepoints
 #' @export
 exceedances.double <- function(x, ...) {
-  which(x > mean(x, ...))
+  which(x > mean(x, na.rm = TRUE, ...))
 }
 
 #' @rdname changepoints
@@ -131,10 +131,10 @@ tidy.tidycpt <- function(x, ...) {
       num_obs = dplyr::n(),
 #      left = min(index),
 #      right = max(index),
-      min = min(y),
-      max = max(y),
-      mean = mean(y),
-      sd = stats::sd(y),
+      min = min(y, na.rm = TRUE),
+      max = max(y, na.rm = TRUE),
+      mean = mean(y, na.rm = TRUE),
+      sd = stats::sd(y, na.rm = TRUE),
       ... = ...
     ) |>
     dplyr::inner_join(theta, by = "region")
