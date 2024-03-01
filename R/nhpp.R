@@ -247,3 +247,30 @@ plot.nhpp <- function(x, ...) {
     )
 }
 
+
+#' @rdname fit_nhpp
+#' @export
+#' @examples
+#' plot_intensity(fit_nhpp(DataCPSim, tau = 826))
+
+plot_intensity <- function(x, ...) {
+  z <- x |>
+    # why???? --names attribute must be the same length as the vector???
+    tibble::as_tibble() |>
+    dplyr::mutate(
+      idx = purrr::map2(begin, end, ~seq(from = .x, to = .y))
+    ) |>
+    dplyr::select(region, alpha, beta, idx) |>
+    tidyr::unnest(idx) |>
+    dplyr::mutate(intensity = iweibull(idx, shape = alpha, scale = beta))
+  
+  ggplot2::ggplot(data = z, ggplot2::aes(x = idx, y = intensity)) +
+    ggplot2::geom_vline(data = x, ggplot2::aes(xintercept = end), linetype = 3) +
+    ggplot2::geom_line() +
+    ggplot2::scale_x_continuous("Time Index (t)") +
+    ggplot2::scale_y_continuous("Value of Intensity Function") +
+    ggplot2::labs(
+      title = "Value of Intensity function over Time",
+      subtitle = "Weibull"
+    )
+}

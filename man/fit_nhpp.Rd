@@ -12,6 +12,7 @@
 \alias{exceedances.nhpp}
 \alias{mcdf}
 \alias{plot.nhpp}
+\alias{plot_intensity}
 \title{Fit a non-homogeneous Poisson process model to the exceedances of a time series.}
 \usage{
 fit_nhpp_region(exc, tau_left, tau_right, params = parameters_weibull(), ...)
@@ -35,6 +36,8 @@ fit_nhpp(x, tau)
 mcdf(x, dist = "weibull")
 
 \method{plot}{nhpp}(x, ...)
+
+plot_intensity(x, ...)
 }
 \arguments{
 \item{exc}{Output from \code{\link[=exceedances]{exceedances()}}}
@@ -74,6 +77,7 @@ nhpp <- fit_nhpp(DataCPSim, tau = 826)
 mcdf(nhpp)
 
 plot(fit_nhpp(DataCPSim, tau = 826))
+plot_intensity(fit_nhpp(DataCPSim, tau = 826))
 }
 \references{
 Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
