@@ -11,6 +11,10 @@
 #' 
 "bogota_pm"
 
+#' Rainfall in Medellín, Colombia
+#' @docType data
+"medellin_rainfall"
+
 #' Simulated time series data
 #' @docType data
 #' @description

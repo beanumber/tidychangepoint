@@ -12,3 +12,12 @@ bogota_pm <- read_csv("data-raw/PM2.5.csv") |>
 
 
 usethis::use_data(bogota_pm, overwrite = TRUE, compress = "xz")
+
+medellin_rainfall <- readxl::read_excel(here::here("data-raw", "precipitacioìn_mensual.xlsx")) |>
+  select(date = fecha, monthly_precipitation = spi_1) |>
+  mutate(
+    monthly_precipitation = as.double(monthly_precipitation),
+    monthly_precipitation = ifelse(monthly_precipitation == -Inf, NA, monthly_precipitation)
+  )
+
+usethis::use_data(medellin_rainfall, overwrite = TRUE, compress = "xz")
