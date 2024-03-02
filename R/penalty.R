@@ -16,14 +16,19 @@
 penalty_mdl <- function(padded_tau, N = NULL) {
   tau <- unpad_tau(padded_tau)
   m <- length(tau)
+  if (m == 0) {
+    return(0)
+  }
+  num_params <- 2
   if (!is.null(N)) {
     extra_term <- m * log(N)
   } else {
     extra_term <- 0
   }
-  2 * sum(log(diff(padded_tau)) / 2) + 
-    log(m) + 
-    sum(log(tau)) +
+  (num_params / 2) * 
+    sum(log(diff(padded_tau))) + 
+    2 * log(m) + 
+    2 * sum(log(tail(tau, -1))) +
     # is this last term necessary???
     extra_term
 }

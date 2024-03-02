@@ -56,10 +56,7 @@ length.tidycpt <- function(x, ...) {
 #' @seealso [stats::logLik()]
 #' @export
 logLik.tidycpt <- function(object, ...) {
-  ll <- logLik(object$nhpp)
-  attr(ll, "df") <- length(changepoints(object))
-  class(ll) <- "logLik"
-  return(ll)
+  logLik(object$nhpp)
 }
 
 #' @rdname changepoints
@@ -72,6 +69,10 @@ MBIC <- function(object, ...) UseMethod("MBIC")
 MBIC.tidycpt <- function(object, ...) {
   MBIC(object$nhpp)
 }
+
+#' @rdname changepoints
+#' @export
+MDL <- function(x, ...) UseMethod("MDL")
 
 #' @rdname changepoints
 #' @export
@@ -146,13 +147,9 @@ tidy.tidycpt <- function(x, ...) {
 glance.tidycpt <- function(x, ...) {
   glance(x$segmenter) |>
     dplyr::mutate(
-      elapsed_time = x$elapsed_time,
-      nhpp_logLik = logLik(x),
-      nhpp_AIC = AIC(x),
-      nhpp_BIC = BIC(x),
-      nhpp_MBIC = MBIC(x),
-      nhpp_BMDL = BMDL(x)
-    )
+      elapsed_time = x$elapsed_time
+    ) |>
+    dplyr::bind_cols(glance(x$nhpp))
 }
 
 #' @rdname changepoints

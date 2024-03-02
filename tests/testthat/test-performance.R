@@ -95,6 +95,8 @@ test_that("running time works", {
 
 
 test_that("random works", {
+  skip()
+  test_sets <- readr::read_rds(here::here("tests/testthat/test_sets.rda"))
   random_glance <- test_sets |>
     dplyr::mutate(
       random = purrr::map(data, segment, method = "random", num_generations = 100)

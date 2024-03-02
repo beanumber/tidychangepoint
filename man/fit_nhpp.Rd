@@ -6,10 +6,12 @@
 \alias{length.nhpp}
 \alias{nobs.nhpp}
 \alias{logLik.nhpp}
+\alias{MDL.nhpp}
 \alias{BMDL.nhpp}
 \alias{MBIC.nhpp}
 \alias{changepoints.nhpp}
 \alias{exceedances.nhpp}
+\alias{glance.nhpp}
 \alias{mcdf}
 \alias{plot.nhpp}
 \alias{plot_intensity}
@@ -25,6 +27,8 @@ fit_nhpp(x, tau)
 
 \method{logLik}{nhpp}(object, ...)
 
+\method{MDL}{nhpp}(x, ...)
+
 \method{BMDL}{nhpp}(x, ...)
 
 \method{MBIC}{nhpp}(object, ...)
@@ -32,6 +36,8 @@ fit_nhpp(x, tau)
 \method{changepoints}{nhpp}(x, ...)
 
 \method{exceedances}{nhpp}(x, ...)
+
+\method{glance}{nhpp}(x, ...)
 
 mcdf(x, dist = "weibull")
 

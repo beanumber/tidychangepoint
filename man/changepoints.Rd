@@ -13,6 +13,7 @@
 \alias{logLik.tidycpt}
 \alias{MBIC}
 \alias{MBIC.tidycpt}
+\alias{MDL}
 \alias{BMDL}
 \alias{BMDL.tidycpt}
 \alias{nobs.tidycpt}
@@ -49,6 +50,8 @@ exceedances(x, ...)
 MBIC(object, ...)
 
 \method{MBIC}{tidycpt}(object, ...)
+
+MDL(x, ...)
 
 BMDL(x, ...)
 

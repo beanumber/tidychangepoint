@@ -121,9 +121,18 @@ nobs.nhpp <- function(object, ...) {
 #' @export
 logLik.nhpp <- function(object, ...) {
   ll <- sum(object$logLik)
-  attr(ll, "df") <- length(changepoints(object))
+  attr(ll, "df") <- 2 * (length(changepoints(object)) + 1) + 1
   class(ll) <- "logLik"
   return(ll)
+}
+
+#' @rdname fit_nhpp
+#' @export
+MDL.nhpp <- function(x, ...) {
+  tau <- changepoints(x)
+  n <- max(x$end)
+  penalty_mdl(pad_tau(tau, n)) - 2 * logLik(x) |>
+    as.double()
 }
 
 #' @rdname fit_nhpp
@@ -131,7 +140,8 @@ logLik.nhpp <- function(object, ...) {
 BMDL.nhpp <- function(x, ...) {
   tau <- changepoints(x)
   n <- max(x$end)
-  penalty_mdl(pad_tau(tau, n), N = length(exceedances(x))) - sum(x$log_posterior)
+  penalty_mdl(pad_tau(tau, n), N = length(exceedances(x))) - 2 * sum(x$log_posterior) |>
+    as.double()
 }
 
 #' @rdname fit_nhpp
@@ -140,8 +150,15 @@ BMDL.nhpp <- function(x, ...) {
 MBIC.nhpp <- function(object, ...) {
   tau <- changepoints(object)
   m <- length(tau)
-  r <- tau / length(object)
-  -(1/2) * (3 * m * log(length(object)) + sum(r)) 
+  if (m == 0) {
+    penalty <- 0
+  } else {
+    n <- nobs(object)
+    padded_tau <- pad_tau(tau, n)
+    penalty <- 3 * m * log(n) + sum(log(diff(padded_tau) / n)) 
+  }
+  penalty - 2 * logLik(object) |>
+    as.double()
 }
 
 #' @rdname fit_nhpp
@@ -158,6 +175,19 @@ changepoints.nhpp <- function(x, ...) {
 exceedances.nhpp <- function(x, ...) {
   x$exceedances |>
     purrr::list_c()
+}
+
+#' @rdname fit_nhpp
+#' @export
+glance.nhpp <- function(x, ...) {
+  tibble::tibble(
+    nhpp_logLik = logLik(x),
+    nhpp_AIC = AIC(x),
+    nhpp_BIC = BIC(x),
+    nhpp_MBIC = MBIC(x),
+    nhpp_MDL = MDL(x),
+    nhpp_BMDL = BMDL(x)
+  )
 }
 
 
