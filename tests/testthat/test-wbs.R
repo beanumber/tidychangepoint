@@ -1,0 +1,14 @@
+test_that("wbs works", {
+  x <- segment(DataCPSim, method = "wbs")
+  expect_s3_class(x, "tidycpt")
+  expect_s3_class(x$segmenter, "wbs")
+  expect_s3_class(as.ts(x), "ts")
+  expect_s3_class(augment(x), "grouped_ts")
+  expect_s3_class(tidy(x), "tbl_df")
+  expect_s3_class(glance(x), "tbl_df")
+  expect_type(changepoints(x), "integer")
+  expect_type(nobs(x), "integer")
+  expect_equal(AIC(x), as.numeric(-2 * logLik(x) + 2 * deg_free(x)))
+  expect_equal(BIC(x), as.numeric(-2 * logLik(x) + log(nobs(x)) * deg_free(x)))
+  
+})

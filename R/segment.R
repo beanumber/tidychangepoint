@@ -91,6 +91,9 @@ segment.ts <- function(x, method = "null", ...) {
   if (method == "single-best") {
     mod <- changepoint::cpt.meanvar(data = x, method = "AMOC", ...)
   }
+  if (method == "wbs") {
+    mod <- wbs::wbs(x, ...)
+  }
   if (method == "gbmdl") {
     mod <- segment_gbmdl(x, ...)
   }
