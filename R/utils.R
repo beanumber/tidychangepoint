@@ -83,6 +83,7 @@ deg_free <- function(x) {
 }
 
 #' Vectors implementation for logLik
+#' 
 #' @export
 #' @inheritParams vctrs::vec_ptype2
 #' @seealso [stats::logLik()]
@@ -96,7 +97,7 @@ vec_ptype2.logLik.logLik <- function(x, y, ...) {
   x
 }
 
-#' @rdname vec_ptype2
+#' @rdname vec_ptype2.logLik.logLik
 #' @export
 vec_cast.logLik.logLik <- function(x, to, ...) {
   x

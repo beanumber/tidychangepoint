@@ -28,7 +28,7 @@ penalty_mdl <- function(padded_tau, N = NULL) {
   (num_params / 2) * 
     sum(log(diff(padded_tau))) + 
     2 * log(m) + 
-    2 * sum(log(tail(tau, -1))) +
+    2 * sum(log(utils::tail(tau, -1))) +
     # is this last term necessary???
     extra_term
 }

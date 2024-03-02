@@ -1,6 +1,6 @@
 globalVariables(c(
   "tau_prev", "tau_this", "m_prev", "m_this", "cum_m_this", "cum_m_prev", "m_i",
-  "cum_m_net"
+  "cum_m_net", "idx", "intensity"
 ))
 
 #' @rdname fit_nhpp

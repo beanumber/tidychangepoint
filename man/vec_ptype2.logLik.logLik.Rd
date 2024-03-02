@@ -2,9 +2,12 @@
 % Please edit documentation in R/utils.R
 \name{vec_ptype2.logLik.logLik}
 \alias{vec_ptype2.logLik.logLik}
+\alias{vec_cast.logLik.logLik}
 \title{Vectors implementation for logLik}
 \usage{
 \method{vec_ptype2}{logLik.logLik}(x, y, ...)
+
+\method{vec_cast}{logLik.logLik}(x, to, ...)
 }
 \arguments{
 \item{x, y}{Vector types.}
