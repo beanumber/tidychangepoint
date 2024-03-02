@@ -109,8 +109,8 @@ test_that("penalties work", {
   
   penalty_mdl(pad_tau(tau, n = length(DataCPSim)), length(exceedances(DataCPSim)))
 
-  expect_equal(penalty_mdl(pad_tau(0, n = 1)), -Inf)
-  expect_equal(penalty_mdl(pad_tau(50, n = 100)), 3 * log(50))
+  expect_equal(penalty_mdl(pad_tau(0, n = 1)), 0)
+  expect_equal(penalty_mdl(pad_tau(50, n = 100)), 2 * log(50))
   expect_gt(penalty_mdl(pad_tau(c(25, 50), n = 100)), penalty_mdl(pad_tau(50, n = 100)))
   
   x <- test_set()
