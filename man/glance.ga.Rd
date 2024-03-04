@@ -15,7 +15,7 @@
 Compatibility layer for GA
 }
 \examples{
-cpts <- segment(DataCPSim, method = "ga")
+cpts <- segment(DataCPSim, method = "ga", maxiter = 20)
 class(cpts)
 y <- augment(cpts)
 class(y)

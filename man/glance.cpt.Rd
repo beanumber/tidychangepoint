@@ -62,16 +62,16 @@
 Compatibility layer for changepoint
 }
 \examples{
-cpts <- segment(DataCPSim, method = "ga")
+cpts <- segment(DataCPSim, method = "ga", maxiter = 20)
 as.ts(cpts)
 
-cpts <- segment(DataCPSim, method = "ga")
+cpts <- segment(DataCPSim, method = "ga", maxiter = 20)
 nobs(cpts)
 
 cpts <- segment(DataCPSim, method = "ga")
 logLik(cpts)
 
-cpts <- segment(DataCPSim, method = "ga")
+cpts <- segment(DataCPSim, method = "ga", maxiter = 20)
 changepoints(cpts$segmenter)
 
 cpts <- segment(DataCPSim, method = "pelt")
