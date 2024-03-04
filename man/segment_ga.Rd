@@ -6,6 +6,13 @@
 \usage{
 segment_ga(x, initial_prob = 0.01, ...)
 }
+\arguments{
+\item{x}{A time series}
+
+\item{initial_prob}{Initial probability of being selected}
+
+\item{...}{arguments passed to \code{\link[GA:ga]{GA::ga()}}}
+}
 \description{
 Segment a time series using a genetic algorithm
 }

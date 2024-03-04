@@ -96,7 +96,7 @@ segment.ts <- function(x, method = "null", ...) {
   }
   if (method == "ga") {
     mod_ga <- segment_ga(x, ...)
-    mod <- as(mod_ga, "tidyga")
+    mod <- methods::as(mod_ga, "tidyga")
     mod@data <- x
   }
   if (method == "gbmdl") {

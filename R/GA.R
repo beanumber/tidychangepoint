@@ -14,7 +14,7 @@
 glance.ga <- function(x, ...) {
   tibble::tibble(
     pkg = "ga",
-    version = package_version(packageVersion("GA")),
+    version = package_version(utils::packageVersion("GA")),
     algorithm = "Genetic",
     params = list(params(x)),
     num_cpts = length(changepoints(x))

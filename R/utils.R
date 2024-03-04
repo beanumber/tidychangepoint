@@ -98,6 +98,7 @@ vec_ptype2.logLik.logLik <- function(x, y, ...) {
 }
 
 #' @rdname vec_ptype2.logLik.logLik
+#' @inheritParams vctrs::vec_cast
 #' @export
 vec_cast.logLik.logLik <- function(x, to, ...) {
   x

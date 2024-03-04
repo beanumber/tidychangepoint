@@ -14,7 +14,7 @@
 glance.wbs <- function(x, ...) {
   tibble::tibble(
     pkg = "wbs",
-    version = package_version(packageVersion("wbs")),
+    version = package_version(utils::packageVersion("wbs")),
     algorithm = "Wild Binary Segmentation",
     params = list(params(x)),
     num_cpts = length(changepoints(x))

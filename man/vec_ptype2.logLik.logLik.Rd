@@ -13,6 +13,8 @@
 \item{x, y}{Vector types.}
 
 \item{...}{These dots are for future extensions and must be empty.}
+
+\item{to}{Type to cast to. If \code{NULL}, \code{x} will be returned as is.}
 }
 \description{
 Vectors implementation for logLik

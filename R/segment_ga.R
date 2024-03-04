@@ -1,4 +1,7 @@
 #' Segment a time series using a genetic algorithm
+#' @param x A time series
+#' @param initial_prob Initial probability of being selected
+#' @param ... arguments passed to [GA::ga()]
 #' @export
 #' @examples
 #' \dontrun{
@@ -18,7 +21,7 @@ segment_ga <- function(x, initial_prob = 0.01, ...) {
   memoise::memoise(obj_fun)
   
   init_pop <- function(obj, p = initial_prob) {
-    rbinom(obj@nBits * obj@popSize, size = 1, prob = p) |>
+    stats::rbinom(obj@nBits * obj@popSize, size = 1, prob = p) |>
       matrix(ncol = obj@nBits)
   }
   

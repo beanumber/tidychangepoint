@@ -26,6 +26,7 @@ Imports:
     GA,
     ggplot2,
     memoise,
+    methods,
     patchwork,
     purrr,
     tibble,
