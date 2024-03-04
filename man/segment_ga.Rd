@@ -4,14 +4,16 @@
 \alias{segment_ga}
 \title{Segment a time series using a genetic algorithm}
 \usage{
-segment_ga(x, ...)
+segment_ga(x, initial_prob = 0.01, ...)
 }
 \description{
 Segment a time series using a genetic algorithm
 }
 \examples{
-res <- segment_ga(DataCPSim)
+\dontrun{
+res <- segment_ga(DataCPSim, initial_prob = 0.01, maxiter = 50)
 summary(res)
 str(res)
 plot(res)
+}
 }

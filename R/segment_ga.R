@@ -2,28 +2,30 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' res <- segment_ga(DataCPSim, maxiter = 10)
+#' res <- segment_ga(DataCPSim, initial_prob = 0.01, maxiter = 50)
 #' summary(res)
 #' str(res)
 #' plot(res)
 #' }
 
-segment_ga <- function(x, ...) {
+segment_ga <- function(x, initial_prob = 0.01, ...) {
+  n <- length(x)
   
   obj_fun <- function(tau_binary_vec) {
     tau <- which(tau_binary_vec == 1)
     -BMDL(fit_nhpp(x, tau))
   }
+  memoise::memoise(obj_fun)
   
-  init_pop <- function(obj, p = 0.06) {
-    rbinom(length(x) * 50, size = 1, prob = p) |>
-      matrix(ncol = length(x))
+  init_pop <- function(obj, p = initial_prob) {
+    rbinom(obj@nBits * obj@popSize, size = 1, prob = p) |>
+      matrix(ncol = obj@nBits)
   }
   
   GA::ga(
     type = "binary", 
     fitness = obj_fun,
-    nBits = length(x),
+    nBits = n,
     population = init_pop,
     ...
   )
