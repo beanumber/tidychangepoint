@@ -94,6 +94,11 @@ segment.ts <- function(x, method = "null", ...) {
   if (method == "wbs") {
     mod <- wbs::wbs(x, ...)
   }
+  if (method == "ga") {
+    mod_ga <- segment_ga(x, ...)
+    mod <- as(mod_ga, "tidyga")
+    mod@data <- x
+  }
   if (method == "gbmdl") {
     mod <- segment_gbmdl(x, ...)
   }
