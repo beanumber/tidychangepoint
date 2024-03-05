@@ -1,5 +1,7 @@
 library(tidyverse)
 
+## Bogota precipitation
+
 bogota_pm <- read_csv("data-raw/PM2.5.csv") |>
   mutate(
     year = rep(2018:2020, c(365, 365, 366)),
@@ -13,6 +15,9 @@ bogota_pm <- read_csv("data-raw/PM2.5.csv") |>
 
 usethis::use_data(bogota_pm, overwrite = TRUE, compress = "xz")
 
+
+## Medellin rainfall
+
 medellin_rainfall <- readxl::read_excel(here::here("data-raw", "precipitacioìn_mensual.xlsx")) |>
   select(date = fecha, monthly_precipitation = spi_1) |>
   mutate(
@@ -21,3 +26,11 @@ medellin_rainfall <- readxl::read_excel(here::here("data-raw", "precipitacioìn_
   )
 
 usethis::use_data(medellin_rainfall, overwrite = TRUE, compress = "xz")
+
+## Central England temperature
+
+england_temperature <- read_csv(here::here("data-raw", "CentralEnglandT1659-2020_yearly.csv")) |>
+  rename(annual_mean_temp = avg) |>
+  tsibble::as_tsibble(index = year)
+
+usethis::use_data(england_temperature, overwrite = TRUE, compress = "xz")

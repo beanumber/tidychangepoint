@@ -4,6 +4,8 @@
 \alias{pad_tau}
 \alias{unpad_tau}
 \alias{is_valid_tau}
+\alias{binary2tau}
+\alias{tau2binary}
 \alias{cut_inclusive}
 \alias{test_set}
 \alias{split_by_tau}
@@ -15,6 +17,10 @@ pad_tau(tau, n)
 unpad_tau(padded_tau)
 
 is_valid_tau(tau, n)
+
+binary2tau(x)
+
+tau2binary(tau, n)
 
 cut_inclusive(x, tau)
 
@@ -47,6 +53,11 @@ is_valid_tau(826, length(DataCPSim))
 is_valid_tau(1096, length(DataCPSim))
 is_valid_tau(1097, length(DataCPSim))
 
+binary2tau(c(0, 0, 1, 0, 1))
+binary2tau(round(runif(10)))
+
+tau2binary(c(7, 17), n = 24)
+tau2binary(binary2tau(c(0, 0, 1, 1, 0, 1)), n = 6)
 split_by_tau(DataCPSim, c(365, 826))
 deg_free(segment(DataCPSim))
 }

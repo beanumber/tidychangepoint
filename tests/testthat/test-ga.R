@@ -1,5 +1,5 @@
 test_that("GA works", {
-  x <- segment(DataCPSim, method = "ga", initial_prob = 0.01, maxiter = 20)
+  x <- segment(DataCPSim, method = "ga", initial_prob = 0.01, maxiter = 5)
   expect_s3_class(x, "tidycpt")
   expect_s4_class(x$segmenter, "ga")
   expect_s3_class(as.ts(x), "ts")
@@ -11,4 +11,15 @@ test_that("GA works", {
   expect_equal(AIC(x), as.numeric(-2 * logLik(x) + 2 * deg_free(x)))
   expect_equal(BIC(x), as.numeric(-2 * logLik(x) + log(nobs(x)) * deg_free(x)))
   
+  x <- segment(DataCPSim, method = "ga-shi", maxiter = 5)
+  expect_s3_class(x, "tidycpt")
+  expect_s4_class(x$segmenter, "ga")
+  expect_s3_class(as.ts(x), "ts")
+  expect_s3_class(augment(x), "grouped_ts")
+  expect_s3_class(tidy(x), "tbl_df")
+  expect_s3_class(glance(x), "tbl_df")
+  expect_type(changepoints(x), "integer")
+  expect_type(nobs(x), "integer")
+  expect_equal(AIC(x), as.numeric(-2 * logLik(x) + 2 * deg_free(x)))
+  expect_equal(BIC(x), as.numeric(-2 * logLik(x) + log(nobs(x)) * deg_free(x)))
 })
