@@ -45,11 +45,11 @@ MBIC(object, ...)
 
 \method{MBIC}{tidycpt}(object, ...)
 
-MDL(x, ...)
+MDL(object, ...)
 
-BMDL(x, ...)
+BMDL(object, ...)
 
-\method{BMDL}{tidycpt}(x, ...)
+\method{BMDL}{tidycpt}(object, ...)
 
 \method{nobs}{tidycpt}(object, ...)
 

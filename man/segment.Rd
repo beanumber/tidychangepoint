@@ -23,13 +23,15 @@ segment(x, method = "null", ...)
 \item{...}{arguments passed to methods}
 }
 \value{
-an object of class \code{tidycpt}. Every \code{tidycpt} object contains:
+An object of class \code{tidycpt}. Every \code{tidycpt} object contains:
 \itemize{
 \item \code{segmenter}: The object returned by the underlying function.
 \item \code{nhpp}: A \code{tbl_df} showing the best fit parameters for each region, as
-defined by the chnagepoint set returned by \code{changepoints()}. These parameters
+defined by the changepoint set returned by \code{\link[=changepoints]{changepoints()}} when called
+on the \code{segmenter}. These parameters
 are fit using the non-homogeneous Poisson process model in \code{\link[=fit_nhpp]{fit_nhpp()}}.
-This object also has class \code{nhpp}
+This object also has class \code{nhpp}.
+\item \code{elapsed_time}: The clock time that passed while the algorithm was running.
 }
 }
 \description{
@@ -48,11 +50,15 @@ on the value of the \code{method} argument:
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
 \item \code{single-best}: Uses the AMOC criteria as implemented by
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
+\item \code{wbs}: Uses the Wild Binary Segmentation algorithm as implemented by
+\code{\link[wbs:wbs]{wbs::wbs()}}. The \code{segmenter} is of class \code{wbs}.
+\item \code{ga-shi}: Uses the Genetic algorithm used by Shi and implemented by
+\code{\link[GA:ga]{GA::ga()}}. The \code{segmenter} is of class \code{tidyga}.
 \item \code{gbmdl}: Uses the Genetic BMDL heuristic as implemented by
 \code{\link[=segment_gbmdl]{segment_gbmdl()}}. The \code{segmenter} is of class \code{\link[=seg_default]{seg_default()}}.
-\item \code{manual}: Uses the vector of changepoints in the \code{cpts} arugment and
-\code{\link[stats:lm]{stats::lm()}}. The \code{segmenter} is of class \code{\link[=seg_default]{seg_default()}}`.
-\item \code{null}: The default. Uses \code{\link[stats:lm]{stats::lm()}} with no changepoints.
+\item \code{manual}: Uses the vector of changepoints in the \code{cpts} argument.
+The \code{segmenter} is of class \code{\link[=seg_default]{seg_default()}}`.
+\item \code{null}: The default. Uses no changepoints.
 The \code{segmenter} is of class \code{\link[=seg_default]{seg_default()}}`.
 }
 }
@@ -76,5 +82,5 @@ x <- segment(DataCPSim, method = "gbmdl", num_generations = 10)
 
 }
 \seealso{
-\code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}
+\code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}, \code{\link[wbs:wbs]{wbs::wbs()}}, \code{\link[GA:ga]{GA::ga()}}
 }

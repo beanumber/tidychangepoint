@@ -60,12 +60,12 @@ MBIC.tidycpt <- function(object, ...) {
 
 #' @rdname changepoints
 #' @export
-MDL <- function(x, ...) UseMethod("MDL")
+MDL <- function(object, ...) UseMethod("MDL")
 
 #' @rdname changepoints
 #' @export
 
-BMDL <- function(x, ...) UseMethod("BMDL")
+BMDL <- function(object, ...) UseMethod("BMDL")
 
 #' @rdname changepoints
 #' @export
@@ -77,8 +77,8 @@ BMDL <- function(x, ...) UseMethod("BMDL")
 #' z <- segment(DataCPSim, method = "single-best")
 #' BMDL(z)
 
-BMDL.tidycpt <- function(x, ...) {
-  BMDL(x$nhpp)
+BMDL.tidycpt <- function(object, ...) {
+  BMDL(object$nhpp)
 }
 
 
@@ -183,7 +183,7 @@ plot.tidycpt <- function(x, ...) {
     ggplot2::scale_y_continuous("Original Measurement") + 
     ggplot2::labs(
       title = "Original times series",
-      subtitle = paste("Mean value is", round(mean(as.ts(x)), 2))
+      subtitle = paste("Mean value is", round(mean(as.ts(x), na.rm = TRUE), 2))
     )
 }
 

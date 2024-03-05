@@ -93,8 +93,8 @@ changepoints.seg_default <- function(x, ...) {
 #' @rdname new_seg_default
 #' @export
 
-BMDL.seg_default <- function(x, ...) {
-  x$candidates |>
+BMDL.seg_default <- function(object, ...) {
+  object$candidates |>
     dplyr::arrange(bmdl) |>
     utils::head(1) |>
     dplyr::pull(bmdl)

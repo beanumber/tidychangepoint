@@ -48,7 +48,7 @@ num_candidates(x)
 
 \method{changepoints}{seg_default}(x, ...)
 
-\method{BMDL}{seg_default}(x, ...)
+\method{BMDL}{seg_default}(object, ...)
 
 \method{logLik}{seg_default}(object, ...)
 

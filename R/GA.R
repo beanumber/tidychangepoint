@@ -61,7 +61,7 @@ nobs.ga <- function(object, ...) {
 #' logLik(cpts)
 #' 
 logLik.ga <- function(object, ...) {
-  logLik(as.ts(object), loc.ind = tau2binary(changepoints(object)))
+  logLik(as.ts(object), loc.ind = tau2binary(changepoints(object), n = nobs(object)))
 }
 
 #' @rdname glance.ga

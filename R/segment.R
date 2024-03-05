@@ -36,12 +36,14 @@ segment.numeric <- function(x, method = "null", ...) {
 
 #' @rdname segment
 #' @export
-#' @return an object of class `tidycpt`. Every `tidycpt` object contains:
+#' @return An object of class `tidycpt`. Every `tidycpt` object contains:
 #' - `segmenter`: The object returned by the underlying function. 
 #' - `nhpp`: A `tbl_df` showing the best fit parameters for each region, as 
-#'   defined by the chnagepoint set returned by `changepoints()`. These parameters
+#'   defined by the changepoint set returned by [changepoints()] when called 
+#'   on the `segmenter`. These parameters
 #'   are fit using the non-homogeneous Poisson process model in [fit_nhpp()].
-#'   This object also has class `nhpp`
+#'   This object also has class `nhpp`.
+#' - `elapsed_time`: The clock time that passed while the algorithm was running.
 #' @details Currently, [segment()] can use the following algorithms, depending
 #' on the value of the `method` argument:
 #' - `pelt`: Uses the PELT algorithm as implemented in 
@@ -52,13 +54,17 @@ segment.numeric <- function(x, method = "null", ...) {
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
 #' - `single-best`: Uses the AMOC criteria as implemented by 
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
+#' - `wbs`: Uses the Wild Binary Segmentation algorithm as implemented by 
+#'   [wbs::wbs()]. The `segmenter` is of class `wbs`.
+#' - `ga-shi`: Uses the Genetic algorithm used by Shi and implemented by 
+#'   [GA::ga()]. The `segmenter` is of class `tidyga`.
 #' - `gbmdl`: Uses the Genetic BMDL heuristic as implemented by 
 #'   [segment_gbmdl()]. The `segmenter` is of class [seg_default()].
-#' - `manual`: Uses the vector of changepoints in the `cpts` arugment and
-#'   [stats::lm()]. The `segmenter` is of class [seg_default()]`.
-#' - `null`: The default. Uses [stats::lm()] with no changepoints. 
+#' - `manual`: Uses the vector of changepoints in the `cpts` argument. 
 #'   The `segmenter` is of class [seg_default()]`.
-#' @seealso [changepoint::cpt.meanvar()]
+#' - `null`: The default. Uses no changepoints. 
+#'   The `segmenter` is of class [seg_default()]`.
+#' @seealso [changepoint::cpt.meanvar()], [wbs::wbs()], [GA::ga()]
 #' @examples
 #' segment(DataCPSim, method = "pelt")
 #' segment(DataCPSim, method = "pelt", penalty = "AIC")

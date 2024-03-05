@@ -27,9 +27,9 @@ fit_nhpp(x, tau)
 
 \method{logLik}{nhpp}(object, ...)
 
-\method{MDL}{nhpp}(x, ...)
+\method{MDL}{nhpp}(object, ...)
 
-\method{BMDL}{nhpp}(x, ...)
+\method{BMDL}{nhpp}(object, ...)
 
 \method{MBIC}{nhpp}(object, ...)
 

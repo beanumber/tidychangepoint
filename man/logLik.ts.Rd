@@ -14,9 +14,18 @@
 
 \method{exceedances}{double}(x, ...)
 
-\method{MDL}{logLik}(x, ...)
+\method{MDL}{logLik}(object, ...)
 
-\method{MBIC}{logLik}(x, ...)
+\method{MBIC}{logLik}(object, ...)
+}
+\arguments{
+\item{object}{any object from which a log-likelihood value, or a
+   contribution to a log-likelihood value, can be extracted.}
+
+\item{...}{some methods for this generic function require additional
+   arguments.}
+
+\item{x}{A numeric vector}
 }
 \description{
 Generic methods for classes from \link{stats}
@@ -31,7 +40,7 @@ loc.ind = 0/1. 1 corresponds a CPT location, 0 is not.
 x <- england_temperature$annual_mean_temp
 logLik(as.ts(x), loc.ind = round(runif(length(x))))
 x <- england_temperature$annual_mean_temp
-MDL(as.ts(x), tau = 123)
+MDL(logLik(as.ts(x), loc.ind = tau2binary(123, n = length(x))))
 }
 \references{
 Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
