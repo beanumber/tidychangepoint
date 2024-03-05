@@ -15,7 +15,7 @@ segment_ga <- function(x, initial_prob = 0.01, ...) {
   n <- length(x)
   
   obj_fun <- function(tau_binary_vec) {
-    tau <- which(tau_binary_vec == 1)
+    tau <- binary2tau(tau_binary_vec)
     -BMDL(fit_nhpp(x, tau))
   }
   memoise::memoise(obj_fun)

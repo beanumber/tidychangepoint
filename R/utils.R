@@ -32,6 +32,29 @@ is_valid_tau <- function(tau, n) {
 }
 
 #' @rdname pad_tau
+#' @export
+#' @examples
+#' binary2tau(c(0, 0, 1, 0, 1))
+#' binary2tau(round(runif(10)))
+#' 
+binary2tau <- function(x) {
+  # tau.vec <- loc.ind * (1:N) # convert binary to CPT location
+  which(x == 1)
+}
+
+#' @rdname pad_tau
+#' @export
+#' @examples
+#' tau2binary(c(7, 17), n = 24)
+#' tau2binary(binary2tau(c(0, 0, 1, 1, 0, 1)), n = 6)
+tau2binary <- function(tau, n) {
+  out <- rep(0, times = n)
+  out[tau] <- 1
+  out
+}
+
+
+#' @rdname pad_tau
 #' @param x A numeric vector
 #' @export
 cut_inclusive <- function(x, tau) {

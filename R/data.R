@@ -15,6 +15,10 @@
 #' @docType data
 "medellin_rainfall"
 
+#' Mean annual temperature in Central England
+#' @docType data
+"england_temperature"
+
 #' Simulated time series data
 #' @docType data
 #' @description

@@ -61,11 +61,7 @@ nobs.wbs <- function(object, ...) {
 #' logLik(cpts)
 #' 
 logLik.wbs <- function(object, ...) {
-#  message("intercepting...")
-  y <- 0
-  attr(ll, "df") <- length(changepoints(object))
-  class(ll) <- "logLik"
-  return(ll)
+  logLik(as.ts(object), loc.ind = tau2binary(changepoints(object)))
 }
 
 #' @rdname glance.cpt
