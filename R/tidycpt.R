@@ -35,18 +35,6 @@ exceedances.tidycpt <- function(x, ...) {
 
 #' @rdname changepoints
 #' @export
-exceedances.ts <- function(x, ...) {
-  exceedances(as.double(x))
-}
-
-#' @rdname changepoints
-#' @export
-exceedances.double <- function(x, ...) {
-  which(x > mean(x, na.rm = TRUE, ...))
-}
-
-#' @rdname changepoints
-#' @export
 length.tidycpt <- function(x, ...) {
   length(as.ts(x))
 }

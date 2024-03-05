@@ -7,8 +7,6 @@
 \alias{as.ts.tidycpt}
 \alias{exceedances}
 \alias{exceedances.tidycpt}
-\alias{exceedances.ts}
-\alias{exceedances.double}
 \alias{length.tidycpt}
 \alias{logLik.tidycpt}
 \alias{MBIC}
@@ -38,10 +36,6 @@ changepoints(x, ...)
 exceedances(x, ...)
 
 \method{exceedances}{tidycpt}(x, ...)
-
-\method{exceedances}{ts}(x, ...)
-
-\method{exceedances}{double}(x, ...)
 
 \method{length}{tidycpt}(x, ...)
 

@@ -6,7 +6,6 @@
 \alias{as.ts.ga}
 \alias{nobs.ga}
 \alias{logLik.ga}
-\alias{logLik.ts}
 \alias{changepoints.ga}
 \title{Compatibility layer for GA}
 \usage{
@@ -20,8 +19,6 @@
 
 \method{logLik}{ga}(object, ...)
 
-\method{logLik}{ts}(object, ...)
-
 \method{changepoints}{ga}(x, ...)
 }
 \arguments{
@@ -33,12 +30,6 @@
 }
 \description{
 Compatibility layer for GA
-}
-\details{
-loc.ind is the binary input of length N
-Note \code{X[1]} cannot be a changepoint,
-so \code{loc.ind[1]} is set to be zero
-loc.ind = 0/1. 1 corresponds a CPT location, 0 is not.
 }
 \examples{
 cpts <- segment(DataCPSim, method = "ga", maxiter = 10)
@@ -57,12 +48,7 @@ nobs(cpts)
 cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
 logLik(cpts)
 
-x <- england_temperature$annual_mean_temp
-logLik(as.ts(x), loc.ind = round(runif(length(x))))
 cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
 changepoints(cpts$segmenter)
 
-}
-\author{
-Xueheng Shi
 }

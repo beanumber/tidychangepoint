@@ -2,14 +2,31 @@
 % Please edit documentation in R/wbs.R
 \name{glance.wbs}
 \alias{glance.wbs}
+\alias{params.wbs}
+\alias{as.ts.wbs}
+\alias{nobs.wbs}
+\alias{logLik.wbs}
+\alias{changepoints.wbs}
 \title{Compatibility layer for wbs}
 \usage{
 \method{glance}{wbs}(x, ...)
+
+\method{params}{wbs}(x, ...)
+
+\method{as.ts}{wbs}(x, ...)
+
+\method{nobs}{wbs}(object, ...)
+
+\method{logLik}{wbs}(object, ...)
+
+\method{changepoints}{wbs}(x, ...)
 }
 \arguments{
 \item{x}{A \code{wbs} object returned by \code{\link[wbs:wbs]{wbs::wbs()}}}
 
 \item{...}{arguments passed to methods}
+
+\item{object}{A \code{cpt} object.}
 }
 \description{
 Compatibility layer for wbs
@@ -22,4 +39,16 @@ class(y)
 y
 tidy(cpts)
 glance(cpts)
+cpts <- segment(DataCPSim, method = "wbs")
+as.ts(cpts)
+
+cpts <- segment(DataCPSim, method = "wbs")
+nobs(cpts)
+
+cpts <- segment(DataCPSim, method = "wbs")
+logLik(cpts)
+
+cpts <- segment(DataCPSim, method = "wbs")
+changepoints(cpts$segmenter)
+
 }

@@ -22,7 +22,7 @@ below to see their documentation.
 \describe{
   \item{broom}{\code{\link[broom:reexports]{augment}}, \code{\link[broom:reexports]{glance}}, \code{\link[broom:reexports]{tidy}}}
 
-  \item{stats}{\code{\link[stats]{AIC}}, \code{\link[stats:ts]{as.ts}}, \code{\link[stats:AIC]{BIC}}, \code{\link[stats]{logLik}}, \code{\link[stats]{nobs}}}
+  \item{stats}{\code{\link[stats]{AIC}}, \code{\link[stats:AIC]{BIC}}, \code{\link[stats:ts]{as.ts}}, \code{\link[stats]{logLik}}, \code{\link[stats]{nobs}}}
 
   \item{vctrs}{\code{\link[vctrs]{vec_cast}}, \code{\link[vctrs]{vec_ptype2}}}
 }}

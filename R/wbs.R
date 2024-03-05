@@ -21,7 +21,7 @@ glance.wbs <- function(x, ...) {
   )
 }
 
-#' @rdname glance.cpt
+#' @rdname glance.wbs
 #' @export
 params.wbs <- function(x, ...) {
   list(
@@ -33,7 +33,7 @@ params.wbs <- function(x, ...) {
   )
 }
 
-#' @rdname glance.cpt
+#' @rdname glance.wbs
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "wbs")
@@ -43,7 +43,7 @@ as.ts.wbs <- function(x, ...) {
   as.ts(x$x)
 }
 
-#' @rdname glance.cpt
+#' @rdname glance.wbs
 #' @param object A `cpt` object.
 #' @export
 #' @examples
@@ -54,7 +54,7 @@ nobs.wbs <- function(object, ...) {
   length(as.ts(object))
 }
 
-#' @rdname glance.cpt
+#' @rdname glance.wbs
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "wbs")
@@ -64,7 +64,7 @@ logLik.wbs <- function(object, ...) {
   logLik(as.ts(object), loc.ind = tau2binary(changepoints(object)))
 }
 
-#' @rdname glance.cpt
+#' @rdname glance.wbs
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "wbs")
