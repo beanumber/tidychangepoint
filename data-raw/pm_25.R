@@ -29,8 +29,8 @@ usethis::use_data(medellin_rainfall, overwrite = TRUE, compress = "xz")
 
 ## Central England temperature
 
-england_temperature <- read_csv(here::here("data-raw", "CentralEnglandT1659-2020_yearly.csv")) |>
+HadCET <- read_csv(here::here("data-raw", "CentralEnglandT1659-2020_yearly.csv")) |>
   rename(annual_mean_temp = avg) |>
   tsibble::as_tsibble(index = year)
 
-usethis::use_data(england_temperature, overwrite = TRUE, compress = "xz")
+usethis::use_data(HadCET, overwrite = TRUE, compress = "xz")
