@@ -5,7 +5,7 @@
 \alias{medellin_rainfall}
 \title{Rainfall in Medellín, Colombia}
 \format{
-An object of class \code{tbl_df} (inherits from \code{tbl}, \code{data.frame}) with 444 rows and 2 columns.
+An object of class \code{xts} (inherits from \code{zoo}) with 444 rows and 1 columns.
 }
 \usage{
 medellin_rainfall

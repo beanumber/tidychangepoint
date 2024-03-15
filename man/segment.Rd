@@ -3,6 +3,7 @@
 \name{segment}
 \alias{segment}
 \alias{segment.tbl_ts}
+\alias{segment.xts}
 \alias{segment.numeric}
 \alias{segment.ts}
 \title{Segment a time series using a variety of algorithms}
@@ -10,6 +11,8 @@
 segment(x, method = "null", ...)
 
 \method{segment}{tbl_ts}(x, method = "null", ...)
+
+\method{segment}{xts}(x, method = "null", ...)
 
 \method{segment}{numeric}(x, method = "null", ...)
 
@@ -76,6 +79,7 @@ segment(DataCPSim, method = "manual", cpts = c(826))
 two_cpts <- segment(DataCPSim, method = "manual", cpts = c(365, 826))
 plot(two_cpts)
 diagnose(two_cpts)
+segment(bogota_pm, method = "pelt")
 \dontrun{
 x <- segment(DataCPSim, method = "gbmdl", num_generations = 10)
 }

@@ -1,5 +1,5 @@
 test_that("data works", {
-  expect_s3_class(bogota_pm, "tbl_ts")
+  expect_s3_class(bogota_pm, "xts")
 })
 
 test_that("tidycpt works", {

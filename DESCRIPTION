@@ -36,7 +36,9 @@ Imports:
     tidyr,
     tsibble,
     vctrs,
-    wbs
+    wbs,
+    xts,
+    zoo
 Depends: 
     R (>= 4.1)
 LazyData: true

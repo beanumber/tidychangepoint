@@ -11,7 +11,7 @@ as.ts.lm <- function(x, ...) {
   as.ts(x$model$y)
 }
 
-#' @rdname as.ts.cpt_lm
+#' @rdname as.ts.lm
 #' @export
 changepoints.lm <- function(x, ...) {
   x$contrasts |>

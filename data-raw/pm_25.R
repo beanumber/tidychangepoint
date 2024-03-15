@@ -10,8 +10,7 @@ bogota_pm <- read_csv("data-raw/PM2.5.csv") |>
     particulate_matter = PM2.5 / 10
   ) |>
   select(date, particulate_matter) |>
-  tsibble::as_tsibble(index = date)
-
+  xts::as.xts()
 
 usethis::use_data(bogota_pm, overwrite = TRUE, compress = "xz")
 
@@ -19,18 +18,20 @@ usethis::use_data(bogota_pm, overwrite = TRUE, compress = "xz")
 ## Medellin rainfall
 
 medellin_rainfall <- readxl::read_excel(here::here("data-raw", "precipitacioìn_mensual.xlsx")) |>
-  select(date = fecha, monthly_precipitation = spi_1) |>
   mutate(
-    monthly_precipitation = as.double(monthly_precipitation),
-    monthly_precipitation = ifelse(monthly_precipitation == -Inf, NA, monthly_precipitation)
-  )
+    date = ymd(fecha), 
+    precipitation = ifelse(spi_1 == -Inf, NA, as.double(spi_1))
+  ) |>
+  select(date, precipitation) |>
+  xts::as.xts()
 
 usethis::use_data(medellin_rainfall, overwrite = TRUE, compress = "xz")
 
 ## Central England temperature
 
-HadCET <- read_csv(here::here("data-raw", "CentralEnglandT1659-2020_yearly.csv")) |>
-  rename(annual_mean_temp = avg) |>
-  tsibble::as_tsibble(index = year)
+CET <- read_csv(here::here("data-raw", "CentralEnglandT1659-2020_yearly.csv")) |>
+  rename(mean_temp = avg) |>
+  mutate(year = parse_date(as.character(year), format = "%Y")) |>
+  xts::as.xts()
 
-usethis::use_data(HadCET, overwrite = TRUE, compress = "xz")
+usethis::use_data(CET, overwrite = TRUE, compress = "xz")

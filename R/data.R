@@ -1,9 +1,8 @@
-#' Paritculate matter in Bogotá, Colombia
+#' Particulate matter in Bogotá, Colombia
 #' @docType data
 #' @description
 #' Particulate matter of less than 2.5 microns of diameter in Bogotá, Colombia.
 #' Daily readings from 2018-2020 are included. 
-#' @returns A [tsibble::tsibble()]
 #' 
 #' @examples
 #' class(bogota_pm)
@@ -35,7 +34,7 @@
 #' @references 
 #'   - Shi, et al. (2022, \doi{10.1175/JCLI-D-21-0489.1}), 
 #'   - Parker, et al. (1992, \doi{10.1002/joc.3370120402})
-"HadCET"
+"CET"
 
 #' Simulated time series data
 #' @docType data

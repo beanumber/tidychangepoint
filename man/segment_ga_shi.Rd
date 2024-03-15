@@ -16,8 +16,7 @@ Segment a time series using a genetic algorithm
 }
 \examples{
 \dontrun{
-x <- england_temperature$annual_mean_temp
-res <- segment_ga_shi(x, maxiter = 50)
+res <- segment_ga_shi(CET, maxiter = 50)
 summary(res)
 str(res)
 plot(res)

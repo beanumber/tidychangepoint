@@ -39,3 +39,6 @@ vctrs::vec_ptype2
 #' @importFrom vctrs vec_cast
 vctrs::vec_cast
 
+#' @export
+#' @importFrom zoo index
+zoo::index

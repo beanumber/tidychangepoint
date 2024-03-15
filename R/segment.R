@@ -23,6 +23,19 @@ segment.tbl_ts <- function(x, method = "null", ...) {
     stop("x is not coercible into a ts object.")
   }
   segment(as.ts(x), method = method, ... = ...)
+  out$time_index <- index(x)
+  return(out)
+}
+
+#' @rdname segment
+#' @export
+segment.xts <- function(x, method = "null", ...) {
+  if (!stats::is.ts(stats::as.ts(x))) {
+    stop("x is not coercible into a ts object.")
+  }
+  out <- segment(as.ts(x), method = method, ... = ...)
+  out$time_index <- index(x)
+  return(out)
 }
 
 #' @rdname segment
@@ -75,6 +88,7 @@ segment.numeric <- function(x, method = "null", ...) {
 #' two_cpts <- segment(DataCPSim, method = "manual", cpts = c(365, 826))
 #' plot(two_cpts)
 #' diagnose(two_cpts)
+#' segment(bogota_pm, method = "pelt")
 #' \dontrun{
 #' x <- segment(DataCPSim, method = "gbmdl", num_generations = 10)
 #' }

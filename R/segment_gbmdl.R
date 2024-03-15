@@ -52,7 +52,7 @@ globalVariables(
 #' \dontrun{
 #' x <- segment_gbmdl(DataCPSim, num_generations = 10)
 #' y <- segment_gbmdl(rlnorm_ts_1)
-#' z <- segment_gbmdl(bogota_pm$particulate_matter)
+#' z <- segment_gbmdl(as.ts(bogota_pm))
 #' }
 #' 
 segment_gbmdl <- function(x, 

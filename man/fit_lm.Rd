@@ -4,7 +4,7 @@
 \alias{fit_lm}
 \title{Regression-based model fitting}
 \usage{
-fit_lm(x, tau)
+fit_lm(x, tau, trends = FALSE, ...)
 }
 \description{
 Regression-based model fitting
@@ -15,4 +15,11 @@ mod <- fit_lm(DataCPSim, tau)
 logLik(mod)
 deg_free(mod)
 
+cpts = c(1700, 1739, 1988)
+ids <- match(cpts, lubridate::year(index(CET)))
+mod <- fit_lm(CET, tau = ids)
+
+mod <- fit_lm(CET, tau = ids, trends = TRUE)
+logLik(mod)
+deg_free(mod)
 }

@@ -9,8 +9,7 @@
 #' @export
 #' @author Xueheng Shi
 #' @examples
-#' x <- england_temperature$annual_mean_temp
-#' logLik(as.ts(x), loc.ind = round(runif(length(x))))
+#' logLik(as.ts(CET), loc.ind = round(runif(length(CET))))
 logLik.ts <- function(object, ...) {
   args <- list(...)
   if (is.null(args[["loc.ind"]])) {
@@ -70,7 +69,7 @@ exceedances.double <- function(x, ...) {
 #' @rdname logLik.ts
 #' @export
 #' @examples
-#' x <- england_temperature$annual_mean_temp
+#' x <- HadCET$annual_mean_temp
 #' MDL(logLik(as.ts(x), loc.ind = tau2binary(123, n = length(x))))
 MDL.logLik <- function(object, ...) {
   tau <- attr(object, "tau")

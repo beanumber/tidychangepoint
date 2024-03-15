@@ -3,15 +3,12 @@
 \docType{data}
 \name{bogota_pm}
 \alias{bogota_pm}
-\title{Paritculate matter in Bogotá, Colombia}
+\title{Particulate matter in Bogotá, Colombia}
 \format{
-An object of class \code{tbl_ts} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 1096 rows and 2 columns.
+An object of class \code{xts} (inherits from \code{zoo}) with 1096 rows and 1 columns.
 }
 \usage{
 bogota_pm
-}
-\value{
-A \code{\link[tsibble:tsibble]{tsibble::tsibble()}}
 }
 \description{
 Particulate matter of less than 2.5 microns of diameter in Bogotá, Colombia.

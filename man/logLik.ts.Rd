@@ -37,9 +37,8 @@ so \code{loc.ind[1]} is set to be zero
 loc.ind = 0/1. 1 corresponds a CPT location, 0 is not.
 }
 \examples{
-x <- england_temperature$annual_mean_temp
-logLik(as.ts(x), loc.ind = round(runif(length(x))))
-x <- england_temperature$annual_mean_temp
+logLik(as.ts(CET), loc.ind = round(runif(length(CET))))
+x <- HadCET$annual_mean_temp
 MDL(logLik(as.ts(x), loc.ind = tau2binary(123, n = length(x))))
 }
 \references{
