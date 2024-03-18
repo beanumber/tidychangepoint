@@ -10,6 +10,8 @@
 #' @author Xueheng Shi
 #' @examples
 #' logLik(as.ts(CET), loc.ind = round(runif(length(CET))))
+#' logLik(as.ts(CET), loc.ind = tau2binary(c(42, 81, 330), n = length(CET)))
+#' logLik(fit_meanshift(CET, tau = c(42, 81, 330)))
 logLik.ts <- function(object, ...) {
   args <- list(...)
   if (is.null(args[["loc.ind"]])) {
@@ -52,6 +54,9 @@ logLik.ts <- function(object, ...) {
   class(ll) <- "logLik"
   return(ll)
 }
+
+
+
 
 #' @rdname logLik.ts
 #' @export

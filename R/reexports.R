@@ -32,6 +32,10 @@ stats::BIC
 stats::nobs
 
 #' @export
+#' @importFrom stats time
+stats::time
+
+#' @export
 #' @importFrom vctrs vec_ptype2
 vctrs::vec_ptype2
 
@@ -40,5 +44,9 @@ vctrs::vec_ptype2
 vctrs::vec_cast
 
 #' @export
+as.ts.xts <- xts:::as.ts.xts
+
+#' @export
 #' @importFrom zoo index
 zoo::index
+

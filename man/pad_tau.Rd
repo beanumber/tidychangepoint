@@ -6,6 +6,8 @@
 \alias{is_valid_tau}
 \alias{binary2tau}
 \alias{tau2binary}
+\alias{tau2time}
+\alias{time2tau}
 \alias{cut_inclusive}
 \alias{test_set}
 \alias{split_by_tau}
@@ -21,6 +23,10 @@ is_valid_tau(tau, n)
 binary2tau(x)
 
 tau2binary(tau, n)
+
+tau2time(tau, index)
+
+time2tau(cpts, index)
 
 cut_inclusive(x, tau)
 
@@ -58,6 +64,8 @@ binary2tau(round(runif(10)))
 
 tau2binary(c(7, 17), n = 24)
 tau2binary(binary2tau(c(0, 0, 1, 1, 0, 1)), n = 6)
+tau2time(c(42, 81, 330), index = lubridate::year(time(CET)))
+time2tau(c(1700, 1739, 1988), index = lubridate::year(time(CET)))
 split_by_tau(DataCPSim, c(365, 826))
 deg_free(segment(DataCPSim))
 }

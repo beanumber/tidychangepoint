@@ -23,7 +23,7 @@ segment.tbl_ts <- function(x, method = "null", ...) {
     stop("x is not coercible into a ts object.")
   }
   segment(as.ts(x), method = method, ... = ...)
-  out$time_index <- index(x)
+  out$time_index <- time(as.ts(x))
   return(out)
 }
 
@@ -34,7 +34,7 @@ segment.xts <- function(x, method = "null", ...) {
     stop("x is not coercible into a ts object.")
   }
   out <- segment(as.ts(x), method = method, ... = ...)
-  out$time_index <- index(x)
+  out$time_index <- time(x)
   return(out)
 }
 

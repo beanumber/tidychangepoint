@@ -53,6 +53,22 @@ tau2binary <- function(tau, n) {
   out
 }
 
+#' @rdname pad_tau
+#' @export
+#' @examples
+#' tau2time(c(42, 81, 330), index = lubridate::year(time(CET)))
+tau2time <- function(tau, index) {
+  index[tau]
+}
+
+#' @rdname pad_tau
+#' @export
+#' @examples
+#' time2tau(c(1700, 1739, 1988), index = lubridate::year(time(CET)))
+time2tau <- function(cpts, index) {
+  match(cpts, index)
+}
+
 
 #' @rdname pad_tau
 #' @param x A numeric vector
