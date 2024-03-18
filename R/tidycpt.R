@@ -153,11 +153,11 @@ plot.tidycpt <- function(x, ...) {
     data = augment(x), 
     ggplot2::aes(x = index, y = y)
   ) +
-    ggplot2::geom_rect(
-      data = regions,
-      ggplot2::aes(xmin = begin, xmax = end, ymin = 0, ymax = Inf, x = NULL, y = NULL),
-      fill = "grey90"
-    ) +
+#    ggplot2::geom_rect(
+#      data = regions,
+#      ggplot2::aes(xmin = begin, xmax = end, ymin = 0, ymax = Inf, x = NULL, y = NULL),
+#      fill = "grey90"
+#    ) +
     ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = end), linetype = 3) +
     ggplot2::geom_hline(yintercept = mean(as.ts(x)), linetype = 3) +
     ggplot2::geom_rug(sides = "l") +

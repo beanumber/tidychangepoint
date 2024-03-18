@@ -45,6 +45,10 @@ deg_free(x)
 
 \item{x}{A numeric vector}
 
+\item{index}{Index of times, typically returned by \code{\link[stats:time]{stats::time()}}}
+
+\item{cpts}{Time series observation labels to be converted to indices}
+
 \item{sd}{Standard deviation passed to \code{\link[stats:Normal]{stats::rnorm()}}}
 
 \item{seed}{Value passed to \code{\link[base:Random]{base::set.seed()}}}
@@ -68,4 +72,7 @@ tau2time(c(42, 81, 330), index = lubridate::year(time(CET)))
 time2tau(c(1700, 1739, 1988), index = lubridate::year(time(CET)))
 split_by_tau(DataCPSim, c(365, 826))
 deg_free(segment(DataCPSim))
+}
+\seealso{
+\code{\link[stats:time]{stats::time()}}
 }
