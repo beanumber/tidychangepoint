@@ -54,6 +54,8 @@ tau2binary <- function(tau, n) {
 }
 
 #' @rdname pad_tau
+#' @param index Index of times, typically returned by [stats::time()]
+#' @seealso [stats::time()]
 #' @export
 #' @examples
 #' tau2time(c(42, 81, 330), index = lubridate::year(time(CET)))
@@ -62,6 +64,7 @@ tau2time <- function(tau, index) {
 }
 
 #' @rdname pad_tau
+#' @param cpts Time series observation labels to be converted to indices
 #' @export
 #' @examples
 #' time2tau(c(1700, 1739, 1988), index = lubridate::year(time(CET)))

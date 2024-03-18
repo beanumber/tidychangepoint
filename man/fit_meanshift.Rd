@@ -12,6 +12,20 @@ fit_meanshift(x, tau, trends = FALSE, ar1 = FALSE, ...)
 
 \method{glance}{cptshift}(x, ...)
 }
+\arguments{
+\item{x}{A time series}
+
+\item{tau}{a set of indices representing a changepoint set}
+
+\item{trends}{logical indicating whether you want trends within regions}
+
+\item{ar1}{logicial indicating whether you want auto-regressive lag 1 errors}
+
+\item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
+
+\item{object}{any object from which a log-likelihood value, or a
+   contribution to a log-likelihood value, can be extracted.}
+}
 \description{
 Regression-based model fitting
 }

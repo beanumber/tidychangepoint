@@ -74,8 +74,7 @@ exceedances.double <- function(x, ...) {
 #' @rdname logLik.ts
 #' @export
 #' @examples
-#' x <- HadCET$annual_mean_temp
-#' MDL(logLik(as.ts(x), loc.ind = tau2binary(123, n = length(x))))
+#' MDL(logLik(as.ts(CET), loc.ind = tau2binary(123, n = length(CET))))
 MDL.logLik <- function(object, ...) {
   tau <- attr(object, "tau")
   n <- nobs(object)

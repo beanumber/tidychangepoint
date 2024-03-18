@@ -40,8 +40,7 @@ loc.ind = 0/1. 1 corresponds a CPT location, 0 is not.
 logLik(as.ts(CET), loc.ind = round(runif(length(CET))))
 logLik(as.ts(CET), loc.ind = tau2binary(c(42, 81, 330), n = length(CET)))
 logLik(fit_meanshift(CET, tau = c(42, 81, 330)))
-x <- HadCET$annual_mean_temp
-MDL(logLik(as.ts(x), loc.ind = tau2binary(123, n = length(x))))
+MDL(logLik(as.ts(CET), loc.ind = tau2binary(123, n = length(CET))))
 }
 \references{
 Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
