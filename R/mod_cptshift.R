@@ -26,11 +26,14 @@ fit_meanshift <- function(x, tau, trends = FALSE, ar1 = FALSE, ...) {
   ds <- data.frame(y = as.ts(x), t = 1:n)
   if (length(tau) < 1) {
     form <- "y ~ 1"
+    model_name <- "null"
   } else {
     if (trends) {
       terms <- paste(paste("t * (t >=", tau, ")"), collapse = " + ")
+      model_name <- "trendshift"
     } else {
       terms <- paste(paste("(t >=", tau, ")"), collapse = " + ")
+      model_name <- "meanshift"
     }
     form <- paste("y ~", terms)
   }
@@ -38,10 +41,12 @@ fit_meanshift <- function(x, tau, trends = FALSE, ar1 = FALSE, ...) {
   out <- stats::lm(stats::as.formula(form), data = ds, ...)
   if (ar1) {
     out <- autoregress_errors(out)
+    model_name <- paste0(model_name, "_ar1")
   }
   out$tau <- tau
   out$trends <- trends
   out$ar1 <- ar1
+  out$model_name <- model_name
   class(out) <- c("cptshift", class(out))
   return(out)
 }
@@ -73,8 +78,30 @@ logLik.cptshift <- function(object, ...) {
 
 #' @rdname fit_meanshift
 #' @export
+MBIC.cptshift <- function(object, ...) {
+  MBIC(logLik(object))
+}
+
+#' @rdname fit_meanshift
+#' @export
+MDL.cptshift <- function(object, ...) {
+  MDL(logLik(object))
+}
+
+#' @rdname fit_meanshift
+#' @export
 glance.cptshift <- function(x, ...) {
-  out <- NextMethod()
-  out |>
-    dplyr::select(-adj.r.squared, -statistic, -p.value, -df, -df.residual, nobs)
+  tibble::tibble(
+    pkg = "tidychangepoint",
+    version = package_version(utils::packageVersion("tidychangepoint")),
+    algorithm = x$model_name,
+    params = list(ar1 = x$ar1),
+    num_cpts = length(changepoints(x)),
+    rmse = sqrt(mean(x$residuals^2)),
+    logLik = as.double(logLik(x)),
+    AIC = AIC(x),
+    BIC = BIC(x),
+    MBIC = MBIC(x),
+    MDL = MDL(x)
+  )
 }

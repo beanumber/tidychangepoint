@@ -18,6 +18,7 @@
 \alias{augment.tidycpt}
 \alias{tidy.tidycpt}
 \alias{glance.tidycpt}
+\alias{glance_cptshift}
 \alias{params}
 \alias{plot.tidycpt}
 \alias{diagnose}
@@ -58,6 +59,8 @@ BMDL(object, ...)
 \method{tidy}{tidycpt}(x, ...)
 
 \method{glance}{tidycpt}(x, ...)
+
+glance_cptshift(x, ...)
 
 params(x, ...)
 

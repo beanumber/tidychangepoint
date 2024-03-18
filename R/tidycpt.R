@@ -136,9 +136,20 @@ glance.tidycpt <- function(x, ...) {
   glance(x$segmenter) |>
     dplyr::mutate(
       elapsed_time = x$elapsed_time
-    ) |>
-    dplyr::bind_cols(glance(x$nhpp))
+    )
 }
+
+#' @rdname changepoints
+#' @export
+glance_cptshift <- function(x, ...) {
+  dplyr::bind_rows(
+    glance(fit_meanshift(as.ts(x), tau = changepoints(x), trends = FALSE)),
+    glance(fit_meanshift(as.ts(x), tau = changepoints(x), trends = FALSE, ar1 = TRUE)),
+    glance(fit_meanshift(as.ts(x), tau = changepoints(x), trends = TRUE)),
+    glance(fit_meanshift(as.ts(x), tau = changepoints(x), trends = TRUE, ar1 = TRUE)),
+  )
+}
+
 
 #' @rdname changepoints
 #' @export

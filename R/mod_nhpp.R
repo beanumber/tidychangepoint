@@ -169,12 +169,17 @@ exceedances.nhpp <- function(x, ...) {
 #' @export
 glance.nhpp <- function(x, ...) {
   tibble::tibble(
-    nhpp_logLik = logLik(x),
-    nhpp_AIC = AIC(x),
-    nhpp_BIC = BIC(x),
-    nhpp_MBIC = MBIC(x),
-    nhpp_MDL = MDL(x),
-    nhpp_BMDL = BMDL(x)
+    pkg = "tidychangepoint",
+    version = package_version(utils::packageVersion("tidychangepoint")),
+    algorithm = "NHPP",
+    params = list(Bayesian = sum(x$log_posterior) != 0),
+    num_cpts = length(changepoints(x)),
+    logLik = as.double(logLik(x)),
+    AIC = AIC(x),
+    BIC = BIC(x),
+    MBIC = MBIC(x),
+    MDL = MDL(x),
+    BMDL = BMDL(x)
   )
 }
 

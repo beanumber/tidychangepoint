@@ -3,12 +3,18 @@
 \name{fit_meanshift}
 \alias{fit_meanshift}
 \alias{logLik.cptshift}
+\alias{MBIC.cptshift}
+\alias{MDL.cptshift}
 \alias{glance.cptshift}
 \title{Regression-based model fitting}
 \usage{
 fit_meanshift(x, tau, trends = FALSE, ar1 = FALSE, ...)
 
 \method{logLik}{cptshift}(object, ...)
+
+\method{MBIC}{cptshift}(object, ...)
+
+\method{MDL}{cptshift}(object, ...)
 
 \method{glance}{cptshift}(x, ...)
 }

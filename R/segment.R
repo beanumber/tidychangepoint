@@ -150,7 +150,6 @@ segment.ts <- function(x, method = "null", ...) {
   obj <- list(
     segmenter = mod,
     nhpp = fit_nhpp(as.ts(x), changepoints(mod)),
-    meanshift = fit_meanshift(as.ts(x), changepoints(mod)),
     elapsed_time = Sys.time() - begin
   )
   class(obj) <- c("tidycpt")

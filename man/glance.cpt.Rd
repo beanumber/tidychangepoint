@@ -6,6 +6,8 @@
 \alias{as.ts.cpt}
 \alias{nobs.cpt}
 \alias{logLik.cpt}
+\alias{MBIC.cpt}
+\alias{MDL.cpt}
 \alias{changepoints.cpt}
 \title{Compatibility layer for changepoint}
 \usage{
@@ -18,6 +20,10 @@
 \method{nobs}{cpt}(object, ...)
 
 \method{logLik}{cpt}(object, ...)
+
+\method{MBIC}{cpt}(object, ...)
+
+\method{MDL}{cpt}(object, ...)
 
 \method{changepoints}{cpt}(x, ...)
 }

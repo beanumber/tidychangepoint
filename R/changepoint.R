@@ -17,7 +17,12 @@ glance.cpt <- function(x, ...) {
     version = package_version(x@version),
     algorithm = x@method,
     params = list(params(x)),
-    num_cpts = length(changepoints(x))
+    num_cpts = length(changepoints(x)),
+    logLik = as.double(logLik(x)),
+    AIC = AIC(x),
+    BIC = BIC(x),
+    MBIC = MBIC(x),
+    MDL = MDL(x)
   )
 }
 
@@ -70,9 +75,23 @@ logLik.cpt <- function(object, ...) {
     suppressWarnings()
   ll <- -y[1] / 2
   attr(ll, "df") <- length(object@cpts)
+  attr(ll, "nobs") <- nobs(object)
   class(ll) <- "logLik"
   return(ll)
 }
+
+#' @rdname glance.cpt
+#' @export
+MBIC.cpt <- function(object, ...) {
+  MBIC(logLik(object))
+}
+
+#' @rdname glance.cpt
+#' @export
+MDL.cpt <- function(object, ...) {
+  MDL(logLik(object))
+}
+
 
 #' @rdname glance.cpt
 #' @export
