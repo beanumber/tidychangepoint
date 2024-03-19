@@ -68,7 +68,7 @@ autoregress_errors <- function(mod, ...) {
   return(out)
 }
 
-#' @rdname fit_meanshift
+#' @rdname fit_lmshift
 #' @inheritParams stats::logLik
 #' @export
 logLik.lmshift <- function(object, ...) {
@@ -79,19 +79,19 @@ logLik.lmshift <- function(object, ...) {
   return(out)
 }
 
-#' @rdname fit_meanshift
+#' @rdname fit_lmshift
 #' @export
 MBIC.lmshift <- function(object, ...) {
   MBIC(logLik(object))
 }
 
-#' @rdname fit_meanshift
+#' @rdname fit_lmshift
 #' @export
 MDL.lmshift <- function(object, ...) {
   MDL(logLik(object))
 }
 
-#' @rdname fit_meanshift
+#' @rdname fit_lmshift
 #' @export
 glance.lmshift <- function(x, ...) {
   tibble::tibble(
@@ -109,7 +109,7 @@ glance.lmshift <- function(x, ...) {
   )
 }
 
-#' @rdname fit_meanshift
+#' @rdname fit_lmshift
 #' @export
 changepoints.lmshift <- function(x, ...) {
   x$tau |>

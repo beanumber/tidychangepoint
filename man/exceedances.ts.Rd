@@ -5,6 +5,8 @@
 \alias{exceedances.double}
 \alias{MDL.logLik}
 \alias{MBIC.logLik}
+\alias{as.ts.lm}
+\alias{changepoints.lm}
 \title{Generic methods for classes from \link{stats}}
 \usage{
 \method{exceedances}{ts}(x, ...)
@@ -14,6 +16,10 @@
 \method{MDL}{logLik}(object, ...)
 
 \method{MBIC}{logLik}(object, ...)
+
+\method{as.ts}{lm}(x, ...)
+
+\method{changepoints}{lm}(x, ...)
 }
 \arguments{
 \item{x}{A numeric vector}
@@ -27,6 +33,9 @@ Generic methods for classes from \link{stats}
 }
 \examples{
 MDL(fit_meanshift_ar1(CET, tau = c(42, 330)))
+cpts <- segment(DataCPSim)
+as.ts(cpts)
+changepoints(cpts)
 }
 \references{
 Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}

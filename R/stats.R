@@ -40,3 +40,23 @@ MBIC.logLik <- function(object, ...) {
   penalty - 2 * object |>
     as.double()
 }
+
+#' @rdname exceedances.ts
+#' @export
+#' @examples
+#' cpts <- segment(DataCPSim)
+#' as.ts(cpts)
+#' changepoints(cpts)
+as.ts.lm <- function(x, ...) {
+  as.ts(x$model$y)
+}
+
+
+#' @rdname exceedances.ts
+#' @export
+changepoints.lm <- function(x, ...) {
+  x$contrasts |>
+    names() |>
+    sub(pattern = "t >= ", replacement = "") |>
+    as.integer()
+}

@@ -19,7 +19,7 @@
 \alias{augment.tidycpt}
 \alias{tidy.tidycpt}
 \alias{glance.tidycpt}
-\alias{glance_lmshift}
+\alias{compare_models}
 \alias{params}
 \alias{plot.tidycpt}
 \alias{diagnose}
@@ -63,7 +63,7 @@ BMDL(object, ...)
 
 \method{glance}{tidycpt}(x, ...)
 
-glance_lmshift(x, ...)
+compare_models(x, ...)
 
 params(x, ...)
 

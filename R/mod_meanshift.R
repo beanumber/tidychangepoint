@@ -1,4 +1,5 @@
 #' Fast implementation of meanshift model
+#' 
 #' @inheritParams fit_lmshift
 #' @details
 #'  loc.ind is the binary input of length N

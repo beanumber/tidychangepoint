@@ -151,13 +151,16 @@ glance.tidycpt <- function(x, ...) {
 
 #' @rdname changepoints
 #' @export
-glance_lmshift <- function(x, ...) {
-  dplyr::bind_rows(
-    glance(fit_lmshift(as.ts(x), tau = changepoints(x), trends = FALSE)),
-    glance(fit_lmshift(as.ts(x), tau = changepoints(x), trends = FALSE, ar1 = TRUE)),
-    glance(fit_lmshift(as.ts(x), tau = changepoints(x), trends = TRUE)),
-    glance(fit_lmshift(as.ts(x), tau = changepoints(x), trends = TRUE, ar1 = TRUE)),
-  )
+compare_models <- function(x, ...) {
+  list(
+    x$nhpp,
+    fit_lmshift(as.ts(x), tau = changepoints(x), trends = FALSE),
+    fit_lmshift(as.ts(x), tau = changepoints(x), trends = FALSE, ar1 = TRUE),
+    fit_lmshift(as.ts(x), tau = changepoints(x), trends = TRUE),
+    fit_lmshift(as.ts(x), tau = changepoints(x), trends = TRUE, ar1 = TRUE)
+  ) |>
+    purrr::map(glance) |>
+    dplyr::bind_rows()
 }
 
 
