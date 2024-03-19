@@ -20,6 +20,7 @@
 \alias{tidy.tidycpt}
 \alias{glance.tidycpt}
 \alias{compare_models}
+\alias{compare_algorithms}
 \alias{params}
 \alias{plot.tidycpt}
 \alias{diagnose}
@@ -64,6 +65,8 @@ BMDL(object, ...)
 \method{glance}{tidycpt}(x, ...)
 
 compare_models(x, ...)
+
+compare_algorithms(x, ...)
 
 params(x, ...)
 

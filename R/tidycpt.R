@@ -163,6 +163,20 @@ compare_models <- function(x, ...) {
     dplyr::bind_rows()
 }
 
+#' @rdname changepoints
+#' @export
+compare_algorithms <- function(x, ...) {
+  list(
+    segment(as.ts(x), method = "pelt"),
+    segment(as.ts(x), method = "binseg"),
+    segment(as.ts(x), method = "wbs"),
+    segment(as.ts(x), method = "random"),
+    segment(as.ts(x), method = "null")
+  ) |>
+    purrr::map(glance) |>
+    dplyr::bind_rows()
+}
+
 
 #' @rdname changepoints
 #' @export

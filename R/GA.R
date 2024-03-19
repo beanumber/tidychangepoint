@@ -17,7 +17,8 @@ glance.ga <- function(x, ...) {
     version = package_version(utils::packageVersion("GA")),
     algorithm = "Genetic",
     params = list(params(x)),
-    num_cpts = length(changepoints(x))
+    num_cpts = length(changepoints(x)),
+    fitness = min(x@fitnessValue)
   )
 }
 
@@ -29,7 +30,8 @@ params.ga <- function(x, ...) {
     iter = x@iter,
     elitism = x@elitism,
     pcrossover = x@pcrossover,
-    pmutation = x@pmutation
+    pmutation = x@pmutation,
+    model_params = x@model_params
   )
 }
 

@@ -17,7 +17,10 @@ glance.wbs <- function(x, ...) {
     version = package_version(utils::packageVersion("wbs")),
     algorithm = "Wild Binary Segmentation",
     params = list(params(x)),
-    num_cpts = length(changepoints(x))
+    num_cpts = length(changepoints(x)),
+    sigma = x$cpt$sigma,
+#    BIC = min(x$cpt$ic.curve$bic.penalty),
+#    MBIC = min(x$cpt$ic.curve$mbic.penalty)
   )
 }
 
@@ -61,7 +64,7 @@ nobs.wbs <- function(object, ...) {
 #' logLik(cpts)
 #' 
 logLik.wbs <- function(object, ...) {
-  logLik(as.ts(object), loc.ind = tau2binary(changepoints(object)))
+  NA
 }
 
 #' @rdname glance.wbs

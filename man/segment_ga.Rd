@@ -45,7 +45,7 @@ y <- segment(CET, method = "ga", model_fn = fit_nhpp, penalty_fn = BMDL,
 changepoints(y)
 
 z <- segment(CET, method = "ga", model_fn = fit_nhpp, penalty_fn = BMDL, 
-  maxiter = 10, popSize = 20,
+  maxiter = 10, popSize = 20, 
   model_params = list(initial_prob = 0.06, threshold = 2))
 changepoints(z)
 }
