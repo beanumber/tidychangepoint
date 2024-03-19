@@ -9,21 +9,24 @@ globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic"))
 #' @export
 #' @examples
 #' tau <- c(365, 826)
-#' mod <- fit_meanshift(DataCPSim, tau)
+#' mod <- fit_lmshift(DataCPSim, tau)
 #' logLik(mod)
 #' deg_free(mod)
 #' 
 #' cpts <- c(1700, 1739, 1988)
 #' ids <- time2tau(cpts, lubridate::year(time(CET)))
-#' mod <- fit_meanshift(CET, tau = ids)
+#' mod <- fit_lmshift(CET, tau = ids)
 #' glance(mod)
-#' glance(fit_meanshift(CET, tau = ids, trends = TRUE))
-#' glance(fit_meanshift(CET, tau = ids, ar1 = TRUE))
-#' glance(fit_meanshift(CET, tau = ids, trends = TRUE, ar1 = TRUE))
+#' glance(fit_lmshift(CET, tau = ids, trends = TRUE))
+#' glance(fit_lmshift(CET, tau = ids, ar1 = TRUE))
+#' glance(fit_lmshift(CET, tau = ids, trends = TRUE, ar1 = TRUE))
 
-fit_meanshift <- function(x, tau, trends = FALSE, ar1 = FALSE, ...) {
+fit_lmshift <- function(x, tau, trends = FALSE, ar1 = FALSE, ...) {
   n <- length(x)
   ds <- data.frame(y = as.ts(x), t = 1:n)
+  if (1 %in% tau) {
+    tau <- utils::tail(tau, -1)
+  }
   if (length(tau) < 1) {
     form <- "y ~ 1"
     model_name <- "null"
@@ -47,7 +50,7 @@ fit_meanshift <- function(x, tau, trends = FALSE, ar1 = FALSE, ...) {
   out$trends <- trends
   out$ar1 <- ar1
   out$model_name <- model_name
-  class(out) <- c("cptshift", class(out))
+  class(out) <- c("lmshift", class(out))
   return(out)
 }
 
@@ -68,7 +71,7 @@ autoregress_errors <- function(mod, ...) {
 #' @rdname fit_meanshift
 #' @inheritParams stats::logLik
 #' @export
-logLik.cptshift <- function(object, ...) {
+logLik.lmshift <- function(object, ...) {
   out <- NextMethod()
   m <- length(object$tau)
   params_estimated <- object$rank
@@ -78,19 +81,19 @@ logLik.cptshift <- function(object, ...) {
 
 #' @rdname fit_meanshift
 #' @export
-MBIC.cptshift <- function(object, ...) {
+MBIC.lmshift <- function(object, ...) {
   MBIC(logLik(object))
 }
 
 #' @rdname fit_meanshift
 #' @export
-MDL.cptshift <- function(object, ...) {
+MDL.lmshift <- function(object, ...) {
   MDL(logLik(object))
 }
 
 #' @rdname fit_meanshift
 #' @export
-glance.cptshift <- function(x, ...) {
+glance.lmshift <- function(x, ...) {
   tibble::tibble(
     pkg = "tidychangepoint",
     version = package_version(utils::packageVersion("tidychangepoint")),
@@ -104,4 +107,11 @@ glance.cptshift <- function(x, ...) {
     MBIC = MBIC(x),
     MDL = MDL(x)
   )
+}
+
+#' @rdname fit_meanshift
+#' @export
+changepoints.lmshift <- function(x, ...) {
+  x$tau |>
+    as.integer()
 }

@@ -1,3 +1,20 @@
+test_that("ga performance", {
+  skip()
+  segment_ga_shi(CET, maxiter = 50)
+  # slow
+  loc_ind <- round(runif(length(CET)))
+  tau <- binary2tau(loc_ind)
+  
+  BIC(mod <- fit_lmshift(CET, tau = tau, ar1 = TRUE))
+  BIC(mod2 <- fit_meanshift_ar1(CET, loc.ind = loc_ind))
+  
+  bench::mark(
+    "lm" = BIC(fit_lmshift(CET, tau = tau, ar1 = TRUE)),
+    "shi" = BIC(fit_meanshift_ar1(CET, loc.ind = loc_ind))
+  )
+
+})
+    
 test_that("test_sets works", {
   skip()
   test_sets <- rep(1:12, 3) |>

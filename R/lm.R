@@ -16,6 +16,6 @@ as.ts.lm <- function(x, ...) {
 changepoints.lm <- function(x, ...) {
   x$contrasts |>
     names() |>
-    sub(pattern = "t > ", replacement = "") |>
+    sub(pattern = "t >= ", replacement = "") |>
     as.integer()
 }
