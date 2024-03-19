@@ -17,12 +17,16 @@
 }
 \arguments{
 \item{x}{A numeric vector}
+
+\item{...}{arguments passed to methods}
+
+\item{object}{A \code{tidycpt} object}
 }
 \description{
 Generic methods for classes from \link{stats}
 }
 \examples{
-MDL(logLik(as.ts(CET), loc.ind = tau2binary(123, n = length(CET))))
+MDL(fit_meanshift_ar1(CET, tau = c(42, 330)))
 }
 \references{
 Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}

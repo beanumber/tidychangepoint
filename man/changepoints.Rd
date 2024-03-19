@@ -4,6 +4,7 @@
 \alias{plot_history}
 \alias{changepoints}
 \alias{changepoints.tidycpt}
+\alias{changepoints_labels}
 \alias{as.ts.tidycpt}
 \alias{exceedances}
 \alias{exceedances.tidycpt}
@@ -18,7 +19,7 @@
 \alias{augment.tidycpt}
 \alias{tidy.tidycpt}
 \alias{glance.tidycpt}
-\alias{glance_cptshift}
+\alias{glance_lmshift}
 \alias{params}
 \alias{plot.tidycpt}
 \alias{diagnose}
@@ -31,6 +32,8 @@ plot_history(x, ...)
 changepoints(x, ...)
 
 \method{changepoints}{tidycpt}(x, ...)
+
+changepoints_labels(x, ...)
 
 \method{as.ts}{tidycpt}(x, ...)
 
@@ -60,7 +63,7 @@ BMDL(object, ...)
 
 \method{glance}{tidycpt}(x, ...)
 
-glance_cptshift(x, ...)
+glance_lmshift(x, ...)
 
 params(x, ...)
 

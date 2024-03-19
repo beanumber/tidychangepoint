@@ -3,15 +3,18 @@
 \name{fit_meanshift_ar1}
 \alias{fit_meanshift_ar1}
 \alias{logLik.meanshift}
+\alias{nobs.meanshift}
 \alias{MBIC.meanshift}
 \alias{MDL.meanshift}
 \alias{glance.meanshift}
 \alias{changepoints.meanshift}
 \title{Fast implementation of meanshift model}
 \usage{
-fit_meanshift_ar1(object, ...)
+fit_meanshift_ar1(x, tau, ...)
 
 \method{logLik}{meanshift}(object, ...)
+
+\method{nobs}{meanshift}(object, ...)
 
 \method{MBIC}{meanshift}(object, ...)
 
@@ -22,11 +25,14 @@ fit_meanshift_ar1(object, ...)
 \method{changepoints}{meanshift}(x, ...)
 }
 \arguments{
+\item{x}{A time series}
+
+\item{tau}{a set of indices representing a changepoint set}
+
+\item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
+
 \item{object}{any object from which a log-likelihood value, or a
    contribution to a log-likelihood value, can be extracted.}
-
-\item{...}{some methods for this generic function require additional
-   arguments.}
 }
 \description{
 Fast implementation of meanshift model
@@ -39,13 +45,13 @@ loc.ind = 0/1. 1 corresponds a CPT location, 0 is not.
 }
 \examples{
 tau <- c(365, 826)
-mod <- fit_meanshift_ar1(DataCPSim, loc.ind = tau2binary(tau, n = length(DataCPSim)))
+mod <- fit_meanshift_ar1(DataCPSim, tau)
 logLik(mod)
 deg_free(mod)
 
 cpts <- c(1700, 1739, 1988)
 ids <- time2tau(cpts, lubridate::year(time(CET)))
-mod <- fit_meanshift_ar1(CET, loc.ind = tau2binary(ids, n = length(CET)))
+mod <- fit_meanshift_ar1(CET, tau = ids)
 glance(mod)
 }
 \author{

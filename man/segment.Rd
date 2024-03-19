@@ -55,7 +55,7 @@ on the value of the \code{method} argument:
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
 \item \code{wbs}: Uses the Wild Binary Segmentation algorithm as implemented by
 \code{\link[wbs:wbs]{wbs::wbs()}}. The \code{segmenter} is of class \code{wbs}.
-\item \code{ga-shi}: Uses the Genetic algorithm used by Shi and implemented by
+\item \code{ga}: Uses the Genetic algorithm implemented by
 \code{\link[GA:ga]{GA::ga()}}. The \code{segmenter} is of class \code{tidyga}.
 \item \code{gbmdl}: Uses the Genetic BMDL heuristic as implemented by
 \code{\link[=segment_gbmdl]{segment_gbmdl()}}. The \code{segmenter} is of class \code{\link[=seg_default]{seg_default()}}.

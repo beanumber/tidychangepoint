@@ -19,6 +19,16 @@ changepoints.tidycpt <- function(x, ...) {
 
 #' @rdname changepoints
 #' @export
+changepoints_labels <- function(x, ...) {
+  if (length(x$time_index) == length(x)) {
+    x$time_index[changepoints(x)]
+  } else {
+    changepoints(x$segmenter)
+  }
+}
+
+#' @rdname changepoints
+#' @export
 as.ts.tidycpt <- function(x, ...) {
   as.ts(x$segmenter)
 }
@@ -141,12 +151,12 @@ glance.tidycpt <- function(x, ...) {
 
 #' @rdname changepoints
 #' @export
-glance_cptshift <- function(x, ...) {
+glance_lmshift <- function(x, ...) {
   dplyr::bind_rows(
-    glance(fit_meanshift(as.ts(x), tau = changepoints(x), trends = FALSE)),
-    glance(fit_meanshift(as.ts(x), tau = changepoints(x), trends = FALSE, ar1 = TRUE)),
-    glance(fit_meanshift(as.ts(x), tau = changepoints(x), trends = TRUE)),
-    glance(fit_meanshift(as.ts(x), tau = changepoints(x), trends = TRUE, ar1 = TRUE)),
+    glance(fit_lmshift(as.ts(x), tau = changepoints(x), trends = FALSE)),
+    glance(fit_lmshift(as.ts(x), tau = changepoints(x), trends = FALSE, ar1 = TRUE)),
+    glance(fit_lmshift(as.ts(x), tau = changepoints(x), trends = TRUE)),
+    glance(fit_lmshift(as.ts(x), tau = changepoints(x), trends = TRUE, ar1 = TRUE)),
   )
 }
 

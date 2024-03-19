@@ -1,22 +1,18 @@
 test_that("GA works", {
   x <- as.ts(DataCPSim)
   expect_type(exceedances(x), "integer")
-  y <- logLik(x, loc.ind = tau2binary(826, n = length(x)))
-  expect_s3_class(y, "logLik")
-  expect_type(BIC(y), "double")
-  expect_type(MDL(y), "double")
-
-  null <- fit_meanshift(CET, tau = NULL)
-  expect_s3_class(null, "cptshift")
+  
+  null <- fit_meanshift_ar1(CET, tau = NULL)
+  expect_s3_class(null, "meanshift")
     
   cpts <- c(1700, 1739, 1988)
   ids <- time2tau(cpts, lubridate::year(time(CET)))
-  trend_wn <- fit_meanshift(CET, tau = ids, trends = TRUE)
+  trend_wn <- fit_lmshift(CET, tau = ids, trends = TRUE)
   expect_equal(round(as.numeric(logLik(trend_wn)), 2), -290.02)
   expect_equal(round(BIC(logLik(trend_wn)), 2), 650.74)
   expect_equal(MDL(logLik(trend_wn)), 653.07)
   
-  trend_ar1 <- fit_meanshift(CET, tau = ids, trends = TRUE, ar1 = TRUE)
+  trend_ar1 <- fit_lmshift(CET, tau = ids, trends = TRUE, ar1 = TRUE)
   expect_equal(round(as.numeric(logLik(trend_ar1)), 2), -288.80)
   expect_equal(round(BIC(trend_ar1), 2), 654.19)
   expect_equal(MDL(logLik(trend_ar1)), 656.52)

@@ -4,10 +4,23 @@
 \alias{segment_ga}
 \title{Segment a time series using a genetic algorithm}
 \usage{
-segment_ga(x, initial_prob = 0.01, ...)
+segment_ga(
+  x,
+  model_fn = fit_meanshift_ar1,
+  penalty_fn = BIC,
+  initial_prob = 0.01,
+  ...
+)
 }
 \arguments{
 \item{x}{A time series}
+
+\item{model_fn}{A function that takes two arguments: \code{x} (a time series) and
+\code{tau} (a set of changepoint indices). See \code{\link[=fit_meanshift_ar1]{fit_meanshift_ar1()}},
+\code{\link[=fit_lmshift]{fit_lmshift()}}, and \code{\link[=fit_nhpp]{fit_nhpp()}}}
+
+\item{penalty_fn}{A function that evaluates the changepoint set returned by
+\code{model_fn}. We provide \code{\link[=AIC]{AIC()}}, \code{\link[=BIC]{BIC()}}, \code{\link[=MBIC]{MBIC()}}, \code{\link[=MDL]{MDL()}}, and \code{\link[=BMDL]{BMDL()}}.}
 
 \item{initial_prob}{Initial probability of being selected}
 
@@ -22,5 +35,8 @@ res <- segment_ga(DataCPSim, initial_prob = 0.01, maxiter = 50)
 summary(res)
 str(res)
 plot(res)
+# Shi's algorithm
+x <- segment(CET, method = "ga", penalty_fn = BIC, initial_prob = 0.06, maxiter = 50, popSize = 200)
+str(x)
 }
 }

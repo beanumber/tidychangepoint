@@ -1,5 +1,10 @@
 #' Segment a time series using a genetic algorithm
 #' @param x A time series
+#' @param model_fn A function that takes two arguments: `x` (a time series) and 
+#' `tau` (a set of changepoint indices). See [fit_meanshift_ar1()], 
+#' [fit_lmshift()], and [fit_nhpp()]
+#' @param penalty_fn A function that evaluates the changepoint set returned by
+#' `model_fn`. We provide [AIC()], [BIC()], [MBIC()], [MDL()], and [BMDL()].
 #' @param initial_prob Initial probability of being selected
 #' @param ... arguments passed to [GA::ga()]
 #' @export
@@ -9,14 +14,17 @@
 #' summary(res)
 #' str(res)
 #' plot(res)
+#' # Shi's algorithm
+#' x <- segment(CET, method = "ga", penalty_fn = BIC, initial_prob = 0.06, maxiter = 50, popSize = 200)
+#' str(x)
 #' }
 
-segment_ga <- function(x, initial_prob = 0.01, ...) {
+segment_ga <- function(x, model_fn = fit_meanshift_ar1, penalty_fn = BIC, initial_prob = 0.01, ...) {
   n <- length(x)
   
   obj_fun <- function(tau_binary_vec) {
     tau <- binary2tau(tau_binary_vec)
-    -BMDL(fit_nhpp(x, tau))
+    -penalty_fn(model_fn(x, tau))
   }
   memoise::memoise(obj_fun)
   

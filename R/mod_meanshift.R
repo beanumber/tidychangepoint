@@ -1,5 +1,5 @@
 #' Fast implementation of meanshift model
-#' @inheritParams stats::logLik
+#' @inheritParams fit_lmshift
 #' @details
 #'  loc.ind is the binary input of length N
 #' Note `X[1]` cannot be a changepoint,
@@ -9,31 +9,27 @@
 #' @author Xueheng Shi
 #' @examples
 #' tau <- c(365, 826)
-#' mod <- fit_meanshift_ar1(DataCPSim, loc.ind = tau2binary(tau, n = length(DataCPSim)))
+#' mod <- fit_meanshift_ar1(DataCPSim, tau)
 #' logLik(mod)
 #' deg_free(mod)
 #' 
 #' cpts <- c(1700, 1739, 1988)
 #' ids <- time2tau(cpts, lubridate::year(time(CET)))
-#' mod <- fit_meanshift_ar1(CET, loc.ind = tau2binary(ids, n = length(CET)))
+#' mod <- fit_meanshift_ar1(CET, tau = ids)
 #' glance(mod)
 
-fit_meanshift_ar1 <- function(object, ...) {
-  args <- list(...)
-  if (is.null(args[["loc.ind"]])) {
-    stop("ts method requires a loc.ind argument")
-  } else {
-    loc.ind <- args[["loc.ind"]]
-  }
-  Xt <- as.ts(object)
-  loc.ind[1] <- 0
+fit_meanshift_ar1 <- function(x, tau, ...) {
+  Xt <- as.numeric(as.ts(x))
   N <- length(Xt) # length of the series
+  loc.ind <- tau2binary(tau, n = N)
+  loc.ind[1] <- 0
   m <- sum(loc.ind) # Number of CPTs
   
   if (m == 0) {
     ## Case 1, Zero Changepoint
     tau <- NA
     mu.hat <- mean(Xt)
+    mu.seg <- mu.hat
     phi.hat <- sum((Xt - mu.hat)[-N] * (Xt - mu.hat)[-1]) / sum((Xt - mu.hat)[-1]^2)
     Xt.hat <- c(mu.hat, mu.hat + phi.hat * (Xt[-N] - mu.hat))
   } else {
@@ -53,12 +49,13 @@ fit_meanshift_ar1 <- function(object, ...) {
   }
   sigma.hatsq <- sum((Xt - Xt.hat)^2) / N
   out <- list(
+    nobs = N,
     means = mu.seg,
     fitted.values = Xt.hat,
     residuals = Xt - Xt.hat,
     sigma_hatsq = sigma.hatsq,
     tau = tau,
-    model_name <- "meanshift_ar1",
+    model_name = "meanshift_ar1",
     ar1 = TRUE,
     trends = FALSE
   )
@@ -71,13 +68,19 @@ fit_meanshift_ar1 <- function(object, ...) {
 #' @export
 logLik.meanshift <- function(object, ...) {
   m <- length(object$tau)
-  N <- length(object$fitted.values)
+  N <- nobs(object)
   ll <- -(N * log(object$sigma_hatsq) + N + N * log(2 * pi)) / 2
   attr(ll, "df") <- 2 * m + 3
   attr(ll, "nobs") <- N
-  attr(ll, "tau") <- tau
+  attr(ll, "tau") <- object$tau
   class(ll) <- "logLik"
   return(ll)
+}
+
+#' @rdname fit_meanshift_ar1
+#' @export
+nobs.meanshift <- function(object, ...) {
+  object$nobs
 }
 
 #' @rdname fit_meanshift_ar1

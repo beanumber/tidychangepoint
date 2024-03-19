@@ -71,5 +71,5 @@ logLik.ga <- function(object, ...) {
 #' changepoints(cpts$segmenter)
 #' 
 changepoints.ga <- function(x, ...) {
-  which(x@solution == 1)
+  which(x@solution[1, ] == 1)
 }
