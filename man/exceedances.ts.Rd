@@ -26,6 +26,8 @@
 
 \item{...}{arguments passed to methods}
 
+\item{threshold}{A value above which to exceed. Default is the \code{\link[=mean]{mean()}}}
+
 \item{object}{A \code{tidycpt} object}
 }
 \description{

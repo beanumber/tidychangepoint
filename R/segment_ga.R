@@ -5,7 +5,7 @@
 #' [fit_lmshift()], and [fit_nhpp()]
 #' @param penalty_fn A function that evaluates the changepoint set returned by
 #' `model_fn`. We provide [AIC()], [BIC()], [MBIC()], [MDL()], and [BMDL()].
-#' @param initial_prob Initial probability of being selected
+#' @param model_params A [list()] of parameters passed to `model_fn`
 #' @param ... arguments passed to [GA::ga()]
 #' @export
 #' @examples

@@ -22,9 +22,9 @@ segment_ga(
 \item{penalty_fn}{A function that evaluates the changepoint set returned by
 \code{model_fn}. We provide \code{\link[=AIC]{AIC()}}, \code{\link[=BIC]{BIC()}}, \code{\link[=MBIC]{MBIC()}}, \code{\link[=MDL]{MDL()}}, and \code{\link[=BMDL]{BMDL()}}.}
 
-\item{...}{arguments passed to \code{\link[GA:ga]{GA::ga()}}}
+\item{model_params}{A \code{\link[=list]{list()}} of parameters passed to \code{model_fn}}
 
-\item{initial_prob}{Initial probability of being selected}
+\item{...}{arguments passed to \code{\link[GA:ga]{GA::ga()}}}
 }
 \description{
 Segment a time series using a genetic algorithm

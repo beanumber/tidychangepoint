@@ -7,6 +7,7 @@ exceedances.ts <- function(x, ...) {
 
 #' @rdname exceedances.ts
 #' @param x A numeric vector
+#' @param threshold A value above which to exceed. Default is the [mean()]
 #' @export
 exceedances.double <- function(x, threshold = mean(x, na.rm = TRUE), ...) {
   which(x > threshold, ...)
