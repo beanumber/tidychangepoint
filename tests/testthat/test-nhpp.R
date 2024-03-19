@@ -9,6 +9,9 @@ test_that("generics works", {
   expect_type(MDL(theta), "double")
   expect_s3_class(glance(theta), "tbl_df")
   
+  m <- mcdf(theta)
+  expect_equal(length(m), length(exceedances(theta)))
+  
   x <- fit_nhpp(DataCPSim, tau = NULL)
   expect_equal(deg_free(x), 3)
   expect_equal(AIC(x), as.double(2 * deg_free(x) - 2 * logLik(x)))
@@ -18,8 +21,9 @@ test_that("generics works", {
   expect_equal(BMDL(x), -2 * sum(x$log_posterior))
   expect_s3_class(glance(x), "tbl_df")
   
-  m <- mcdf(theta)
-  expect_equal(length(m), length(exceedances(theta)))
+  
+  y <- fit_nhpp(DataCPSim, tau = 826, threshold = 200)
+  expect_lt(length(mcdf(y)), length(m))
 })
 
 

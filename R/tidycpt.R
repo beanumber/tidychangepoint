@@ -40,7 +40,7 @@ exceedances <- function(x, ...) UseMethod("exceedances")
 #' @rdname changepoints
 #' @export
 exceedances.tidycpt <- function(x, ...) {
-  exceedances(as.ts(x))
+  exceedances(as.ts(x), ...)
 }
 
 #' @rdname changepoints

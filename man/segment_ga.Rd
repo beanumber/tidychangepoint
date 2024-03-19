@@ -8,7 +8,7 @@ segment_ga(
   x,
   model_fn = fit_meanshift_ar1,
   penalty_fn = BIC,
-  initial_prob = 0.01,
+  model_params = list(initial_prob = 0.01),
   ...
 )
 }
@@ -22,21 +22,31 @@ segment_ga(
 \item{penalty_fn}{A function that evaluates the changepoint set returned by
 \code{model_fn}. We provide \code{\link[=AIC]{AIC()}}, \code{\link[=BIC]{BIC()}}, \code{\link[=MBIC]{MBIC()}}, \code{\link[=MDL]{MDL()}}, and \code{\link[=BMDL]{BMDL()}}.}
 
-\item{initial_prob}{Initial probability of being selected}
-
 \item{...}{arguments passed to \code{\link[GA:ga]{GA::ga()}}}
+
+\item{initial_prob}{Initial probability of being selected}
 }
 \description{
 Segment a time series using a genetic algorithm
 }
 \examples{
 \dontrun{
-res <- segment_ga(DataCPSim, initial_prob = 0.01, maxiter = 50)
+res <- segment_ga(DataCPSim, model_params = list(initial_prob = 0.06), maxiter = 50)
 summary(res)
 str(res)
 plot(res)
 # Shi's algorithm
-x <- segment(CET, method = "ga", penalty_fn = BIC, initial_prob = 0.06, maxiter = 50, popSize = 200)
+x <- segment(CET, method = "ga", penalty_fn = BIC, 
+model_params = list(initial_prob = 0.06), maxiter = 50, popSize = 200)
 str(x)
+# GeneticBMDL
+y <- segment(CET, method = "ga", model_fn = fit_nhpp, penalty_fn = BMDL, 
+  model_params = list(initial_prob = 0.06), maxiter = 20, popSize = 50)
+changepoints(y)
+
+z <- segment(CET, method = "ga", model_fn = fit_nhpp, penalty_fn = BMDL, 
+  maxiter = 10, popSize = 20,
+  model_params = list(initial_prob = 0.06, threshold = 2))
+changepoints(z)
 }
 }

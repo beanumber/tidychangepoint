@@ -11,7 +11,7 @@
 \usage{
 \method{exceedances}{ts}(x, ...)
 
-\method{exceedances}{double}(x, ...)
+\method{exceedances}{double}(x, threshold = mean(x, na.rm = TRUE), ...)
 
 \method{MDL}{logLik}(object, ...)
 

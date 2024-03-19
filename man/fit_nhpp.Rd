@@ -19,7 +19,7 @@
 \usage{
 fit_nhpp_region(exc, tau_left, tau_right, params = parameters_weibull(), ...)
 
-fit_nhpp(x, tau)
+fit_nhpp(x, tau, ...)
 
 \method{length}{nhpp}(x, ...)
 
@@ -78,6 +78,8 @@ region defined by the changepoint set returned by \code{\link[=changepoints]{cha
 \examples{
 fit_nhpp_region(exceedances(DataCPSim), 0, 575)
 fit_nhpp(DataCPSim, tau = 826)
+fit_nhpp(DataCPSim, tau = 826, threshold = 20)
+fit_nhpp(DataCPSim, tau = 826, threshold = 200)
 fit_nhpp(DataCPSim, tau = changepoints(segment(DataCPSim, method = "pelt")))
 nhpp <- fit_nhpp(DataCPSim, tau = 826)
 mcdf(nhpp)

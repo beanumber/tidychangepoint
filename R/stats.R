@@ -2,14 +2,14 @@
 #' @inheritParams exceedances
 #' @export
 exceedances.ts <- function(x, ...) {
-  exceedances(as.double(x))
+  exceedances(as.double(x), ...)
 }
 
 #' @rdname exceedances.ts
 #' @param x A numeric vector
 #' @export
-exceedances.double <- function(x, ...) {
-  which(x > mean(x, na.rm = TRUE, ...))
+exceedances.double <- function(x, threshold = mean(x, na.rm = TRUE), ...) {
+  which(x > threshold, ...)
 }
 
 #' @rdname exceedances.ts

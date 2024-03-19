@@ -10,41 +10,64 @@
 #' @export
 #' @examples
 #' \dontrun{
-#' res <- segment_ga(DataCPSim, initial_prob = 0.01, maxiter = 50)
+#' res <- segment_ga(DataCPSim, model_params = list(initial_prob = 0.06), maxiter = 50)
 #' summary(res)
 #' str(res)
 #' plot(res)
 #' # Shi's algorithm
-#' x <- segment(CET, method = "ga", penalty_fn = BIC, initial_prob = 0.06, maxiter = 50, popSize = 200)
+#' x <- segment(CET, method = "ga", penalty_fn = BIC, 
+#' model_params = list(initial_prob = 0.06), maxiter = 50, popSize = 200)
 #' str(x)
+#' # GeneticBMDL
+#' y <- segment(CET, method = "ga", model_fn = fit_nhpp, penalty_fn = BMDL, 
+#'   model_params = list(initial_prob = 0.06), maxiter = 20, popSize = 50)
+#' changepoints(y)
+#' 
+#' z <- segment(CET, method = "ga", model_fn = fit_nhpp, penalty_fn = BMDL, 
+#'   maxiter = 10, popSize = 20,
+#'   model_params = list(initial_prob = 0.06, threshold = 2))
+#' changepoints(z)
 #' }
 
-segment_ga <- function(x, model_fn = fit_meanshift_ar1, penalty_fn = BIC, initial_prob = 0.01, ...) {
+segment_ga <- function(x, 
+                       model_fn = fit_meanshift_ar1, 
+                       penalty_fn = BIC, 
+                       model_params = list(initial_prob = 0.01), ...) {
   n <- length(x)
   
   obj_fun <- function(tau_binary_vec) {
     tau <- binary2tau(tau_binary_vec)
-    -penalty_fn(model_fn(x, tau))
+    -penalty_fn(model_fn(x, tau, threshold = model_params[["threshold"]]))
   }
   memoise::memoise(obj_fun)
   
-  init_pop <- function(obj, p = initial_prob) {
+  init_pop <- function(obj, p = model_params[["initial_prob"]]) {
+#    message("p:", p)
     stats::rbinom(obj@nBits * obj@popSize, size = 1, prob = p) |>
       matrix(ncol = obj@nBits)
   }
   
-  GA::ga(
+  mod_ga <- GA::ga(
     type = "binary", 
     fitness = obj_fun,
     nBits = n,
     population = init_pop,
     ...
   )
+  
+  out <- methods::as(mod_ga, "tidyga")
+  out@data <- x
+  out@model_params <- model_params
+  return(out)
 }
 
 
 
 
 #' @importClassesFrom GA ga
-methods::setClass("tidyga", contains = "ga", slots = c(data = "ts"))
+methods::setClass(
+  "tidyga", 
+  contains = "ga", 
+  slots = c(data = "ts", model_params = "list")
+)
 

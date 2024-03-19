@@ -55,10 +55,19 @@ fit_nhpp_region <- function(exc, tau_left, tau_right,
 #' @export
 #' @examples
 #' fit_nhpp(DataCPSim, tau = 826)
+#' fit_nhpp(DataCPSim, tau = 826, threshold = 20)
+#' fit_nhpp(DataCPSim, tau = 826, threshold = 200)
 #' fit_nhpp(DataCPSim, tau = changepoints(segment(DataCPSim, method = "pelt")))
 
-fit_nhpp <- function(x, tau) {
-  exc <- exceedances(x)
+fit_nhpp <- function(x, tau, ...) {
+  args <- list(...)
+  if (is.numeric(args[["threshold"]])) {
+    threshold <- args[["threshold"]]
+  } else {
+    threshold <- mean(x, na.rm = TRUE)
+  }
+#  message(paste("threshold:", threshold))
+  exc <- exceedances(x, threshold = threshold)
   padded_tau <- pad_tau(tau, length(x))
   exc_by_tau <- exc |>
     split(cut_inclusive(exc, padded_tau))
@@ -99,6 +108,7 @@ fit_nhpp <- function(x, tau) {
   names(out)[3:ncol(out)] <- names_params
   
   out <- dplyr::bind_cols(regions_df, out)
+  attr(out, "threshold") <- threshold
   class(out) <- c("nhpp", class(out))
   
   return(out)

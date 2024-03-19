@@ -115,9 +115,7 @@ segment.ts <- function(x, method = "null", ...) {
     mod <- wbs::wbs(x, ...)
   }
   if (method == "ga") {
-    mod_ga <- segment_ga(x, ...)
-    mod <- methods::as(mod_ga, "tidyga")
-    mod@data <- x
+    mod <- segment_ga(x, ...)
   }
   if (method == "gbmdl") {
     mod <- segment_gbmdl(x, ...)
@@ -144,7 +142,7 @@ segment.ts <- function(x, method = "null", ...) {
   # build the tidycpt object
   obj <- list(
     segmenter = mod,
-    nhpp = fit_nhpp(as.ts(x), changepoints(mod)),
+    nhpp = fit_nhpp(as.ts(x), changepoints(mod), ...),
     elapsed_time = Sys.time() - begin
   )
   class(obj) <- c("tidycpt")
