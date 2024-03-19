@@ -5,7 +5,6 @@
 \alias{params.ga}
 \alias{as.ts.ga}
 \alias{nobs.ga}
-\alias{logLik.ga}
 \alias{changepoints.ga}
 \title{Compatibility layer for GA}
 \usage{
@@ -16,8 +15,6 @@
 \method{as.ts}{ga}(x, ...)
 
 \method{nobs}{ga}(object, ...)
-
-\method{logLik}{ga}(object, ...)
 
 \method{changepoints}{ga}(x, ...)
 }
@@ -44,9 +41,6 @@ as.ts(cpts)
 
 cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
 nobs(cpts)
-
-cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
-logLik(cpts)
 
 cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
 changepoints(cpts$segmenter)

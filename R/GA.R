@@ -58,16 +58,6 @@ nobs.ga <- function(object, ...) {
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
-#' logLik(cpts)
-#' 
-logLik.ga <- function(object, ...) {
-  logLik(as.ts(object), loc.ind = tau2binary(changepoints(object), n = nobs(object)))
-}
-
-#' @rdname glance.ga
-#' @export
-#' @examples
-#' cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
 #' changepoints(cpts$segmenter)
 #' 
 changepoints.ga <- function(x, ...) {
