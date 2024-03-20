@@ -65,3 +65,12 @@ nobs.ga <- function(object, ...) {
 changepoints.ga <- function(x, ...) {
   which(x@solution[1, ] == 1)
 }
+
+#' @rdname glance.ga
+#' @export
+
+gabin_Population_Informed <- function(object, p = 0.01) {
+  #    message("p:", p)
+  stats::rbinom(object@nBits * object@popSize, size = 1, prob = p) |>
+    matrix(ncol = object@nBits)
+}
