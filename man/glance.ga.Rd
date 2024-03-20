@@ -6,7 +6,7 @@
 \alias{as.ts.ga}
 \alias{nobs.ga}
 \alias{changepoints.ga}
-\alias{gabin_Population_Informed}
+\alias{build_gabin_population}
 \title{Compatibility layer for GA}
 \usage{
 \method{glance}{ga}(x, ...)
@@ -19,7 +19,7 @@
 
 \method{changepoints}{ga}(x, ...)
 
-gabin_Population_Informed(object, p = 0.01)
+build_gabin_population(x, ...)
 }
 \arguments{
 \item{x}{A \code{GA} object returned by \code{\link[GA:ga]{GA::ga()}}}
@@ -48,4 +48,6 @@ nobs(cpts)
 cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
 changepoints(cpts$segmenter)
 
+f <- build_gabin_population(CET)
+segment(CET, method = "ga", population = f)
 }

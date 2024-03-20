@@ -68,9 +68,24 @@ changepoints.ga <- function(x, ...) {
 
 #' @rdname glance.ga
 #' @export
+#' @examples
+#' f <- build_gabin_population(CET)
+#' segment(CET, method = "ga", population = f)
 
-gabin_Population_Informed <- function(object, p = 0.01) {
-  #    message("p:", p)
-  stats::rbinom(object@nBits * object@popSize, size = 1, prob = p) |>
-    matrix(ncol = object@nBits)
+build_gabin_population <- function(x, ...) {
+  p <- list(
+    segment(x, method = "pelt"),
+    segment(x, method = "binseg"),
+    segment(x, method = "wbs")
+  ) |>
+    purrr::map(changepoints) |>
+    purrr::map_int(length) |>
+    mean() / length(x)
+  
+  f <- function(object, ...) {
+    message(paste("Seeding initial population with probability:", p))
+    stats::rbinom(object@nBits * object@popSize, size = 1, prob = p) |>
+      matrix(ncol = object@nBits)
+  }
+  return(f)
 }

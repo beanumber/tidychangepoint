@@ -117,6 +117,12 @@ segment.ts <- function(x, method = "null", ...) {
   if (method == "ga") {
     mod <- segment_ga(x, ...)
   }
+  if (method == "ga-shi") {
+    mod <- segment_ga_shi(x, ...)
+  }
+  if (method == "ga-gbmdl") {
+    mod <- segment_ga_gbmdl(x, ...)
+  }
   if (method == "gbmdl") {
     mod <- segment_gbmdl(x, ...)
   }

@@ -2,6 +2,8 @@
 % Please edit documentation in R/segment_ga.R
 \name{segment_ga}
 \alias{segment_ga}
+\alias{segment_ga_shi}
+\alias{segment_ga_gbmdl}
 \title{Segment a time series using a genetic algorithm}
 \usage{
 segment_ga(
@@ -11,6 +13,10 @@ segment_ga(
   model_params = list(),
   ...
 )
+
+segment_ga_shi(x, ...)
+
+segment_ga_gbmdl(x, ...)
 }
 \arguments{
 \item{x}{A time series}
@@ -36,7 +42,7 @@ summary(res)
 str(res)
 plot(res)
 # Shi's algorithm
-x <- segment(CET, method = "ga", penalty_fn = BIC, maxiter = 50, popSize = 200)
+x <- segment(CET, method = "ga-shi", maxiter = 50)
 str(x)
 # GeneticBMDL
 y <- segment(CET, method = "ga", model_fn = fit_nhpp, penalty_fn = BMDL, 

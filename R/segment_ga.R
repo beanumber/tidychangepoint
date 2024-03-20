@@ -15,16 +15,13 @@
 #' str(res)
 #' plot(res)
 #' # Shi's algorithm
-#' x <- segment(CET, method = "ga", penalty_fn = BIC, maxiter = 50, popSize = 200)
+#' x <- segment(CET, method = "ga-shi", maxiter = 50)
 #' str(x)
 #' # GeneticBMDL
-#' y <- segment(CET, method = "ga", model_fn = fit_nhpp, penalty_fn = BMDL, 
-#'      maxiter = 20, popSize = 50, population = gabin_Population_Informed)
+#' y <- segment(CET, method = "ga-gbmdl", maxiter = 20)
 #' changepoints(y)
 #' 
-#' z <- segment(CET, method = "ga", model_fn = fit_nhpp, penalty_fn = BMDL, 
-#'   maxiter = 10, popSize = 20, 
-#'   model_params = list(threshold = 2))
+#' z <- segment(CET, method = "ga-gbmdl", maxiter = 10, model_params = list(threshold = 2))
 #' changepoints(z)
 #' }
 
@@ -55,7 +52,20 @@ segment_ga <- function(x,
   return(out)
 }
 
+#' @rdname segment_ga
+#' @export
+segment_ga_shi <- function(x, ...) {
+  segment_ga(x, model_fn = fit_meanshift_ar1, penalty_fn = BIC, popSize = 200, ...)
+}
 
+#' @rdname segment_ga
+#' @export
+segment_ga_gbmdl <- function(x, ...) {
+  segment_ga(
+    x, model_fn = fit_nhpp, penalty_fn = BMDL, 
+    population = build_gabin_population(x), popSize = 50, ...
+  )
+}
 
 
 #' @importClassesFrom GA ga
