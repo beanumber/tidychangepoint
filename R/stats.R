@@ -1,19 +1,17 @@
-#' Generic methods for classes from [stats]
-#' @inheritParams exceedances
+#' @rdname exceedances
 #' @export
 exceedances.ts <- function(x, ...) {
   exceedances(as.double(x), ...)
 }
 
-#' @rdname exceedances.ts
-#' @param x A numeric vector
+#' @rdname exceedances
 #' @param threshold A value above which to exceed. Default is the [mean()]
 #' @export
 exceedances.double <- function(x, threshold = mean(x, na.rm = TRUE), ...) {
   which(x > threshold, ...)
 }
 
-#' @rdname exceedances.ts
+#' @rdname MDL
 #' @inheritParams stats::logLik
 #' @export
 #' @examples
@@ -25,7 +23,7 @@ MDL.logLik <- function(object, ...) {
     as.double()
 }
 
-#' @rdname exceedances.ts
+#' @rdname MBIC
 #' @references Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
 #' @export
 MBIC.logLik <- function(object, ...) {
@@ -40,24 +38,4 @@ MBIC.logLik <- function(object, ...) {
   }
   penalty - 2 * object |>
     as.double()
-}
-
-#' @rdname exceedances.ts
-#' @export
-#' @examples
-#' cpts <- segment(DataCPSim)
-#' as.ts(cpts)
-#' changepoints(cpts)
-as.ts.lm <- function(x, ...) {
-  as.ts(x$model$y)
-}
-
-
-#' @rdname exceedances.ts
-#' @export
-changepoints.lm <- function(x, ...) {
-  x$contrasts |>
-    names() |>
-    sub(pattern = "t >= ", replacement = "") |>
-    as.integer()
 }

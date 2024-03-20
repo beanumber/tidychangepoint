@@ -1,4 +1,5 @@
 #' Compatibility layer for GA
+#' @name ga-generics
 #' @param x A `GA` object returned by [GA::ga()]
 #' @param ... arguments passed to methods
 #' @export
@@ -22,7 +23,7 @@ glance.ga <- function(x, ...) {
   )
 }
 
-#' @rdname glance.ga
+#' @rdname ga-generics
 #' @export
 params.ga <- function(x, ...) {
   list(
@@ -35,7 +36,7 @@ params.ga <- function(x, ...) {
   )
 }
 
-#' @rdname glance.ga
+#' @rdname ga-generics
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
@@ -45,7 +46,7 @@ as.ts.ga <- function(x, ...) {
   x@data
 }
 
-#' @rdname glance.ga
+#' @rdname ga-generics
 #' @param object A `ga` object.
 #' @export
 #' @examples
@@ -56,7 +57,7 @@ nobs.ga <- function(object, ...) {
   length(as.ts(object))
 }
 
-#' @rdname glance.ga
+#' @rdname changepoints
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
@@ -66,8 +67,10 @@ changepoints.ga <- function(x, ...) {
   which(x@solution[1, ] == 1)
 }
 
-#' @rdname glance.ga
+#' Build an initial population set for GA algorithms
+#' @inheritParams segment
 #' @export
+#' @seealso [GA::gabin_Population()]
 #' @examples
 #' f <- build_gabin_population(CET)
 #' segment(CET, method = "ga", population = f)

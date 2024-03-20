@@ -10,7 +10,7 @@
 #' deg_free(mod)
 #' 
 #' cpts <- c(1700, 1739, 1988)
-#' ids <- time2tau(cpts, lubridate::year(time(CET)))
+#' ids <- time2tau(cpts, substr(time(CET), 1, 4))
 #' mod <- fit_meanshift(CET, tau = ids)
 #' glance(mod)
 #' mod <- fit_meanshift_ar1(CET, tau = ids)
@@ -43,12 +43,12 @@ fit_meanshift <- function(x, tau, ar1 = FALSE, ...) {
     ar1 = ar1,
     trends = FALSE
   )
+  class(out) <- c("meanshift", class(out))
   
   if (ar1) {
     out <- autoregress_errors(out)
   }
   
-  class(out) <- c("meanshift", class(out))
   return(out)
 }
 
@@ -58,8 +58,18 @@ fit_meanshift_ar1 <- function(x, tau, ...) {
   fit_meanshift(x, tau, ar1 = TRUE, ...)
 }
 
+#' Methods for meanshift objects
+#' @name meanshift-generics
+#' @param x A `meanshift` object, typically the output from [fit_meanshift()]`
+#' @export
+#' @examples
+#' cpts <- fit_meanshift(DataCPSim, tau = 365)
+#' as.ts(cpts)
+as.ts.meanshift <- function(x, ...) {
+  as.ts(x$data)
+}
 
-#' @rdname fit_meanshift
+#' @rdname meanshift-generics
 #' @inheritParams stats::logLik
 #' @export
 logLik.meanshift <- function(object, ...) {
@@ -73,25 +83,25 @@ logLik.meanshift <- function(object, ...) {
   return(ll)
 }
 
-#' @rdname fit_meanshift
+#' @rdname meanshift-generics
 #' @export
 nobs.meanshift <- function(object, ...) {
   object$nobs
 }
 
-#' @rdname fit_meanshift
+#' @rdname MBIC
 #' @export
 MBIC.meanshift <- function(object, ...) {
   MBIC(logLik(object))
 }
 
-#' @rdname fit_meanshift
+#' @rdname MDL
 #' @export
 MDL.meanshift <- function(object, ...) {
   MDL(logLik(object))
 }
 
-#' @rdname fit_meanshift
+#' @rdname meanshift-generics
 #' @export
 glance.meanshift <- function(x, ...) {
   tibble::tibble(
@@ -109,7 +119,7 @@ glance.meanshift <- function(x, ...) {
   )
 }
 
-#' @rdname fit_meanshift
+#' @rdname changepoints
 #' @export
 changepoints.meanshift <- function(x, ...) {
   x$tau |>

@@ -14,7 +14,7 @@ globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic"))
 #' deg_free(mod)
 #' 
 #' cpts <- c(1700, 1739, 1988)
-#' ids <- time2tau(cpts, lubridate::year(time(CET)))
+#' ids <- time2tau(cpts, substr(time(CET), 1, 4))
 #' mod <- fit_lmshift(CET, tau = ids)
 #' glance(mod)
 #' glance(fit_lmshift(CET, tau = ids, trends = TRUE))
@@ -43,6 +43,7 @@ fit_lmshift <- function(x, tau, trends = FALSE, ar1 = FALSE, ...) {
   
   out <- stats::lm(stats::as.formula(form), data = ds, ...)
   out$sigma_hatsq <- sum((out$residuals)^2) / n
+  class(out) <- c("lmshift", class(out))
   if (ar1) {
     out <- autoregress_errors(out)
     model_name <- paste0(model_name, "_ar1")
@@ -51,18 +52,14 @@ fit_lmshift <- function(x, tau, trends = FALSE, ar1 = FALSE, ...) {
   out$trends <- trends
   out$ar1 <- ar1
   out$model_name <- model_name
-  class(out) <- c("lmshift", class(out))
   return(out)
 }
 
 autoregress_errors <- function(mod, ...) {
   n <- nobs(mod)
   resid <- mod$residuals
-  if (inherits(mod, "lm")) {
-    y <- mod$model$y
-  } else {
-    y <- mod$data
-  }
+  
+  y <- as.ts(mod)
   
   phi_hat <- sum(utils::head(resid, -1) * utils::tail(resid, -1)) / sum(resid^2)
   y_hat <- mod$fitted.values + c(0, phi_hat * utils::head(resid, -1))
@@ -77,7 +74,19 @@ autoregress_errors <- function(mod, ...) {
   return(out)
 }
 
-#' @rdname fit_lmshift
+#' Methods for lmshift objects
+#' @name lmshift-generics
+#' @param x An `lmshift` object, typically the output from [fit_lmshift()]`
+#' @export
+#' @examples
+#' cpts <- fit_lmshift(DataCPSim, tau = 365)
+#' as.ts(cpts)
+as.ts.lmshift <- function(x, ...) {
+  as.ts(x$model$y)
+}
+
+
+#' @rdname lmshift-generics
 #' @inheritParams stats::logLik
 #' @export
 logLik.lmshift <- function(object, ...) {
@@ -88,19 +97,19 @@ logLik.lmshift <- function(object, ...) {
   return(out)
 }
 
-#' @rdname fit_lmshift
+#' @rdname MBIC
 #' @export
 MBIC.lmshift <- function(object, ...) {
   MBIC(logLik(object))
 }
 
-#' @rdname fit_lmshift
+#' @rdname MDL
 #' @export
 MDL.lmshift <- function(object, ...) {
   MDL(logLik(object))
 }
 
-#' @rdname fit_lmshift
+#' @rdname lmshift-generics
 #' @export
 glance.lmshift <- function(x, ...) {
   tibble::tibble(
@@ -118,7 +127,7 @@ glance.lmshift <- function(x, ...) {
   )
 }
 
-#' @rdname fit_lmshift
+#' @rdname changepoints
 #' @export
 changepoints.lmshift <- function(x, ...) {
   x$tau |>

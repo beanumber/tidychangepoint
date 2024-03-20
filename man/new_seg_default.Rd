@@ -4,24 +4,11 @@
 \alias{new_seg_default}
 \alias{validate_seg_default}
 \alias{seg_default}
-\alias{as.ts.seg_default}
-\alias{exceedances.seg_default}
-\alias{nobs.seg_default}
 \alias{num_candidates}
-\alias{length.seg_default}
-\alias{changepoints.seg_default}
-\alias{BMDL.seg_default}
-\alias{logLik.seg_default}
 \alias{evaluate_cpts}
 \alias{evaluate_cpts.seg_default}
 \alias{evaluate_cpts.list}
 \alias{evaluate_cpts.tbl_df}
-\alias{params.seg_default}
-\alias{glance.seg_default}
-\alias{plot.seg_default}
-\alias{diagnose.seg_default}
-\alias{plot_best_chromosome}
-\alias{plot_cpt_repeated}
 \title{Default class for candidate changepoint sets}
 \usage{
 new_seg_default(
@@ -36,21 +23,7 @@ validate_seg_default(x)
 
 seg_default(x, ...)
 
-\method{as.ts}{seg_default}(x, ...)
-
-\method{exceedances}{seg_default}(x, ...)
-
-\method{nobs}{seg_default}(object, ...)
-
 num_candidates(x)
-
-\method{length}{seg_default}(x, ...)
-
-\method{changepoints}{seg_default}(x, ...)
-
-\method{BMDL}{seg_default}(object, ...)
-
-\method{logLik}{seg_default}(object, ...)
 
 evaluate_cpts(x, ...)
 
@@ -59,18 +32,6 @@ evaluate_cpts(x, ...)
 \method{evaluate_cpts}{list}(x, ...)
 
 \method{evaluate_cpts}{tbl_df}(x, ...)
-
-\method{params}{seg_default}(x, ...)
-
-\method{glance}{seg_default}(x, ...)
-
-\method{plot}{seg_default}(x, ...)
-
-\method{diagnose}{seg_default}(x, ...)
-
-plot_best_chromosome(x)
-
-plot_cpt_repeated(x, i = nrow(x$candidates))
 }
 \arguments{
 \item{x}{a numeric vector coercible into a \code{ts} object}
@@ -82,10 +43,6 @@ plot_cpt_repeated(x, i = nrow(x$candidates))
 \item{params}{a possibly empty \code{list()} of parameters}
 
 \item{...}{currently ignored}
-
-\item{object}{A \code{seg_default} object}
-
-\item{i}{index of candidates to show}
 }
 \description{
 Default class for candidate changepoint sets
@@ -95,12 +52,4 @@ seg <- seg_default(DataCPSim)
 str(seg)
 as.ts(seg)
 changepoints(seg)
-x <- segment(DataCPSim, method = "random", num_generations = 5)
-diagnose(x)
-diagnose(x$segmenter)
-x <- segment(DataCPSim, method = "random", k = 10)
-plot_best_chromosome(x$segmenter)
-x <- segment(DataCPSim, method = "random", k = 10)
-plot_cpt_repeated(x$segmenter)
-plot_cpt_repeated(x$segmenter, 5)
 }

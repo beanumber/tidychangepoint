@@ -4,7 +4,7 @@
 #' A wrapper function that encapsulates various algorithms for detecting changepoint
 #' sets in univariate time series. 
 #' 
-#' @param x a [tsibble::tsibble] or numeric vector coercible into a [stats::ts] object
+#' @param x a numeric vector coercible into a [stats::ts] object
 #' @param method a character string indicating the algorithm to use. See Details.
 #' @param ... arguments passed to methods
 #' @export

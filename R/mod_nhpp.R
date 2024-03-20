@@ -137,13 +137,13 @@ logLik.nhpp <- function(object, ...) {
   return(ll)
 }
 
-#' @rdname fit_nhpp
+#' @rdname MDL
 #' @export
 MDL.nhpp <- function(object, ...) {
   MDL(logLik(object))
 }
 
-#' @rdname fit_nhpp
+#' @rdname BMDL
 #' @export
 BMDL.nhpp <- function(object, ...) {
   tau <- changepoints(object)
@@ -152,14 +152,14 @@ BMDL.nhpp <- function(object, ...) {
     as.double()
 }
 
-#' @rdname fit_nhpp
+#' @rdname MBIC
 #' @references Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
 #' @export
 MBIC.nhpp <- function(object, ...) {
   MBIC(logLik(object))
 }
 
-#' @rdname fit_nhpp
+#' @rdname changepoints
 #' @export
 changepoints.nhpp <- function(x, ...) {
   c(x$begin, x$end) |>
@@ -168,7 +168,7 @@ changepoints.nhpp <- function(x, ...) {
     as.integer()
 }
 
-#' @rdname fit_nhpp
+#' @rdname exceedances
 #' @export
 exceedances.nhpp <- function(x, ...) {
   x$exceedances |>

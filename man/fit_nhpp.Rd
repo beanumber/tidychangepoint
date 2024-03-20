@@ -6,11 +6,6 @@
 \alias{length.nhpp}
 \alias{nobs.nhpp}
 \alias{logLik.nhpp}
-\alias{MDL.nhpp}
-\alias{BMDL.nhpp}
-\alias{MBIC.nhpp}
-\alias{changepoints.nhpp}
-\alias{exceedances.nhpp}
 \alias{glance.nhpp}
 \alias{mcdf}
 \alias{plot.nhpp}
@@ -26,16 +21,6 @@ fit_nhpp(x, tau, ...)
 \method{nobs}{nhpp}(object, ...)
 
 \method{logLik}{nhpp}(object, ...)
-
-\method{MDL}{nhpp}(object, ...)
-
-\method{BMDL}{nhpp}(object, ...)
-
-\method{MBIC}{nhpp}(object, ...)
-
-\method{changepoints}{nhpp}(x, ...)
-
-\method{exceedances}{nhpp}(x, ...)
 
 \method{glance}{nhpp}(x, ...)
 
@@ -86,7 +71,4 @@ mcdf(nhpp)
 
 plot(fit_nhpp(DataCPSim, tau = 826))
 plot_intensity(fit_nhpp(DataCPSim, tau = 826))
-}
-\references{
-Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
 }

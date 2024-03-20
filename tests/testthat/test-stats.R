@@ -7,12 +7,14 @@ test_that("lmshift works", {
   expect_equal(fit_meanshift(CET, tau = NA)$tau, NA)
   
   cpts <- c(1700, 1739, 1988)
-  ids <- time2tau(cpts, lubridate::year(time(CET)))
+  ids <- time2tau(cpts, substr(time(CET), 1, 4))
   
   x <- fit_meanshift(CET, tau = ids)
   expect_s3_class(x, "meanshift")
   expect_equal(x$phi_hat, 0)
   expect_false(x$ar1)
+  
+  tidychangepoint:::autoregress_errors(x)
   
   y <- fit_meanshift_ar1(CET, tau = ids)
   expect_s3_class(y, "meanshift")

@@ -19,7 +19,7 @@ segment(x, method = "null", ...)
 \method{segment}{ts}(x, method = "null", ...)
 }
 \arguments{
-\item{x}{a \link[tsibble:tsibble]{tsibble::tsibble} or numeric vector coercible into a \link[stats:ts]{stats::ts} object}
+\item{x}{a numeric vector coercible into a \link[stats:ts]{stats::ts} object}
 
 \item{method}{a character string indicating the algorithm to use. See Details.}
 

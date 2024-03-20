@@ -2,24 +2,9 @@
 % Please edit documentation in R/mod_lmshift.R
 \name{fit_lmshift}
 \alias{fit_lmshift}
-\alias{logLik.lmshift}
-\alias{MBIC.lmshift}
-\alias{MDL.lmshift}
-\alias{glance.lmshift}
-\alias{changepoints.lmshift}
 \title{Regression-based model fitting}
 \usage{
 fit_lmshift(x, tau, trends = FALSE, ar1 = FALSE, ...)
-
-\method{logLik}{lmshift}(object, ...)
-
-\method{MBIC}{lmshift}(object, ...)
-
-\method{MDL}{lmshift}(object, ...)
-
-\method{glance}{lmshift}(x, ...)
-
-\method{changepoints}{lmshift}(x, ...)
 }
 \arguments{
 \item{x}{A time series}
@@ -31,9 +16,6 @@ fit_lmshift(x, tau, trends = FALSE, ar1 = FALSE, ...)
 \item{ar1}{logicial indicating whether you want auto-regressive lag 1 errors}
 
 \item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
-
-\item{object}{any object from which a log-likelihood value, or a
-   contribution to a log-likelihood value, can be extracted.}
 }
 \description{
 Regression-based model fitting
@@ -45,7 +27,7 @@ logLik(mod)
 deg_free(mod)
 
 cpts <- c(1700, 1739, 1988)
-ids <- time2tau(cpts, lubridate::year(time(CET)))
+ids <- time2tau(cpts, substr(time(CET), 1, 4))
 mod <- fit_lmshift(CET, tau = ids)
 glance(mod)
 glance(fit_lmshift(CET, tau = ids, trends = TRUE))

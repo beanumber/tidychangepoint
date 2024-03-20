@@ -1,4 +1,5 @@
 #' Compatibility layer for changepoint
+#' @name cpt-generics
 #' @param x A `cpt` object returned by [changepoint::cpt.meanvar()]
 #' @param ... arguments passed to methods
 #' @export
@@ -26,7 +27,7 @@ glance.cpt <- function(x, ...) {
   )
 }
 
-#' @rdname glance.cpt
+#' @rdname cpt-generics
 #' @export
 params.cpt <- function(x, ...) {
   out <- list(
@@ -40,7 +41,7 @@ params.cpt <- function(x, ...) {
   out
 }
 
-#' @rdname glance.cpt
+#' @rdname cpt-generics
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "pelt")
@@ -50,7 +51,7 @@ as.ts.cpt <- function(x, ...) {
   as.ts(x@data.set)
 }
 
-#' @rdname glance.cpt
+#' @rdname cpt-generics
 #' @param object A `cpt` object.
 #' @export
 #' @examples
@@ -61,7 +62,7 @@ nobs.cpt <- function(object, ...) {
   length(as.ts(object@data.set))
 }
 
-#' @rdname glance.cpt
+#' @rdname cpt-generics
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "pelt", penalty = "BIC")
@@ -80,20 +81,19 @@ logLik.cpt <- function(object, ...) {
   return(ll)
 }
 
-#' @rdname glance.cpt
+#' @rdname MBIC
 #' @export
 MBIC.cpt <- function(object, ...) {
   MBIC(logLik(object))
 }
 
-#' @rdname glance.cpt
+#' @rdname MDL
 #' @export
 MDL.cpt <- function(object, ...) {
   MDL(logLik(object))
 }
 
-
-#' @rdname glance.cpt
+#' @rdname changepoints
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "pelt")

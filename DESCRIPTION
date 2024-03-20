@@ -43,6 +43,7 @@ Depends:
     R (>= 4.1)
 LazyData: true
 Suggests: 
+    bench,
     knitr,
     here,
     readr,

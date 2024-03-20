@@ -47,19 +47,21 @@ seg_default <- function(x, ...) {
   validate_seg_default(obj)
 }
 
-#' @rdname new_seg_default
+#' Methods for seg_default objects
+#' @name seg-default-generics
+#' @param x An `seg_default` object
 #' @export
 as.ts.seg_default <- function(x, ...) {
   as.ts(x$data)
 }
 
-#' @rdname new_seg_default
+#' @rdname exceedances
 #' @export
 exceedances.seg_default <- function(x, ...) {
   exceedances(as.ts(x), ...)
 }
 
-#' @rdname new_seg_default
+#' @rdname cpt-generics
 #' @param object A `seg_default` object
 #' @export
 nobs.seg_default <- function(object, ...) {
@@ -73,13 +75,13 @@ num_candidates <- function(x) {
 }
 
 
-#' @rdname new_seg_default
+#' @rdname cpt-generics
 #' @export
 length.seg_default <- function(x, ...) {
   length(as.ts(x))
 }
 
-#' @rdname new_seg_default
+#' @rdname changepoints
 #' @export
 changepoints.seg_default <- function(x, ...) {
   x$candidates |>
@@ -90,9 +92,8 @@ changepoints.seg_default <- function(x, ...) {
     as.integer()
 }
 
-#' @rdname new_seg_default
+#' @rdname BMDL
 #' @export
-
 BMDL.seg_default <- function(object, ...) {
   object$candidates |>
     dplyr::arrange(bmdl) |>
@@ -100,7 +101,8 @@ BMDL.seg_default <- function(object, ...) {
     dplyr::pull(bmdl)
 }
 
-#' @rdname new_seg_default
+#' @rdname seg-default-generics
+#' @inheritParams stats::logLik
 #' @export
 logLik.seg_default <- function(object, ...) {
   regions <- fit_nhpp(object, tau = changepoints(object))
@@ -155,14 +157,14 @@ evaluate_cpts.tbl_df <- function(x, ...) {
     )
 }
 
-#' @rdname new_seg_default
+#' @rdname seg-default-generics
 #' @export
 params.seg_default <- function(x, ...) {
   x$params
 }
 
 
-#' @rdname new_seg_default
+#' @rdname seg-default-generics
 #' @export
 glance.seg_default <- function(x, ...) {
   tibble::tibble(
@@ -174,14 +176,14 @@ glance.seg_default <- function(x, ...) {
   )
 }
 
-#' @rdname new_seg_default
+#' @rdname seg-default-generics
 #' @export
 
 plot.seg_default <- function(x, ...) {
   plot_history(x)
 }
 
-#' @rdname new_seg_default
+#' @rdname diagnose
 #' @export
 #' @examples
 #' x <- segment(DataCPSim, method = "random", num_generations = 5)
@@ -195,8 +197,9 @@ diagnose.seg_default <- function(x, ...) {
   )
 }
 
-
-#' @rdname changepoints
+#' Plot seg_default information
+#' @param x A `seg_default` object
+#' @param ... currently ignored
 #' @export
 #' @examples
 #' x <- segment(DataCPSim, method = "random", k = 10)
@@ -240,7 +243,7 @@ plot_history <- function(x, ...) {
 }
 
 
-#' @rdname new_seg_default
+#' @rdname plot_history
 #' @export
 #' @examples
 #' x <- segment(DataCPSim, method = "random", k = 10)
@@ -271,7 +274,7 @@ plot_best_chromosome <- function(x) {
     )
 }
 
-#' @rdname new_seg_default
+#' @rdname plot_history
 #' @param i index of candidates to show
 #' @export
 #' @examples

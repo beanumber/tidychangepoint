@@ -1,4 +1,5 @@
 #' Compatibility layer for wbs
+#' @name wbs-generics
 #' @param x A `wbs` object returned by [wbs::wbs()]
 #' @param ... arguments passed to methods
 #' @export
@@ -24,7 +25,7 @@ glance.wbs <- function(x, ...) {
   )
 }
 
-#' @rdname glance.wbs
+#' @rdname wbs-generics
 #' @export
 params.wbs <- function(x, ...) {
   list(
@@ -36,7 +37,7 @@ params.wbs <- function(x, ...) {
   )
 }
 
-#' @rdname glance.wbs
+#' @rdname wbs-generics
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "wbs")
@@ -46,7 +47,7 @@ as.ts.wbs <- function(x, ...) {
   as.ts(x$x)
 }
 
-#' @rdname glance.wbs
+#' @rdname wbs-generics
 #' @param object A `cpt` object.
 #' @export
 #' @examples
@@ -57,7 +58,7 @@ nobs.wbs <- function(object, ...) {
   length(as.ts(object))
 }
 
-#' @rdname glance.wbs
+#' @rdname wbs-generics
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "wbs")
@@ -67,7 +68,7 @@ logLik.wbs <- function(object, ...) {
   NA
 }
 
-#' @rdname glance.wbs
+#' @rdname changepoints
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "wbs")
