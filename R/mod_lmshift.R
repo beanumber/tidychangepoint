@@ -57,14 +57,22 @@ fit_lmshift <- function(x, tau, trends = FALSE, ar1 = FALSE, ...) {
 autoregress_errors <- function(mod, ...) {
   n <- nobs(mod)
   resid <- mod$residuals
+  if (inherits(mod, "lm")) {
+    y <- mod$model$y
+  } else {
+    y <- mod$data
+  }
   
   phi_hat <- sum(utils::head(resid, -1) * utils::tail(resid, -1)) / sum(resid^2)
   y_hat <- mod$fitted.values + c(0, phi_hat * utils::head(resid, -1))
-  sigma_hat_sq <- sum((mod$model$y - y_hat)^2) / n
+  sigma_hatsq <- sum((y - y_hat)^2) / n
   
   out <- mod
   out$fitted.values <- y_hat
-  out$residuals <- mod$model$y - y_hat
+  out$residuals <- y - y_hat
+  out$sigma_hatsq <- sigma_hatsq
+  out$phi_hat <- phi_hat
+  out$model_name <- paste0(out$model_name, "_ar1")
   return(out)
 }
 

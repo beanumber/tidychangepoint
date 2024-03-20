@@ -16,10 +16,12 @@
 #' 
 #' cpts <- c(1700, 1739, 1988)
 #' ids <- time2tau(cpts, lubridate::year(time(CET)))
+#' mod <- fit_meanshift(CET, tau = ids)
+#' glance(mod)
 #' mod <- fit_meanshift_ar1(CET, tau = ids)
 #' glance(mod)
 
-fit_meanshift_ar1 <- function(x, tau, ...) {
+fit_meanshift <- function(x, tau, ar1 = FALSE, ...) {
   Xt <- as.numeric(as.ts(x))
   N <- length(Xt) # length of the series
   loc.ind <- tau2binary(tau, n = N)
@@ -31,8 +33,6 @@ fit_meanshift_ar1 <- function(x, tau, ...) {
     tau <- NA
     mu.hat <- mean(Xt)
     mu.seg <- mu.hat
-    phi.hat <- sum((Xt - mu.hat)[-N] * (Xt - mu.hat)[-1]) / sum((Xt - mu.hat)[-1]^2)
-    Xt.hat <- c(mu.hat, mu.hat + phi.hat * (Xt[-N] - mu.hat))
   } else {
     tau.vec <- loc.ind * (1:N) # convert binary to CPT location
     tau <- tau.vec[tau.vec > 0] # keep CPT locations only
@@ -45,24 +45,37 @@ fit_meanshift_ar1 <- function(x, tau, ...) {
     Xseg <- split(Xt, ff) ## Segmentation list
     mu.seg <- unlist(lapply(Xseg, mean), use.names = F)
     mu.hat <- rep(mu.seg, seg.len)
-    phi.hat <- sum((Xt - mu.hat)[-N] * (Xt - mu.hat)[-1]) / sum((Xt - mu.hat)[-1]^2)
-    Xt.hat <- c(mu.hat[1], mu.hat[-1] + phi.hat * (Xt[-N] - mu.hat[-N]))
   }
+  Xt.hat <- mu.hat
   sigma.hatsq <- sum((Xt - Xt.hat)^2) / N
   out <- list(
+    data = Xt,
     nobs = N,
     means = mu.seg,
     fitted.values = Xt.hat,
     residuals = Xt - Xt.hat,
     sigma_hatsq = sigma.hatsq,
+    phi_hat = 0,
     tau = tau,
-    model_name = "meanshift_ar1",
-    ar1 = TRUE,
+    model_name = "meanshift",
+    ar1 = ar1,
     trends = FALSE
   )
+  
+  if (ar1) {
+    out <- autoregress_errors(out)
+  }
+  
   class(out) <- c("meanshift", class(out))
   return(out)
 }
+
+#' @rdname fit_meanshift_ar1
+#' @export
+fit_meanshift_ar1 <- function(x, tau, ...) {
+  fit_meanshift(x, tau, ar1 = TRUE, ...)
+}
+
 
 #' @rdname fit_meanshift_ar1
 #' @inheritParams stats::logLik
