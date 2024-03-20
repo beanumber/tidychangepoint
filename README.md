@@ -107,11 +107,10 @@ glance(cpts)
 ```
 
     ## # A tibble: 1 × 11
-    ##   pkg         version algorithm params       num_cpts elapsed_time   nhpp_logLik
-    ##   <chr>       <chr>   <chr>     <list>          <int> <drtn>         <logLik>   
-    ## 1 changepoint 2.2.4   PELT      <named list>        3 0.1093771 secs -525.8797  
-    ## # ℹ 4 more variables: nhpp_AIC <dbl>, nhpp_BIC <dbl>, nhpp_MBIC <dbl>,
-    ## #   nhpp_BMDL <dbl>
+    ##   pkg     version algorithm params       num_cpts logLik   AIC   BIC  MBIC   MDL
+    ##   <chr>   <pckg_> <chr>     <list>          <int>  <dbl> <dbl> <dbl> <dbl> <dbl>
+    ## 1 change… 2.2.4   PELT      <named list>        3 -4688. 9383. 9403. 9375. 9375.
+    ## # ℹ 1 more variable: elapsed_time <drtn>
 
 ### Other methods
 
@@ -130,13 +129,6 @@ modeled as a non-homogeneous Poisson process.
 ``` r
 diagnose(cpts)
 ```
-
-    ## Warning: Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
-    ## Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
-    ## Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
 
 ![](README_files/figure-gfm/diagnose-1.png)<!-- -->
 
@@ -170,13 +162,6 @@ DataCPSim |>
 
     ## method: null
 
-    ## Warning: Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
-    ## Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
-    ## Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
-
 ![](README_files/figure-gfm/null-plot-1.png)<!-- -->
 
 - `method = "manual"`: returns a model with changepoints specified
@@ -189,13 +174,6 @@ DataCPSim |>
 ```
 
     ## method: manual
-
-    ## Warning: Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
-    ## Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
-    ## Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
 
 ![](README_files/figure-gfm/manual-plot-1.png)<!-- -->
 
@@ -210,13 +188,6 @@ DataCPSim |>
 
     ## method: single-best
 
-    ## Warning: Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
-    ## Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
-    ## Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
-
 ![](README_files/figure-gfm/amoc-plot-1.png)<!-- -->
 
 - `method = "random"`: returns the best model from a random collection
@@ -228,13 +199,6 @@ DataCPSim |>
 ```
 
     ## method: random
-
-    ## Warning: Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
-    ## Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
-    ## Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
 
 ![](README_files/figure-gfm/random-plot-1.png)<!-- -->
 
@@ -255,18 +219,11 @@ x <- DataCPSim |>
 changepoints(x)
 ```
 
-    ## [1] 562 649 864
+    ## [1] 488 581 810 834
 
 ``` r
 diagnose(x)
 ```
-
-    ## Warning: Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
-    ## Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
-    ## Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_line()`).
 
 ![](README_files/figure-gfm/gbmdl-tidyplot-1.png)<!-- -->
 
