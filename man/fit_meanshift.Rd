@@ -2,9 +2,30 @@
 % Please edit documentation in R/mod_meanshift.R
 \name{fit_meanshift}
 \alias{fit_meanshift}
+\alias{fit_meanshift_ar1}
+\alias{logLik.meanshift}
+\alias{nobs.meanshift}
+\alias{MBIC.meanshift}
+\alias{MDL.meanshift}
+\alias{glance.meanshift}
+\alias{changepoints.meanshift}
 \title{Fast implementation of meanshift model}
 \usage{
 fit_meanshift(x, tau, ar1 = FALSE, ...)
+
+fit_meanshift_ar1(x, tau, ...)
+
+\method{logLik}{meanshift}(object, ...)
+
+\method{nobs}{meanshift}(object, ...)
+
+\method{MBIC}{meanshift}(object, ...)
+
+\method{MDL}{meanshift}(object, ...)
+
+\method{glance}{meanshift}(x, ...)
+
+\method{changepoints}{meanshift}(x, ...)
 }
 \arguments{
 \item{x}{A time series}
@@ -14,6 +35,9 @@ fit_meanshift(x, tau, ar1 = FALSE, ...)
 \item{ar1}{logicial indicating whether you want auto-regressive lag 1 errors}
 
 \item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
+
+\item{object}{any object from which a log-likelihood value, or a
+   contribution to a log-likelihood value, can be extracted.}
 }
 \description{
 Fast implementation of meanshift model
@@ -32,6 +56,8 @@ deg_free(mod)
 
 cpts <- c(1700, 1739, 1988)
 ids <- time2tau(cpts, lubridate::year(time(CET)))
+mod <- fit_meanshift(CET, tau = ids)
+glance(mod)
 mod <- fit_meanshift_ar1(CET, tau = ids)
 glance(mod)
 }

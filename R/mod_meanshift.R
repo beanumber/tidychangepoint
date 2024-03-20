@@ -1,11 +1,6 @@
 #' Fast implementation of meanshift model
 #' 
 #' @inheritParams fit_lmshift
-#' @details
-#'  loc.ind is the binary input of length N
-#' Note `X[1]` cannot be a changepoint,
-#' so `loc.ind[1]` is set to be zero
-#' loc.ind = 0/1. 1 corresponds a CPT location, 0 is not.
 #' @export
 #' @author Xueheng Shi
 #' @examples
@@ -22,39 +17,26 @@
 #' glance(mod)
 
 fit_meanshift <- function(x, tau, ar1 = FALSE, ...) {
-  Xt <- as.numeric(as.ts(x))
-  N <- length(Xt) # length of the series
-  loc.ind <- tau2binary(tau, n = N)
-  loc.ind[1] <- 0
-  m <- sum(loc.ind) # Number of CPTs
+  y <- as.numeric(as.ts(x))
+  N <- length(y) # length of the series
+  m <- length(tau) # Number of CPTs
   
-  if (m == 0) {
-    ## Case 1, Zero Changepoint
-    tau <- NA
-    mu.hat <- mean(Xt)
-    mu.seg <- mu.hat
-  } else {
-    tau.vec <- loc.ind * (1:N) # convert binary to CPT location
-    tau <- tau.vec[tau.vec > 0] # keep CPT locations only
-    tau.ext <- c(1, tau, (N + 1)) # include CPT boundary 1 and N+1
-    
-    ## Split Xt to regimes/segments to
-    ## compute phi.hat and sigma.hat.sq
-    seg.len <- diff(tau.ext) # length of each segments
-    ff <- rep(0:m, times = seg.len) ## create factors for segmentation
-    Xseg <- split(Xt, ff) ## Segmentation list
-    mu.seg <- unlist(lapply(Xseg, mean), use.names = F)
-    mu.hat <- rep(mu.seg, seg.len)
-  }
-  Xt.hat <- mu.hat
-  sigma.hatsq <- sum((Xt - Xt.hat)^2) / N
+  y_seg <- y |>
+    split_by_tau(tau)
+  mu_seg <- y_seg |>
+    purrr::map_dbl(mean)
+  seg_len <- y_seg |>
+    purrr::map_int(length)
+  y_hat <- rep(mu_seg, seg_len)
+
+  sigma_hatsq <- sum((y - y_hat)^2) / N
   out <- list(
-    data = Xt,
+    data = y,
     nobs = N,
-    means = mu.seg,
-    fitted.values = Xt.hat,
-    residuals = Xt - Xt.hat,
-    sigma_hatsq = sigma.hatsq,
+    means = mu_seg,
+    fitted.values = y_hat,
+    residuals = y - y_hat,
+    sigma_hatsq = sigma_hatsq,
     phi_hat = 0,
     tau = tau,
     model_name = "meanshift",
@@ -70,14 +52,14 @@ fit_meanshift <- function(x, tau, ar1 = FALSE, ...) {
   return(out)
 }
 
-#' @rdname fit_meanshift_ar1
+#' @rdname fit_meanshift
 #' @export
 fit_meanshift_ar1 <- function(x, tau, ...) {
   fit_meanshift(x, tau, ar1 = TRUE, ...)
 }
 
 
-#' @rdname fit_meanshift_ar1
+#' @rdname fit_meanshift
 #' @inheritParams stats::logLik
 #' @export
 logLik.meanshift <- function(object, ...) {
@@ -91,25 +73,25 @@ logLik.meanshift <- function(object, ...) {
   return(ll)
 }
 
-#' @rdname fit_meanshift_ar1
+#' @rdname fit_meanshift
 #' @export
 nobs.meanshift <- function(object, ...) {
   object$nobs
 }
 
-#' @rdname fit_meanshift_ar1
+#' @rdname fit_meanshift
 #' @export
 MBIC.meanshift <- function(object, ...) {
   MBIC(logLik(object))
 }
 
-#' @rdname fit_meanshift_ar1
+#' @rdname fit_meanshift
 #' @export
 MDL.meanshift <- function(object, ...) {
   MDL(logLik(object))
 }
 
-#' @rdname fit_meanshift_ar1
+#' @rdname fit_meanshift
 #' @export
 glance.meanshift <- function(x, ...) {
   tibble::tibble(
@@ -127,7 +109,7 @@ glance.meanshift <- function(x, ...) {
   )
 }
 
-#' @rdname fit_meanshift_ar1
+#' @rdname fit_meanshift
 #' @export
 changepoints.meanshift <- function(x, ...) {
   x$tau |>

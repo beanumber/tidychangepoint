@@ -42,6 +42,7 @@ fit_lmshift <- function(x, tau, trends = FALSE, ar1 = FALSE, ...) {
   }
   
   out <- stats::lm(stats::as.formula(form), data = ds, ...)
+  out$sigma_hatsq <- sum((out$residuals)^2) / n
   if (ar1) {
     out <- autoregress_errors(out)
     model_name <- paste0(model_name, "_ar1")
