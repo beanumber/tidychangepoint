@@ -45,13 +45,10 @@ plot(res)
 x <- segment(CET, method = "ga-shi", maxiter = 50)
 str(x)
 # GeneticBMDL
-y <- segment(CET, method = "ga", model_fn = fit_nhpp, penalty_fn = BMDL, 
-     maxiter = 20, popSize = 50, population = gabin_Population_Informed)
+y <- segment(CET, method = "ga-gbmdl", maxiter = 20)
 changepoints(y)
 
-z <- segment(CET, method = "ga", model_fn = fit_nhpp, penalty_fn = BMDL, 
-  maxiter = 10, popSize = 20, 
-  model_params = list(threshold = 2))
+z <- segment(CET, method = "ga-gbmdl", maxiter = 10, model_params = list(threshold = 2))
 changepoints(z)
 }
 }

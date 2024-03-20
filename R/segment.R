@@ -126,9 +126,6 @@ segment.ts <- function(x, method = "null", ...) {
   if (method == "gbmdl") {
     mod <- segment_gbmdl(x, ...)
   }
-  if (method == "boltzmann") {
-    mod <- segment_boltzmann(x, ...)
-  }
   if (method == "random") {
     mod <- segment_random(x, ...)
   }
