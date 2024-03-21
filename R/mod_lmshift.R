@@ -62,6 +62,7 @@ autoregress_errors <- function(mod, ...) {
   y <- as.ts(mod)
   
   phi_hat <- sum(utils::head(resid, -1) * utils::tail(resid, -1)) / sum(resid^2)
+  d <- sum((utils::head(resid, -1) - utils::tail(resid, -1))^2) / sum(resid^2)
   y_hat <- mod$fitted.values + c(0, phi_hat * utils::head(resid, -1))
   sigma_hatsq <- sum((y - y_hat)^2) / n
   
@@ -70,6 +71,7 @@ autoregress_errors <- function(mod, ...) {
   out$residuals <- y - y_hat
   out$sigma_hatsq <- sigma_hatsq
   out$phi_hat <- phi_hat
+  out$durbin_watson <- d
   out$model_name <- paste0(out$model_name, "_ar1")
   return(out)
 }
