@@ -12,14 +12,41 @@ exceedances.double <- function(x, threshold = mean(x, na.rm = TRUE), ...) {
 }
 
 #' @rdname MDL
+#' @return regresa la evaluación de la penalización
+#'  \deqn{
+#'    P_{\theta,\tau} = \sum_{i=1}^{m+1}\dfrac{\ln(\tau_i-\tau_{i-1})}{2}+\ln(m)+\sum_{i=2}^m\ln(\tau_i)
+#'  }
 #' @inheritParams stats::logLik
 #' @export
 #' @examples
 #' MDL(fit_meanshift_ar1(CET, tau = c(42, 330)))
+#' MDL(fit_lmshift(CET, tau = c(42, 81, 330), trends = TRUE))
 MDL.logLik <- function(object, ...) {
   tau <- attr(object, "tau")
-  n <- nobs(object)
-  penalty_mdl(pad_tau(tau, n)) - 2 * object |>
+  N <- nobs(object)
+  m <- length(tau)
+
+  if (m == 0) {
+    penalty <- 0
+  } else {
+    padded_tau <- pad_tau(tau, n = N)
+    if (!is.null(attr(object, "ar1"))) {
+      ar1 <- attr(object, "ar1")
+    } else {
+      ar1 <- FALSE
+    }
+    num_params_per_region <- floor((deg_free(object) - ar1) / (m + 1))
+    
+    fudge_N <- 3 + ar1
+    fudge_tau <- num_params_per_region - 1
+    
+    penalty <- fudge_tau * sum(log(diff(padded_tau))) + 
+      2 * log(m) + 
+      2 * sum(log(utils::tail(tau, -1))) +
+      fudge_N * log(N)
+  }
+  
+  penalty - 2 * object |>
     as.double()
 }
 

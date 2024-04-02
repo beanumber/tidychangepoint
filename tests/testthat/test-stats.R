@@ -24,15 +24,17 @@ test_that("lmshift works", {
   z <- fit_lmshift(CET, tau = ids)
   expect_true(all(abs(z$fitted.values - x$fitted.values) < 0.000000001))
   expect_equal(x$sigma_hatsq, z$sigma_hatsq)
+  expect_equal(deg_free(x), deg_free(z))
   
   w <- fit_lmshift(CET, tau = ids, ar1 = TRUE)
   expect_true(all(abs(w$fitted.values - y$fitted.values) < 0.000000001))
   expect_equal(y$sigma_hatsq, w$sigma_hatsq)
+  expect_equal(deg_free(y), deg_free(w))
   
   trend_wn <- fit_lmshift(CET, tau = ids, trends = TRUE)
   expect_equal(round(as.numeric(logLik(trend_wn)), 2), -290.02)
   expect_equal(round(BIC(logLik(trend_wn)), 2), 650.74)
-  expect_equal(MDL(logLik(trend_wn)), 653.07)
+  expect_equal(round(MDL(logLik(trend_wn)), 2), 653.07)
   
   trend_ar1 <- fit_lmshift(CET, tau = ids, trends = TRUE, ar1 = TRUE)
   expect_equal(round(as.numeric(logLik(trend_ar1)), 2), -288.80)

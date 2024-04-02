@@ -107,15 +107,16 @@ test_that("penalties work", {
   # log-posterior
   fit_nhpp(DataCPSim, tau)
   
-  penalty_mdl(pad_tau(tau, n = length(DataCPSim)), length(exceedances(DataCPSim)))
-
-  expect_equal(penalty_mdl(pad_tau(0, n = 1)), 0)
-  expect_equal(penalty_mdl(pad_tau(50, n = 100)), 2 * log(50))
-  expect_gt(penalty_mdl(pad_tau(c(25, 50), n = 100)), penalty_mdl(pad_tau(50, n = 100)))
+  mod <- fit_nhpp(DataCPSim, tau = NULL)
+  expect_equal(MDL(mod), as.numeric(-2 * logLik(mod)))
+  
+  mod <- fit_nhpp(DataCPSim, tau = 365)
+  expect_gt(MDL(mod), as.numeric(-2 * logLik(mod)))
   
   x <- test_set()
   cpt <- attr(x, "cpt_true")
-  expect_gt(penalty_mdl(pad_tau(cpt, length(x))), 0)
+  mod <- fit_nhpp(x, tau = cpt)
+  expect_gt(MDL(mod), as.numeric(-2 * logLik(mod)))
   
   # expect_equal(bmdl(x, 0), -Inf)
   true_bmdl <- fit_nhpp(x, cpt) |> BMDL()
@@ -125,7 +126,7 @@ test_that("penalties work", {
 
 test_that("performance comparison works", {
   x <- segment(DataCPSim, method = "pelt")
-  y <- segment(DataCPSim, method = "gbmdl", num_generations = 10)
+  y <- segment(DataCPSim, method = "gbmdl", num_generations = 20)
   z <- segment(DataCPSim, method = "random", num_generations = 20)
   expect_gt(BMDL(x), BMDL(y))
   expect_gt(BMDL(z), BMDL(y))

@@ -77,6 +77,7 @@ logLik.cpt <- function(object, ...) {
   ll <- -y[1] / 2
   attr(ll, "df") <- length(object@cpts)
   attr(ll, "nobs") <- nobs(object)
+  attr(ll, "tau") <- changepoints(object)
   class(ll) <- "logLik"
   return(ll)
 }

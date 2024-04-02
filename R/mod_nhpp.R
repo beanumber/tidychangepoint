@@ -133,6 +133,7 @@ logLik.nhpp <- function(object, ...) {
   ll <- sum(object$logLik)
   attr(ll, "df") <- 2 * (length(changepoints(object)) + 1) + 1
   attr(ll, "nobs") <- nobs(object)
+  attr(ll, "tau") <- changepoints(object)
   class(ll) <- "logLik"
   return(ll)
 }
@@ -146,10 +147,9 @@ MDL.nhpp <- function(object, ...) {
 #' @rdname BMDL
 #' @export
 BMDL.nhpp <- function(object, ...) {
-  tau <- changepoints(object)
-  n <- max(object$end)
-  penalty_mdl(pad_tau(tau, n), N = length(exceedances(object))) - 2 * sum(object$log_posterior) |>
+  logPrior <- sum(object$log_posterior) - logLik(object) |>
     as.double()
+  MDL(object) - 2 * logPrior
 }
 
 #' @rdname MBIC

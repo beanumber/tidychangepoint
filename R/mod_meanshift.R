@@ -76,9 +76,11 @@ logLik.meanshift <- function(object, ...) {
   m <- length(object$tau)
   N <- nobs(object)
   ll <- -(N * log(object$sigma_hatsq) + N + N * log(2 * pi)) / 2
-  attr(ll, "df") <- 2 * m + 3
+  params_estimated <- (m + 1) * (object$trends + 1)
+  attr(ll, "df") <- m + params_estimated + 1 + (object$ar1)
   attr(ll, "nobs") <- N
   attr(ll, "tau") <- object$tau
+  attr(ll, "ar1") <- object$ar1
   class(ll) <- "logLik"
   return(ll)
 }

@@ -29,9 +29,16 @@ MDL(object, ...)
 \item{...}{some methods for this generic function require additional
    arguments.}
 }
+\value{
+regresa la evaluación de la penalización
+\deqn{
+   P_{\theta,\tau} = \sum_{i=1}^{m+1}\dfrac{\ln(\tau_i-\tau_{i-1})}{2}+\ln(m)+\sum_{i=2}^m\ln(\tau_i)
+ }
+}
 \description{
 Maximum Descriptive Length
 }
 \examples{
 MDL(fit_meanshift_ar1(CET, tau = c(42, 330)))
+MDL(fit_lmshift(CET, tau = c(42, 81, 330), trends = TRUE))
 }
