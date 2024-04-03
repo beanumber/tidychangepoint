@@ -130,15 +130,15 @@ compare_models <- function(x, ...) {
 #' @rdname compare_models
 #' @export
 compare_algorithms <- function(x, ...) {
-  list(
+  others <- list(
     segment(as.ts(x), method = "pelt"),
     segment(as.ts(x), method = "binseg"),
     segment(as.ts(x), method = "wbs"),
     segment(as.ts(x), method = "random"),
     segment(as.ts(x), method = "null")
   ) |>
-    purrr::map(glance) |>
-    dplyr::bind_rows()
+    purrr::map(glance)
+  dplyr::bind_rows(glance(x), others)
 }
 
 #' @rdname tidycpt-generics
