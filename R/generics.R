@@ -1,3 +1,20 @@
+#' Extract changepoints
+#' 
+#' @param x A `tidycpt` object
+#' @param ... arguments passed to methods
+#' @export
+changepoints <- function(x, ...) UseMethod("changepoints")
+
+#' Compute exceedances of a threshold for a time series
+#' 
+#' @inheritParams segment
+#' @export
+exceedances <- function(x, ...) UseMethod("exceedances")
+
+#' @rdname changepoints
+#' @export
+params <- function(x, ...) UseMethod("params")
+
 #' Modified Bayesian Information Criterion
 #' 
 #' @inheritParams stats::logLik
@@ -45,3 +62,13 @@ BMDL <- function(object, ...) UseMethod("BMDL")
 BMDL.default <- function(object, ...) {
   BMDL(logLik(object))
 }
+
+#' @rdname new_seg_default
+#' @export
+evaluate_cpts <- function(x, ...) UseMethod("evaluate_cpts")
+
+#' Diagnose the fit of a segmented time series
+#' @param x A `tidycpt` object
+#' @param ... currently ignored
+#' @export
+diagnose <- function(x, ...) UseMethod("diagnose")

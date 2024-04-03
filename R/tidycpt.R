@@ -4,13 +4,6 @@ globalVariables(c(
   "lower", "upper"
 ))
 
-#' Extract changepoints
-#' 
-#' @param x A `tidycpt` object
-#' @param ... arguments passed to methods
-#' @export
-changepoints <- function(x, ...) UseMethod("changepoints")
-
 #' @rdname changepoints
 #' @export
 changepoints.tidycpt <- function(x, ...) {
@@ -35,12 +28,6 @@ changepoints_labels <- function(x, ...) {
 as.ts.tidycpt <- function(x, ...) {
   as.ts(x$segmenter)
 }
-
-#' Compute exceedances of a threshold for a time series
-#' 
-#' @inheritParams segment
-#' @export
-exceedances <- function(x, ...) UseMethod("exceedances")
 
 #' @rdname exceedances
 #' @export
@@ -160,11 +147,6 @@ compare_algorithms <- function(x, ...) {
     dplyr::bind_rows()
 }
 
-
-#' @rdname changepoints
-#' @export
-params <- function(x, ...) UseMethod("params")
-
 #' @rdname tidycpt-generics
 #' @export
 plot.tidycpt <- function(x, ...) {
@@ -206,12 +188,6 @@ plot.tidycpt <- function(x, ...) {
       subtitle = paste("Mean value is", round(mean(as.ts(x), na.rm = TRUE), 2))
     )
 }
-
-#' Diagnose the fit of a segmented time series
-#' @param x A `tidycpt` object
-#' @param ... currently ignored
-#' @export
-diagnose <- function(x, ...) UseMethod("diagnose")
 
 #' @rdname diagnose
 #' @export

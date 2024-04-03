@@ -114,10 +114,6 @@ logLik.seg_default <- function(object, ...) {
 
 #' @rdname new_seg_default
 #' @export
-evaluate_cpts <- function(x, ...) UseMethod("evaluate_cpts")
-
-#' @rdname new_seg_default
-#' @export
 evaluate_cpts.seg_default <- function(x, ...) {
   evaluate_cpts(x$candidates, .data = as.ts(x), ...)
 }
