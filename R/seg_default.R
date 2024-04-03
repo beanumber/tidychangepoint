@@ -55,12 +55,6 @@ as.ts.seg_default <- function(x, ...) {
   as.ts(x$data)
 }
 
-#' @rdname exceedances
-#' @export
-exceedances.seg_default <- function(x, ...) {
-  exceedances(as.ts(x), ...)
-}
-
 #' @rdname cpt-generics
 #' @param object A `seg_default` object
 #' @export

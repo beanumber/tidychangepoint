@@ -29,12 +29,6 @@ as.ts.tidycpt <- function(x, ...) {
   as.ts(x$segmenter)
 }
 
-#' @rdname exceedances
-#' @export
-exceedances.tidycpt <- function(x, ...) {
-  exceedances(as.ts(x), ...)
-}
-
 #' @rdname tidycpt-generics
 #' @export
 length.tidycpt <- function(x, ...) {

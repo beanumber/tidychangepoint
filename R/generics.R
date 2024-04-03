@@ -11,6 +11,12 @@ changepoints <- function(x, ...) UseMethod("changepoints")
 #' @export
 exceedances <- function(x, ...) UseMethod("exceedances")
 
+#' @rdname exceedances
+#' @export
+exceedances.default <- function(x, ...) {
+  exceedances(as.ts(x), ...)
+}
+
 #' @rdname changepoints
 #' @export
 params <- function(x, ...) UseMethod("params")
