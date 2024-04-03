@@ -4,7 +4,6 @@
 \alias{tidycpt-generics}
 \alias{as.ts.tidycpt}
 \alias{length.tidycpt}
-\alias{logLik.tidycpt}
 \alias{nobs.tidycpt}
 \alias{augment.tidycpt}
 \alias{tidy.tidycpt}
@@ -15,8 +14,6 @@
 \method{as.ts}{tidycpt}(x, ...)
 
 \method{length}{tidycpt}(x, ...)
-
-\method{logLik}{tidycpt}(object, ...)
 
 \method{nobs}{tidycpt}(object, ...)
 
@@ -33,14 +30,12 @@
 
 \item{...}{arguments passed to methods}
 
-\item{object}{A \code{tidycpt} object}
+\item{object}{A fitted model object.}
 }
 \description{
 Generic functions for tidycpt objects
 }
 \seealso{
-\code{\link[stats:logLik]{stats::logLik()}}
-
 \code{\link[stats:nobs]{stats::nobs()}}
 
 \code{\link[broom:reexports]{broom::augment()}}

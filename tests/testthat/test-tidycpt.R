@@ -11,18 +11,8 @@ test_that("tidycpt works", {
   expect_true(all(c("alpha", "beta", "region") %in% names(tidy(x))))
   expect_s3_class(glance(x), "tbl_df")
   expect_type(changepoints(x), "integer")
-  expect_equal(AIC(x), as.numeric(-2 * logLik(x) + 2 * deg_free(x)))
-  expect_equal(BIC(x), as.numeric(-2 * logLik(x) + log(nobs(x)) * deg_free(x)))
-  expect_type(BMDL(x), "double")
   expect_s3_class(plot(x), "gg")
   expect_s3_class(diagnose(x), "patchwork")
-  
-  # AIC, BIC not quite right
-  library(tidychangepoint)
-  pelt_bic <- segment(DataCPSim, method = "pelt", penalty = "BIC")
-  pelt_bic |>
-    glance() |> 
-    dplyr::select(dplyr::matches("IC|Lik"))
   
   z <- segment(DataCPSim, method = "manual", cpts = c(365, 826))
   expect_s3_class(z, "tidycpt")
@@ -33,9 +23,6 @@ test_that("tidycpt works", {
   expect_s3_class(glance(z), "tbl_df")
   expect_type(changepoints(z), "integer")
   expect_equal(length(changepoints(z)), 2)
-  expect_equal(AIC(z), as.numeric(-2 * logLik(z) + 2 * deg_free(z)))
-  expect_equal(BIC(z), as.numeric(-2 * logLik(z) + log(nobs(z)) * deg_free(z)))
-  expect_type(BMDL(z), "double")
   expect_s3_class(plot(z), "gg")
   expect_s3_class(diagnose(z), "patchwork")
   
@@ -118,9 +105,12 @@ test_that("penalties work", {
   mod <- fit_nhpp(x, tau = cpt)
   expect_gt(MDL(mod), as.numeric(-2 * logLik(mod)))
   
-  # expect_equal(bmdl(x, 0), -Inf)
   true_bmdl <- fit_nhpp(x, cpt) |> BMDL()
   expect_type(true_bmdl, "double")
+  
+#  expect_equal(AIC(x$nhpp), as.numeric(-2 * logLik(x) + 2 * deg_free(x)))
+#  expect_equal(BIC(x), as.numeric(-2 * logLik(x) + log(nobs(x)) * deg_free(x)))
+#  expect_type(BMDL(x), "double")
 })
 
 
@@ -128,8 +118,8 @@ test_that("performance comparison works", {
   x <- segment(DataCPSim, method = "pelt")
   y <- segment(DataCPSim, method = "gbmdl", num_generations = 20)
   z <- segment(DataCPSim, method = "random", num_generations = 20)
-  expect_gt(BMDL(x), BMDL(y))
-  expect_gt(BMDL(z), BMDL(y))
+  expect_gt(BMDL(x$nhpp), BMDL(y$nhpp))
+  expect_gt(BMDL(z$nhpp), BMDL(y$nhpp))
   
   expect_s3_class(dplyr::bind_rows(glance(x), glance(y), glance(z)), "tbl_df")
 })

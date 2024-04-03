@@ -50,6 +50,7 @@ seg_default <- function(x, ...) {
 #' Methods for seg_default objects
 #' @name seg-default-generics
 #' @param x An `seg_default` object
+#' @param ... arguments passed to methods
 #' @export
 as.ts.seg_default <- function(x, ...) {
   as.ts(x$data)
@@ -68,42 +69,32 @@ num_candidates <- function(x) {
   nrow(x$candidates)
 }
 
-
 #' @rdname cpt-generics
 #' @export
 length.seg_default <- function(x, ...) {
   length(as.ts(x))
 }
 
+#' @rdname cpt-generics
+#' @export
+best_nhpp <- function(x, ...) {
+  x$candidates |>
+    dplyr::arrange(BMDL) |>
+    utils::head(1) |>
+    dplyr::pull(nhpp) |>
+    purrr::pluck(1)
+}
+
+
 #' @rdname changepoints
 #' @export
 changepoints.seg_default <- function(x, ...) {
   x$candidates |>
-    dplyr::arrange(bmdl) |>
+    dplyr::arrange(BMDL) |>
     utils::head(1) |>
     dplyr::pull(changepoints) |>
     purrr::pluck(1) |>
     as.integer()
-}
-
-#' @rdname BMDL
-#' @export
-BMDL.seg_default <- function(object, ...) {
-  object$candidates |>
-    dplyr::arrange(bmdl) |>
-    utils::head(1) |>
-    dplyr::pull(bmdl)
-}
-
-#' @rdname seg-default-generics
-#' @inheritParams stats::logLik
-#' @export
-logLik.seg_default <- function(object, ...) {
-  regions <- fit_nhpp(object, tau = changepoints(object))
-  log_likes <- sum(regions$logLik)
-  attr(log_likes, "df") <- length(changepoints(object))
-  class(log_likes) <- "logLik"
-  return(log_likes)
 }
 
 #' @rdname new_seg_default
@@ -134,7 +125,7 @@ evaluate_cpts.tbl_df <- function(x, ...) {
   y <- x |>
     dplyr::mutate(
       nhpp = purrr::map(changepoints, ~fit_nhpp(x = as.ts(ds), tau = .x)),
-      bmdl = purrr::map_dbl(nhpp, BMDL)
+      BMDL = purrr::map_dbl(nhpp, BMDL)
     )
   ll <- y$nhpp |>
     purrr::map(logLik)
@@ -152,7 +143,6 @@ evaluate_cpts.tbl_df <- function(x, ...) {
 params.seg_default <- function(x, ...) {
   x$params
 }
-
 
 #' @rdname seg-default-generics
 #' @export
@@ -192,17 +182,18 @@ diagnose.seg_default <- function(x, ...) {
 #' @param ... currently ignored
 #' @export
 #' @examples
-#' x <- segment(DataCPSim, method = "random", k = 10)
+#' x <- segment(DataCPSim, method = "random", num_generations = 10)
 #' plot_history(x$segmenter)
 plot_history <- function(x, ...) {
   methods <- c("null", "single-best", "pelt")
   bmdls <- methods |>
     purrr::map(~segment(as.ts(x), method = .x)) |>
+    purrr::map(~purrr::pluck(.x, "nhpp")) |>
     purrr::map_dbl(BMDL)
   
   guidelines <- tibble::tibble(
     method = c(class(x)[1], methods),
-    bmdl = c(BMDL(x), bmdls)
+    BMDL = c(BMDL(best_nhpp(x)), bmdls)
   )
   
   bmdl_seg <- x$candidates |>
@@ -211,13 +202,13 @@ plot_history <- function(x, ...) {
     )
 
   best <- bmdl_seg |> 
-    dplyr::arrange(bmdl) |> 
+    dplyr::arrange(BMDL) |> 
     utils::head(1)
   
-  ggplot2::ggplot(data = bmdl_seg, ggplot2::aes(x = num_generation, y = bmdl)) +
+  ggplot2::ggplot(data = bmdl_seg, ggplot2::aes(x = num_generation, y = BMDL)) +
     ggplot2::geom_hline(
       data = guidelines, 
-      ggplot2::aes(yintercept = bmdl, color = method), 
+      ggplot2::aes(yintercept = BMDL, color = method), 
       linetype = 2
     ) +
     ggplot2::geom_line() +
@@ -236,7 +227,7 @@ plot_history <- function(x, ...) {
 #' @rdname plot_history
 #' @export
 #' @examples
-#' x <- segment(DataCPSim, method = "random", k = 10)
+#' x <- segment(DataCPSim, method = "random", num_generations = 10)
 #' plot_best_chromosome(x$segmenter)
 plot_best_chromosome <- function(x) {
   d <- x$candidates |> 
@@ -245,7 +236,7 @@ plot_best_chromosome <- function(x) {
       cpt_length = purrr::map_int(changepoints, length)
     )
   best <- d |> 
-    dplyr::arrange(bmdl) |> 
+    dplyr::arrange(BMDL) |> 
     utils::head(1)
   ggplot2::ggplot(d, ggplot2::aes(x = num_generation, y = cpt_length)) +
     ggplot2::geom_hline(

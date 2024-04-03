@@ -90,7 +90,7 @@ segment_gbmdl <- function(x,
       evaluate_cpts(.data = as.ts(obj))
     
     best_cpts[[i]] <- this_generation |>
-      dplyr::arrange(bmdl) |>
+      dplyr::arrange(BMDL) |>
       utils::head(1)
     
     # Imprimimos el porcentaje de progreso
@@ -102,7 +102,7 @@ segment_gbmdl <- function(x,
       exceedances() |>
       evolve_gbmdl(
         obj$mat_cp, 
-        this_generation |> dplyr::pull(bmdl)
+        this_generation |> dplyr::pull(BMDL)
       )
     #    plot_evolution(obj, i)
     #    plot_cpt_repeated(obj, i)
@@ -123,7 +123,7 @@ segment_gbmdl <- function(x,
 #' @export
 #' @examples
 #' mat_cp <- sim_k_cp_BMDL(DataCPSim)
-#' bmdls <- mat_cp |> mat_cp_2_list() |> evaluate_cpts(.data = as.ts(DataCPSim)) |> dplyr::pull(bmdl)
+#' bmdls <- mat_cp |> mat_cp_2_list() |> evaluate_cpts(.data = as.ts(DataCPSim)) |> dplyr::pull(BMDL)
 #' evolve_gbmdl(exceedances(DataCPSim), mat_cp, bmdls)
 
 evolve_gbmdl <- function(x, mat_cp, these_bmdls) {

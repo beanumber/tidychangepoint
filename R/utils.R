@@ -118,7 +118,7 @@ split_by_tau <- function(x, tau) {
 #' @rdname pad_tau
 #' @export
 #' @examples
-#' deg_free(segment(DataCPSim))
+#' deg_free(segment(DataCPSim)$nhpp)
 
 deg_free <- function(x) {
   attr(logLik(x), "df")

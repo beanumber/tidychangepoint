@@ -3,15 +3,12 @@
 \name{seg-default-generics}
 \alias{seg-default-generics}
 \alias{as.ts.seg_default}
-\alias{logLik.seg_default}
 \alias{params.seg_default}
 \alias{glance.seg_default}
 \alias{plot.seg_default}
 \title{Methods for seg_default objects}
 \usage{
 \method{as.ts}{seg_default}(x, ...)
-
-\method{logLik}{seg_default}(object, ...)
 
 \method{params}{seg_default}(x, ...)
 
@@ -22,11 +19,7 @@
 \arguments{
 \item{x}{An \code{seg_default} object}
 
-\item{...}{some methods for this generic function require additional
-   arguments.}
-
-\item{object}{any object from which a log-likelihood value, or a
-   contribution to a log-likelihood value, can be extracted.}
+\item{...}{arguments passed to methods}
 }
 \description{
 Methods for seg_default objects

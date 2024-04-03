@@ -23,9 +23,9 @@ plot_cpt_repeated(x, i = nrow(x$candidates))
 Plot seg_default information
 }
 \examples{
-x <- segment(DataCPSim, method = "random", k = 10)
+x <- segment(DataCPSim, method = "random", num_generations = 10)
 plot_history(x$segmenter)
-x <- segment(DataCPSim, method = "random", k = 10)
+x <- segment(DataCPSim, method = "random", num_generations = 10)
 plot_best_chromosome(x$segmenter)
 x <- segment(DataCPSim, method = "random", k = 10)
 plot_cpt_repeated(x$segmenter)

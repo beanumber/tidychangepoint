@@ -92,18 +92,6 @@ nobs.meanshift <- function(object, ...) {
   object$nobs
 }
 
-#' @rdname MBIC
-#' @export
-MBIC.meanshift <- function(object, ...) {
-  MBIC(logLik(object))
-}
-
-#' @rdname MDL
-#' @export
-MDL.meanshift <- function(object, ...) {
-  MDL(logLik(object))
-}
-
 #' @rdname meanshift-generics
 #' @export
 glance.meanshift <- function(x, ...) {

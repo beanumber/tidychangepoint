@@ -14,8 +14,14 @@ exceedances.double <- function(x, threshold = mean(x, na.rm = TRUE), ...) {
 #' @rdname MDL
 #' @return regresa la evaluación de la penalización
 #'  \deqn{
-#'    P_{\theta,\tau} = \sum_{i=1}^{m+1}\dfrac{\ln(\tau_i-\tau_{i-1})}{2}+\ln(m)+\sum_{i=2}^m\ln(\tau_i)
+#'    2 \cdot P(\tau | N) = a \cdot \ln{N}
+#'      + b \cdot \sum_{i=1}^{m+1} \ln{(\tau_i-\tau_{i-1})} 
+#'      + \ln{m} + \sum_{i=2}^m \ln{(\tau_i)}
 #'  }
+#'  where \eqn{a} is the number of parameters estimated using all of the data points,
+#'  and \eqn{b} is the number of parameters estimated in each regime. 
+#'  These quantites should be [base::attributes()] of the object returned by 
+#'  [logLik()].
 #' @inheritParams stats::logLik
 #' @export
 #' @examples

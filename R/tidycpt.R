@@ -36,26 +36,7 @@ length.tidycpt <- function(x, ...) {
 }
 
 #' @rdname tidycpt-generics
-#' @param object A `tidycpt` object
-#' @seealso [stats::logLik()]
-#' @export
-logLik.tidycpt <- function(object, ...) {
-  logLik(object$nhpp)
-}
-
-#' @rdname MBIC
-#' @export
-MBIC.tidycpt <- function(object, ...) {
-  MBIC(object$nhpp)
-}
-
-#' @rdname BMDL
-#' @export
-BMDL.tidycpt <- function(object, ...) {
-  BMDL(object$nhpp)
-}
-
-#' @rdname tidycpt-generics
+#' @inheritParams stats::nobs
 #' @seealso [stats::nobs()]
 #' @export
 nobs.tidycpt <- function(object, ...) {
@@ -211,7 +192,7 @@ file_name <- function(x, data_name_slug = "data") {
       label = paste(
         data_name_slug, 
         algorithm,
-        floor(BMDL(x)),
+        floor(BMDL(x$nhpp)),
         params(x$segmenter) |> cli::hash_obj_md5(),
         sep = "_"
       ),

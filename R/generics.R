@@ -57,11 +57,11 @@ BMDL <- function(object, ...) UseMethod("BMDL")
 #' @export
 #' @examples
 #' x <- segment(DataCPSim, method = "pelt")
-#' BMDL(x)
+#' BMDL(x$nhpp)
 #' y <- segment(DataCPSim, method = "manual", cpts = 826)
-#' BMDL(y)
+#' BMDL(y$nhpp)
 #' z <- segment(DataCPSim, method = "single-best")
-#' BMDL(z)
+#' BMDL(z$nhpp)
 BMDL.default <- function(object, ...) {
   BMDL(logLik(object))
 }

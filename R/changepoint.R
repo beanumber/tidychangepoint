@@ -66,9 +66,9 @@ nobs.cpt <- function(object, ...) {
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "pelt", penalty = "BIC")
-#' logLik(cpts)
+#' logLik(cpts$segmenter)
 #' cpts <- segment(DataCPSim, method = "pelt", penalty = "AIC")
-#' logLik(cpts)
+#' logLik(cpts$segmenter)
 #' 
 logLik.cpt <- function(object, ...) {
 #  message("intercepting...")

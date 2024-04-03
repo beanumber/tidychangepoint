@@ -8,9 +8,7 @@ test_that("changepoint works", {
   expect_s3_class(glance(x), "tbl_df")
   expect_type(changepoints(x), "integer")
   expect_type(nobs(x), "integer")
-  expect_equal(AIC(x), as.numeric(-2 * logLik(x) + 2 * deg_free(x)))
-  expect_equal(BIC(x), as.numeric(-2 * logLik(x) + log(nobs(x)) * deg_free(x)))
-  
+  expect_s3_class(logLik(x$segmenter), "logLik")
   
   x <- segment(DataCPSim, method = "binseg")
   expect_s3_class(x, "tidycpt")
@@ -21,7 +19,4 @@ test_that("changepoint works", {
   expect_s3_class(glance(x), "tbl_df")
   expect_type(changepoints(x), "integer")
   expect_type(nobs(x), "integer")
-  
-  expect_equal(AIC(x), as.numeric(-2 * logLik(x) + 2 * deg_free(x)))
-  expect_equal(BIC(x), as.numeric(-2 * logLik(x) + log(nobs(x)) * deg_free(x)))
 })

@@ -9,6 +9,7 @@
 \alias{logLik.cpt}
 \alias{nobs.seg_default}
 \alias{length.seg_default}
+\alias{best_nhpp}
 \title{Compatibility layer for changepoint}
 \usage{
 \method{glance}{cpt}(x, ...)
@@ -24,6 +25,8 @@
 \method{nobs}{seg_default}(object, ...)
 
 \method{length}{seg_default}(x, ...)
+
+best_nhpp(x, ...)
 }
 \arguments{
 \item{x}{A \code{cpt} object returned by \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}}
@@ -50,8 +53,8 @@ cpts <- segment(DataCPSim, method = "pelt")
 nobs(cpts)
 
 cpts <- segment(DataCPSim, method = "pelt", penalty = "BIC")
-logLik(cpts)
+logLik(cpts$segmenter)
 cpts <- segment(DataCPSim, method = "pelt", penalty = "AIC")
-logLik(cpts)
+logLik(cpts$segmenter)
 
 }

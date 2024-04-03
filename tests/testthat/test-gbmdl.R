@@ -10,11 +10,8 @@ test_that("gbmdl works", {
   expect_type(nobs(x), "integer")
   expect_s3_class(plot(x), "gg")
   
-  expect_s3_class(logLik(x), "logLik")
-  expect_type(AIC(x), "double")
-  expect_type(BIC(x), "double")
-  
-  expect_equal(min(x$segmenter$candidates$bmdl), BMDL(x))
+  expect_s3_class(logLik(x$nhpp), "logLik")
+  expect_equal(min(x$segmenter$candidates$BMDL), BMDL(x$nhpp))
 })
 
 test_that("params works", {

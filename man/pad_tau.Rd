@@ -71,7 +71,7 @@ tau2binary(binary2tau(c(0, 0, 1, 1, 0, 1)), n = 6)
 tau2time(c(42, 81, 330), index = substr(time(CET), 1, 4))
 time2tau(c(1700, 1739, 1988), index = substr(time(CET), 1, 4))
 split_by_tau(DataCPSim, c(365, 826))
-deg_free(segment(DataCPSim))
+deg_free(segment(DataCPSim)$nhpp)
 }
 \seealso{
 \code{\link[stats:time]{stats::time()}}
