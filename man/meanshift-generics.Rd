@@ -17,7 +17,7 @@
 \method{glance}{meanshift}(x, ...)
 }
 \arguments{
-\item{x}{A \code{meanshift} object, typically the output from \code{\link[=fit_meanshift]{fit_meanshift()}}`}
+\item{x}{A \code{meanshift} object, typically the output from \code{\link[=fit_meanshift]{fit_meanshift()}}}
 
 \item{...}{some methods for this generic function require additional
    arguments.}

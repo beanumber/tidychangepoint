@@ -44,7 +44,8 @@ changepoints_labels(x, ...)
 \item{...}{arguments passed to methods}
 }
 \description{
-Extract changepoints
+Not to be confused with \code{\link[wbs:changepoints]{wbs::changepoints()}}, which returns different
+information.
 }
 \examples{
 cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
@@ -56,4 +57,7 @@ changepoints(cpts)
 cpts <- segment(DataCPSim, method = "wbs")
 changepoints(cpts$segmenter)
 
+}
+\seealso{
+\code{\link[wbs:changepoints]{wbs::changepoints()}}
 }

@@ -2,6 +2,11 @@
 #' 
 #' @param x A `tidycpt` object
 #' @param ... arguments passed to methods
+#' @description
+#' Not to be confused with [wbs::changepoints()], which returns different
+#' information. 
+#' 
+#' @seealso [wbs::changepoints()]
 #' @export
 changepoints <- function(x, ...) UseMethod("changepoints")
 

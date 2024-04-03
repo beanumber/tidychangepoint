@@ -50,4 +50,3 @@ as.ts.xts <- xts:::as.ts.xts
 #' @export
 #' @importFrom zoo index
 zoo::index
-

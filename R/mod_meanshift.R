@@ -60,7 +60,7 @@ fit_meanshift_ar1 <- function(x, tau, ...) {
 
 #' Methods for meanshift objects
 #' @name meanshift-generics
-#' @param x A `meanshift` object, typically the output from [fit_meanshift()]`
+#' @param x A `meanshift` object, typically the output from [fit_meanshift()]
 #' @export
 #' @examples
 #' cpts <- fit_meanshift(DataCPSim, tau = 365)
