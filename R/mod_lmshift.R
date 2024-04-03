@@ -101,18 +101,6 @@ logLik.lmshift <- function(object, ...) {
   return(out)
 }
 
-#' @rdname MBIC
-#' @export
-MBIC.lmshift <- function(object, ...) {
-  MBIC(logLik(object))
-}
-
-#' @rdname MDL
-#' @export
-MDL.lmshift <- function(object, ...) {
-  MDL(logLik(object))
-}
-
 #' @rdname lmshift-generics
 #' @export
 glance.lmshift <- function(x, ...) {

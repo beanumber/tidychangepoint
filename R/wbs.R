@@ -58,16 +58,6 @@ nobs.wbs <- function(object, ...) {
   length(as.ts(object))
 }
 
-#' @rdname wbs-generics
-#' @export
-#' @examples
-#' cpts <- segment(DataCPSim, method = "wbs")
-#' logLik(cpts)
-#' 
-logLik.wbs <- function(object, ...) {
-  NA
-}
-
 #' @rdname changepoints
 #' @export
 #' @examples

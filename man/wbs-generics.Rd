@@ -6,7 +6,6 @@
 \alias{params.wbs}
 \alias{as.ts.wbs}
 \alias{nobs.wbs}
-\alias{logLik.wbs}
 \title{Compatibility layer for wbs}
 \usage{
 \method{glance}{wbs}(x, ...)
@@ -16,8 +15,6 @@
 \method{as.ts}{wbs}(x, ...)
 
 \method{nobs}{wbs}(object, ...)
-
-\method{logLik}{wbs}(object, ...)
 }
 \arguments{
 \item{x}{A \code{wbs} object returned by \code{\link[wbs:wbs]{wbs::wbs()}}}
@@ -42,8 +39,5 @@ as.ts(cpts)
 
 cpts <- segment(DataCPSim, method = "wbs")
 nobs(cpts)
-
-cpts <- segment(DataCPSim, method = "wbs")
-logLik(cpts)
 
 }

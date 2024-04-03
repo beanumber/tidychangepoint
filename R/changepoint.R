@@ -83,18 +83,6 @@ logLik.cpt <- function(object, ...) {
   return(ll)
 }
 
-#' @rdname MBIC
-#' @export
-MBIC.cpt <- function(object, ...) {
-  MBIC(logLik(object))
-}
-
-#' @rdname MDL
-#' @export
-MDL.cpt <- function(object, ...) {
-  MDL(logLik(object))
-}
-
 #' @rdname changepoints
 #' @export
 #' @examples
