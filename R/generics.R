@@ -62,9 +62,6 @@ BMDL <- function(object, ...) UseMethod("BMDL")
 #' BMDL(y)
 #' z <- segment(DataCPSim, method = "single-best")
 #' BMDL(z)
-
-#' @rdname BMDL
-#' @export
 BMDL.default <- function(object, ...) {
   BMDL(logLik(object))
 }
