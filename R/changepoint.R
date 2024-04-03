@@ -78,6 +78,7 @@ logLik.cpt <- function(object, ...) {
   attr(ll, "df") <- length(object@cpts)
   attr(ll, "nobs") <- nobs(object)
   attr(ll, "tau") <- changepoints(object)
+  attr(ll, "real_params_estimated") <- (length(changepoints(object)) + 1) * 2
   class(ll) <- "logLik"
   return(ll)
 }

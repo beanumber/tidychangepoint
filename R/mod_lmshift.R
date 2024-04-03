@@ -94,9 +94,9 @@ as.ts.lmshift <- function(x, ...) {
 logLik.lmshift <- function(object, ...) {
   out <- NextMethod()
   m <- length(object$tau)
-  params_estimated <- object$rank
+  attr(out, "real_params_estimated") <- object$rank
+  attr(out, "df") <- m + object$rank + 1 + (object$ar1)
   attr(out, "tau") <- object$tau
-  attr(out, "df") <- m + params_estimated + 1 + (object$ar1)
   attr(out, "ar1") <- object$ar1
   return(out)
 }

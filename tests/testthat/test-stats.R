@@ -35,9 +35,28 @@ test_that("lmshift works", {
   expect_equal(round(as.numeric(logLik(trend_wn)), 2), -290.02)
   expect_equal(round(BIC(logLik(trend_wn)), 2), 650.74)
   expect_equal(round(MDL(logLik(trend_wn)), 2), 653.07)
+  MDL(logLik(trend_wn)) + 2 * log(nobs(trend_wn))
   
   trend_ar1 <- fit_lmshift(CET, tau = ids, trends = TRUE, ar1 = TRUE)
   expect_equal(round(as.numeric(logLik(trend_ar1)), 2), -288.80)
   expect_equal(round(BIC(trend_ar1), 2), 654.19)
   expect_equal(MDL(logLik(trend_ar1)), 656.52)
+  expect_equal(round(trend_ar1$phi_hat, 3), 0.058)
+  
+  # truncated series
+  CET_trunc <- CET['1772-01-01/'] 
+  tau <- time2tau(1987, substr(time(CET_trunc), 1, 4))
+  
+  trend_wn_trunc <- fit_lmshift(CET_trunc, tau = tau, trends = TRUE)
+  trend_wn_trunc$sigma_hatsq
+  logLik(trend_wn_trunc)
+  BIC(trend_wn_trunc)
+  MDL(trend_wn_trunc) + 2 * log(nobs(trend_wn_trunc))
+  
+  trend_ar1_trunc <- fit_lmshift(CET_trunc, tau = tau, trends = TRUE, ar1 = TRUE)
+  expect_equal(round(trend_ar1_trunc$sigma_hatsq, 3), 0.305)
+  expect_equal(round(trend_ar1_trunc$phi_hat, 3), 0.073)
+  logLik(trend_ar1_trunc)
+  BIC(trend_ar1_trunc)
+  MDL(trend_ar1_trunc) + 2 * log(nobs(trend_ar1_trunc))
 })

@@ -35,15 +35,14 @@ MDL.logLik <- function(object, ...) {
     } else {
       ar1 <- FALSE
     }
-    num_params_per_region <- floor((deg_free(object) - ar1) / (m + 1))
+    num_params_per_region <- attr(object, "real_params_estimated") / (m + 1)
+    num_params_using_all_data <- 1 + ar1
     
-    fudge_N <- 3 + ar1
-    fudge_tau <- num_params_per_region - 1
-    
-    penalty <- fudge_tau * sum(log(diff(padded_tau))) + 
+    # actually twice the penalty!
+    penalty <- num_params_per_region * sum(log(diff(padded_tau))) + 
       2 * log(m) + 
       2 * sum(log(utils::tail(tau, -1))) +
-      fudge_N * log(N)
+      num_params_using_all_data * log(N)
   }
   
   penalty - 2 * object |>

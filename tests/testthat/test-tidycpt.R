@@ -101,8 +101,8 @@ test_that("penalties work", {
     purrr::map_dbl(BMDL)
 
   tau <- chromo2tau(mat_cp[1,])
-  b <- fit_nhpp(DataCPSim, chromo2tau(mat_cp[1,])) |>
-    BMDL()
+  b <- fit_nhpp(DataCPSim, chromo2tau(mat_cp[1,]))
+  expect_lt(MDL(b), BMDL(b))
   
   # log-posterior
   fit_nhpp(DataCPSim, tau)

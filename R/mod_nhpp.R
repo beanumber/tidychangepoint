@@ -131,9 +131,11 @@ nobs.nhpp <- function(object, ...) {
 #' @export
 logLik.nhpp <- function(object, ...) {
   ll <- sum(object$logLik)
-  attr(ll, "df") <- 2 * (length(changepoints(object)) + 1) + 1
+  m <- length(changepoints(object))
+  attr(ll, "df") <- 2 * (m + 1) + 1
   attr(ll, "nobs") <- nobs(object)
   attr(ll, "tau") <- changepoints(object)
+  attr(ll, "real_params_estimated") <- (m + 1) * 2
   class(ll) <- "logLik"
   return(ll)
 }
