@@ -1,5 +1,5 @@
 test_that("gbmdl works", {
-  x <- segment(DataCPSim, method = "gbmdl", num_generations = 3)
+  x <- segment(DataCPSim, method = "taimal", num_generations = 3)
   expect_s3_class(x, "tidycpt")
   expect_s3_class(x$segmenter, "cpt_gbmdl")
   expect_s3_class(as.ts(x), "ts")
@@ -16,7 +16,7 @@ test_that("gbmdl works", {
 
 test_that("params works", {
   # Validador de la dimensiones de cosas de distribucion a priori
-  x <- segment(DataCPSim, method = "gbmdl", num_generations = 2)
+  x <- segment(DataCPSim, method = "taimal", num_generations = 2)
   if (x$segmenter$params$nhpp_dist %in% c("W", "MO", "GO")) {
     dim_a_priori <- 2
   } else {

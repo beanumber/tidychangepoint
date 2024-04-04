@@ -50,12 +50,12 @@ globalVariables(
 #' @export
 #' @examples
 #' \dontrun{
-#' x <- segment_gbmdl(DataCPSim, num_generations = 10)
-#' y <- segment_gbmdl(rlnorm_ts_1)
-#' z <- segment_gbmdl(as.ts(bogota_pm))
+#' x <- segment_taimal(DataCPSim, num_generations = 10)
+#' y <- segment_taimal(rlnorm_ts_1)
+#' z <- segment_taimal(as.ts(bogota_pm))
 #' }
 #' 
-segment_gbmdl <- function(x, 
+segment_taimal <- function(x, 
                           num_generations = 50, 
                           nhpp_dist = c("W","EW","GGO","MO","GO")[1], # función de tasa de NHPP
                           vec_dist_a_priori = c("Gamma", "Gamma"), # distribuciones a priori

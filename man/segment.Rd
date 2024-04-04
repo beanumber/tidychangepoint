@@ -57,8 +57,8 @@ on the value of the \code{method} argument:
 \code{\link[wbs:wbs]{wbs::wbs()}}. The \code{segmenter} is of class \code{wbs}.
 \item \code{ga}: Uses the Genetic algorithm implemented by
 \code{\link[GA:ga]{GA::ga()}}. The \code{segmenter} is of class \code{tidyga}.
-\item \code{gbmdl}: Uses the Genetic BMDL heuristic as implemented by
-\code{\link[=segment_gbmdl]{segment_gbmdl()}}. The \code{segmenter} is of class \code{\link[=seg_default]{seg_default()}}.
+\item \code{taimal}: Uses the Genetic BMDL heuristic as implemented by
+\code{\link[=segment_taimal]{segment_taimal()}}. The \code{segmenter} is of class \code{\link[=seg_default]{seg_default()}}.
 \item \code{manual}: Uses the vector of changepoints in the \code{cpts} argument.
 The \code{segmenter} is of class \code{\link[=seg_default]{seg_default()}}`.
 \item \code{null}: The default. Uses no changepoints.

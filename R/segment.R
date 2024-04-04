@@ -71,8 +71,8 @@ segment.numeric <- function(x, method = "null", ...) {
 #'   [wbs::wbs()]. The `segmenter` is of class `wbs`.
 #' - `ga`: Uses the Genetic algorithm implemented by 
 #'   [GA::ga()]. The `segmenter` is of class `tidyga`.
-#' - `gbmdl`: Uses the Genetic BMDL heuristic as implemented by 
-#'   [segment_gbmdl()]. The `segmenter` is of class [seg_default()].
+#' - `taimal`: Uses the Genetic BMDL heuristic as implemented by 
+#'   [segment_taimal()]. The `segmenter` is of class [seg_default()].
 #' - `manual`: Uses the vector of changepoints in the `cpts` argument. 
 #'   The `segmenter` is of class [seg_default()]`.
 #' - `null`: The default. Uses no changepoints. 
@@ -120,11 +120,11 @@ segment.ts <- function(x, method = "null", ...) {
   if (method == "ga-shi") {
     mod <- segment_ga_shi(x, ...)
   }
-  if (method == "ga-gbmdl") {
-    mod <- segment_ga_gbmdl(x, ...)
+  if (method == "ga-taimal") {
+    mod <- segment_ga_taimal(x, ...)
   }
-  if (method == "gbmdl") {
-    mod <- segment_gbmdl(x, ...)
+  if (method == "taimal") {
+    mod <- segment_taimal(x, ...)
   }
   if (method == "random") {
     mod <- segment_random(x, ...)

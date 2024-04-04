@@ -123,10 +123,15 @@ compare_algorithms <- function(x, ...) {
 }
 
 #' @rdname tidycpt-generics
+#' @param use_time_index Should the x-axis labels be the time indices? Or the 
+#' time labels? 
 #' @export
-plot.tidycpt <- function(x, ...) {
+#' @examples
+#' plot(segment(CET, method = "pelt"))
+#' plot(segment(CET, method = "pelt"), use_time_index = TRUE)
+plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
   regions <- tidy(x)
-  ggplot2::ggplot(
+  g <- ggplot2::ggplot(
     data = augment(x), 
     ggplot2::aes(x = index, y = y)
   ) +
@@ -156,12 +161,27 @@ plot.tidycpt <- function(x, ...) {
       color = "red",
       linetype = 3
     ) + 
-    ggplot2::scale_x_continuous("Time Index (t)") +
     ggplot2::scale_y_continuous("Original Measurement") + 
     ggplot2::labs(
       title = "Original times series",
       subtitle = paste("Mean value is", round(mean(as.ts(x), na.rm = TRUE), 2))
     )
+  if (use_time_index) {
+    my_labels <- function(t) {
+      n <- length(t)
+      indices <- 1:length(x)
+      good <- t %in% indices
+      out <- x$time_index[ifelse(good, t, NA)] |>
+        as.character()
+      replace(out, is.na(out), "")
+    }
+    
+    g +
+      ggplot2::scale_x_continuous("Time", labels = my_labels)
+  } else {
+    g +
+      ggplot2::scale_x_continuous("Time Index (t)")
+  }
 }
 
 #' @rdname diagnose

@@ -3,7 +3,7 @@
 \name{segment_ga}
 \alias{segment_ga}
 \alias{segment_ga_shi}
-\alias{segment_ga_gbmdl}
+\alias{segment_ga_taimal}
 \title{Segment a time series using a genetic algorithm}
 \usage{
 segment_ga(
@@ -16,7 +16,7 @@ segment_ga(
 
 segment_ga_shi(x, ...)
 
-segment_ga_gbmdl(x, ...)
+segment_ga_taimal(x, ...)
 }
 \arguments{
 \item{x}{A time series}
@@ -35,6 +35,14 @@ segment_ga_gbmdl(x, ...)
 \description{
 Segment a time series using a genetic algorithm
 }
+\details{
+Shi's algorithm is the algorithm used in \doi{10.1175/JCLI-D-21-0489.1}.
+Note that in order to achieve the reported results you have to run the algorithm
+for a really long time. Pass the values \code{maxiter} = 50000 and \code{run} = 10000
+to \code{\link[GA:ga]{GA::ga()}} using the dots.
+
+Taimal's algorithm is the one used in \doi{10.1007/978-3-031-47372-2_20}.
+}
 \examples{
 \dontrun{
 res <- segment_ga(DataCPSim, maxiter = 10)
@@ -51,4 +59,22 @@ changepoints(y)
 z <- segment(CET, method = "ga-gbmdl", maxiter = 10, model_params = list(threshold = 2))
 changepoints(z)
 }
+\dontrun{
+# This will take a really long time!
+x <- segment(CET, method = "ga-shi", maxiter = 500, run = 100)
+changepoints(x)
+
+y <- segment(CET, method = "ga", model_fn = fit_lmshift, penalty_fn = BIC, 
+  popSize = 200, maxiter = 5000, run = 1000, model_params = list(trends = TRUE), 
+  population = build_gabin_population(CET))
+
+}
+
+\dontrun{
+x <- segment(method = "ga-taimal", maxiter = 50)
+}
+
+}
+\references{
+\doi{10.1175/JCLI-D-21-0489.1}
 }

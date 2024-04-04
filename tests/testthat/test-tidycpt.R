@@ -116,7 +116,7 @@ test_that("penalties work", {
 
 test_that("performance comparison works", {
   x <- segment(DataCPSim, method = "pelt")
-  y <- segment(DataCPSim, method = "gbmdl", num_generations = 20)
+  y <- segment(DataCPSim, method = "taimal", num_generations = 20)
   z <- segment(DataCPSim, method = "random", num_generations = 20)
   expect_gt(BMDL(x$nhpp), BMDL(y$nhpp))
   expect_gt(BMDL(z$nhpp), BMDL(y$nhpp))
