@@ -7,9 +7,13 @@
 
 ## Usage
 
+To install `tidychangepoint`:
+
 ``` r
 remotes::install_github("beanumber/tidychangepoint")
 ```
+
+To load it:
 
 ``` r
 library(tidychangepoint)
@@ -25,46 +29,50 @@ plot(as.ts(DataCPSim))
 
 ![](README_files/figure-gfm/rlnorm-plot-1.png)<!-- -->
 
-`tidychangepoint` allows you to use any number of algorithms for
-detecting changepoints in univariate time series with a common,
-`tidyverse`-compliant interface. The `segment()` function takes a
-numeric vector that is coercible into a `ts` object, and a string
-indicating the algorithm you wish you use. `segment()` always returns a
-`tidycpt` object.
+The `tidychangepoint` package allows you to use any number of algorithms
+for detecting changepoint sets in univariate time series with a common,
+`tidyverse`-compliant interface. It also provides model-fitting
+procedures for commonly-used parametric models, tools for computing
+various penalty functions, and graphical diagnostic displays.
+
+Changepoint sets are computed using the `segment()` function, which
+takes a numeric vector that is coercible into a `ts` object, and a
+string indicating the algorithm you wish you use. `segment()` always
+returns a `tidycpt` object.
 
 ``` r
-cpts <- segment(DataCPSim, method = "pelt")
+x <- segment(DataCPSim, method = "pelt")
 ```
 
     ## method: pelt
 
 ``` r
-class(cpts)
+class(x)
 ```
 
     ## [1] "tidycpt"
 
 Various methods are available for `tidycpt` objects. For example,
 `as.ts()` returns the original data as `ts` object, and `changepoints()`
-returns the set of changepoints.
+returns the set of changepoint indices.
 
 ``` r
-changepoints(cpts)
+changepoints(x)
 ```
 
     ## [1] 547 822 972
 
-### `broom` Interface
+### Retrieving information using the `broom` interface
 
 `tidychangepoint` follows the design interface of the `broom` package.
 Therefore, `augment()`, `tidy()` and `glance()` methods exists for
 `tidycpt` objects.
 
 - `augment()` returns a `tsibble` that is grouped according to the
-  regions defined by the changepoints.
+  regions defined by the changepoint set.
 
 ``` r
-augment(cpts)
+augment(x)
 ```
 
     ## # A tsibble: 1,096 x 3 [1]
@@ -84,10 +92,10 @@ augment(cpts)
     ## # ℹ 1,086 more rows
 
 - `tidy()` returns a `tbl` that provides summary statistics for each
-  region
+  region.
 
 ``` r
-tidy(cpts)
+tidy(x)
 ```
 
     ## # A tibble: 4 × 13
@@ -100,24 +108,26 @@ tidy(cpts)
     ## # ℹ 3 more variables: logLik <dbl>, alpha <dbl>, beta <dbl>
 
 - `glance()` returns a `tbl` that provides summary statistics for the
-  model fit.
+  algorithm.
 
 ``` r
-glance(cpts)
+glance(x)
 ```
 
     ## # A tibble: 1 × 11
     ##   pkg     version algorithm params       num_cpts logLik   AIC   BIC  MBIC   MDL
     ##   <chr>   <pckg_> <chr>     <list>          <int>  <dbl> <dbl> <dbl> <dbl> <dbl>
-    ## 1 change… 2.2.4   PELT      <named list>        3 -4688. 9383. 9403. 9375. 9375.
+    ## 1 change… 2.2.4   PELT      <named list>        3 -4688. 9383. 9403. 9432. 9455.
     ## # ℹ 1 more variable: elapsed_time <drtn>
 
 ### Other methods
 
-The `plot()` method leverages `ggplot2` to provide an informative plot.
+The `plot()` method leverages `ggplot2` to provide an informative plot,
+with the regions defined by the changepoint set clearly demarcated, and
+the means within each region also indicated.
 
 ``` r
-plot(cpts)
+plot(x)
 ```
 
 ![](README_files/figure-gfm/pelt-plot-1.png)<!-- -->
@@ -127,30 +137,91 @@ the exceedances of the time series, as well as how that distribution is
 modeled as a non-homogeneous Poisson process.
 
 ``` r
-diagnose(cpts)
+diagnose(x)
 ```
 
 ![](README_files/figure-gfm/diagnose-1.png)<!-- -->
 
 ## Algorithms
 
-### From `changepoint`
+### Fast algorithms rom existing packages
 
-The `segment()` function passes argument to the `cpt.meanvar()` function
-from the `changepoint` package, and stores the resulting `cpt` object as
-its `segmenter` object.
+- The `segment()` function passes arguments to the `cpt.meanvar()`
+  function from the `changepoint` package, and stores the resulting
+  `cpt` object as its `segmenter` object.
 
 ``` r
-x <- changepoint::cpt.meanvar(DataCPSim, method = "PELT")
-identical(x, cpts$segmenter)
+y <- changepoint::cpt.meanvar(DataCPSim, method = "PELT")
+identical(y, x$segmenter)
 ```
 
     ## [1] TRUE
 
-### Naive methods
+The binary segmentation (`method = "binseg"`) and segmented neighborhood
+(`method = "binseg"`) algorithms, as implemented by the `changepoint`
+package, are also available.
 
-`segment()` includes three options for computing changepoints using
-naive methods, all of which return `lm` objects:
+- Wild binary segmentation via the `wbs` package is available via
+  `method = "wbs"`.
+
+### Genetic algorithms
+
+- `method = "ga-shi"`: implements a genetic algorithm as specified by
+  Shi and Lund, using the `GA` package. \[Note that this algorithm
+  performs very poorly unless `maxiter` is set much, much higher.\]
+
+``` r
+x <- DataCPSim |>
+  segment(method = "ga-shi", maxiter = 5)
+```
+
+    ## method: ga-shi
+
+``` r
+length(changepoints(x))
+```
+
+    ## [1] 508
+
+``` r
+diagnose(x)
+```
+
+    ## Warning: Removed 227 rows containing missing values or values outside the scale range
+    ## (`geom_segment()`).
+    ## Removed 227 rows containing missing values or values outside the scale range
+    ## (`geom_segment()`).
+
+![](README_files/figure-gfm/shi-1.png)<!-- -->
+
+- `method = "gbmdl"`: implements the Genetic BMDL heuristic as per
+  Taimal and Sierra-Suarez.
+
+``` r
+x <- DataCPSim |>
+  segment(method = "gbmdl", num_generations = 5)
+```
+
+    ## method: gbmdl
+
+    ##   |                                                                    |                                                            |   0%  |                                                                    |===============                                             |  25%  |                                                                    |==============================                              |  50%  |                                                                    |=============================================               |  75%  |                                                                    |============================================================| 100%
+
+``` r
+changepoints(x)
+```
+
+    ## [1] 575 884
+
+``` r
+diagnose(x)
+```
+
+![](README_files/figure-gfm/gbmdl-tidyplot-1.png)<!-- -->
+
+### Näive methods
+
+`segment()` includes three options for computing changepoint sets using
+näive methods.
 
 - `method = "null"`: returns null model with no changepoints
 
@@ -177,20 +248,8 @@ DataCPSim |>
 
 ![](README_files/figure-gfm/manual-plot-1.png)<!-- -->
 
-- `method = "single-best"`: returns the model with at most one
-  changepoint that minimizes the log-likelihood
-
-``` r
-DataCPSim |>
-  segment(method = "single-best") |>
-  diagnose()
-```
-
-    ## method: single-best
-
-![](README_files/figure-gfm/amoc-plot-1.png)<!-- -->
-
 - `method = "random"`: returns the best model from a random collection
+  of changepoint sets.
 
 ``` r
 DataCPSim |>
@@ -201,73 +260,6 @@ DataCPSim |>
     ## method: random
 
 ![](README_files/figure-gfm/random-plot-1.png)<!-- -->
-
-### Genetic BMDL
-
-- `method = "gbmdl"`: implements the Genetic BMDL heuristic
-
-``` r
-x <- DataCPSim |>
-  segment(method = "gbmdl", num_generations = 5)
-```
-
-    ## method: gbmdl
-
-    ##   |                                                                    |                                                            |   0%  |                                                                    |===============                                             |  25%  |                                                                    |==============================                              |  50%  |                                                                    |=============================================               |  75%  |                                                                    |============================================================| 100%
-
-``` r
-changepoints(x)
-```
-
-    ## [1] 488 581 810 834
-
-``` r
-diagnose(x)
-```
-
-![](README_files/figure-gfm/gbmdl-tidyplot-1.png)<!-- -->
-
-Diagnostic plots are also available.
-
-``` r
-plot(x$segmenter)
-```
-
-    ## method: null
-
-    ## method: single-best
-
-    ## method: pelt
-
-    ## `geom_smooth()` using method = 'loess' and formula = 'y ~ x'
-
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric,
-    ## : span too small.  fewer data values than degrees of freedom.
-
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric,
-    ## : pseudoinverse used at 0.98
-
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric,
-    ## : neighborhood radius 2.02
-
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric,
-    ## : reciprocal condition number 0
-
-    ## Warning in simpleLoess(y, x, w, span, degree = degree, parametric = parametric,
-    ## : There are other near singularities as well. 4.0804
-
-![](README_files/figure-gfm/plot-gbmdl-1.png)<!-- -->
-
-``` r
-diagnose(x$segmenter)
-```
-
-    ## `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.
-
-    ## Warning: Removed 2 rows containing missing values or values outside the scale range
-    ## (`geom_bar()`).
-
-![](README_files/figure-gfm/diagnostic-1.png)<!-- -->
 
 ## Citation
 

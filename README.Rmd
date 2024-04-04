@@ -10,9 +10,13 @@ output: github_document
 
 ## Usage
 
+To install `tidychangepoint`:
+
 ```{r, eval=FALSE}
 remotes::install_github("beanumber/tidychangepoint")
 ```
+
+To load it:
 
 ```{r, message=FALSE}
 library(tidychangepoint)
@@ -26,75 +30,101 @@ Consider the following time series:
 plot(as.ts(DataCPSim))
 ```
 
-`tidychangepoint` allows you to use any number of algorithms for detecting changepoints in univariate time series with a common, `tidyverse`-compliant interface. 
-The `segment()` function takes a numeric vector that is coercible into a `ts` object, and a string indicating the algorithm you wish you use. 
+The `tidychangepoint` package allows you to use any number of algorithms for detecting changepoint sets in univariate time series with a common, `tidyverse`-compliant interface. 
+It also provides model-fitting procedures for commonly-used parametric models, tools for computing various penalty functions, and graphical diagnostic displays. 
+
+Changepoint sets are computed using the `segment()` function, which takes a numeric vector that is coercible into a `ts` object, and a string indicating the algorithm you wish you use. 
 `segment()` always returns a `tidycpt` object. 
 
 ```{r}
-cpts <- segment(DataCPSim, method = "pelt")
-class(cpts)
+x <- segment(DataCPSim, method = "pelt")
+class(x)
 ```
 
 Various methods are available for `tidycpt` objects. 
-For example, `as.ts()` returns the original data as `ts` object, and `changepoints()` returns the set of changepoints. 
+For example, `as.ts()` returns the original data as `ts` object, and `changepoints()` returns the set of changepoint indices. 
 
 ```{r}
-changepoints(cpts)
+changepoints(x)
 ```
 
-### `broom` Interface
+### Retrieving information using the `broom` interface
 
 `tidychangepoint` follows the design interface of the `broom` package. 
 Therefore, `augment()`, `tidy()` and `glance()` methods exists for `tidycpt` objects. 
 
-- `augment()` returns a `tsibble` that is grouped according to the regions defined by the changepoints. 
+- `augment()` returns a `tsibble` that is grouped according to the regions defined by the changepoint set. 
 
 ```{r}
-augment(cpts)
+augment(x)
 ```
 
-- `tidy()` returns a `tbl` that provides summary statistics for each region
+- `tidy()` returns a `tbl` that provides summary statistics for each region.
 
 ```{r}
-tidy(cpts)
+tidy(x)
 ```
 
-- `glance()` returns a `tbl` that provides summary statistics for the model fit. 
+- `glance()` returns a `tbl` that provides summary statistics for the algorithm. 
 
 ```{r}
-glance(cpts)
+glance(x)
 ```
 
 ### Other methods
 
-The `plot()` method leverages `ggplot2` to provide an informative plot. 
+The `plot()` method leverages `ggplot2` to provide an informative plot, with the regions defined by the changepoint set clearly demarcated, and the means within each region also indicated. 
 
 ```{r pelt-plot}
-plot(cpts)
+plot(x)
 ```
 
 The `diagnose()` function shows the empirical cumulative distribution of the exceedances of the time series, as well as how that distribution is modeled as a non-homogeneous Poisson process. 
 
 ```{r diagnose}
-diagnose(cpts)
+diagnose(x)
 ```
 
 
 
 ## Algorithms
 
-### From `changepoint`
+### Fast algorithms rom existing packages
 
-The `segment()` function passes argument to the `cpt.meanvar()` function from the `changepoint` package, and stores the resulting `cpt` object as its `segmenter` object. 
+- The `segment()` function passes arguments to the `cpt.meanvar()` function from the `changepoint` package, and stores the resulting `cpt` object as its `segmenter` object. 
 
 ```{r changepoint, message=FALSE}
-x <- changepoint::cpt.meanvar(DataCPSim, method = "PELT")
-identical(x, cpts$segmenter)
+y <- changepoint::cpt.meanvar(DataCPSim, method = "PELT")
+identical(y, x$segmenter)
 ```
 
-### Naive methods
+The binary segmentation (`method = "binseg"`) and segmented neighborhood (`method = "binseg"`) algorithms, as implemented by the `changepoint` package, are also available. 
 
-`segment()` includes three options for computing changepoints using naive methods, all of which return `lm` objects:
+- Wild binary segmentation via the `wbs` package is available via `method = "wbs"`. 
+
+### Genetic algorithms
+
+- `method = "ga-shi"`: implements a genetic algorithm as specified by Shi and Lund, using the `GA` package. [Note that this algorithm performs very poorly unless `maxiter` is set much, much higher.]
+
+```{r shi}
+x <- DataCPSim |>
+  segment(method = "ga-shi", maxiter = 5)
+length(changepoints(x))
+diagnose(x)
+```
+
+- `method = "gbmdl"`: implements the Genetic BMDL heuristic as per Taimal and Sierra-Suarez. 
+
+```{r gbmdl-tidyplot}
+x <- DataCPSim |>
+  segment(method = "gbmdl", num_generations = 5)
+changepoints(x)
+diagnose(x)
+```
+
+### Näive methods
+
+`segment()` includes three options for computing changepoint sets using näive methods.
 
 - `method = "null"`: returns null model with no changepoints
 
@@ -112,41 +142,12 @@ DataCPSim |>
   diagnose()
 ```
 
-- `method = "single-best"`: returns the model with at most one changepoint that minimizes the log-likelihood
-
-```{r amoc-plot}
-DataCPSim |>
-  segment(method = "single-best") |>
-  diagnose()
-```
-
-- `method = "random"`: returns the best model from a random collection
+- `method = "random"`: returns the best model from a random collection of changepoint sets.
 
 ```{r random-plot}
 DataCPSim |>
   segment(method = "random", num_generations = 20) |>
   diagnose()
-```
-
-### Genetic BMDL
-
-- `method = "gbmdl"`: implements the Genetic BMDL heuristic
-
-```{r gbmdl-tidyplot}
-x <- DataCPSim |>
-  segment(method = "gbmdl", num_generations = 5)
-changepoints(x)
-diagnose(x)
-```
-
-Diagnostic plots are also available. 
-
-```{r plot-gbmdl}
-plot(x$segmenter)
-```
-
-```{r diagnostic}
-diagnose(x$segmenter)
 ```
 
 
