@@ -102,7 +102,7 @@ build_gabin_population <- function(x, ...) {
 #' fitness(x)
 #' 
 fitness.ga <- function(object, ...) {
-  out <- object@fitnessValue
+  out <- -object@fitnessValue
   names(out) <- object@model_params$penalty_fn
   out
 }
