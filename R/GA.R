@@ -19,6 +19,7 @@ glance.ga <- function(x, ...) {
     algorithm = "Genetic",
     params = list(params(x)),
     num_cpts = length(changepoints(x)),
+    criteria = names(fitness(x)),
     fitness = fitness(x)
   )
 }

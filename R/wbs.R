@@ -19,6 +19,7 @@ glance.wbs <- function(x, ...) {
     algorithm = "Wild Binary Segmentation",
     params = list(params(x)),
     num_cpts = length(changepoints(x)),
+    criteria = names(fitness(x)),
     fitness = fitness(x),
     sigma = x$cpt$sigma,
 #    BIC = min(x$cpt$ic.curve$bic.penalty),

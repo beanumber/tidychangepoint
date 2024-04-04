@@ -100,11 +100,15 @@ changepoints.seg_default <- function(x, ...) {
 #' @rdname fitness
 #' @export
 fitness.seg_default <- function(object, ...) {
-  object$candidates |>
+  if (nrow(object$candidates) == 0) {
+    return(c("BMDL" = NA))
+  }
+  out <- object$candidates |>
     dplyr::arrange(BMDL) |>
     utils::head(1) |>
-    dplyr::pull(BMDL) |>
-    purrr::pluck(1)
+    dplyr::pull(BMDL)
+  names(out) <- "BMDL"
+  out
 }
 
 #' @rdname new_seg_default
@@ -163,6 +167,7 @@ glance.seg_default <- function(x, ...) {
     algorithm = x$algorithm,
     params = list(x$params),
     num_cpts = length(changepoints(x)),
+    criteria = names(fitness(x)),
     fitness = fitness(x)
   )
 }
