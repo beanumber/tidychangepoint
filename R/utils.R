@@ -58,7 +58,7 @@ tau2binary <- function(tau, n) {
 #' @seealso [stats::time()]
 #' @export
 #' @examples
-#' tau2time(c(42, 81, 330), index = substr(time(CET), 1, 4))
+#' tau2time(c(42, 81, 330), index = as_year(time(CET)))
 tau2time <- function(tau, index) {
   index[tau]
 }
@@ -67,7 +67,7 @@ tau2time <- function(tau, index) {
 #' @param cpts Time series observation labels to be converted to indices
 #' @export
 #' @examples
-#' time2tau(c(1700, 1739, 1988), index = substr(time(CET), 1, 4))
+#' time2tau(c(1700, 1739, 1988), index = as_year(time(CET)))
 time2tau <- function(cpts, index) {
   match(cpts, index)
 }
@@ -123,6 +123,18 @@ split_by_tau <- function(x, tau) {
 deg_free <- function(x) {
   attr(logLik(x), "df")
 }
+
+#' @rdname pad_tau
+#' @export
+#' @examples
+#' as_year("1988-01-01")
+
+as_year <- function(x) {
+  x |> 
+    as.Date() |>
+    format("%Y")
+}
+
 
 #' Vectors implementation for logLik
 #' 

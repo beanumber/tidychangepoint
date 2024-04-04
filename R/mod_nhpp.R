@@ -287,6 +287,8 @@ plot.nhpp <- function(x, ...) {
 #' @export
 #' @examples
 #' plot_intensity(fit_nhpp(DataCPSim, tau = 826))
+#' mod <- segment(bogota_pm, method = "pelt")
+#' plot_intensity(mod$nhpp)
 
 plot_intensity <- function(x, ...) {
   z <- x |>

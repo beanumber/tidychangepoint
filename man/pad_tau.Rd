@@ -12,6 +12,7 @@
 \alias{test_set}
 \alias{split_by_tau}
 \alias{deg_free}
+\alias{as_year}
 \title{Utility functions}
 \usage{
 pad_tau(tau, n)
@@ -35,6 +36,8 @@ test_set(n = 1, sd = 1, seed = NULL)
 split_by_tau(x, tau)
 
 deg_free(x)
+
+as_year(x)
 }
 \arguments{
 \item{tau}{a numeric vector of changepoints}
@@ -68,10 +71,11 @@ binary2tau(round(runif(10)))
 
 tau2binary(c(7, 17), n = 24)
 tau2binary(binary2tau(c(0, 0, 1, 1, 0, 1)), n = 6)
-tau2time(c(42, 81, 330), index = substr(time(CET), 1, 4))
-time2tau(c(1700, 1739, 1988), index = substr(time(CET), 1, 4))
+tau2time(c(42, 81, 330), index = as_year(time(CET)))
+time2tau(c(1700, 1739, 1988), index = as_year(time(CET)))
 split_by_tau(DataCPSim, c(365, 826))
 deg_free(segment(DataCPSim)$nhpp)
+as_year("1988-01-01")
 }
 \seealso{
 \code{\link[stats:time]{stats::time()}}

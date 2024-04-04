@@ -23,7 +23,7 @@
 
 \method{glance}{tidycpt}(x, ...)
 
-\method{plot}{tidycpt}(x, ...)
+\method{plot}{tidycpt}(x, use_time_index = FALSE, ...)
 }
 \arguments{
 \item{x}{An \code{tidycpt} object, typically the output from \code{\link[=segment]{segment()}}`}
@@ -31,9 +31,16 @@
 \item{...}{arguments passed to methods}
 
 \item{object}{A fitted model object.}
+
+\item{use_time_index}{Should the x-axis labels be the time indices? Or the
+time labels?}
 }
 \description{
 Generic functions for tidycpt objects
+}
+\examples{
+plot(segment(CET, method = "pelt"))
+plot(segment(CET, method = "pelt"), use_time_index = TRUE)
 }
 \seealso{
 \code{\link[stats:nobs]{stats::nobs()}}

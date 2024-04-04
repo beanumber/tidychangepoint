@@ -7,7 +7,7 @@ test_that("lmshift works", {
   expect_equal(fit_meanshift(CET, tau = NA)$tau, NA)
   
   cpts <- c(1700, 1739, 1988)
-  ids <- time2tau(cpts, substr(time(CET), 1, 4))
+  ids <- time2tau(cpts, as_year(time(CET)))
   
   x <- fit_meanshift(CET, tau = ids)
   expect_s3_class(x, "meanshift")
@@ -45,7 +45,7 @@ test_that("lmshift works", {
   
   # truncated series
   CET_trunc <- CET['1772-01-01/'] 
-  tau <- time2tau(1987, substr(time(CET_trunc), 1, 4))
+  tau <- time2tau(1987, as_year(time(CET_trunc)))
   
   trend_wn_trunc <- fit_lmshift(CET_trunc, tau = tau, trends = TRUE)
   trend_wn_trunc$sigma_hatsq

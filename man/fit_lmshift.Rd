@@ -27,7 +27,7 @@ logLik(mod)
 deg_free(mod)
 
 cpts <- c(1700, 1739, 1988)
-ids <- time2tau(cpts, substr(time(CET), 1, 4))
+ids <- time2tau(cpts, as_year(time(CET)))
 mod <- fit_lmshift(CET, tau = ids)
 glance(mod)
 glance(fit_lmshift(CET, tau = ids, trends = TRUE))
