@@ -98,14 +98,13 @@ augment(x)
 tidy(x)
 ```
 
-    ## # A tibble: 4 × 13
-    ##   region   num_obs   min   max  mean    sd exceedances begin   end log_posterior
-    ##   <chr>      <int> <dbl> <dbl> <dbl> <dbl> <named lis> <dbl> <dbl>         <dbl>
-    ## 1 [0,547)      546  13.7  92.8  35.3  11.3 <int [11]>      0   547         -60.1
-    ## 2 [547,82…     275  20.5 163.   58.1  19.3 <int [95]>    547   822        -198. 
-    ## 3 [822,97…     150  39.2 215.   96.7  30.5 <int [129]>   822   972        -150. 
-    ## 4 [972,1.…     125  67.2 299.  156.   49.6 <int [125]>   972  1096        -126. 
-    ## # ℹ 3 more variables: logLik <dbl>, alpha <dbl>, beta <dbl>
+    ## # A tibble: 4 × 6
+    ##   region        num_obs   min   max  mean    sd
+    ##   <fct>           <int> <dbl> <dbl> <dbl> <dbl>
+    ## 1 [0,547)           546  13.7  92.8  35.3  11.3
+    ## 2 [547,822)         275  20.5 163.   58.1  19.3
+    ## 3 [822,972)         150  39.2 215.   96.7  30.5
+    ## 4 [972,1.1e+03]     125  67.2 299.  156.   49.6
 
 - `glance()` returns a `tbl` that provides summary statistics for the
   algorithm.
@@ -114,10 +113,10 @@ tidy(x)
 glance(x)
 ```
 
-    ## # A tibble: 1 × 11
-    ##   pkg     version algorithm params       num_cpts logLik   AIC   BIC  MBIC   MDL
-    ##   <chr>   <pckg_> <chr>     <list>          <int>  <dbl> <dbl> <dbl> <dbl> <dbl>
-    ## 1 change… 2.2.4   PELT      <named list>        3 -4688. 9383. 9403. 9432. 9455.
+    ## # A tibble: 1 × 9
+    ##   pkg         version    algorithm params       num_cpts model  criteria fitness
+    ##   <chr>       <pckg_vrs> <chr>     <list>          <int> <chr>  <chr>      <dbl>
+    ## 1 changepoint 2.2.4      PELT      <named list>        3 fit_m… MBIC        28.0
     ## # ℹ 1 more variable: elapsed_time <drtn>
 
 ### Other methods
@@ -181,28 +180,28 @@ x <- DataCPSim |>
 length(changepoints(x))
 ```
 
-    ## [1] 508
+    ## [1] 527
 
 ``` r
 diagnose(x)
 ```
 
-    ## Warning: Removed 227 rows containing missing values or values outside the scale range
+    ## Warning: Removed 247 rows containing missing values or values outside the scale range
     ## (`geom_segment()`).
-    ## Removed 227 rows containing missing values or values outside the scale range
+    ## Removed 247 rows containing missing values or values outside the scale range
     ## (`geom_segment()`).
 
 ![](README_files/figure-gfm/shi-1.png)<!-- -->
 
-- `method = "gbmdl"`: implements the Genetic BMDL heuristic as per
+- `method = "taimal"`: implements the Genetic BMDL heuristic as per
   Taimal and Sierra-Suarez.
 
 ``` r
 x <- DataCPSim |>
-  segment(method = "gbmdl", num_generations = 5)
+  segment(method = "taimal", num_generations = 5)
 ```
 
-    ## method: gbmdl
+    ## method: taimal
 
     ##   |                                                                    |                                                            |   0%  |                                                                    |===============                                             |  25%  |                                                                    |==============================                              |  50%  |                                                                    |=============================================               |  75%  |                                                                    |============================================================| 100%
 
@@ -210,7 +209,7 @@ x <- DataCPSim |>
 changepoints(x)
 ```
 
-    ## [1] 575 884
+    ## [1] 566 618 862
 
 ``` r
 diagnose(x)

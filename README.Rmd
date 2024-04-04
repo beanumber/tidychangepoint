@@ -113,11 +113,11 @@ length(changepoints(x))
 diagnose(x)
 ```
 
-- `method = "gbmdl"`: implements the Genetic BMDL heuristic as per Taimal and Sierra-Suarez. 
+- `method = "taimal"`: implements the Genetic BMDL heuristic as per Taimal and Sierra-Suarez. 
 
 ```{r gbmdl-tidyplot}
 x <- DataCPSim |>
-  segment(method = "gbmdl", num_generations = 5)
+  segment(method = "taimal", num_generations = 5)
 changepoints(x)
 diagnose(x)
 ```
