@@ -59,7 +59,7 @@ segment_ga <- function(x,
 #' Note that in order to achieve the reported results you have to run the algorithm
 #' for a really long time. Pass the values `maxiter` = 50000 and `run` = 10000
 #' to [GA::ga()] using the dots. 
-#' @references \doi{10.1175/JCLI-D-21-0489.1}
+#' @references Shi, et al. (2022, \doi{10.1175/JCLI-D-21-0489.1})
 #' @examples
 #' \dontrun{
 #' # This will take a really long time!
@@ -82,6 +82,13 @@ segment_ga_shi <- function(x, ...) {
 #' @details
 #' Taimal's algorithm is the one used in \doi{10.1007/978-3-031-47372-2_20}.
 #' 
+#' Note that the speed of the algorithm is highly sensitive to the size of the 
+#' changepoint sets under consideration, with large changepoint sets begin slow. 
+#' Consider setting the `population` argument to [GA::ga()] to improve 
+#' performance. Taimal's algorithm uses the [build_gabin_population()] function
+#' for this purpose by default. 
+#' @seealso [build_gabin_population()]
+#' @references Taimal, et al. (2023, \doi{10.1007/978-3-031-47372-2_20})
 #' @export
 #' @examples
 #' \dontrun{

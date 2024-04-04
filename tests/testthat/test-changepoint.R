@@ -9,6 +9,8 @@ test_that("changepoint works", {
   expect_type(changepoints(x), "integer")
   expect_type(nobs(x), "integer")
   expect_s3_class(logLik(x$segmenter), "logLik")
+  expect_type(fitness(x$segmenter), "double")
+  expect_equal(names(fitness(x$segmenter)), "MBIC")
   
   x <- segment(DataCPSim, method = "binseg")
   expect_s3_class(x, "tidycpt")

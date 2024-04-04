@@ -19,6 +19,7 @@ glance.wbs <- function(x, ...) {
     algorithm = "Wild Binary Segmentation",
     params = list(params(x)),
     num_cpts = length(changepoints(x)),
+    fitness = fitness(x),
     sigma = x$cpt$sigma,
 #    BIC = min(x$cpt$ic.curve$bic.penalty),
 #    MBIC = min(x$cpt$ic.curve$mbic.penalty)
@@ -65,7 +66,20 @@ nobs.wbs <- function(object, ...) {
 #' changepoints(cpts$segmenter)
 #' 
 changepoints.wbs <- function(x, ...) {
-  x$cpt$cpt.th[[1]] |>
+  x$cpt$cpt.ic$mbic.penalty |>
     sort() |>
     as.integer()
 }
+
+#' @rdname fitness
+#' @export
+#' @examples
+#' x <- segment(DataCPSim, method = "wbs")
+#' fitness(x)
+#' 
+fitness.wbs <- function(object, ...) {
+  out <- NA
+  names(out) <- "MBIC"
+  out
+}
+

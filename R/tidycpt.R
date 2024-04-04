@@ -43,6 +43,12 @@ nobs.tidycpt <- function(object, ...) {
   nobs(object$segmenter)
 }
 
+#' @rdname fitness
+#' @export
+fitness.tidycpt <- function(object, ...) {
+  fitness(object$segmenter)
+}
+
 #' @rdname tidycpt-generics
 #' @seealso [broom::augment()]
 #' @export

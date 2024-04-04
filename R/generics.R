@@ -22,6 +22,12 @@ exceedances.default <- function(x, ...) {
   exceedances(as.ts(x), ...)
 }
 
+#' Retrieve the optimal fitness (or objective function) value used by an algorithm
+#' @param object An object, typically returned by [segment()]
+#' @param ... currently ignored
+#' @export
+fitness <- function(object, ...) UseMethod("fitness") 
+
 #' @rdname changepoints
 #' @export
 params <- function(x, ...) UseMethod("params")

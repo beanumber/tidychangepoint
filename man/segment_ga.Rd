@@ -42,6 +42,12 @@ for a really long time. Pass the values \code{maxiter} = 50000 and \code{run} = 
 to \code{\link[GA:ga]{GA::ga()}} using the dots.
 
 Taimal's algorithm is the one used in \doi{10.1007/978-3-031-47372-2_20}.
+
+Note that the speed of the algorithm is highly sensitive to the size of the
+changepoint sets under consideration, with large changepoint sets begin slow.
+Consider setting the \code{population} argument to \code{\link[GA:ga]{GA::ga()}} to improve
+performance. Taimal's algorithm uses the \code{\link[=build_gabin_population]{build_gabin_population()}} function
+for this purpose by default.
 }
 \examples{
 \dontrun{
@@ -76,5 +82,10 @@ x <- segment(method = "ga-taimal", maxiter = 50)
 
 }
 \references{
-\doi{10.1175/JCLI-D-21-0489.1}
+Shi, et al. (2022, \doi{10.1175/JCLI-D-21-0489.1})
+
+Taimal, et al. (2023, \doi{10.1007/978-3-031-47372-2_20})
+}
+\seealso{
+\code{\link[=build_gabin_population]{build_gabin_population()}}
 }

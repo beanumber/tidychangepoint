@@ -19,11 +19,7 @@ glance.cpt <- function(x, ...) {
     algorithm = x@method,
     params = list(params(x)),
     num_cpts = length(changepoints(x)),
-    logLik = as.double(logLik(x)),
-    AIC = AIC(x),
-    BIC = BIC(x),
-    MBIC = MBIC(x),
-    MDL = MDL(x)
+    fitness = fitness(x)
   )
 }
 
@@ -92,4 +88,16 @@ logLik.cpt <- function(object, ...) {
 changepoints.cpt <- function(x, ...) {
   changepoint::cpts(x) |>
     as.integer()
+}
+
+#' @rdname fitness
+#' @export
+#' @examples
+#' x <- segment(DataCPSim, method = "pelt")
+#' fitness(x)
+#' 
+fitness.cpt <- function(object, ...) {
+  out <- object@pen.value
+  names(out) <- object@pen.type
+  out
 }

@@ -26,6 +26,7 @@ test_that("seg_default works", {
   expect_type(changepoints(y), "integer")
   expect_equal(length(changepoints(y)), 1)
   expect_type(nobs(y), "integer")
+  expect_type(fitness(y$segmenter), "double")
 
   z <- segment(DataCPSim, method = "manual", cpts = c(365, 826))
   expect_s3_class(z, "tidycpt")

@@ -8,6 +8,7 @@ test_that("GA works", {
   expect_s3_class(glance(x), "tbl_df")
   expect_type(changepoints(x), "integer")
   expect_type(nobs(x), "integer")
+  expect_type(fitness(x$segmenter), "double")
 
   x <- segment(DataCPSim, method = "ga", maxiter = 5)
   expect_s3_class(x, "tidycpt")

@@ -19,7 +19,7 @@ glance.ga <- function(x, ...) {
     algorithm = "Genetic",
     params = list(params(x)),
     num_cpts = length(changepoints(x)),
-    fitness = min(x@fitnessValue)
+    fitness = fitness(x)
   )
 }
 
@@ -91,4 +91,17 @@ build_gabin_population <- function(x, ...) {
       matrix(ncol = object@nBits)
   }
   return(f)
+}
+
+#' @rdname fitness
+#' @export
+#' @examples
+#' x <- segment(DataCPSim, method = "ga")
+#' fitness(x)
+#' 
+fitness.ga <- function(object, ...) {
+  out <- object@fitnessValue
+  # need to figure this out
+#  names(out) <- x@pen.type
+  out
 }

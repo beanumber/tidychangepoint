@@ -97,6 +97,16 @@ changepoints.seg_default <- function(x, ...) {
     as.integer()
 }
 
+#' @rdname fitness
+#' @export
+fitness.seg_default <- function(object, ...) {
+  object$candidates |>
+    dplyr::arrange(BMDL) |>
+    utils::head(1) |>
+    dplyr::pull(BMDL) |>
+    purrr::pluck(1)
+}
+
 #' @rdname new_seg_default
 #' @export
 evaluate_cpts.seg_default <- function(x, ...) {
@@ -152,7 +162,8 @@ glance.seg_default <- function(x, ...) {
     version = utils::packageVersion("tidychangepoint"),
     algorithm = x$algorithm,
     params = list(x$params),
-    num_cpts = length(changepoints(x))
+    num_cpts = length(changepoints(x)),
+    fitness = fitness(x)
   )
 }
 
