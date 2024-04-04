@@ -1,7 +1,7 @@
 globalVariables(c(
   "index", "region", "algorithm", "label", "filename", "y", "begin", "end", 
   "sd", "num_generation", "method", "m", "t_exceedance", "cum_exceedances",
-  "lower", "upper"
+  "lower", "upper", "model"
 ))
 
 #' @rdname changepoints
@@ -125,7 +125,8 @@ compare_algorithms <- function(x, ...) {
     segment(as.ts(x), method = "null")
   ) |>
     purrr::map(glance)
-  dplyr::bind_rows(glance(x), others)
+  dplyr::bind_rows(glance(x), others) |>
+    dplyr::mutate(model = gsub(pattern = "fit_", replacement = "", model))
 }
 
 #' @rdname tidycpt-generics

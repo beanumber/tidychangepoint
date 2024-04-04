@@ -167,6 +167,7 @@ glance.seg_default <- function(x, ...) {
     algorithm = x$algorithm,
     params = list(x$params),
     num_cpts = length(changepoints(x)),
+    model = "fit_nhpp",
     criteria = names(fitness(x)),
     fitness = fitness(x)
   )

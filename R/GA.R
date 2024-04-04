@@ -19,6 +19,7 @@ glance.ga <- function(x, ...) {
     algorithm = "Genetic",
     params = list(params(x)),
     num_cpts = length(changepoints(x)),
+    model = x@model_params$model_fn,
     criteria = names(fitness(x)),
     fitness = fitness(x)
   )
@@ -102,7 +103,6 @@ build_gabin_population <- function(x, ...) {
 #' 
 fitness.ga <- function(object, ...) {
   out <- object@fitnessValue
-  # need to figure this out
-#  names(out) <- x@pen.type
+  names(out) <- object@model_params$penalty_fn
   out
 }

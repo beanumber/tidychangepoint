@@ -16,9 +16,10 @@ glance.wbs <- function(x, ...) {
   tibble::tibble(
     pkg = "wbs",
     version = package_version(utils::packageVersion("wbs")),
-    algorithm = "Wild Binary Segmentation",
+    algorithm = "Wild BinSeg",
     params = list(params(x)),
     num_cpts = length(changepoints(x)),
+    model = "fit_wbs",
     criteria = names(fitness(x)),
     fitness = fitness(x),
     sigma = x$cpt$sigma,

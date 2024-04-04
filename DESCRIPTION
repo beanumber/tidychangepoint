@@ -32,6 +32,7 @@ Imports:
     methods,
     patchwork,
     purrr,
+    stringr,
     tibble,
     tidyr,
     tsibble,

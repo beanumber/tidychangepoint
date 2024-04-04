@@ -19,6 +19,7 @@ glance.cpt <- function(x, ...) {
     algorithm = x@method,
     params = list(params(x)),
     num_cpts = length(changepoints(x)),
+    model = "fit_meanvar",
     criteria = names(fitness(x)),
     fitness = fitness(x)
   )
