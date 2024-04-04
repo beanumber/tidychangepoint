@@ -67,7 +67,6 @@ augment.tidycpt <- function(x, ...) {
 #' @export
 tidy.tidycpt <- function(x, ...) {
   tau <- changepoints(x)
-  theta <- x$nhpp
   n <- length(x)
   
   augment(x) |>
@@ -84,8 +83,7 @@ tidy.tidycpt <- function(x, ...) {
       mean = mean(y, na.rm = TRUE),
       sd = stats::sd(y, na.rm = TRUE),
       ... = ...
-    ) |>
-    dplyr::inner_join(theta, by = "region")
+    )
 }
 
 #' @rdname tidycpt-generics
@@ -137,7 +135,9 @@ compare_algorithms <- function(x, ...) {
 #' plot(segment(CET, method = "pelt"))
 #' plot(segment(CET, method = "pelt"), use_time_index = TRUE)
 plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
-  regions <- tidy(x)
+  regions <- x |>
+    tidy() |>
+    dplyr::inner_join(x$nhpp, by = "region")
   g <- ggplot2::ggplot(
     data = augment(x), 
     ggplot2::aes(x = index, y = y)

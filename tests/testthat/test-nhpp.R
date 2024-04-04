@@ -1,6 +1,7 @@
 test_that("generics works", {
   theta <- fit_nhpp(DataCPSim, tau = 826)
   
+  expect_true(all(c("alpha", "beta", "region") %in% names(theta)))
   expect_type(changepoints(theta), "integer")
   expect_type(exceedances(theta), "integer")
   expect_s3_class(logLik(theta), "logLik")
