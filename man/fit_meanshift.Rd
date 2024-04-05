@@ -5,7 +5,7 @@
 \alias{fit_meanshift_ar1}
 \title{Fast implementation of meanshift model}
 \usage{
-fit_meanshift(x, tau, ar1 = FALSE, ...)
+fit_meanshift(x, tau, ...)
 
 fit_meanshift_ar1(x, tau, ...)
 }
@@ -13,8 +13,6 @@ fit_meanshift_ar1(x, tau, ...)
 \item{x}{A time series}
 
 \item{tau}{a set of indices representing a changepoint set}
-
-\item{ar1}{logicial indicating whether you want auto-regressive lag 1 errors}
 
 \item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
 }

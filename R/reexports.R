@@ -32,6 +32,14 @@ stats::BIC
 stats::nobs
 
 #' @export
+#' @importFrom stats fitted
+stats::fitted
+
+#' @export
+#' @importFrom stats residuals
+stats::residuals
+
+#' @export
 #' @importFrom stats time
 stats::time
 

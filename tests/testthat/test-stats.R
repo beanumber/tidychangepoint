@@ -2,22 +2,22 @@ test_that("lmshift works", {
   x <- as.ts(DataCPSim)
   expect_type(exceedances(x), "integer")
   
-  expect_s3_class(fit_meanshift(CET, tau = NULL), "meanshift")
-  expect_s3_class(fit_meanshift(CET, tau = NA), "meanshift")
+  expect_s3_class(fit_meanshift(CET, tau = NULL), "cptmod")
+  expect_s3_class(fit_meanshift(CET, tau = NA), "cptmod")
   expect_equal(fit_meanshift(CET, tau = NA)$tau, NA)
   
   cpts <- c(1700, 1739, 1988)
   ids <- time2tau(cpts, as_year(time(CET)))
   
   x <- fit_meanshift(CET, tau = ids)
-  expect_s3_class(x, "meanshift")
+  expect_s3_class(x, "cptmod")
   expect_equal(x$phi_hat, 0)
   expect_false(x$ar1)
   
   tidychangepoint:::autoregress_errors(x)
   
   y <- fit_meanshift_ar1(CET, tau = ids)
-  expect_s3_class(y, "meanshift")
+  expect_s3_class(y, "cptmod")
   expect_gt(y$phi_hat, 0)
   expect_true(y$ar1)
   
