@@ -159,7 +159,7 @@ autoregress_errors <- function(mod, ...) {
   out <- mod
   out$fitted_values <- y_hat
   out$model_params[["sigma_hatsq"]] <- sigma_hatsq
-  out$phi_hat <- phi_hat
+  out$model_params[["phi_hat"]] <- phi_hat
   out$durbin_watson <- d
   out$model_name <- paste0(out$model_name, "_ar1")
   return(out)

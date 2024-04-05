@@ -41,7 +41,6 @@ fit_meanshift <- function(x, tau, ...) {
     fitted_values = y_hat,
     model_name = "meanshift"
   )
-  out$phi_hat <- 0
   return(out)
 }
 

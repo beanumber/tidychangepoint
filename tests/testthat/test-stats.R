@@ -11,24 +11,24 @@ test_that("lmshift works", {
   
   x <- fit_meanshift(CET, tau = ids)
   expect_s3_class(x, "cptmod")
-  expect_equal(x$phi_hat, 0)
-  expect_false(x$ar1)
-  
-  tidychangepoint:::autoregress_errors(x)
-  
+  expect_true("sigma_hatsq" %in% names(x$model_params))
+  expect_false("phi_hat" %in% names(x$model_params))
+
   y <- fit_meanshift_ar1(CET, tau = ids)
   expect_s3_class(y, "cptmod")
-  expect_gt(y$phi_hat, 0)
-  expect_true(y$ar1)
+  expect_true("sigma_hatsq" %in% names(y$model_params))
+  expect_true("phi_hat" %in% names(y$model_params))
+  expect_gt(y$model_params["phi_hat"], 0)
   
   z <- fit_lmshift(CET, tau = ids)
-  expect_true(all(abs(z$fitted.values - x$fitted.values) < 0.000000001))
-  expect_equal(x$sigma_hatsq, z$sigma_hatsq)
+  expect_true(all(abs(fitted(z) - fitted(x)) < 0.000000001))
+  expect_equal(model_variance(x), model_variance(z))
+  expect_equal(x$model_params["sigma_hatsq"], z$model_params["sigma_hatsq"])
   expect_equal(deg_free(x), deg_free(z))
   
-  w <- fit_lmshift(CET, tau = ids, ar1 = TRUE)
-  expect_true(all(abs(w$fitted.values - y$fitted.values) < 0.000000001))
-  expect_equal(y$sigma_hatsq, w$sigma_hatsq)
+  w <- fit_lmshift_ar1(CET, tau = ids)
+  expect_true(all(abs(fitted(w) - fitted(y)) < 0.000000001))
+  expect_equal(model_variance(y), model_variance(w))
   expect_equal(deg_free(y), deg_free(w))
   
   trend_wn <- fit_lmshift(CET, tau = ids, trends = TRUE)
@@ -37,11 +37,11 @@ test_that("lmshift works", {
   expect_equal(round(MDL(trend_wn), 2), 653.07)
   MDL(trend_wn) + 2 * log(nobs(trend_wn))
   
-  trend_ar1 <- fit_lmshift(CET, tau = ids, trends = TRUE, ar1 = TRUE)
+  trend_ar1 <- fit_lmshift_ar1(CET, tau = ids, trends = TRUE)
   expect_equal(round(as.numeric(logLik(trend_ar1)), 2), -288.80)
   expect_equal(round(BIC(trend_ar1), 2), 654.19)
   expect_equal(round(MDL(trend_ar1), 2), 656.52)
-  expect_equal(round(trend_ar1$phi_hat, 3), 0.058)
+  expect_equal(round(trend_ar1$model_params[["phi_hat"]], 3), 0.058)
   
   # truncated series
   CET_trunc <- CET['1772-01-01/'] 
@@ -53,9 +53,9 @@ test_that("lmshift works", {
   BIC(trend_wn_trunc)
   MDL(trend_wn_trunc) + 2 * log(nobs(trend_wn_trunc))
   
-  trend_ar1_trunc <- fit_lmshift(CET_trunc, tau = tau, trends = TRUE, ar1 = TRUE)
-  expect_equal(round(trend_ar1_trunc$sigma_hatsq, 3), 0.305)
-  expect_equal(round(trend_ar1_trunc$phi_hat, 3), 0.073)
+  trend_ar1_trunc <- fit_lmshift_ar1(CET_trunc, tau = tau, trends = TRUE)
+  expect_equal(round(model_variance(trend_ar1_trunc), 3), 0.305)
+  expect_equal(round(trend_ar1_trunc$model_params[["phi_hat"]], 3), 0.073)
   logLik(trend_ar1_trunc)
   BIC(trend_ar1_trunc)
   MDL(trend_ar1_trunc) + 2 * log(nobs(trend_ar1_trunc))

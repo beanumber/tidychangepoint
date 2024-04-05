@@ -75,6 +75,20 @@ test_that("utils works", {
   r <- random_cpts(DataCPSim, n = 5)
   expect_type(r, "list")
   expect_true(all(purrr::map(r, typeof) == "integer"))
+  
+  ds <- data.frame(y = as.ts(CET), t = 1:length(CET))
+  x <- tbl_coef(lm(y ~ 1, data = ds))
+  expect_s3_class(x, "tbl_df")
+  expect_equal(ncol(x), 1)
+  expect_identical(names(x), c("mu"))
+  y <- tbl_coef(lm(y ~ (t >= 42) + (t >= 81), data = ds))
+  expect_s3_class(y, "tbl_df")
+  expect_equal(ncol(y), 1)
+  expect_identical(names(y), c("mu"))
+  z <- tbl_coef(lm(y ~ t * (t >= 42) + t * (t >= 81), data = ds))
+  expect_s3_class(z, "tbl_df")
+  expect_equal(ncol(z), 2)
+  expect_identical(names(z), c("mu", "beta"))
 })
 
 test_that("penalties work", {

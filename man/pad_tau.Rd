@@ -11,6 +11,7 @@
 \alias{cut_inclusive}
 \alias{test_set}
 \alias{split_by_tau}
+\alias{tbl_coef}
 \alias{deg_free}
 \alias{as_year}
 \title{Utility functions}
@@ -34,6 +35,8 @@ cut_inclusive(x, tau)
 test_set(n = 1, sd = 1, seed = NULL)
 
 split_by_tau(x, tau)
+
+tbl_coef(mod, ...)
 
 deg_free(x)
 
@@ -74,6 +77,10 @@ tau2binary(binary2tau(c(0, 0, 1, 1, 0, 1)), n = 6)
 tau2time(c(42, 81, 330), index = as_year(time(CET)))
 time2tau(c(1700, 1739, 1988), index = as_year(time(CET)))
 split_by_tau(DataCPSim, c(365, 826))
+ds <- data.frame(y = as.ts(CET), t = 1:length(CET))
+tbl_coef(lm(y ~ 1, data = ds))
+tbl_coef(lm(y ~ (t >= 42) + (t >= 81), data = ds))
+tbl_coef(lm(y ~ t * (t >= 42) + t * (t >= 81), data = ds))
 deg_free(segment(DataCPSim)$nhpp)
 as_year("1988-01-01")
 }

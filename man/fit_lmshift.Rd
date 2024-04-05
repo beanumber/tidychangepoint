@@ -2,9 +2,12 @@
 % Please edit documentation in R/mod_lmshift.R
 \name{fit_lmshift}
 \alias{fit_lmshift}
+\alias{fit_lmshift_ar1}
 \title{Regression-based model fitting}
 \usage{
-fit_lmshift(x, tau, trends = FALSE, ar1 = FALSE, ...)
+fit_lmshift(x, tau, trends = FALSE, ...)
+
+fit_lmshift_ar1(x, tau, ...)
 }
 \arguments{
 \item{x}{A time series}
@@ -13,9 +16,9 @@ fit_lmshift(x, tau, trends = FALSE, ar1 = FALSE, ...)
 
 \item{trends}{logical indicating whether you want trends within regions}
 
-\item{ar1}{logicial indicating whether you want auto-regressive lag 1 errors}
-
 \item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
+
+\item{ar1}{logicial indicating whether you want auto-regressive lag 1 errors}
 }
 \description{
 Regression-based model fitting
@@ -31,6 +34,6 @@ ids <- time2tau(cpts, as_year(time(CET)))
 mod <- fit_lmshift(CET, tau = ids)
 glance(mod)
 glance(fit_lmshift(CET, tau = ids, trends = TRUE))
-glance(fit_lmshift(CET, tau = ids, ar1 = TRUE))
-glance(fit_lmshift(CET, tau = ids, trends = TRUE, ar1 = TRUE))
+glance(fit_lmshift_ar1(CET, tau = ids))
+glance(fit_lmshift_ar1(CET, tau = ids, trends = TRUE))
 }

@@ -18,10 +18,10 @@ globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic"))
 #' mod <- fit_lmshift(CET, tau = ids)
 #' glance(mod)
 #' glance(fit_lmshift(CET, tau = ids, trends = TRUE))
-#' glance(fit_lmshift(CET, tau = ids, ar1 = TRUE))
-#' glance(fit_lmshift(CET, tau = ids, trends = TRUE, ar1 = TRUE))
+#' glance(fit_lmshift_ar1(CET, tau = ids))
+#' glance(fit_lmshift_ar1(CET, tau = ids, trends = TRUE))
 
-fit_lmshift <- function(x, tau, trends = FALSE, ar1 = FALSE, ...) {
+fit_lmshift <- function(x, tau, trends = FALSE, ...) {
   n <- length(x)
   ds <- data.frame(y = as.ts(x), t = 1:n)
   if (1 %in% tau) {
@@ -38,71 +38,26 @@ fit_lmshift <- function(x, tau, trends = FALSE, ar1 = FALSE, ...) {
       terms <- paste(paste("(t >=", tau, ")"), collapse = " + ")
       model_name <- "meanshift"
     }
-    form <- paste("y ~", terms)
+    form <- paste("y ~ ", terms)
   }
   
-  out <- stats::lm(stats::as.formula(form), data = ds, ...)
-  out$sigma_hatsq <- sum((out$residuals)^2) / n
-  class(out) <- c("lmshift", class(out))
-  if (ar1) {
-    out <- autoregress_errors(out)
-    model_name <- paste0(model_name, "_ar1")
-  }
-  out$tau <- tau
-  out$trends <- trends
-  out$ar1 <- ar1
-  out$model_name <- model_name
-  return(out)
-}
+  mod <- stats::lm(stats::as.formula(form), data = ds, ...)
 
-
-
-#' Methods for lmshift objects
-#' @name lmshift-generics
-#' @param x An `lmshift` object, typically the output from [fit_lmshift()]`
-#' @export
-#' @examples
-#' cpts <- fit_lmshift(DataCPSim, tau = 365)
-#' as.ts(cpts)
-as.ts.lmshift <- function(x, ...) {
-  as.ts(x$model$y)
-}
-
-
-#' @rdname lmshift-generics
-#' @inheritParams stats::logLik
-#' @export
-logLik.lmshift <- function(object, ...) {
-  out <- NextMethod()
-  m <- length(object$tau)
-  attr(out, "real_params_estimated") <- object$rank
-  attr(out, "df") <- m + object$rank + 1 + (object$ar1)
-  attr(out, "tau") <- object$tau
-  attr(out, "ar1") <- object$ar1
-  return(out)
-}
-
-#' @rdname lmshift-generics
-#' @export
-glance.lmshift <- function(x, ...) {
-  tibble::tibble(
-    pkg = "tidychangepoint",
-    version = package_version(utils::packageVersion("tidychangepoint")),
-    algorithm = x$model_name,
-    params = list(ar1 = x$ar1),
-    num_cpts = length(changepoints(x)),
-    rmse = sqrt(mean(x$residuals^2)),
-    logLik = as.double(logLik(x)),
-    AIC = AIC(x),
-    BIC = BIC(x),
-    MBIC = MBIC(x),
-    MDL = MDL(x)
+  cptmod(
+    x = as.ts(x),
+    tau = tau,
+    region_params = tbl_coef(mod),
+    model_params = c(
+      sigma_hatsq = model_variance(mod)
+    ),
+    fitted_values = fitted(mod),
+    model_name = model_name
   )
 }
 
-#' @rdname changepoints
+#' @rdname fit_lmshift
 #' @export
-changepoints.lmshift <- function(x, ...) {
-  x$tau |>
-    as.integer()
+fit_lmshift_ar1 <- function(x, tau, ...) {
+  fit_lmshift(x, tau,  ...) |>
+    autoregress_errors()
 }
