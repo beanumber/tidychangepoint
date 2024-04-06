@@ -28,7 +28,8 @@ unpad_tau <- function(padded_tau) {
 #' is_valid_tau(1097, length(DataCPSim))
 #' 
 is_valid_tau <- function(tau, n) {
-  all(tau %in% 1:n)
+  # the first and last points cannot be changepoints!
+  all(tau %in% 2:(n-1))
 }
 
 #' @rdname pad_tau

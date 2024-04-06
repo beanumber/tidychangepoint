@@ -4,7 +4,7 @@ test_that("lmshift works", {
   
   expect_s3_class(fit_meanshift(CET, tau = NULL), "cptmod")
   expect_s3_class(fit_meanshift(CET, tau = NA), "cptmod")
-  expect_equal(fit_meanshift(CET, tau = NA)$tau, NA)
+  expect_equal(changepoints(fit_meanshift(CET, tau = NA)), integer())
   
   cpts <- c(1700, 1739, 1988)
   ids <- time2tau(cpts, as_year(time(CET)))

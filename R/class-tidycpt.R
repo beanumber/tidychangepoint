@@ -114,7 +114,7 @@ compare_algorithms <- function(x, ...) {
 plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
   regions <- x |>
     tidy() |>
-    dplyr::inner_join(x$nhpp, by = "region")
+    dplyr::inner_join(x$nhpp$region_params, by = "region")
   g <- ggplot2::ggplot(
     data = augment(x), 
     ggplot2::aes(x = index, y = y)

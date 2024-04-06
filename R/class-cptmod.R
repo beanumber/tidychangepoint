@@ -45,6 +45,10 @@ validate_cptmod <- function(x) {
   if (!stats::is.ts(as.ts(x))) {
     stop("data attribute is not coercible into a ts object.")
   }
+  if (!is_valid_tau(x$tau, nobs(x))) {
+#    message("Removing 1 and/or n from tau...")
+    x$tau <- x$tau[x$tau %in% 2:(nobs(x) - 1)]
+  }
   x
 }
 
@@ -163,7 +167,7 @@ tidy.cptmod <- function(x, ...) {
       max = max(y, na.rm = TRUE),
       mean = mean(y, na.rm = TRUE),
       sd = stats::sd(y, na.rm = TRUE),
-      ... = ...
+#      ... = ...
     ) |>
     dplyr::mutate(
       begin = utils::head(tau_padded, -1),

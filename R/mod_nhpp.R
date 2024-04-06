@@ -224,7 +224,7 @@ mcdf <- function(x, dist = "weibull") {
 #' plot(fit_nhpp(DataCPSim, tau = 826))
 
 plot.nhpp <- function(x, ...) {
-  n <- length(x)
+  n <- nobs(x)
   
   z <- exceedances(x) |>
     tibble::enframe(name = "cum_exceedances", value = "t_exceedance") |>
@@ -246,7 +246,7 @@ plot.nhpp <- function(x, ...) {
     dplyr::distinct()
   
   ggplot2::ggplot(data = z, ggplot2::aes(x = t_exceedance, y = cum_exceedances)) +
-    ggplot2::geom_vline(data = x, ggplot2::aes(xintercept = end), linetype = 3) +
+    ggplot2::geom_vline(data = tidy(x), ggplot2::aes(xintercept = end), linetype = 3) +
     ggplot2::geom_abline(intercept = 0, slope = 0.5, linetype = 3) +
     ggplot2::geom_line() +
     ggplot2::scale_x_continuous("Time Index (t)", limits = c(0, n)) +
