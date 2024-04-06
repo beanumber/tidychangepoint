@@ -1,7 +1,7 @@
 test_that("generics works", {
   theta <- fit_nhpp(DataCPSim, tau = 826)
   
-  expect_true(all(c("alpha", "beta", "region") %in% names(theta)))
+  expect_true(all(c("param_alpha", "param_beta") %in% names(theta$region_params)))
   expect_type(changepoints(theta), "integer")
   expect_type(exceedances(theta), "integer")
   expect_s3_class(logLik(theta), "logLik")
@@ -19,12 +19,12 @@ test_that("generics works", {
   expect_equal(BIC(x), as.double(log(nobs(x)) * deg_free(x) - 2 * logLik(x)))
   expect_equal(MBIC(x), as.double(-2 * logLik(x)))
   expect_equal(MDL(x), as.double(-2 * logLik(x)))
-  expect_equal(BMDL(x), -2 * sum(x$log_posterior))
+  expect_equal(BMDL(x), -2 * sum(x$region_params[["logPost"]]))
   expect_s3_class(glance(x), "tbl_df")
   
   
   y <- fit_nhpp(DataCPSim, tau = 826, threshold = 200)
-  expect_lt(length(mcdf(y)), length(m))
+  expect_true(all(mcdf(y) < length(m)))
 })
 
 
@@ -34,10 +34,10 @@ test_that("BMDL works", {
   expect_s3_class(logLik(seg$nhpp), "logLik")
   expect_type(BMDL(seg$nhpp), "double")
 
-  expect_equal(fit_nhpp(y, c(0, 500, 2000)), fit_nhpp(y, 500))
+  expect_identical(fit_nhpp(y, c(0, 500, 2000))$region_params, fit_nhpp(y, 500)$region_params)
   
   z <- segment(DataCPSim, method = "null")
-  expect_equal(BMDL(z$nhpp), - 2 * sum(z$nhpp$log_posterior))
+  expect_equal(BMDL(z$nhpp), - 2 * sum(z$nhpp$region_params[["logPost"]]))
 })
 
 test_that("parameter fitting works", {
@@ -46,5 +46,5 @@ test_that("parameter fitting works", {
   tau <- attr(y, "cpt_true")
   theta <- fit_nhpp(y, tau)
   diagnose(segment(y, method = "manual", cpts = tau))
-  expect_lt(abs(theta$alpha[1] - 1), 0.05)
+  expect_lt(abs(theta$region_params[["param_alpha"]][1] - 1), 0.05)
 })

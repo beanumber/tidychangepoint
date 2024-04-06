@@ -3,10 +3,9 @@
 \name{fit_nhpp_region}
 \alias{fit_nhpp_region}
 \alias{fit_nhpp}
-\alias{length.nhpp}
-\alias{nobs.nhpp}
 \alias{logLik.nhpp}
 \alias{glance.nhpp}
+\alias{fitted.nhpp}
 \alias{mcdf}
 \alias{plot.nhpp}
 \alias{plot_intensity}
@@ -16,13 +15,11 @@ fit_nhpp_region(exc, tau_left, tau_right, params = parameters_weibull(), ...)
 
 fit_nhpp(x, tau, ...)
 
-\method{length}{nhpp}(x, ...)
-
-\method{nobs}{nhpp}(object, ...)
-
 \method{logLik}{nhpp}(object, ...)
 
 \method{glance}{nhpp}(x, ...)
+
+\method{fitted}{nhpp}(object, ...)
 
 mcdf(x, dist = "weibull")
 

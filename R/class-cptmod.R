@@ -69,6 +69,8 @@ cptmod <- function(x, ...) {
 #' fitted(cpts)
 #' residuals(cpts)
 #' changepoints(cpts)
+#' augment(cpts)
+#' tidy(cpts)
 #' glance(cpts)
 
 as.ts.cptmod <- function(x, ...) {
@@ -125,6 +127,48 @@ model_variance <- function(object, ...) {
 changepoints.cptmod <- function(x, ...) {
   x$tau |>
     as.integer()
+}
+
+#' @rdname cptmod-generics
+#' @seealso [broom::augment()]
+#' @export
+augment.cptmod <- function(x, ...) {
+  tau <- changepoints(x)
+  tibble::enframe(as.ts(x), name = "index", value = "y") |>
+    tsibble::as_tsibble(index = index) |>
+    dplyr::mutate(
+      region = cut_inclusive(index, pad_tau(tau, nobs(x)))
+    ) |>
+    dplyr::group_by(region)
+}
+
+#' @rdname cptmod-generics
+#' @seealso [broom::tidy()]
+#' @export
+tidy.cptmod <- function(x, ...) {
+  tau <- changepoints(x)
+  n <- length(as.ts(x))
+  tau_padded <- pad_tau(tau, n)
+  
+  augment(x) |>
+    dplyr::ungroup() |>
+    # why is this necessary????
+    as.data.frame() |>
+    dplyr::group_by(region) |>
+    dplyr::summarize(
+      num_obs = dplyr::n(),
+#      begin = min(y),
+#      end = max(y),
+      min = min(y, na.rm = TRUE),
+      max = max(y, na.rm = TRUE),
+      mean = mean(y, na.rm = TRUE),
+      sd = stats::sd(y, na.rm = TRUE),
+      ... = ...
+    ) |>
+    dplyr::mutate(
+      begin = utils::head(tau_padded, -1),
+      end = utils::tail(tau_padded, -1)
+    )
 }
 
 #' @rdname cptmod-generics

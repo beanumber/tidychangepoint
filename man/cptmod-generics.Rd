@@ -8,6 +8,8 @@
 \alias{fitted.cptmod}
 \alias{residuals.cptmod}
 \alias{model_variance}
+\alias{augment.cptmod}
+\alias{tidy.cptmod}
 \alias{glance.cptmod}
 \title{Methods for cptmod objects}
 \usage{
@@ -22,6 +24,10 @@
 \method{residuals}{cptmod}(object, ...)
 
 model_variance(object, ...)
+
+\method{augment}{cptmod}(x, ...)
+
+\method{tidy}{cptmod}(x, ...)
 
 \method{glance}{cptmod}(x, ...)
 }
@@ -46,5 +52,12 @@ logLik(cpts)
 fitted(cpts)
 residuals(cpts)
 changepoints(cpts)
+augment(cpts)
+tidy(cpts)
 glance(cpts)
+}
+\seealso{
+\code{\link[broom:reexports]{broom::augment()}}
+
+\code{\link[broom:reexports]{broom::tidy()}}
 }

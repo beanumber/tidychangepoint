@@ -53,37 +53,14 @@ fitness.tidycpt <- function(object, ...) {
 #' @seealso [broom::augment()]
 #' @export
 augment.tidycpt <- function(x, ...) {
-  tau <- changepoints(x)
-  tibble::enframe(as.ts(x), name = "index", value = "y") |>
-    tsibble::as_tsibble(index = index) |>
-    dplyr::mutate(
-      region = cut_inclusive(index, pad_tau(tau, length(x)))
-    ) |>
-    dplyr::group_by(region)
+  augment(x$nhpp)
 }
 
 #' @rdname tidycpt-generics
 #' @seealso [broom::tidy()]
 #' @export
 tidy.tidycpt <- function(x, ...) {
-  tau <- changepoints(x)
-  n <- length(x)
-  
-  augment(x) |>
-    dplyr::ungroup() |>
-    # why is this necessary????
-    as.data.frame() |>
-    dplyr::group_by(region) |>
-    dplyr::summarize(
-      num_obs = dplyr::n(),
-#      left = min(index),
-#      right = max(index),
-      min = min(y, na.rm = TRUE),
-      max = max(y, na.rm = TRUE),
-      mean = mean(y, na.rm = TRUE),
-      sd = stats::sd(y, na.rm = TRUE),
-      ... = ...
-    )
+  tidy(x$nhpp)
 }
 
 #' @rdname tidycpt-generics

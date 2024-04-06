@@ -87,114 +87,90 @@ fit_nhpp <- function(x, tau, ...) {
   
   get_params <- function(z) {
     cbind(
-      data.frame(
-        "log_posterior" = -z$value,
+      data.frame(t(z$par)),
+      tibble::tibble(
+        "logPost" = -z$value,
         "logLik" = z$logLik
-      ), 
-      data.frame(t(z$par))
+      )
     )
   }
   
-  out <- res |>
+  region_params <- res |>
     purrr::map(get_params) |>
     purrr::list_rbind()
   
   # to fix and generalize later
   if ("W" %in% c("W", "MO", "GO")) {
-    names_params <- c("alpha", "beta")
+    names_params <- c("param_alpha", "param_beta")
   } else {
-    names_params <- c("alpha", "beta", "sigma")
+    names_params <- c("param_alpha", "param_beta", "param_sigma")
   }
-  names(out)[3:ncol(out)] <- names_params
+  names(region_params)[1:length(names_params)] <- names_params
   
-  out <- dplyr::bind_cols(regions_df, out)
-  attr(out, "threshold") <- threshold
+  region_params <- regions_df |>
+    dplyr::select(region) |>
+    dplyr::bind_cols(region_params)
+  
+  out <- cptmod(
+    x = as.ts(x),
+    tau = tau,
+    region_params = region_params,
+    model_params = c("threshold" = threshold),
+    model_name = "nhpp"
+  )
   class(out) <- c("nhpp", class(out))
-  
   return(out)
 }
 
-#' @rdname fit_nhpp
-#' @export
-length.nhpp <- function(x, ...) {
-  max(x$end)
-}
-
-#' @rdname fit_nhpp
-#' @export
-nobs.nhpp <- function(object, ...) {
-  max(object$end)
-}
 
 #' @rdname fit_nhpp
 #' @param object An `nhpp` object
 #' @export
 logLik.nhpp <- function(object, ...) {
-  ll <- sum(object$logLik)
+  ll <- sum(object$region_params[["logLik"]])
   m <- length(changepoints(object))
-  attr(ll, "df") <- 2 * (m + 1) + 1
+  num_region_params <- object$region_params |>
+    dplyr::select(contains("param_")) |>
+    dim() |>
+    prod()
+  num_model_params <- length(object$model_params)
+  attr(ll, "num_region_params") <- num_region_params
+  attr(ll, "num_model_params") <- num_model_params
   attr(ll, "nobs") <- nobs(object)
-  attr(ll, "tau") <- changepoints(object)
-  attr(ll, "real_params_estimated") <- (m + 1) * 2
+  attr(ll, "tau") <- changepoints(object)  
+  attr(ll, "df") <- m + num_region_params + num_model_params
   class(ll) <- "logLik"
   return(ll)
-}
-
-#' @rdname MDL
-#' @export
-MDL.nhpp <- function(object, ...) {
-  MDL(logLik(object))
 }
 
 #' @rdname BMDL
 #' @export
 BMDL.nhpp <- function(object, ...) {
-  logPrior <- sum(object$log_posterior) - logLik(object) |>
+  logPrior <- sum(object$region_params[["logPost"]]) - logLik(object) |>
     as.double()
   MDL(object) - 2 * logPrior
-}
-
-#' @rdname MBIC
-#' @references Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
-#' @export
-MBIC.nhpp <- function(object, ...) {
-  MBIC(logLik(object))
-}
-
-#' @rdname changepoints
-#' @export
-changepoints.nhpp <- function(x, ...) {
-  c(x$begin, x$end) |>
-    unique() |>
-    unpad_tau() |>
-    as.integer()
-}
-
-#' @rdname exceedances
-#' @export
-exceedances.nhpp <- function(x, ...) {
-  x$exceedances |>
-    purrr::list_c()
 }
 
 #' @rdname fit_nhpp
 #' @export
 glance.nhpp <- function(x, ...) {
-  tibble::tibble(
-    pkg = "tidychangepoint",
-    version = package_version(utils::packageVersion("tidychangepoint")),
-    algorithm = "NHPP",
-    params = list(Bayesian = sum(x$log_posterior) != 0),
-    num_cpts = length(changepoints(x)),
-    logLik = as.double(logLik(x)),
-    AIC = AIC(x),
-    BIC = BIC(x),
-    MBIC = MBIC(x),
-    MDL = MDL(x),
-    BMDL = BMDL(x)
-  )
+  out <- NextMethod()
+  out |>
+    dplyr::mutate(
+      BMDL = BMDL(x)
+    )
 }
 
+#' @rdname fit_nhpp
+#' @export
+fitted.nhpp <- function(object, ...) {
+  lambda <- object$region_params$param_alpha
+  region_lengths <- object |>
+    as.ts() |>
+    split_by_tau(changepoints(object)) |>
+    purrr::map_int(length)
+  rep(lambda, region_lengths)
+}
 
 #' @rdname fit_nhpp
 #' @param x An `nhpp` object
@@ -211,16 +187,18 @@ mcdf <- function(x, dist = "weibull") {
     d <- mweibull
   }
   t <- exceedances(x)
-  n <- length(x)
+  n <- nobs(x)
   tau <- changepoints(x)
   tau_padded <- pad_tau(tau, n)
-
+  
   theta_calc <- x |>
+    tidy() |>
     # why????
     tibble::as_tibble() |>
+    dplyr::inner_join(x$region_params, by = "region") |>
     dplyr::mutate(
-      m_prev = ifelse(begin == 1, 0, d(begin, alpha, beta)),
-      m_this = d(end, alpha, beta),
+      m_prev = ifelse(begin == 1, 0, d(begin, param_alpha, param_beta)),
+      m_this = d(end, param_alpha, param_beta),
       cum_m_prev = cumsum(m_prev),
       cum_m_this = cumsum(dplyr::lag(m_this, 1, 0)),
       cum_m_net = cum_m_this - cum_m_prev
@@ -232,7 +210,7 @@ mcdf <- function(x, dist = "weibull") {
   ) |>
     dplyr::left_join(theta_calc, by = "region") |>
     dplyr::mutate(
-      m_i = d(t, alpha, beta),
+      m_i = d(t, param_alpha, param_beta),
       m = m_i + cum_m_net,
       #      m_carlos = m_carlos,
       #      equal = m_carlos == m
