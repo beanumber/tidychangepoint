@@ -30,12 +30,6 @@ as.ts.tidycpt <- function(x, ...) {
 }
 
 #' @rdname tidycpt-generics
-#' @export
-length.tidycpt <- function(x, ...) {
-  length(as.ts(x))
-}
-
-#' @rdname tidycpt-generics
 #' @inheritParams stats::nobs
 #' @seealso [stats::nobs()]
 #' @export

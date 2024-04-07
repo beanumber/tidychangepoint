@@ -3,7 +3,6 @@
 \name{tidycpt-generics}
 \alias{tidycpt-generics}
 \alias{as.ts.tidycpt}
-\alias{length.tidycpt}
 \alias{nobs.tidycpt}
 \alias{augment.tidycpt}
 \alias{tidy.tidycpt}
@@ -12,8 +11,6 @@
 \title{Generic functions for tidycpt objects}
 \usage{
 \method{as.ts}{tidycpt}(x, ...)
-
-\method{length}{tidycpt}(x, ...)
 
 \method{nobs}{tidycpt}(object, ...)
 

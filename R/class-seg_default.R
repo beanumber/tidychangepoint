@@ -71,12 +71,6 @@ num_candidates <- function(x) {
 
 #' @rdname cpt-generics
 #' @export
-length.seg_default <- function(x, ...) {
-  length(as.ts(x))
-}
-
-#' @rdname cpt-generics
-#' @export
 best_nhpp <- function(x, ...) {
   x$candidates |>
     dplyr::arrange(BMDL) |>

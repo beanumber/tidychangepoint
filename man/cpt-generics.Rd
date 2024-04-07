@@ -2,7 +2,6 @@
 % Please edit documentation in R/class-seg_default.R, R/pkg-changepoint.R
 \name{nobs.seg_default}
 \alias{nobs.seg_default}
-\alias{length.seg_default}
 \alias{best_nhpp}
 \alias{cpt-generics}
 \alias{glance.cpt}
@@ -13,8 +12,6 @@
 \title{Compatibility layer for changepoint}
 \usage{
 \method{nobs}{seg_default}(object, ...)
-
-\method{length}{seg_default}(x, ...)
 
 best_nhpp(x, ...)
 
