@@ -31,7 +31,7 @@ fitness(object, ...)
 Retrieve the optimal fitness (or objective function) value used by an algorithm
 }
 \examples{
-x <- segment(DataCPSim, method = "ga")
+x <- segment(DataCPSim, method = "ga", maxiter = 10)
 fitness(x)
 
 x <- segment(DataCPSim, method = "pelt")

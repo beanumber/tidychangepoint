@@ -85,3 +85,8 @@ fitness.wbs <- function(object, ...) {
   out
 }
 
+#' @rdname model_fit
+#' @export
+model_fit.wbs <- function(object, ...) {
+  NA
+}

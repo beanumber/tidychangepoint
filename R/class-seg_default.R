@@ -105,6 +105,12 @@ fitness.seg_default <- function(object, ...) {
   out
 }
 
+#' @rdname model_fit
+#' @export
+model_fit.seg_default <- function(object, ...) {
+  "meanshift"
+}
+
 #' @rdname new_seg_default
 #' @export
 evaluate_cpts.seg_default <- function(x, ...) {

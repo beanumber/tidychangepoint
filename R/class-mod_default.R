@@ -13,12 +13,12 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value"))
 #' data set. 
 #' @param ... currently ignored
 #' @examples
-#' cpt <- cptmod(CET)
+#' cpt <- mod_default(CET)
 #' str(cpt)
 #' as.ts(cpt)
 #' changepoints(cpt)
 
-new_cptmod <- function(x = numeric(), 
+new_mod_default <- function(x = numeric(), 
                        tau = integer(),
                        region_params = tibble::tibble(),
                        model_params = double(),
@@ -34,14 +34,14 @@ new_cptmod <- function(x = numeric(),
       fitted_values = fitted_values,
       model_name = model_name
     ), 
-    class = "cptmod"
+    class = "mod_default"
   )
 }
 
-#' @rdname new_cptmod
+#' @rdname new_mod_default
 #' @export
 
-validate_cptmod <- function(x) {
+validate_mod_default <- function(x) {
   if (!stats::is.ts(as.ts(x))) {
     stop("data attribute is not coercible into a ts object.")
   }
@@ -52,17 +52,17 @@ validate_cptmod <- function(x) {
   x
 }
 
-#' @rdname new_cptmod
+#' @rdname new_mod_default
 #' @export
 
-cptmod <- function(x, ...) {
-  obj <- new_cptmod(x, ...)
-  validate_cptmod(obj)
+mod_default <- function(x, ...) {
+  obj <- new_mod_default(x, ...)
+  validate_mod_default(obj)
 }
 
-#' Methods for cptmod objects
-#' @name cptmod-generics
-#' @param x A `cptmod` object, typically the output from one of the `fit_*()`
+#' Methods for mod_default objects
+#' @name mod_default-generics
+#' @param x A `mod_default` object, typically the output from one of the `fit_*()`
 #' functions
 #' @export
 #' @examples
@@ -77,20 +77,20 @@ cptmod <- function(x, ...) {
 #' tidy(cpts)
 #' glance(cpts)
 
-as.ts.cptmod <- function(x, ...) {
+as.ts.mod_default <- function(x, ...) {
   as.ts(x$data)
 }
 
-#' @rdname cptmod-generics
+#' @rdname mod_default-generics
 #' @export
-nobs.cptmod <- function(object, ...) {
+nobs.mod_default <- function(object, ...) {
   length(as.ts(object))
 }
 
-#' @rdname cptmod-generics
+#' @rdname mod_default-generics
 #' @inheritParams stats::logLik
 #' @export
-logLik.cptmod <- function(object, ...) {
+logLik.mod_default <- function(object, ...) {
   m <- length(object$tau)
   N <- nobs(object)
   sigma_hatsq <- model_variance(object)
@@ -108,19 +108,19 @@ logLik.cptmod <- function(object, ...) {
   return(ll)
 }
 
-#' @rdname cptmod-generics
+#' @rdname mod_default-generics
 #' @export
-fitted.cptmod <- function(object, ...) {
+fitted.mod_default <- function(object, ...) {
   object$fitted_values
 }
 
-#' @rdname cptmod-generics
+#' @rdname mod_default-generics
 #' @export
-residuals.cptmod <- function(object, ...) {
+residuals.mod_default <- function(object, ...) {
   object$data - fitted(object)
 }
 
-#' @rdname cptmod-generics
+#' @rdname mod_default-generics
 #' @export
 model_variance <- function(object, ...) {
   sum(residuals(object)^2) / nobs(object)
@@ -128,15 +128,15 @@ model_variance <- function(object, ...) {
 
 #' @rdname changepoints
 #' @export
-changepoints.cptmod <- function(x, ...) {
+changepoints.mod_default <- function(x, ...) {
   x$tau |>
     as.integer()
 }
 
-#' @rdname cptmod-generics
+#' @rdname mod_default-generics
 #' @seealso [broom::augment()]
 #' @export
-augment.cptmod <- function(x, ...) {
+augment.mod_default <- function(x, ...) {
   tau <- changepoints(x)
   tibble::enframe(as.ts(x), name = "index", value = "y") |>
     tsibble::as_tsibble(index = index) |>
@@ -146,10 +146,10 @@ augment.cptmod <- function(x, ...) {
     dplyr::group_by(region)
 }
 
-#' @rdname cptmod-generics
+#' @rdname mod_default-generics
 #' @seealso [broom::tidy()]
 #' @export
-tidy.cptmod <- function(x, ...) {
+tidy.mod_default <- function(x, ...) {
   tau <- changepoints(x)
   n <- length(as.ts(x))
   tau_padded <- pad_tau(tau, n)
@@ -175,9 +175,9 @@ tidy.cptmod <- function(x, ...) {
     )
 }
 
-#' @rdname cptmod-generics
+#' @rdname mod_default-generics
 #' @export
-glance.cptmod <- function(x, ...) {
+glance.mod_default <- function(x, ...) {
   tibble::tibble(
     pkg = "tidychangepoint",
     version = package_version(utils::packageVersion("tidychangepoint")),
@@ -212,5 +212,3 @@ autoregress_errors <- function(mod, ...) {
   out$model_name <- paste0(out$model_name, "_ar1")
   return(out)
 }
-
-

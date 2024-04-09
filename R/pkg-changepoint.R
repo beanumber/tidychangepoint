@@ -103,3 +103,13 @@ fitness.cpt <- function(object, ...) {
   names(out) <- object@pen.type
   out
 }
+
+#' @rdname model_fit
+#' @export
+model_fit.cpt <- function(object, ...) {
+  if (object@cpttype == "mean and variance") {
+    return("fit_meanvar")
+  } else {
+    return("fit_meanshift")
+  }
+}

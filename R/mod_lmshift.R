@@ -43,7 +43,7 @@ fit_lmshift <- function(x, tau, trends = FALSE, ...) {
   
   mod <- stats::lm(stats::as.formula(form), data = ds, ...)
 
-  cptmod(
+  mod_default(
     x = as.ts(x),
     tau = tau,
     region_params = tbl_coef(mod),

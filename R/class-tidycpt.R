@@ -43,6 +43,12 @@ fitness.tidycpt <- function(object, ...) {
   fitness(object$segmenter)
 }
 
+#' @rdname model_fit
+#' @export
+model_fit.tidycpt <- function(object, ...) {
+  model_fit(object$segmenter, ...)
+}
+
 #' @rdname tidycpt-generics
 #' @seealso [broom::augment()]
 #' @export

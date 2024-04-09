@@ -98,11 +98,17 @@ build_gabin_population <- function(x, ...) {
 #' @rdname fitness
 #' @export
 #' @examples
-#' x <- segment(DataCPSim, method = "ga")
+#' x <- segment(DataCPSim, method = "ga", maxiter = 10)
 #' fitness(x)
 #' 
 fitness.ga <- function(object, ...) {
   out <- -object@fitnessValue
   names(out) <- object@model_params$penalty_fn
   out
+}
+
+#' @rdname model_fit
+#' @export
+model_fit.ga <- function(object, ...) {
+  object@model_params[["model_fn"]]
 }

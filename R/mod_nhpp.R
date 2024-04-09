@@ -111,7 +111,7 @@ fit_nhpp <- function(x, tau, ...) {
     dplyr::select(region) |>
     dplyr::bind_cols(region_params)
   
-  out <- cptmod(
+  out <- mod_default(
     x = as.ts(x),
     tau = tau,
     region_params = region_params,

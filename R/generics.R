@@ -26,11 +26,16 @@ exceedances.default <- function(x, ...) {
 #' @param object An object, typically returned by [segment()]
 #' @param ... currently ignored
 #' @export
-fitness <- function(object, ...) UseMethod("fitness") 
+fitness <- function(object, ...) UseMethod("fitness")
 
 #' @rdname changepoints
 #' @export
 params <- function(x, ...) UseMethod("params")
+
+#' Retrieve the model that a segmenter used
+#' @inheritParams fitness
+#' @export
+model_fit <- function(x, ...) UseMethod("model_fit")
 
 #' Modified Bayesian Information Criterion
 #' 

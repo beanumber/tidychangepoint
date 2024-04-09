@@ -2,20 +2,20 @@ test_that("lmshift works", {
   x <- as.ts(DataCPSim)
   expect_type(exceedances(x), "integer")
   
-  expect_s3_class(fit_meanshift(CET, tau = NULL), "cptmod")
-  expect_s3_class(fit_meanshift(CET, tau = NA), "cptmod")
+  expect_s3_class(fit_meanshift(CET, tau = NULL), "mod_default")
+  expect_s3_class(fit_meanshift(CET, tau = NA), "mod_default")
   expect_equal(changepoints(fit_meanshift(CET, tau = NA)), integer())
   
   cpts <- c(1700, 1739, 1988)
   ids <- time2tau(cpts, as_year(time(CET)))
   
   x <- fit_meanshift(CET, tau = ids)
-  expect_s3_class(x, "cptmod")
+  expect_s3_class(x, "mod_default")
   expect_true("sigma_hatsq" %in% names(x$model_params))
   expect_false("phi_hat" %in% names(x$model_params))
 
   y <- fit_meanshift_ar1(CET, tau = ids)
-  expect_s3_class(y, "cptmod")
+  expect_s3_class(y, "mod_default")
   expect_true("sigma_hatsq" %in% names(y$model_params))
   expect_true("phi_hat" %in% names(y$model_params))
   expect_gt(y$model_params["phi_hat"], 0)

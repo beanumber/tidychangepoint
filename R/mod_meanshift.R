@@ -31,7 +31,7 @@ fit_meanshift <- function(x, tau, ...) {
 
   sigma_hatsq <- sum((y - y_hat)^2) / N
   
-  out <- cptmod(
+  out <- mod_default(
     x = y,
     tau = tau,
     region_params = tibble::tibble(mu = mu_seg),
