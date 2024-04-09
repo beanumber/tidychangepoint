@@ -89,6 +89,11 @@ test_that("utils works", {
   expect_s3_class(z, "tbl_df")
   expect_equal(ncol(z), 2)
   expect_identical(names(z), c("mu", "beta"))
+  
+  expect_equal(whoami(fit_meanshift), "meanshift")
+  expect_equal(whoami(fit_meanshift_ar1), "meanshift_ar1")
+  expect_equal(whoami(fit_lmshift), "lmshift")
+  expect_equal(whoami(fit_nhpp), "nhpp")
 })
 
 test_that("penalties work", {

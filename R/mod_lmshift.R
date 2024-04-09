@@ -55,9 +55,13 @@ fit_lmshift <- function(x, tau, trends = FALSE, ...) {
   )
 }
 
+attr(fit_lmshift, "model_name") <- "lmshift"
+
 #' @rdname fit_lmshift
 #' @export
 fit_lmshift_ar1 <- function(x, tau, ...) {
   fit_lmshift(x, tau,  ...) |>
     autoregress_errors()
 }
+
+attr(fit_lmshift_ar1, "model_name") <- "lmshift_ar1"

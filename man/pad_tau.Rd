@@ -14,6 +14,7 @@
 \alias{tbl_coef}
 \alias{deg_free}
 \alias{as_year}
+\alias{whoami}
 \title{Utility functions}
 \usage{
 pad_tau(tau, n)
@@ -41,6 +42,8 @@ tbl_coef(mod, ...)
 deg_free(x)
 
 as_year(x)
+
+whoami(x = fit_meanshift, ...)
 }
 \arguments{
 \item{tau}{a numeric vector of changepoints}
@@ -83,6 +86,10 @@ tbl_coef(lm(y ~ (t >= 42) + (t >= 81), data = ds))
 tbl_coef(lm(y ~ t * (t >= 42) + t * (t >= 81), data = ds))
 deg_free(segment(DataCPSim)$nhpp)
 as_year("1988-01-01")
+whoami(fit_meanshift)
+whoami(fit_meanshift_ar1)
+whoami(fit_lmshift)
+whoami(fit_nhpp)
 }
 \seealso{
 \code{\link[stats:time]{stats::time()}}

@@ -59,7 +59,7 @@ on the value of the \code{method} argument:
 \code{\link[GA:ga]{GA::ga()}}. The \code{segmenter} is of class \code{tidyga}.
 \item \code{taimal}: Uses the Genetic BMDL heuristic as implemented by
 \code{\link[=segment_taimal]{segment_taimal()}}. The \code{segmenter} is of class \code{\link[=seg_default]{seg_default()}}.
-\item \code{manual}: Uses the vector of changepoints in the \code{cpts} argument.
+\item \code{manual}: Uses the vector of changepoints in the \code{tau} argument.
 The \code{segmenter} is of class \code{\link[=seg_default]{seg_default()}}`.
 \item \code{null}: The default. Uses no changepoints.
 The \code{segmenter} is of class \code{\link[=seg_default]{seg_default()}}`.
@@ -75,8 +75,8 @@ segment(DataCPSim, method = "pelt", penalty = "AIC")
 segment(DataCPSim, method = "binseg", penalty = "AIC")
 segment(DataCPSim, method = "segneigh", penalty = "BIC")
 segment(DataCPSim, method = "random", num_generations = 10)
-segment(DataCPSim, method = "manual", cpts = c(826))
-two_cpts <- segment(DataCPSim, method = "manual", cpts = c(365, 826))
+segment(DataCPSim, method = "manual", tau = c(826))
+two_cpts <- segment(DataCPSim, method = "manual", tau = c(365, 826))
 plot(two_cpts)
 diagnose(two_cpts)
 segment(bogota_pm, method = "pelt")

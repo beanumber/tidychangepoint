@@ -44,6 +44,8 @@ fit_meanshift <- function(x, tau, ...) {
   return(out)
 }
 
+attr(fit_meanshift, "model_name") <- "meanshift"
+
 #' @rdname fit_meanshift
 #' @export
 fit_meanshift_ar1 <- function(x, tau, ...) {
@@ -51,3 +53,4 @@ fit_meanshift_ar1 <- function(x, tau, ...) {
     autoregress_errors()
 }
 
+attr(fit_meanshift_ar1, "model_name") <- "meanshift_ar1"

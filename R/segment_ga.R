@@ -46,13 +46,7 @@ segment_ga <- function(x,
   
   out <- methods::as(mod_ga, "tidyga")
   out@data <- as.ts(x)
-  model_params$model_fn <- model_fn |>
-    body() |>
-    as.character() |>
-    stringr::str_extract(pattern = "fit_.+\\(") |>
-    gsub(pattern = "\\(", replacement = "") |>
-    stats::na.omit() |> 
-    as.character()
+  model_params$model_fn <- whoami(model_fn)
   model_params$penalty_fn <- penalty_fn |>
     body() |>
     as.character() |>

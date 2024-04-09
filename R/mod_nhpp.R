@@ -122,6 +122,7 @@ fit_nhpp <- function(x, tau, ...) {
   return(out)
 }
 
+attr(fit_nhpp, "model_name") <- "nhpp"
 
 #' @rdname fit_nhpp
 #' @param object An `nhpp` object

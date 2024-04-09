@@ -172,6 +172,18 @@ as_year <- function(x) {
     format("%Y")
 }
 
+#' @rdname pad_tau
+#' @export
+#' @examples
+#' whoami(fit_meanshift)
+#' whoami(fit_meanshift_ar1)
+#' whoami(fit_lmshift)
+#' whoami(fit_nhpp)
+
+whoami <- function(x = fit_meanshift, ...) {
+  attr(x, "model_name")
+}
+
 
 #' Vectors implementation for logLik
 #' 

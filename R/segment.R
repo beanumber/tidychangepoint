@@ -73,7 +73,7 @@ segment.numeric <- function(x, method = "null", ...) {
 #'   [GA::ga()]. The `segmenter` is of class `tidyga`.
 #' - `taimal`: Uses the Genetic BMDL heuristic as implemented by 
 #'   [segment_taimal()]. The `segmenter` is of class [seg_default()].
-#' - `manual`: Uses the vector of changepoints in the `cpts` argument. 
+#' - `manual`: Uses the vector of changepoints in the `tau` argument. 
 #'   The `segmenter` is of class [seg_default()]`.
 #' - `null`: The default. Uses no changepoints. 
 #'   The `segmenter` is of class [seg_default()]`.
@@ -84,8 +84,8 @@ segment.numeric <- function(x, method = "null", ...) {
 #' segment(DataCPSim, method = "binseg", penalty = "AIC")
 #' segment(DataCPSim, method = "segneigh", penalty = "BIC")
 #' segment(DataCPSim, method = "random", num_generations = 10)
-#' segment(DataCPSim, method = "manual", cpts = c(826))
-#' two_cpts <- segment(DataCPSim, method = "manual", cpts = c(365, 826))
+#' segment(DataCPSim, method = "manual", tau = c(826))
+#' two_cpts <- segment(DataCPSim, method = "manual", tau = c(365, 826))
 #' plot(two_cpts)
 #' diagnose(two_cpts)
 #' segment(bogota_pm, method = "pelt")
@@ -130,14 +130,14 @@ segment.ts <- function(x, method = "null", ...) {
     mod <- segment_random(x, ...)
   }
   if (method == "manual") {
-    if(!"cpts" %in% names(args)) {
-      stop("Please supply the cpts argument to use the manual algorithm.")
+    if(!"tau" %in% names(args)) {
+      stop("Please supply the tau argument to use the manual algorithm.")
     }
-    cpts <- args[["cpts"]]
-    if (!is.list(cpts)) {
-      cpts <- list(cpts)
+    tau <- args[["tau"]]
+    if (!is.list(tau)) {
+      tau <- list(tau)
     }
-    mod <- new_seg_default(x, cpt_list = cpts)
+    mod <- new_seg_default(x, cpt_list = tau)
   }
   if (method == "null") {
     mod <- new_seg_default(x)
