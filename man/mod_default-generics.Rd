@@ -11,6 +11,7 @@
 \alias{augment.mod_default}
 \alias{tidy.mod_default}
 \alias{glance.mod_default}
+\alias{plot.mod_default}
 \title{Methods for mod_default objects}
 \usage{
 \method{as.ts}{mod_default}(x, ...)
@@ -30,6 +31,8 @@ model_variance(object, ...)
 \method{tidy}{mod_default}(x, ...)
 
 \method{glance}{mod_default}(x, ...)
+
+\method{plot}{mod_default}(x, ...)
 }
 \arguments{
 \item{x}{A \code{mod_default} object, typically the output from one of the \verb{fit_*()}
@@ -40,6 +43,9 @@ functions}
 
 \item{object}{any object from which a log-likelihood value, or a
    contribution to a log-likelihood value, can be extracted.}
+
+\item{use_time_index}{Should the x-axis labels be the time indices? Or the
+time labels?}
 }
 \description{
 Methods for mod_default objects
@@ -55,6 +61,7 @@ changepoints(cpts)
 augment(cpts)
 tidy(cpts)
 glance(cpts)
+plot(fit_meanshift(CET, tau = 300))
 }
 \seealso{
 \code{\link[broom:reexports]{broom::augment()}}

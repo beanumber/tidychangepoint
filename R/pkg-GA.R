@@ -110,5 +110,7 @@ fitness.ga <- function(object, ...) {
 #' @rdname model_fit
 #' @export
 model_fit.ga <- function(object, ...) {
-  object@model_params[["model_fn"]]
+  paste0("fit_", object@model_params[["model_fn"]]) |>
+    parse(text = _) |>
+    eval()
 }

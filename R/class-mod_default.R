@@ -172,7 +172,8 @@ tidy.mod_default <- function(x, ...) {
     dplyr::mutate(
       begin = utils::head(tau_padded, -1),
       end = utils::tail(tau_padded, -1)
-    )
+    ) |>
+    dplyr::inner_join(x$region_params, by = "region")
 }
 
 #' @rdname mod_default-generics
@@ -211,4 +212,51 @@ autoregress_errors <- function(mod, ...) {
   out$durbin_watson <- d
   out$model_name <- paste0(out$model_name, "_ar1")
   return(out)
+}
+
+
+#' @rdname mod_default-generics
+#' @param use_time_index Should the x-axis labels be the time indices? Or the 
+#' time labels? 
+#' @export
+#' @examples
+#' plot(fit_meanshift(CET, tau = 300))
+plot.mod_default <- function(x, ...) {
+  regions <- tidy(x)
+  ggplot2::ggplot(
+    data = augment(x), 
+    ggplot2::aes(x = index, y = y)
+  ) +
+    #    ggplot2::geom_rect(
+    #      data = regions,
+    #      ggplot2::aes(xmin = begin, xmax = end, ymin = 0, ymax = Inf, x = NULL, y = NULL),
+    #      fill = "grey90"
+    #    ) +
+    ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = end), linetype = 3) +
+    ggplot2::geom_hline(yintercept = mean(as.ts(x)), linetype = 3) +
+    ggplot2::geom_rug(sides = "l") +
+    ggplot2::geom_line() + 
+    ggplot2::geom_segment(
+      data = regions,
+      ggplot2::aes(x = begin, y = mean, xend = end, yend = mean),
+      color = "red"
+    ) +
+    ggplot2::geom_segment(
+      data = regions,
+      ggplot2::aes(x = begin, y = mean + 1.96 * sd, xend = end, yend = mean + 1.96 * sd),
+      color = "red",
+      linetype = 3
+    ) +
+    ggplot2::geom_segment(
+      data = regions,
+      ggplot2::aes(x = begin, y = mean - 1.96 * sd, xend = end, yend = mean - 1.96 * sd),
+      color = "red",
+      linetype = 3
+    ) + 
+    ggplot2::scale_x_continuous("Time Index (t)") +
+    ggplot2::scale_y_continuous("Original Measurement") + 
+    ggplot2::labs(
+      title = "Original times series",
+      subtitle = paste("Mean value is", round(mean(as.ts(x), na.rm = TRUE), 2))
+    )
 }

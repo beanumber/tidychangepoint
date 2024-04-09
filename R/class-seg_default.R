@@ -108,7 +108,7 @@ fitness.seg_default <- function(object, ...) {
 #' @rdname model_fit
 #' @export
 model_fit.seg_default <- function(object, ...) {
-  "meanshift"
+  fit_meanshift
 }
 
 #' @rdname new_seg_default

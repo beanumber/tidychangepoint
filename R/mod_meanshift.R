@@ -31,10 +31,13 @@ fit_meanshift <- function(x, tau, ...) {
 
   sigma_hatsq <- sum((y - y_hat)^2) / N
   
+  regions <- split_by_tau(as.ts(x), tau = tau) |>
+    names()
+  
   out <- mod_default(
     x = y,
     tau = tau,
-    region_params = tibble::tibble(mu = mu_seg),
+    region_params = tibble::tibble(region = regions, mu = mu_seg),
     model_params = c(
       sigma_hatsq = sigma_hatsq
     ),

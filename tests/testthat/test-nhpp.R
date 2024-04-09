@@ -31,13 +31,15 @@ test_that("generics works", {
 test_that("BMDL works", {
   y <- test_set(n = 1, seed = 123)
   seg <- segment(y, method = "pelt")
-  expect_s3_class(logLik(seg$nhpp), "logLik")
-  expect_type(BMDL(seg$nhpp), "double")
+  nhpp <- fit_nhpp(y, changepoints(seg))
+  expect_s3_class(logLik(nhpp), "logLik")
+  expect_type(BMDL(nhpp), "double")
 
   expect_identical(fit_nhpp(y, c(0, 500, 2000))$region_params, fit_nhpp(y, 500)$region_params)
   
   z <- segment(DataCPSim, method = "null")
-  expect_equal(BMDL(z$nhpp), - 2 * sum(z$nhpp$region_params[["logPost"]]))
+  nhpp <- fit_nhpp(as.ts(z), changepoints(z))
+  expect_equal(BMDL(nhpp), - 2 * sum(nhpp$region_params[["logPost"]]))
 })
 
 test_that("parameter fitting works", {

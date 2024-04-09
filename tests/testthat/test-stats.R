@@ -13,6 +13,7 @@ test_that("lmshift works", {
   expect_s3_class(x, "mod_default")
   expect_true("sigma_hatsq" %in% names(x$model_params))
   expect_false("phi_hat" %in% names(x$model_params))
+  expect_true("region" %in% names(x$region_params))
 
   y <- fit_meanshift_ar1(CET, tau = ids)
   expect_s3_class(y, "mod_default")
@@ -25,6 +26,7 @@ test_that("lmshift works", {
   expect_equal(model_variance(x), model_variance(z))
   expect_equal(x$model_params["sigma_hatsq"], z$model_params["sigma_hatsq"])
   expect_equal(deg_free(x), deg_free(z))
+  expect_true("region" %in% names(z$region_params))
   
   w <- fit_lmshift_ar1(CET, tau = ids)
   expect_true(all(abs(fitted(w) - fitted(y)) < 0.000000001))
@@ -59,4 +61,9 @@ test_that("lmshift works", {
   logLik(trend_ar1_trunc)
   BIC(trend_ar1_trunc)
   MDL(trend_ar1_trunc) + 2 * log(nobs(trend_ar1_trunc))
+  
+  x <- fit_meanvar(CET, tau = c(42, 330))
+  expect_true("sigma_hatsq" %in% names(x$region_params))
+  expect_true("region" %in% names(x$region_params))
+  
 })

@@ -53,14 +53,14 @@ model_fit.tidycpt <- function(object, ...) {
 #' @seealso [broom::augment()]
 #' @export
 augment.tidycpt <- function(x, ...) {
-  augment(x$nhpp)
+  augment(x$model)
 }
 
 #' @rdname tidycpt-generics
 #' @seealso [broom::tidy()]
 #' @export
 tidy.tidycpt <- function(x, ...) {
-  tidy(x$nhpp)
+  tidy(x$model)
 }
 
 #' @rdname tidycpt-generics
@@ -79,7 +79,7 @@ glance.tidycpt <- function(x, ...) {
 #' @export
 compare_models <- function(x, ...) {
   list(
-    x$nhpp,
+    x$model,
     fit_lmshift(as.ts(x), tau = changepoints(x), trends = FALSE),
     fit_lmshift(as.ts(x), tau = changepoints(x), trends = FALSE, ar1 = TRUE),
     fit_lmshift(as.ts(x), tau = changepoints(x), trends = TRUE),
@@ -112,44 +112,7 @@ compare_algorithms <- function(x, ...) {
 #' plot(segment(CET, method = "pelt"))
 #' plot(segment(CET, method = "pelt"), use_time_index = TRUE)
 plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
-  regions <- x |>
-    tidy() |>
-    dplyr::inner_join(x$nhpp$region_params, by = "region")
-  g <- ggplot2::ggplot(
-    data = augment(x), 
-    ggplot2::aes(x = index, y = y)
-  ) +
-#    ggplot2::geom_rect(
-#      data = regions,
-#      ggplot2::aes(xmin = begin, xmax = end, ymin = 0, ymax = Inf, x = NULL, y = NULL),
-#      fill = "grey90"
-#    ) +
-    ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = end), linetype = 3) +
-    ggplot2::geom_hline(yintercept = mean(as.ts(x)), linetype = 3) +
-    ggplot2::geom_rug(sides = "l") +
-    ggplot2::geom_line() + 
-    ggplot2::geom_segment(
-      data = regions,
-      ggplot2::aes(x = begin, y = mean, xend = end, yend = mean),
-      color = "red"
-    ) +
-    ggplot2::geom_segment(
-      data = regions,
-      ggplot2::aes(x = begin, y = mean + 1.96 * sd, xend = end, yend = mean + 1.96 * sd),
-      color = "red",
-      linetype = 3
-    ) +
-    ggplot2::geom_segment(
-      data = regions,
-      ggplot2::aes(x = begin, y = mean - 1.96 * sd, xend = end, yend = mean - 1.96 * sd),
-      color = "red",
-      linetype = 3
-    ) + 
-    ggplot2::scale_y_continuous("Original Measurement") + 
-    ggplot2::labs(
-      title = "Original times series",
-      subtitle = paste("Mean value is", round(mean(as.ts(x), na.rm = TRUE), 2))
-    )
+  g <- plot(x$model)
   if (use_time_index) {
     my_labels <- function(t) {
       n <- length(t)
@@ -160,12 +123,10 @@ plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
       replace(out, is.na(out), "")
     }
     
-    g +
+    g <- g +
       ggplot2::scale_x_continuous("Time", labels = my_labels)
-  } else {
-    g +
-      ggplot2::scale_x_continuous("Time Index (t)")
   }
+  g
 }
 
 #' @rdname diagnose
@@ -178,7 +139,7 @@ plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
 #' diagnose(segment(test_set(n = 2, sd = 4), method = "pelt"))
 #' 
 diagnose.tidycpt <- function(x, ...) {
-  patchwork::wrap_plots(plot(x), plot(x$nhpp), ncol = 1)
+  patchwork::wrap_plots(plot(x), plot(x$model), ncol = 1)
 }
 
 #' Obtain a descriptive filename for a tidycpt object
@@ -191,12 +152,12 @@ diagnose.tidycpt <- function(x, ...) {
 
 file_name <- function(x, data_name_slug = "data") {
   glance(x) |>
-    dplyr::select(dplyr::matches("algorithm|params|nhpp_BMDL")) |>
+    dplyr::select(dplyr::matches("algorithm|params|MDL")) |>
     dplyr::mutate(
       label = paste(
         data_name_slug, 
         algorithm,
-        floor(BMDL(x$nhpp)),
+        floor(MDL(x$model)),
         params(x$segmenter) |> cli::hash_obj_md5(),
         sep = "_"
       ),

@@ -108,8 +108,8 @@ fitness.cpt <- function(object, ...) {
 #' @export
 model_fit.cpt <- function(object, ...) {
   if (object@cpttype == "mean and variance") {
-    return("fit_meanvar")
+    return(fit_meanvar)
   } else {
-    return("fit_meanshift")
+    return(fit_meanshift)
   }
 }

@@ -100,34 +100,34 @@ segment.ts <- function(x, method = "null", ...) {
   begin <- Sys.time()
   
   if (method == "pelt") {
-    mod <- changepoint::cpt.meanvar(data = x, method = "PELT", ...)
+    seg <- changepoint::cpt.meanvar(data = x, method = "PELT", ...)
   }
   if (method == "binseg") {
-    mod <- changepoint::cpt.meanvar(data = x, method = "BinSeg", ...)
+    seg <- changepoint::cpt.meanvar(data = x, method = "BinSeg", ...)
   }
   if (method == "segneigh") {
-    mod <- changepoint::cpt.meanvar(data = x, method = "SegNeigh", ...)
+    seg <- changepoint::cpt.meanvar(data = x, method = "SegNeigh", ...)
   }
   if (method == "single-best") {
-    mod <- changepoint::cpt.meanvar(data = x, method = "AMOC", ...)
+    seg <- changepoint::cpt.meanvar(data = x, method = "AMOC", ...)
   }
   if (method == "wbs") {
-    mod <- wbs::wbs(x, ...)
+    seg <- wbs::wbs(x, ...)
   }
   if (method == "ga") {
-    mod <- segment_ga(x, ...)
+    seg <- segment_ga(x, ...)
   }
   if (method == "ga-shi") {
-    mod <- segment_ga_shi(x, ...)
+    seg <- segment_ga_shi(x, ...)
   }
   if (method == "ga-taimal") {
-    mod <- segment_ga_taimal(x, ...)
+    seg <- segment_ga_taimal(x, ...)
   }
   if (method == "taimal") {
-    mod <- segment_taimal(x, ...)
+    seg <- segment_taimal(x, ...)
   }
   if (method == "random") {
-    mod <- segment_random(x, ...)
+    seg <- segment_random(x, ...)
   }
   if (method == "manual") {
     if(!"tau" %in% names(args)) {
@@ -137,16 +137,16 @@ segment.ts <- function(x, method = "null", ...) {
     if (!is.list(tau)) {
       tau <- list(tau)
     }
-    mod <- new_seg_default(x, cpt_list = tau)
+    seg <- new_seg_default(x, cpt_list = tau)
   }
   if (method == "null") {
-    mod <- new_seg_default(x)
+    seg <- new_seg_default(x)
   }
   # build the tidycpt object
+  m <- model_fit(seg)
   obj <- list(
-    segmenter = mod,
-    nhpp = fit_nhpp(as.ts(x), changepoints(mod), ...),
-    model = model_fit(mod),
+    segmenter = seg,
+    model = m(as.ts(x), changepoints(seg), ...),
     elapsed_time = Sys.time() - begin
   )
   class(obj) <- c("tidycpt")

@@ -43,10 +43,17 @@ fit_lmshift <- function(x, tau, trends = FALSE, ...) {
   
   mod <- stats::lm(stats::as.formula(form), data = ds, ...)
 
+  regions <- split_by_tau(as.ts(x), tau = tau) |>
+    names()
+  
+  region_params <- mod |>
+    tbl_coef() |>
+    dplyr::mutate(region = regions)
+  
   mod_default(
     x = as.ts(x),
     tau = tau,
-    region_params = tbl_coef(mod),
+    region_params = region_params,
     model_params = c(
       sigma_hatsq = model_variance(mod)
     ),

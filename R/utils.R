@@ -147,7 +147,7 @@ tbl_coef <- function(mod, ...) {
         mu = mu + tau * beta
       )
   }
-  vars <- c("mu", "beta")
+  vars <- c("region", "mu", "beta")
   out |>
     dplyr::select(any_of(vars))
 }
