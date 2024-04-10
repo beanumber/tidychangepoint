@@ -89,10 +89,10 @@ segment_taimal <- function(x,
 
     this_generation <- obj$mat_cp |>
       mat_cp_2_list() |>
-      evaluate_cpts(.data = as.ts(obj))
+      evaluate_cpts(.data = as.ts(obj), model_fn = fit_nhpp)
     
     best_cpts[[i]] <- this_generation |>
-      dplyr::arrange(BMDL) |>
+      dplyr::arrange(obj$penalty) |>
       utils::head(1)
     
     # Imprimimos el porcentaje de progreso
@@ -104,7 +104,7 @@ segment_taimal <- function(x,
       exceedances() |>
       evolve_gbmdl(
         obj$mat_cp, 
-        this_generation |> dplyr::pull(BMDL)
+        this_generation |> dplyr::pull(obj$penalty)
       )
     #    plot_evolution(obj, i)
     #    plot_cpt_repeated(obj, i)
@@ -125,7 +125,10 @@ segment_taimal <- function(x,
 #' @export
 #' @examples
 #' mat_cp <- sim_k_cp_BMDL(DataCPSim)
-#' bmdls <- mat_cp |> mat_cp_2_list() |> evaluate_cpts(.data = as.ts(DataCPSim)) |> dplyr::pull(BMDL)
+#' bmdls <- mat_cp |> 
+#'   mat_cp_2_list() |> 
+#'   evaluate_cpts(.data = as.ts(DataCPSim), model_fn = fit_nhpp) |> 
+#'   dplyr::pull(BMDL)
 #' evolve_gbmdl(exceedances(DataCPSim), mat_cp, bmdls)
 
 evolve_gbmdl <- function(x, mat_cp, these_bmdls) {

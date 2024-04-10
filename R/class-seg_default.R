@@ -9,7 +9,7 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value"))
 #' @inheritParams new_mod_default
 #' @param ... currently ignored
 #' @examples
-#' seg <- seg_default(DataCPSim)
+#' seg <- seg_default(DataCPSim, cpt_list = list(c(365), c(330, 839)))
 #' str(seg)
 #' as.ts(seg)
 #' changepoints(seg)
@@ -27,7 +27,8 @@ new_seg_default <- function(x = numeric(),
     list(
       data = stats::as.ts(x),
       algorithm = algorithm,
-      candidates = evaluate_cpts(cpt_list, .data = stats::as.ts(x)),
+      candidates = cpt_list |>
+        evaluate_cpts(.data = stats::as.ts(x), model_fn = model_fit(model_name)),
       params = params,
       model_name = model_name,
       penalty = penalty
@@ -78,10 +79,17 @@ num_candidates <- function(x) {
 
 #' @rdname cpt-generics
 #' @export
-best_nhpp <- function(x, ...) {
+best_cpt <- function(x, ...) {
   x$candidates |>
     dplyr::arrange(.data[[x$penalty]]) |>
-    utils::head(1) |>
+    utils::head(1)
+}
+
+
+#' @rdname cpt-generics
+#' @export
+best_nhpp <- function(x, ...) {
+  best_cpt(x, ...) |>
     dplyr::pull(nhpp) |>
     purrr::pluck(1)
 }
@@ -90,9 +98,7 @@ best_nhpp <- function(x, ...) {
 #' @rdname changepoints
 #' @export
 changepoints.seg_default <- function(x, ...) {
-  x$candidates |>
-    dplyr::arrange(.data[[x$penalty]]) |>
-    utils::head(1) |>
+  best_cpt(x, ...)|>
     dplyr::pull(changepoints) |>
     purrr::pluck(1) |>
     as.integer()
@@ -104,9 +110,7 @@ fitness.seg_default <- function(object, ...) {
   if (nrow(object$candidates) == 0) {
     out <- NA
   } else {
-    out <- object$candidates |>
-      dplyr::arrange(.data[[object$penalty]]) |>
-      utils::head(1) |>
+    out <- best_cpt(object, ...) |>
       dplyr::pull(.data[[object$penalty]])
   }
   names(out) <- object$penalty
@@ -121,20 +125,20 @@ model_name.seg_default <- function(object, ...) {
 
 #' @rdname new_seg_default
 #' @export
-evaluate_cpts.seg_default <- function(x, ...) {
-  evaluate_cpts(x$candidates, .data = as.ts(x), ...)
+evaluate_cpts.seg_default <- function(x, model_fn, ...) {
+  evaluate_cpts(x$candidates, .data = as.ts(x), model_fn = model_fit(x), ...)
 }
 
 #' @rdname new_seg_default
 #' @export
-evaluate_cpts.list <- function(x, ...) {
+evaluate_cpts.list <- function(x, model_fn, ...) {
   tibble::tibble(changepoints = x) |>
-    evaluate_cpts(...)
+    evaluate_cpts(model_fn = model_fn, ...)
 }
 
 #' @rdname new_seg_default
 #' @export
-evaluate_cpts.tbl_df <- function(x, ...) {
+evaluate_cpts.tbl_df <- function(x, model_fn, ...) {
   args <- list(...)
   if (!".data" %in% names(args)) {
     stop("This method requires a .data argument")
@@ -146,18 +150,25 @@ evaluate_cpts.tbl_df <- function(x, ...) {
   }
   y <- x |>
     dplyr::mutate(
-      nhpp = purrr::map(changepoints, ~fit_nhpp(x = as.ts(ds), tau = .x)),
-      BMDL = purrr::map_dbl(nhpp, BMDL)
+      model = purrr::map(changepoints, ~model_fn(x = as.ts(ds), tau = .x)),
+#      BMDL = purrr::map_dbl(nhpp, BMDL)
     )
-  ll <- y$nhpp |>
+  ll <- y$model |>
     purrr::map(logLik)
   y$logLik <- as.numeric(ll)
-  y |>
+  out <- y |>
     dplyr::mutate(
-      AIC = purrr::map_dbl(nhpp, AIC),
-      BIC = purrr::map_dbl(nhpp, BIC),
-      MBIC = purrr::map_dbl(nhpp, MBIC),
-    )
+      AIC = purrr::map_dbl(model, AIC),
+      BIC = purrr::map_dbl(model, BIC),
+      MBIC = purrr::map_dbl(model, MBIC),
+      MDL = purrr::map_dbl(model, MDL)
+    )  
+  if (model_name(model_fn) == "nhpp") {
+    out <- out |>
+      dplyr::mutate(BMDL = purrr::map_dbl(model, BMDL))
+  } else {
+    out
+  }
 }
 
 #' @rdname seg-default-generics

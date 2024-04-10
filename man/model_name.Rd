@@ -7,6 +7,8 @@
 \alias{model_name.seg_default}
 \alias{model_name.tidycpt}
 \alias{model_name}
+\alias{model_name.default}
+\alias{model_name.character}
 \alias{model_name.ga}
 \alias{model_name.cpt}
 \alias{model_name.wbs}
@@ -19,6 +21,10 @@
 \method{model_name}{tidycpt}(object, ...)
 
 model_name(object, ...)
+
+\method{model_name}{default}(object, ...)
+
+\method{model_name}{character}(object, ...)
 
 \method{model_name}{ga}(object, ...)
 

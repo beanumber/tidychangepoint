@@ -162,7 +162,10 @@ por lo cual se nosotros:
 }
 \examples{
 mat_cp <- sim_k_cp_BMDL(DataCPSim)
-bmdls <- mat_cp |> mat_cp_2_list() |> evaluate_cpts(.data = as.ts(DataCPSim)) |> dplyr::pull(BMDL)
+bmdls <- mat_cp |> 
+  mat_cp_2_list() |> 
+  evaluate_cpts(.data = as.ts(DataCPSim), model_fn = fit_nhpp) |> 
+  dplyr::pull(BMDL)
 evolve_gbmdl(exceedances(DataCPSim), mat_cp, bmdls)
 sim_1_cp_BMDL(exceedances(DataCPSim))
 sim_1_cp_BMDL(exceedances(rlnorm_ts_1))

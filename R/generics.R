@@ -37,6 +37,18 @@ params <- function(x, ...) UseMethod("params")
 #' @export
 model_name <- function(object, ...) UseMethod("model_name")
 
+#' @rdname model_name
+#' @export
+model_name.default <- function(object, ...) {
+  attr(object, "model_name")
+}
+
+#' @rdname model_name
+#' @export
+model_name.character <- function(object, ...) {
+  object
+}
+
 #' Convert a segmenter to a `mod_default` object
 #' @inheritParams fitness
 #' @export

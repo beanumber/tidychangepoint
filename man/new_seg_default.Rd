@@ -27,11 +27,11 @@ seg_default(x, ...)
 
 num_candidates(x)
 
-\method{evaluate_cpts}{seg_default}(x, ...)
+\method{evaluate_cpts}{seg_default}(x, model_fn, ...)
 
-\method{evaluate_cpts}{list}(x, ...)
+\method{evaluate_cpts}{list}(x, model_fn, ...)
 
-\method{evaluate_cpts}{tbl_df}(x, ...)
+\method{evaluate_cpts}{tbl_df}(x, model_fn, ...)
 
 evaluate_cpts(x, ...)
 }
@@ -52,7 +52,7 @@ evaluate_cpts(x, ...)
 Default class for candidate changepoint sets
 }
 \examples{
-seg <- seg_default(DataCPSim)
+seg <- seg_default(DataCPSim, cpt_list = list(c(365), c(330, 839)))
 str(seg)
 as.ts(seg)
 changepoints(seg)

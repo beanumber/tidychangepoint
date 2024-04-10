@@ -12,8 +12,8 @@ test_that("seg_default works", {
   expect_type(nobs(x), "integer")
 
   expect_s3_class(evaluate_cpts(x$segmenter), "tbl_df")
-  expect_s3_class(evaluate_cpts(list(), .data = DataCPSim), "tbl_df")
-  expect_s3_class(evaluate_cpts(tibble::tibble(changepoints = list(826)), .data = DataCPSim), "tbl_df")
+  expect_s3_class(evaluate_cpts(list(), .data = DataCPSim, model_fn = fit_nhpp), "tbl_df")
+  expect_s3_class(evaluate_cpts(tibble::tibble(changepoints = list(826)), .data = DataCPSim, model_fn = fit_nhpp), "tbl_df")
   
   y <- segment(DataCPSim, method = "manual", tau = c(826))
   expect_s3_class(y, "tidycpt")
@@ -39,6 +39,7 @@ test_that("seg_default works", {
   expect_type(changepoints(z), "integer")
   expect_equal(length(changepoints(z)), 2)
   expect_type(nobs(z), "integer")
+  expect_true(all(c("logLik", "AIC", "BIC", "MBIC", "MDL") %in% names(z$segmenter$candidates)))
 })
 
 test_that("random works", {
