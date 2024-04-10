@@ -46,9 +46,6 @@ functions}
 
 \item{object}{any object from which a log-likelihood value, or a
    contribution to a log-likelihood value, can be extracted.}
-
-\item{use_time_index}{Should the x-axis labels be the time indices? Or the
-time labels?}
 }
 \description{
 Methods for mod_default objects

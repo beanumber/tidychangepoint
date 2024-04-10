@@ -23,12 +23,8 @@ BMDL(object, ...)
 Bayesian Maximum Descriptive Length
 }
 \examples{
-x <- segment(DataCPSim, method = "pelt")
-BMDL(x$nhpp)
-y <- segment(DataCPSim, method = "manual", cpts = 826)
-BMDL(y$nhpp)
-z <- segment(DataCPSim, method = "single-best")
-BMDL(z$nhpp)
+BMDL(fit_nhpp(DataCPSim, tau = NULL))
+BMDL(fit_nhpp(DataCPSim, tau = c(365, 830)))
 }
 \seealso{
 \code{\link[=MDL]{MDL()}}

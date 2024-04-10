@@ -24,6 +24,7 @@ test_that("lmshift works", {
   z <- fit_lmshift(CET, tau = ids)
   expect_true(all(abs(fitted(z) - fitted(x)) < 0.000000001))
   expect_equal(model_variance(x), model_variance(z))
+  expect_equal(coef(x), coef(z))
   expect_equal(x$model_params["sigma_hatsq"], z$model_params["sigma_hatsq"])
   expect_equal(deg_free(x), deg_free(z))
   expect_true("region" %in% names(z$region_params))
@@ -31,6 +32,7 @@ test_that("lmshift works", {
   w <- fit_lmshift_ar1(CET, tau = ids)
   expect_true(all(abs(fitted(w) - fitted(y)) < 0.000000001))
   expect_equal(model_variance(y), model_variance(w))
+  expect_equal(coef(y), coef(w))
   expect_equal(deg_free(y), deg_free(w))
   
   trend_wn <- fit_lmshift(CET, tau = ids, trends = TRUE)

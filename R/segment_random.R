@@ -6,14 +6,13 @@
 #' @examples
 #' segment_random(DataCPSim, 10)
 #' 
-segment_random <- function(x, num_generations = 10, ...) {
-  cpts <- random_cpts(x, n = num_generations)
+segment_random <- function(x, popSize = 10, ...) {
+  cpts <- random_cpts(x, n = popSize)
   new_seg_default(
     x, 
     algorithm = "random",
     cpt_list = cpts, 
-    params = list(num_generations = num_generations), 
-    model_name = "meanshift",
+    params = list(popSize = popSize), 
     ...
   )
 }

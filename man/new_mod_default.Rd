@@ -35,6 +35,8 @@ across the entire data set (not just in each region).}
 \item{fitted_values}{Fitted values returned by the model on the original
 data set.}
 
+\item{model_name}{A \code{character} vector giving the model's name.}
+
 \item{...}{currently ignored}
 }
 \description{

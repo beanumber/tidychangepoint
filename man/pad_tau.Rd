@@ -12,7 +12,6 @@
 \alias{test_set}
 \alias{split_by_tau}
 \alias{regions_by_tau}
-\alias{tbl_coef}
 \alias{deg_free}
 \alias{as_year}
 \alias{whoami}
@@ -41,15 +40,13 @@ split_by_tau(x, tau)
 
 regions_by_tau(n, tau)
 
-tbl_coef(mod, ...)
-
 deg_free(x)
 
 as_year(x)
 
 whoami(x = fit_meanshift, ...)
 
-model_fit(object, ...)
+model_fit(x, ...)
 }
 \arguments{
 \item{tau}{a numeric vector of changepoints}
@@ -67,6 +64,8 @@ model_fit(object, ...)
 \item{sd}{Standard deviation passed to \code{\link[stats:Normal]{stats::rnorm()}}}
 
 \item{seed}{Value passed to \code{\link[base:Random]{base::set.seed()}}}
+
+\item{...}{currently ignored}
 }
 \description{
 Utility functions
@@ -86,12 +85,8 @@ tau2binary(binary2tau(c(0, 0, 1, 1, 0, 1)), n = 6)
 tau2time(c(42, 81, 330), index = as_year(time(CET)))
 time2tau(c(1700, 1739, 1988), index = as_year(time(CET)))
 split_by_tau(DataCPSim, c(365, 826))
-regions_by_tau(n, c(365, 826))
-ds <- data.frame(y = as.ts(CET), t = 1:length(CET))
-tbl_coef(lm(y ~ 1, data = ds))
-tbl_coef(lm(y ~ (t >= 42) + (t >= 81), data = ds))
-tbl_coef(lm(y ~ t * (t >= 42) + t * (t >= 81), data = ds))
-deg_free(segment(DataCPSim)$nhpp)
+regions_by_tau(1096, c(365, 826))
+deg_free(segment(DataCPSim)$model)
 as_year("1988-01-01")
 whoami(fit_meanshift)
 whoami(fit_meanshift_ar1)

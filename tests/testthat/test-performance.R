@@ -67,7 +67,7 @@ test_that("performance works", {
   diagnose(y)
   
   test_long <- test_sets |>
-    dplyr::select(ncpts_true, contains("bmdl")) |>
+    dplyr::select(ncpts_true, dplyr::contains("bmdl")) |>
     tidyr::pivot_longer(cols = -ncpts_true, names_to = "algorithm", values_to = "bmdl")
   
   ggplot2::ggplot(test_long, ggplot2::aes(x = ncpts_true, y = bmdl, color = algorithm)) +

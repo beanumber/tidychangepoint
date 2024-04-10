@@ -35,21 +35,21 @@ params <- function(x, ...) UseMethod("params")
 #' Retrieve the model that a segmenter used
 #' @inheritParams fitness
 #' @export
-model_name <- function(x, ...) UseMethod("model_name")
+model_name <- function(object, ...) UseMethod("model_name")
 
 #' Convert a segmenter to a `mod_default` object
 #' @inheritParams fitness
 #' @export
-as.mod_default <- function(x, ...) UseMethod("as.mod_default")
+as.mod_default <- function(object, ...) UseMethod("as.mod_default")
 
 #' @rdname ga-generics
 #' @export
 #' @examples
-#' cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
+#' cpt <- segment(DataCPSim, method = "ga", maxiter = 5)
 #' as.mod_default(cpt$segmenter)
-as.mod_default.default <- function(x, ...) {
-  f <- model_fit(x)
-  f(as.ts(x), tau = changepoints(x))
+as.mod_default.default <- function(object, ...) {
+  f <- model_fit(object)
+  f(as.ts(object), tau = changepoints(object))
 }
 
 #' Modified Bayesian Information Criterion
@@ -87,12 +87,8 @@ BMDL <- function(object, ...) UseMethod("BMDL")
 #' @rdname BMDL
 #' @export
 #' @examples
-#' x <- segment(DataCPSim, method = "pelt")
-#' BMDL(x$nhpp)
-#' y <- segment(DataCPSim, method = "manual", cpts = 826)
-#' BMDL(y$nhpp)
-#' z <- segment(DataCPSim, method = "single-best")
-#' BMDL(z$nhpp)
+#' BMDL(fit_nhpp(DataCPSim, tau = NULL))
+#' BMDL(fit_nhpp(DataCPSim, tau = c(365, 830)))
 BMDL.default <- function(object, ...) {
   BMDL(logLik(object))
 }

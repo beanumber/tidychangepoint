@@ -8,7 +8,7 @@
 \usage{
 segment_ga_random(x, ...)
 
-segment_random(x, num_generations = 10, ...)
+segment_random(x, popSize = 10, ...)
 
 random_cpts(x, n = 10, k = round(log(length(as.ts(x)))), ...)
 }
@@ -17,11 +17,11 @@ random_cpts(x, n = 10, k = round(log(length(as.ts(x)))), ...)
 
 \item{...}{currently ignored}
 
-\item{num_generations}{Number of generations}
-
 \item{n}{Number of random changepoints sets to generate}
 
 \item{k}{Rate function for Poisson distribution of mean changepoint set length.}
+
+\item{num_generations}{Number of generations}
 }
 \description{
 Segment a times series using randomly selected candidate changepoints

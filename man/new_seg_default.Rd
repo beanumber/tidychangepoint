@@ -17,6 +17,7 @@ new_seg_default(
   cpt_list = list(),
   params = list(),
   model_name = "meanshift",
+  penalty = "BIC",
   ...
 )
 
@@ -43,6 +44,8 @@ evaluate_cpts(x, ...)
 
 \item{params}{a possibly empty \code{list()} of parameters}
 
+\item{model_name}{A \code{character} vector giving the model's name.}
+
 \item{...}{currently ignored}
 }
 \description{
@@ -53,4 +56,6 @@ seg <- seg_default(DataCPSim)
 str(seg)
 as.ts(seg)
 changepoints(seg)
+fitness(seg)
+glance(seg)
 }

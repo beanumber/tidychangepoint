@@ -9,7 +9,7 @@
 \alias{nobs.ga}
 \title{Compatibility layer for GA}
 \usage{
-\method{as.mod_default}{default}(x, ...)
+\method{as.mod_default}{default}(object, ...)
 
 \method{glance}{ga}(x, ...)
 
@@ -20,17 +20,17 @@
 \method{nobs}{ga}(object, ...)
 }
 \arguments{
-\item{x}{A \code{GA} object returned by \code{\link[GA:ga]{GA::ga()}}}
+\item{object}{A \code{ga} object.}
 
 \item{...}{arguments passed to methods}
 
-\item{object}{A \code{ga} object.}
+\item{x}{A \code{GA} object returned by \code{\link[GA:ga]{GA::ga()}}}
 }
 \description{
 Compatibility layer for GA
 }
 \examples{
-cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
+cpt <- segment(DataCPSim, method = "ga", maxiter = 5)
 as.mod_default(cpt$segmenter)
 cpts <- segment(DataCPSim, method = "ga", maxiter = 10)
 class(cpts)

@@ -4,9 +4,11 @@
 \alias{as.mod_default}
 \title{Convert a segmenter to a \code{mod_default} object}
 \usage{
-as.mod_default(x, ...)
+as.mod_default(object, ...)
 }
 \arguments{
+\item{object}{An object, typically returned by \code{\link[=segment]{segment()}}}
+
 \item{...}{currently ignored}
 }
 \description{

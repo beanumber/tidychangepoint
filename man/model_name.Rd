@@ -18,7 +18,7 @@
 
 \method{model_name}{tidycpt}(object, ...)
 
-model_name(x, ...)
+model_name(object, ...)
 
 \method{model_name}{ga}(object, ...)
 

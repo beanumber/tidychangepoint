@@ -1,6 +1,6 @@
 globalVariables(c(
   "tau_prev", "tau_this", "m_prev", "m_this", "cum_m_this", "cum_m_prev", "m_i",
-  "cum_m_net", "idx", "intensity"
+  "cum_m_net", "idx", "intensity", "param_alpha", "param_beta"
 ))
 
 #' @rdname fit_nhpp
@@ -131,7 +131,7 @@ logLik.nhpp <- function(object, ...) {
   ll <- sum(object$region_params[["logLik"]])
   m <- length(changepoints(object))
   num_region_params <- object$region_params |>
-    dplyr::select(contains("param_")) |>
+    dplyr::select(dplyr::contains("param_")) |>
     dim() |>
     prod()
   num_model_params <- length(object$model_params)
@@ -264,7 +264,7 @@ plot.nhpp <- function(x, ...) {
 #' @examples
 #' plot_intensity(fit_nhpp(DataCPSim, tau = 826))
 #' mod <- segment(bogota_pm, method = "pelt")
-#' plot_intensity(mod$nhpp)
+#' plot_intensity(fit_nhpp(bogota_pm, tau = changepoints(mod)))
 
 plot_intensity <- function(x, ...) {
   z <- x |>

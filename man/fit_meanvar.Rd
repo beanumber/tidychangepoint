@@ -6,6 +6,13 @@
 \usage{
 fit_meanvar(x, tau, ...)
 }
+\arguments{
+\item{x}{A time series}
+
+\item{tau}{a set of indices representing a changepoint set}
+
+\item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
+}
 \description{
 Fit a model for mean and variance
 }

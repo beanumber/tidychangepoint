@@ -119,7 +119,7 @@ split_by_tau <- function(x, tau) {
 #' @rdname pad_tau
 #' @export
 #' @examples
-#' regions_by_tau(n, c(365, 826))
+#' regions_by_tau(1096, c(365, 826))
 
 regions_by_tau <- function(n, tau) {
   cut_inclusive(1:n, pad_tau(tau, n)) |>
@@ -129,7 +129,7 @@ regions_by_tau <- function(n, tau) {
 #' @rdname pad_tau
 #' @export
 #' @examples
-#' deg_free(segment(DataCPSim)$nhpp)
+#' deg_free(segment(DataCPSim)$model)
 
 deg_free <- function(x) {
   attr(logLik(x), "df")
@@ -147,6 +147,7 @@ as_year <- function(x) {
 }
 
 #' @rdname pad_tau
+#' @param ... currently ignored
 #' @export
 #' @examples
 #' whoami(fit_meanshift)
@@ -160,8 +161,8 @@ whoami <- function(x = fit_meanshift, ...) {
 
 #' @rdname pad_tau
 #' @export
-model_fit <- function(object, ...) {
-  paste0("fit_", model_name(object)) |>
+model_fit <- function(x, ...) {
+  paste0("fit_", model_name(x)) |>
     parse(text = _) |>
     eval()
 }

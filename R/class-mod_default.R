@@ -11,6 +11,7 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value"))
 #' across the entire data set (not just in each region). 
 #' @param fitted_values Fitted values returned by the model on the original
 #' data set. 
+#' @param model_name A `character` vector giving the model's name. 
 #' @param ... currently ignored
 #' @examples
 #' cpt <- mod_default(CET)
@@ -96,7 +97,7 @@ logLik.mod_default <- function(object, ...) {
   sigma_hatsq <- model_variance(object)
   ll <- -(N * log(sigma_hatsq) + N + N * log(2 * pi)) / 2
   num_region_params <- coef(object) |>
-    dplyr::select(contains("param_")) |>
+    dplyr::select(dplyr::contains("param_")) |>
     dim() |>
     prod()
   num_model_params <- length(object$model_params)
@@ -230,8 +231,6 @@ autoregress_errors <- function(mod, ...) {
 
 
 #' @rdname mod_default-generics
-#' @param use_time_index Should the x-axis labels be the time indices? Or the 
-#' time labels? 
 #' @export
 #' @examples
 #' plot(fit_meanshift(CET, tau = 300))

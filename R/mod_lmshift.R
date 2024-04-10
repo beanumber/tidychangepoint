@@ -1,10 +1,10 @@
-globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic"))
+globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic", 
+                  "variable", "param_mu", "param_beta"))
 
 #' Regression-based model fitting
 #' @param x A time series
 #' @param tau a set of indices representing a changepoint set
 #' @param trends logical indicating whether you want trends within regions
-#' @param ar1 logicial indicating whether you want auto-regressive lag 1 errors
 #' @param ... arguments passed to [stats::lm()]
 #' @export
 #' @examples
@@ -65,6 +65,8 @@ fit_lmshift <- function(x, tau, trends = FALSE, ...) {
 attr(fit_lmshift, "model_name") <- "lmshift"
 
 #' @rdname fit_lmshift
+#' @details
+#' [fit_lmshift_ar1]: will apply auto-regressive lag 1 errors
 #' @export
 fit_lmshift_ar1 <- function(x, tau, ...) {
   fit_lmshift(x, tau,  ...) |>
@@ -74,7 +76,9 @@ fit_lmshift_ar1 <- function(x, tau, ...) {
 attr(fit_lmshift_ar1, "model_name") <- "lmshift_ar1"
 
 
-#' @rdname fit_lmshift
+#' Format the coefficients from a linear model as a tibble
+#' @param mod An `lm` model object
+#' @param ... currently ignored
 #' @export
 #' @examples
 #' ds <- data.frame(y = as.ts(CET), t = 1:length(CET))
@@ -107,5 +111,5 @@ tbl_coef <- function(mod, ...) {
   }
   vars <- c("region", "param_mu", "param_beta")
   out |>
-    dplyr::select(any_of(vars))
+    dplyr::select(dplyr::any_of(vars))
 }

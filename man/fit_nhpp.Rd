@@ -69,5 +69,5 @@ mcdf(nhpp)
 plot(fit_nhpp(DataCPSim, tau = 826))
 plot_intensity(fit_nhpp(DataCPSim, tau = 826))
 mod <- segment(bogota_pm, method = "pelt")
-plot_intensity(mod$nhpp)
+plot_intensity(fit_nhpp(bogota_pm, tau = changepoints(mod)))
 }

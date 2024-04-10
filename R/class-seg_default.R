@@ -6,18 +6,22 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value"))
 #' @param algorithm Algorithm used to find the changepoints
 #' @param cpt_list a possibly empty `list()` of candidate changepoints
 #' @param params a possibly empty `list()` of parameters
+#' @inheritParams new_mod_default
 #' @param ... currently ignored
 #' @examples
 #' seg <- seg_default(DataCPSim)
 #' str(seg)
 #' as.ts(seg)
 #' changepoints(seg)
+#' fitness(seg)
+#' glance(seg)
 
 new_seg_default <- function(x = numeric(), 
                             algorithm = NA, 
                             cpt_list = list(), 
                             params = list(), 
-                            model_name = "meanshift", ...) {
+                            model_name = "meanshift", 
+                            penalty = "BIC", ...) {
   stopifnot(is.numeric(x))
   structure(
     list(
@@ -25,7 +29,8 @@ new_seg_default <- function(x = numeric(),
       algorithm = algorithm,
       candidates = evaluate_cpts(cpt_list, .data = stats::as.ts(x)),
       params = params,
-      model_name = model_name
+      model_name = model_name,
+      penalty = penalty
     ), 
     class = "seg_default"
   )
@@ -75,7 +80,7 @@ num_candidates <- function(x) {
 #' @export
 best_nhpp <- function(x, ...) {
   x$candidates |>
-    dplyr::arrange(BMDL) |>
+    dplyr::arrange(.data[[x$penalty]]) |>
     utils::head(1) |>
     dplyr::pull(nhpp) |>
     purrr::pluck(1)
@@ -86,7 +91,7 @@ best_nhpp <- function(x, ...) {
 #' @export
 changepoints.seg_default <- function(x, ...) {
   x$candidates |>
-    dplyr::arrange(BMDL) |>
+    dplyr::arrange(.data[[x$penalty]]) |>
     utils::head(1) |>
     dplyr::pull(changepoints) |>
     purrr::pluck(1) |>
@@ -97,13 +102,14 @@ changepoints.seg_default <- function(x, ...) {
 #' @export
 fitness.seg_default <- function(object, ...) {
   if (nrow(object$candidates) == 0) {
-    return(c("BMDL" = NA))
+    out <- NA
+  } else {
+    out <- object$candidates |>
+      dplyr::arrange(.data[[object$penalty]]) |>
+      utils::head(1) |>
+      dplyr::pull(.data[[object$penalty]])
   }
-  out <- object$candidates |>
-    dplyr::arrange(BMDL) |>
-    utils::head(1) |>
-    dplyr::pull(BMDL)
-  names(out) <- "BMDL"
+  names(out) <- object$penalty
   out
 }
 
@@ -207,8 +213,8 @@ plot_history <- function(x, ...) {
   methods <- c("null", "single-best", "pelt")
   bmdls <- methods |>
     purrr::map(~segment(as.ts(x), method = .x)) |>
-    purrr::map(~purrr::pluck(.x, "nhpp")) |>
-    purrr::map_dbl(BMDL)
+    purrr::map(~purrr::pluck(.x, "model")) |>
+    purrr::map_dbl(MDL)
   
   guidelines <- tibble::tibble(
     method = c(class(x)[1], methods),

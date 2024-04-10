@@ -80,15 +80,15 @@ test_that("utils works", {
   x <- tbl_coef(lm(y ~ 1, data = ds))
   expect_s3_class(x, "tbl_df")
   expect_equal(ncol(x), 2)
-  expect_identical(names(x), c("region", "mu"))
+  expect_identical(names(x), c("region", "param_mu"))
   y <- tbl_coef(lm(y ~ (t >= 42) + (t >= 81), data = ds))
   expect_s3_class(y, "tbl_df")
   expect_equal(ncol(y), 2)
-  expect_identical(names(y), c("region", "mu"))
+  expect_identical(names(y), c("region", "param_mu"))
   z <- tbl_coef(lm(y ~ t * (t >= 42) + t * (t >= 81), data = ds))
   expect_s3_class(z, "tbl_df")
   expect_equal(ncol(z), 3)
-  expect_identical(names(z), c("region", "mu", "beta"))
+  expect_identical(names(z), c("region", "param_mu", "param_beta"))
   
   expect_equal(whoami(fit_meanshift), "meanshift")
   expect_equal(whoami(fit_meanshift_ar1), "meanshift_ar1")
@@ -125,10 +125,6 @@ test_that("penalties work", {
   
   true_bmdl <- fit_nhpp(x, cpt) |> BMDL()
   expect_type(true_bmdl, "double")
-  
-#  expect_equal(AIC(x$nhpp), as.numeric(-2 * logLik(x) + 2 * deg_free(x)))
-#  expect_equal(BIC(x), as.numeric(-2 * logLik(x) + log(nobs(x)) * deg_free(x)))
-#  expect_type(BMDL(x), "double")
 })
 
 
