@@ -37,7 +37,7 @@ fit_meanshift <- function(x, tau, ...) {
   out <- mod_default(
     x = y,
     tau = tau,
-    region_params = tibble::tibble(region = regions, mu = mu_seg),
+    region_params = tibble::tibble(region = regions, param_mu = unname(mu_seg)),
     model_params = c(
       sigma_hatsq = sigma_hatsq
     ),

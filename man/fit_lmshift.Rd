@@ -3,11 +3,14 @@
 \name{fit_lmshift}
 \alias{fit_lmshift}
 \alias{fit_lmshift_ar1}
+\alias{tbl_coef}
 \title{Regression-based model fitting}
 \usage{
 fit_lmshift(x, tau, trends = FALSE, ...)
 
 fit_lmshift_ar1(x, tau, ...)
+
+tbl_coef(mod, ...)
 }
 \arguments{
 \item{x}{A time series}
@@ -36,4 +39,8 @@ glance(mod)
 glance(fit_lmshift(CET, tau = ids, trends = TRUE))
 glance(fit_lmshift_ar1(CET, tau = ids))
 glance(fit_lmshift_ar1(CET, tau = ids, trends = TRUE))
+ds <- data.frame(y = as.ts(CET), t = 1:length(CET))
+tbl_coef(lm(y ~ 1, data = ds))
+tbl_coef(lm(y ~ (t >= 42) + (t >= 81), data = ds))
+tbl_coef(lm(y ~ t * (t >= 42) + t * (t >= 81), data = ds))
 }

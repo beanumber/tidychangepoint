@@ -126,43 +126,6 @@ regions_by_tau <- function(n, tau) {
     levels()
 }
 
-
-#' @rdname pad_tau
-#' @export
-#' @examples
-#' ds <- data.frame(y = as.ts(CET), t = 1:length(CET))
-#' tbl_coef(lm(y ~ 1, data = ds))
-#' tbl_coef(lm(y ~ (t >= 42) + (t >= 81), data = ds))
-#' tbl_coef(lm(y ~ t * (t >= 42) + t * (t >= 81), data = ds))
-
-tbl_coef <- function(mod, ...) {
-  out <- mod |>
-    stats::coef() |>
-    tibble::enframe(name = "variable", value = "value") |>
-    dplyr::mutate(
-      region = stringr::str_extract(variable, pattern = "t >= [0-9]+"),
-      is_slope = grepl(pattern = "^t$|t:t", variable)
-    ) |>
-    dplyr::select(-variable) |>
-    tidyr::pivot_wider(names_from = "is_slope", values_from = "value") |>
-    dplyr::mutate(
-      tau = stringr::str_extract(region, pattern = "[0-9]+$") |>
-        as.integer(),
-      tau = ifelse(is.na(tau), 0, tau),
-      mu = cumsum(`FALSE`)
-    )
-  if ("TRUE" %in% names(out)) {
-    out <- out |>
-      dplyr::mutate(
-        beta = cumsum(`TRUE`),
-        mu = mu + tau * beta
-      )
-  }
-  vars <- c("region", "mu", "beta")
-  out |>
-    dplyr::select(any_of(vars))
-}
-    
 #' @rdname pad_tau
 #' @export
 #' @examples

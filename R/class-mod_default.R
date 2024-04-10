@@ -95,7 +95,8 @@ logLik.mod_default <- function(object, ...) {
   N <- nobs(object)
   sigma_hatsq <- model_variance(object)
   ll <- -(N * log(sigma_hatsq) + N + N * log(2 * pi)) / 2
-  num_region_params <- object$region_params |>
+  num_region_params <- coef(object) |>
+    dplyr::select(contains("param_")) |>
     dim() |>
     prod()
   num_model_params <- length(object$model_params)
@@ -131,6 +132,13 @@ model_variance <- function(object, ...) {
 coef.mod_default <- function(object, ...) {
   object$region_params
 }
+
+#' @rdname model_name
+#' @export
+model_name.mod_default <- function(object, ...) {
+  object$model_name
+}
+
 
 #' @rdname changepoints
 #' @export
