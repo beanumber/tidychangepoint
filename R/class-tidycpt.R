@@ -43,10 +43,10 @@ fitness.tidycpt <- function(object, ...) {
   fitness(object$segmenter)
 }
 
-#' @rdname model_fit
+#' @rdname model_name
 #' @export
-model_fit.tidycpt <- function(object, ...) {
-  model_fit(object$segmenter, ...)
+model_name.tidycpt <- function(object, ...) {
+  model_name(object$segmenter, ...)
 }
 
 #' @rdname tidycpt-generics

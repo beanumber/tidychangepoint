@@ -105,6 +105,21 @@ segment_ga_taimal <- function(x, ...) {
   )
 }
 
+#' @rdname segment_random
+#' @details
+#' Randomly select candidate changepoint sets
+#' 
+#' @seealso [build_gabin_population()]
+#' @export
+#' @examples
+#' x <- segment(CET, method = "ga-random")
+#' 
+segment_ga_random <- function(x, ...) {
+  segment_ga(
+    x, population = log_gabin_population(x), maxiter = 1, ...
+  )
+}
+
 
 #' @importClassesFrom GA ga
 methods::setClass(

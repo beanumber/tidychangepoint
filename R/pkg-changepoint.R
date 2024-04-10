@@ -19,7 +19,7 @@ glance.cpt <- function(x, ...) {
     algorithm = x@method,
     params = list(params(x)),
     num_cpts = length(changepoints(x)),
-    model = "fit_meanvar",
+    model = model_name(x),
     criteria = names(fitness(x)),
     fitness = fitness(x)
   )
@@ -104,12 +104,12 @@ fitness.cpt <- function(object, ...) {
   out
 }
 
-#' @rdname model_fit
+#' @rdname model_name
 #' @export
-model_fit.cpt <- function(object, ...) {
+model_name.cpt <- function(object, ...) {
   if (object@cpttype == "mean and variance") {
-    return(fit_meanvar)
+    return("meanvar")
   } else {
-    return(fit_meanshift)
+    return("meanshift")
   }
 }

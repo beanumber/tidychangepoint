@@ -2,9 +2,12 @@
 % Please edit documentation in R/pkg-GA.R
 \name{build_gabin_population}
 \alias{build_gabin_population}
+\alias{log_gabin_population}
 \title{Build an initial population set for GA algorithms}
 \usage{
 build_gabin_population(x, ...)
+
+log_gabin_population(x, ...)
 }
 \arguments{
 \item{x}{a numeric vector coercible into a \link[stats:ts]{stats::ts} object}
@@ -17,6 +20,8 @@ Build an initial population set for GA algorithms
 \examples{
 f <- build_gabin_population(CET)
 segment(CET, method = "ga", population = f)
+f <- log_gabin_population(CET)
+segment(CET, method = "ga", population = f, maxiter = 10)
 }
 \seealso{
 \code{\link[GA:ga_Population]{GA::gabin_Population()}}

@@ -13,6 +13,7 @@ segment_random <- function(x, num_generations = 10, ...) {
     algorithm = "random",
     cpt_list = cpts, 
     params = list(num_generations = num_generations), 
+    model_name = "meanshift",
     ...
   )
 }

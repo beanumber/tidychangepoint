@@ -35,7 +35,22 @@ params <- function(x, ...) UseMethod("params")
 #' Retrieve the model that a segmenter used
 #' @inheritParams fitness
 #' @export
-model_fit <- function(x, ...) UseMethod("model_fit")
+model_name <- function(x, ...) UseMethod("model_name")
+
+#' Convert a segmenter to a `mod_default` object
+#' @inheritParams fitness
+#' @export
+as.mod_default <- function(x, ...) UseMethod("as.mod_default")
+
+#' @rdname ga-generics
+#' @export
+#' @examples
+#' cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
+#' as.mod_default(cpt$segmenter)
+as.mod_default.default <- function(x, ...) {
+  f <- model_fit(x)
+  f(as.ts(x), tau = changepoints(x))
+}
 
 #' Modified Bayesian Information Criterion
 #' 

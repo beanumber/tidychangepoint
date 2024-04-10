@@ -15,7 +15,7 @@ test_that("seg_default works", {
   expect_s3_class(evaluate_cpts(list(), .data = DataCPSim), "tbl_df")
   expect_s3_class(evaluate_cpts(tibble::tibble(changepoints = list(826)), .data = DataCPSim), "tbl_df")
   
-  y <- segment(DataCPSim, method = "manual", cpts = c(826))
+  y <- segment(DataCPSim, method = "manual", tau = c(826))
   expect_s3_class(y, "tidycpt")
   expect_s3_class(y$segmenter, "seg_default")
   expect_s3_class(as.ts(y), "ts")
@@ -28,7 +28,7 @@ test_that("seg_default works", {
   expect_type(nobs(y), "integer")
   expect_type(fitness(y$segmenter), "double")
 
-  z <- segment(DataCPSim, method = "manual", cpts = c(365, 826))
+  z <- segment(DataCPSim, method = "manual", tau = c(365, 826))
   expect_s3_class(z, "tidycpt")
   expect_s3_class(z$segmenter, "seg_default")
   expect_s3_class(as.ts(z), "ts")

@@ -13,7 +13,7 @@ test_that("tidycpt works", {
   expect_s3_class(plot(x), "gg")
   expect_s3_class(diagnose(x), "patchwork")
   
-  z <- segment(DataCPSim, method = "manual", cpts = c(365, 826))
+  z <- segment(DataCPSim, method = "manual", tau = c(365, 826))
   expect_s3_class(z, "tidycpt")
   expect_s3_class(as.ts(z), "ts")
   expect_s3_class(augment(z), "grouped_ts")
@@ -25,8 +25,8 @@ test_that("tidycpt works", {
   expect_s3_class(plot(z), "gg")
   expect_s3_class(diagnose(z), "patchwork")
   
-  expect_s3_class(segment(bogota_pm, method = "manual", cpts = c(500, 850)), "tidycpt")
-  expect_error(segment(bogota_pm, method = "manual", tau = c(500, 850)), "cpts")
+  expect_s3_class(segment(bogota_pm, method = "manual", tau = c(500, 850)), "tidycpt")
+  expect_error(segment(bogota_pm, method = "manual", cpts = c(500, 850)), "tau")
   
 })
 
@@ -34,7 +34,7 @@ test_that("regions works", {
   x <- segment(DataCPSim, method = "pelt")
   tau <- changepoints(x)
   expect_equal(tau, changepoints(x$segmenter))
-  expect_equal(tau, changepoints(x$nhpp))
+  expect_equal(tau, changepoints(x$model))
   expect_false(0 %in% tau)
   expect_false(length(x) %in% tau)
   y <- split_by_tau(as.ts(x), tau)
@@ -79,16 +79,16 @@ test_that("utils works", {
   ds <- data.frame(y = as.ts(CET), t = 1:length(CET))
   x <- tbl_coef(lm(y ~ 1, data = ds))
   expect_s3_class(x, "tbl_df")
-  expect_equal(ncol(x), 1)
-  expect_identical(names(x), c("mu"))
+  expect_equal(ncol(x), 2)
+  expect_identical(names(x), c("region", "mu"))
   y <- tbl_coef(lm(y ~ (t >= 42) + (t >= 81), data = ds))
   expect_s3_class(y, "tbl_df")
-  expect_equal(ncol(y), 1)
-  expect_identical(names(y), c("mu"))
+  expect_equal(ncol(y), 2)
+  expect_identical(names(y), c("region", "mu"))
   z <- tbl_coef(lm(y ~ t * (t >= 42) + t * (t >= 81), data = ds))
   expect_s3_class(z, "tbl_df")
-  expect_equal(ncol(z), 2)
-  expect_identical(names(z), c("mu", "beta"))
+  expect_equal(ncol(z), 3)
+  expect_identical(names(z), c("region", "mu", "beta"))
   
   expect_equal(whoami(fit_meanshift), "meanshift")
   expect_equal(whoami(fit_meanshift_ar1), "meanshift_ar1")
@@ -134,10 +134,12 @@ test_that("penalties work", {
 
 test_that("performance comparison works", {
   x <- segment(DataCPSim, method = "pelt")
-  y <- segment(DataCPSim, method = "taimal", num_generations = 20)
-  z <- segment(DataCPSim, method = "random", num_generations = 20)
-  expect_gt(BMDL(x$nhpp), BMDL(y$nhpp))
-  expect_gt(BMDL(z$nhpp), BMDL(y$nhpp))
+#  y <- segment(DataCPSim, method = "taimal", num_generations = 20)
+  y <- segment(DataCPSim, method = "ga-taimal", maxiter = 20)
+  z <- segment(DataCPSim, method = "ga-random", model_fn = fit_nhpp, penalty_fn = BMDL, popSize = 20)
+  
+  expect_gt(BMDL(fit_nhpp(DataCPSim, changepoints(x))), BMDL(y$model))
+  expect_gt(BMDL(z$model), BMDL(y$model))
   
   expect_s3_class(dplyr::bind_rows(glance(x), glance(y), glance(z)), "tbl_df")
 })

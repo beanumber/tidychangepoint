@@ -95,6 +95,23 @@ build_gabin_population <- function(x, ...) {
   return(f)
 }
 
+#' @rdname build_gabin_population
+#' @export
+#' @examples
+#' f <- log_gabin_population(CET)
+#' segment(CET, method = "ga", population = f, maxiter = 10)
+
+log_gabin_population <- function(x, ...) {
+  p <- log(length(x)) / length(x)
+  
+  f <- function(object, ...) {
+    message(paste("Seeding initial population with probability:", p))
+    stats::rbinom(object@nBits * object@popSize, size = 1, prob = p) |>
+      matrix(ncol = object@nBits)
+  }
+  return(f)
+}
+
 #' @rdname fitness
 #' @export
 #' @examples
@@ -107,10 +124,8 @@ fitness.ga <- function(object, ...) {
   out
 }
 
-#' @rdname model_fit
+#' @rdname model_name
 #' @export
-model_fit.ga <- function(object, ...) {
-  paste0("fit_", object@model_params[["model_fn"]]) |>
-    parse(text = _) |>
-    eval()
+model_name.ga <- function(object, ...) {
+  object@model_params[["model_fn"]]
 }

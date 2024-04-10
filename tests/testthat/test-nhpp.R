@@ -47,6 +47,6 @@ test_that("parameter fitting works", {
   y <- test_set(n = 1, seed = 123)
   tau <- attr(y, "cpt_true")
   theta <- fit_nhpp(y, tau)
-  diagnose(segment(y, method = "manual", cpts = tau))
+  diagnose(segment(y, method = "manual", tau = tau))
   expect_lt(abs(theta$region_params[["param_alpha"]][1] - 1), 0.05)
 })

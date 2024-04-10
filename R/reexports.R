@@ -40,6 +40,10 @@ stats::fitted
 stats::residuals
 
 #' @export
+#' @importFrom stats coef
+stats::coef
+
+#' @export
 #' @importFrom stats time
 stats::time
 

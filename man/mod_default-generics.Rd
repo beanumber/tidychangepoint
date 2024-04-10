@@ -8,6 +8,7 @@
 \alias{fitted.mod_default}
 \alias{residuals.mod_default}
 \alias{model_variance}
+\alias{coef.mod_default}
 \alias{augment.mod_default}
 \alias{tidy.mod_default}
 \alias{glance.mod_default}
@@ -25,6 +26,8 @@
 \method{residuals}{mod_default}(object, ...)
 
 model_variance(object, ...)
+
+\method{coef}{mod_default}(object, ...)
 
 \method{augment}{mod_default}(x, ...)
 

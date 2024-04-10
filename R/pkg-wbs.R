@@ -85,8 +85,8 @@ fitness.wbs <- function(object, ...) {
   out
 }
 
-#' @rdname model_fit
+#' @rdname model_name
 #' @export
-model_fit.wbs <- function(object, ...) {
-  NA
+model_name.wbs <- function(object, ...) {
+  "meanshift"
 }

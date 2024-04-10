@@ -3,12 +3,15 @@
 \name{seg-default-generics}
 \alias{seg-default-generics}
 \alias{as.ts.seg_default}
+\alias{nobs.seg_default}
 \alias{params.seg_default}
 \alias{glance.seg_default}
 \alias{plot.seg_default}
 \title{Methods for seg_default objects}
 \usage{
 \method{as.ts}{seg_default}(x, ...)
+
+\method{nobs}{seg_default}(object, ...)
 
 \method{params}{seg_default}(x, ...)
 
@@ -20,6 +23,8 @@
 \item{x}{An \code{seg_default} object}
 
 \item{...}{arguments passed to methods}
+
+\item{object}{A \code{seg_default} object}
 }
 \description{
 Methods for seg_default objects

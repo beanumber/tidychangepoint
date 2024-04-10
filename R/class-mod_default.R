@@ -126,6 +126,12 @@ model_variance <- function(object, ...) {
   sum(residuals(object)^2) / nobs(object)
 }
 
+#' @rdname mod_default-generics
+#' @export
+coef.mod_default <- function(object, ...) {
+  object$region_params
+}
+
 #' @rdname changepoints
 #' @export
 changepoints.mod_default <- function(x, ...) {

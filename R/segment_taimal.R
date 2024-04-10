@@ -73,7 +73,8 @@ segment_taimal <- function(x,
       mat_phi = mat_phi,
       generation_size = generation_size, 
       max_num_cp = max_num_cp
-    )
+    ),
+    model_name = "nhpp"
   )
   obj$mat_cp <- sim_k_cp_BMDL(x, generation_size)
   class(obj) <- c("cpt_gbmdl", class(obj))

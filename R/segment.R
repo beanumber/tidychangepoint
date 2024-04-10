@@ -129,6 +129,9 @@ segment.ts <- function(x, method = "null", ...) {
   if (method == "random") {
     seg <- segment_random(x, ...)
   }
+  if (method == "ga-random") {
+    seg <- segment_ga_random(x, ...)
+  }
   if (method == "manual") {
     if(!"tau" %in% names(args)) {
       stop("Please supply the tau argument to use the manual algorithm.")
@@ -143,10 +146,9 @@ segment.ts <- function(x, method = "null", ...) {
     seg <- new_seg_default(x)
   }
   # build the tidycpt object
-  m <- model_fit(seg)
   obj <- list(
     segmenter = seg,
-    model = m(as.ts(x), changepoints(seg), ...),
+    model = as.mod_default(seg),
     elapsed_time = Sys.time() - begin
   )
   class(obj) <- c("tidycpt")

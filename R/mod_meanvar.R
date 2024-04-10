@@ -28,7 +28,7 @@ fit_meanvar <- function(x, tau, ...) {
     region_params = region_params,
     model_params = c(),
     fitted_values = fitted_values,
-    model_name = "fit_meanvar"
+    model_name = "meanvar"
   )
 }
 

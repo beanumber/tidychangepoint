@@ -119,6 +119,17 @@ split_by_tau <- function(x, tau) {
 #' @rdname pad_tau
 #' @export
 #' @examples
+#' regions_by_tau(n, c(365, 826))
+
+regions_by_tau <- function(n, tau) {
+  cut_inclusive(1:n, pad_tau(tau, n)) |>
+    levels()
+}
+
+
+#' @rdname pad_tau
+#' @export
+#' @examples
 #' ds <- data.frame(y = as.ts(CET), t = 1:length(CET))
 #' tbl_coef(lm(y ~ 1, data = ds))
 #' tbl_coef(lm(y ~ (t >= 42) + (t >= 81), data = ds))
@@ -184,6 +195,13 @@ whoami <- function(x = fit_meanshift, ...) {
   attr(x, "model_name")
 }
 
+#' @rdname pad_tau
+#' @export
+model_fit <- function(object, ...) {
+  paste0("fit_", model_name(object)) |>
+    parse(text = _) |>
+    eval()
+}
 
 #' Vectors implementation for logLik
 #' 

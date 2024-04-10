@@ -16,14 +16,16 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value"))
 new_seg_default <- function(x = numeric(), 
                             algorithm = NA, 
                             cpt_list = list(), 
-                            params = list(), ...) {
+                            params = list(), 
+                            model_name = "meanshift", ...) {
   stopifnot(is.numeric(x))
   structure(
     list(
       data = stats::as.ts(x),
       algorithm = algorithm,
       candidates = evaluate_cpts(cpt_list, .data = stats::as.ts(x)),
-      params = params
+      params = params,
+      model_name = model_name
     ), 
     class = "seg_default"
   )
@@ -56,7 +58,7 @@ as.ts.seg_default <- function(x, ...) {
   as.ts(x$data)
 }
 
-#' @rdname cpt-generics
+#' @rdname seg-default-generics
 #' @param object A `seg_default` object
 #' @export
 nobs.seg_default <- function(object, ...) {
@@ -105,10 +107,10 @@ fitness.seg_default <- function(object, ...) {
   out
 }
 
-#' @rdname model_fit
+#' @rdname model_name
 #' @export
-model_fit.seg_default <- function(object, ...) {
-  fit_meanshift
+model_name.seg_default <- function(object, ...) {
+  object$model_name
 }
 
 #' @rdname new_seg_default
@@ -167,7 +169,7 @@ glance.seg_default <- function(x, ...) {
     algorithm = x$algorithm,
     params = list(x$params),
     num_cpts = length(changepoints(x)),
-    model = "fit_nhpp",
+    model = model_name(x),
     criteria = names(fitness(x)),
     fitness = fitness(x)
   )
