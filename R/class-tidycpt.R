@@ -116,7 +116,7 @@ plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
   if (use_time_index) {
     my_labels <- function(t) {
       n <- length(t)
-      indices <- 1:length(x)
+      indices <- 1:nobs(x)
       good <- t %in% indices
       out <- x$time_index[ifelse(good, t, NA)] |>
         as.character()

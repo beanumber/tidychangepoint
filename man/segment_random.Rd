@@ -17,11 +17,11 @@ random_cpts(x, n = 10, k = round(log(length(as.ts(x)))), ...)
 
 \item{...}{currently ignored}
 
+\item{popSize}{Size of initial population. Passed to \code{\link[GA:ga]{GA::ga()}}.}
+
 \item{n}{Number of random changepoints sets to generate}
 
 \item{k}{Rate function for Poisson distribution of mean changepoint set length.}
-
-\item{num_generations}{Number of generations}
 }
 \description{
 Segment a times series using randomly selected candidate changepoints

@@ -2,7 +2,6 @@
 % Please edit documentation in R/class-seg_default.R, R/pkg-changepoint.R
 \name{best_cpt}
 \alias{best_cpt}
-\alias{best_nhpp}
 \alias{cpt-generics}
 \alias{glance.cpt}
 \alias{params.cpt}
@@ -12,8 +11,6 @@
 \title{Compatibility layer for changepoint}
 \usage{
 best_cpt(x, ...)
-
-best_nhpp(x, ...)
 
 \method{glance}{cpt}(x, ...)
 

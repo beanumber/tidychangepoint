@@ -35,29 +35,33 @@ test_that("lmshift works", {
   expect_equal(coef(y), coef(w))
   expect_equal(deg_free(y), deg_free(w))
   
-  trend_wn <- fit_lmshift(CET, tau = ids, trends = TRUE)
+  trend_wn <- fit_lmshift(CET, tau = ids, deg_poly = 1)
   expect_equal(round(as.numeric(logLik(trend_wn)), 2), -290.02)
   expect_equal(round(BIC(trend_wn), 2), 650.74)
   expect_equal(round(MDL(trend_wn), 2), 653.07)
   MDL(trend_wn) + 2 * log(nobs(trend_wn))
   
-  trend_ar1 <- fit_lmshift_ar1(CET, tau = ids, trends = TRUE)
+  trend_ar1 <- fit_lmshift_ar1(CET, tau = ids, deg_poly = 1)
   expect_equal(round(as.numeric(logLik(trend_ar1)), 2), -288.80)
   expect_equal(round(BIC(trend_ar1), 2), 654.19)
   expect_equal(round(MDL(trend_ar1), 2), 656.52)
   expect_equal(round(trend_ar1$model_params[["phi_hat"]], 3), 0.058)
   
+  spline_wn <- fit_lmshift(CET, tau = ids, deg_poly = 4)
+  expect_equal(ncol(coef(spline_wn)), 6)
+  expect_lt(model_variance(spline_wn), model_variance(trend_wn))
+  
   # truncated series
   CET_trunc <- CET['1772-01-01/'] 
   tau <- time2tau(1987, as_year(time(CET_trunc)))
   
-  trend_wn_trunc <- fit_lmshift(CET_trunc, tau = tau, trends = TRUE)
+  trend_wn_trunc <- fit_lmshift(CET_trunc, tau = tau, deg_poly = 2)
   trend_wn_trunc$sigma_hatsq
   logLik(trend_wn_trunc)
   BIC(trend_wn_trunc)
   MDL(trend_wn_trunc) + 2 * log(nobs(trend_wn_trunc))
   
-  trend_ar1_trunc <- fit_lmshift_ar1(CET_trunc, tau = tau, trends = TRUE)
+  trend_ar1_trunc <- fit_lmshift_ar1(CET_trunc, tau = tau, deg_poly = 1)
   expect_equal(round(model_variance(trend_ar1_trunc), 3), 0.305)
   expect_equal(round(trend_ar1_trunc$model_params[["phi_hat"]], 3), 0.073)
   logLik(trend_ar1_trunc)

@@ -1,4 +1,4 @@
-globalVariables(c("bmdl", "nhpp", "cpt_length", "value"))
+globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".data"))
 
 #' Default class for candidate changepoint sets
 #' @export
@@ -6,7 +6,9 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value"))
 #' @param algorithm Algorithm used to find the changepoints
 #' @param cpt_list a possibly empty `list()` of candidate changepoints
 #' @param params a possibly empty `list()` of parameters
-#' @inheritParams new_mod_default
+#' @param model_name character indicating the model used to find the changepoints. 
+#' @param penalty character indicating the name of the penalty function used to
+#' find the changepoints.
 #' @param ... currently ignored
 #' @examples
 #' seg <- seg_default(DataCPSim, cpt_list = list(c(365), c(330, 839)))
@@ -85,16 +87,6 @@ best_cpt <- function(x, ...) {
     utils::head(1)
 }
 
-
-#' @rdname cpt-generics
-#' @export
-best_nhpp <- function(x, ...) {
-  best_cpt(x, ...) |>
-    dplyr::pull(nhpp) |>
-    purrr::pluck(1)
-}
-
-
 #' @rdname changepoints
 #' @export
 changepoints.seg_default <- function(x, ...) {
@@ -124,6 +116,8 @@ model_name.seg_default <- function(object, ...) {
 }
 
 #' @rdname new_seg_default
+#' @param model_fn Name of the function to fit the model. 
+#' See, for examples, [fit_meanshift()].
 #' @export
 evaluate_cpts.seg_default <- function(x, model_fn, ...) {
   evaluate_cpts(x$candidates, .data = as.ts(x), model_fn = model_fit(x), ...)
@@ -218,33 +212,33 @@ diagnose.seg_default <- function(x, ...) {
 #' @param ... currently ignored
 #' @export
 #' @examples
-#' x <- segment(DataCPSim, method = "random", num_generations = 10)
+#' x <- segment(DataCPSim, method = "random", popSize = 10)
 #' plot_history(x$segmenter)
 plot_history <- function(x, ...) {
   methods <- c("null", "single-best", "pelt")
-  bmdls <- methods |>
+  vals <- methods |>
     purrr::map(~segment(as.ts(x), method = .x)) |>
     purrr::map(~purrr::pluck(.x, "model")) |>
-    purrr::map_dbl(MDL)
+    purrr::map_dbl(eval(parse(text = x$penalty)))
   
   guidelines <- tibble::tibble(
     method = c(class(x)[1], methods),
-    BMDL = c(BMDL(best_nhpp(x)), bmdls)
+    value = c(fitness(x), vals)
   )
   
-  bmdl_seg <- x$candidates |>
+  seg <- x$candidates |>
     dplyr::mutate(
       num_generation = dplyr::row_number()
     )
 
-  best <- bmdl_seg |> 
-    dplyr::arrange(BMDL) |> 
+  best <- seg |>
+    dplyr::arrange(.data[[x$penalty]]) |>
     utils::head(1)
   
-  ggplot2::ggplot(data = bmdl_seg, ggplot2::aes(x = num_generation, y = BMDL)) +
+  ggplot2::ggplot(data = seg, ggplot2::aes(x = num_generation, y = .data[[x$penalty]])) +
     ggplot2::geom_hline(
       data = guidelines, 
-      ggplot2::aes(yintercept = BMDL, color = method), 
+      ggplot2::aes(yintercept = value, color = method), 
       linetype = 2
     ) +
     ggplot2::geom_line() +
@@ -252,9 +246,8 @@ plot_history <- function(x, ...) {
     ggplot2::geom_point(data = best) +
     ggplot2::geom_smooth(se = 0) + 
     ggplot2::scale_x_continuous("Generation of Candidate Changepoints") +
-    ggplot2::scale_y_continuous("BMDL") +
     ggplot2::labs(
-      title = "Evolution of BMDL scores",
+      title = "Evolution of Objective Function values",
       subtitle = "Comparison with other known algorithms"
     )
 }
@@ -272,7 +265,7 @@ plot_best_chromosome <- function(x) {
       cpt_length = purrr::map_int(changepoints, length)
     )
   best <- d |> 
-    dplyr::arrange(BMDL) |> 
+    dplyr::arrange(.data[[x$penalty]]) |> 
     utils::head(1)
   ggplot2::ggplot(d, ggplot2::aes(x = num_generation, y = cpt_length)) +
     ggplot2::geom_hline(

@@ -1,10 +1,11 @@
 globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic", 
-                  "variable", "param_mu", "param_beta"))
+                  "variable", "param_mu", "param_beta", "poly_k", "k", "param_beta0"))
 
 #' Regression-based model fitting
 #' @param x A time series
 #' @param tau a set of indices representing a changepoint set
-#' @param trends logical indicating whether you want trends within regions
+#' @param deg_poly integer indicating the degree of the polynomial spline to be
+#' fit. Passed to [stats::poly()].
 #' @param ... arguments passed to [stats::lm()]
 #' @export
 #' @examples
@@ -17,11 +18,12 @@ globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic",
 #' ids <- time2tau(cpts, as_year(time(CET)))
 #' mod <- fit_lmshift(CET, tau = ids)
 #' glance(mod)
-#' glance(fit_lmshift(CET, tau = ids, trends = TRUE))
+#' glance(fit_lmshift(CET, tau = ids, deg_poly = 1))
 #' glance(fit_lmshift_ar1(CET, tau = ids))
-#' glance(fit_lmshift_ar1(CET, tau = ids, trends = TRUE))
+#' glance(fit_lmshift_ar1(CET, tau = ids, deg_poly = 1))
+#' glance(fit_lmshift_ar1(CET, tau = ids, deg_poly = 2))
 
-fit_lmshift <- function(x, tau, trends = FALSE, ...) {
+fit_lmshift <- function(x, tau, deg_poly = 0, ...) {
   n <- length(x)
   ds <- data.frame(y = as.ts(x), t = 1:n)
   if (1 %in% tau) {
@@ -31,9 +33,13 @@ fit_lmshift <- function(x, tau, trends = FALSE, ...) {
     form <- "y ~ 1"
     model_name <- "null"
   } else {
-    if (trends) {
-      terms <- paste(paste("t * (t >=", tau, ")"), collapse = " + ")
-      model_name <- "trendshift"
+    if (deg_poly > 0) {
+      terms <- paste(paste("poly(t,", deg_poly, ", raw = TRUE) * (t >=", tau, ")"), collapse = " + ")
+      if (deg_poly == 1) {
+        model_name <- "trendshift"
+      } else {
+        model_name <- "splineshift"
+      }
     } else {
       terms <- paste(paste("(t >=", tau, ")"), collapse = " + ")
       model_name <- "meanshift"
@@ -84,32 +90,56 @@ attr(fit_lmshift_ar1, "model_name") <- "lmshift_ar1"
 #' ds <- data.frame(y = as.ts(CET), t = 1:length(CET))
 #' tbl_coef(lm(y ~ 1, data = ds))
 #' tbl_coef(lm(y ~ (t >= 42) + (t >= 81), data = ds))
-#' tbl_coef(lm(y ~ t * (t >= 42) + t * (t >= 81), data = ds))
+#' tbl_coef(lm(y ~ poly(t, 1, raw = TRUE) * (t >= 42) + poly(t, 1, raw = TRUE) * (t >= 81), data = ds))
+#' tbl_coef(lm(y ~ poly(t, 2, raw = TRUE) * (t >= 42) + poly(t, 2, raw = TRUE) * (t >= 81), data = ds))
 
 tbl_coef <- function(mod, ...) {
   out <- mod |>
     stats::coef() |>
-    tibble::enframe(name = "variable", value = "value") |>
-    dplyr::mutate(
-      region = stringr::str_extract(variable, pattern = "t >= [0-9]+"),
-      is_slope = grepl(pattern = "^t$|t:t", variable)
-    ) |>
-    dplyr::select(-variable) |>
-    tidyr::pivot_wider(names_from = "is_slope", values_from = "value") |>
-    dplyr::mutate(
-      tau = stringr::str_extract(region, pattern = "[0-9]+$") |>
-        as.integer(),
-      tau = ifelse(is.na(tau), 0, tau),
-      param_mu = cumsum(`FALSE`)
+    tibble::enframe(name = "variable", value = "value") 
+  
+  deg_poly <- out$variable |>
+    stringr::str_extract(pattern = "poly\\(t, [0-9]+, raw = TRUE\\)") |>
+    stringr::str_extract("[0-9]+") |>
+    as.integer()
+  if (all(is.na(deg_poly))) {
+    deg_poly <- 0
+  } else {
+    deg_poly <- max(deg_poly, na.rm = TRUE)
+  }
+  
+  regions <- out$variable |>
+    stringr::str_extract(pattern = "t >= [0-9]+") |>
+    unique()
+  
+  if ((deg_poly + 1) * length(regions) != nrow(out)) {
+    stop(
+      paste(
+        "Spline has degree", deg_poly, "over", length(regions), 
+        "regions, but", nrow(out), "parameters were fit!"
+      )
     )
-  if ("TRUE" %in% names(out)) {
+  }
+  
+  # fix for polynomials of degree 1
+  if (deg_poly == 1) {
     out <- out |>
       dplyr::mutate(
-        param_beta = cumsum(`TRUE`),
-        param_mu + tau * param_beta
+        variable = stringr::str_replace(variable, "TRUE\\)", "TRUE\\)1")
       )
   }
-  vars <- c("region", "param_mu", "param_beta")
+  
   out |>
-    dplyr::select(dplyr::any_of(vars))
+    dplyr::mutate(
+      region = stringr::str_extract(variable, pattern = "t >= [0-9]+") ,
+      poly_k = stringr::str_extract(variable, pattern = "poly\\(t, [0-9]+, raw = TRUE\\)[0-9]+"),
+      k = as.integer(stringr::str_extract(poly_k, "[0-9]+$")),
+      k = ifelse(is.na(k), 0, k)
+    ) |>
+    dplyr::select(region, k, value) |>
+    tidyr::pivot_wider(names_from = "k", values_from = "value", names_prefix = "param_beta") |>
+    dplyr::rename(param_mu = param_beta0) |>
+    dplyr::mutate(
+      param_mu = cumsum(param_mu)
+    )
 }

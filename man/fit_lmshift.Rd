@@ -5,7 +5,7 @@
 \alias{fit_lmshift_ar1}
 \title{Regression-based model fitting}
 \usage{
-fit_lmshift(x, tau, trends = FALSE, ...)
+fit_lmshift(x, tau, deg_poly = 0, ...)
 
 fit_lmshift_ar1(x, tau, ...)
 }
@@ -14,7 +14,8 @@ fit_lmshift_ar1(x, tau, ...)
 
 \item{tau}{a set of indices representing a changepoint set}
 
-\item{trends}{logical indicating whether you want trends within regions}
+\item{deg_poly}{integer indicating the degree of the polynomial spline to be
+fit. Passed to \code{\link[stats:poly]{stats::poly()}}.}
 
 \item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
 }
@@ -34,7 +35,8 @@ cpts <- c(1700, 1739, 1988)
 ids <- time2tau(cpts, as_year(time(CET)))
 mod <- fit_lmshift(CET, tau = ids)
 glance(mod)
-glance(fit_lmshift(CET, tau = ids, trends = TRUE))
+glance(fit_lmshift(CET, tau = ids, deg_poly = 1))
 glance(fit_lmshift_ar1(CET, tau = ids))
-glance(fit_lmshift_ar1(CET, tau = ids, trends = TRUE))
+glance(fit_lmshift_ar1(CET, tau = ids, deg_poly = 1))
+glance(fit_lmshift_ar1(CET, tau = ids, deg_poly = 2))
 }

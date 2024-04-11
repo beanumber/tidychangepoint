@@ -18,5 +18,6 @@ Format the coefficients from a linear model as a tibble
 ds <- data.frame(y = as.ts(CET), t = 1:length(CET))
 tbl_coef(lm(y ~ 1, data = ds))
 tbl_coef(lm(y ~ (t >= 42) + (t >= 81), data = ds))
-tbl_coef(lm(y ~ t * (t >= 42) + t * (t >= 81), data = ds))
+tbl_coef(lm(y ~ poly(t, 1, raw = TRUE) * (t >= 42) + poly(t, 1, raw = TRUE) * (t >= 81), data = ds))
+tbl_coef(lm(y ~ poly(t, 2, raw = TRUE) * (t >= 42) + poly(t, 2, raw = TRUE) * (t >= 81), data = ds))
 }

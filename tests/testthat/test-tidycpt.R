@@ -85,11 +85,15 @@ test_that("utils works", {
   expect_s3_class(y, "tbl_df")
   expect_equal(ncol(y), 2)
   expect_identical(names(y), c("region", "param_mu"))
-  z <- tbl_coef(lm(y ~ t * (t >= 42) + t * (t >= 81), data = ds))
+  z <- tbl_coef(lm(y ~ poly(t, 1, raw = TRUE) * (t >= 42) + poly(t, 1, raw = TRUE) * (t >= 81), data = ds))
   expect_s3_class(z, "tbl_df")
   expect_equal(ncol(z), 3)
-  expect_identical(names(z), c("region", "param_mu", "param_beta"))
-  
+  expect_identical(names(z), c("region", "param_mu", "param_beta1"))
+  w <- tbl_coef(lm(y ~ poly(t, 2, raw = TRUE) * (t >= 42) + poly(t, 2, raw = TRUE) * (t >= 81), data = ds))
+  expect_s3_class(w, "tbl_df")
+  expect_equal(ncol(w), 4)
+  expect_identical(names(w), c("region", "param_mu", "param_beta1", "param_beta2"))
+    
   expect_equal(whoami(fit_meanshift), "meanshift")
   expect_equal(whoami(fit_meanshift_ar1), "meanshift_ar1")
   expect_equal(whoami(fit_lmshift), "lmshift")
