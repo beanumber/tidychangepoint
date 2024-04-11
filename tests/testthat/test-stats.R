@@ -35,13 +35,13 @@ test_that("lmshift works", {
   expect_equal(coef(y), coef(w))
   expect_equal(deg_free(y), deg_free(w))
   
-  trend_wn <- fit_lmshift(CET, tau = ids, deg_poly = 1)
+  trend_wn <- fit_trendshift(CET, tau = ids)
   expect_equal(round(as.numeric(logLik(trend_wn)), 2), -290.02)
   expect_equal(round(BIC(trend_wn), 2), 650.74)
   expect_equal(round(MDL(trend_wn), 2), 653.07)
   MDL(trend_wn) + 2 * log(nobs(trend_wn))
   
-  trend_ar1 <- fit_lmshift_ar1(CET, tau = ids, deg_poly = 1)
+  trend_ar1 <- fit_trendshift_ar1(CET, tau = ids)
   expect_equal(round(as.numeric(logLik(trend_ar1)), 2), -288.80)
   expect_equal(round(BIC(trend_ar1), 2), 654.19)
   expect_equal(round(MDL(trend_ar1), 2), 656.52)

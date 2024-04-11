@@ -3,11 +3,17 @@
 \name{fit_lmshift}
 \alias{fit_lmshift}
 \alias{fit_lmshift_ar1}
+\alias{fit_trendshift}
+\alias{fit_trendshift_ar1}
 \title{Regression-based model fitting}
 \usage{
 fit_lmshift(x, tau, deg_poly = 0, ...)
 
 fit_lmshift_ar1(x, tau, ...)
+
+fit_trendshift(x, tau, ...)
+
+fit_trendshift_ar1(x, tau, ...)
 }
 \arguments{
 \item{x}{A time series}
@@ -23,7 +29,17 @@ fit. Passed to \code{\link[stats:poly]{stats::poly()}}.}
 Regression-based model fitting
 }
 \details{
-\link{fit_lmshift_ar1}: will apply auto-regressive lag 1 errors
+\itemize{
+\item \link{fit_lmshift_ar1}: will apply auto-regressive lag 1 errors
+}
+
+\itemize{
+\item \link{fit_trendshift}: will fit a line in each region
+}
+
+\itemize{
+\item \link{fit_trendshift_ar1}: will fit a line in each region and autoregress lag 1 errors
+}
 }
 \examples{
 tau <- c(365, 826)

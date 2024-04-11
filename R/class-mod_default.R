@@ -156,7 +156,9 @@ augment.mod_default <- function(x, ...) {
   tibble::enframe(as.ts(x), name = "index", value = "y") |>
     tsibble::as_tsibble(index = index) |>
     dplyr::mutate(
-      region = cut_inclusive(index, pad_tau(tau, nobs(x)))
+      region = cut_inclusive(index, pad_tau(tau, nobs(x))),
+      .fitted = fitted(x),
+      .resid = residuals(x)
     ) |>
     dplyr::group_by(region)
 }
@@ -166,7 +168,7 @@ augment.mod_default <- function(x, ...) {
 #' @export
 tidy.mod_default <- function(x, ...) {
   tau <- changepoints(x)
-  n <- length(as.ts(x))
+  n <- nobs(x)
   tau_padded <- pad_tau(tau, n)
   
   augment(x) |>
@@ -188,7 +190,7 @@ tidy.mod_default <- function(x, ...) {
       begin = utils::head(tau_padded, -1),
       end = utils::tail(tau_padded, -1)
     ) |>
-    dplyr::inner_join(x$region_params, by = "region")
+    dplyr::inner_join(coef(x), by = "region")
 }
 
 #' @rdname mod_default-generics
@@ -234,6 +236,9 @@ autoregress_errors <- function(mod, ...) {
 #' @export
 #' @examples
 #' plot(fit_meanshift(CET, tau = 300))
+#' plot(fit_trendshift(CET, tau = 300))
+#' plot(fit_lmshift(CET, tau = 300, deg_poly = 2))
+#' plot(fit_lmshift(CET, tau = 300, deg_poly = 10))
 plot.mod_default <- function(x, ...) {
   regions <- tidy(x)
   ggplot2::ggplot(
@@ -249,11 +254,12 @@ plot.mod_default <- function(x, ...) {
     ggplot2::geom_hline(yintercept = mean(as.ts(x)), linetype = 3) +
     ggplot2::geom_rug(sides = "l") +
     ggplot2::geom_line() + 
-    ggplot2::geom_segment(
-      data = regions,
-      ggplot2::aes(x = begin, y = mean, xend = end, yend = mean),
-      color = "red"
-    ) +
+    ggplot2::geom_line(ggplot2::aes(y = .fitted), color = "red") + 
+#    ggplot2::geom_segment(
+#      data = regions,
+#      ggplot2::aes(x = begin, y = mean, xend = end, yend = mean),
+#      color = "red"
+#    ) +
     ggplot2::geom_segment(
       data = regions,
       ggplot2::aes(x = begin, y = mean + 1.96 * sd, xend = end, yend = mean + 1.96 * sd),

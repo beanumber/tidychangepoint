@@ -18,7 +18,8 @@ fit_meanvar <- function(x, tau, ...) {
   
   region_params <- region_mods |>
     purrr::map(purrr::pluck("region_params")) |>
-    purrr::list_rbind()
+    purrr::list_rbind() |>
+    dplyr::mutate(region = names(regions))
   
   region_params$sigma_hatsq <- region_mods |>
     purrr::map_dbl(model_variance)

@@ -62,6 +62,9 @@ augment(cpts)
 tidy(cpts)
 glance(cpts)
 plot(fit_meanshift(CET, tau = 300))
+plot(fit_trendshift(CET, tau = 300))
+plot(fit_lmshift(CET, tau = 300, deg_poly = 2))
+plot(fit_lmshift(CET, tau = 300, deg_poly = 10))
 }
 \seealso{
 \code{\link[broom:reexports]{broom::augment()}}

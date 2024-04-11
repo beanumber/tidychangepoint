@@ -72,7 +72,7 @@ attr(fit_lmshift, "model_name") <- "lmshift"
 
 #' @rdname fit_lmshift
 #' @details
-#' [fit_lmshift_ar1]: will apply auto-regressive lag 1 errors
+#' - [fit_lmshift_ar1]: will apply auto-regressive lag 1 errors
 #' @export
 fit_lmshift_ar1 <- function(x, tau, ...) {
   fit_lmshift(x, tau,  ...) |>
@@ -81,6 +81,26 @@ fit_lmshift_ar1 <- function(x, tau, ...) {
 
 attr(fit_lmshift_ar1, "model_name") <- "lmshift_ar1"
 
+#' @rdname fit_lmshift
+#' @details
+#' - [fit_trendshift]: will fit a line in each region
+#' @export
+fit_trendshift <- function(x, tau, ...) {
+  fit_lmshift(x, tau,  deg_poly = 1, ...)
+}
+
+attr(fit_trendshift, "model_name") <- "trendshift"
+
+#' @rdname fit_lmshift
+#' @details
+#' - [fit_trendshift_ar1]: will fit a line in each region and autoregress lag 1 errors
+#' @export
+fit_trendshift_ar1 <- function(x, tau, ...) {
+  fit_trendshift(x, tau, ...) |>
+    autoregress_errors()
+}
+
+attr(fit_trendshift_ar1, "model_name") <- "trendshift_ar1"
 
 #' Format the coefficients from a linear model as a tibble
 #' @param mod An `lm` model object

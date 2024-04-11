@@ -1,6 +1,6 @@
 #' Segment a times series using randomly selected candidate changepoints
 #' @param x A times series
-#' @param num_generations Number of generations
+#' @param popSize Size of initial population. Passed to [GA::ga()].
 #' @param ... currently ignored
 #' @export
 #' @examples
