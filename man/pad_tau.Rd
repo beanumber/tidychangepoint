@@ -4,6 +4,7 @@
 \alias{pad_tau}
 \alias{unpad_tau}
 \alias{is_valid_tau}
+\alias{validate_tau}
 \alias{binary2tau}
 \alias{tau2binary}
 \alias{tau2time}
@@ -23,6 +24,8 @@ pad_tau(tau, n)
 unpad_tau(padded_tau)
 
 is_valid_tau(tau, n)
+
+validate_tau(tau, n)
 
 binary2tau(x)
 
@@ -76,6 +79,14 @@ is_valid_tau(1, length(DataCPSim))
 is_valid_tau(826, length(DataCPSim))
 is_valid_tau(1096, length(DataCPSim))
 is_valid_tau(1097, length(DataCPSim))
+
+validate_tau(0, length(DataCPSim))
+validate_tau(1, length(DataCPSim))
+validate_tau(826, length(DataCPSim))
+validate_tau(c(826, 826), length(DataCPSim))
+validate_tau(1096, length(DataCPSim))
+validate_tau(1097, length(DataCPSim))
+validate_tau(c(-4, 0, 1, 4, 5, 5, 824, 1096, 1097, 182384), length(DataCPSim))
 
 binary2tau(c(0, 0, 1, 0, 1))
 binary2tau(round(runif(10)))

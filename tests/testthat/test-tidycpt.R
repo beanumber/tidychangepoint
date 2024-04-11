@@ -62,6 +62,14 @@ test_that("utils works", {
   expect_false(is_valid_tau(length(x), length(x)))
   expect_false(is_valid_tau(length(x) + 1, length(x)))
   
+  expect_length(validate_tau(0, length(x)), 0)
+  expect_length(validate_tau(1, length(x)), 0)
+  expect_length(validate_tau(826, length(x)), 1)
+  expect_length(validate_tau(length(x), length(x)), 0)
+  expect_length(validate_tau(length(x) + 1, length(x)), 0)
+  expect_length(validate_tau(c(826, 826), length(x)), 1)
+  expect_length(validate_tau(c(-4, 0, 1, 4, 5, 5, 824, 1096, 1097, 182384), length(x)), 3)
+  
   z <- cut_inclusive(x, y)
   expect_equal(length(z), length(x))
   expect_type(levels(z), "character")

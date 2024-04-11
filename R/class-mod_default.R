@@ -48,7 +48,7 @@ validate_mod_default <- function(x) {
   }
   if (!is_valid_tau(x$tau, nobs(x))) {
 #    message("Removing 1 and/or n from tau...")
-    x$tau <- x$tau[x$tau %in% 2:(nobs(x) - 1)]
+    x$tau <- validate_tau(x$tau, nobs(x))
   }
   x
 }
