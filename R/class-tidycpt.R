@@ -80,13 +80,17 @@ glance.tidycpt <- function(x, ...) {
 compare_models <- function(x, ...) {
   list(
     x$model,
-    fit_lmshift(as.ts(x), tau = changepoints(x), trends = FALSE),
-    fit_lmshift(as.ts(x), tau = changepoints(x), trends = FALSE, ar1 = TRUE),
-    fit_lmshift(as.ts(x), tau = changepoints(x), trends = TRUE),
-    fit_lmshift(as.ts(x), tau = changepoints(x), trends = TRUE, ar1 = TRUE)
+    fit_meanshift(as.ts(x), tau = changepoints(x)),
+    fit_meanshift_ar1(as.ts(x), tau = changepoints(x)),
+    fit_trendshift(as.ts(x), tau = changepoints(x)),
+    fit_trendshift_ar1(as.ts(x), tau = changepoints(x)),
+    fit_meanvar(as.ts(x), tau = changepoints(x)),
+    fit_lmshift(as.ts(x), tau = changepoints(x), deg_poly = 2),
+    fit_nhpp(as.ts(x), tau = changepoints(x))
   ) |>
     purrr::map(glance) |>
-    dplyr::bind_rows()
+    dplyr::bind_rows() |>
+    dplyr::arrange(.data[[names(fitness(x))]])
 }
 
 #' @rdname compare_models
@@ -101,7 +105,8 @@ compare_algorithms <- function(x, ...) {
   ) |>
     purrr::map(glance)
   dplyr::bind_rows(glance(x), others) |>
-    dplyr::mutate(model = gsub(pattern = "fit_", replacement = "", model))
+    dplyr::mutate(model = gsub(pattern = "fit_", replacement = "", model)) |>
+    dplyr::arrange(elapsed_time)
 }
 
 #' @rdname tidycpt-generics
