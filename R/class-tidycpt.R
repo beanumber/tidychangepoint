@@ -113,6 +113,11 @@ compare_algorithms <- function(x, ...) {
 #' plot(segment(CET, method = "pelt"), use_time_index = TRUE)
 plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
   g <- plot(x$model)
+  b <- g |>
+    ggplot2::ggplot_build() |>
+    purrr::pluck("layout") |>
+    purrr::pluck("panel_scales_x") |>
+    purrr::pluck(1)
   if (use_time_index) {
     my_labels <- function(t) {
       n <- length(t)
@@ -124,7 +129,7 @@ plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
     }
     
     g <- g +
-      ggplot2::scale_x_continuous("Time", labels = my_labels)
+      ggplot2::scale_x_continuous("Time", breaks = b$breaks, labels = my_labels)
   }
   g
 }

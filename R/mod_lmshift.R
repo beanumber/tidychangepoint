@@ -34,9 +34,7 @@ globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic",
 fit_lmshift <- function(x, tau, deg_poly = 0, ...) {
   n <- length(x)
   ds <- data.frame(y = as.ts(x), t = 1:n)
-  if (1 %in% tau) {
-    tau <- utils::tail(tau, -1)
-  }
+  tau <- validate_tau(tau, n)
   if (length(tau) < 1) {
     form <- "y ~ 1"
     model_name <- "null"

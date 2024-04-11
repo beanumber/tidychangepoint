@@ -235,12 +235,23 @@ autoregress_errors <- function(mod, ...) {
 #' @rdname mod_default-generics
 #' @export
 #' @examples
-#' plot(fit_meanshift(CET, tau = 300))
-#' plot(fit_trendshift(CET, tau = 300))
-#' plot(fit_lmshift(CET, tau = 300, deg_poly = 2))
-#' plot(fit_lmshift(CET, tau = 300, deg_poly = 10))
+#' plot(fit_meanshift(CET, tau = 330))
+#' plot(fit_trendshift(CET, tau = 330))
+#' plot(fit_lmshift(CET, tau = 330, deg_poly = 2))
+#' plot(fit_lmshift(CET, tau = 330, deg_poly = 10))
 plot.mod_default <- function(x, ...) {
   regions <- tidy(x)
+  breaks_default <- scales::extended_breaks()(1:nobs(x))
+  if (length(changepoints(x)) < 8) {
+    b <- breaks_default |>
+      union(nobs(x)) |>
+      union(changepoints(x)) |>
+      sort()
+  } else {
+    b <- breaks_default |>
+      union(nobs(x)) |>
+      sort()
+  }
   ggplot2::ggplot(
     data = augment(x), 
     ggplot2::aes(x = index, y = y)
@@ -272,7 +283,7 @@ plot.mod_default <- function(x, ...) {
       color = "red",
       linetype = 3
     ) + 
-    ggplot2::scale_x_continuous("Time Index (t)") +
+    ggplot2::scale_x_continuous("Time Index (t)", breaks = b) +
     ggplot2::scale_y_continuous("Original Measurement") + 
     ggplot2::labs(
       title = "Original times series",
