@@ -1,0 +1,50 @@
+---
+title: "Central England Temperature"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{Central England Temperature}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+[Shi, et al. (2022)](10.1175/JCLI-D-21-0489.1) use changepoint detection algorithms to analyze a time series of temperature data from Central England. 
+These data are available via `CET` from `tidychangepoint`. 
+
+```{r setup}
+library(tidychangepoint)
+plot(CET)
+```
+
+
+```{r}
+l <- log_gabin_population(CET)
+trend_wn <- CET |>
+  segment(
+    method = "ga", 
+    model_fn = fit_meanshift, 
+    penalty_fn = BIC, 
+    population = l, 
+    popSize = 200, 
+    maxiter = 10
+  )
+```
+
+```{r}
+changepoints(trend_wn)
+fitness(trend_wn)
+tidy(trend_wn)
+glance(trend_wn)
+glance(trend_wn$model)
+```
+
+```{r}
+plot(trend_wn, use_time_index = TRUE)
+```
+

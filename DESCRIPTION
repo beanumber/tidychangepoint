@@ -2,12 +2,12 @@ Package: tidychangepoint
 Title: What the Package Does (One Line, Title Case)
 Version: 0.0.0.9030
 Authors@R: c(
+    person("Benjamin S.", "Baumer", role = c("aut", "cre"), 
+           comment = c(ORCID = "0000-0002-3279-0516")),
     person(
       "Biviana", "Suarez Sierra", email = "first.last@example.com", 
-      role = c("aut", "cre"), comment = c(ORCID = "YOUR-ORCID-ID")
+      role = c("aut"), comment = c(ORCID = "YOUR-ORCID-ID")
     ),
-    person("Benjamin S.", "Baumer", role = c("aut"), 
-           comment = c(ORCID = "0000-0002-3279-0516")),
     person(
       "Carlos A.", "Taimal", email = "first.last@example.com", 
       role = c("aut"), comment = c(ORCID = "YOUR-ORCID-ID")
