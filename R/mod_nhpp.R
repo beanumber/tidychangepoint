@@ -111,11 +111,20 @@ fit_nhpp <- function(x, tau, ...) {
     dplyr::select(region) |>
     dplyr::bind_cols(region_params)
   
+  regions <- x |>
+    as.ts() |>
+    split_by_tau(tau)
+  mu_seg <- regions |>
+    purrr::map_dbl(mean)
+  n_seg <- regions |>
+    purrr::map_int(length)
+  
   out <- mod_default(
     x = as.ts(x),
     tau = tau,
     region_params = region_params,
     model_params = c("threshold" = threshold),
+    fitted_values = rep(mu_seg, n_seg),
     model_name = "nhpp"
   )
   class(out) <- c("nhpp", class(out))
@@ -160,17 +169,6 @@ glance.nhpp <- function(x, ...) {
     dplyr::mutate(
       BMDL = BMDL(x)
     )
-}
-
-#' @rdname fit_nhpp
-#' @export
-fitted.nhpp <- function(object, ...) {
-  lambda <- object$region_params$param_alpha
-  region_lengths <- object |>
-    as.ts() |>
-    split_by_tau(changepoints(object)) |>
-    purrr::map_int(length)
-  rep(lambda, region_lengths)
 }
 
 #' @rdname fit_nhpp
@@ -219,9 +217,9 @@ mcdf <- function(x, dist = "weibull") {
 #' @rdname fit_nhpp
 #' @export
 #' @examples
-#' plot(fit_nhpp(DataCPSim, tau = 826))
+#' diagnose(fit_nhpp(DataCPSim, tau = 826))
 
-plot.nhpp <- function(x, ...) {
+diagnose.nhpp <- function(x, ...) {
   n <- nobs(x)
   
   z <- exceedances(x) |>

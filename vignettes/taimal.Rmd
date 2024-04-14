@@ -1,0 +1,54 @@
+---
+title: "Using Taimal's algorithm"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{taimal}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+```{r setup}
+library(tidychangepoint)
+```
+
+```{r}
+plot(bogota_pm)
+```
+
+## Using the original implementation of Taimal's algorithm
+
+```{r}
+x <- segment(bogota_pm, method = "taimal", num_generations = 5)
+changepoints(x)
+plot(x)
+```
+
+## Using the GA implementation of Taimal's algorithm
+
+```{r}
+y <- segment(bogota_pm, method = "ga-taimal", maxiter = 5)
+changepoints(y)
+plot(y)
+diagnose(y$model)
+```
+
+### Changing the threshold
+
+```{r}
+z <- segment(
+  bogota_pm, 
+  method = "ga-taimal", 
+  maxiter = 5,
+  model_params = list(threshold = 60)
+)
+changepoints(z)
+plot(z)
+diagnose(z$model)
+```

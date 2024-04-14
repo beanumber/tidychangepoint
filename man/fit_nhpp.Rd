@@ -5,9 +5,8 @@
 \alias{fit_nhpp}
 \alias{logLik.nhpp}
 \alias{glance.nhpp}
-\alias{fitted.nhpp}
 \alias{mcdf}
-\alias{plot.nhpp}
+\alias{diagnose.nhpp}
 \alias{plot_intensity}
 \title{Fit a non-homogeneous Poisson process model to the exceedances of a time series.}
 \usage{
@@ -19,11 +18,9 @@ fit_nhpp(x, tau, ...)
 
 \method{glance}{nhpp}(x, ...)
 
-\method{fitted}{nhpp}(object, ...)
-
 mcdf(x, dist = "weibull")
 
-\method{plot}{nhpp}(x, ...)
+\method{diagnose}{nhpp}(x, ...)
 
 plot_intensity(x, ...)
 }
@@ -66,7 +63,7 @@ fit_nhpp(DataCPSim, tau = changepoints(segment(DataCPSim, method = "pelt")))
 nhpp <- fit_nhpp(DataCPSim, tau = 826)
 mcdf(nhpp)
 
-plot(fit_nhpp(DataCPSim, tau = 826))
+diagnose(fit_nhpp(DataCPSim, tau = 826))
 plot_intensity(fit_nhpp(DataCPSim, tau = 826))
 mod <- segment(bogota_pm, method = "pelt")
 plot_intensity(fit_nhpp(bogota_pm, tau = changepoints(mod)))
