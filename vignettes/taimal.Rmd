@@ -37,6 +37,8 @@ y <- segment(bogota_pm, method = "ga-taimal", maxiter = 5)
 changepoints(y)
 plot(y)
 diagnose(y$model)
+tidy(y)
+glance(y)
 ```
 
 ### Changing the threshold
@@ -50,5 +52,6 @@ z <- segment(
 )
 changepoints(z)
 plot(z)
-diagnose(z$model)
+tidy(z)
+glance(z)
 ```
