@@ -12,7 +12,7 @@ sets in univariate time series."><!-- mathjax --><script src="https://cdnjs.clou
     
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9030</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9031</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -22,6 +22,13 @@ sets in univariate time series."><!-- mathjax --><script src="https://cdnjs.clou
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item">
   <a class="nav-link" href="../reference/index.html">Reference</a>
+</li>
+<li class="nav-item dropdown">
+  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
+  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
+    <a class="dropdown-item" href="../articles/CET.html">Central England Temperature</a>
+    <a class="dropdown-item" href="../articles/taimal.html">Using Taimal's algorithm</a>
+  </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
         <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off"></form>
@@ -142,7 +149,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pkg      version algorithm params num_cpts model criteria fitness elapsed_time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidycha… 0.0.0.… <span style="color: #BB0000;">NA</span>        <span style="color: #949494;">&lt;list&gt;</span>        0 mean… BIC      <span style="color: #BB0000;">NA</span>      0.006513596…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidycha… 0.0.0.… <span style="color: #BB0000;">NA</span>        <span style="color: #949494;">&lt;list&gt;</span>        0 mean… BIC      <span style="color: #BB0000;">NA</span>      0.00681901 …</span>
 <span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> method: pelt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $segmenter</span>
@@ -625,7 +632,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.04669189 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.04428744 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -1131,7 +1138,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 1.899194 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 1.992971 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -1629,7 +1636,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.1760459 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.1856744 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -2124,7 +2131,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.2582884 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.2843761 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -2956,7 +2963,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.06962705 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.0664103 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -3774,7 +3781,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.01254869 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.01398706 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -4192,7 +4199,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.07691288 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.07916188 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $time_index</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [1] "2018-01-01" "2018-01-02" "2018-01-03" "2018-01-04" "2018-01-05"</span>
@@ -4429,7 +4436,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 
 
     <footer><div class="pkgdown-footer-left">
-  <p></p><p>Developed by Biviana Suarez Sierra, Benjamin S. Baumer, Carlos A. Taimal.</p>
+  <p></p><p>Developed by Benjamin S. Baumer, Biviana Suarez Sierra, Carlos A. Taimal.</p>
 </div>
 
 <div class="pkgdown-footer-right">
