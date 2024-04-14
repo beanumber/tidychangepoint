@@ -24,20 +24,15 @@ library(tidychangepoint)
 
 ## Tidy methods for changepoint analysis
 
-Consider the following time series:
-
-```{r rlnorm-plot}
-plot(as.ts(DataCPSim))
-```
-
 The `tidychangepoint` package allows you to use any number of algorithms for detecting changepoint sets in univariate time series with a common, `tidyverse`-compliant interface. 
+Currently, algorithms from `changepoint`, `wbs`, and several genetic algorithms made accessible via `GA` are supported. 
 It also provides model-fitting procedures for commonly-used parametric models, tools for computing various penalty functions, and graphical diagnostic displays. 
 
 Changepoint sets are computed using the `segment()` function, which takes a numeric vector that is coercible into a `ts` object, and a string indicating the algorithm you wish you use. 
 `segment()` always returns a `tidycpt` object. 
 
-```{r}
-x <- segment(DataCPSim, method = "pelt")
+```{r, message=FALSE}
+x <- segment(CET, method = "pelt")
 class(x)
 ```
 
@@ -48,106 +43,17 @@ For example, `as.ts()` returns the original data as `ts` object, and `changepoin
 changepoints(x)
 ```
 
-### Retrieving information using the `broom` interface
-
-`tidychangepoint` follows the design interface of the `broom` package. 
-Therefore, `augment()`, `tidy()` and `glance()` methods exists for `tidycpt` objects. 
-
-- `augment()` returns a `tsibble` that is grouped according to the regions defined by the changepoint set. 
+If the original time series has time labels, we can also retrieve that information. 
 
 ```{r}
-augment(x)
+changepoints_labels(x)
 ```
 
-- `tidy()` returns a `tbl` that provides summary statistics for each region.
+
+The `fitness()` function returns the both the value and the name of the objective function that the algorithm used to find the optimal changepoint set. 
 
 ```{r}
-tidy(x)
-```
-
-- `glance()` returns a `tbl` that provides summary statistics for the algorithm. 
-
-```{r}
-glance(x)
-```
-
-### Other methods
-
-The `plot()` method leverages `ggplot2` to provide an informative plot, with the regions defined by the changepoint set clearly demarcated, and the means within each region also indicated. 
-
-```{r pelt-plot}
-plot(x)
-```
-
-The `diagnose()` function shows the empirical cumulative distribution of the exceedances of the time series, as well as how that distribution is modeled as a non-homogeneous Poisson process. 
-
-```{r diagnose}
-diagnose(x)
-```
-
-
-
-## Algorithms
-
-### Fast algorithms rom existing packages
-
-- The `segment()` function passes arguments to the `cpt.meanvar()` function from the `changepoint` package, and stores the resulting `cpt` object as its `segmenter` object. 
-
-```{r changepoint, message=FALSE}
-y <- changepoint::cpt.meanvar(DataCPSim, method = "PELT")
-identical(y, x$segmenter)
-```
-
-The binary segmentation (`method = "binseg"`) and segmented neighborhood (`method = "binseg"`) algorithms, as implemented by the `changepoint` package, are also available. 
-
-- Wild binary segmentation via the `wbs` package is available via `method = "wbs"`. 
-
-### Genetic algorithms
-
-- `method = "ga-shi"`: implements a genetic algorithm as specified by Shi and Lund, using the `GA` package. [Note that this algorithm performs very poorly unless `maxiter` is set much, much higher.]
-
-```{r shi}
-x <- DataCPSim |>
-  segment(method = "ga-shi", maxiter = 5)
-length(changepoints(x))
-diagnose(x)
-```
-
-- `method = "taimal"`: implements the Genetic BMDL heuristic as per Taimal and Sierra-Suarez. 
-
-```{r gbmdl-tidyplot}
-x <- DataCPSim |>
-  segment(method = "taimal", num_generations = 5)
-changepoints(x)
-diagnose(x)
-```
-
-### Näive methods
-
-`segment()` includes three options for computing changepoint sets using näive methods.
-
-- `method = "null"`: returns null model with no changepoints
-
-```{r null-plot}
-DataCPSim |>
-  segment(method = "null") |>
-  diagnose()
-```
-
-- `method = "manual"`: returns a model with changepoints specified manually using the `cpts` argument
-
-```{r manual-plot}
-DataCPSim |>
-  segment(method = "manual", cpts = c(365, 826)) |>
-  diagnose()
-```
-
-- `method = "random"`: returns the best model from a random collection of changepoint sets.
-
-```{r random-plot}
-DataCPSim |>
-  segment(method = "random", num_generations = 20) |>
-  diagnose()
+fitness(x)
 ```
 
 
