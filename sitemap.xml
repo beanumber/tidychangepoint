@@ -37,7 +37,7 @@
     <loc>https://beanumber.github.io/tidychangepoint/reference/MDL.html</loc>
   </url>
   <url>
-    <loc>https://beanumber.github.io/tidychangepoint/reference/as.mod_default.html</loc>
+    <loc>https://beanumber.github.io/tidychangepoint/reference/as.model.html</loc>
   </url>
   <url>
     <loc>https://beanumber.github.io/tidychangepoint/reference/bogota_pm.html</loc>
@@ -101,6 +101,9 @@
   </url>
   <url>
     <loc>https://beanumber.github.io/tidychangepoint/reference/mod_default-generics.html</loc>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/tidychangepoint/reference/model_args.html</loc>
   </url>
   <url>
     <loc>https://beanumber.github.io/tidychangepoint/reference/model_name.html</loc>
