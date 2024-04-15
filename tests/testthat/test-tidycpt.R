@@ -140,6 +140,10 @@ test_that("penalties work", {
 })
 
 
+test_that("modeling works", {
+  x <- segment(CET, method = "ga-taimal", maxiter = 5)
+})
+
 test_that("performance comparison works", {
   x <- segment(DataCPSim, method = "pelt")
 #  y <- segment(DataCPSim, method = "taimal", num_generations = 20)

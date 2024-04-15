@@ -43,15 +43,22 @@ glance(y)
 
 ### Changing the threshold
 
+By default, the threshold is set to the mean of the observed values, but it can be changed using the `model_fn_args` argument to `segment()`. 
+
+Please note that the number of iterations (`maxiter`) of the genetic algorithm has been set very low here for ease of compilation. 
+To obtain more robust result, set `maxiter` to be something much higher. 
+You can also experiment with the `popSize` argument to `segment()`. 
+
 ```{r}
 z <- segment(
   bogota_pm, 
   method = "ga-taimal", 
   maxiter = 5,
-  model_params = list(threshold = 60)
+  model_fn_args = list(threshold = 50)
 )
 changepoints(z)
 plot(z)
+diagnose(z$model)
 tidy(z)
 glance(z)
 ```
