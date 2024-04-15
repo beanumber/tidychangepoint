@@ -5,7 +5,7 @@
 #' [fit_lmshift()], and [fit_nhpp()]
 #' @param penalty_fn A function that evaluates the changepoint set returned by
 #' `model_fn`. We provide [AIC()], [BIC()], [MBIC()], [MDL()], and [BMDL()].
-#' @param model_params A [list()] of parameters passed to `model_fn`
+#' @param model_fn_args A [list()] of parameters passed to `model_fn`
 #' @param ... arguments passed to [GA::ga()]
 #' @export
 #' @examples
@@ -21,19 +21,19 @@
 #' y <- segment(CET, method = "ga-gbmdl", maxiter = 20)
 #' changepoints(y)
 #' 
-#' z <- segment(CET, method = "ga-gbmdl", maxiter = 10, model_params = list(threshold = 2))
+#' z <- segment(CET, method = "ga-gbmdl", maxiter = 10, model_fn_args = list(threshold = 2))
 #' changepoints(z)
 #' }
 
 segment_ga <- function(x, 
                        model_fn = fit_meanshift_ar1, 
                        penalty_fn = BIC, 
-                       model_params = list(), ...) {
+                       model_fn_args = list(), ...) {
   n <- length(as.ts(x))
   
   obj_fun <- function(tau_binary_vec) {
     tau <- binary2tau(tau_binary_vec)
-    -penalty_fn(model_fn(as.ts(x), tau, threshold = model_params[["threshold"]]))
+    -penalty_fn(model_fn(as.ts(x), tau, threshold = model_fn_args[["threshold"]]))
   }
   memoise::memoise(obj_fun)
   
@@ -46,12 +46,12 @@ segment_ga <- function(x,
   
   out <- methods::as(mod_ga, "tidyga")
   out@data <- as.ts(x)
-  model_params$model_fn <- whoami(model_fn)
-  model_params$penalty_fn <- penalty_fn |>
+  model_fn_args$model_fn <- whoami(model_fn)
+  model_fn_args$penalty_fn <- penalty_fn |>
     body() |>
     as.character() |>
     purrr::pluck(2)
-  out@model_params <- model_params
+  out@model_fn_args <- model_fn_args
   return(out)
 }
 
@@ -70,7 +70,7 @@ segment_ga <- function(x,
 #' changepoints(x)
 #' 
 #' y <- segment(CET, method = "ga", model_fn = fit_lmshift, penalty_fn = BIC, 
-#'   popSize = 200, maxiter = 5000, run = 1000, model_params = list(trends = TRUE), 
+#'   popSize = 200, maxiter = 5000, run = 1000, model_fn_args = list(trends = TRUE), 
 #'   population = build_gabin_population(CET))
 #' 
 #' }
@@ -125,6 +125,6 @@ segment_ga_random <- function(x, ...) {
 methods::setClass(
   "tidyga", 
   contains = "ga", 
-  slots = c(data = "ts", model_params = "list")
+  slots = c(data = "ts", model_fn_args = "list")
 )
 

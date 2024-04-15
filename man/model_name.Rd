@@ -9,6 +9,7 @@
 \alias{model_name}
 \alias{model_name.default}
 \alias{model_name.character}
+\alias{model_args.default}
 \alias{model_name.ga}
 \alias{model_name.cpt}
 \alias{model_name.wbs}
@@ -25,6 +26,8 @@ model_name(object, ...)
 \method{model_name}{default}(object, ...)
 
 \method{model_name}{character}(object, ...)
+
+\method{model_args}{default}(object, ...)
 
 \method{model_name}{ga}(object, ...)
 

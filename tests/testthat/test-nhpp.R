@@ -27,6 +27,16 @@ test_that("generics works", {
   expect_true(all(mcdf(y) < length(m)))
 })
 
+test_that("threshold works", {
+  x <- fit_nhpp(DataCPSim, tau = 826)
+  expect_equal(length(exceedances(x)), 360)
+  expect_equal(length(exceedances(x)), length(mcdf(x)))
+  
+  y <- fit_nhpp(DataCPSim, tau = 826, threshold = 200)
+  expect_lt(length(exceedances(y)), 360)
+  expect_equal(length(exceedances(y)), length(mcdf(y)))
+  expect_equal(y$model_params[["threshold"]], 200)
+})
 
 test_that("BMDL works", {
   y <- test_set(n = 1, seed = 123)

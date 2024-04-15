@@ -10,7 +10,7 @@ segment_ga(
   x,
   model_fn = fit_meanshift_ar1,
   penalty_fn = BIC,
-  model_params = list(),
+  model_fn_args = list(),
   ...
 )
 
@@ -28,7 +28,7 @@ segment_ga_taimal(x, ...)
 \item{penalty_fn}{A function that evaluates the changepoint set returned by
 \code{model_fn}. We provide \code{\link[=AIC]{AIC()}}, \code{\link[=BIC]{BIC()}}, \code{\link[=MBIC]{MBIC()}}, \code{\link[=MDL]{MDL()}}, and \code{\link[=BMDL]{BMDL()}}.}
 
-\item{model_params}{A \code{\link[=list]{list()}} of parameters passed to \code{model_fn}}
+\item{model_fn_args}{A \code{\link[=list]{list()}} of parameters passed to \code{model_fn}}
 
 \item{...}{arguments passed to \code{\link[GA:ga]{GA::ga()}}}
 }
@@ -62,7 +62,7 @@ str(x)
 y <- segment(CET, method = "ga-gbmdl", maxiter = 20)
 changepoints(y)
 
-z <- segment(CET, method = "ga-gbmdl", maxiter = 10, model_params = list(threshold = 2))
+z <- segment(CET, method = "ga-gbmdl", maxiter = 10, model_fn_args = list(threshold = 2))
 changepoints(z)
 }
 \dontrun{
@@ -71,7 +71,7 @@ x <- segment(CET, method = "ga-shi", maxiter = 500, run = 100)
 changepoints(x)
 
 y <- segment(CET, method = "ga", model_fn = fit_lmshift, penalty_fn = BIC, 
-  popSize = 200, maxiter = 5000, run = 1000, model_params = list(trends = TRUE), 
+  popSize = 200, maxiter = 5000, run = 1000, model_fn_args = list(trends = TRUE), 
   population = build_gabin_population(CET))
 
 }

@@ -113,3 +113,9 @@ model_name.cpt <- function(object, ...) {
     return("meanshift")
   }
 }
+
+#' @rdname model_args
+#' @export
+model_args.cpt <- function(object, ...) {
+  NULL
+}

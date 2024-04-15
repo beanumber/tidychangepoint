@@ -69,7 +69,7 @@ test_that("lmshift works", {
   MDL(trend_ar1_trunc) + 2 * log(nobs(trend_ar1_trunc))
   
   x <- fit_meanvar(CET, tau = c(42, 330))
-  expect_true("sigma_hatsq" %in% names(x$region_params))
+  expect_true("param_sigma_hatsq" %in% names(x$region_params))
   expect_true("region" %in% names(x$region_params))
   
 })

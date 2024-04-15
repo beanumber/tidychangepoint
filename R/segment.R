@@ -148,7 +148,7 @@ segment.ts <- function(x, method = "null", ...) {
   # build the tidycpt object
   obj <- list(
     segmenter = seg,
-    model = as.mod_default(seg),
+    model = as.model(seg),
     elapsed_time = Sys.time() - begin
   )
   class(obj) <- c("tidycpt")

@@ -49,19 +49,33 @@ model_name.character <- function(object, ...) {
   object
 }
 
-#' Convert a segmenter to a `mod_default` object
+#' Retrieve the model arguments that a segmenter used
 #' @inheritParams fitness
 #' @export
-as.mod_default <- function(object, ...) UseMethod("as.mod_default")
+model_args <- function(object, ...) UseMethod("model_args")
+
+#' @rdname model_name
+#' @export
+model_args.default <- function(object, ...) {
+  object$model_fn_args
+}
+
+#' Convert a segmenter to a model object
+#' @inheritParams fitness
+#' @export
+as.model <- function(object, ...) UseMethod("as.model")
 
 #' @rdname ga-generics
 #' @export
 #' @examples
 #' cpt <- segment(DataCPSim, method = "ga", maxiter = 5)
-#' as.mod_default(cpt$segmenter)
-as.mod_default.default <- function(object, ...) {
+#' as.model(cpt$segmenter)
+#' cpt <- segment(DataCPSim, method = "ga-taimal", model_fn_args = list(threshold = 80), maxiter = 5)
+#' as.model(cpt$segmenter)$model_params
+as.model.default <- function(object, ...) {
   f <- model_fit(object)
-  f(as.ts(object), tau = changepoints(object))
+  args <- c(list(as.ts(object), tau = changepoints(object)), model_args(object), list(...))
+  do.call(f, args)
 }
 
 #' Modified Bayesian Information Criterion

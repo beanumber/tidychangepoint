@@ -19,7 +19,7 @@ glance.ga <- function(x, ...) {
     algorithm = "Genetic",
     params = list(params(x)),
     num_cpts = length(changepoints(x)),
-    model = x@model_params$model_fn,
+    model = model_name(x),
     criteria = names(fitness(x)),
     fitness = fitness(x)
   )
@@ -34,7 +34,7 @@ params.ga <- function(x, ...) {
     elitism = x@elitism,
     pcrossover = x@pcrossover,
     pmutation = x@pmutation,
-    model_params = x@model_params
+    model_fn_args = model_args(x)
   )
 }
 
@@ -120,12 +120,18 @@ log_gabin_population <- function(x, ...) {
 #' 
 fitness.ga <- function(object, ...) {
   out <- -object@fitnessValue
-  names(out) <- object@model_params$penalty_fn
+  names(out) <- model_args(object)[["penalty_fn"]]
   out
 }
 
 #' @rdname model_name
 #' @export
 model_name.ga <- function(object, ...) {
-  object@model_params[["model_fn"]]
+  model_args(object)[["model_fn"]]
+}
+
+#' @rdname model_args
+#' @export
+model_args.ga <- function(object, ...) {
+  object@model_fn_args
 }

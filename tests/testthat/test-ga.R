@@ -1,5 +1,5 @@
 test_that("GA works", {
-  x <- segment(DataCPSim, method = "ga", model_params = list(initial_prob = 0.01), maxiter = 5)
+  x <- segment(DataCPSim, method = "ga", model_fn_args = list(initial_prob = 0.01), maxiter = 5)
   expect_s3_class(x, "tidycpt")
   expect_s4_class(x$segmenter, "ga")
   expect_s3_class(as.ts(x), "ts")

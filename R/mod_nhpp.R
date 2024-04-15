@@ -133,6 +133,17 @@ fit_nhpp <- function(x, tau, ...) {
 
 attr(fit_nhpp, "model_name") <- "nhpp"
 
+#' @rdname exceedances
+#' @param threshold A value above which to exceed. Default is the [mean()]
+#' @export
+#' @examples
+#' fit_nhpp(DataCPSim, tau = 826) |> exceedances()
+#' fit_nhpp(DataCPSim, tau = 826, threshold = 200) |> exceedances()
+exceedances.nhpp <- function(x, ...) {
+  t <- x$model_params[["threshold"]]
+  exceedances(as.ts(x), threshold = t, ...)
+}
+
 #' @rdname fit_nhpp
 #' @param object An `nhpp` object
 #' @export
@@ -179,8 +190,8 @@ glance.nhpp <- function(x, ...) {
 #' @examples
 #' nhpp <- fit_nhpp(DataCPSim, tau = 826)
 #' mcdf(nhpp)
-#' 
-
+#' nhpp <- fit_nhpp(DataCPSim, tau = 826, threshold = 200)
+#' mcdf(nhpp)
 mcdf <- function(x, dist = "weibull") {
   if (dist == "weibull") {
     d <- mweibull
@@ -218,11 +229,13 @@ mcdf <- function(x, dist = "weibull") {
 #' @export
 #' @examples
 #' diagnose(fit_nhpp(DataCPSim, tau = 826))
+#' diagnose(fit_nhpp(DataCPSim, tau = 826, threshold = 200))
 
 diagnose.nhpp <- function(x, ...) {
   n <- nobs(x)
   
-  z <- exceedances(x) |>
+  exc <- exceedances(x)
+  z <-exc |>
     tibble::enframe(name = "cum_exceedances", value = "t_exceedance") |>
     dplyr::mutate(
       m = mcdf(x)
@@ -230,9 +243,9 @@ diagnose.nhpp <- function(x, ...) {
     # always add the last observation
     dplyr::bind_rows(
       data.frame(
-        cum_exceedances = c(0, length(exceedances(x))), 
+        cum_exceedances = c(0, length(exc)), 
         t_exceedance = c(0, n),
-        m = c(0, length(exceedances(x)))
+        m = c(0, length(exc))
       )
     ) |>
     dplyr::mutate(
@@ -252,7 +265,7 @@ diagnose.nhpp <- function(x, ...) {
     ggplot2::geom_line(ggplot2::aes(y = upper), color = "blue") +
     ggplot2::labs(
       title = "Exceedances of the mean over time",
-      subtitle = paste("Total exceedances:", length(exceedances(x)))
+      subtitle = paste("Total exceedances:", length(exc))
     )
 }
 
