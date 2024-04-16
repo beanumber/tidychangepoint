@@ -1,4 +1,4 @@
-globalVariables(c("bmdl", "nhpp", "cpt_length", "value"))
+globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".fitted"))
 
 #' Base class for changepoint models
 #' @export

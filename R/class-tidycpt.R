@@ -1,7 +1,7 @@
 globalVariables(c(
   "index", "region", "algorithm", "label", "filename", "y", "begin", "end", 
   "sd", "num_generation", "method", "m", "t_exceedance", "cum_exceedances",
-  "lower", "upper", "model"
+  "lower", "upper", "model", "elapsed_time"
 ))
 
 #' @rdname changepoints
