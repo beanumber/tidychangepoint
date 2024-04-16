@@ -4,7 +4,7 @@ pkgdown_sha: ~
 articles:
   CET: CET.html
   taimal: taimal.html
-last_built: 2024-04-15T14:59Z
+last_built: 2024-04-16T17:41Z
 urls:
   reference: https://beanumber.github.io/tidychangepoint/reference
   article: https://beanumber.github.io/tidychangepoint/articles
