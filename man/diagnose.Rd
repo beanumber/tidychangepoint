@@ -32,3 +32,10 @@ diagnose(segment(test_set()))
 diagnose(segment(test_set(n = 2, sd = 4), method = "pelt"))
 
 }
+\seealso{
+Other tidychangepoint-generics: 
+\code{\link{changepoints.mod_default}()},
+\code{\link{exceedances}()},
+\code{\link{fitness.seg_default}()}
+}
+\concept{tidychangepoint-generics}

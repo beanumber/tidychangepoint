@@ -70,3 +70,10 @@ plot_intensity(fit_nhpp(DataCPSim, tau = 826))
 mod <- segment(bogota_pm, method = "pelt")
 plot_intensity(fit_nhpp(bogota_pm, tau = changepoints(mod)))
 }
+\seealso{
+Other model-fitting: 
+\code{\link{fit_lmshift}()},
+\code{\link{fit_meanshift}()},
+\code{\link{fit_meanvar}()}
+}
+\concept{model-fitting}

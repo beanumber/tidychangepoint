@@ -19,3 +19,10 @@ Fit a model for mean and variance
 \examples{
 fit_meanvar(CET, tau = c(42, 330))
 }
+\seealso{
+Other model-fitting: 
+\code{\link{fit_lmshift}()},
+\code{\link{fit_meanshift}()},
+\code{\link{fit_nhpp_region}()}
+}
+\concept{model-fitting}

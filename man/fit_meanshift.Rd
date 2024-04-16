@@ -32,6 +32,13 @@ glance(mod)
 mod <- fit_meanshift_ar1(CET, tau = ids)
 glance(mod)
 }
+\seealso{
+Other model-fitting: 
+\code{\link{fit_lmshift}()},
+\code{\link{fit_meanvar}()},
+\code{\link{fit_nhpp_region}()}
+}
 \author{
 Xueheng Shi
 }
+\concept{model-fitting}

@@ -54,4 +54,15 @@ changepoints(cpts$segmenter)
 }
 \seealso{
 \code{\link[wbs:changepoints]{wbs::changepoints()}}
+
+Other tidychangepoint-generics: 
+\code{\link{diagnose.seg_default}()},
+\code{\link{exceedances}()},
+\code{\link{fitness.seg_default}()}
+
+Other tidychangepoint-generics: 
+\code{\link{diagnose.seg_default}()},
+\code{\link{exceedances}()},
+\code{\link{fitness.seg_default}()}
 }
+\concept{tidychangepoint-generics}

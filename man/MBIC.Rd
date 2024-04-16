@@ -29,4 +29,9 @@ Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
 }
 \seealso{
 \code{\link[stats:AIC]{stats::BIC()}}
+
+Other penalty-functions: 
+\code{\link{BMDL}()},
+\code{\link{MDL}()}
 }
+\concept{penalty-functions}

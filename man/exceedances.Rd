@@ -32,3 +32,10 @@ Compute exceedances of a threshold for a time series
 fit_nhpp(DataCPSim, tau = 826) |> exceedances()
 fit_nhpp(DataCPSim, tau = 826, threshold = 200) |> exceedances()
 }
+\seealso{
+Other tidychangepoint-generics: 
+\code{\link{changepoints.mod_default}()},
+\code{\link{diagnose.seg_default}()},
+\code{\link{fitness.seg_default}()}
+}
+\concept{tidychangepoint-generics}

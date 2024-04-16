@@ -2,6 +2,7 @@
 #' 
 #' @inheritParams fit_lmshift
 #' @export
+#' @family model-fitting
 #' @author Xueheng Shi
 #' @examples
 #' tau <- c(365, 826)

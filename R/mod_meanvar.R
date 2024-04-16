@@ -1,6 +1,7 @@
 #' Fit a model for mean and variance
 #' @inheritParams fit_meanshift
 #' @export
+#' @family model-fitting
 #' @examples
 #' fit_meanvar(CET, tau = c(42, 330))
 

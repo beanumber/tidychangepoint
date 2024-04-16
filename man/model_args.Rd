@@ -2,11 +2,14 @@
 % Please edit documentation in R/generics.R, R/pkg-GA.R, R/pkg-changepoint.R
 \name{model_args}
 \alias{model_args}
+\alias{model_args.default}
 \alias{model_args.ga}
 \alias{model_args.cpt}
-\title{Retrieve the model arguments that a segmenter used}
+\title{Retrieve the arguments that a model-fitting function used}
 \usage{
 model_args(object, ...)
+
+\method{model_args}{default}(object, ...)
 
 \method{model_args}{ga}(object, ...)
 
@@ -17,6 +20,26 @@ model_args(object, ...)
 
 \item{...}{currently ignored}
 }
-\description{
-Retrieve the model arguments that a segmenter used
+\value{
+\itemize{
+\item \code{\link[=model_args]{model_args()}}: A named \code{list} of arguments, or \code{NULL}
 }
+}
+\description{
+Retrieve the arguments that a model-fitting function used
+}
+\details{
+Every segmenter uses a model-fitting function, and these functions sometimes
+take arguments. \code{\link[=model_args]{model_args()}} recovers the arguments that were passed to
+the model fitting function when it was called. These are especially
+important when using a genetic algorithm.
+}
+\examples{
+x <- segment(CET, method = "ga-taimal", maxiter = 3)
+model_args(x$segmenter)
+}
+\seealso{
+Other modeling: 
+\code{\link{model_name.mod_default}()}
+}
+\concept{modeling}

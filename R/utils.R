@@ -177,7 +177,11 @@ whoami <- function(x = fit_meanshift, ...) {
   attr(x, "model_name")
 }
 
-#' @rdname pad_tau
+#' @rdname model_name
+#' @param x A `character` giving the name of a model. Typically the result of
+#' [model_name()].
+#' @return - [model_fit()]: A function
+#' @family modeling
 #' @export
 model_fit <- function(x, ...) {
   paste0("fit_", model_name(x)) |>

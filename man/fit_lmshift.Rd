@@ -63,3 +63,10 @@ fit_lmshift(CET, tau = NA)
 fit_lmshift(CET, tau = NULL)
 fit_lmshift(CET, tau = c(42, 42))
 }
+\seealso{
+Other model-fitting: 
+\code{\link{fit_meanshift}()},
+\code{\link{fit_meanvar}()},
+\code{\link{fit_nhpp_region}()}
+}
+\concept{model-fitting}

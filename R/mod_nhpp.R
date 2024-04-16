@@ -53,6 +53,7 @@ fit_nhpp_region <- function(exc, tau_left, tau_right,
 #' @return A `tbl_df` with each row representing one region. 
 #' 
 #' @export
+#' @family model-fitting
 #' @examples
 #' fit_nhpp(DataCPSim, tau = 826)
 #' fit_nhpp(DataCPSim, tau = 826, threshold = 20)

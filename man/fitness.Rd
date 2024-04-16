@@ -41,3 +41,10 @@ x <- segment(DataCPSim, method = "wbs")
 fitness(x)
 
 }
+\seealso{
+Other tidychangepoint-generics: 
+\code{\link{changepoints.mod_default}()},
+\code{\link{diagnose.seg_default}()},
+\code{\link{exceedances}()}
+}
+\concept{tidychangepoint-generics}

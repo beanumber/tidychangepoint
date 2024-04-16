@@ -16,7 +16,6 @@
 \alias{deg_free}
 \alias{as_year}
 \alias{whoami}
-\alias{model_fit}
 \title{Utility functions}
 \usage{
 pad_tau(tau, n)
@@ -48,8 +47,6 @@ deg_free(x)
 as_year(x)
 
 whoami(x = fit_meanshift, ...)
-
-model_fit(x, ...)
 }
 \arguments{
 \item{tau}{a numeric vector of changepoints}

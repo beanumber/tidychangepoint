@@ -27,5 +27,8 @@ BMDL(fit_nhpp(DataCPSim, tau = NULL))
 BMDL(fit_nhpp(DataCPSim, tau = c(365, 830)))
 }
 \seealso{
-\code{\link[=MDL]{MDL()}}
+Other penalty-functions: 
+\code{\link{MBIC}()},
+\code{\link{MDL}()}
 }
+\concept{penalty-functions}

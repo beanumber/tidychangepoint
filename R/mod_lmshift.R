@@ -8,6 +8,7 @@ globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic",
 #' fit. Passed to [stats::poly()].
 #' @param ... arguments passed to [stats::lm()]
 #' @export
+#' @family model-fitting
 #' @examples
 #' tau <- c(365, 826)
 #' mod <- fit_lmshift(DataCPSim, tau)

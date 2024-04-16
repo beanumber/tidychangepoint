@@ -38,3 +38,9 @@ Maximum Descriptive Length
 MDL(fit_meanshift_ar1(CET, tau = c(42, 330)))
 MDL(fit_lmshift(CET, tau = c(42, 81, 330), trends = TRUE))
 }
+\seealso{
+Other penalty-functions: 
+\code{\link{BMDL}()},
+\code{\link{MBIC}()}
+}
+\concept{penalty-functions}
