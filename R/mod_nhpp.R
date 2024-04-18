@@ -265,8 +265,8 @@ diagnose.nhpp <- function(x, ...) {
     ggplot2::geom_line(ggplot2::aes(y = lower), color = "blue") +
     ggplot2::geom_line(ggplot2::aes(y = upper), color = "blue") +
     ggplot2::labs(
-      title = "Exceedances of the mean over time",
-      subtitle = paste("Total exceedances:", length(exc))
+      title = "Exceedances of the threshold over time",
+      subtitle = paste("Total exceedances:", length(exc), "Threshold:", x$model_params$threshold)
     )
 }
 
