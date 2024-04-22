@@ -100,35 +100,34 @@ from <code>tidychangepoint</code>.</p>
 <pre><code><span><span class="co">## Seeding initial population with probability: 0.0162752602536624</span></span></code></pre>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/changepoints.html">changepoints</a></span><span class="op">(</span><span class="va">trend_wn</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##  x34  x42 x273 x331 </span></span>
-<span><span class="co">##   34   42  273  331</span></span></code></pre>
+<pre><code><span><span class="co">##  x56 x250 x331 </span></span>
+<span><span class="co">##   56  250  331</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fitness.html">fitness</a></span><span class="op">(</span><span class="va">trend_wn</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##      BIC </span></span>
-<span><span class="co">## 656.7946</span></span></code></pre>
+<span><span class="co">## 665.7259</span></span></code></pre>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">trend_wn</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5 × 9</span></span></span>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 4 × 9</span></span></span>
 <span><span class="co">##   region    num_obs   min   max  mean    sd begin   end param_mu</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> [0,34)         33  7.86 10.2   8.83 0.554     0    34     8.83</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span> [34,42)         8  7.29  8.83  8.03 0.531    34    42     8.03</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span> [42,273)      231  6.86 10.5   9.18 0.587    42   273     9.18</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span> [273,331)      58  8.52 10.6   9.53 0.454   273   331     9.53</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span> [331,362]      32  8.86 11.0  10.3  0.497   331   362    10.3</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> [0,56)         55  7.29  10.2  8.79 0.612     0    56     8.79</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> [56,250)      194  6.86  10.5  9.17 0.608    56   250     9.17</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> [250,331)      81  8.52  10.6  9.47 0.472   250   331     9.47</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> [331,362]      32  8.86  11.0 10.3  0.497   331   362    10.3</span></span></code></pre>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">trend_wn</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 9</span></span></span>
 <span><span class="co">##   pkg   version    algorithm params           num_cpts model    criteria fitness</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;pckg_vrs&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>              <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> ga    3.2.4      Genetic   <span style="color: #949494;">&lt;named list [6]&gt;</span>        4 meanshi… BIC         657.</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> ga    3.2.4      Genetic   <span style="color: #949494;">&lt;named list [6]&gt;</span>        3 meanshi… BIC         666.</span></span>
 <span><span class="co">## <span style="color: #949494;"># ℹ 1 more variable: elapsed_time &lt;drtn&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">trend_wn</span><span class="op">$</span><span class="va">model</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
 <span><span class="co">##   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> tidych… 0.0.0.… meanshift <span style="color: #949494;">&lt;dbl&gt;</span>         4 0.553  -<span style="color: #BB0000;">299.</span>  618.  657.  658.  730.</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> tidych… 0.0.0.… meanshift <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.569  -<span style="color: #BB0000;">309.</span>  635.  666.  665.  678.</span></span></code></pre>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">trend_wn</span>, use_time_index <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>
