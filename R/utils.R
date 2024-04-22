@@ -99,11 +99,16 @@ cut_inclusive <- function(x, tau) {
   cut(x, breaks = tau, include.lowest = TRUE, right = FALSE)
 }
 
-#' @rdname pad_tau
-#' @param n Number of changepoints
+#' Simulate time series with known changepoint sets
+#' @param n Number of true changepoints in set
 #' @param sd Standard deviation passed to [stats::rnorm()]
 #' @param seed Value passed to [base::set.seed()]
 #' @export
+#' @seealso [DataCPSim]
+#' @examples
+#' x <- test_set()
+#' plot(x)
+#' changepoints(x)
 test_set <- function(n = 1, sd = 1, seed = NULL) {
   if (!is.null(seed)) {
     set.seed(seed)
@@ -119,7 +124,7 @@ test_set <- function(n = 1, sd = 1, seed = NULL) {
   
   out <- purrr::map2(region_lengths, means, ~rnorm(.x, mean = .y, sd = sd)) |>
     c(recursive = TRUE) |>
-    as.ts()
+    stats::as.ts()
   attr(out, "cpt_true") <- tau
   return(out)
 }

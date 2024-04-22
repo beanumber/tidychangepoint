@@ -11,6 +11,12 @@
 #' @export
 changepoints <- function(x, ...) UseMethod("changepoints")
 
+#' @rdname changepoints
+#' @export
+changepoints.default <- function(x, ...) {
+  attr(x, "cpt_true")
+}
+
 #' Compute exceedances of a threshold for a time series
 #' 
 #' @inheritParams segment

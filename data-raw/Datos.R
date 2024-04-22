@@ -8,6 +8,8 @@ rlnorm_ts_1 <- c(
 ) |>
   as.ts()
 
+attr(rlnorm_ts_1, "cpt_true") <- 826
+
 usethis::use_data(rlnorm_ts_1, overwrite = TRUE)
 
 # simulated data set 2
@@ -17,6 +19,8 @@ rlnorm_ts_2 <- c(
   rlnorm(366, 4.5, sdlog = 0.3162278)
 ) |>
   as.ts()
+
+attr(rlnorm_ts_2, "cpt_true") <- c(366, 731)
 
 usethis::use_data(rlnorm_ts_2, overwrite = TRUE)
 
@@ -28,6 +32,8 @@ rlnorm_ts_3 <- c(
   rlnorm(124, 5, sdlog = 0.3162278)
 ) |>
   as.ts()
+
+attr(rlnorm_ts_3, "cpt_true") <- c(548, 823, 973)
 
 usethis::use_data(rlnorm_ts_3, overwrite = TRUE)
 

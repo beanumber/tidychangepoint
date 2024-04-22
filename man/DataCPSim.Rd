@@ -3,14 +3,49 @@
 \docType{data}
 \name{DataCPSim}
 \alias{DataCPSim}
-\title{DataCPSim}
+\alias{rlnorm_ts_1}
+\alias{rlnorm_ts_2}
+\alias{rlnorm_ts_3}
+\title{Simulated time series data}
 \format{
 An object of class \code{numeric} of length 1096.
+
+An object of class \code{ts} of length 1096.
+
+An object of class \code{ts} of length 1096.
+
+An object of class \code{ts} of length 1096.
 }
 \usage{
 DataCPSim
+
+rlnorm_ts_1
+
+rlnorm_ts_2
+
+rlnorm_ts_3
 }
 \description{
-DataCPSim
+Randomly-generated time series data, using the \code{\link[stats:Lognormal]{stats::rlnorm()}} function.
+\itemize{
+\item For \code{rlnorm_ts_1}, there is one changepoint located at 826.
+\item For \code{rlnorm_ts_2}, there are two changepoints, located at 366 and 731.
+\item For \code{rlnorm_ts_3}, there are three changepoints, located at 548, 823, and 973.
+}
+}
+\details{
+\itemize{
+\item \code{DataCPSim}: Simulated time series.
+}
+}
+\examples{
+plot(rlnorm_ts_1)
+plot(rlnorm_ts_2)
+plot(rlnorm_ts_3)
+changepoints(rlnorm_ts_1)
+
+}
+\seealso{
+\code{\link[stats:ts]{stats::ts()}}, \code{\link[=test_set]{test_set()}}
 }
 \keyword{datasets}

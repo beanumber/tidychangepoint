@@ -8,6 +8,7 @@
 \alias{changepoints.tidycpt}
 \alias{changepoints_labels}
 \alias{changepoints}
+\alias{changepoints.default}
 \alias{params}
 \alias{changepoints.ga}
 \alias{changepoints.cpt}
@@ -23,6 +24,8 @@
 changepoints_labels(x, ...)
 
 changepoints(x, ...)
+
+\method{changepoints}{default}(x, ...)
 
 params(x, ...)
 

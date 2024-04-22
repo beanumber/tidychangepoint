@@ -10,7 +10,6 @@
 \alias{tau2time}
 \alias{time2tau}
 \alias{cut_inclusive}
-\alias{test_set}
 \alias{split_by_tau}
 \alias{regions_by_tau}
 \alias{deg_free}
@@ -36,8 +35,6 @@ time2tau(cpts, index)
 
 cut_inclusive(x, tau)
 
-test_set(n = 1, sd = 1, seed = NULL)
-
 split_by_tau(x, tau)
 
 regions_by_tau(n, tau)
@@ -51,7 +48,7 @@ whoami(x = fit_meanshift, ...)
 \arguments{
 \item{tau}{a numeric vector of changepoints}
 
-\item{n}{Number of changepoints}
+\item{n}{the length of the original time series}
 
 \item{padded_tau}{Output from \code{\link[=pad_tau]{pad_tau()}}}
 
@@ -60,10 +57,6 @@ whoami(x = fit_meanshift, ...)
 \item{index}{Index of times, typically returned by \code{\link[stats:time]{stats::time()}}}
 
 \item{cpts}{Time series observation labels to be converted to indices}
-
-\item{sd}{Standard deviation passed to \code{\link[stats:Normal]{stats::rnorm()}}}
-
-\item{seed}{Value passed to \code{\link[base:Random]{base::set.seed()}}}
 
 \item{...}{currently ignored}
 }
