@@ -93,7 +93,11 @@ nobs.mod_default <- function(object, ...) {
 #' @export
 logLik.mod_default <- function(object, ...) {
   m <- length(object$tau)
-  N <- nobs(object)
+  if ("durbin_watson" %in% names(object)) {
+    N <- nobs(object) - 1
+  } else {
+    N <- nobs(object)
+  }
   sigma_hatsq <- model_variance(object)
   ll <- -(N * log(sigma_hatsq) + N + N * log(2 * pi)) / 2
   num_params_per_region <- object |>
