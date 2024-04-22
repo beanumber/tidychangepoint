@@ -39,8 +39,7 @@ test_that("lmshift works", {
   expect_equal(round(as.numeric(logLik(trend_wn)), 2), -290.02)
   expect_equal(round(BIC(trend_wn), 2), 650.74)
   expect_equal(round(MDL(trend_wn), 2), 653.07)
-  MDL(trend_wn) + 2 * log(nobs(trend_wn))
-  
+
   trend_ar1 <- fit_trendshift_ar1(CET, tau = ids)
   expect_equal(round(as.numeric(logLik(trend_ar1)), 2), -288.80)
   expect_equal(round(BIC(trend_ar1), 2), 654.19)

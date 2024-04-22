@@ -38,10 +38,10 @@ MDL.logLik <- function(object, ...) {
     padded_tau <- pad_tau(tau, n = N)
     
     # actually twice the penalty!
-    penalty <- attr(object, "num_region_params") * sum(log(diff(padded_tau))) + 
+    penalty <- attr(object, "num_params_per_region") * sum(log(diff(padded_tau))) + 
       2 * log(m) + 
       2 * sum(log(utils::tail(tau, -1))) +
-      attr(object, "num_model_params") * log(N)
+      (2 + attr(object, "num_model_params")) * log(N)
   }
   
   penalty - 2 * object |>

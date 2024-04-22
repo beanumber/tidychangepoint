@@ -96,14 +96,14 @@ logLik.mod_default <- function(object, ...) {
   N <- nobs(object)
   sigma_hatsq <- model_variance(object)
   ll <- -(N * log(sigma_hatsq) + N + N * log(2 * pi)) / 2
-  num_region_params <- coef(object) |>
+  num_params_per_region <- object |>
+    coef() |>
     dplyr::select(dplyr::contains("param_")) |>
-    dim() |>
-    prod()
+    ncol()
   num_model_params <- length(object$model_params)
-  attr(ll, "num_region_params") <- num_region_params
+  attr(ll, "num_params_per_region") <- num_params_per_region
   attr(ll, "num_model_params") <- num_model_params
-  attr(ll, "df") <- m + num_region_params + num_model_params
+  attr(ll, "df") <- m + num_params_per_region * (m + 1) + num_model_params
   attr(ll, "nobs") <- N
   attr(ll, "tau") <- object$tau
   class(ll) <- "logLik"
