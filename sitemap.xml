@@ -7,13 +7,16 @@
     <loc>https://beanumber.github.io/tidychangepoint/LICENSE-text.html</loc>
   </url>
   <url>
-    <loc>https://beanumber.github.io/tidychangepoint/articles/CET.html</loc>
+    <loc>https://beanumber.github.io/tidychangepoint/articles/climate_data.html</loc>
   </url>
   <url>
     <loc>https://beanumber.github.io/tidychangepoint/articles/index.html</loc>
   </url>
   <url>
     <loc>https://beanumber.github.io/tidychangepoint/articles/taimal.html</loc>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/tidychangepoint/articles/tidychangepoint.html</loc>
   </url>
   <url>
     <loc>https://beanumber.github.io/tidychangepoint/authors.html</loc>
@@ -94,7 +97,7 @@
     <loc>https://beanumber.github.io/tidychangepoint/reference/iweibull.html</loc>
   </url>
   <url>
-    <loc>https://beanumber.github.io/tidychangepoint/reference/medellin_rainfall.html</loc>
+    <loc>https://beanumber.github.io/tidychangepoint/reference/mde_rain.html</loc>
   </url>
   <url>
     <loc>https://beanumber.github.io/tidychangepoint/reference/mlb_hrs.html</loc>
@@ -124,9 +127,6 @@
     <loc>https://beanumber.github.io/tidychangepoint/reference/reexports.html</loc>
   </url>
   <url>
-    <loc>https://beanumber.github.io/tidychangepoint/reference/rlnorm_ts_1.html</loc>
-  </url>
-  <url>
     <loc>https://beanumber.github.io/tidychangepoint/reference/seg-default-generics.html</loc>
   </url>
   <url>
@@ -143,6 +143,9 @@
   </url>
   <url>
     <loc>https://beanumber.github.io/tidychangepoint/reference/tbl_coef.html</loc>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/tidychangepoint/reference/test_set.html</loc>
   </url>
   <url>
     <loc>https://beanumber.github.io/tidychangepoint/reference/tidycpt-generics.html</loc>
