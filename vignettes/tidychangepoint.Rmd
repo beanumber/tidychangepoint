@@ -1,0 +1,74 @@
+---
+title: "tidychangepoint"
+output: rmarkdown::html_vignette
+vignette: >
+  %\VignetteIndexEntry{tidychangepoint}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
+---
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>"
+)
+```
+
+
+## Tidy methods for changepoint analysis
+
+Consider the following time series:
+
+```{r rlnorm-plot}
+library(tidychangepoint)
+plot(as.ts(DataCPSim))
+```
+
+The `tidychangepoint` package allows you to use any number of algorithms for detecting changepoint sets in univariate time series with a common, `tidyverse`-compliant interface. 
+It also provides model-fitting procedures for commonly-used parametric models, tools for computing various penalty functions, and graphical diagnostic displays. 
+
+Changepoint sets are computed using the `segment()` function, which takes a numeric vector that is coercible into a `ts` object, and a string indicating the algorithm you wish you use. 
+`segment()` always returns a `tidycpt` object. 
+
+```{r}
+x <- segment(DataCPSim, method = "pelt")
+class(x)
+```
+
+Various methods are available for `tidycpt` objects. 
+For example, `as.ts()` returns the original data as `ts` object, and `changepoints()` returns the set of changepoint indices. 
+```{r}
+changepoints(x)
+```
+
+### Retrieving information using the `broom` interface
+
+`tidychangepoint` follows the design interface of the `broom` package. 
+Therefore, `augment()`, `tidy()` and `glance()` methods exists for `tidycpt` objects. 
+
+- `augment()` returns a `tsibble` that is grouped according to the regions defined by the changepoint set. 
+
+```{r}
+augment(x)
+```
+
+- `tidy()` returns a `tbl` that provides summary statistics for each region.
+
+```{r}
+tidy(x)
+```
+
+- `glance()` returns a `tbl` that provides summary statistics for the algorithm. 
+
+```{r}
+glance(x)
+```
+
+### Other methods
+
+The `plot()` method leverages `ggplot2` to provide an informative plot, with the regions defined by the changepoint set clearly demarcated, and the means within each region also indicated. 
+
+```{r pelt-plot}
+plot(x)
+```
+

@@ -1,18 +1,8 @@
 ---
-title: "Central England Temperature"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{Central England Temperature}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
+title: "Climate data in tidychangpeoint"
 ---
 
-```{r, include = FALSE}
-knitr::opts_chunk$set(
-  collapse = TRUE,
-  comment = "#>"
-)
-```
+## Central England Temperature
 
 [Shi, et al. (2022)](10.1175/JCLI-D-21-0489.1) use changepoint detection algorithms to analyze a time series of temperature data from Central England. 
 These data are available via `CET` from `tidychangepoint`. 
@@ -44,7 +34,19 @@ glance(trend_wn)
 glance(trend_wn$model)
 ```
 
-```{r}
+```{r cet_trend_wn}
 plot(trend_wn, use_time_index = TRUE)
+```
+
+## Bogotá particulate matter
+
+```{r}
+plot(bogota_pm)
+```
+
+## Medellín rainfall
+
+```{r}
+plot(mde_rain_monthly)
 ```
 

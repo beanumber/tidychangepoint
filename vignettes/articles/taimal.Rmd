@@ -1,10 +1,5 @@
 ---
 title: "Using Taimal's algorithm"
-output: rmarkdown::html_vignette
-vignette: >
-  %\VignetteIndexEntry{taimal}
-  %\VignetteEngine{knitr::rmarkdown}
-  %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, include = FALSE}
@@ -33,7 +28,7 @@ plot(x)
 ## Using the GA implementation of Taimal's algorithm
 
 ```{r}
-y <- segment(bogota_pm, method = "ga-taimal", maxiter = 5)
+y <- segment(bogota_pm, method = "ga-taimal", maxiter = 50, run = 10)
 changepoints(y)
 plot(y)
 diagnose(y$model)
@@ -46,7 +41,7 @@ glance(y)
 By default, the threshold is set to the mean of the observed values, but it can be changed using the `model_fn_args` argument to `segment()`. 
 
 Please note that the number of iterations (`maxiter`) of the genetic algorithm has been set very low here for ease of compilation. 
-To obtain more robust result, set `maxiter` to be something much higher. 
+**NOTA BENE**: To obtain more robust result, set `maxiter` to be something much higher. 
 You can also experiment with the `popSize` argument to `segment()`. 
 
 ```{r}
