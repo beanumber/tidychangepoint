@@ -81,22 +81,22 @@
 <p>The <code>tidychangepoint</code> package allows you to use any number of algorithms for detecting changepoint sets in univariate time series with a common, <code>tidyverse</code>-compliant interface. Currently, algorithms from <code>changepoint</code>, <code>wbs</code>, and several genetic algorithms made accessible via <code>GA</code> are supported. It also provides model-fitting procedures for commonly-used parametric models, tools for computing various penalty functions, and graphical diagnostic displays.</p>
 <p>Changepoint sets are computed using the <code><a href="reference/segment.html">segment()</a></code> function, which takes a numeric vector that is coercible into a <code>ts</code> object, and a string indicating the algorithm you wish you use. <code><a href="reference/segment.html">segment()</a></code> always returns a <code>tidycpt</code> object.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/segment.html">segment</a></span><span class="op">(</span><span class="va">CET</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/segment.html">segment</a></span><span class="op">(</span><span class="va">CET</span>, method <span class="op">=</span> <span class="st">"pelt"</span>, minseglen <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="do">## [1] "tidycpt"</span></span></code></pre></div>
 <p>Various methods are available for <code>tidycpt</code> objects. For example, <code><a href="https://rdrr.io/r/stats/ts.html" class="external-link">as.ts()</a></code> returns the original data as <code>ts</code> object, and <code><a href="reference/changepoints.html">changepoints()</a></code> returns the set of changepoint indices.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/changepoints.html">changepoints</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">## [1]  55  57 309 311 330</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">## [1] 237 330</span></span></code></pre></div>
 <p>If the original time series has time labels, we can also retrieve that information.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/changepoints.html">changepoints_labels</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## [1]  55  57 309 311 330</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## [1] "1895-01-01" "1988-01-01"</span></span></code></pre></div>
 <p>The <code><a href="reference/fitness.html">fitness()</a></code> function returns the both the value and the name of the objective function that the algorithm used to find the optimal changepoint set.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fitness.html">fitness</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="do">##     MBIC </span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="do">## 23.56658</span></span></code></pre></div>
+<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="do">## 643.5292</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="citation">Citation<a class="anchor" aria-label="anchor" href="#citation"></a>
