@@ -13,7 +13,7 @@ changepoints.tidycpt <- function(x, ...) {
 #' @rdname changepoints
 #' @export
 changepoints_labels <- function(x, ...) {
-  if (length(x$time_index) == length(x)) {
+  if (length(x$time_index) == nobs(x)) {
     x$time_index[changepoints(x)]
   } else {
     changepoints(x$segmenter)

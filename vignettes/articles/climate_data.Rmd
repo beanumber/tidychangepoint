@@ -1,41 +1,113 @@
 ---
-title: "Climate data in tidychangpeoint"
+title: "Climate data in tidychangepoint"
+bibliography: refs.bib
 ---
 
-## Central England Temperature
-
-[Shi, et al. (2022)](10.1175/JCLI-D-21-0489.1) use changepoint detection algorithms to analyze a time series of temperature data from Central England. 
-These data are available via `CET` from `tidychangepoint`. 
+The `tidychangepoint` package provides three climate-related time series. 
 
 ```{r setup}
 library(tidychangepoint)
+```
+
+## Central England Temperature
+
+@shi2022changepoint use changepoint detection algorithms to analyze a time series of annual temperature data from Central England. 
+These data are available via `CET` from `tidychangepoint`. 
+
+These data go back to 1659, and a simple plot illustrates the increase in temperature in recent years. 
+
+```{r}
 plot(CET)
 ```
 
+@shi2022changepoint use a genetic algorithm to identify changepoints in this time series. 
+The code below reproduces this analysis. 
+Note that since the genetic algorithm is random, results vary. 
+Shi, et al. used a `maxiter` value of 50,000 in order to obtain the results used in the paper. 
+Here, we use a much lower value solely in the interest of computational speed. 
+Note that this algorithm is fitting a "meanshift" model, which estimates the mean $\mu_i$ for each of the regions defined by the changepoint set. 
+The objective function employs the `BIC` penalty. 
+One departure from Shi's implementation is the use of the `log_gabin_population()` function to generate the first generation of 200 (i.e. `popSize`) possible changepoint sets. 
+Each data point is chosen uniformly at random with probability equal to $\ln{N}$, where $N$ is the number of observations (362, in this case). 
 
-```{r}
-l <- log_gabin_population(CET)
+```{r ga-shi}
 trend_wn <- CET |>
   segment(
     method = "ga", 
     model_fn = fit_meanshift, 
     penalty_fn = BIC, 
-    population = l, 
+    population = log_gabin_population(CET),
     popSize = 200, 
-    maxiter = 10
+    maxiter = 50,
+    run = 10
   )
 ```
 
+Compare this with the changepoint set discovered by the algorithm:
+
 ```{r}
 changepoints(trend_wn)
+changepoints_labels(trend_wn)
+```
+
+The `fitness()` function returns a named vector with the value of the objective function from the discovered changepoint set. 
+
+```{r}
 fitness(trend_wn)
+```
+
+Information about the regions, including their means, are shown by the `tidy()` function. 
+
+```{r}
 tidy(trend_wn)
+```
+
+By default, `glance()` returns a summary of the **segmenter** that produced the discovered changepoint set. 
+This includes the fitness, the elapsed time, and the parameters used by the segmenter. 
+
+```{r}
 glance(trend_wn)
+```
+
+However, we can also run `glance()` on the model resulting from the discovered changepoint set. 
+This provides information about the model and its fit, including the values of various alternative model fitting metrics.
+
+::: {.callout-important}
+It is important to note that only one of these metrics (in this case, BIC) is actually the one used by the segmenter!
+:::
+
+```{r}
 glance(trend_wn$model)
 ```
 
+The `plot()` function returns an informative plot of the original time series, with the changepoint set and the corresponding regions demarcated. 
+
 ```{r cet_trend_wn}
 plot(trend_wn, use_time_index = TRUE)
+```
+
+
+### Comparison to reported values
+
+The changepoint set reported by @shi2022changepoint is $\{1700, 1739, 1988\}$. 
+For that configuration with the trendshift model with white noise errors, Table 2 of @shi2022changepoint reports model variance $\hat{\sigma}^2$ of 0.291, a log-likelihood of -290.02, BIC of 650.74, and MDL of 653.07. 
+
+Fitting the trendshift model with white noise errors and running the `glance()` function reveals an exact match to the reported figures. 
+
+```{r}
+target_cpts <- c(1700, 1739, 1988)
+ids <- time2tau(target_cpts, as_year(time(CET)))
+CET |>
+  fit_trendshift(tau = ids) |>
+  glance()
+```
+
+Modifying the model to incorporate AR(1) lagged errors also matches the figures from Table 2. 
+
+```{r}
+CET |>
+  fit_trendshift_ar1(tau = ids) |>
+  glance()
 ```
 
 ## Bogotá particulate matter
@@ -50,3 +122,4 @@ plot(bogota_pm)
 plot(mde_rain_monthly)
 ```
 
+# References
