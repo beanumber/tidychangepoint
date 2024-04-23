@@ -112,14 +112,55 @@ CET |>
 
 ## Bogotá particulate matter
 
-```{r}
+The `bogota_pm` data set contains daily measurement on particulate matter in Bogotá, Colombia over the three-year period from 2018--2020. 
+
+```{r bogota-plot}
 plot(bogota_pm)
+```
+
+Here, we use the genetic algorithm from @taimal2023exploration to identify changepoint sets. 
+Note that the model being fit here is the NHPP model, along with the BMDL penalty function. 
+
+```{r bog-cpt}
+bog_cpt <- bogota_pm |>
+  segment(
+    method = "ga-taimal", 
+    maxiter = 50,
+    run = 10
+  )
+```
+
+```{r}
+glance(bog_cpt)
+```
+
+```{r bogota-results}
+plot(bog_cpt, use_time_index = TRUE)
+```
+
+We compare the quality of the fit of the NHPP model using `diagnose()`.
+
+```{r diagnose}
+diagnose(bog_cpt$model)
 ```
 
 ## Medellín rainfall
 
-```{r}
+The times series `mde_rain_monthly` contains monthly precipitation readings from locations in and around the city of Medellín, Colombia. 
+
+```{r mde_rain}
 plot(mde_rain_monthly)
 ```
+
+Here, we fit the deterministic PELT algorithm [@killick2014changepoint].
+
+```{r}
+mde_cpt <- segment(mde_rain_monthly, method = "pelt")
+```
+
+```{r mde_pelt}
+plot(mde_cpt, use_time_index = TRUE)
+```
+
 
 # References

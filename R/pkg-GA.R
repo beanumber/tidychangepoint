@@ -85,7 +85,7 @@ build_gabin_population <- function(x, ...) {
   ) |>
     purrr::map(changepoints) |>
     purrr::map_int(length) |>
-    mean() / length(x)
+    mean() * 3 / length(x)
   
   f <- function(object, ...) {
     message(paste("Seeding initial population with probability:", p))
