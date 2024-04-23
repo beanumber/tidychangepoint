@@ -99,7 +99,7 @@ changepoints.cpt <- function(x, ...) {
 #' fitness(x)
 #' 
 fitness.cpt <- function(object, ...) {
-  out <- object@pen.value
+  out <- object@pen.value - 2 * as.double(logLik(object))
   names(out) <- object@pen.type
   out
 }

@@ -11,6 +11,14 @@ test_that("changepoint works", {
   expect_s3_class(logLik(x$segmenter), "logLik")
   expect_type(fitness(x$segmenter), "double")
   expect_equal(names(fitness(x$segmenter)), "MBIC")
+  expect_gt(fitness(x), changepoint::pen.value(x$segmenter))
+#  expect_equal(fitness(x), MBIC(x$model))
+  
+  library(tidychangepoint)
+  library(testthat)
+  y <- segment(DataCPSim, method = "pelt", penalty = "BIC")
+  expect_equal(as.double(logLik(y$segmenter)), as.double(logLik(y$model)))
+  expect_equal(unname(fitness(y)), BIC(y$model))
   
   x <- segment(DataCPSim, method = "binseg")
   expect_s3_class(x, "tidycpt")
