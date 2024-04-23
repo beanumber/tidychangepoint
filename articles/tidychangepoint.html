@@ -77,11 +77,8 @@
 <div class="section level2">
 <h2 id="tidy-methods-for-changepoint-analysis">Tidy methods for changepoint analysis<a class="anchor" aria-label="anchor" href="#tidy-methods-for-changepoint-analysis"></a>
 </h2>
-<p>Consider the following time series:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://beanumber.github.io/tidychangepoint/">tidychangepoint</a></span><span class="op">)</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/ts.html" class="external-link">as.ts</a></span><span class="op">(</span><span class="va">DataCPSim</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><img src="tidychangepoint_files/figure-html/rlnorm-plot-1.png" width="700"></p>
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://beanumber.github.io/tidychangepoint/">tidychangepoint</a></span><span class="op">)</span></span></code></pre></div>
 <p>The <code>tidychangepoint</code> package allows you to use any number
 of algorithms for detecting changepoint sets in univariate time series
 with a common, <code>tidyverse</code>-compliant interface. It also
@@ -137,7 +134,8 @@ grouped according to the regions defined by the changepoint set.</li>
 <ul>
 <li>
 <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> returns a <code>tbl</code> that provides summary
-statistics for each region.</li>
+statistics for each region. These include any parameters that were fit,
+which are prefixed in the output by <code>param_</code>.</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -151,7 +149,9 @@ statistics for each region.</li>
 <ul>
 <li>
 <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> returns a <code>tbl</code> that provides
-summary statistics for the algorithm.</li>
+summary statistics for the algorithm. This includes the
+<code>fitness</code>, which is the value of the penalized objective
+function that was used.</li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -171,6 +171,113 @@ indicated.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <p><img src="tidychangepoint_files/figure-html/pelt-plot-1.png" width="700"></p>
+<p>Other generic functions defined for <code>tidycpt</code> objects
+include <code><a href="../reference/fitness.html">fitness()</a></code>, <code><a href="../reference/as.model.html">as.model()</a></code>, and
+<code><a href="../reference/exceedances.html">exceedances()</a></code>. For example, <code><a href="../reference/fitness.html">fitness()</a></code> returns
+a named vector with the value of the penalized objective function
+used.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="../reference/fitness.html">fitness</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span><span class="co">#&gt;     MBIC </span></span>
+<span><span class="co">#&gt; 9403.391</span></span></code></pre></div>
+</div>
+</div>
+<div class="section level2">
+<h2 id="structure">Structure<a class="anchor" aria-label="anchor" href="#structure"></a>
+</h2>
+<p>Every <code>tidycpt</code> objects contains two main children:</p>
+<ul>
+<li>
+<code>segmenter</code>: The object that results from the changepoint
+detection algorithm. These can be of any class. Methods for objects of
+class <code>cpt</code>, <code>ga</code>, and <code>wbs</code> are
+currently implemented, and as well as <code>seg_default</code> (the
+default internal class). Given a data set, a model, and a penalized
+objective function, a segmenter’s job is to search the
+exponentially-large space of possible changepoint sets for the one that
+optimizes the penalized objective function (over the space of possible
+changepoint sets). Some segmenting algorithms (e.g., PELT) are
+deterministic, while others (e.g., genetic algorithms) are
+randomized.</li>
+<li>
+<code>model</code>: A model object inheriting from
+<code>mod_default</code>, an internal class for representing model
+objects. Model objects are created by model-fitting functions, all of
+whose names start with <code>fit_</code>. The <code>model</code> of a
+<code>tidycpt</code> object is the model object returned by the
+<code>fit_*()</code> function that corresponds to the one used by the
+<code>segmenter</code>. Given a data set, a model description,
+<strong>and a set of changepoints</strong>, the corresponding
+model-fitting function finds the values of the model parameters that
+optimize the model fit to the data.</li>
+</ul>
+<p>Both <strong>segmenters and models</strong> implement methods for the
+generic functions <code><a href="../reference/changepoints.html">changepoints()</a></code>, <code><a href="https://rdrr.io/r/stats/ts.html" class="external-link">as.ts()</a></code>,
+<code><a href="https://rdrr.io/r/stats/nobs.html" class="external-link">nobs()</a></code>, <code><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik()</a></code>, <code><a href="../reference/model_name.html">model_name()</a></code>,
+and <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code>. However, it is important to note that while
+<code>tidychangepoint</code> does its best to match the model used by
+the <code>segmenter</code> to its corresponding model-fitting function,
+exact matches do not always exist. Thus, the <code><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik()</a></code> of
+the <code>segmenter</code> may not always match the
+<code><a href="https://rdrr.io/r/stats/logLik.html" class="external-link">logLik()</a></code> of the <code>model</code>. Nevertheless, squaring
+these values is the focus of ongoing work.</p>
+<div class="section level3">
+<h3 id="segmenters">Segmenters<a class="anchor" aria-label="anchor" href="#segmenters"></a>
+</h3>
+<p>In the example above, the <code>segmenter</code> is of class
+<code>cpt</code>, because <code><a href="../reference/segment.html">segment()</a></code> simply wraps the
+<code>cpt.meanvar()</code> function from the <code>changepoint</code>
+package.</p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">segmenter</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; Formal class 'cpt' [package "changepoint"] with 12 slots</span></span>
+<span><span class="co">#&gt;   ..@ data.set : Time-Series [1:1096] from 1 to 1096: 35.5 29 35.6 33 29.5 ...</span></span>
+<span><span class="co">#&gt;   ..@ cpttype  : chr "mean and variance"</span></span>
+<span><span class="co">#&gt;   ..@ method   : chr "PELT"</span></span>
+<span><span class="co">#&gt;   ..@ test.stat: chr "Normal"</span></span>
+<span><span class="co">#&gt;   ..@ pen.type : chr "MBIC"</span></span>
+<span><span class="co">#&gt;   ..@ pen.value: num 28</span></span>
+<span><span class="co">#&gt;   ..@ minseglen: num 2</span></span>
+<span><span class="co">#&gt;   ..@ cpts     : int [1:4] 547 822 972 1096</span></span>
+<span><span class="co">#&gt;   ..@ ncpts.max: num Inf</span></span>
+<span><span class="co">#&gt;   ..@ param.est:List of 2</span></span>
+<span><span class="co">#&gt;   .. ..$ mean    : num [1:4] 35.3 58.2 96.8 156.5</span></span>
+<span><span class="co">#&gt;   .. ..$ variance: num [1:4] 127 371 921 2406</span></span>
+<span><span class="co">#&gt;   ..@ date     : chr "Sat Apr 22 02:12:09 2023"</span></span>
+<span><span class="co">#&gt;   ..@ version  : chr "2.2.4"</span></span></code></pre></div>
+<p>In addition to the generic functions listed above,
+<strong>segmenters</strong> implement methods for the generic functions
+<code><a href="../reference/fitness.html">fitness()</a></code>, <code><a href="../reference/model_args.html">model_args()</a></code>, and
+<code><a href="../reference/changepoints.html">params()</a></code>.</p>
+</div>
+<div class="section level3">
+<h3 id="models">Models<a class="anchor" aria-label="anchor" href="#models"></a>
+</h3>
+<p>The <code>model</code> object in this case is created by
+<code><a href="../reference/fit_meanvar.html">fit_meanvar()</a></code>, and is of class
+<code>mod_default</code>.</p>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">model</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; List of 6</span></span>
+<span><span class="co">#&gt;  $ data         : Time-Series [1:1096] from 1 to 1096: 35.5 29 35.6 33 29.5 ...</span></span>
+<span><span class="co">#&gt;  $ tau          : int [1:3] 547 822 972</span></span>
+<span><span class="co">#&gt;  $ region_params: tibble [4 × 3] (S3: tbl_df/tbl/data.frame)</span></span>
+<span><span class="co">#&gt;   ..$ region           : chr [1:4] "[0,547)" "[547,822)" "[822,972)" "[972,1.1e+03]"</span></span>
+<span><span class="co">#&gt;   ..$ param_mu         : num [1:4] 35.3 58.1 96.7 155.9</span></span>
+<span><span class="co">#&gt;   ..$ param_sigma_hatsq: Named num [1:4] 127 372 924 2442</span></span>
+<span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:4] "[0,547)" "[547,822)" "[822,972)" "[972,1.1e+03]"</span></span>
+<span><span class="co">#&gt;  $ model_params : NULL</span></span>
+<span><span class="co">#&gt;  $ fitted_values: Named num [1:1096] 35.3 35.3 35.3 35.3 35.3 ...</span></span>
+<span><span class="co">#&gt;   ..- attr(*, "names")= chr [1:1096] "1" "2" "3" "4" ...</span></span>
+<span><span class="co">#&gt;  $ model_name   : chr "meanvar"</span></span>
+<span><span class="co">#&gt;  - attr(*, "class")= chr "mod_default"</span></span></code></pre></div>
+<p>In addition to the generic functions listed above,
+<strong>models</strong> implement methods for the generic functions
+<code><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted()</a></code>, <code><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals()</a></code>, <code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef()</a></code>,
+<code><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment()</a></code>, <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code>, and
+<code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>.</p>
 </div>
 </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
