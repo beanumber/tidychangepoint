@@ -35,7 +35,7 @@ string indicating the algorithm you wish you use. `segment()` always
 returns a `tidycpt` object.
 
 ``` r
-x <- segment(CET, method = "pelt")
+x <- segment(CET, method = "pelt", minseglen = 3)
 class(x)
 ```
 
@@ -49,7 +49,7 @@ returns the set of changepoint indices.
 changepoints(x)
 ```
 
-    ## [1]  55  57 309 311 330
+    ## [1] 237 330
 
 If the original time series has time labels, we can also retrieve that
 information.
@@ -58,7 +58,7 @@ information.
 changepoints_labels(x)
 ```
 
-    ## [1]  55  57 309 311 330
+    ## [1] "1895-01-01" "1988-01-01"
 
 The `fitness()` function returns the both the value and the name of the
 objective function that the algorithm used to find the optimal
@@ -69,7 +69,7 @@ fitness(x)
 ```
 
     ##     MBIC 
-    ## 23.56658
+    ## 643.5292
 
 ## Citation
 

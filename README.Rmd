@@ -32,7 +32,7 @@ Changepoint sets are computed using the `segment()` function, which takes a nume
 `segment()` always returns a `tidycpt` object. 
 
 ```{r, message=FALSE}
-x <- segment(CET, method = "pelt")
+x <- segment(CET, method = "pelt", minseglen = 3)
 class(x)
 ```
 
