@@ -15,11 +15,7 @@ mde_rain_monthly <- mde_rain |>
   select(date, mean_rainfall) |>
   xts::as.xts()
 usethis::use_data(mde_rain_monthly, overwrite = TRUE, compress = "xz")
-
-
-
-
-
+ 
 ### OLD STUFF
 
 medellin_rainfall <- readxl::read_excel(here::here("data-raw", "precipitacioìn_mensual.xlsx")) |>

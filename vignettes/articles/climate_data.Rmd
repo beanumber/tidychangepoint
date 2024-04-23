@@ -124,7 +124,7 @@ Note that the model being fit here is the NHPP model, along with the BMDL penalt
 ```{r bog-cpt}
 bog_cpt <- bogota_pm |>
   segment(
-    method = "ga-taimal", 
+    method = "ga-taimal",
     maxiter = 50,
     run = 10
   )
@@ -162,5 +162,36 @@ mde_cpt <- segment(mde_rain_monthly, method = "pelt")
 plot(mde_cpt, use_time_index = TRUE)
 ```
 
+
+
+
+
+
+```{r, include=FALSE, eval=FALSE}
+mde_rain_monthly_estacion <- mde_rain |>
+  group_by(year, month, station_id) |>
+  summarize(
+    mean_rainfall = mean(rainfall, na.rm = TRUE)
+  ) |>
+  mutate(date = ym(paste(year, month))) |>
+  ungroup() |>
+  select(station_id, date, mean_rainfall) |>
+  xts::as.xts()
+
+ggplot(mde_rain_monthly_estacion, aes(x = date, y = mean_rainfall, color = factor(station_id))) +
+  geom_line() +
+  facet_wrap(vars(station_id))
+
+
+mde_estaction <- mde_rain_monthly_estacion |>
+  group_by(station_id)
+
+ mods <- mde_estaction |>
+  group_split() |>
+  purrr::map(~segment(.x$mean_rainfall, method = "taimal", threshold = 10))
+
+mods |>
+  purrr::map(plot)
+```
 
 # References
