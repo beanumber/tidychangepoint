@@ -12,7 +12,7 @@ sets in univariate time series."><!-- mathjax --><script src="https://cdnjs.clou
     
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9032</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9033</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -152,7 +152,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pkg      version algorithm params num_cpts model criteria fitness elapsed_time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidycha… 0.0.0.… <span style="color: #BB0000;">NA</span>        <span style="color: #949494;">&lt;list&gt;</span>        0 mean… BIC      <span style="color: #BB0000;">NA</span>      0.006232262…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidycha… 0.0.0.… <span style="color: #BB0000;">NA</span>        <span style="color: #949494;">&lt;list&gt;</span>        0 mean… BIC      <span style="color: #BB0000;">NA</span>      0.01181674 …</span>
 <span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> method: pelt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $segmenter</span>
@@ -160,7 +160,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Sat Apr 22 02:12:09 2023 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Wed Apr 24 22:13:43 2024 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -635,7 +635,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.03900504 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.04762959 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -646,7 +646,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Sat Apr 22 02:12:09 2023 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Wed Apr 24 22:13:43 2024 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -1141,7 +1141,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 1.860644 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 2.173441 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -1153,7 +1153,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 14 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpts.full pen.value.full data.set cpttype method test.stat pen.type pen.value minseglen cpts ncpts.max param.est date version </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Sat Apr 22 02:12:09 2023 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Wed Apr 24 22:13:43 2024 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -1639,7 +1639,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.06053233 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.06150246 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -1651,7 +1651,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 14 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpts.full pen.value.full data.set cpttype method test.stat pen.type pen.value minseglen cpts ncpts.max param.est date version </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Sat Apr 22 02:12:09 2023 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Wed Apr 24 22:13:43 2024 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -2134,7 +2134,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.2517562 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.245564 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -2969,7 +2969,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.06309748 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.06162167 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -3787,7 +3787,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.01209354 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.01281548 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -3804,7 +3804,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Sat Apr 22 02:12:09 2023 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Wed Apr 24 22:13:43 2024 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -4205,7 +4205,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.08030915 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.08159041 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $time_index</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [1] "2018-01-01" "2018-01-02" "2018-01-03" "2018-01-04" "2018-01-05"</span>
