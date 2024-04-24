@@ -215,3 +215,60 @@ vec_ptype2.logLik.logLik <- function(x, y, ...) {
 vec_cast.logLik.logLik <- function(x, to, ...) {
   x
 }
+
+#' @rdname as.model
+#' @param x An object, typically returned by `fit_*()`
+#' @export
+#' @examples
+#' x <- fit_nhpp(CET, tau = 330)
+#' is_model(x)
+is_model <- function(x, ...) {
+  req <- c(common, mods_only)
+  implements_all_methods(x, req)
+}
+
+#' @rdname as.model
+#' @export
+#' @examples
+#' x <- segment(CET, method = "pelt")
+#' is_segmenter(x$segmenter)
+is_segmenter <- function(object, ...) {
+  req <- c(common, segs_only)
+  implements_all_methods(object, req)
+}
+
+get_all_methods <- function(object) {
+  if (isS4(object)) {
+    classes <- object |>
+      class() |>
+      methods::extends()
+  } else {
+    classes <- object |>
+      class() 
+  }
+  classes |>
+    purrr::map(~methods(class = .x)) |>
+    purrr::map(attr, "info") |>
+    purrr::list_rbind() |>
+    dplyr::filter(!isS4) |>
+    dplyr::pull("generic") |>
+    unique()
+}
+
+implements_all_methods <- function(object, required_methods, ...) {
+  available <- object |>
+    get_all_methods()
+  
+  missing <- setdiff(required_methods, available)
+  
+  if (length(missing) > 0) {
+    message(paste("No methods for:"), missing)
+    return(FALSE)
+  } else {
+    return(TRUE)
+  }
+}
+
+common <- c("as.ts", "changepoints", "glance", "model_name", "nobs")
+segs_only <- c("fitness", "model_args", "params")
+mods_only <- c("augment", "coef", "fitted", "logLik", "plot", "residuals", "tidy")

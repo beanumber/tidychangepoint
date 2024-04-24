@@ -8,4 +8,6 @@ test_that("wbs works", {
   expect_s3_class(glance(x), "tbl_df")
   expect_type(changepoints(x), "integer")
   expect_type(nobs(x), "integer")
+  expect_true(is_segmenter(x$segmenter))
+  expect_true(is_model(x$model))
 })

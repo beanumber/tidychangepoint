@@ -36,7 +36,7 @@ model_name(object, ...)
 model_fit(x, ...)
 }
 \arguments{
-\item{object}{An object, typically returned by \code{\link[=segment]{segment()}}}
+\item{object}{A segmenter object, typically returned by \code{\link[=segment]{segment()}}}
 
 \item{...}{currently ignored}
 
@@ -73,9 +73,9 @@ model_name(x$model)
 }
 \seealso{
 Other modeling: 
-\code{\link{model_args}()}
+\code{\link{model_args.seg_default}()}
 
 Other modeling: 
-\code{\link{model_args}()}
+\code{\link{model_args.seg_default}()}
 }
 \concept{modeling}

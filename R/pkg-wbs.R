@@ -90,3 +90,9 @@ fitness.wbs <- function(object, ...) {
 model_name.wbs <- function(object, ...) {
   "meanshift"
 }
+
+#' @rdname model_args
+#' @export
+model_args.wbs <- function(object, ...) {
+  NULL
+}

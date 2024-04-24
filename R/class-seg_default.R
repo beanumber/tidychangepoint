@@ -115,6 +115,12 @@ model_name.seg_default <- function(object, ...) {
   object$model_name
 }
 
+#' @rdname model_args
+#' @export
+model_args.seg_default <- function(object, ...) {
+  NA
+}
+
 #' @rdname new_seg_default
 #' @param model_fn Name of the function to fit the model. 
 #' See, for examples, [fit_meanshift()].

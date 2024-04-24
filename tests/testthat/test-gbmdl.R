@@ -9,6 +9,8 @@ test_that("gbmdl works", {
   expect_type(changepoints(x), "integer")
   expect_type(nobs(x), "integer")
   expect_s3_class(plot(x), "gg")
+  expect_true(is_segmenter(x$segmenter))
+  expect_true(is_model(x$model))
   
   expect_s3_class(logLik(x$model), "logLik")
   expect_equal(min(x$segmenter$candidates$BMDL), BMDL(x$model))

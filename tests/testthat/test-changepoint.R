@@ -13,9 +13,9 @@ test_that("changepoint works", {
   expect_equal(names(fitness(x$segmenter)), "MBIC")
   expect_gt(fitness(x), changepoint::pen.value(x$segmenter))
 #  expect_equal(fitness(x), MBIC(x$model))
+  expect_true(is_segmenter(x$segmenter))
+  expect_true(is_model(x$model))
   
-  library(tidychangepoint)
-  library(testthat)
   y <- segment(DataCPSim, method = "pelt", penalty = "BIC")
   expect_equal(as.double(logLik(y$segmenter)), as.double(logLik(y$model)))
   expect_equal(unname(fitness(y)), BIC(y$model))

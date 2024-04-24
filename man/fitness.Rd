@@ -23,7 +23,7 @@ fitness(object, ...)
 \method{fitness}{wbs}(object, ...)
 }
 \arguments{
-\item{object}{An object, typically returned by \code{\link[=segment]{segment()}}}
+\item{object}{A segmenter object, typically returned by \code{\link[=segment]{segment()}}}
 
 \item{...}{currently ignored}
 }

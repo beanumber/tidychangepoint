@@ -10,6 +10,8 @@ test_that("seg_default works", {
   expect_type(changepoints(x), "integer")
   expect_equal(length(changepoints(x)), 0)  
   expect_type(nobs(x), "integer")
+  expect_true(is_segmenter(x$segmenter))
+  expect_true(is_model(x$model))
 
   expect_s3_class(evaluate_cpts(x$segmenter), "tbl_df")
   expect_s3_class(evaluate_cpts(list(), .data = DataCPSim, model_fn = fit_nhpp), "tbl_df")

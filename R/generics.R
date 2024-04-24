@@ -31,8 +31,7 @@ exceedances.default <- function(x, ...) {
 }
 
 #' Retrieve the optimal fitness (or objective function) value used by an algorithm
-#' @param object An object, typically returned by [segment()]
-#' @param ... currently ignored
+#' @inheritParams as.model
 #' @family tidychangepoint-generics
 #' @export
 fitness <- function(object, ...) UseMethod("fitness")
@@ -101,11 +100,12 @@ model_args.default <- function(object, ...) {
 }
 
 #' Convert a segmenter to a model object
-#' @inheritParams fitness
+#' @param object A segmenter object, typically returned by [segment()]
+#' @param ... currently ignored
 #' @export
 as.model <- function(object, ...) UseMethod("as.model")
 
-#' @rdname ga-generics
+#' @rdname as.model
 #' @export
 #' @examples
 #' cpt <- segment(DataCPSim, method = "ga", maxiter = 5)
