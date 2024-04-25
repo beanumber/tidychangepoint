@@ -19,7 +19,7 @@
 #'  - `station_id`: 
 #'  - `lat`, `long`: latitude and longitude for the weather station
 #'  - `date`, `year`, `month`, `day`: date variables
-#'  - `rainfall`: daily rainfall (in UNITS) as measured by the weather station
+#'  - `rainfall`: daily rainfall (in cubic centimeters) as measured by the weather station
 #' @references [OpenStreetMap](https://www.openstreetmap.org/index.html?mlat=6.244747&mlon=-75.574828&zoom=12)
 "mde_rain"
 

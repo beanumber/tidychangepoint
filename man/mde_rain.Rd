@@ -26,7 +26,7 @@ Variables:
 \item \code{station_id}:
 \item \code{lat}, \code{long}: latitude and longitude for the weather station
 \item \code{date}, \code{year}, \code{month}, \code{day}: date variables
-\item \code{rainfall}: daily rainfall (in UNITS) as measured by the weather station
+\item \code{rainfall}: daily rainfall (in cubic centimeters) as measured by the weather station
 }
 
 \itemize{

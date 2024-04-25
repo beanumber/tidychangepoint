@@ -21,7 +21,7 @@ segment_ga_taimal(x, ...)
 \arguments{
 \item{x}{A time series}
 
-\item{model_fn}{A \code{character} or \code{name} coercible into \code{fun_cpt} function.
+\item{model_fn}{A \code{character} or \code{name} coercible into \code{\link[=fun_cpt]{fun_cpt()}} function.
 See, for example, \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}}.}
 
 \item{penalty_fn}{A function that evaluates the changepoint set returned by
