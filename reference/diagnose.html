@@ -83,28 +83,26 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"random"</span>, num_generations <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> method: random</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (distribution == c("lnorm")) {    mu_seg &lt;- purrr::map_dbl(purrr::map(y_seg, log), mean)    y_hat &lt;- rep(exp(mu_seg), seg_len)    sigma_hatsq &lt;- sum((log(y) - y_hat)^2)/N} else {    mu_seg &lt;- purrr::map_dbl(y_seg, mean)    y_hat &lt;- rep(mu_seg, seg_len)    sigma_hatsq &lt;- sum((y - y_hat)^2)/N}:</span> missing value where TRUE/FALSE needed</span>
 <span class="r-in"><span><span class="fu">diagnose</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="diagnose-1.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'x' not found</span>
 <span class="r-in"><span><span class="fu">diagnose</span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">segmenter</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> `stat_bin()` using `bins = 30`. Pick better value with `binwidth`.</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>Removed 2 rows containing missing values or values outside the scale range</span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> (`geom_bar()`).</span>
-<span class="r-plt img"><img src="diagnose-2.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in eval(expr, envir, enclos):</span> object 'x' not found</span>
 <span class="r-in"><span><span class="fu">diagnose</span><span class="op">(</span><span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">DataCPSim</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> method: null</span>
-<span class="r-plt img"><img src="diagnose-3.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (distribution == c("lnorm")) {    mu_seg &lt;- purrr::map_dbl(purrr::map(y_seg, log), mean)    y_hat &lt;- rep(exp(mu_seg), seg_len)    sigma_hatsq &lt;- sum((log(y) - y_hat)^2)/N} else {    mu_seg &lt;- purrr::map_dbl(y_seg, mean)    y_hat &lt;- rep(mu_seg, seg_len)    sigma_hatsq &lt;- sum((y - y_hat)^2)/N}:</span> missing value where TRUE/FALSE needed</span>
 <span class="r-in"><span><span class="fu">diagnose</span><span class="op">(</span><span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"single-best"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> method: single-best</span>
-<span class="r-plt img"><img src="diagnose-4.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="diagnose-1.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu">diagnose</span><span class="op">(</span><span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> method: pelt</span>
-<span class="r-plt img"><img src="diagnose-5.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="diagnose-2.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span><span class="fu">diagnose</span><span class="op">(</span><span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="fu"><a href="test_set.html">test_set</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> method: null</span>
-<span class="r-plt img"><img src="diagnose-6.png" alt="" width="700" height="433"></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (distribution == c("lnorm")) {    mu_seg &lt;- purrr::map_dbl(purrr::map(y_seg, log), mean)    y_hat &lt;- rep(exp(mu_seg), seg_len)    sigma_hatsq &lt;- sum((log(y) - y_hat)^2)/N} else {    mu_seg &lt;- purrr::map_dbl(y_seg, mean)    y_hat &lt;- rep(mu_seg, seg_len)    sigma_hatsq &lt;- sum((y - y_hat)^2)/N}:</span> missing value where TRUE/FALSE needed</span>
 <span class="r-in"><span><span class="fu">diagnose</span><span class="op">(</span><span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="fu"><a href="test_set.html">test_set</a></span><span class="op">(</span>n <span class="op">=</span> <span class="fl">2</span>, sd <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> method: pelt</span>
-<span class="r-plt img"><img src="diagnose-7.png" alt="" width="700" height="433"></span>
+<span class="r-plt img"><img src="diagnose-3.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

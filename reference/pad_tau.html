@@ -319,7 +319,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[0,365)"       "[365,826)"     "[826,1.1e+03]"</span>
 <span class="r-in"><span><span class="fu">deg_free</span><span class="op">(</span><span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">DataCPSim</span><span class="op">)</span><span class="op">$</span><span class="va">model</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> method: null</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if (distribution == c("lnorm")) {    mu_seg &lt;- purrr::map_dbl(purrr::map(y_seg, log), mean)    y_hat &lt;- rep(exp(mu_seg), seg_len)    sigma_hatsq &lt;- sum((log(y) - y_hat)^2)/N} else {    mu_seg &lt;- purrr::map_dbl(y_seg, mean)    y_hat &lt;- rep(mu_seg, seg_len)    sigma_hatsq &lt;- sum((y - y_hat)^2)/N}:</span> missing value where TRUE/FALSE needed</span>
 <span class="r-in"><span><span class="fu">as_year</span><span class="op">(</span><span class="st">"1988-01-01"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "1988"</span>
 <span class="r-in"><span><span class="fu">whoami</span><span class="op">(</span><span class="va">fit_meanshift</span><span class="op">)</span></span></span>
