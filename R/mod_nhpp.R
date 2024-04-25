@@ -149,18 +149,9 @@ exceedances.nhpp <- function(x, ...) {
 #' @param object An `nhpp` object
 #' @export
 logLik.nhpp <- function(object, ...) {
+  out <- NextMethod()
   ll <- sum(object$region_params[["logLik"]])
-  m <- length(changepoints(object))
-  num_params_per_region <- object$region_params |>
-    dplyr::select(dplyr::contains("param_")) |>
-    ncol()
-  num_model_params <- length(object$model_params)
-  attr(ll, "num_params_per_region") <- num_params_per_region
-  attr(ll, "num_model_params") <- num_model_params
-  attr(ll, "nobs") <- nobs(object)
-  attr(ll, "tau") <- changepoints(object)  
-  attr(ll, "df") <- m + num_params_per_region * (m + 1) + num_model_params
-  class(ll) <- "logLik"
+  attributes(ll) <- attributes(out)
   return(ll)
 }
 

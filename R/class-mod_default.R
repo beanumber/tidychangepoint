@@ -99,7 +99,7 @@ logLik.mod_default <- function(object, ...) {
     N <- nobs(object)
   }
   sigma_hatsq <- model_variance(object)
-  ll <- -(N * log(sigma_hatsq) + N + N * log(2 * pi)) / 2
+  ll <- -N * (log(sigma_hatsq) + 1 + log(2 * pi)) / 2
   num_params_per_region <- object |>
     coef() |>
     dplyr::select(dplyr::contains("param_")) |>

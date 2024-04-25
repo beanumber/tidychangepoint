@@ -74,3 +74,13 @@ test_that("lmshift works", {
   expect_true("region" %in% names(x$region_params))
   
 })
+
+test_that("model performance", {
+  skip()
+  bench::mark(
+    m1 = fit_meanshift(CET, tau = ids), 
+    m2 = fit_meanshift2(CET, ids), 
+    lm = fit_lmshift(CET, ids), 
+    check = FALSE
+  )
+}) 
