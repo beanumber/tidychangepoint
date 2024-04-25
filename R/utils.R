@@ -169,31 +169,6 @@ as_year <- function(x) {
     format("%Y")
 }
 
-#' @rdname pad_tau
-#' @param ... currently ignored
-#' @export
-#' @examples
-#' whoami(fit_meanshift)
-#' whoami(fit_meanshift_ar1)
-#' whoami(fit_lmshift)
-#' whoami(fit_nhpp)
-
-whoami <- function(x = fit_meanshift, ...) {
-  attr(x, "model_name")
-}
-
-#' @rdname model_name
-#' @param x A `character` giving the name of a model. Typically the result of
-#' [model_name()].
-#' @return - [model_fit()]: A function
-#' @family modeling
-#' @export
-model_fit <- function(x, ...) {
-  paste0("fit_", model_name(x)) |>
-    parse(text = _) |>
-    eval()
-}
-
 #' Vectors implementation for logLik
 #' 
 #' @export

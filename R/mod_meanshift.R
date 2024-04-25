@@ -9,15 +9,15 @@
 #' @author Xueheng Shi
 #' @examples
 #' tau <- c(365, 826)
-#' mod <- fit_meanshift_ar1(DataCPSim, tau)
+#' mod <- fit_meanshift_norm_ar1(DataCPSim, tau)
 #' logLik(mod)
 #' deg_free(mod)
 #' 
 #' cpts <- c(1700, 1739, 1988)
 #' ids <- time2tau(cpts, as_year(time(CET)))
-#' mod <- fit_meanshift(CET, tau = ids)
+#' mod <- fit_meanshift_norm(CET, tau = ids)
 #' glance(mod)
-#' mod <- fit_meanshift_ar1(CET, tau = ids)
+#' mod <- fit_meanshift_norm_ar1(CET, tau = ids)
 #' glance(mod)
 
 fit_meanshift <- function(x, tau, distribution = "norm", ...) {
@@ -37,32 +37,27 @@ fit_meanshift <- function(x, tau, distribution = "norm", ...) {
       purrr::map_dbl(mean)
     
     y_hat <- rep(exp(mu_seg), seg_len)
-    sigma_hatsq <- sum((log(y) - y_hat)^2) / N
   } else {
     mu_seg <- y_seg |>
       purrr::map_dbl(mean)
     
     y_hat <- rep(mu_seg, seg_len)
-    sigma_hatsq <- sum((y - y_hat)^2) / N
   }
   
-  out <- mod_default(
+  out <- mod_cpt(
     x = y,
     tau = tau,
     region_params = tibble::tibble(
       region = names(y_seg), 
       param_mu = unname(mu_seg)
     ),
-    model_params = c(sigma_hatsq = sigma_hatsq),
+    model_params = c(sigma_hatsq = sum((y - y_hat)^2) / N),
     fitted_values = unname(y_hat),
-    model_name = "meanshift",
+    model_name = paste("meanshift", distribution, sep = "_"),
     distribution = distribution
   )
-  class(out) <- c(paste(out$model_name, distribution, sep = "_"), class(out))
   return(out)
 }
-
-attr(fit_meanshift, "model_name") <- "meanshift"
 
 #' @rdname fit_meanshift
 #' @export
@@ -86,7 +81,7 @@ fit_meanshift2 <- function(x, tau, ...) {
     purrr::map(2) |>
     purrr::list_c()
   
-  out <- mod_default(
+  out <- mod_cpt(
     x = y,
     tau = tau,
     region_params = region_params,
@@ -98,8 +93,6 @@ fit_meanshift2 <- function(x, tau, ...) {
   )
   return(out)
 }
-attr(fit_meanshift2, "model_name") <- "meanshift"
-
 
 fit_meanshift_region <- function(x, ...) {
   y <- as.numeric(x)
@@ -113,12 +106,37 @@ fit_meanshift_region <- function(x, ...) {
   )
 }
 
+#' @rdname fit_meanshift
+#' @export
+fit_meanshift_norm <- function(x, tau, ...) {
+  fit_meanshift(x, tau, distribution = "norm", ...)
+}
 
 #' @rdname fit_meanshift
 #' @export
-fit_meanshift_ar1 <- function(x, tau, ...) {
-  fit_meanshift(x, tau,  ...) |>
+fit_meanshift_lnorm <- function(x, tau, ...) {
+  out <- fit_meanshift(x, tau, distribution = "lnorm", ...)
+  class(out) <- c("mod_cpt_lnorm", class(out))
+  return(out)
+}
+
+#' @rdname fit_meanshift
+#' @export
+logLik.meanshift_lnorm <- function(object, ...) {
+  extra_term <- sum(log(as.ts(object)))
+  out <- NextMethod()
+  out - extra_term
+}
+
+#' @rdname fit_meanshift
+#' @export
+fit_meanshift_norm_ar1 <- function(x, tau, ...) {
+  fit_meanshift_norm(x, tau,  ...) |>
     autoregress_errors()
 }
 
-attr(fit_meanshift_ar1, "model_name") <- "meanshift_ar1"
+
+fit_meanshift_norm <- fun_cpt("fit_meanshift_norm")
+fit_meanshift_lnorm <- fun_cpt("fit_meanshift_lnorm")
+# fit_meanshift_pois <- fun_cpt("fit_meanshift_pois")
+fit_meanshift_norm_ar1 <- fun_cpt("fit_meanshift_norm_ar1")

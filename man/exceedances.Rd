@@ -34,7 +34,7 @@ fit_nhpp(DataCPSim, tau = 826, threshold = 200) |> exceedances()
 }
 \seealso{
 Other tidychangepoint-generics: 
-\code{\link{changepoints.mod_default}()},
+\code{\link{changepoints.mod_cpt}()},
 \code{\link{diagnose.seg_default}()},
 \code{\link{fitness.seg_default}()}
 }

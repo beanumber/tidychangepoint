@@ -1,8 +1,7 @@
 #' Segment a time series using a genetic algorithm
 #' @param x A time series
-#' @param model_fn A function that takes two arguments: `x` (a time series) and 
-#' `tau` (a set of changepoint indices). See [fit_meanshift_ar1()], 
-#' [fit_lmshift()], and [fit_nhpp()]
+#' @param model_fn A `character` or `name` coercible into [fun_cpt()] function. 
+#' See, for example, [fit_meanshift_norm()].
 #' @param penalty_fn A function that evaluates the changepoint set returned by
 #' `model_fn`. We provide [AIC()], [BIC()], [MBIC()], [MDL()], and [BMDL()].
 #' @param model_fn_args A [list()] of parameters passed to `model_fn`
@@ -26,10 +25,16 @@
 #' }
 
 segment_ga <- function(x, 
-                       model_fn = fit_meanshift_ar1, 
+                       model_fn = fit_meanshift_norm, 
                        penalty_fn = BIC, 
                        model_fn_args = list(), ...) {
   n <- length(as.ts(x))
+  if (!inherits(model_fn, "fun_cpt")) {
+    model_fn <- fun_cpt(model_fn)
+  }
+  if (!inherits(model_fn, "fun_cpt")) {
+    stop("model_fn must be coercible into a fun_cpt")
+  }
   
   obj_fun <- function(tau_binary_vec) {
     tau <- binary2tau(tau_binary_vec)
@@ -46,7 +51,7 @@ segment_ga <- function(x,
   
   out <- methods::as(mod_ga, "tidyga")
   out@data <- as.ts(x)
-  model_fn_args$model_fn <- whoami(model_fn)
+  model_fn_args$model_fn <- model_name(model_fn)
   model_fn_args$penalty_fn <- penalty_fn |>
     body() |>
     as.character() |>
@@ -77,7 +82,7 @@ segment_ga <- function(x,
 #' 
 segment_ga_shi <- function(x, ...) {
   segment_ga(
-    x, model_fn = fit_meanshift_ar1, penalty_fn = BIC, popSize = 200, ...
+    x, model_fn = fit_meanshift_norm_ar1, penalty_fn = BIC, popSize = 200, ...
   )
 }
 

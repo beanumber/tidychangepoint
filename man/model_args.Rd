@@ -47,6 +47,7 @@ model_args(x$segmenter)
 }
 \seealso{
 Other modeling: 
-\code{\link{model_name.mod_default}()}
+\code{\link{model_name.mod_cpt}()},
+\code{\link{new_fun_cpt}()}
 }
 \concept{modeling}

@@ -82,7 +82,7 @@ fitness(x)
 Every `tidycpt` objects contains two main children:
 
 - `segmenter`: The object that results from the changepoint detection algorithm. These can be of any class. Methods for objects of class `cpt`, `ga`, and `wbs` are currently implemented, and as well as `seg_default` (the default internal class). Given a data set, a model, and a penalized objective function, a segmenter's job is to search the exponentially-large space of possible changepoint sets for the one that optimizes the penalized objective function (over the space of possible changepoint sets). Some segmenting algorithms (e.g., PELT) are deterministic, while others (e.g., genetic algorithms) are randomized. 
-- `model`: A model object inheriting from `mod_default`, an internal class for representing model objects. Model objects are created by model-fitting functions, all of whose names start with `fit_`. The `model` of a `tidycpt` object is the model object returned by the `fit_*()` function that corresponds to the one used by the `segmenter`. Given a data set, a model description, **and a set of changepoints**, the corresponding model-fitting function finds the values of the model parameters that optimize the model fit to the data.
+- `model`: A model object inheriting from `mod_cpt`, an internal class for representing model objects. Model objects are created by model-fitting functions, all of whose names start with `fit_`. The `model` of a `tidycpt` object is the model object returned by the `fit_*()` function that corresponds to the one used by the `segmenter`. Given a data set, a model description, **and a set of changepoints**, the corresponding model-fitting function finds the values of the model parameters that optimize the model fit to the data.
 
 Both **segmenters and models** implement methods for the generic functions `changepoints()`, `as.ts()`, `nobs()`, `logLik()`, `model_name()`, and `glance()`. 
 However, it is important to note that while `tidychangepoint` does its best to match the model used by the `segmenter` to its corresponding model-fitting function, exact matches do not always exist. 
@@ -102,7 +102,7 @@ In addition to the generic functions listed above, **segmenters** implement meth
 
 ### Models
 
-The `model` object in this case is created by `fit_meanvar()`, and is of class `mod_default`. 
+The `model` object in this case is created by `fit_meanvar()`, and is of class `mod_cpt`. 
 
 ```{r}
 x$model |>

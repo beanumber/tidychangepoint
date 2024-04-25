@@ -22,7 +22,7 @@ new_seg_default <- function(x = numeric(),
                             algorithm = NA, 
                             cpt_list = list(), 
                             params = list(), 
-                            model_name = "meanshift", 
+                            model_name = "meanshift_norm", 
                             penalty = "BIC", ...) {
   stopifnot(is.numeric(x))
   structure(
@@ -30,7 +30,7 @@ new_seg_default <- function(x = numeric(),
       data = stats::as.ts(x),
       algorithm = algorithm,
       candidates = cpt_list |>
-        evaluate_cpts(.data = stats::as.ts(x), model_fn = model_fit(model_name)),
+        evaluate_cpts(.data = stats::as.ts(x), model_fn = whomademe(model_name)),
       params = params,
       model_name = model_name,
       penalty = penalty
@@ -126,7 +126,7 @@ model_args.seg_default <- function(object, ...) {
 #' See, for examples, [fit_meanshift()].
 #' @export
 evaluate_cpts.seg_default <- function(x, model_fn, ...) {
-  evaluate_cpts(x$candidates, .data = as.ts(x), model_fn = model_fit(x), ...)
+  evaluate_cpts(x$candidates, .data = as.ts(x), model_fn = whomademe(x), ...)
 }
 
 #' @rdname new_seg_default

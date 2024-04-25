@@ -3,19 +3,32 @@
 \name{fit_meanshift}
 \alias{fit_meanshift}
 \alias{fit_meanshift2}
-\alias{fit_meanshift_ar1}
+\alias{fit_meanshift_norm}
+\alias{fit_meanshift_lnorm}
+\alias{logLik.meanshift_lnorm}
+\alias{fit_meanshift_norm_ar1}
 \title{Fast implementation of meanshift model}
 \usage{
-fit_meanshift(x, tau, ...)
+fit_meanshift(x, tau, distribution = "norm", ...)
 
 fit_meanshift2(x, tau, ...)
 
-fit_meanshift_ar1(x, tau, ...)
+fit_meanshift_norm(x, tau, ...)
+
+fit_meanshift_lnorm(x, tau, ...)
+
+\method{logLik}{meanshift_lnorm}(object, ...)
+
+fit_meanshift_norm_ar1(x, tau, ...)
 }
 \arguments{
 \item{x}{A time series}
 
 \item{tau}{a set of indices representing a changepoint set}
+
+\item{distribution}{A character indicating the distribution of the data.
+Should match R distribution function naming conventions
+(e.g., "norm" for the Normal distribution, etc.)}
 
 \item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
 }
@@ -24,22 +37,23 @@ Fast implementation of meanshift model
 }
 \examples{
 tau <- c(365, 826)
-mod <- fit_meanshift_ar1(DataCPSim, tau)
+mod <- fit_meanshift_norm_ar1(DataCPSim, tau)
 logLik(mod)
 deg_free(mod)
 
 cpts <- c(1700, 1739, 1988)
 ids <- time2tau(cpts, as_year(time(CET)))
-mod <- fit_meanshift(CET, tau = ids)
+mod <- fit_meanshift_norm(CET, tau = ids)
 glance(mod)
-mod <- fit_meanshift_ar1(CET, tau = ids)
+mod <- fit_meanshift_norm_ar1(CET, tau = ids)
 glance(mod)
 }
 \seealso{
 Other model-fitting: 
 \code{\link{fit_lmshift}()},
 \code{\link{fit_meanvar}()},
-\code{\link{fit_nhpp_region}()}
+\code{\link{fit_nhpp_region}()},
+\code{\link{new_fun_cpt}()}
 }
 \author{
 Xueheng Shi

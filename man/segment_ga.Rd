@@ -8,7 +8,7 @@
 \usage{
 segment_ga(
   x,
-  model_fn = fit_meanshift_ar1,
+  model_fn = fit_meanshift_norm,
   penalty_fn = BIC,
   model_fn_args = list(),
   ...
@@ -21,9 +21,8 @@ segment_ga_taimal(x, ...)
 \arguments{
 \item{x}{A time series}
 
-\item{model_fn}{A function that takes two arguments: \code{x} (a time series) and
-\code{tau} (a set of changepoint indices). See \code{\link[=fit_meanshift_ar1]{fit_meanshift_ar1()}},
-\code{\link[=fit_lmshift]{fit_lmshift()}}, and \code{\link[=fit_nhpp]{fit_nhpp()}}}
+\item{model_fn}{A \code{character} or \code{name} coercible into \code{fun_cpt} function.
+See, for example, \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}}.}
 
 \item{penalty_fn}{A function that evaluates the changepoint set returned by
 \code{model_fn}. We provide \code{\link[=AIC]{AIC()}}, \code{\link[=BIC]{BIC()}}, \code{\link[=MBIC]{MBIC()}}, \code{\link[=MDL]{MDL()}}, and \code{\link[=BMDL]{BMDL()}}.}

@@ -14,12 +14,12 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".fitted"))
 #' @param model_name A `character` vector giving the model's name. 
 #' @param ... currently ignored
 #' @examples
-#' cpt <- mod_default(CET)
+#' cpt <- mod_cpt(CET)
 #' str(cpt)
 #' as.ts(cpt)
 #' changepoints(cpt)
 
-new_mod_default <- function(x = numeric(), 
+new_mod_cpt <- function(x = numeric(), 
                        tau = integer(),
                        region_params = tibble::tibble(),
                        model_params = double(),
@@ -35,14 +35,14 @@ new_mod_default <- function(x = numeric(),
       fitted_values = fitted_values,
       model_name = model_name
     ), 
-    class = "mod_default"
+    class = "mod_cpt"
   )
 }
 
-#' @rdname new_mod_default
+#' @rdname new_mod_cpt
 #' @export
 
-validate_mod_default <- function(x) {
+validate_mod_cpt <- function(x) {
   if (!stats::is.ts(as.ts(x))) {
     stop("data attribute is not coercible into a ts object.")
   }
@@ -53,21 +53,21 @@ validate_mod_default <- function(x) {
   x
 }
 
-#' @rdname new_mod_default
+#' @rdname new_mod_cpt
 #' @export
 
-mod_default <- function(x, ...) {
-  obj <- new_mod_default(x, ...)
-  validate_mod_default(obj)
+mod_cpt <- function(x, ...) {
+  obj <- new_mod_cpt(x, ...)
+  validate_mod_cpt(obj)
 }
 
-#' Methods for mod_default objects
-#' @name mod_default-generics
-#' @param x A `mod_default` object, typically the output from one of the `fit_*()`
+#' Methods for mod_cpt objects
+#' @name mod_cpt-generics
+#' @param x A `mod_cpt` object, typically the output from one of the `fit_*()`
 #' functions
 #' @export
 #' @examples
-#' cpts <- fit_meanshift(DataCPSim, tau = 365)
+#' cpts <- fit_meanshift_norm(DataCPSim, tau = 365)
 #' as.ts(cpts)
 #' nobs(cpts)
 #' logLik(cpts)
@@ -78,33 +78,43 @@ mod_default <- function(x, ...) {
 #' tidy(cpts)
 #' glance(cpts)
 
-as.ts.mod_default <- function(x, ...) {
+as.ts.mod_cpt <- function(x, ...) {
   as.ts(x$data)
 }
 
-#' @rdname mod_default-generics
+#' @rdname mod_cpt-generics
 #' @export
-nobs.mod_default <- function(object, ...) {
+nobs.mod_cpt <- function(object, ...) {
   length(as.ts(object))
 }
 
-#' @rdname mod_default-generics
+#' @rdname mod_cpt-generics
 #' @inheritParams stats::logLik
 #' @export
-logLik.mod_default <- function(object, ...) {
+logLik.mod_cpt <- function(object, ...) {
+  sigma_hatsq <- model_variance(object)
+  N <- nobs(object)
+  ll <- -N * (log(sigma_hatsq) + 1 + log(2 * pi)) / 2
+  as.logLik(object, ll)
+}
+
+as.logLik <- function(object, ll = 0) {
   m <- length(object$tau)
   if ("durbin_watson" %in% names(object)) {
     N <- nobs(object) - 1
   } else {
     N <- nobs(object)
   }
-  sigma_hatsq <- model_variance(object)
-  ll <- -N * (log(sigma_hatsq) + 1 + log(2 * pi)) / 2
   num_params_per_region <- object |>
     coef() |>
     dplyr::select(dplyr::contains("param_")) |>
     ncol()
   num_model_params <- length(object$model_params)
+  
+  if (!is.numeric(ll)) {
+    warning("Invalid log-likelihood value...returning 0")
+    ll <- 0
+  }
   attr(ll, "num_params_per_region") <- num_params_per_region
   attr(ll, "num_model_params") <- num_model_params
   attr(ll, "df") <- m + num_params_per_region * (m + 1) + num_model_params
@@ -114,48 +124,48 @@ logLik.mod_default <- function(object, ...) {
   return(ll)
 }
 
-#' @rdname mod_default-generics
+#' @rdname mod_cpt-generics
 #' @export
-fitted.mod_default <- function(object, ...) {
+fitted.mod_cpt <- function(object, ...) {
   object$fitted_values
 }
 
-#' @rdname mod_default-generics
+#' @rdname mod_cpt-generics
 #' @export
-residuals.mod_default <- function(object, ...) {
+residuals.mod_cpt <- function(object, ...) {
   object$data - fitted(object)
 }
 
-#' @rdname mod_default-generics
+#' @rdname mod_cpt-generics
 #' @export
 model_variance <- function(object, ...) {
   sum(residuals(object)^2) / nobs(object)
 }
 
-#' @rdname mod_default-generics
+#' @rdname mod_cpt-generics
 #' @export
-coef.mod_default <- function(object, ...) {
+coef.mod_cpt <- function(object, ...) {
   object$region_params
 }
 
 #' @rdname model_name
 #' @export
-model_name.mod_default <- function(object, ...) {
+model_name.mod_cpt <- function(object, ...) {
   object$model_name
 }
 
 
 #' @rdname changepoints
 #' @export
-changepoints.mod_default <- function(x, ...) {
+changepoints.mod_cpt <- function(x, ...) {
   x$tau |>
     as.integer()
 }
 
-#' @rdname mod_default-generics
+#' @rdname mod_cpt-generics
 #' @seealso [broom::augment()]
 #' @export
-augment.mod_default <- function(x, ...) {
+augment.mod_cpt <- function(x, ...) {
   tau <- changepoints(x)
   tibble::enframe(as.ts(x), name = "index", value = "y") |>
     tsibble::as_tsibble(index = index) |>
@@ -167,10 +177,10 @@ augment.mod_default <- function(x, ...) {
     dplyr::group_by(region)
 }
 
-#' @rdname mod_default-generics
+#' @rdname mod_cpt-generics
 #' @seealso [broom::tidy()]
 #' @export
-tidy.mod_default <- function(x, ...) {
+tidy.mod_cpt <- function(x, ...) {
   tau <- changepoints(x)
   n <- nobs(x)
   tau_padded <- pad_tau(tau, n)
@@ -197,9 +207,9 @@ tidy.mod_default <- function(x, ...) {
     dplyr::inner_join(coef(x), by = "region")
 }
 
-#' @rdname mod_default-generics
+#' @rdname mod_cpt-generics
 #' @export
-glance.mod_default <- function(x, ...) {
+glance.mod_cpt <- function(x, ...) {
   tibble::tibble(
     pkg = "tidychangepoint",
     version = package_version(utils::packageVersion("tidychangepoint")),
@@ -236,14 +246,14 @@ autoregress_errors <- function(mod, ...) {
 }
 
 
-#' @rdname mod_default-generics
+#' @rdname mod_cpt-generics
 #' @export
 #' @examples
-#' plot(fit_meanshift(CET, tau = 330))
+#' plot(fit_meanshift_norm(CET, tau = 330))
 #' plot(fit_trendshift(CET, tau = 330))
 #' plot(fit_lmshift(CET, tau = 330, deg_poly = 2))
 #' plot(fit_lmshift(CET, tau = 330, deg_poly = 10))
-plot.mod_default <- function(x, ...) {
+plot.mod_cpt <- function(x, ...) {
   regions <- tidy(x)
   breaks_default <- scales::extended_breaks()(1:nobs(x))
   if (length(changepoints(x)) < 8) {

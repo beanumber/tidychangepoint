@@ -74,6 +74,7 @@ plot_intensity(fit_nhpp(bogota_pm, tau = changepoints(mod)))
 Other model-fitting: 
 \code{\link{fit_lmshift}()},
 \code{\link{fit_meanshift}()},
-\code{\link{fit_meanvar}()}
+\code{\link{fit_meanvar}()},
+\code{\link{new_fun_cpt}()}
 }
 \concept{model-fitting}

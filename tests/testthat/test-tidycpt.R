@@ -102,10 +102,14 @@ test_that("utils works", {
   expect_equal(ncol(w), 4)
   expect_identical(names(w), c("region", "param_mu", "param_beta1", "param_beta2"))
     
-  expect_equal(whoami(fit_meanshift), "meanshift")
-  expect_equal(whoami(fit_meanshift_ar1), "meanshift_ar1")
-  expect_equal(whoami(fit_lmshift), "lmshift")
-  expect_equal(whoami(fit_nhpp), "nhpp")
+  expect_equal(model_name(fit_meanshift_norm), "meanshift_norm")
+  expect_equal(model_name(fit_meanshift_norm_ar1), "meanshift_norm_ar1")
+  expect_equal(model_name(fit_lmshift), "lmshift")
+  expect_equal(model_name(fit_nhpp), "nhpp")
+  
+  x <- fit_meanshift_norm(CET, tau = 42)
+  expect_s3_class(whomademe(x), "fun_cpt")
+  expect_equal(model_name(whomademe(x)), model_name(x))
 })
 
 test_that("penalties work", {

@@ -31,7 +31,6 @@ globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic",
 #' fit_lmshift(CET, tau = NULL)
 #' fit_lmshift(CET, tau = c(42, 42))
 
-
 fit_lmshift <- function(x, tau, deg_poly = 0, ...) {
   n <- length(x)
   ds <- data.frame(y = as.ts(x), t = 1:n)
@@ -63,7 +62,7 @@ fit_lmshift <- function(x, tau, deg_poly = 0, ...) {
     tbl_coef() |>
     dplyr::mutate(region = regions)
   
-  mod_default(
+  mod_cpt(
     x = as.ts(x),
     tau = tau,
     region_params = region_params,
@@ -75,8 +74,6 @@ fit_lmshift <- function(x, tau, deg_poly = 0, ...) {
   )
 }
 
-attr(fit_lmshift, "model_name") <- "lmshift"
-
 #' @rdname fit_lmshift
 #' @details
 #' - [fit_lmshift_ar1]: will apply auto-regressive lag 1 errors
@@ -86,8 +83,6 @@ fit_lmshift_ar1 <- function(x, tau, ...) {
     autoregress_errors()
 }
 
-attr(fit_lmshift_ar1, "model_name") <- "lmshift_ar1"
-
 #' @rdname fit_lmshift
 #' @details
 #' - [fit_trendshift]: will fit a line in each region
@@ -95,8 +90,6 @@ attr(fit_lmshift_ar1, "model_name") <- "lmshift_ar1"
 fit_trendshift <- function(x, tau, ...) {
   fit_lmshift(x, tau,  deg_poly = 1, ...)
 }
-
-attr(fit_trendshift, "model_name") <- "trendshift"
 
 #' @rdname fit_lmshift
 #' @details
@@ -107,7 +100,12 @@ fit_trendshift_ar1 <- function(x, tau, ...) {
     autoregress_errors()
 }
 
-attr(fit_trendshift_ar1, "model_name") <- "trendshift_ar1"
+
+# Register model-fitting functions
+fit_trendshift <- fun_cpt("fit_trendshift")
+fit_trendshift_ar1 <- fun_cpt("fit_trendshift_ar1")
+fit_lmshift <- fun_cpt("fit_lmshift")
+fit_lmshift_ar1 <- fun_cpt("fit_lmshift_ar1")
 
 #' Format the coefficients from a linear model as a tibble
 #' @param mod An `lm` model object

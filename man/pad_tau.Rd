@@ -14,7 +14,6 @@
 \alias{regions_by_tau}
 \alias{deg_free}
 \alias{as_year}
-\alias{whoami}
 \title{Utility functions}
 \usage{
 pad_tau(tau, n)
@@ -42,8 +41,6 @@ regions_by_tau(n, tau)
 deg_free(x)
 
 as_year(x)
-
-whoami(x = fit_meanshift, ...)
 }
 \arguments{
 \item{tau}{a numeric vector of changepoints}
@@ -57,8 +54,6 @@ whoami(x = fit_meanshift, ...)
 \item{index}{Index of times, typically returned by \code{\link[stats:time]{stats::time()}}}
 
 \item{cpts}{Time series observation labels to be converted to indices}
-
-\item{...}{currently ignored}
 }
 \description{
 Utility functions
@@ -89,10 +84,6 @@ split_by_tau(DataCPSim, c(365, 826))
 regions_by_tau(1096, c(365, 826))
 deg_free(segment(DataCPSim)$model)
 as_year("1988-01-01")
-whoami(fit_meanshift)
-whoami(fit_meanshift_ar1)
-whoami(fit_lmshift)
-whoami(fit_nhpp)
 }
 \seealso{
 \code{\link[stats:time]{stats::time()}}

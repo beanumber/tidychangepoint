@@ -45,7 +45,7 @@ params <- function(x, ...) UseMethod("params")
 #' 
 #' @details
 #' Every segmenter works by fitting a model to the data. [model_name()] returns
-#' the name of a model that can be passed to [model_fit()] to retrieve the 
+#' the name of a model that can be passed to [whomademe()] to retrieve the 
 #' model fitting function. These functions must begin with the prefix `fit_`. 
 #' Note that the model fitting functions exist in `tidychangepoint` are are
 #' not necessarily the actual functions used by the segmenter. 
@@ -59,7 +59,7 @@ params <- function(x, ...) UseMethod("params")
 #' @examples
 #' x <- segment(CET, method = "pelt")
 #' model_name(x$segmenter)
-#' model_fit(model_name(x))
+#' whomademe(model_name(x))
 #' model_name(x$segmenter)
 #' model_name(x$model)
 model_name <- function(object, ...) UseMethod("model_name")
@@ -113,8 +113,8 @@ as.model <- function(object, ...) UseMethod("as.model")
 #' cpt <- segment(DataCPSim, method = "ga-taimal", model_fn_args = list(threshold = 80), maxiter = 5)
 #' as.model(cpt$segmenter)$model_params
 as.model.default <- function(object, ...) {
-  f <- model_fit(object)
-  args <- c(list(as.ts(object), tau = changepoints(object)), model_args(object), list(...))
+  f <- whomademe(object)
+  args <- c(list(x = as.ts(object), tau = changepoints(object)), model_args(object), list(...))
   do.call(f, args)
 }
 

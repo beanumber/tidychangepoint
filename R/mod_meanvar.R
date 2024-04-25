@@ -11,7 +11,7 @@ fit_meanvar <- function(x, tau, ...) {
     split_by_tau(tau)
   
   region_mods <- regions |>
-    purrr::map(~fit_lmshift(.x, tau = NULL))
+    purrr::map(~fit_meanshift_norm(.x, tau = NULL))
   
   fitted_values <- region_mods |>
     purrr::map(~c(fitted(.x))) |>
@@ -25,7 +25,7 @@ fit_meanvar <- function(x, tau, ...) {
   region_params$param_sigma_hatsq <- region_mods |>
     purrr::map_dbl(model_variance)
   
-  mod_default(
+  mod_cpt(
     x <- as.ts(x),
     tau = tau,
     region_params = region_params,
@@ -35,4 +35,5 @@ fit_meanvar <- function(x, tau, ...) {
   )
 }
 
-attr(fit_meanvar, "model_name") <- "meanvar"
+# Register model-fitting functions
+fit_meanvar <- fun_cpt("fit_meanvar")

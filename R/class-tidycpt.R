@@ -80,8 +80,8 @@ glance.tidycpt <- function(x, ...) {
 compare_models <- function(x, ...) {
   list(
     x$model,
-    fit_meanshift(as.ts(x), tau = changepoints(x)),
-    fit_meanshift_ar1(as.ts(x), tau = changepoints(x)),
+    fit_meanshift_norm(as.ts(x), tau = changepoints(x)),
+    fit_meanshift_norm_ar1(as.ts(x), tau = changepoints(x)),
     fit_trendshift(as.ts(x), tau = changepoints(x)),
     fit_trendshift_ar1(as.ts(x), tau = changepoints(x)),
     fit_meanvar(as.ts(x), tau = changepoints(x)),

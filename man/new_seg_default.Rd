@@ -16,7 +16,7 @@ new_seg_default(
   algorithm = NA,
   cpt_list = list(),
   params = list(),
-  model_name = "meanshift",
+  model_name = "meanshift_norm",
   penalty = "BIC",
   ...
 )

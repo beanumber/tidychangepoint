@@ -120,7 +120,7 @@ fit_nhpp <- function(x, tau, ...) {
   n_seg <- regions |>
     purrr::map_int(length)
   
-  out <- mod_default(
+  out <- mod_cpt(
     x = as.ts(x),
     tau = tau,
     region_params = region_params,
@@ -132,7 +132,8 @@ fit_nhpp <- function(x, tau, ...) {
   return(out)
 }
 
-attr(fit_nhpp, "model_name") <- "nhpp"
+# Register model-fitting functions
+fit_nhpp <- fun_cpt("fit_nhpp")
 
 #' @rdname exceedances
 #' @param threshold A value above which to exceed. Default is the [mean()]
@@ -149,10 +150,8 @@ exceedances.nhpp <- function(x, ...) {
 #' @param object An `nhpp` object
 #' @export
 logLik.nhpp <- function(object, ...) {
-  out <- NextMethod()
   ll <- sum(object$region_params[["logLik"]])
-  attributes(ll) <- attributes(out)
-  return(ll)
+  as.logLik(object, ll)
 }
 
 #' @rdname BMDL

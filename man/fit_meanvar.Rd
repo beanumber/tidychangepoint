@@ -23,6 +23,7 @@ fit_meanvar(CET, tau = c(42, 330))
 Other model-fitting: 
 \code{\link{fit_lmshift}()},
 \code{\link{fit_meanshift}()},
-\code{\link{fit_nhpp_region}()}
+\code{\link{fit_nhpp_region}()},
+\code{\link{new_fun_cpt}()}
 }
 \concept{model-fitting}
