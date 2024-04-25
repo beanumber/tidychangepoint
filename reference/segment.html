@@ -152,7 +152,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 9</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pkg      version algorithm params num_cpts model criteria fitness elapsed_time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;lgl&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidycha… 0.0.0.… <span style="color: #BB0000;">NA</span>        <span style="color: #949494;">&lt;list&gt;</span>        0 mean… BIC      <span style="color: #BB0000;">NA</span>      0.01181674 …</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidycha… 0.0.0.… <span style="color: #BB0000;">NA</span>        <span style="color: #949494;">&lt;list&gt;</span>        0 mean… BIC      <span style="color: #BB0000;">NA</span>      0.006490231…</span>
 <span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> method: pelt</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $segmenter</span>
@@ -635,7 +635,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.04762959 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.04076815 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -1141,7 +1141,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 2.173441 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 1.951562 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -1639,7 +1639,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.06150246 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.06089783 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -2134,7 +2134,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.245564 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.4571798 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -2521,446 +2521,163 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span>    622.8361 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $fitted_values</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        [0,10)        [0,10)        [0,10)        [0,10)        [0,10) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      32.46043      32.46043      32.46043      32.46043      32.46043 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        [0,10)        [0,10)        [0,10)        [0,10)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      32.46043      32.46043      32.46043      32.46043      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)      [10,414)      [10,414) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      35.58786      35.58786 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [10,414)      [10,414)      [10,414)     [414,441)     [414,441) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.58786      35.58786      35.58786      34.84633      34.84633 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [414,441)     [414,441)     [414,441)     [414,441)     [414,441) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      34.84633      34.84633      34.84633      34.84633      34.84633 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [414,441)     [414,441)     [414,441)     [414,441)     [414,441) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      34.84633      34.84633      34.84633      34.84633      34.84633 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [414,441)     [414,441)     [414,441)     [414,441)     [414,441) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      34.84633      34.84633      34.84633      34.84633      34.84633 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [414,441)     [414,441)     [414,441)     [414,441)     [414,441) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      34.84633      34.84633      34.84633      34.84633      34.84633 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [414,441)     [414,441)     [414,441)     [414,441)     [414,441) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      34.84633      34.84633      34.84633      34.84633      34.84633 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [441,457)     [441,457)     [441,457)     [441,457)     [441,457) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.35077      35.35077      35.35077      35.35077      35.35077 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [441,457)     [441,457)     [441,457)     [441,457)     [441,457) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.35077      35.35077      35.35077      35.35077      35.35077 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [441,457)     [441,457)     [441,457)     [441,457)     [441,457) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.35077      35.35077      35.35077      35.35077      35.35077 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [441,457)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.35077      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [457,552)     [457,552)     [457,552)     [457,552) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      35.31759      35.31759      35.31759      35.31759 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [457,552)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      35.31759      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [552,770) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      58.47474 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [552,770)     [552,770)     [552,770)     [552,770)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      58.47474      58.47474      58.47474      58.47474      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975)     [770,975) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205      87.15205 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     [770,975)     [770,975)     [770,975)     [770,975) [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      87.15205      87.15205      87.15205      87.15205     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172     156.42172     156.42172     156.42172     156.42172 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [975,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     156.42172 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]  32.46043  32.46043  32.46043  32.46043  32.46043  32.46043  32.46043</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [8]  32.46043  32.46043  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [15]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [22]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [29]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [36]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [43]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [50]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [57]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [64]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [71]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [78]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [85]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [92]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [99]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [106]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [113]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [120]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [127]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [134]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [141]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [148]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [155]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [162]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [169]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [176]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [183]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [190]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [197]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [204]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [211]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [218]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [225]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [232]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [239]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [246]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [253]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [260]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [267]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [274]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [281]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [288]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [295]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [302]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [309]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [316]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [323]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [330]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [337]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [344]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [351]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [358]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [365]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [372]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [379]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [386]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [393]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [400]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [407]  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786  35.58786</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [414]  34.84633  34.84633  34.84633  34.84633  34.84633  34.84633  34.84633</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [421]  34.84633  34.84633  34.84633  34.84633  34.84633  34.84633  34.84633</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [428]  34.84633  34.84633  34.84633  34.84633  34.84633  34.84633  34.84633</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [435]  34.84633  34.84633  34.84633  34.84633  34.84633  34.84633  35.35077</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [442]  35.35077  35.35077  35.35077  35.35077  35.35077  35.35077  35.35077</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [449]  35.35077  35.35077  35.35077  35.35077  35.35077  35.35077  35.35077</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [456]  35.35077  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [463]  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [470]  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [477]  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [484]  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [491]  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [498]  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [505]  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [512]  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [519]  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [526]  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [533]  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [540]  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759  35.31759</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [547]  35.31759  35.31759  35.31759  35.31759  35.31759  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [554]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [561]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [568]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [575]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [582]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [589]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [596]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [603]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [610]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [617]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [624]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [631]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [638]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [645]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [652]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [659]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [666]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [673]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [680]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [687]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [694]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [701]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [708]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [715]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [722]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [729]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [736]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [743]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [750]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [757]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [764]  58.47474  58.47474  58.47474  58.47474  58.47474  58.47474  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [771]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [778]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [785]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [792]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [799]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [806]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [813]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [820]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [827]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [834]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [841]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [848]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [855]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [862]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [869]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [876]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [883]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [890]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [897]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [904]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [911]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [918]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [925]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [932]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [939]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [946]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [953]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [960]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [967]  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205  87.15205</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [974]  87.15205 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [981] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [988] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [995] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1002] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1009] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1016] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1023] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1030] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1037] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1044] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1051] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1058] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1065] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1072] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1079] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1086] 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172 156.42172</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1093] 156.42172 156.42172 156.42172 156.42172</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model_name</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "meanshift"</span>
@@ -2969,7 +2686,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.06162167 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.06220245 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -3339,446 +3056,143 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span>    881.8299 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $fitted_values</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       [0,826)       [0,826)       [0,826)       [0,826)       [0,826) </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>       43.2493       43.2493       43.2493       43.2493       43.2493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923      123.7923      123.7923      123.7923      123.7923 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [826,1.1e+03] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      123.7923 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [1]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    [9]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [17]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [25]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [33]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [41]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [49]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [57]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [65]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [73]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [81]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [89]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   [97]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [105]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [113]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [121]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [129]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [137]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [145]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [153]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [161]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [169]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [177]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [185]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [193]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [201]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [209]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [217]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [225]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [233]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [241]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [249]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [257]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [265]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [273]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [281]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [289]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [297]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [305]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [313]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [321]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [329]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [337]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [345]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [353]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [361]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [369]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [377]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [385]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [393]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [401]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [409]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [417]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [425]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [433]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [441]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [449]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [457]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [465]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [473]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [481]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [489]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [497]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [505]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [513]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [521]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [529]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [537]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [545]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [553]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [561]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [569]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [577]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [585]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [593]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [601]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [609]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [617]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [625]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [633]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [641]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [649]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [657]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [665]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [673]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [681]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [689]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [697]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [705]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [713]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [721]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [729]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [737]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [745]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [753]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [761]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [769]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [777]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [785]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [793]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [801]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [809]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [817]  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493  43.2493</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [825]  43.2493 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [833] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [841] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [849] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [857] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [865] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [873] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [881] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [889] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [897] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [905] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [913] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [921] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [929] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [937] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [945] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [953] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [961] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [969] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [977] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [985] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [993] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1001] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1009] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1017] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1025] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1033] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1041] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1049] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1057] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1065] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1073] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1081] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1089] 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923 123.7923</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $model_name</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "meanshift"</span>
@@ -3787,7 +3201,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.01281548 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.01263523 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -4205,7 +3619,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_default.html">seg_
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.08159041 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.07717133 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $time_index</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [1] "2018-01-01" "2018-01-02" "2018-01-03" "2018-01-04" "2018-01-05"</span>
