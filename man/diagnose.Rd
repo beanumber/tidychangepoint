@@ -22,7 +22,7 @@ diagnose(x, ...)
 Diagnose the fit of a segmented time series
 }
 \examples{
-x <- segment(DataCPSim, method = "random", num_generations = 5)
+x <- segment(DataCPSim, method = "random")
 diagnose(x)
 diagnose(x$segmenter)
 diagnose(segment(DataCPSim))

@@ -1,5 +1,5 @@
 #' Manually segment a times series
-#' @inheritParams segment
+#' @inheritParams fit_meanshift_norm
 #' @export
 #' @examples
 #' segment_manual(CET, tau = c(84, 330))

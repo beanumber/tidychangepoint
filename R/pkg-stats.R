@@ -25,7 +25,7 @@ exceedances.double <- function(x, threshold = mean(x, na.rm = TRUE), ...) {
 #' @inheritParams stats::logLik
 #' @export
 #' @examples
-#' MDL(fit_meanshift_ar1(CET, tau = c(42, 330)))
+#' MDL(fit_meanshift_norm_ar1(CET, tau = c(42, 330)))
 #' MDL(fit_lmshift(CET, tau = c(42, 81, 330), trends = TRUE))
 MDL.logLik <- function(object, ...) {
   tau <- attr(object, "tau")

@@ -1,9 +1,11 @@
 #' Base class for segmenters
 #' @export
 #' @param x a numeric vector coercible into a `ts` object
+#' @param pkg name of the package providing the segmenter
 #' @param algorithm Algorithm used to find the changepoints
-#' @param cpt_list a possibly empty `list()` of candidate changepoints
-#' @param params a possibly empty `list()` of parameters
+#' @param changepoints a possibly empty `list()` of candidate changepoints
+#' @param fitness A named `double` vector whose name reflects the penalty applied
+#' @param seg_params a possibly empty `list()` of segmenter parameters
 #' @param model_name character indicating the model used to find the changepoints. 
 #' @param penalty character indicating the name of the penalty function used to
 #' find the changepoints.

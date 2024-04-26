@@ -110,7 +110,7 @@ segment_ga_taimal <- function(x, ...) {
   )
 }
 
-#' @rdname segment_random
+#' @rdname segment_manual
 #' @details
 #' Randomly select candidate changepoint sets
 #' 

@@ -25,7 +25,15 @@ seg_cpt(x, ...)
 \arguments{
 \item{x}{a numeric vector coercible into a \code{ts} object}
 
+\item{pkg}{name of the package providing the segmenter}
+
 \item{algorithm}{Algorithm used to find the changepoints}
+
+\item{changepoints}{a possibly empty \code{list()} of candidate changepoints}
+
+\item{fitness}{A named \code{double} vector whose name reflects the penalty applied}
+
+\item{seg_params}{a possibly empty \code{list()} of segmenter parameters}
 
 \item{model_name}{character indicating the model used to find the changepoints.}
 
@@ -33,10 +41,6 @@ seg_cpt(x, ...)
 find the changepoints.}
 
 \item{...}{currently ignored}
-
-\item{cpt_list}{a possibly empty \code{list()} of candidate changepoints}
-
-\item{params}{a possibly empty \code{list()} of parameters}
 }
 \description{
 Base class for segmenters

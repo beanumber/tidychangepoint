@@ -35,7 +35,7 @@ These quantites should be \code{\link[base:attributes]{base::attributes()}} of t
 Maximum Descriptive Length
 }
 \examples{
-MDL(fit_meanshift_ar1(CET, tau = c(42, 330)))
+MDL(fit_meanshift_norm_ar1(CET, tau = c(42, 330)))
 MDL(fit_lmshift(CET, tau = c(42, 81, 330), trends = TRUE))
 }
 \seealso{

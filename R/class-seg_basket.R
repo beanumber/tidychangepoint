@@ -2,14 +2,8 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".data"))
 
 #' Default class for candidate changepoint sets
 #' @export
-#' @param x a numeric vector coercible into a `ts` object
-#' @param algorithm Algorithm used to find the changepoints
+#' @inheritParams new_seg_cpt
 #' @param cpt_list a possibly empty `list()` of candidate changepoints
-#' @param params a possibly empty `list()` of parameters
-#' @param model_name character indicating the model used to find the changepoints. 
-#' @param penalty character indicating the name of the penalty function used to
-#' find the changepoints.
-#' @param ... currently ignored
 #' @examples
 #' seg <- seg_basket(DataCPSim, cpt_list = list(c(365), c(330, 839)))
 #' str(seg)
@@ -57,7 +51,10 @@ seg_basket <- function(x, ...) {
   validate_seg_basket(obj)
 }
 
-#' @rdname seg-basket-generics
+#' Methods for seg_basket objects
+#' @name seg-basket-generics
+#' @object A `seg_basket` object
+#' @param ... arguments passed to methods
 #' @export
 as.segmenter.seg_basket <- function(object, ...) {
   seg_cpt(
@@ -72,6 +69,7 @@ as.segmenter.seg_basket <- function(object, ...) {
 }
 
 #' @rdname seg-basket-generics
+#' @param x A `seg_basket` object
 #' @export
 as.ts.seg_basket <- function(x, ...) {
   x$data
@@ -116,6 +114,7 @@ evaluate_cpts.seg_basket <- function(x, ...) {
 }
 
 #' @rdname new_seg_basket
+#' @param .data A time series
 #' @export
 evaluate_cpts.list <- function(x, .data, model_fn, ...) {
   tibble::tibble(changepoints = x) |>
@@ -161,6 +160,7 @@ evaluate_cpts.tbl_df <- function(x, .data, model_fn, ...) {
   } else {
     y
   }
+  return(y)
 }
 
 #' @rdname model_name
@@ -178,7 +178,7 @@ plot.seg_basket <- function(x, ...) {
 #' @rdname diagnose
 #' @export
 #' @examples
-#' x <- segment(DataCPSim, method = "random", num_generations = 5)
+#' x <- segment(DataCPSim, method = "random")
 #' diagnose(x)
 #' diagnose(x$segmenter)
 diagnose.seg_basket <- function(x, ...) {
@@ -194,7 +194,7 @@ diagnose.seg_basket <- function(x, ...) {
 #' @param ... currently ignored
 #' @export
 #' @examples
-#' x <- segment(DataCPSim, method = "random", popSize = 10)
+#' x <- segment(DataCPSim, method = "taimal", num_generations = 3)
 #' plot_history(x$segmenter)
 plot_history <- function(x, ...) {
   methods <- c("null", "single-best", "pelt")
@@ -238,7 +238,7 @@ plot_history <- function(x, ...) {
 #' @rdname plot_history
 #' @export
 #' @examples
-#' x <- segment(DataCPSim, method = "random", num_generations = 10)
+#' x <- segment(DataCPSim, method = "random")
 #' plot_best_chromosome(x$segmenter)
 plot_best_chromosome <- function(x) {
   d <- x$basket |> 

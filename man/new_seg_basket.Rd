@@ -39,6 +39,8 @@ evaluate_cpts(x, ...)
 
 \item{cpt_list}{a possibly empty \code{list()} of candidate changepoints}
 
+\item{seg_params}{a possibly empty \code{list()} of segmenter parameters}
+
 \item{model_name}{character indicating the model used to find the changepoints.}
 
 \item{penalty}{character indicating the name of the penalty function used to
@@ -46,10 +48,10 @@ find the changepoints.}
 
 \item{...}{currently ignored}
 
+\item{.data}{A time series}
+
 \item{model_fn}{Name of the function to fit the model.
 See, for examples, \code{\link[=fit_meanshift]{fit_meanshift()}}.}
-
-\item{params}{a possibly empty \code{list()} of parameters}
 }
 \description{
 Default class for candidate changepoint sets

@@ -98,7 +98,7 @@ x$segmenter |>
   str()
 ```
 
-In addition to the generic functions listed above, **segmenters** implement methods for the generic functions `fitness()`, `model_args()`, and `params()`. 
+In addition to the generic functions listed above, **segmenters** implement methods for the generic functions `fitness()`, `model_args()`, and `seg_params()`. 
 
 ### Models
 

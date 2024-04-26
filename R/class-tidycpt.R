@@ -162,7 +162,7 @@ file_name <- function(x, data_name_slug = "data") {
         data_name_slug, 
         algorithm,
         floor(MDL(x$model)),
-        params(x$segmenter) |> cli::hash_obj_md5(),
+        seg_params(x$segmenter) |> cli::hash_obj_md5(),
         sep = "_"
       ),
       filename = paste0(label, ".rda")

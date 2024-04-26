@@ -121,6 +121,7 @@ fit_meanshift_lnorm <- function(x, tau, ...) {
 }
 
 #' @rdname fit_meanshift
+#' @inheritParams stats::logLik
 #' @export
 logLik.meanshift_lnorm <- function(object, ...) {
   extra_term <- sum(log(as.ts(object)))
