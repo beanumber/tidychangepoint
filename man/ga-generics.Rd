@@ -2,38 +2,42 @@
 % Please edit documentation in R/pkg-GA.R
 \name{ga-generics}
 \alias{ga-generics}
-\alias{glance.ga}
-\alias{params.ga}
+\alias{as.segmenter.ga}
 \alias{as.ts.ga}
 \alias{nobs.ga}
+\alias{seg_params.ga}
 \title{Compatibility layer for GA}
 \usage{
-\method{glance}{ga}(x, ...)
-
-\method{params}{ga}(x, ...)
+\method{as.segmenter}{ga}(object, ...)
 
 \method{as.ts}{ga}(x, ...)
 
 \method{nobs}{ga}(object, ...)
+
+\method{seg_params}{ga}(x, ...)
 }
 \arguments{
-\item{x}{A \code{GA} object returned by \code{\link[GA:ga]{GA::ga()}}}
+\item{object}{A \code{ga} object.}
 
 \item{...}{arguments passed to methods}
 
-\item{object}{A \code{ga} object.}
+\item{x}{A \code{GA} object returned by \code{\link[GA:ga]{GA::ga()}}}
 }
 \description{
 Compatibility layer for GA
 }
 \examples{
 cpts <- segment(DataCPSim, method = "ga", maxiter = 10)
-class(cpts)
-y <- augment(cpts)
-class(y)
-y
-tidy(cpts)
-glance(cpts)
+x <- cpts$segmenter
+class(x)
+as.segmenter(x)
+as.ts(x) 
+changepoints(x)
+fitness(x)
+model_name(x)
+model_args(x)
+nobs(x)
+seg_params(x)
 cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
 as.ts(cpts)
 

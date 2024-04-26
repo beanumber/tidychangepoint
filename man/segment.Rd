@@ -58,11 +58,11 @@ on the value of the \code{method} argument:
 \item \code{ga}: Uses the Genetic algorithm implemented by
 \code{\link[GA:ga]{GA::ga()}}. The \code{segmenter} is of class \code{tidyga}.
 \item \code{taimal}: Uses the Genetic BMDL heuristic as implemented by
-\code{\link[=segment_taimal]{segment_taimal()}}. The \code{segmenter} is of class \code{\link[=seg_default]{seg_default()}}.
+\code{\link[=segment_taimal]{segment_taimal()}}. The \code{segmenter} is of class \code{\link[=seg_basket]{seg_basket()}}.
 \item \code{manual}: Uses the vector of changepoints in the \code{tau} argument.
-The \code{segmenter} is of class \code{\link[=seg_default]{seg_default()}}`.
+The \code{segmenter} is of class \code{\link[=seg_basket]{seg_basket()}}`.
 \item \code{null}: The default. Uses no changepoints.
-The \code{segmenter} is of class \code{\link[=seg_default]{seg_default()}}`.
+The \code{segmenter} is of class \code{\link[=seg_basket]{seg_basket()}}`.
 }
 }
 \examples{

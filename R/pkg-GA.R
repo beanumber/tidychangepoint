@@ -5,36 +5,25 @@
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "ga", maxiter = 10)
-#' class(cpts)
-#' y <- augment(cpts)
-#' class(y)
-#' y
-#' tidy(cpts)
-#' glance(cpts)
-
-glance.ga <- function(x, ...) {
-  tibble::tibble(
-    pkg = "ga",
-    version = package_version(utils::packageVersion("GA")),
+#' x <- cpts$segmenter
+#' class(x)
+#' as.segmenter(x)
+#' as.ts(x) 
+#' changepoints(x)
+#' fitness(x)
+#' model_name(x)
+#' model_args(x)
+#' nobs(x)
+#' seg_params(x)
+as.segmenter.ga <- function(object, ...) {
+  seg_cpt(
+    x = as.ts(object),
+    pkg = "GA",
     algorithm = "Genetic",
-    params = list(params(x)),
-    num_cpts = length(changepoints(x)),
-    model = model_name(x),
-    criteria = names(fitness(x)),
-    fitness = fitness(x)
-  )
-}
-
-#' @rdname ga-generics
-#' @export
-params.ga <- function(x, ...) {
-  list(
-    popSize = x@popSize,
-    iter = x@iter,
-    elitism = x@elitism,
-    pcrossover = x@pcrossover,
-    pmutation = x@pmutation,
-    model_fn_args = model_args(x)
+    changepoints = changepoints(object),
+    seg_params = list(seg_params(object)),
+    model = model_name(object),
+    fitness = fitness(object)
   )
 }
 
@@ -48,6 +37,40 @@ as.ts.ga <- function(x, ...) {
   x@data
 }
 
+#' @rdname changepoints
+#' @export
+#' @examples
+#' cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
+#' changepoints(cpts$segmenter)
+#' 
+changepoints.ga <- function(x, ...) {
+  which(x@solution[1, ] == 1)
+}
+
+#' @rdname fitness
+#' @export
+#' @examples
+#' x <- segment(DataCPSim, method = "ga", maxiter = 10)
+#' fitness(x)
+#' 
+fitness.ga <- function(object, ...) {
+  out <- -object@fitnessValue
+  names(out) <- model_args(object)[["penalty_fn"]]
+  out
+}
+
+#' @rdname model_name
+#' @export
+model_name.ga <- function(object, ...) {
+  model_args(object)[["model_fn"]]
+}
+
+#' @rdname model_args
+#' @export
+model_args.ga <- function(object, ...) {
+  object@model_fn_args
+}
+
 #' @rdname ga-generics
 #' @param object A `ga` object.
 #' @export
@@ -59,14 +82,17 @@ nobs.ga <- function(object, ...) {
   length(as.ts(object))
 }
 
-#' @rdname changepoints
+#' @rdname ga-generics
 #' @export
-#' @examples
-#' cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
-#' changepoints(cpts$segmenter)
-#' 
-changepoints.ga <- function(x, ...) {
-  which(x@solution[1, ] == 1)
+seg_params.ga <- function(x, ...) {
+  list(
+    popSize = x@popSize,
+    iter = x@iter,
+    elitism = x@elitism,
+    pcrossover = x@pcrossover,
+    pmutation = x@pmutation,
+    model_fn_args = model_args(x)
+  )
 }
 
 #' Build an initial population set for GA algorithms
@@ -110,28 +136,4 @@ log_gabin_population <- function(x, ...) {
       matrix(ncol = object@nBits)
   }
   return(f)
-}
-
-#' @rdname fitness
-#' @export
-#' @examples
-#' x <- segment(DataCPSim, method = "ga", maxiter = 10)
-#' fitness(x)
-#' 
-fitness.ga <- function(object, ...) {
-  out <- -object@fitnessValue
-  names(out) <- model_args(object)[["penalty_fn"]]
-  out
-}
-
-#' @rdname model_name
-#' @export
-model_name.ga <- function(object, ...) {
-  model_args(object)[["model_fn"]]
-}
-
-#' @rdname model_args
-#' @export
-model_args.ga <- function(object, ...) {
-  object@model_fn_args
 }

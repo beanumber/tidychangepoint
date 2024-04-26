@@ -8,7 +8,7 @@
 #' 
 segment_random <- function(x, popSize = 10, ...) {
   cpts <- random_cpts(x, n = popSize)
-  new_seg_default(
+  seg_basket(
     x, 
     algorithm = "random",
     cpt_list = cpts, 

@@ -244,6 +244,6 @@ implements_all_methods <- function(object, required_methods, ...) {
   }
 }
 
-common <- c("as.ts", "changepoints", "glance", "model_name", "nobs")
-segs_only <- c("fitness", "model_args", "params")
-mods_only <- c("augment", "coef", "fitted", "logLik", "plot", "residuals", "tidy")
+common <- c("as.ts", "changepoints", "model_name", "nobs")
+segs_only <- c("fitness", "model_args", "seg_params")
+mods_only <- c("augment", "coef", "fitted", "glance", "logLik", "plot", "residuals", "tidy")

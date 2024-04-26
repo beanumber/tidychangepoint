@@ -1,75 +1,62 @@
 #' Compatibility layer for changepoint
 #' @name cpt-generics
 #' @param x A `cpt` object returned by [changepoint::cpt.meanvar()]
+#' @param object A `cpt` object.
 #' @param ... arguments passed to methods
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "pelt")
-#' class(cpts)
-#' y <- augment(cpts)
-#' class(y)
-#' y
-#' tidy(cpts)
-#' glance(cpts)
-
-glance.cpt <- function(x, ...) {
-  tibble::tibble(
+#' x <- cpts$segmenter
+#' class(x)
+#' as.segmenter(x)
+#' as.ts(x) 
+#' changepoints(x)
+#' fitness(x)
+#' logLik(x)
+#' model_name(x)
+#' model_args(x)
+#' nobs(x)
+#' seg_params(x)
+#' 
+as.segmenter.cpt <- function(object, ...) {
+  seg_cpt(
+    x = as.ts(object),
     pkg = "changepoint",
-    version = package_version(x@version),
-    algorithm = x@method,
-    params = list(params(x)),
-    num_cpts = length(changepoints(x)),
-    model = model_name(x),
-    criteria = names(fitness(x)),
-    fitness = fitness(x)
+    algorithm = object@method,
+    changepoints = changepoints(object),
+    seg_params = list(seg_params(object)),
+    model = model_name(object),
+    fitness = fitness(object)
   )
 }
 
+
 #' @rdname cpt-generics
 #' @export
-params.cpt <- function(x, ...) {
-  out <- list(
-    test_stat = x@test.stat,
-    penalty = x@pen.value,
-    num_cpts_max = x@ncpts.max,
-    min_seg_length = x@minseglen
-  )
-  # hack
-  names(out)[2] <- x@pen.type
+as.ts.cpt <- function(x, ...) {
+  as.ts(x@data.set)
+}
+
+#' @rdname changepoints
+#' @export
+changepoints.cpt <- function(x, ...) {
+  changepoint::cpts(x) |>
+    as.integer()
+}
+
+#' @rdname fitness
+#' @export
+#' 
+fitness.cpt <- function(object, ...) {
+  out <- object@pen.value - 2 * as.double(logLik(object))
+  names(out) <- object@pen.type
   out
 }
 
 #' @rdname cpt-generics
 #' @export
-#' @examples
-#' cpts <- segment(DataCPSim, method = "pelt")
-#' as.ts(cpts)
-#' 
-as.ts.cpt <- function(x, ...) {
-  as.ts(x@data.set)
-}
-
-#' @rdname cpt-generics
-#' @param object A `cpt` object.
-#' @export
-#' @examples
-#' cpts <- segment(DataCPSim, method = "pelt")
-#' nobs(cpts)
-#' 
-nobs.cpt <- function(object, ...) {
-  length(as.ts(object@data.set))
-}
-
-#' @rdname cpt-generics
-#' @export
-#' @examples
-#' cpts <- segment(DataCPSim, method = "pelt", penalty = "BIC")
-#' logLik(cpts$segmenter)
-#' cpts <- segment(DataCPSim, method = "pelt", penalty = "AIC")
-#' logLik(cpts$segmenter)
-#' 
 logLik.cpt <- function(object, ...) {
-#  message("intercepting...")
+  #  message("intercepting...")
   y <- changepoint::likelihood(object) |>
     suppressWarnings()
   ll <- -y[1] / 2
@@ -81,36 +68,13 @@ logLik.cpt <- function(object, ...) {
   return(ll)
 }
 
-#' @rdname changepoints
-#' @export
-#' @examples
-#' cpts <- segment(DataCPSim, method = "pelt")
-#' changepoints(cpts)
-#' 
-changepoints.cpt <- function(x, ...) {
-  changepoint::cpts(x) |>
-    as.integer()
-}
-
-#' @rdname fitness
-#' @export
-#' @examples
-#' x <- segment(DataCPSim, method = "pelt")
-#' fitness(x)
-#' 
-fitness.cpt <- function(object, ...) {
-  out <- object@pen.value - 2 * as.double(logLik(object))
-  names(out) <- object@pen.type
-  out
-}
-
 #' @rdname model_name
 #' @export
 model_name.cpt <- function(object, ...) {
   if (object@cpttype == "mean and variance") {
     return("meanvar")
   } else {
-    return("meanshift")
+    return("meanshift_norm")
   }
 }
 
@@ -118,4 +82,21 @@ model_name.cpt <- function(object, ...) {
 #' @export
 model_args.cpt <- function(object, ...) {
   NULL
+}
+
+#' @rdname cpt-generics
+#' @param object A `cpt` object.
+#' @export
+nobs.cpt <- function(object, ...) {
+  length(as.ts(object))
+}
+
+#' @rdname cpt-generics
+#' @export
+seg_params.cpt <- function(x, ...) {
+  list(
+    test_stat = x@test.stat,
+    num_cpts_max = x@ncpts.max,
+    min_seg_length = x@minseglen
+  )
 }

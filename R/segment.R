@@ -72,11 +72,11 @@ segment.numeric <- function(x, method = "null", ...) {
 #' - `ga`: Uses the Genetic algorithm implemented by 
 #'   [GA::ga()]. The `segmenter` is of class `tidyga`.
 #' - `taimal`: Uses the Genetic BMDL heuristic as implemented by 
-#'   [segment_taimal()]. The `segmenter` is of class [seg_default()].
+#'   [segment_taimal()]. The `segmenter` is of class [seg_basket()].
 #' - `manual`: Uses the vector of changepoints in the `tau` argument. 
-#'   The `segmenter` is of class [seg_default()]`.
+#'   The `segmenter` is of class [seg_basket()]`.
 #' - `null`: The default. Uses no changepoints. 
-#'   The `segmenter` is of class [seg_default()]`.
+#'   The `segmenter` is of class [seg_basket()]`.
 #' @seealso [changepoint::cpt.meanvar()], [wbs::wbs()], [GA::ga()]
 #' @examples
 #' segment(DataCPSim, method = "pelt")
@@ -140,10 +140,10 @@ segment.ts <- function(x, method = "null", ...) {
     if (!is.list(tau)) {
       tau <- list(tau)
     }
-    seg <- new_seg_default(x, cpt_list = tau)
+    seg <- segment_manual(x, ...)
   }
-  if (method == "null") {
-    seg <- new_seg_default(x)
+  if (method == "null") {    
+    seg <- segment_manual(x, tau = NULL)
   }
   # build the tidycpt object
   obj <- list(

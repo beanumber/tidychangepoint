@@ -29,14 +29,6 @@ as.ts.tidycpt <- function(x, ...) {
   as.ts(x$segmenter)
 }
 
-#' @rdname tidycpt-generics
-#' @inheritParams stats::nobs
-#' @seealso [stats::nobs()]
-#' @export
-nobs.tidycpt <- function(object, ...) {
-  nobs(object$segmenter)
-}
-
 #' @rdname fitness
 #' @export
 fitness.tidycpt <- function(object, ...) {
@@ -67,7 +59,9 @@ tidy.tidycpt <- function(x, ...) {
 #' @seealso [broom::glance()]
 #' @export
 glance.tidycpt <- function(x, ...) {
-  glance(x$segmenter) |>
+  x$segmenter |>
+    as.segmenter() |>
+    glance() |>
     dplyr::mutate(
       elapsed_time = x$elapsed_time
     )

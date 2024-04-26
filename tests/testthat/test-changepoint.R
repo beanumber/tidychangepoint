@@ -7,7 +7,6 @@ test_that("changepoint works", {
   expect_s3_class(tidy(x), "tbl_df")
   expect_s3_class(glance(x), "tbl_df")
   expect_type(changepoints(x), "integer")
-  expect_type(nobs(x), "integer")
   expect_s3_class(logLik(x$segmenter), "logLik")
   expect_type(fitness(x$segmenter), "double")
   expect_equal(names(fitness(x$segmenter)), "MBIC")
@@ -28,5 +27,4 @@ test_that("changepoint works", {
   expect_s3_class(tidy(x), "tbl_df")
   expect_s3_class(glance(x), "tbl_df")
   expect_type(changepoints(x), "integer")
-  expect_type(nobs(x), "integer")
 })

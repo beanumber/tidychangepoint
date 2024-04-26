@@ -17,6 +17,13 @@ changepoints.default <- function(x, ...) {
   attr(x, "cpt_true")
 }
 
+#' Convert a wild-caught segmenter object into a `segmenter` object
+#' @param object An object resulting from a changepoint detection algorithm.
+#' @param ... currently ignored
+#' @family tidychangepoint-generics
+#' @export
+as.segmenter <- function(object, ...) UseMethod("as.segmenter")
+
 #' Compute exceedances of a threshold for a time series
 #' 
 #' @inheritParams segment
@@ -39,7 +46,7 @@ fitness <- function(object, ...) UseMethod("fitness")
 #' @rdname changepoints
 #' @family tidychangepoint-generics
 #' @export
-params <- function(x, ...) UseMethod("params")
+seg_params <- function(x, ...) UseMethod("seg_params")
 
 #' Retrieve the name of the model that a segmenter or model used
 #' 
@@ -161,7 +168,7 @@ BMDL.default <- function(object, ...) {
   BMDL(logLik(object))
 }
 
-#' @rdname new_seg_default
+#' @rdname new_seg_basket
 #' @export
 evaluate_cpts <- function(x, ...) UseMethod("evaluate_cpts")
 

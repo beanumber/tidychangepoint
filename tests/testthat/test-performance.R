@@ -1,3 +1,13 @@
+test_that("random performance", {
+  x <- segment(CET, method = "random", popSize = 100)
+  y <- segment(CET, method = "ga-random", popSize = 100)
+  bench::mark(
+    basket = segment(CET, method = "random", popSize = 100),
+    ga = segment(CET, method = "ga-random", popSize = 100),
+    check = FALSE
+  )
+})
+
 test_that("ga performance", {
   skip()
   segment_ga_shi(CET, maxiter = 50)

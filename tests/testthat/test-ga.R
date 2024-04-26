@@ -7,7 +7,6 @@ test_that("GA works", {
   expect_s3_class(tidy(x), "tbl_df")
   expect_s3_class(glance(x), "tbl_df")
   expect_type(changepoints(x), "integer")
-  expect_type(nobs(x), "integer")
   expect_type(fitness(x$segmenter), "double")
   expect_true(is_segmenter(x$segmenter))
   expect_true(is_model(x$model))
@@ -20,5 +19,4 @@ test_that("GA works", {
   expect_s3_class(tidy(x), "tbl_df")
   expect_s3_class(glance(x), "tbl_df")
   expect_type(changepoints(x), "integer")
-  expect_type(nobs(x), "integer")
 })

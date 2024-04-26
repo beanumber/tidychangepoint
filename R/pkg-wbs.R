@@ -5,38 +5,26 @@
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "wbs")
-#' class(cpts)
-#' y <- augment(cpts)
-#' class(y)
-#' y
-#' tidy(cpts)
-#' glance(cpts)
-
-glance.wbs <- function(x, ...) {
-  tibble::tibble(
+#' x <- cpts$segmenter
+#' class(x)
+#' as.segmenter(x)
+#' as.ts(x) 
+#' changepoints(x)
+#' fitness(x)
+#' model_name(x)
+#' model_args(x)
+#' nobs(x)
+#' seg_params(x)
+#' 
+as.segmenter.wbs <- function(object, ...) {
+  seg_cpt(
+    x = as.ts(object),
     pkg = "wbs",
-    version = package_version(utils::packageVersion("wbs")),
     algorithm = "Wild BinSeg",
-    params = list(params(x)),
-    num_cpts = length(changepoints(x)),
-    model = "fit_wbs",
-    criteria = names(fitness(x)),
-    fitness = fitness(x),
-    sigma = x$cpt$sigma,
-#    BIC = min(x$cpt$ic.curve$bic.penalty),
-#    MBIC = min(x$cpt$ic.curve$mbic.penalty)
-  )
-}
-
-#' @rdname wbs-generics
-#' @export
-params.wbs <- function(x, ...) {
-  list(
-    M = x$M,
-    integrated = x$integrated,
-    rand_intervals = x$rand.intervals,
-    threshold = x$cpt$th,
-    Kmax = x$cpt$Kmax
+    changepoints = changepoints(object),
+    seg_params = list(seg_params(object)),
+    model = model_name(object),
+    fitness = fitness(object)
   )
 }
 
@@ -48,17 +36,6 @@ params.wbs <- function(x, ...) {
 #' 
 as.ts.wbs <- function(x, ...) {
   as.ts(x$x)
-}
-
-#' @rdname wbs-generics
-#' @param object A `cpt` object.
-#' @export
-#' @examples
-#' cpts <- segment(DataCPSim, method = "wbs")
-#' nobs(cpts)
-#' 
-nobs.wbs <- function(object, ...) {
-  length(as.ts(object))
 }
 
 #' @rdname changepoints
@@ -80,19 +57,43 @@ changepoints.wbs <- function(x, ...) {
 #' fitness(x)
 #' 
 fitness.wbs <- function(object, ...) {
-  out <- NA
+  out <- 0
   names(out) <- "MBIC"
   out
+}
+
+#' @rdname wbs-generics
+#' @param object A `cpt` object.
+#' @export
+#' @examples
+#' cpts <- segment(DataCPSim, method = "wbs")
+#' nobs(cpts)
+#' 
+nobs.wbs <- function(object, ...) {
+  length(as.ts(object))
 }
 
 #' @rdname model_name
 #' @export
 model_name.wbs <- function(object, ...) {
-  "meanshift"
+  "meanshift_norm"
 }
 
 #' @rdname model_args
 #' @export
 model_args.wbs <- function(object, ...) {
   NULL
+}
+
+#' @rdname wbs-generics
+#' @export
+seg_params.wbs <- function(x, ...) {
+  list(
+    M = x$M,
+    integrated = x$integrated,
+    rand_intervals = x$rand.intervals,
+    threshold = x$cpt$th,
+    Kmax = x$cpt$Kmax,
+    sigma = x$cpt$sigma
+  )
 }

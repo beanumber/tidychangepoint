@@ -56,17 +56,17 @@ globalVariables(
 #' }
 #' 
 segment_taimal <- function(x, 
-                          num_generations = 50, 
-                          nhpp_dist = c("W","EW","GGO","MO","GO")[1], # función de tasa de NHPP
-                          vec_dist_a_priori = c("Gamma", "Gamma"), # distribuciones a priori
-                          mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2),
-                          generation_size = 50, 
-                          max_num_cp = 20,
-                          show_progress_bar = TRUE, ...) {
-  obj <- new_seg_default(
+                           num_generations = 50, 
+                           nhpp_dist = c("W","EW","GGO","MO","GO")[1], # función de tasa de NHPP
+                           vec_dist_a_priori = c("Gamma", "Gamma"), # distribuciones a priori
+                           mat_phi = matrix(c(1, 3, 2, 1.2), ncol = 2),
+                           generation_size = 50, 
+                           max_num_cp = 20,
+                           show_progress_bar = TRUE, ...) {
+  obj <- seg_basket(
     x, 
     algorithm = "GeneticBMDL", 
-    params = list(
+    seg_params = list(
       num_generations = num_generations, 
       nhpp_dist = nhpp_dist, 
       vec_dist_a_priori = vec_dist_a_priori,
@@ -80,12 +80,12 @@ segment_taimal <- function(x,
   obj$mat_cp <- sim_k_cp_BMDL(x, generation_size)
   class(obj) <- c("cpt_gbmdl", class(obj))
   
-  pb <- utils::txtProgressBar(min = 1, max = obj$params$num_generations, style = 3, width = 60)
+  pb <- utils::txtProgressBar(min = 1, max = obj$seg_params$num_generations, style = 3, width = 60)
 #  graphics::par(mfrow = c(2, 1), mar = c(1, 4, 2, 2))
   
   best_cpts <- list()
   
-  for (i in 1:obj$params$num_generations) {
+  for (i in 1:obj$seg_params$num_generations) {
 
     this_generation <- obj$mat_cp |>
       mat_cp_2_list() |>
@@ -111,7 +111,7 @@ segment_taimal <- function(x,
   }
   close(pb)
 #  graphics::par(mfrow = c(1, 1))
-  obj$candidates <- best_cpts |>
+  obj$basket <- best_cpts |>
     dplyr::bind_rows()
 
   return(obj)

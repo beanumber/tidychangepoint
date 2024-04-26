@@ -2,38 +2,43 @@
 % Please edit documentation in R/pkg-wbs.R
 \name{wbs-generics}
 \alias{wbs-generics}
-\alias{glance.wbs}
-\alias{params.wbs}
+\alias{as.segmenter.wbs}
 \alias{as.ts.wbs}
 \alias{nobs.wbs}
+\alias{seg_params.wbs}
 \title{Compatibility layer for wbs}
 \usage{
-\method{glance}{wbs}(x, ...)
-
-\method{params}{wbs}(x, ...)
+\method{as.segmenter}{wbs}(object, ...)
 
 \method{as.ts}{wbs}(x, ...)
 
 \method{nobs}{wbs}(object, ...)
+
+\method{seg_params}{wbs}(x, ...)
 }
 \arguments{
-\item{x}{A \code{wbs} object returned by \code{\link[wbs:wbs]{wbs::wbs()}}}
+\item{object}{A \code{cpt} object.}
 
 \item{...}{arguments passed to methods}
 
-\item{object}{A \code{cpt} object.}
+\item{x}{A \code{wbs} object returned by \code{\link[wbs:wbs]{wbs::wbs()}}}
 }
 \description{
 Compatibility layer for wbs
 }
 \examples{
 cpts <- segment(DataCPSim, method = "wbs")
-class(cpts)
-y <- augment(cpts)
-class(y)
-y
-tidy(cpts)
-glance(cpts)
+x <- cpts$segmenter
+class(x)
+as.segmenter(x)
+as.ts(x) 
+changepoints(x)
+fitness(x)
+model_name(x)
+model_args(x)
+nobs(x)
+seg_params(x)
+
 cpts <- segment(DataCPSim, method = "wbs")
 as.ts(cpts)
 

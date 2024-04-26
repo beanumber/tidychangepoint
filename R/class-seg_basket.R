@@ -11,17 +11,17 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".data"))
 #' find the changepoints.
 #' @param ... currently ignored
 #' @examples
-#' seg <- seg_default(DataCPSim, cpt_list = list(c(365), c(330, 839)))
+#' seg <- seg_basket(DataCPSim, cpt_list = list(c(365), c(330, 839)))
 #' str(seg)
 #' as.ts(seg)
 #' changepoints(seg)
 #' fitness(seg)
 #' glance(seg)
 
-new_seg_default <- function(x = numeric(), 
+new_seg_basket <- function(x = numeric(), 
                             algorithm = NA, 
                             cpt_list = list(), 
-                            params = list(), 
+                            seg_params = list(), 
                             model_name = "meanshift_norm", 
                             penalty = "BIC", ...) {
   stopifnot(is.numeric(x))
@@ -29,67 +29,65 @@ new_seg_default <- function(x = numeric(),
     list(
       data = stats::as.ts(x),
       algorithm = algorithm,
-      candidates = cpt_list |>
+      basket = cpt_list |>
         evaluate_cpts(.data = stats::as.ts(x), model_fn = whomademe(model_name)),
-      params = params,
+      seg_params = seg_params,
       model_name = model_name,
       penalty = penalty
     ), 
-    class = "seg_default"
+    class = "seg_basket"
   )
 }
 
-#' @rdname new_seg_default
+#' @rdname new_seg_basket
 #' @export
 
-validate_seg_default <- function(x) {
+validate_seg_basket <- function(x) {
   if (!stats::is.ts(as.ts(x))) {
     stop("data attribute is not coercible into a ts object.")
   }
   x
 }
 
-#' @rdname new_seg_default
+#' @rdname new_seg_basket
 #' @export
 
-seg_default <- function(x, ...) {
-  obj <- new_seg_default(x, ...)
-  validate_seg_default(obj)
+seg_basket <- function(x, ...) {
+  obj <- new_seg_basket(x, ...)
+  validate_seg_basket(obj)
 }
 
-#' Methods for seg_default objects
-#' @name seg-default-generics
-#' @param x An `seg_default` object
-#' @param ... arguments passed to methods
+#' @rdname seg-basket-generics
 #' @export
-as.ts.seg_default <- function(x, ...) {
-  as.ts(x$data)
+as.segmenter.seg_basket <- function(object, ...) {
+  seg_cpt(
+    x = as.ts(object$data),
+    pkg = "tidychangepoint",
+    algorithm = object$algorithm,
+    changepoints = changepoints(object),
+    seg_params = list(object$seg_params),
+    model = object$model_name,
+    fitness = fitness(object)
+  )
 }
 
-#' @rdname seg-default-generics
-#' @param object A `seg_default` object
+#' @rdname seg-basket-generics
 #' @export
-nobs.seg_default <- function(object, ...) {
-  length(as.ts(object))
+as.ts.seg_basket <- function(x, ...) {
+  x$data
 }
 
-#' @rdname new_seg_default
-#' @export
-num_candidates <- function(x) {
-  nrow(x$candidates)
-}
-
-#' @rdname cpt-generics
+#' @rdname seg-basket-generics
 #' @export
 best_cpt <- function(x, ...) {
-  x$candidates |>
+  x$basket |>
     dplyr::arrange(.data[[x$penalty]]) |>
     utils::head(1)
 }
 
 #' @rdname changepoints
 #' @export
-changepoints.seg_default <- function(x, ...) {
+changepoints.seg_basket <- function(x, ...) {
   best_cpt(x, ...)|>
     dplyr::pull(changepoints) |>
     purrr::pluck(1) |>
@@ -98,8 +96,8 @@ changepoints.seg_default <- function(x, ...) {
 
 #' @rdname fitness
 #' @export
-fitness.seg_default <- function(object, ...) {
-  if (nrow(object$candidates) == 0) {
+fitness.seg_basket <- function(object, ...) {
+  if (nrow(object$basket) == 0) {
     out <- NA
   } else {
     out <- best_cpt(object, ...) |>
@@ -109,93 +107,70 @@ fitness.seg_default <- function(object, ...) {
   out
 }
 
-#' @rdname model_name
-#' @export
-model_name.seg_default <- function(object, ...) {
-  object$model_name
-}
-
-#' @rdname model_args
-#' @export
-model_args.seg_default <- function(object, ...) {
-  NA
-}
-
-#' @rdname new_seg_default
+#' @rdname new_seg_basket
 #' @param model_fn Name of the function to fit the model. 
 #' See, for examples, [fit_meanshift()].
 #' @export
-evaluate_cpts.seg_default <- function(x, model_fn, ...) {
-  evaluate_cpts(x$candidates, .data = as.ts(x), model_fn = whomademe(x), ...)
+evaluate_cpts.seg_basket <- function(x, ...) {
+  evaluate_cpts(x$basket, .data = as.ts(x), model_fn = whomademe(x), ...)
 }
 
-#' @rdname new_seg_default
+#' @rdname new_seg_basket
 #' @export
-evaluate_cpts.list <- function(x, model_fn, ...) {
+evaluate_cpts.list <- function(x, .data, model_fn, ...) {
   tibble::tibble(changepoints = x) |>
-    evaluate_cpts(model_fn = model_fn, ...)
+    evaluate_cpts(.data = .data, model_fn = model_fn, ...)
 }
 
-#' @rdname new_seg_default
+#' @rdname new_seg_basket
 #' @export
-evaluate_cpts.tbl_df <- function(x, model_fn, ...) {
-  args <- list(...)
-  if (!".data" %in% names(args)) {
-    stop("This method requires a .data argument")
-  } else {
-    ds <- args[[".data"]]
-  }
-  if (!stats::is.ts(as.ts(ds))) {
+evaluate_cpts.tbl_df <- function(x, .data, model_fn, ...) {
+  if (!stats::is.ts(as.ts(.data))) {
     stop(".data must be coercible into a time series")
   }
-  y <- x |>
-    dplyr::mutate(
-      model = purrr::map(changepoints, ~model_fn(x = as.ts(ds), tau = .x)),
-#      BMDL = purrr::map_dbl(nhpp, BMDL)
-    )
+  if (!inherits(model_fn, "fun_cpt")) {
+    stop("model_fn must be a fun_cpt function")
+  }
+  y <- x
+  y$model <- x$changepoints |>
+    purrr::map(model_fn, x = .data)
+#  WHY???????
+#  y <- x |>
+#    dplyr::mutate(
+#      model = purrr::map(changepoints, ~model_fn(x = .data, tau = .x))
+#    )
   ll <- y$model |>
     purrr::map(logLik)
   y$logLik <- as.numeric(ll)
-  out <- y |>
-    dplyr::mutate(
-      AIC = purrr::map_dbl(model, AIC),
-      BIC = purrr::map_dbl(model, BIC),
-      MBIC = purrr::map_dbl(model, MBIC),
-      MDL = purrr::map_dbl(model, MDL)
-    )  
+  y$AIC = purrr::map_dbl(y$model, AIC)
+  y$BIC = purrr::map_dbl(y$model, BIC)
+  y$MBIC = purrr::map_dbl(y$model, MBIC)
+  y$MDL = purrr::map_dbl(y$model, MDL)
+  # WHY ?????
+  # out <- y |>
+  #   dplyr::mutate(
+  #     AIC = purrr::map_dbl(model, AIC),
+  #     BIC = purrr::map_dbl(model, BIC),
+  #     MBIC = purrr::map_dbl(model, MBIC),
+  #     MDL = purrr::map_dbl(model, MDL)
+  #   )  
   if (model_name(model_fn) == "nhpp") {
-    out <- out |>
+    y <- y |>
       dplyr::mutate(BMDL = purrr::map_dbl(model, BMDL))
   } else {
-    out
+    y
   }
 }
 
-#' @rdname seg-default-generics
+#' @rdname model_name
 #' @export
-params.seg_default <- function(x, ...) {
-  x$params
+model_name.seg_basket <- function(object, ...) {
+  object$model_name
 }
 
-#' @rdname seg-default-generics
+#' @rdname seg-basket-generics
 #' @export
-glance.seg_default <- function(x, ...) {
-  tibble::tibble(
-    pkg = "tidychangepoint",
-    version = utils::packageVersion("tidychangepoint"),
-    algorithm = x$algorithm,
-    params = list(x$params),
-    num_cpts = length(changepoints(x)),
-    model = model_name(x),
-    criteria = names(fitness(x)),
-    fitness = fitness(x)
-  )
-}
-
-#' @rdname seg-default-generics
-#' @export
-
-plot.seg_default <- function(x, ...) {
+plot.seg_basket <- function(x, ...) {
   plot_history(x)
 }
 
@@ -205,7 +180,7 @@ plot.seg_default <- function(x, ...) {
 #' x <- segment(DataCPSim, method = "random", num_generations = 5)
 #' diagnose(x)
 #' diagnose(x$segmenter)
-diagnose.seg_default <- function(x, ...) {
+diagnose.seg_basket <- function(x, ...) {
   patchwork::wrap_plots(
     plot_best_chromosome(x),
     plot_cpt_repeated(x),
@@ -213,8 +188,8 @@ diagnose.seg_default <- function(x, ...) {
   )
 }
 
-#' Plot seg_default information
-#' @param x A `seg_default` object
+#' Plot seg_basket information
+#' @param x A `seg_basket` object
 #' @param ... currently ignored
 #' @export
 #' @examples
@@ -232,7 +207,7 @@ plot_history <- function(x, ...) {
     value = c(fitness(x), vals)
   )
   
-  seg <- x$candidates |>
+  seg <- x$basket |>
     dplyr::mutate(
       num_generation = dplyr::row_number()
     )
@@ -265,7 +240,7 @@ plot_history <- function(x, ...) {
 #' x <- segment(DataCPSim, method = "random", num_generations = 10)
 #' plot_best_chromosome(x$segmenter)
 plot_best_chromosome <- function(x) {
-  d <- x$candidates |> 
+  d <- x$basket |> 
     dplyr::mutate(
       num_generation = dplyr::row_number(),
       cpt_length = purrr::map_int(changepoints, length)
@@ -291,15 +266,15 @@ plot_best_chromosome <- function(x) {
 }
 
 #' @rdname plot_history
-#' @param i index of candidates to show
+#' @param i index of basket to show
 #' @export
 #' @examples
 #' x <- segment(DataCPSim, method = "random", k = 10)
 #' plot_cpt_repeated(x$segmenter)
 #' plot_cpt_repeated(x$segmenter, 5)
-plot_cpt_repeated <- function(x, i = nrow(x$candidates)) {
+plot_cpt_repeated <- function(x, i = nrow(x$basket)) {
   
-  x$candidates |>
+  x$basket |>
     dplyr::slice(1:i) |>
     dplyr::select(changepoints) |>
     tidyr::unnest(changepoints) |>

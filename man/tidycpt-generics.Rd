@@ -3,7 +3,6 @@
 \name{tidycpt-generics}
 \alias{tidycpt-generics}
 \alias{as.ts.tidycpt}
-\alias{nobs.tidycpt}
 \alias{augment.tidycpt}
 \alias{tidy.tidycpt}
 \alias{glance.tidycpt}
@@ -11,8 +10,6 @@
 \title{Generic functions for tidycpt objects}
 \usage{
 \method{as.ts}{tidycpt}(x, ...)
-
-\method{nobs}{tidycpt}(object, ...)
 
 \method{augment}{tidycpt}(x, ...)
 
@@ -27,8 +24,6 @@
 
 \item{...}{arguments passed to methods}
 
-\item{object}{A fitted model object.}
-
 \item{use_time_index}{Should the x-axis labels be the time indices? Or the
 time labels?}
 }
@@ -40,8 +35,6 @@ plot(segment(CET, method = "pelt"))
 plot(segment(CET, method = "pelt"), use_time_index = TRUE)
 }
 \seealso{
-\code{\link[stats:nobs]{stats::nobs()}}
-
 \code{\link[broom:reexports]{broom::augment()}}
 
 \code{\link[broom:reexports]{broom::tidy()}}

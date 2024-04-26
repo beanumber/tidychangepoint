@@ -50,7 +50,7 @@ Other model-fitting:
 \code{\link{fit_nhpp_region}()}
 
 Other modeling: 
-\code{\link{model_args.seg_default}()},
+\code{\link{model_args.seg_cpt}()},
 \code{\link{model_name.mod_cpt}()}
 }
 \concept{model-fitting}
