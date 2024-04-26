@@ -80,10 +80,6 @@ test_that("utils works", {
   expect_type(levels(z), "character")
   expect_length(levels(z), 2)
   
-  r <- random_cpts(DataCPSim, n = 5)
-  expect_type(r, "list")
-  expect_true(all(purrr::map(r, typeof) == "integer"))
-  
   ds <- data.frame(y = as.ts(CET), t = 1:length(CET))
   x <- tbl_coef(lm(y ~ 1, data = ds))
   expect_s3_class(x, "tbl_df")
@@ -146,16 +142,4 @@ test_that("penalties work", {
 
 test_that("modeling works", {
   x <- segment(CET, method = "ga-taimal", maxiter = 5)
-})
-
-test_that("performance comparison works", {
-  x <- segment(DataCPSim, method = "pelt")
-#  y <- segment(DataCPSim, method = "taimal", num_generations = 20)
-  y <- segment(DataCPSim, method = "ga-taimal", maxiter = 20)
-  z <- segment(DataCPSim, method = "ga-random", model_fn = fit_nhpp, penalty_fn = BMDL, popSize = 20)
-  
-  expect_gt(BMDL(fit_nhpp(DataCPSim, changepoints(x))), BMDL(y$model))
-  expect_gt(BMDL(z$model), BMDL(y$model))
-  
-  expect_s3_class(dplyr::bind_rows(glance(x), glance(y), glance(z)), "tbl_df")
 })

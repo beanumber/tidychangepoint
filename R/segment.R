@@ -127,9 +127,6 @@ segment.ts <- function(x, method = "null", ...) {
     seg <- segment_taimal(x, ...)
   }
   if (method == "random") {
-    seg <- segment_random(x, ...)
-  }
-  if (method == "ga-random") {
     seg <- segment_ga_random(x, ...)
   }
   if (method == "manual") {

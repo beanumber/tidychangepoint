@@ -155,8 +155,9 @@ evaluate_cpts.tbl_df <- function(x, .data, model_fn, ...) {
   #     MDL = purrr::map_dbl(model, MDL)
   #   )  
   if (model_name(model_fn) == "nhpp") {
-    y <- y |>
-      dplyr::mutate(BMDL = purrr::map_dbl(model, BMDL))
+    y$BMDL = purrr::map_dbl(y$model, BMDL)
+  #  y <- y |>
+  #      dplyr::mutate(BMDL = purrr::map_dbl(model, BMDL))
   } else {
     y
   }

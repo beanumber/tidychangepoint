@@ -2,6 +2,7 @@ test_that("gbmdl works", {
   x <- segment(DataCPSim, method = "taimal", num_generations = 3)
   expect_s3_class(x, "tidycpt")
   expect_s3_class(x$segmenter, "cpt_gbmdl")
+  expect_s3_class(x$segmenter, "seg_basket")
   expect_s3_class(as.ts(x), "ts")
   expect_s3_class(augment(x), "grouped_ts")
   expect_s3_class(tidy(x), "tbl_df")
@@ -9,6 +10,15 @@ test_that("gbmdl works", {
   expect_type(changepoints(x), "integer")
   expect_s3_class(plot(x), "gg")
 
+  expect_true(all(c("logLik", "AIC", "BIC", "MBIC", "MDL") %in% names(x$segmenter$basket)))
+  
+  expect_true(is_segmenter(x$segmenter))
+  expect_true(is_model(x$model))
+  
+  expect_s3_class(evaluate_cpts(x$segmenter), "tbl_df")
+  expect_s3_class(evaluate_cpts(list(), .data = DataCPSim, model_fn = fit_nhpp), "tbl_df")
+  expect_s3_class(evaluate_cpts(tibble::tibble(changepoints = list(826)), .data = DataCPSim, model_fn = fit_nhpp), "tbl_df")
+  
   expect_s3_class(logLik(x$model), "logLik")
   expect_equal(min(x$segmenter$basket$BMDL), BMDL(x$model))
 })

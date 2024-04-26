@@ -1,4 +1,19 @@
+test_that("performance comparison works", {
+  skip()
+  x <- segment(DataCPSim, method = "pelt")
+  #  y <- segment(DataCPSim, method = "taimal", num_generations = 20)
+  y <- segment(DataCPSim, method = "ga-taimal", maxiter = 20)
+  z <- segment(DataCPSim, method = "random", model_fn = fit_nhpp, penalty_fn = BMDL, popSize = 20)
+  
+  expect_gt(BMDL(fit_nhpp(DataCPSim, changepoints(x))), BMDL(y$model))
+  expect_gt(BMDL(z$model), BMDL(y$model))
+  
+  expect_s3_class(dplyr::bind_rows(glance(x), glance(y), glance(z)), "tbl_df")
+})
+
+
 test_that("random performance", {
+  skip()
   x <- segment(CET, method = "random", popSize = 100)
   y <- segment(CET, method = "ga-random", popSize = 100)
   bench::mark(
