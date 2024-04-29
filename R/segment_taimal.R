@@ -228,7 +228,7 @@ mata_k_tau_volado <- function(mat_cp) {
 #'   0 (de no mutar), probabilidad 0.2 de mutar 1,, probabilidad 0.2 de mutar 2,
 #'   y, probabilidad 0.1 de mutar 3.
 #' @param dist_extremos distancia entre el primer los puntos de cambio v_0 y v_1
-#'   al igual que entre v_m y v_{m+1}; distancia minima que debe de haber de un
+#'   al igual que entre v_m y v_\{m+1\}; distancia minima que debe de haber de un
 #'   punto de cambio y los valores 1 y T, donde T es la longitud total de la
 #'   serie
 #' @param min_num_cpts es la cota inferior del número de puntos de cambio

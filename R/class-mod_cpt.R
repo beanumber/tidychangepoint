@@ -1,4 +1,4 @@
-globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".fitted"))
+globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".fitted", ".resid"))
 
 #' Base class for changepoint models
 #' @export
@@ -302,5 +302,24 @@ plot.mod_cpt <- function(x, ...) {
     ggplot2::labs(
       title = "Original times series",
       subtitle = paste("Mean value is", round(mean(as.ts(x), na.rm = TRUE), 2))
+    )
+}
+
+#' @rdname diagnose
+#' @export
+#' @examples
+#' diagnose(fit_meanshift_norm(CET, tau = 330))
+diagnose.mod_cpt <- function(x, ...) {
+  ggplot2::ggplot(
+    data = augment(x), 
+    ggplot2::aes(x = region, y = .resid)
+  ) +
+    ggplot2::geom_hline(yintercept = 0, linetype = 3) +
+    ggplot2::geom_violin(alpha = 0.5, ggplot2::aes(fill = region)) +
+    ggplot2::geom_rug(sides = "l") +
+    ggplot2::scale_x_discrete("Region defined by changepoint set") +
+    ggplot2::scale_y_continuous("Residual") + 
+    ggplot2::labs(
+      title = "Distribution of residuals by region"
     )
 }

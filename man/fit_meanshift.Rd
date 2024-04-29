@@ -31,6 +31,9 @@ Should match R distribution function naming conventions
 (e.g., "norm" for the Normal distribution, etc.)}
 
 \item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
+
+\item{object}{any object from which a log-likelihood value, or a
+   contribution to a log-likelihood value, can be extracted.}
 }
 \description{
 Fast implementation of meanshift model

@@ -83,7 +83,7 @@ segment.numeric <- function(x, method = "null", ...) {
 #' segment(DataCPSim, method = "pelt", penalty = "AIC")
 #' segment(DataCPSim, method = "binseg", penalty = "AIC")
 #' segment(DataCPSim, method = "segneigh", penalty = "BIC")
-#' segment(DataCPSim, method = "random", num_generations = 10)
+#' segment(DataCPSim, method = "random")
 #' segment(DataCPSim, method = "manual", tau = c(826))
 #' two_cpts <- segment(DataCPSim, method = "manual", tau = c(365, 826))
 #' plot(two_cpts)

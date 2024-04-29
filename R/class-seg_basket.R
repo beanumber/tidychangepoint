@@ -10,8 +10,6 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".data"))
 #' as.ts(seg)
 #' changepoints(seg)
 #' fitness(seg)
-#' glance(seg)
-
 new_seg_basket <- function(x = numeric(), 
                             algorithm = NA, 
                             cpt_list = list(), 
@@ -53,7 +51,7 @@ seg_basket <- function(x, ...) {
 
 #' Methods for seg_basket objects
 #' @name seg-basket-generics
-#' @object A `seg_basket` object
+#' @param object A `seg_basket` object
 #' @param ... arguments passed to methods
 #' @export
 as.segmenter.seg_basket <- function(object, ...) {
@@ -172,36 +170,14 @@ model_name.seg_basket <- function(object, ...) {
 #' @rdname seg-basket-generics
 #' @export
 plot.seg_basket <- function(x, ...) {
-  plot_history(x)
-}
-
-#' @rdname diagnose
-#' @export
-#' @examples
-#' x <- segment(DataCPSim, method = "random")
-#' diagnose(x)
-#' diagnose(x$segmenter)
-diagnose.seg_basket <- function(x, ...) {
-  patchwork::wrap_plots(
-    plot_best_chromosome(x),
-    plot_cpt_repeated(x),
-    ncol = 1
-  )
-}
-
-#' Plot seg_basket information
-#' @param x A `seg_basket` object
-#' @param ... currently ignored
-#' @export
-#' @examples
-#' x <- segment(DataCPSim, method = "taimal", num_generations = 3)
-#' plot_history(x$segmenter)
-plot_history <- function(x, ...) {
-  methods <- c("null", "single-best", "pelt")
+  methods <- c("null", "pelt")
+  penalty <- names(fitness(x))
+  f <- whomademe(x)
   vals <- methods |>
     purrr::map(~segment(as.ts(x), method = .x)) |>
-    purrr::map(~purrr::pluck(.x, "model")) |>
-    purrr::map_dbl(eval(parse(text = x$penalty)))
+    purrr::map(changepoints) |>
+    purrr::map(~f(as.ts(x), tau = .x)) |>
+    purrr::map_dbl(eval(parse(text = penalty)))
   
   guidelines <- tibble::tibble(
     method = c(class(x)[1], methods),
@@ -212,7 +188,7 @@ plot_history <- function(x, ...) {
     dplyr::mutate(
       num_generation = dplyr::row_number()
     )
-
+  
   best <- seg |>
     dplyr::arrange(.data[[x$penalty]]) |>
     utils::head(1)
@@ -234,11 +210,25 @@ plot_history <- function(x, ...) {
     )
 }
 
-
-#' @rdname plot_history
+#' @rdname diagnose
 #' @export
 #' @examples
-#' x <- segment(DataCPSim, method = "random")
+#' x <- segment(DataCPSim, method = "taimal", num_generations = 3)
+#' plot(x$segmenter)
+#' diagnose(x$segmenter)
+diagnose.seg_basket <- function(x, ...) {
+  patchwork::wrap_plots(
+    plot_best_chromosome(x),
+    plot_cpt_repeated(x),
+    ncol = 1
+  )
+}
+
+
+#' @rdname seg-basket-generics
+#' @export
+#' @examples
+#' x <- segment(DataCPSim, method = "taimal", num_generations = 3)
 #' plot_best_chromosome(x$segmenter)
 plot_best_chromosome <- function(x) {
   d <- x$basket |> 
@@ -266,11 +256,11 @@ plot_best_chromosome <- function(x) {
     )
 }
 
-#' @rdname plot_history
+#' @rdname seg-basket-generics
 #' @param i index of basket to show
 #' @export
 #' @examples
-#' x <- segment(DataCPSim, method = "random", k = 10)
+#' x <- segment(DataCPSim, method = "taimal", num_generations = 3)
 #' plot_cpt_repeated(x$segmenter)
 #' plot_cpt_repeated(x$segmenter, 5)
 plot_cpt_repeated <- function(x, i = nrow(x$basket)) {

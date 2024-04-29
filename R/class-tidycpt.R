@@ -13,7 +13,7 @@ changepoints.tidycpt <- function(x, ...) {
 #' @rdname changepoints
 #' @export
 changepoints_labels <- function(x, ...) {
-  if (length(x$time_index) == nobs(x)) {
+  if (length(x$time_index) == length(as.ts(x))) {
     x$time_index[changepoints(x)]
   } else {
     changepoints(x$segmenter)
@@ -120,7 +120,7 @@ plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
   if (use_time_index) {
     my_labels <- function(t) {
       n <- length(t)
-      indices <- 1:nobs(x)
+      indices <- 1:nobs(x$model)
       good <- t %in% indices
       out <- x$time_index[ifelse(good, t, NA)] |>
         as.character()
@@ -141,9 +141,8 @@ plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
 #' diagnose(segment(DataCPSim, method = "pelt"))
 #' diagnose(segment(test_set()))
 #' diagnose(segment(test_set(n = 2, sd = 4), method = "pelt"))
-#' 
 diagnose.tidycpt <- function(x, ...) {
-  patchwork::wrap_plots(plot(x), plot(x$model), ncol = 1)
+  patchwork::wrap_plots(plot(x), diagnose(x$model), ncol = 1)
 }
 
 #' Obtain a descriptive filename for a tidycpt object

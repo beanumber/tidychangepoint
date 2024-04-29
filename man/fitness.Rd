@@ -46,7 +46,7 @@ fitness(x)
 Other tidychangepoint-generics: 
 \code{\link{as.segmenter}()},
 \code{\link{changepoints.mod_cpt}()},
-\code{\link{diagnose.seg_basket}()},
+\code{\link{diagnose.mod_cpt}()},
 \code{\link{exceedances}()}
 }
 \concept{tidychangepoint-generics}

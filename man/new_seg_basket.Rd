@@ -62,5 +62,4 @@ str(seg)
 as.ts(seg)
 changepoints(seg)
 fitness(seg)
-glance(seg)
 }

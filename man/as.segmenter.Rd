@@ -17,7 +17,7 @@ Convert a wild-caught segmenter object into a \code{segmenter} object
 \seealso{
 Other tidychangepoint-generics: 
 \code{\link{changepoints.mod_cpt}()},
-\code{\link{diagnose.seg_basket}()},
+\code{\link{diagnose.mod_cpt}()},
 \code{\link{exceedances}()},
 \code{\link{fitness.seg_basket}()}
 }

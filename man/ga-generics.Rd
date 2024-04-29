@@ -42,6 +42,5 @@ cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
 as.ts(cpts)
 
 cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
-nobs(cpts)
-
+nobs(cpts$segmenter)
 }

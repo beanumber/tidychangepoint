@@ -60,13 +60,13 @@ changepoints(cpts$segmenter)
 
 Other tidychangepoint-generics: 
 \code{\link{as.segmenter}()},
-\code{\link{diagnose.seg_basket}()},
+\code{\link{diagnose.mod_cpt}()},
 \code{\link{exceedances}()},
 \code{\link{fitness.seg_basket}()}
 
 Other tidychangepoint-generics: 
 \code{\link{as.segmenter}()},
-\code{\link{diagnose.seg_basket}()},
+\code{\link{diagnose.mod_cpt}()},
 \code{\link{exceedances}()},
 \code{\link{fitness.seg_basket}()}
 }

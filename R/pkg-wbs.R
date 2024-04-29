@@ -67,8 +67,7 @@ fitness.wbs <- function(object, ...) {
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "wbs")
-#' nobs(cpts)
-#' 
+#' nobs(cpts$segmenter)
 nobs.wbs <- function(object, ...) {
   length(as.ts(object))
 }

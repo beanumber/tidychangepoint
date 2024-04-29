@@ -6,6 +6,8 @@
 \alias{as.ts.seg_basket}
 \alias{best_cpt}
 \alias{plot.seg_basket}
+\alias{plot_best_chromosome}
+\alias{plot_cpt_repeated}
 \title{Methods for seg_basket objects}
 \usage{
 \method{as.segmenter}{seg_basket}(object, ...)
@@ -15,7 +17,27 @@
 best_cpt(x, ...)
 
 \method{plot}{seg_basket}(x, ...)
+
+plot_best_chromosome(x)
+
+plot_cpt_repeated(x, i = nrow(x$basket))
+}
+\arguments{
+\item{object}{A \code{seg_basket} object}
+
+\item{...}{arguments passed to methods}
+
+\item{x}{A \code{seg_basket} object}
+
+\item{i}{index of basket to show}
 }
 \description{
 Methods for seg_basket objects
+}
+\examples{
+x <- segment(DataCPSim, method = "taimal", num_generations = 3)
+plot_best_chromosome(x$segmenter)
+x <- segment(DataCPSim, method = "taimal", num_generations = 3)
+plot_cpt_repeated(x$segmenter)
+plot_cpt_repeated(x$segmenter, 5)
 }

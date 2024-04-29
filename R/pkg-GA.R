@@ -1,3 +1,4 @@
+globalVariables(c("median", "q1", "q3"))
 #' Compatibility layer for GA
 #' @name ga-generics
 #' @param x A `GA` object returned by [GA::ga()]
@@ -76,11 +77,71 @@ model_args.ga <- function(object, ...) {
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
-#' nobs(cpts)
-#' 
+#' nobs(cpts$segmenter)
 nobs.ga <- function(object, ...) {
   length(as.ts(object))
 }
+
+#' Plot GA information
+#' @param x A `tidyga` object
+#' @param ... currently ignored
+#' @export
+#' @examples
+#' x <- segment(DataCPSim, method = "ga-taimal", maxiter = 5)
+#' plot(x$segmenter)
+plot.tidyga <- function(x, ...) {
+  methods <- c("null", "pelt")
+  penalty <- names(fitness(x))
+  f <- whomademe(x)
+  vals <- methods |>
+    purrr::map(~segment(as.ts(x), method = .x)) |>
+    purrr::map(changepoints) |>
+    purrr::map(~f(as.ts(x), tau = .x)) |>
+    purrr::map_dbl(eval(parse(text = penalty)))
+  
+  guidelines <- tibble::tibble(
+    method = c(class(x)[1], methods),
+    value = c(fitness(x), vals)
+  )
+  
+  seg <- x@summary |>
+    tibble::as_tibble() |>
+    dplyr::mutate(
+      num_generation = dplyr::row_number()
+    )
+  
+  best <- seg |>
+    dplyr::arrange(dplyr::desc(max), num_generation) |>
+    utils::head(1)
+
+  ggplot2::ggplot(data = seg, ggplot2::aes(x = num_generation, y = -max)) +
+    ggplot2::geom_hline(
+      data = guidelines, 
+      ggplot2::aes(yintercept = value, color = method), 
+      linetype = 2
+    ) +
+    ggplot2::geom_errorbar(
+      ggplot2::aes(
+        y = -median,
+        ymin = -q3, ymax = -q1,
+        group = num_generation, width = 0.2
+      )
+    ) +
+    ggplot2::geom_line(color = "blue") +
+    ggplot2::geom_point(color = "blue") +
+    ggplot2::geom_point(ggplot2::aes(y = -mean), size = 2) +
+    ggplot2::geom_vline(xintercept = best$num_generation, linetype = 3) + 
+    ggplot2::geom_point(data = best, color = "red") +
+#    ggplot2::geom_smooth(se = 0) + 
+    ggplot2::scale_y_continuous(penalty) +
+    ggplot2::scale_x_continuous("Generation of Candidate Changepoints") +
+    ggplot2::labs(
+      title = "Evolution of Objective Function values",
+      subtitle = "Comparison with other known algorithms"
+    )
+}
+
+
 
 #' @rdname ga-generics
 #' @export

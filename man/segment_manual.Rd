@@ -23,8 +23,7 @@ Manually segment a times series
 Randomly select candidate changepoint sets
 }
 \examples{
-x <- segment(CET, method = "ga-random")
-
+x <- segment(CET, method = "random")
 segment_manual(CET, tau = c(84, 330))
 segment_manual(CET, tau = NULL)
 

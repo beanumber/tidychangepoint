@@ -43,6 +43,5 @@ cpts <- segment(DataCPSim, method = "wbs")
 as.ts(cpts)
 
 cpts <- segment(DataCPSim, method = "wbs")
-nobs(cpts)
-
+nobs(cpts$segmenter)
 }

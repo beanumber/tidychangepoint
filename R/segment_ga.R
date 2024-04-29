@@ -117,8 +117,7 @@ segment_ga_taimal <- function(x, ...) {
 #' @seealso [build_gabin_population()]
 #' @export
 #' @examples
-#' x <- segment(CET, method = "ga-random")
-#' 
+#' x <- segment(CET, method = "random")
 segment_ga_random <- function(x, ...) {
   segment_ga(
     x, population = log_gabin_population(x), maxiter = 1, ...

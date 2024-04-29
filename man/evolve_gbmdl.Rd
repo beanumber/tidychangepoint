@@ -76,7 +76,7 @@ numero l; eg si vale c(.5,.2,.2,.1) se tiene una probabilidad 0.5 de mutar
 y, probabilidad 0.1 de mutar 3.}
 
 \item{dist_extremos}{distancia entre el primer los puntos de cambio v_0 y v_1
-al igual que entre v_m y v_{m+1}; distancia minima que debe de haber de un
+al igual que entre v_m y v_\{m+1\}; distancia minima que debe de haber de un
 punto de cambio y los valores 1 y T, donde T es la longitud total de la
 serie}
 
