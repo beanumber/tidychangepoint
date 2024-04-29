@@ -5,12 +5,13 @@
 \alias{mlb_hrs}
 \title{Differences between leagues in Major League Baseball}
 \format{
-An object of class \code{tbl_ts} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 98 rows and 2 columns.
+An object of class \code{ts} with 98 rows and 1 columns.
 }
 \usage{
 mlb_hrs
 }
 \description{
-Differences between leagues in Major League Baseball
+The difference in home runs hit per plate appearance between the
+American League and the National League from 1925 to 2022.
 }
 \keyword{datasets}

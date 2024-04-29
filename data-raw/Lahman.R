@@ -20,6 +20,7 @@ mlb_hrs <- Batting |>
   group_by(yearID) |>
   arrange(yearID, lgID) |>
   summarize(hr_rate_diff = diff(hr_rate)) |>
-  tsibble::as_tsibble(index = yearID)
+  pull(hr_rate_diff) |>
+  ts(start = 1925, frequency = 1)
   
 usethis::use_data(mlb_hrs, overwrite = TRUE, compress = "xz")

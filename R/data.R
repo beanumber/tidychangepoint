@@ -83,4 +83,7 @@
 
 #' Differences between leagues in Major League Baseball
 #' @docType data
+#' @description
+#' The difference in home runs hit per plate appearance between the 
+#' American League and the National League from 1925 to 2022. 
 "mlb_hrs"
