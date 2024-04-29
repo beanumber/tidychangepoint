@@ -34,7 +34,7 @@ Each data point is chosen uniformly at random with probability equal to $\ln{N}$
 trend_wn <- CET |>
   segment(
     method = "ga", 
-    model_fn = fit_meanshift, 
+    model_fn = fit_meanshift_norm, 
     penalty_fn = BIC, 
     population = log_gabin_population(CET),
     popSize = 200, 
