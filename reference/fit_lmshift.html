@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9033</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9035</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,7 +92,8 @@ fit. Passed to <code><a href="https://rdrr.io/r/stats/poly.html" class="external
     <div class="dont-index"><p>Other model-fitting: 
 <code><a href="fit_meanshift.html">fit_meanshift</a>()</code>,
 <code><a href="fit_meanvar.html">fit_meanvar</a>()</code>,
-<code><a href="fit_nhpp.html">fit_nhpp_region</a>()</code></p></div>
+<code><a href="fit_nhpp.html">fit_nhpp_region</a>()</code>,
+<code><a href="new_fun_cpt.html">new_fun_cpt</a>()</code></p></div>
     </div>
 
     <div class="section level2">
@@ -121,17 +122,17 @@ fit. Passed to <code><a href="https://rdrr.io/r/stats/poly.html" class="external
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.0.… meanshif… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.566  -<span style="color: #BB0000;">307.</span>  632.  667.  660.  676.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.0.… meanshif… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.566  -<span style="color: #BB0000;">308.</span>  634.  669.  661.  678.</span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="fu">fit_lmshift_ar1</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="va">ids</span>, deg_poly <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.0.… trendshi… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.538  -<span style="color: #BB0000;">289.</span>  603.  654.  623.  656.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.0.… trendshi… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.538  -<span style="color: #BB0000;">289.</span>  605.  655.  625.  658.</span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="fu">fit_lmshift_ar1</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="va">ids</span>, deg_poly <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.0.… splinesh… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.537  -<span style="color: #BB0000;">288.</span>  609.  675.  621.  670.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.0.… splinesh… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.537  -<span style="color: #BB0000;">288.</span>  611.  677.  623.  672.</span>
 <span class="r-in"><span><span class="fu">fit_lmshift</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time Series:</span>
@@ -281,7 +282,7 @@ fit. Passed to <code><a href="https://rdrr.io/r/stats/poly.html" class="external
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "null"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
 <span class="r-in"><span><span class="fu">fit_lmshift</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time Series:</span>
@@ -431,7 +432,7 @@ fit. Passed to <code><a href="https://rdrr.io/r/stats/poly.html" class="external
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "null"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
 <span class="r-in"><span><span class="fu">fit_lmshift</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="fl">362</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time Series:</span>
@@ -581,7 +582,7 @@ fit. Passed to <code><a href="https://rdrr.io/r/stats/poly.html" class="external
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "null"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
 <span class="r-in"><span><span class="fu">fit_lmshift</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="fl">363</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time Series:</span>
@@ -731,7 +732,7 @@ fit. Passed to <code><a href="https://rdrr.io/r/stats/poly.html" class="external
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "null"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
 <span class="r-in"><span><span class="fu">fit_lmshift</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="cn">NA</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time Series:</span>
@@ -881,7 +882,7 @@ fit. Passed to <code><a href="https://rdrr.io/r/stats/poly.html" class="external
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "null"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
 <span class="r-in"><span><span class="fu">fit_lmshift</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time Series:</span>
@@ -1031,7 +1032,7 @@ fit. Passed to <code><a href="https://rdrr.io/r/stats/poly.html" class="external
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "null"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
 <span class="r-in"><span><span class="fu">fit_lmshift</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">42</span>, <span class="fl">42</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Time Series:</span>
@@ -1182,7 +1183,7 @@ fit. Passed to <code><a href="https://rdrr.io/r/stats/poly.html" class="external
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "meanshift"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_default"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>

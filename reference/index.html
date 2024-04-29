@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9033</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9035</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,6 +87,11 @@
         <dd>Convert a segmenter to a model object</dd>
       </dl><dl><dt>
           
+          <code><a href="as.segmenter.html">as.segmenter()</a></code> 
+        </dt>
+        <dd>Convert a wild-caught segmenter object into a <code>segmenter</code> object</dd>
+      </dl><dl><dt>
+          
           <code><a href="bogota_pm.html">bogota_pm</a></code> 
         </dt>
         <dd>Particulate matter in Bogotá, Colombia</dd>
@@ -97,7 +102,7 @@
         <dd>Build an initial population set for GA algorithms</dd>
       </dl><dl><dt>
           
-          <code><a href="changepoints.html">changepoints_labels()</a></code> <code><a href="changepoints.html">changepoints()</a></code> <code><a href="changepoints.html">params()</a></code> 
+          <code><a href="changepoints.html">changepoints_labels()</a></code> <code><a href="changepoints.html">changepoints()</a></code> <code><a href="changepoints.html">seg_params()</a></code> 
         </dt>
         <dd>Extract changepoints</dd>
       </dl><dl><dt>
@@ -107,7 +112,7 @@
         <dd>Compare various models for a give changepoint set</dd>
       </dl><dl><dt>
           
-          <code><a href="cpt-generics.html">best_cpt()</a></code> <code><a href="cpt-generics.html">glance(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">params(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">as.ts(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">nobs(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">logLik(<i>&lt;cpt&gt;</i>)</a></code> 
+          <code><a href="cpt-generics.html">as.segmenter(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">as.ts(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">logLik(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">nobs(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">seg_params(<i>&lt;cpt&gt;</i>)</a></code> 
         </dt>
         <dd>Compatibility layer for changepoint</dd>
       </dl><dl><dt>
@@ -115,11 +120,6 @@
           <code><a href="diagnose.html">diagnose()</a></code> 
         </dt>
         <dd>Diagnose the fit of a segmented time series</dd>
-      </dl><dl><dt>
-          
-          <code><a href="evolve_gbmdl.html">evolve_gbmdl()</a></code> <code><a href="evolve_gbmdl.html">junta_1_puntos_cambio()</a></code> <code><a href="evolve_gbmdl.html">junta_k_puntos_cambio()</a></code> <code><a href="evolve_gbmdl.html">mata_1_tau_volado()</a></code> <code><a href="evolve_gbmdl.html">mata_k_tau_volado()</a></code> <code><a href="evolve_gbmdl.html">muta_1_cp_BMDL()</a></code> <code><a href="evolve_gbmdl.html">muta_k_cp_BMDL()</a></code> <code><a href="evolve_gbmdl.html">sim_1_cp_BMDL()</a></code> <code><a href="evolve_gbmdl.html">sim_k_cp_BMDL()</a></code> <code><a href="evolve_gbmdl.html">probs_vec_MDL()</a></code> <code><a href="evolve_gbmdl.html">selec_k_pares_de_padres()</a></code> <code><a href="evolve_gbmdl.html">chromo2tau()</a></code> <code><a href="evolve_gbmdl.html">mat_cp_2_list()</a></code> 
-        </dt>
-        <dd>Generate a list of candidate changepoints using a genetic algorithm</dd>
       </dl><dl><dt>
           
           <code><a href="exceedances.html">exceedances()</a></code> 
@@ -137,7 +137,7 @@
         <dd>Regression-based model fitting</dd>
       </dl><dl><dt>
           
-          <code><a href="fit_meanshift.html">fit_meanshift()</a></code> <code><a href="fit_meanshift.html">fit_meanshift2()</a></code> <code><a href="fit_meanshift.html">fit_meanshift_ar1()</a></code> 
+          <code><a href="fit_meanshift.html">fit_meanshift()</a></code> <code><a href="fit_meanshift.html">fit_meanshift2()</a></code> <code><a href="fit_meanshift.html">fit_meanshift_norm()</a></code> <code><a href="fit_meanshift.html">fit_meanshift_lnorm()</a></code> <code><a href="fit_meanshift.html">logLik(<i>&lt;meanshift_lnorm&gt;</i>)</a></code> <code><a href="fit_meanshift.html">fit_meanshift_norm_ar1()</a></code> 
         </dt>
         <dd>Fast implementation of meanshift model</dd>
       </dl><dl><dt>
@@ -157,7 +157,7 @@
         <dd>Retrieve the optimal fitness (or objective function) value used by an algorithm</dd>
       </dl><dl><dt>
           
-          <code><a href="ga-generics.html">glance(<i>&lt;ga&gt;</i>)</a></code> <code><a href="ga-generics.html">params(<i>&lt;ga&gt;</i>)</a></code> <code><a href="ga-generics.html">as.ts(<i>&lt;ga&gt;</i>)</a></code> <code><a href="ga-generics.html">nobs(<i>&lt;ga&gt;</i>)</a></code> 
+          <code><a href="ga-generics.html">as.segmenter(<i>&lt;ga&gt;</i>)</a></code> <code><a href="ga-generics.html">as.ts(<i>&lt;ga&gt;</i>)</a></code> <code><a href="ga-generics.html">nobs(<i>&lt;ga&gt;</i>)</a></code> <code><a href="ga-generics.html">seg_params(<i>&lt;ga&gt;</i>)</a></code> 
         </dt>
         <dd>Compatibility layer for GA</dd>
       </dl><dl><dt>
@@ -182,9 +182,9 @@
         <dd>Differences between leagues in Major League Baseball</dd>
       </dl><dl><dt>
           
-          <code><a href="mod_default-generics.html">as.ts(<i>&lt;mod_default&gt;</i>)</a></code> <code><a href="mod_default-generics.html">nobs(<i>&lt;mod_default&gt;</i>)</a></code> <code><a href="mod_default-generics.html">logLik(<i>&lt;mod_default&gt;</i>)</a></code> <code><a href="mod_default-generics.html">fitted(<i>&lt;mod_default&gt;</i>)</a></code> <code><a href="mod_default-generics.html">residuals(<i>&lt;mod_default&gt;</i>)</a></code> <code><a href="mod_default-generics.html">model_variance()</a></code> <code><a href="mod_default-generics.html">coef(<i>&lt;mod_default&gt;</i>)</a></code> <code><a href="mod_default-generics.html">augment(<i>&lt;mod_default&gt;</i>)</a></code> <code><a href="mod_default-generics.html">tidy(<i>&lt;mod_default&gt;</i>)</a></code> <code><a href="mod_default-generics.html">glance(<i>&lt;mod_default&gt;</i>)</a></code> <code><a href="mod_default-generics.html">plot(<i>&lt;mod_default&gt;</i>)</a></code> 
+          <code><a href="mod_cpt-generics.html">as.ts(<i>&lt;mod_cpt&gt;</i>)</a></code> <code><a href="mod_cpt-generics.html">nobs(<i>&lt;mod_cpt&gt;</i>)</a></code> <code><a href="mod_cpt-generics.html">logLik(<i>&lt;mod_cpt&gt;</i>)</a></code> <code><a href="mod_cpt-generics.html">fitted(<i>&lt;mod_cpt&gt;</i>)</a></code> <code><a href="mod_cpt-generics.html">residuals(<i>&lt;mod_cpt&gt;</i>)</a></code> <code><a href="mod_cpt-generics.html">model_variance()</a></code> <code><a href="mod_cpt-generics.html">coef(<i>&lt;mod_cpt&gt;</i>)</a></code> <code><a href="mod_cpt-generics.html">augment(<i>&lt;mod_cpt&gt;</i>)</a></code> <code><a href="mod_cpt-generics.html">tidy(<i>&lt;mod_cpt&gt;</i>)</a></code> <code><a href="mod_cpt-generics.html">glance(<i>&lt;mod_cpt&gt;</i>)</a></code> <code><a href="mod_cpt-generics.html">plot(<i>&lt;mod_cpt&gt;</i>)</a></code> 
         </dt>
-        <dd>Methods for mod_default objects</dd>
+        <dd>Methods for mod_cpt objects</dd>
       </dl><dl><dt>
           
           <code><a href="model_args.html">model_args()</a></code> 
@@ -192,34 +192,49 @@
         <dd>Retrieve the arguments that a model-fitting function used</dd>
       </dl><dl><dt>
           
-          <code><a href="model_name.html">model_name()</a></code> <code><a href="model_name.html">model_fit()</a></code> 
+          <code><a href="model_name.html">model_name()</a></code> 
         </dt>
         <dd>Retrieve the name of the model that a segmenter or model used</dd>
       </dl><dl><dt>
           
-          <code><a href="new_mod_default.html">new_mod_default()</a></code> <code><a href="new_mod_default.html">validate_mod_default()</a></code> <code><a href="new_mod_default.html">mod_default()</a></code> 
+          <code><a href="new_fun_cpt.html">new_fun_cpt()</a></code> <code><a href="new_fun_cpt.html">validate_fun_cpt()</a></code> <code><a href="new_fun_cpt.html">fun_cpt()</a></code> <code><a href="new_fun_cpt.html">whomademe()</a></code> 
+        </dt>
+        <dd>Class for model-fitting functions</dd>
+      </dl><dl><dt>
+          
+          <code><a href="new_mod_cpt.html">new_mod_cpt()</a></code> <code><a href="new_mod_cpt.html">validate_mod_cpt()</a></code> <code><a href="new_mod_cpt.html">mod_cpt()</a></code> 
         </dt>
         <dd>Base class for changepoint models</dd>
       </dl><dl><dt>
           
-          <code><a href="new_seg_default.html">new_seg_default()</a></code> <code><a href="new_seg_default.html">validate_seg_default()</a></code> <code><a href="new_seg_default.html">seg_default()</a></code> <code><a href="new_seg_default.html">num_candidates()</a></code> <code><a href="new_seg_default.html">evaluate_cpts()</a></code> 
+          <code><a href="new_seg_basket.html">new_seg_basket()</a></code> <code><a href="new_seg_basket.html">validate_seg_basket()</a></code> <code><a href="new_seg_basket.html">seg_basket()</a></code> <code><a href="new_seg_basket.html">evaluate_cpts()</a></code> 
         </dt>
         <dd>Default class for candidate changepoint sets</dd>
       </dl><dl><dt>
           
-          <code><a href="pad_tau.html">pad_tau()</a></code> <code><a href="pad_tau.html">unpad_tau()</a></code> <code><a href="pad_tau.html">is_valid_tau()</a></code> <code><a href="pad_tau.html">validate_tau()</a></code> <code><a href="pad_tau.html">binary2tau()</a></code> <code><a href="pad_tau.html">tau2binary()</a></code> <code><a href="pad_tau.html">tau2time()</a></code> <code><a href="pad_tau.html">time2tau()</a></code> <code><a href="pad_tau.html">cut_inclusive()</a></code> <code><a href="pad_tau.html">split_by_tau()</a></code> <code><a href="pad_tau.html">regions_by_tau()</a></code> <code><a href="pad_tau.html">deg_free()</a></code> <code><a href="pad_tau.html">as_year()</a></code> <code><a href="pad_tau.html">whoami()</a></code> 
+          <code><a href="new_seg_cpt.html">new_seg_cpt()</a></code> <code><a href="new_seg_cpt.html">validate_seg_cpt()</a></code> <code><a href="new_seg_cpt.html">seg_cpt()</a></code> 
+        </dt>
+        <dd>Base class for segmenters</dd>
+      </dl><dl><dt>
+          
+          <code><a href="pad_tau.html">pad_tau()</a></code> <code><a href="pad_tau.html">unpad_tau()</a></code> <code><a href="pad_tau.html">is_valid_tau()</a></code> <code><a href="pad_tau.html">validate_tau()</a></code> <code><a href="pad_tau.html">binary2tau()</a></code> <code><a href="pad_tau.html">tau2binary()</a></code> <code><a href="pad_tau.html">tau2time()</a></code> <code><a href="pad_tau.html">time2tau()</a></code> <code><a href="pad_tau.html">cut_inclusive()</a></code> <code><a href="pad_tau.html">split_by_tau()</a></code> <code><a href="pad_tau.html">regions_by_tau()</a></code> <code><a href="pad_tau.html">deg_free()</a></code> <code><a href="pad_tau.html">as_year()</a></code> 
         </dt>
         <dd>Utility functions</dd>
       </dl><dl><dt>
           
-          <code><a href="plot_history.html">plot_history()</a></code> <code><a href="plot_history.html">plot_best_chromosome()</a></code> <code><a href="plot_history.html">plot_cpt_repeated()</a></code> 
+          <code><a href="plot.tidyga.html">plot(<i>&lt;tidyga&gt;</i>)</a></code> 
         </dt>
-        <dd>Plot seg_default information</dd>
+        <dd>Plot GA information</dd>
       </dl><dl><dt>
           
-          <code><a href="seg-default-generics.html">as.ts(<i>&lt;seg_default&gt;</i>)</a></code> <code><a href="seg-default-generics.html">nobs(<i>&lt;seg_default&gt;</i>)</a></code> <code><a href="seg-default-generics.html">params(<i>&lt;seg_default&gt;</i>)</a></code> <code><a href="seg-default-generics.html">glance(<i>&lt;seg_default&gt;</i>)</a></code> <code><a href="seg-default-generics.html">plot(<i>&lt;seg_default&gt;</i>)</a></code> 
+          <code><a href="seg-basket-generics.html">as.segmenter(<i>&lt;seg_basket&gt;</i>)</a></code> <code><a href="seg-basket-generics.html">as.ts(<i>&lt;seg_basket&gt;</i>)</a></code> <code><a href="seg-basket-generics.html">best_cpt()</a></code> <code><a href="seg-basket-generics.html">plot(<i>&lt;seg_basket&gt;</i>)</a></code> <code><a href="seg-basket-generics.html">plot_best_chromosome()</a></code> <code><a href="seg-basket-generics.html">plot_cpt_repeated()</a></code> 
         </dt>
-        <dd>Methods for seg_default objects</dd>
+        <dd>Methods for seg_basket objects</dd>
+      </dl><dl><dt>
+          
+          <code><a href="seg-cpt-generics.html">as.segmenter(<i>&lt;seg_cpt&gt;</i>)</a></code> <code><a href="seg-cpt-generics.html">as.ts(<i>&lt;seg_cpt&gt;</i>)</a></code> <code><a href="seg-cpt-generics.html">glance(<i>&lt;seg_cpt&gt;</i>)</a></code> <code><a href="seg-cpt-generics.html">nobs(<i>&lt;seg_cpt&gt;</i>)</a></code> <code><a href="seg-cpt-generics.html">seg_params(<i>&lt;seg_cpt&gt;</i>)</a></code> 
+        </dt>
+        <dd>Methods for seg_cpt objects</dd>
       </dl><dl><dt>
           
           <code><a href="segment.html">segment()</a></code> 
@@ -232,14 +247,9 @@
         <dd>Segment a time series using a genetic algorithm</dd>
       </dl><dl><dt>
           
-          <code><a href="segment_random.html">segment_ga_random()</a></code> <code><a href="segment_random.html">segment_random()</a></code> <code><a href="segment_random.html">random_cpts()</a></code> 
+          <code><a href="segment_manual.html">segment_ga_random()</a></code> <code><a href="segment_manual.html">segment_manual()</a></code> 
         </dt>
-        <dd>Segment a times series using randomly selected candidate changepoints</dd>
-      </dl><dl><dt>
-          
-          <code><a href="segment_taimal.html">segment_taimal()</a></code> 
-        </dt>
-        <dd>Algoritmo genético de Bayesian MDL a un paso</dd>
+        <dd>Manually segment a times series</dd>
       </dl><dl><dt>
           
           <code><a href="tbl_coef.html">tbl_coef()</a></code> 
@@ -252,7 +262,7 @@
         <dd>Simulate time series with known changepoint sets</dd>
       </dl><dl><dt>
           
-          <code><a href="tidycpt-generics.html">as.ts(<i>&lt;tidycpt&gt;</i>)</a></code> <code><a href="tidycpt-generics.html">nobs(<i>&lt;tidycpt&gt;</i>)</a></code> <code><a href="tidycpt-generics.html">augment(<i>&lt;tidycpt&gt;</i>)</a></code> <code><a href="tidycpt-generics.html">tidy(<i>&lt;tidycpt&gt;</i>)</a></code> <code><a href="tidycpt-generics.html">glance(<i>&lt;tidycpt&gt;</i>)</a></code> <code><a href="tidycpt-generics.html">plot(<i>&lt;tidycpt&gt;</i>)</a></code> 
+          <code><a href="tidycpt-generics.html">as.ts(<i>&lt;tidycpt&gt;</i>)</a></code> <code><a href="tidycpt-generics.html">augment(<i>&lt;tidycpt&gt;</i>)</a></code> <code><a href="tidycpt-generics.html">tidy(<i>&lt;tidycpt&gt;</i>)</a></code> <code><a href="tidycpt-generics.html">glance(<i>&lt;tidycpt&gt;</i>)</a></code> <code><a href="tidycpt-generics.html">plot(<i>&lt;tidycpt&gt;</i>)</a></code> 
         </dt>
         <dd>Generic functions for tidycpt objects</dd>
       </dl><dl><dt>
@@ -262,7 +272,7 @@
         <dd>Vectors implementation for logLik</dd>
       </dl><dl><dt>
           
-          <code><a href="wbs-generics.html">glance(<i>&lt;wbs&gt;</i>)</a></code> <code><a href="wbs-generics.html">params(<i>&lt;wbs&gt;</i>)</a></code> <code><a href="wbs-generics.html">as.ts(<i>&lt;wbs&gt;</i>)</a></code> <code><a href="wbs-generics.html">nobs(<i>&lt;wbs&gt;</i>)</a></code> 
+          <code><a href="wbs-generics.html">as.segmenter(<i>&lt;wbs&gt;</i>)</a></code> <code><a href="wbs-generics.html">as.ts(<i>&lt;wbs&gt;</i>)</a></code> <code><a href="wbs-generics.html">nobs(<i>&lt;wbs&gt;</i>)</a></code> <code><a href="wbs-generics.html">seg_params(<i>&lt;wbs&gt;</i>)</a></code> 
         </dt>
         <dd>Compatibility layer for wbs</dd>
       </dl></div>

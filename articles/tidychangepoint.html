@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9033</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9035</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -155,11 +155,10 @@ function that was used.</li>
 </ul>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 9</span></span></span>
-<span><span class="co">#&gt;   pkg         version    algorithm params       num_cpts model  criteria fitness</span></span>
-<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;pckg_vrs&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>          <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> changepoint 2.2.4      PELT      <span style="color: #949494;">&lt;named list&gt;</span>        3 meanv… MBIC       <span style="text-decoration: underline;">9</span>403.</span></span>
-<span><span class="co">#&gt; <span style="color: #949494;"># ℹ 1 more variable: elapsed_time &lt;drtn&gt;</span></span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
+<span><span class="co">#&gt;   pkg      version algorithm seg_params model_name criteria fitness elapsed_time</span></span>
+<span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span></span>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> changep… 2.2.4   PELT      <span style="color: #949494;">&lt;list [1]&gt;</span> meanvar    MBIC       <span style="text-decoration: underline;">9</span>403. 0.0633657 s…</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="other-methods">Other methods<a class="anchor" aria-label="anchor" href="#other-methods"></a>
@@ -191,7 +190,7 @@ used.</p>
 <code>segmenter</code>: The object that results from the changepoint
 detection algorithm. These can be of any class. Methods for objects of
 class <code>cpt</code>, <code>ga</code>, and <code>wbs</code> are
-currently implemented, and as well as <code>seg_default</code> (the
+currently implemented, and as well as <code>seg_basket</code> (the
 default internal class). Given a data set, a model, and a penalized
 objective function, a segmenter’s job is to search the
 exponentially-large space of possible changepoint sets for the one that
@@ -201,9 +200,9 @@ deterministic, while others (e.g., genetic algorithms) are
 randomized.</li>
 <li>
 <code>model</code>: A model object inheriting from
-<code>mod_default</code>, an internal class for representing model
-objects. Model objects are created by model-fitting functions, all of
-whose names start with <code>fit_</code>. The <code>model</code> of a
+<code>mod_cpt</code>, an internal class for representing model objects.
+Model objects are created by model-fitting functions, all of whose names
+start with <code>fit_</code>. The <code>model</code> of a
 <code>tidycpt</code> object is the model object returned by the
 <code>fit_*()</code> function that corresponds to the one used by the
 <code>segmenter</code>. Given a data set, a model description,
@@ -249,14 +248,13 @@ package.</p>
 <p>In addition to the generic functions listed above,
 <strong>segmenters</strong> implement methods for the generic functions
 <code><a href="../reference/fitness.html">fitness()</a></code>, <code><a href="../reference/model_args.html">model_args()</a></code>, and
-<code><a href="../reference/changepoints.html">params()</a></code>.</p>
+<code><a href="../reference/changepoints.html">seg_params()</a></code>.</p>
 </div>
 <div class="section level3">
 <h3 id="models">Models<a class="anchor" aria-label="anchor" href="#models"></a>
 </h3>
 <p>The <code>model</code> object in this case is created by
-<code><a href="../reference/fit_meanvar.html">fit_meanvar()</a></code>, and is of class
-<code>mod_default</code>.</p>
+<code><a href="../reference/fit_meanvar.html">fit_meanvar()</a></code>, and is of class <code>mod_cpt</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">model</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -269,10 +267,9 @@ package.</p>
 <span><span class="co">#&gt;   ..$ param_sigma_hatsq: Named num [1:4] 127 372 924 2442</span></span>
 <span><span class="co">#&gt;   .. ..- attr(*, "names")= chr [1:4] "[0,547)" "[547,822)" "[822,972)" "[972,1.1e+03]"</span></span>
 <span><span class="co">#&gt;  $ model_params : NULL</span></span>
-<span><span class="co">#&gt;  $ fitted_values: Named num [1:1096] 35.3 35.3 35.3 35.3 35.3 ...</span></span>
-<span><span class="co">#&gt;   ..- attr(*, "names")= chr [1:1096] "1" "2" "3" "4" ...</span></span>
+<span><span class="co">#&gt;  $ fitted_values: num [1:1096] 35.3 35.3 35.3 35.3 35.3 ...</span></span>
 <span><span class="co">#&gt;  $ model_name   : chr "meanvar"</span></span>
-<span><span class="co">#&gt;  - attr(*, "class")= chr "mod_default"</span></span></code></pre></div>
+<span><span class="co">#&gt;  - attr(*, "class")= chr "mod_cpt"</span></span></code></pre></div>
 <p>In addition to the generic functions listed above,
 <strong>models</strong> implement methods for the generic functions
 <code><a href="https://rdrr.io/r/stats/fitted.values.html" class="external-link">fitted()</a></code>, <code><a href="https://rdrr.io/r/stats/residuals.html" class="external-link">residuals()</a></code>, <code><a href="https://rdrr.io/r/stats/coef.html" class="external-link">coef()</a></code>,

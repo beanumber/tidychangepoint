@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9033</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9035</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -54,7 +54,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">segment_ga</span><span class="op">(</span></span>
 <span>  <span class="va">x</span>,</span>
-<span>  model_fn <span class="op">=</span> <span class="va">fit_meanshift_ar1</span>,</span>
+<span>  model_fn <span class="op">=</span> <span class="va">fit_meanshift_norm</span>,</span>
 <span>  penalty_fn <span class="op">=</span> <span class="va">BIC</span>,</span>
 <span>  model_fn_args <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  <span class="va">...</span></span>
@@ -72,9 +72,8 @@
 
 
 <dt>model_fn</dt>
-<dd><p>A function that takes two arguments: <code>x</code> (a time series) and
-<code>tau</code> (a set of changepoint indices). See <code><a href="fit_meanshift.html">fit_meanshift_ar1()</a></code>,
-<code><a href="fit_lmshift.html">fit_lmshift()</a></code>, and <code><a href="fit_nhpp.html">fit_nhpp()</a></code></p></dd>
+<dd><p>A <code>character</code> or <code>name</code> coercible into <code><a href="new_fun_cpt.html">fun_cpt()</a></code> function.
+See, for example, <code><a href="fit_meanshift.html">fit_meanshift_norm()</a></code>.</p></dd>
 
 
 <dt>penalty_fn</dt>
