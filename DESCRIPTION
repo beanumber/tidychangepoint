@@ -28,6 +28,7 @@ Imports:
     dplyr,
     GA,
     ggplot2,
+    lifecycle,
     memoise,
     methods,
     patchwork,

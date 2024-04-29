@@ -177,3 +177,4 @@ sim_k_cp_BMDL(DataCPSim)
 chromo <- c(4, 1, 557, 877 , 905, 986, 1096, 0, 0, 0)
 chromo2tau(chromo)
 }
+\keyword{internal}

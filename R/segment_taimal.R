@@ -31,7 +31,11 @@ globalVariables(
 
 
 #' Algoritmo genético de Bayesian MDL a un paso
-#'
+#' @description
+#' 
+#' `r lifecycle::badge("deprecated")`
+#' This implementation is deprecated. Please see [segment_ga_taimal()]
+#' 
 #' @param x an object coercible into a time series object via [stats::as.ts()]
 #' @param generation_size tamaño de las generaciones
 #' @param nhpp_dist toma valores en c("W","EW","GGO","MO","GO") y es el nombre de
@@ -47,12 +51,13 @@ globalVariables(
 #' @param num_generations Number of generations to evolve
 #' @param show_progress_bar show the progress bar?
 #' @return A `cpt_gbmdl` object
+#' @keywords internal
 #' @export
 #' @examples
 #' \dontrun{
 #' x <- segment_taimal(DataCPSim, num_generations = 10)
-#' y <- segment_taimal(rlnorm_ts_1)
-#' z <- segment_taimal(as.ts(bogota_pm))
+#' # |>
+#' x <- segment_ga_taimal(DataCPSim, maxiter = 10)
 #' }
 #' 
 segment_taimal <- function(x, 
@@ -63,6 +68,7 @@ segment_taimal <- function(x,
                            generation_size = 50, 
                            max_num_cp = 20,
                            show_progress_bar = TRUE, ...) {
+  lifecycle::deprecate_warn("0.0.1", "segment_taimal()", "segment_ga_taimal()")
   obj <- seg_basket(
     x, 
     algorithm = "GeneticBMDL", 
@@ -123,6 +129,7 @@ segment_taimal <- function(x,
 #' @param mat_cp A matrix containing a list of candidate chromosomes
 #' @param these_bmdls vector of [BMDL()] scores
 #' @export
+#' @keywords internal
 #' @examples
 #' mat_cp <- sim_k_cp_BMDL(DataCPSim)
 #' bmdls <- mat_cp |> 

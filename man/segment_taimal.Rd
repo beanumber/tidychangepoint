@@ -44,13 +44,15 @@ particular para que todos los cromosomas quepan en una matriz.}
 A \code{cpt_gbmdl} object
 }
 \description{
-Algoritmo genético de Bayesian MDL a un paso
+\ifelse{html}{\href{https://lifecycle.r-lib.org/articles/stages.html#deprecated}{\figure{lifecycle-deprecated.svg}{options: alt='[Deprecated]'}}}{\strong{[Deprecated]}}
+This implementation is deprecated. Please see \code{\link[=segment_ga_taimal]{segment_ga_taimal()}}
 }
 \examples{
 \dontrun{
 x <- segment_taimal(DataCPSim, num_generations = 10)
-y <- segment_taimal(rlnorm_ts_1)
-z <- segment_taimal(as.ts(bogota_pm))
+# |>
+x <- segment_ga_taimal(DataCPSim, maxiter = 10)
 }
 
 }
+\keyword{internal}
