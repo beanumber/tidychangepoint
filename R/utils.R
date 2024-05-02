@@ -135,6 +135,7 @@ test_set <- function(n = 1, sd = 1, seed = NULL) {
 #' split_by_tau(DataCPSim, c(365, 826))
 
 split_by_tau <- function(x, tau) {
+  tau <- validate_tau(tau, n = length(x))
   idx <- cut_inclusive(1:length(x), pad_tau(tau, length(x)))
   split(x, idx)
 }
