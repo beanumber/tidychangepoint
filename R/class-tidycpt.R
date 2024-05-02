@@ -63,7 +63,7 @@ glance.tidycpt <- function(x, ...) {
     as.segmenter() |>
     glance() |>
     dplyr::mutate(
-      elapsed_time = x$elapsed_time
+      elapsed_time = round(x$elapsed_time, 3)
     )
 }
 
@@ -97,9 +97,9 @@ compare_algorithms <- function(x, ...) {
     segment(as.ts(x), method = "random"),
     segment(as.ts(x), method = "null")
   ) |>
+    unique() |>
     purrr::map(glance)
   dplyr::bind_rows(glance(x), others) |>
-    dplyr::mutate(model = gsub(pattern = "fit_", replacement = "", model)) |>
     dplyr::arrange(elapsed_time)
 }
 
