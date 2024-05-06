@@ -1,6 +1,10 @@
 #' Segment a time series using a genetic algorithm
+#' 
+#' @description
+#' Segmenting functions for various genetic algorithms
+#' 
 #' @param x A time series
-#' @param model_fn A `character` or `name` coercible into [fun_cpt()] function. 
+#' @param model_fn A `character` or `name` coercible into a [fun_cpt()] function. 
 #' See, for example, [fit_meanshift_norm()].
 #' @param penalty_fn A function that evaluates the changepoint set returned by
 #' `model_fn`. We provide [AIC()], [BIC()], [MBIC()], [MDL()], and [BMDL()].
@@ -63,7 +67,8 @@ segment_ga <- function(x,
 #' @rdname segment_ga
 #' @export
 #' @details
-#' Shi's algorithm is the algorithm used in \doi{10.1175/JCLI-D-21-0489.1}. 
+#'   - [segment_ga_shi()]: Shi's algorithm is the algorithm used in 
+#'   \doi{10.1175/JCLI-D-21-0489.1}. 
 #' Note that in order to achieve the reported results you have to run the algorithm
 #' for a really long time. Pass the values `maxiter` = 50000 and `run` = 10000
 #' to [GA::ga()] using the dots. 
@@ -88,12 +93,12 @@ segment_ga_shi <- function(x, ...) {
 
 #' @rdname segment_ga
 #' @details
-#' Taimal's algorithm is the one used in \doi{10.1007/978-3-031-47372-2_20}.
-#' 
+#'   - [segment_ga_taimal()]: Coen's algorithm is the one used in 
+#'   \doi{10.1007/978-3-031-47372-2_20}.
 #' Note that the speed of the algorithm is highly sensitive to the size of the 
-#' changepoint sets under consideration, with large changepoint sets begin slow. 
+#' changepoint sets under consideration, with large changepoint sets being slow. 
 #' Consider setting the `population` argument to [GA::ga()] to improve 
-#' performance. Taimal's algorithm uses the [build_gabin_population()] function
+#' performance. Coen's algorithm uses the [build_gabin_population()] function
 #' for this purpose by default. 
 #' @seealso [build_gabin_population()]
 #' @references Taimal, et al. (2023, \doi{10.1007/978-3-031-47372-2_20})
@@ -110,12 +115,15 @@ segment_ga_taimal <- function(x, ...) {
   )
 }
 
-#' @rdname segment_manual
+#' @rdname segment_ga
 #' @details
-#' Randomly select candidate changepoint sets
+#'   - [segment_ga_random()]: Randomly select candidate changepoint sets. This 
+#'   is implemented as a genetic algorithm with only one generation (i.e., 
+#'   `maxiter = 1`. Note
+#'   that this function uses [log_gabin_population()] by default. 
 #' 
-#' @seealso [build_gabin_population()]
 #' @export
+#' @seealso [log_gabin_population()]
 #' @examples
 #' x <- segment(CET, method = "random")
 segment_ga_random <- function(x, ...) {

@@ -4,6 +4,7 @@
 \alias{segment_ga}
 \alias{segment_ga_shi}
 \alias{segment_ga_taimal}
+\alias{segment_ga_random}
 \title{Segment a time series using a genetic algorithm}
 \usage{
 segment_ga(
@@ -17,11 +18,13 @@ segment_ga(
 segment_ga_shi(x, ...)
 
 segment_ga_taimal(x, ...)
+
+segment_ga_random(x, ...)
 }
 \arguments{
 \item{x}{A time series}
 
-\item{model_fn}{A \code{character} or \code{name} coercible into \code{\link[=fun_cpt]{fun_cpt()}} function.
+\item{model_fn}{A \code{character} or \code{name} coercible into a \code{\link[=fun_cpt]{fun_cpt()}} function.
 See, for example, \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}}.}
 
 \item{penalty_fn}{A function that evaluates the changepoint set returned by
@@ -32,21 +35,33 @@ See, for example, \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}}.}
 \item{...}{arguments passed to \code{\link[GA:ga]{GA::ga()}}}
 }
 \description{
-Segment a time series using a genetic algorithm
+Segmenting functions for various genetic algorithms
 }
 \details{
-Shi's algorithm is the algorithm used in \doi{10.1175/JCLI-D-21-0489.1}.
+\itemize{
+\item \code{\link[=segment_ga_shi]{segment_ga_shi()}}: Shi's algorithm is the algorithm used in
+\doi{10.1175/JCLI-D-21-0489.1}.
 Note that in order to achieve the reported results you have to run the algorithm
 for a really long time. Pass the values \code{maxiter} = 50000 and \code{run} = 10000
 to \code{\link[GA:ga]{GA::ga()}} using the dots.
+}
 
-Taimal's algorithm is the one used in \doi{10.1007/978-3-031-47372-2_20}.
-
+\itemize{
+\item \code{\link[=segment_ga_taimal]{segment_ga_taimal()}}: Coen's algorithm is the one used in
+\doi{10.1007/978-3-031-47372-2_20}.
 Note that the speed of the algorithm is highly sensitive to the size of the
-changepoint sets under consideration, with large changepoint sets begin slow.
+changepoint sets under consideration, with large changepoint sets being slow.
 Consider setting the \code{population} argument to \code{\link[GA:ga]{GA::ga()}} to improve
-performance. Taimal's algorithm uses the \code{\link[=build_gabin_population]{build_gabin_population()}} function
+performance. Coen's algorithm uses the \code{\link[=build_gabin_population]{build_gabin_population()}} function
 for this purpose by default.
+}
+
+\itemize{
+\item \code{\link[=segment_ga_random]{segment_ga_random()}}: Randomly select candidate changepoint sets. This
+is implemented as a genetic algorithm with only one generation (i.e.,
+\code{maxiter = 1}. Note
+that this function uses \code{\link[=log_gabin_population]{log_gabin_population()}} by default.
+}
 }
 \examples{
 \dontrun{
@@ -79,6 +94,7 @@ y <- segment(CET, method = "ga", model_fn = fit_lmshift, penalty_fn = BIC,
 x <- segment(method = "ga-taimal", maxiter = 50)
 }
 
+x <- segment(CET, method = "random")
 }
 \references{
 Shi, et al. (2022, \doi{10.1175/JCLI-D-21-0489.1})
@@ -87,4 +103,6 @@ Taimal, et al. (2023, \doi{10.1007/978-3-031-47372-2_20})
 }
 \seealso{
 \code{\link[=build_gabin_population]{build_gabin_population()}}
+
+\code{\link[=log_gabin_population]{log_gabin_population()}}
 }
