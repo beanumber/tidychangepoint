@@ -76,7 +76,7 @@ fit_lmshift <- function(x, tau, deg_poly = 0, ...) {
 
 #' @rdname fit_lmshift
 #' @details
-#' - [fit_lmshift_ar1]: will apply auto-regressive lag 1 errors
+#' - [fit_lmshift_ar1()]: will apply auto-regressive lag 1 errors
 #' @export
 fit_lmshift_ar1 <- function(x, tau, ...) {
   fit_lmshift(x, tau,  ...) |>
@@ -85,7 +85,7 @@ fit_lmshift_ar1 <- function(x, tau, ...) {
 
 #' @rdname fit_lmshift
 #' @details
-#' - [fit_trendshift]: will fit a line in each region
+#' - [fit_trendshift()]: will fit a line in each region
 #' @export
 fit_trendshift <- function(x, tau, ...) {
   fit_lmshift(x, tau,  deg_poly = 1, ...)
@@ -93,7 +93,7 @@ fit_trendshift <- function(x, tau, ...) {
 
 #' @rdname fit_lmshift
 #' @details
-#' - [fit_trendshift_ar1]: will fit a line in each region and autoregress lag 1 errors
+#' - [fit_trendshift_ar1()]: will fit a line in each region and autoregress lag 1 errors
 #' @export
 fit_trendshift_ar1 <- function(x, tau, ...) {
   fit_trendshift(x, tau, ...) |>

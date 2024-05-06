@@ -29,3 +29,4 @@ vec_cast(a, b)
 \seealso{
 \code{\link[stats:logLik]{stats::logLik()}}
 }
+\keyword{internal}

@@ -175,6 +175,7 @@ as_year <- function(x) {
 #' @export
 #' @inheritParams vctrs::vec_ptype2
 #' @seealso [stats::logLik()]
+#' @keywords internal
 #' @examples
 #' a <- logLik(lm(mpg ~ disp, data = mtcars))
 #' b <- logLik(lm(mpg ~ am, data = mtcars))
