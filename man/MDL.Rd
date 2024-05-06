@@ -20,23 +20,28 @@ MDL(object, ...)
    arguments.}
 }
 \value{
-regresa la evaluación de la penalización
+A \code{double} vector of length 1
+}
+\description{
+Generic function to compute the Maximum Descriptive Length for a
+changepoint detection model.
+}
+\details{
 \deqn{
-   2 \cdot P(\tau | N) = a \cdot \ln{N}
-     + b \cdot \sum_{i=1}^{m+1} \ln{(\tau_i-\tau_{i-1})} 
-     + \ln{m} + \sum_{i=2}^m \ln{(\tau_i)}
+   P_{MDL}(\tau) = \frac{a(\theta_\tau)}{2} \cdot 
+     \sum_{j=0}^m \log{\left(\tau_j - \tau_{j-1} \right)} + 2 \ln{m} + \sum_{j=2}^m \ln{\tau_j} + 
+     \left( 2 + b(\theta_\tau) \right) \ln{n} 
  }
-where \eqn{a} is the number of parameters estimated using all of the data points,
-and \eqn{b} is the number of parameters estimated in each regime.
+where \eqn{a(\theta)} is the number of parameters in \eqn{\theta} that are
+fit in each region, and \eqn{b(\theta)} is the number of parameters
+fit to the model as a whole.
+
 These quantites should be \code{\link[base:attributes]{base::attributes()}} of the object returned by
 \code{\link[=logLik]{logLik()}}.
 }
-\description{
-Maximum Descriptive Length
-}
 \examples{
 MDL(fit_meanshift_norm_ar1(CET, tau = c(42, 330)))
-MDL(fit_lmshift(CET, tau = c(42, 81, 330), trends = TRUE))
+MDL(fit_trendshift(CET, tau = c(42, 81, 330)))
 }
 \seealso{
 Other penalty-functions: 

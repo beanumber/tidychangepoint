@@ -12,21 +12,14 @@ exceedances.double <- function(x, threshold = mean(x, na.rm = TRUE), ...) {
 }
 
 #' @rdname MDL
-#' @return regresa la evaluación de la penalización
-#'  \deqn{
-#'    2 \cdot P(\tau | N) = a \cdot \ln{N}
-#'      + b \cdot \sum_{i=1}^{m+1} \ln{(\tau_i-\tau_{i-1})} 
-#'      + \ln{m} + \sum_{i=2}^m \ln{(\tau_i)}
-#'  }
-#'  where \eqn{a} is the number of parameters estimated using all of the data points,
-#'  and \eqn{b} is the number of parameters estimated in each regime. 
+#' @details
 #'  These quantites should be [base::attributes()] of the object returned by 
 #'  [logLik()].
 #' @inheritParams stats::logLik
 #' @export
 #' @examples
 #' MDL(fit_meanshift_norm_ar1(CET, tau = c(42, 330)))
-#' MDL(fit_lmshift(CET, tau = c(42, 81, 330), trends = TRUE))
+#' MDL(fit_trendshift(CET, tau = c(42, 81, 330)))
 MDL.logLik <- function(object, ...) {
   tau <- attr(object, "tau")
   N <- nobs(object)

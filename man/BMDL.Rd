@@ -19,8 +19,23 @@ BMDL(object, ...)
 \item{...}{some methods for this generic function require additional
    arguments.}
 }
+\value{
+A \code{double} vector of length 1
+}
 \description{
-Bayesian Maximum Descriptive Length
+Generic function to compute the Bayesian Maximum Descriptive Length for a
+changepoint detection model.
+}
+\details{
+Currently, the BMDL function is only defined for the NHPP model
+(see \code{\link[=fit_nhpp]{fit_nhpp()}}).
+Given a changepoint set \eqn{\tau}, the BMDL is:
+\deqn{
+   BMDL(\tau, NHPP(y | \hat{\theta}_\tau) = 
+   P_{MDL}(\tau) - 2 \ln{ L_{NHPP}(y | \hat{\theta}_\tau) } 
+   - 2 \ln{ g(\hat{\theta}_\tau) }
+ }
+where \eqn{P_{MDL}(\tau)} is the \code{\link[=MDL]{MDL()}} penalty.
 }
 \examples{
 BMDL(fit_nhpp(DataCPSim, tau = NULL))

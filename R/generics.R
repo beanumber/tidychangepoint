@@ -127,11 +127,14 @@ as.model.default <- function(object, ...) {
 
 #' Modified Bayesian Information Criterion
 #' 
+#' @description
+#' Generic function to compute the Modified Bayesian Information Criterion for a
+#' changepoint detection model. 
 #' @inheritParams stats::logLik
+#' @return A `double` vector of length 1
 #' @family penalty-functions
 #' @export
 #' @seealso [stats::BIC()]
-#' @references Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
 MBIC <- function(object, ...) UseMethod("MBIC")
 
 #' @rdname MBIC
@@ -142,6 +145,19 @@ MBIC.default <- function(object, ...) {
 
 #' Maximum Descriptive Length
 #' 
+#' @description
+#' Generic function to compute the Maximum Descriptive Length for a
+#' changepoint detection model. 
+#' @details
+#' \deqn{
+#'    P_{MDL}(\tau) = \frac{a(\theta_\tau)}{2} \cdot 
+#'      \sum_{j=0}^m \log{\left(\tau_j - \tau_{j-1} \right)} + 2 \ln{m} + \sum_{j=2}^m \ln{\tau_j} + 
+#'      \left( 2 + b(\theta_\tau) \right) \ln{n} 
+#'  }
+#'  where \eqn{a(\theta)} is the number of parameters in \eqn{\theta} that are 
+#'  fit in each region, and \eqn{b(\theta)} is the number of parameters 
+#'  fit to the model as a whole. 
+#' @return A `double` vector of length 1
 #' @family penalty-functions
 #' @export
 MDL <- function(object, ...) UseMethod("MDL")
@@ -154,6 +170,21 @@ MDL.default <- function(object, ...) {
 
 #' Bayesian Maximum Descriptive Length
 #' 
+#' @description
+#' Generic function to compute the Bayesian Maximum Descriptive Length for a
+#' changepoint detection model. 
+#' 
+#' @details
+#' Currently, the BMDL function is only defined for the NHPP model 
+#' (see [fit_nhpp()]).
+#' Given a changepoint set \eqn{\tau}, the BMDL is: 
+#'  \deqn{
+#'    BMDL(\tau, NHPP(y | \hat{\theta}_\tau) = 
+#'    P_{MDL}(\tau) - 2 \ln{ L_{NHPP}(y | \hat{\theta}_\tau) } 
+#'    - 2 \ln{ g(\hat{\theta}_\tau) }
+#'  }
+#' where \eqn{P_{MDL}(\tau)} is the [MDL()] penalty. 
+#' @return A `double` vector of length 1
 #' @inheritParams stats::logLik
 #' @family penalty-functions
 #' @export

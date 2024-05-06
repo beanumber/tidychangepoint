@@ -19,12 +19,14 @@ MBIC(object, ...)
 \item{...}{some methods for this generic function require additional
    arguments.}
 }
+\value{
+A \code{double} vector of length 1
+}
 \description{
-Modified Bayesian Information Criterion
+Generic function to compute the Modified Bayesian Information Criterion for a
+changepoint detection model.
 }
 \references{
-Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
-
 Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
 }
 \seealso{
