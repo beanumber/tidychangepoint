@@ -327,6 +327,13 @@ plot.mod_cpt <- function(x, ...) {
     )
 }
 
+
+#' @rdname mod_cpt-generics
+#' @export
+print.mod_cpt <- function(x, ...) {
+  str(x)
+}
+
 #' @rdname diagnose
 #' @export
 #' @examples

@@ -133,6 +133,14 @@ plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
   g
 }
 
+#' @rdname tidycpt-generics
+#' @export
+print.tidycpt <- function(x, ...) {
+  cat("A tidycpt object\n")
+  print(x$segmenter)
+  print(x$model)
+}
+
 #' @rdname diagnose
 #' @export
 #' @examples

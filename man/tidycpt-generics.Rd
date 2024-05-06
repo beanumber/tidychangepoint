@@ -7,6 +7,7 @@
 \alias{tidy.tidycpt}
 \alias{glance.tidycpt}
 \alias{plot.tidycpt}
+\alias{print.tidycpt}
 \title{Generic functions for tidycpt objects}
 \usage{
 \method{as.ts}{tidycpt}(x, ...)
@@ -18,6 +19,8 @@
 \method{glance}{tidycpt}(x, ...)
 
 \method{plot}{tidycpt}(x, use_time_index = FALSE, ...)
+
+\method{print}{tidycpt}(x, ...)
 }
 \arguments{
 \item{x}{An \code{tidycpt} object, typically the output from \code{\link[=segment]{segment()}}`}

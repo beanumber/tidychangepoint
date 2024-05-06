@@ -6,6 +6,7 @@
 \alias{as.ts.seg_cpt}
 \alias{glance.seg_cpt}
 \alias{nobs.seg_cpt}
+\alias{print.seg_cpt}
 \alias{seg_params.seg_cpt}
 \title{Methods for seg_cpt objects}
 \usage{
@@ -16,6 +17,8 @@
 \method{glance}{seg_cpt}(x, ...)
 
 \method{nobs}{seg_cpt}(object, ...)
+
+\method{print}{seg_cpt}(x, ...)
 
 \method{seg_params}{seg_cpt}(x, ...)
 }

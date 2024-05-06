@@ -137,6 +137,12 @@ nobs.seg_cpt <- function(object, ...) {
 
 #' @rdname seg-cpt-generics
 #' @export
+print.seg_cpt <- function(x, ...) {
+  str(x)
+}
+
+#' @rdname seg-cpt-generics
+#' @export
 seg_params.seg_cpt <- function(x, ...) {
   x$seg_params
 }

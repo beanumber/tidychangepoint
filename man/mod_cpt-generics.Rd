@@ -13,6 +13,7 @@
 \alias{tidy.mod_cpt}
 \alias{glance.mod_cpt}
 \alias{plot.mod_cpt}
+\alias{print.mod_cpt}
 \title{Methods for mod_cpt objects}
 \usage{
 \method{as.ts}{mod_cpt}(x, ...)
@@ -36,6 +37,8 @@ model_variance(object, ...)
 \method{glance}{mod_cpt}(x, ...)
 
 \method{plot}{mod_cpt}(x, ...)
+
+\method{print}{mod_cpt}(x, ...)
 }
 \arguments{
 \item{x}{A \code{mod_cpt} object, typically the output from one of the \verb{fit_*()}
