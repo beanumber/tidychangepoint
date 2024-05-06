@@ -277,16 +277,13 @@ autoregress_errors <- function(mod, ...) {
 #' plot(fit_lmshift(CET, tau = 330, deg_poly = 10))
 plot.mod_cpt <- function(x, ...) {
   regions <- tidy(x)
-  breaks_default <- scales::extended_breaks()(1:nobs(x))
-  if (length(changepoints(x)) < 8) {
-    b <- breaks_default |>
-      union(nobs(x)) |>
-      union(changepoints(x)) |>
+  m <- length(changepoints(x))
+  breaks_default <- scales::extended_breaks(3)(1:nobs(x))
+  b <- c(1, changepoints(x), nobs(x))
+  if (m == 0) {
+    b2 <- c(1, breaks_default, nobs(x)) |>
       sort()
-  } else {
-    b <- breaks_default |>
-      union(nobs(x)) |>
-      sort()
+    b <- b2[b2 > 0]
   }
   ggplot2::ggplot(
     data = augment(x), 
