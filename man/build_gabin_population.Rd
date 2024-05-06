@@ -3,7 +3,7 @@
 \name{build_gabin_population}
 \alias{build_gabin_population}
 \alias{log_gabin_population}
-\title{Build an initial population set for GA algorithms}
+\title{Initialize populations in genetic algorithms}
 \usage{
 build_gabin_population(x, ...)
 
@@ -14,8 +14,31 @@ log_gabin_population(x, ...)
 
 \item{...}{arguments passed to methods}
 }
+\value{
+A \code{function} that can be passed to the \code{population} argument of
+\code{\link[GA:ga]{GA::ga()}} (through \code{\link[=segment_ga]{segment_ga()}})
+}
 \description{
-Build an initial population set for GA algorithms
+Build an initial population set for genetic algorithms
+}
+\details{
+Genetic algorithms require a method for randomly generating initial
+populations (i.e., a first generation).
+The default method used by \code{\link[GA:ga]{GA::ga()}} for changepoint detection is usually
+\code{\link[GA:ga_Population]{GA::gabin_Population()}}, which selects candidate changepoints uniformly at
+random with probability 0.5.
+This leads to an initial population with excessively large candidate
+changepoint sets (on the order of \eqn{n/2}), which makes the genetic
+algorithm slow.
+\itemize{
+\item \code{\link[=build_gabin_population]{build_gabin_population()}} takes a \code{ts} object and runs several fast
+changepoint detection algorithms on it, then sets the initial probability
+to 3 times the average value of the size of the changepoint sets returned
+by those algorithms. This is a conservative guess as to the likely size of
+the optimal changepoint set.
+\item \code{\link[=log_gabin_population]{log_gabin_population()}} takes a \code{ts} object and sets the initial
+probability to the natural logarithm of the length of the time series.
+}
 }
 \examples{
 f <- build_gabin_population(CET)
@@ -24,5 +47,5 @@ f <- log_gabin_population(CET)
 segment(CET, method = "ga", population = f, maxiter = 10)
 }
 \seealso{
-\code{\link[GA:ga_Population]{GA::gabin_Population()}}
+\code{\link[GA:ga_Population]{GA::gabin_Population()}}, \code{\link[=segment_ga]{segment_ga()}}
 }

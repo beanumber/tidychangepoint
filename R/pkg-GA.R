@@ -156,10 +156,34 @@ seg_params.ga <- function(x, ...) {
   )
 }
 
-#' Build an initial population set for GA algorithms
+#' Initialize populations in genetic algorithms
+#' 
+#' @description
+#' Build an initial population set for genetic algorithms
+#' 
 #' @inheritParams segment
+#' @details
+#' Genetic algorithms require a method for randomly generating initial 
+#' populations (i.e., a first generation). 
+#' The default method used by [GA::ga()] for changepoint detection is usually 
+#' [GA::gabin_Population()], which selects candidate changepoints uniformly at
+#' random with probability 0.5. 
+#' This leads to an initial population with excessively large candidate 
+#' changepoint sets (on the order of \eqn{n/2}), which makes the genetic 
+#' algorithm slow. 
+#'   
+#'   - [build_gabin_population()] takes a `ts` object and runs several fast 
+#'   changepoint detection algorithms on it, then sets the initial probability
+#'   to 3 times the average value of the size of the changepoint sets returned 
+#'   by those algorithms. This is a conservative guess as to the likely size of 
+#'   the optimal changepoint set. 
+#'   - [log_gabin_population()] takes a `ts` object and sets the initial 
+#'   probability to the natural logarithm of the length of the time series. 
+#' 
+#' @return A `function` that can be passed to the `population` argument of
+#' [GA::ga()] (through [segment_ga()])
 #' @export
-#' @seealso [GA::gabin_Population()]
+#' @seealso [GA::gabin_Population()], [segment_ga()]
 #' @examples
 #' f <- build_gabin_population(CET)
 #' segment(CET, method = "ga", population = f)
