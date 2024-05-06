@@ -28,13 +28,13 @@ segment(x, method = "null", ...)
 \value{
 An object of class \code{tidycpt}. Every \code{tidycpt} object contains:
 \itemize{
-\item \code{segmenter}: The object returned by the underlying function.
-\item \code{nhpp}: A \code{tbl_df} showing the best fit parameters for each region, as
-defined by the changepoint set returned by \code{\link[=changepoints]{changepoints()}} when called
-on the \code{segmenter}. These parameters
-are fit using the non-homogeneous Poisson process model in \code{\link[=fit_nhpp]{fit_nhpp()}}.
-This object also has class \code{nhpp}.
+\item \code{segmenter}: The object returned by the underlying changepoint
+detection algorithm.
+\item \code{model}: A model object inheriting from \code{mod_cpt}, as created by
+\code{\link[=as.model]{as.model()}} when called
+on the \code{segmenter}.
 \item \code{elapsed_time}: The clock time that passed while the algorithm was running.
+\item \code{time_index}: If available, the labels for the time indices of the time series.
 }
 }
 \description{
@@ -55,14 +55,14 @@ on the value of the \code{method} argument:
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
 \item \code{wbs}: Uses the Wild Binary Segmentation algorithm as implemented by
 \code{\link[wbs:wbs]{wbs::wbs()}}. The \code{segmenter} is of class \code{wbs}.
-\item \code{ga}: Uses the Genetic algorithm implemented by
+\item \code{ga}: Uses the Genetic algorithm implemented by \code{\link[=segment_ga]{segment_ga()}}, which wraps
 \code{\link[GA:ga]{GA::ga()}}. The \code{segmenter} is of class \code{tidyga}.
 \item \code{taimal}: Uses the Genetic BMDL heuristic as implemented by
 \code{\link[=segment_taimal]{segment_taimal()}}. The \code{segmenter} is of class \code{\link[=seg_basket]{seg_basket()}}.
 \item \code{manual}: Uses the vector of changepoints in the \code{tau} argument.
-The \code{segmenter} is of class \code{\link[=seg_basket]{seg_basket()}}`.
+The \code{segmenter} is of class \code{\link[=seg_cpt]{seg_cpt()}}`.
 \item \code{null}: The default. Uses no changepoints.
-The \code{segmenter} is of class \code{\link[=seg_basket]{seg_basket()}}`.
+The \code{segmenter} is of class \code{\link[=seg_cpt]{seg_cpt()}}`.
 }
 }
 \examples{
@@ -86,5 +86,6 @@ x <- segment(DataCPSim, method = "gbmdl", num_generations = 10)
 
 }
 \seealso{
-\code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}, \code{\link[wbs:wbs]{wbs::wbs()}}, \code{\link[GA:ga]{GA::ga()}}
+\code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}, \code{\link[wbs:wbs]{wbs::wbs()}}, \code{\link[GA:ga]{GA::ga()}},
+\code{\link[=segment_ga]{segment_ga()}}
 }

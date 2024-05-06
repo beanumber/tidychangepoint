@@ -50,13 +50,13 @@ segment.numeric <- function(x, method = "null", ...) {
 #' @rdname segment
 #' @export
 #' @return An object of class `tidycpt`. Every `tidycpt` object contains:
-#' - `segmenter`: The object returned by the underlying function. 
-#' - `nhpp`: A `tbl_df` showing the best fit parameters for each region, as 
-#'   defined by the changepoint set returned by [changepoints()] when called 
-#'   on the `segmenter`. These parameters
-#'   are fit using the non-homogeneous Poisson process model in [fit_nhpp()].
-#'   This object also has class `nhpp`.
+#' - `segmenter`: The object returned by the underlying changepoint
+#' detection algorithm.  
+#' - `model`: A model object inheriting from `mod_cpt`, as created by
+#' [as.model()] when called 
+#'   on the `segmenter`. 
 #' - `elapsed_time`: The clock time that passed while the algorithm was running.
+#' - `time_index`: If available, the labels for the time indices of the time series.
 #' @details Currently, [segment()] can use the following algorithms, depending
 #' on the value of the `method` argument:
 #' - `pelt`: Uses the PELT algorithm as implemented in 
@@ -69,15 +69,16 @@ segment.numeric <- function(x, method = "null", ...) {
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
 #' - `wbs`: Uses the Wild Binary Segmentation algorithm as implemented by 
 #'   [wbs::wbs()]. The `segmenter` is of class `wbs`.
-#' - `ga`: Uses the Genetic algorithm implemented by 
+#' - `ga`: Uses the Genetic algorithm implemented by [segment_ga()], which wraps
 #'   [GA::ga()]. The `segmenter` is of class `tidyga`.
 #' - `taimal`: Uses the Genetic BMDL heuristic as implemented by 
 #'   [segment_taimal()]. The `segmenter` is of class [seg_basket()].
 #' - `manual`: Uses the vector of changepoints in the `tau` argument. 
-#'   The `segmenter` is of class [seg_basket()]`.
+#'   The `segmenter` is of class [seg_cpt()]`.
 #' - `null`: The default. Uses no changepoints. 
-#'   The `segmenter` is of class [seg_basket()]`.
-#' @seealso [changepoint::cpt.meanvar()], [wbs::wbs()], [GA::ga()]
+#'   The `segmenter` is of class [seg_cpt()]`.
+#' @seealso [changepoint::cpt.meanvar()], [wbs::wbs()], [GA::ga()], 
+#' [segment_ga()]
 #' @examples
 #' segment(DataCPSim, method = "pelt")
 #' segment(DataCPSim, method = "pelt", penalty = "AIC")
