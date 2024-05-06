@@ -105,7 +105,7 @@ probability to the natural logarithm of the length of the time series.</p></li>
 <span class="r-in"><span><span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">CET</span>, method <span class="op">=</span> <span class="st">"ga"</span>, population <span class="op">=</span> <span class="va">f</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> method: ga</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Seeding initial population with probability: 0.0276243093922652</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $segmenter</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> A tidycpt object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "ga"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
@@ -118,208 +118,23 @@ probability to the natural logarithm of the length of the time series.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [13] "suggestions"   "population"    "elitism"       "pcrossover"   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [17] "pmutation"     "optim"         "fitness"       "summary"      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21] "bestSol"       "fitnessValue"  "solution"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time Series:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Start = 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> End = 362 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Frequency = 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]  8.87  9.10  9.78  9.52  8.63  9.34  8.29  9.86  8.52  9.51  9.02  8.96</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [13]  9.08  8.82  8.38  8.12  7.88  8.84  8.78  8.45  8.76  8.89  8.75  9.05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [25]  8.49  7.95  9.16 10.15  8.99  7.86  8.56  8.94  8.17  7.73  8.47  7.67</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [37]  7.29  8.52  8.05  7.67  8.83  8.60  8.75  9.31  9.09  9.07  8.75  9.82</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [49]  9.41  9.68  8.74  9.49  9.42  9.14  8.64  9.44  9.44  8.38  9.04  9.29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [61]  9.49  9.10  8.91  9.37  9.80  9.28  8.69  9.36  9.97  9.54  9.29 10.07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [73]  9.90  9.69 10.50  9.82  9.57 10.33  9.95  9.84  9.21  6.86  9.32  8.38</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [85]  9.83  8.80  8.85  8.66  9.84  8.79  9.49  9.71  8.47  9.21  9.12  8.87</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [97]  8.58  8.78  8.97  8.98 10.03  9.85 10.02  9.61  8.95  8.73  8.55  8.66</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [109]  8.70  8.95  8.81  8.53  8.58  9.17  9.29  9.09 10.11  9.02  9.12  9.23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [121] 10.41  9.12 10.23  8.05  9.31  7.85  8.58  8.27  9.31  9.22  8.93  9.46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [133]  9.29  9.20  9.13  9.90  8.71  9.02  9.03  9.63  7.92  9.28  9.63  8.98</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [145]  9.09  9.59  9.00  9.84  8.69  8.86  8.96  8.78  9.69  8.21  8.72  7.78</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [157]  9.07  7.89  8.89  9.88  9.27  8.56  9.55 10.06  8.40  9.32  9.76 10.09</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [169]  9.51 10.32  8.18  8.72 10.13  9.49  9.52 10.51  9.57  8.88  8.85  8.10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [181]  8.71  8.52  8.75  9.25  9.10  8.60  8.30 10.16  9.26  9.42  9.32  9.10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [193]  9.18  9.82  8.41  9.34  8.09  9.10 10.11  9.16  9.64  7.92  9.15  9.21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [205]  9.69  8.87  9.72  9.68  9.03 10.40  9.62  9.02  9.07  9.76  9.03  9.33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [217]  9.48  9.53  9.19  9.26  7.44  9.10  8.58  9.47  9.04  9.85  8.58  8.74</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [229]  8.30  8.24  9.02  8.76  8.51  8.18 10.01  9.32  8.70  9.34  9.44 10.10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [241]  9.71  9.60  9.15  8.88  9.33  9.02  9.16  9.47  8.88  9.28  8.59  9.20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [253] 10.09  9.37  9.83  9.90  8.96  9.20  8.55  9.53  8.53  9.58 10.51  8.70</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [265]  9.11  9.29  9.20  9.74  9.24  9.59  9.06  9.47  9.02  9.41  9.86 10.03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [277]  9.74  9.35  9.59 10.21  9.70  9.06  9.12  9.11 10.05  9.59 10.29  9.46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [289]  9.65 10.03 10.64  9.43  9.30  9.12  9.87  9.26  9.33  8.87 10.06  9.45</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [301] 10.52  9.75  9.95  8.61  8.52  9.48  8.99  9.47  9.64  9.32  9.32  9.60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [313]  9.72  9.22  9.57  9.64 10.04 10.10  9.51  9.47  8.85  9.42  9.28  9.86</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [325] 10.10  9.75  8.90  8.81  9.08  9.80 10.54 10.65  9.58  9.87  9.52 10.29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [337] 10.55  9.22 10.56 10.35 10.65 10.32  9.97 10.63 10.54 10.50 10.48 10.87</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [349] 10.50  9.97 10.14  8.86 10.72  9.72  9.61 10.95 10.31 10.34 10.58 10.68</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [361] 10.34 10.76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $tau</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x50 x235 x326 x330 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   50  235  326  330 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $region_params</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 5 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   region    param_mu</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> [0,50)        8.74</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> [50,235)      9.15</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> [235,326)     9.46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> [326,330)     9.14</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> [330,362]    10.3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $model_params</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sigma_hatsq </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.3188567 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $fitted_values</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]  8.744898  8.744898  8.744898  8.744898  8.744898  8.744898  8.744898</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [8]  8.744898  8.744898  8.744898  8.744898  8.744898  8.744898  8.744898</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [15]  8.744898  8.744898  8.744898  8.744898  8.744898  8.744898  8.744898</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [22]  8.744898  8.744898  8.744898  8.744898  8.744898  8.744898  8.744898</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [29]  8.744898  8.744898  8.744898  8.744898  8.744898  8.744898  8.744898</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [36]  8.744898  8.744898  8.744898  8.744898  8.744898  8.744898  8.744898</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [43]  8.744898  8.744898  8.744898  8.744898  8.744898  8.744898  8.744898</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [50]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [57]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [64]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [71]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [78]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [85]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [92]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [99]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [106]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [113]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [120]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [127]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [134]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [141]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [148]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [155]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [162]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [169]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [176]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [183]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [190]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [197]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [204]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [211]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [218]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [225]  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378  9.152378</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [232]  9.152378  9.152378  9.152378  9.463516  9.463516  9.463516  9.463516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [239]  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [246]  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [253]  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [260]  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [267]  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [274]  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [281]  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [288]  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [295]  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [302]  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [309]  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [316]  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516  9.463516</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [323]  9.463516  9.463516  9.463516  9.135000  9.135000  9.135000  9.135000</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [330] 10.253636 10.253636 10.253636 10.253636 10.253636 10.253636 10.253636</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [337] 10.253636 10.253636 10.253636 10.253636 10.253636 10.253636 10.253636</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [344] 10.253636 10.253636 10.253636 10.253636 10.253636 10.253636 10.253636</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [351] 10.253636 10.253636 10.253636 10.253636 10.253636 10.253636 10.253636</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [358] 10.253636 10.253636 10.253636 10.253636 10.253636</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $model_name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "meanshift_norm"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 8.255067 secs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $time_index</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] "1659-01-01" "1660-01-01" "1661-01-01" "1662-01-01" "1663-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [6] "1664-01-01" "1665-01-01" "1666-01-01" "1667-01-01" "1668-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] "1669-01-01" "1670-01-01" "1671-01-01" "1672-01-01" "1673-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [16] "1674-01-01" "1675-01-01" "1676-01-01" "1677-01-01" "1678-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] "1679-01-01" "1680-01-01" "1681-01-01" "1682-01-01" "1683-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [26] "1684-01-01" "1685-01-01" "1686-01-01" "1687-01-01" "1688-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] "1689-01-01" "1690-01-01" "1691-01-01" "1692-01-01" "1693-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [36] "1694-01-01" "1695-01-01" "1696-01-01" "1697-01-01" "1698-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] "1699-01-01" "1700-01-01" "1701-01-01" "1702-01-01" "1703-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [46] "1704-01-01" "1705-01-01" "1706-01-01" "1707-01-01" "1708-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] "1709-01-01" "1710-01-01" "1711-01-01" "1712-01-01" "1713-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [56] "1714-01-01" "1715-01-01" "1716-01-01" "1717-01-01" "1718-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] "1719-01-01" "1720-01-01" "1721-01-01" "1722-01-01" "1723-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [66] "1724-01-01" "1725-01-01" "1726-01-01" "1727-01-01" "1728-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] "1729-01-01" "1730-01-01" "1731-01-01" "1732-01-01" "1733-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [76] "1734-01-01" "1735-01-01" "1736-01-01" "1737-01-01" "1738-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] "1739-01-01" "1740-01-01" "1741-01-01" "1742-01-01" "1743-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [86] "1744-01-01" "1745-01-01" "1746-01-01" "1747-01-01" "1748-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] "1749-01-01" "1750-01-01" "1751-01-01" "1752-01-01" "1753-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [96] "1754-01-01" "1755-01-01" "1756-01-01" "1757-01-01" "1758-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [101] "1759-01-01" "1760-01-01" "1761-01-01" "1762-01-01" "1763-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [106] "1764-01-01" "1765-01-01" "1766-01-01" "1767-01-01" "1768-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [111] "1769-01-01" "1770-01-01" "1771-01-01" "1772-01-01" "1773-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [116] "1774-01-01" "1775-01-01" "1776-01-01" "1777-01-01" "1778-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [121] "1779-01-01" "1780-01-01" "1781-01-01" "1782-01-01" "1783-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [126] "1784-01-01" "1785-01-01" "1786-01-01" "1787-01-01" "1788-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [131] "1789-01-01" "1790-01-01" "1791-01-01" "1792-01-01" "1793-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [136] "1794-01-01" "1795-01-01" "1796-01-01" "1797-01-01" "1798-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [141] "1799-01-01" "1800-01-01" "1801-01-01" "1802-01-01" "1803-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [146] "1804-01-01" "1805-01-01" "1806-01-01" "1807-01-01" "1808-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [151] "1809-01-01" "1810-01-01" "1811-01-01" "1812-01-01" "1813-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [156] "1814-01-01" "1815-01-01" "1816-01-01" "1817-01-01" "1818-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [161] "1819-01-01" "1820-01-01" "1821-01-01" "1822-01-01" "1823-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [166] "1824-01-01" "1825-01-01" "1826-01-01" "1827-01-01" "1828-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [171] "1829-01-01" "1830-01-01" "1831-01-01" "1832-01-01" "1833-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [176] "1834-01-01" "1835-01-01" "1836-01-01" "1837-01-01" "1838-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [181] "1839-01-01" "1840-01-01" "1841-01-01" "1842-01-01" "1843-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [186] "1844-01-01" "1845-01-01" "1846-01-01" "1847-01-01" "1848-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [191] "1849-01-01" "1850-01-01" "1851-01-01" "1852-01-01" "1853-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [196] "1854-01-01" "1855-01-01" "1856-01-01" "1857-01-01" "1858-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [201] "1859-01-01" "1860-01-01" "1861-01-01" "1862-01-01" "1863-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [206] "1864-01-01" "1865-01-01" "1866-01-01" "1867-01-01" "1868-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [211] "1869-01-01" "1870-01-01" "1871-01-01" "1872-01-01" "1873-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [216] "1874-01-01" "1875-01-01" "1876-01-01" "1877-01-01" "1878-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [221] "1879-01-01" "1880-01-01" "1881-01-01" "1882-01-01" "1883-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [226] "1884-01-01" "1885-01-01" "1886-01-01" "1887-01-01" "1888-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [231] "1889-01-01" "1890-01-01" "1891-01-01" "1892-01-01" "1893-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [236] "1894-01-01" "1895-01-01" "1896-01-01" "1897-01-01" "1898-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [241] "1899-01-01" "1900-01-01" "1901-01-01" "1902-01-01" "1903-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [246] "1904-01-01" "1905-01-01" "1906-01-01" "1907-01-01" "1908-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [251] "1909-01-01" "1910-01-01" "1911-01-01" "1912-01-01" "1913-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [256] "1914-01-01" "1915-01-01" "1916-01-01" "1917-01-01" "1918-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [261] "1919-01-01" "1920-01-01" "1921-01-01" "1922-01-01" "1923-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [266] "1924-01-01" "1925-01-01" "1926-01-01" "1927-01-01" "1928-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [271] "1929-01-01" "1930-01-01" "1931-01-01" "1932-01-01" "1933-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [276] "1934-01-01" "1935-01-01" "1936-01-01" "1937-01-01" "1938-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [281] "1939-01-01" "1940-01-01" "1941-01-01" "1942-01-01" "1943-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [286] "1944-01-01" "1945-01-01" "1946-01-01" "1947-01-01" "1948-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [291] "1949-01-01" "1950-01-01" "1951-01-01" "1952-01-01" "1953-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [296] "1954-01-01" "1955-01-01" "1956-01-01" "1957-01-01" "1958-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [301] "1959-01-01" "1960-01-01" "1961-01-01" "1962-01-01" "1963-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [306] "1964-01-01" "1965-01-01" "1966-01-01" "1967-01-01" "1968-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [311] "1969-01-01" "1970-01-01" "1971-01-01" "1972-01-01" "1973-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [316] "1974-01-01" "1975-01-01" "1976-01-01" "1977-01-01" "1978-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [321] "1979-01-01" "1980-01-01" "1981-01-01" "1982-01-01" "1983-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [326] "1984-01-01" "1985-01-01" "1986-01-01" "1987-01-01" "1988-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [331] "1989-01-01" "1990-01-01" "1991-01-01" "1992-01-01" "1993-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [336] "1994-01-01" "1995-01-01" "1996-01-01" "1997-01-01" "1998-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [341] "1999-01-01" "2000-01-01" "2001-01-01" "2002-01-01" "2003-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [346] "2004-01-01" "2005-01-01" "2006-01-01" "2007-01-01" "2008-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [351] "2009-01-01" "2010-01-01" "2011-01-01" "2012-01-01" "2013-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [356] "2014-01-01" "2015-01-01" "2016-01-01" "2017-01-01" "2018-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [361] "2019-01-01" "2020-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:362] from 1 to 362: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : Named int [1:4] 50 235 326 330</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr [1:4] "x50" "x235" "x326" "x330"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [5 × 2] (S3: tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region  : chr [1:5] "[0,50)" "[50,235)" "[235,326)" "[326,330)" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu: num [1:5] 8.74 9.15 9.46 9.13 10.25</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : Named num 0.319</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr "sigma_hatsq"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:362] 8.74 8.74 8.74 8.74 8.74 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanshift_norm"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
 <span class="r-in"><span><span class="va">f</span> <span class="op">&lt;-</span> <span class="fu">log_gabin_population</span><span class="op">(</span><span class="va">CET</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">CET</span>, method <span class="op">=</span> <span class="st">"ga"</span>, population <span class="op">=</span> <span class="va">f</span>, maxiter <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> method: ga</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Seeding initial population with probability: 0.0162752602536624</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $segmenter</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> A tidycpt object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> An object of class "ga"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Call:</span>
@@ -332,202 +147,18 @@ probability to the natural logarithm of the length of the time series.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [13] "suggestions"   "population"    "elitism"       "pcrossover"   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [17] "pmutation"     "optim"         "fitness"       "summary"      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21] "bestSol"       "fitnessValue"  "solution"     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $model</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $data</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time Series:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Start = 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> End = 362 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Frequency = 1 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]  8.87  9.10  9.78  9.52  8.63  9.34  8.29  9.86  8.52  9.51  9.02  8.96</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [13]  9.08  8.82  8.38  8.12  7.88  8.84  8.78  8.45  8.76  8.89  8.75  9.05</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [25]  8.49  7.95  9.16 10.15  8.99  7.86  8.56  8.94  8.17  7.73  8.47  7.67</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [37]  7.29  8.52  8.05  7.67  8.83  8.60  8.75  9.31  9.09  9.07  8.75  9.82</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [49]  9.41  9.68  8.74  9.49  9.42  9.14  8.64  9.44  9.44  8.38  9.04  9.29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [61]  9.49  9.10  8.91  9.37  9.80  9.28  8.69  9.36  9.97  9.54  9.29 10.07</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [73]  9.90  9.69 10.50  9.82  9.57 10.33  9.95  9.84  9.21  6.86  9.32  8.38</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [85]  9.83  8.80  8.85  8.66  9.84  8.79  9.49  9.71  8.47  9.21  9.12  8.87</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [97]  8.58  8.78  8.97  8.98 10.03  9.85 10.02  9.61  8.95  8.73  8.55  8.66</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [109]  8.70  8.95  8.81  8.53  8.58  9.17  9.29  9.09 10.11  9.02  9.12  9.23</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [121] 10.41  9.12 10.23  8.05  9.31  7.85  8.58  8.27  9.31  9.22  8.93  9.46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [133]  9.29  9.20  9.13  9.90  8.71  9.02  9.03  9.63  7.92  9.28  9.63  8.98</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [145]  9.09  9.59  9.00  9.84  8.69  8.86  8.96  8.78  9.69  8.21  8.72  7.78</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [157]  9.07  7.89  8.89  9.88  9.27  8.56  9.55 10.06  8.40  9.32  9.76 10.09</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [169]  9.51 10.32  8.18  8.72 10.13  9.49  9.52 10.51  9.57  8.88  8.85  8.10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [181]  8.71  8.52  8.75  9.25  9.10  8.60  8.30 10.16  9.26  9.42  9.32  9.10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [193]  9.18  9.82  8.41  9.34  8.09  9.10 10.11  9.16  9.64  7.92  9.15  9.21</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [205]  9.69  8.87  9.72  9.68  9.03 10.40  9.62  9.02  9.07  9.76  9.03  9.33</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [217]  9.48  9.53  9.19  9.26  7.44  9.10  8.58  9.47  9.04  9.85  8.58  8.74</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [229]  8.30  8.24  9.02  8.76  8.51  8.18 10.01  9.32  8.70  9.34  9.44 10.10</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [241]  9.71  9.60  9.15  8.88  9.33  9.02  9.16  9.47  8.88  9.28  8.59  9.20</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [253] 10.09  9.37  9.83  9.90  8.96  9.20  8.55  9.53  8.53  9.58 10.51  8.70</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [265]  9.11  9.29  9.20  9.74  9.24  9.59  9.06  9.47  9.02  9.41  9.86 10.03</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [277]  9.74  9.35  9.59 10.21  9.70  9.06  9.12  9.11 10.05  9.59 10.29  9.46</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [289]  9.65 10.03 10.64  9.43  9.30  9.12  9.87  9.26  9.33  8.87 10.06  9.45</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [301] 10.52  9.75  9.95  8.61  8.52  9.48  8.99  9.47  9.64  9.32  9.32  9.60</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [313]  9.72  9.22  9.57  9.64 10.04 10.10  9.51  9.47  8.85  9.42  9.28  9.86</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [325] 10.10  9.75  8.90  8.81  9.08  9.80 10.54 10.65  9.58  9.87  9.52 10.29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [337] 10.55  9.22 10.56 10.35 10.65 10.32  9.97 10.63 10.54 10.50 10.48 10.87</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [349] 10.50  9.97 10.14  8.86 10.72  9.72  9.61 10.95 10.31 10.34 10.58 10.68</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [361] 10.34 10.76</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $tau</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x43 x250 x336 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   43  250  336 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $region_params</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   region    param_mu</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> [0,43)        8.67</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> [43,250)      9.17</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> [250,336)     9.51</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> [336,362]    10.3 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $model_params</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> sigma_hatsq </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.3195173 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $fitted_values</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1]  8.673810  8.673810  8.673810  8.673810  8.673810  8.673810  8.673810</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [8]  8.673810  8.673810  8.673810  8.673810  8.673810  8.673810  8.673810</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [15]  8.673810  8.673810  8.673810  8.673810  8.673810  8.673810  8.673810</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [22]  8.673810  8.673810  8.673810  8.673810  8.673810  8.673810  8.673810</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [29]  8.673810  8.673810  8.673810  8.673810  8.673810  8.673810  8.673810</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [36]  8.673810  8.673810  8.673810  8.673810  8.673810  8.673810  8.673810</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [43]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [50]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [57]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [64]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [71]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [78]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [85]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [92]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [99]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [106]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [113]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [120]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [127]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [134]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [141]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [148]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [155]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [162]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [169]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [176]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [183]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [190]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [197]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [204]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [211]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [218]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [225]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [232]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [239]  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667  9.166667</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [246]  9.166667  9.166667  9.166667  9.166667  9.506628  9.506628  9.506628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [253]  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [260]  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [267]  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [274]  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [281]  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [288]  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [295]  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [302]  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [309]  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [316]  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [323]  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [330]  9.506628  9.506628  9.506628  9.506628  9.506628  9.506628 10.311481</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [337] 10.311481 10.311481 10.311481 10.311481 10.311481 10.311481 10.311481</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [344] 10.311481 10.311481 10.311481 10.311481 10.311481 10.311481 10.311481</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [351] 10.311481 10.311481 10.311481 10.311481 10.311481 10.311481 10.311481</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [358] 10.311481 10.311481 10.311481 10.311481 10.311481</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $model_name</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "meanshift_norm"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.8417811 secs</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> $time_index</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [1] "1659-01-01" "1660-01-01" "1661-01-01" "1662-01-01" "1663-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   [6] "1664-01-01" "1665-01-01" "1666-01-01" "1667-01-01" "1668-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [11] "1669-01-01" "1670-01-01" "1671-01-01" "1672-01-01" "1673-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [16] "1674-01-01" "1675-01-01" "1676-01-01" "1677-01-01" "1678-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [21] "1679-01-01" "1680-01-01" "1681-01-01" "1682-01-01" "1683-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [26] "1684-01-01" "1685-01-01" "1686-01-01" "1687-01-01" "1688-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [31] "1689-01-01" "1690-01-01" "1691-01-01" "1692-01-01" "1693-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [36] "1694-01-01" "1695-01-01" "1696-01-01" "1697-01-01" "1698-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [41] "1699-01-01" "1700-01-01" "1701-01-01" "1702-01-01" "1703-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [46] "1704-01-01" "1705-01-01" "1706-01-01" "1707-01-01" "1708-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [51] "1709-01-01" "1710-01-01" "1711-01-01" "1712-01-01" "1713-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [56] "1714-01-01" "1715-01-01" "1716-01-01" "1717-01-01" "1718-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [61] "1719-01-01" "1720-01-01" "1721-01-01" "1722-01-01" "1723-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [66] "1724-01-01" "1725-01-01" "1726-01-01" "1727-01-01" "1728-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [71] "1729-01-01" "1730-01-01" "1731-01-01" "1732-01-01" "1733-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [76] "1734-01-01" "1735-01-01" "1736-01-01" "1737-01-01" "1738-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [81] "1739-01-01" "1740-01-01" "1741-01-01" "1742-01-01" "1743-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [86] "1744-01-01" "1745-01-01" "1746-01-01" "1747-01-01" "1748-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [91] "1749-01-01" "1750-01-01" "1751-01-01" "1752-01-01" "1753-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [96] "1754-01-01" "1755-01-01" "1756-01-01" "1757-01-01" "1758-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [101] "1759-01-01" "1760-01-01" "1761-01-01" "1762-01-01" "1763-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [106] "1764-01-01" "1765-01-01" "1766-01-01" "1767-01-01" "1768-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [111] "1769-01-01" "1770-01-01" "1771-01-01" "1772-01-01" "1773-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [116] "1774-01-01" "1775-01-01" "1776-01-01" "1777-01-01" "1778-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [121] "1779-01-01" "1780-01-01" "1781-01-01" "1782-01-01" "1783-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [126] "1784-01-01" "1785-01-01" "1786-01-01" "1787-01-01" "1788-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [131] "1789-01-01" "1790-01-01" "1791-01-01" "1792-01-01" "1793-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [136] "1794-01-01" "1795-01-01" "1796-01-01" "1797-01-01" "1798-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [141] "1799-01-01" "1800-01-01" "1801-01-01" "1802-01-01" "1803-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [146] "1804-01-01" "1805-01-01" "1806-01-01" "1807-01-01" "1808-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [151] "1809-01-01" "1810-01-01" "1811-01-01" "1812-01-01" "1813-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [156] "1814-01-01" "1815-01-01" "1816-01-01" "1817-01-01" "1818-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [161] "1819-01-01" "1820-01-01" "1821-01-01" "1822-01-01" "1823-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [166] "1824-01-01" "1825-01-01" "1826-01-01" "1827-01-01" "1828-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [171] "1829-01-01" "1830-01-01" "1831-01-01" "1832-01-01" "1833-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [176] "1834-01-01" "1835-01-01" "1836-01-01" "1837-01-01" "1838-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [181] "1839-01-01" "1840-01-01" "1841-01-01" "1842-01-01" "1843-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [186] "1844-01-01" "1845-01-01" "1846-01-01" "1847-01-01" "1848-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [191] "1849-01-01" "1850-01-01" "1851-01-01" "1852-01-01" "1853-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [196] "1854-01-01" "1855-01-01" "1856-01-01" "1857-01-01" "1858-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [201] "1859-01-01" "1860-01-01" "1861-01-01" "1862-01-01" "1863-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [206] "1864-01-01" "1865-01-01" "1866-01-01" "1867-01-01" "1868-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [211] "1869-01-01" "1870-01-01" "1871-01-01" "1872-01-01" "1873-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [216] "1874-01-01" "1875-01-01" "1876-01-01" "1877-01-01" "1878-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [221] "1879-01-01" "1880-01-01" "1881-01-01" "1882-01-01" "1883-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [226] "1884-01-01" "1885-01-01" "1886-01-01" "1887-01-01" "1888-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [231] "1889-01-01" "1890-01-01" "1891-01-01" "1892-01-01" "1893-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [236] "1894-01-01" "1895-01-01" "1896-01-01" "1897-01-01" "1898-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [241] "1899-01-01" "1900-01-01" "1901-01-01" "1902-01-01" "1903-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [246] "1904-01-01" "1905-01-01" "1906-01-01" "1907-01-01" "1908-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [251] "1909-01-01" "1910-01-01" "1911-01-01" "1912-01-01" "1913-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [256] "1914-01-01" "1915-01-01" "1916-01-01" "1917-01-01" "1918-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [261] "1919-01-01" "1920-01-01" "1921-01-01" "1922-01-01" "1923-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [266] "1924-01-01" "1925-01-01" "1926-01-01" "1927-01-01" "1928-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [271] "1929-01-01" "1930-01-01" "1931-01-01" "1932-01-01" "1933-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [276] "1934-01-01" "1935-01-01" "1936-01-01" "1937-01-01" "1938-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [281] "1939-01-01" "1940-01-01" "1941-01-01" "1942-01-01" "1943-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [286] "1944-01-01" "1945-01-01" "1946-01-01" "1947-01-01" "1948-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [291] "1949-01-01" "1950-01-01" "1951-01-01" "1952-01-01" "1953-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [296] "1954-01-01" "1955-01-01" "1956-01-01" "1957-01-01" "1958-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [301] "1959-01-01" "1960-01-01" "1961-01-01" "1962-01-01" "1963-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [306] "1964-01-01" "1965-01-01" "1966-01-01" "1967-01-01" "1968-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [311] "1969-01-01" "1970-01-01" "1971-01-01" "1972-01-01" "1973-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [316] "1974-01-01" "1975-01-01" "1976-01-01" "1977-01-01" "1978-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [321] "1979-01-01" "1980-01-01" "1981-01-01" "1982-01-01" "1983-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [326] "1984-01-01" "1985-01-01" "1986-01-01" "1987-01-01" "1988-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [331] "1989-01-01" "1990-01-01" "1991-01-01" "1992-01-01" "1993-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [336] "1994-01-01" "1995-01-01" "1996-01-01" "1997-01-01" "1998-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [341] "1999-01-01" "2000-01-01" "2001-01-01" "2002-01-01" "2003-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [346] "2004-01-01" "2005-01-01" "2006-01-01" "2007-01-01" "2008-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [351] "2009-01-01" "2010-01-01" "2011-01-01" "2012-01-01" "2013-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [356] "2014-01-01" "2015-01-01" "2016-01-01" "2017-01-01" "2018-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [361] "2019-01-01" "2020-01-01"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:362] from 1 to 362: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : Named int [1:3] 43 250 336</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr [1:3] "x43" "x250" "x336"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [4 × 2] (S3: tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region  : chr [1:4] "[0,43)" "[43,250)" "[250,336)" "[336,362]"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu: num [1:4] 8.67 9.17 9.51 10.31</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : Named num 0.32</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr "sigma_hatsq"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:362] 8.67 8.67 8.67 8.67 8.67 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanshift_norm"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
