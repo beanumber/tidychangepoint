@@ -4,9 +4,9 @@
 \name{tidychangepoint-package}
 \alias{tidychangepoint}
 \alias{tidychangepoint-package}
-\title{tidychangepoint: What the Package Does (One Line, Title Case)}
+\title{tidychangepoint: Facilitate Changepoint Detection Analysis in a Tidy Framework}
 \description{
-What the package does (one paragraph).
+Changepoint detection algorithms for R are widespread but have different interfaces and reporting conventions. This makes the comparative analysis of results difficult. Tidychangepoint solves this problem by providing a unified interface for several different changepoint detection algorithms. It also provides consistent numerical and graphical reporting using the broom and ggplot2 packages.
 }
 \seealso{
 Useful links:
@@ -20,8 +20,9 @@ Useful links:
 
 Authors:
 \itemize{
-  \item Biviana Suarez Sierra \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
-  \item Carlos A. Taimal \email{first.last@example.com} (\href{https://orcid.org/YOUR-ORCID-ID}{ORCID})
+  \item Biviana Marcela Suarez Sierra \email{bmsuarezs@eafit.edu.co} (\href{https://orcid.org/0000-0003-2151-3537}{ORCID})
+  \item Arrigo Coen (\href{https://orcid.org/0000-0001-7798-7104}{ORCID})
+  \item Carlos A. Taimal (\href{https://orcid.org/0000-0002-8716-1282}{ORCID})
 }
 
 Other contributors:
