@@ -27,7 +27,7 @@
 \item{x}{A \code{cpt} object returned by \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}}
 }
 \description{
-Compatibility layer for changepoint
+Methods for generic functions applied to \code{cpt} objects
 }
 \examples{
 cpts <- segment(DataCPSim, method = "pelt")
@@ -43,4 +43,7 @@ model_args(x)
 nobs(x)
 seg_params(x)
 
+}
+\seealso{
+\link[changepoint:changepoint-package]{changepoint::changepoint-package}
 }

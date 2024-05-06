@@ -24,7 +24,7 @@
 \item{x}{A \code{GA} object returned by \code{\link[GA:ga]{GA::ga()}}}
 }
 \description{
-Compatibility layer for GA
+Methods for generic functions applied to \code{ga} objects
 }
 \examples{
 cpts <- segment(DataCPSim, method = "ga", maxiter = 10)
@@ -43,4 +43,7 @@ as.ts(cpts)
 
 cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
 nobs(cpts$segmenter)
+}
+\seealso{
+\link[GA:GA-package]{GA::GA-package}
 }

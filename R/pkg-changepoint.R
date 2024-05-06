@@ -1,8 +1,13 @@
 #' Compatibility layer for changepoint
 #' @name cpt-generics
+#' 
+#' @description
+#' Methods for generic functions applied to `cpt` objects
+#' 
 #' @param x A `cpt` object returned by [changepoint::cpt.meanvar()]
 #' @param object A `cpt` object.
 #' @param ... arguments passed to methods
+#' @seealso [changepoint::changepoint-package]
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "pelt")

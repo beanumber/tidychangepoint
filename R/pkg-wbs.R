@@ -1,8 +1,12 @@
 #' Compatibility layer for wbs
 #' @name wbs-generics
+#' 
+#' @description
+#' Methods for generic functions applied to `wbs` objects
 #' @param x A `wbs` object returned by [wbs::wbs()]
 #' @param ... arguments passed to methods
 #' @export
+#' @seealso [wbs::wbs-package]
 #' @examples
 #' cpts <- segment(DataCPSim, method = "wbs")
 #' x <- cpts$segmenter

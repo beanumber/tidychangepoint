@@ -1,8 +1,13 @@
 globalVariables(c("median", "q1", "q3"))
 #' Compatibility layer for GA
 #' @name ga-generics
+#' 
+#' @description
+#' Methods for generic functions applied to `ga` objects
+#' 
 #' @param x A `GA` object returned by [GA::ga()]
 #' @param ... arguments passed to methods
+#' @seealso [GA::GA-package]
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "ga", maxiter = 10)

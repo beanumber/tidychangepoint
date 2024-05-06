@@ -24,7 +24,7 @@
 \item{x}{A \code{wbs} object returned by \code{\link[wbs:wbs]{wbs::wbs()}}}
 }
 \description{
-Compatibility layer for wbs
+Methods for generic functions applied to \code{wbs} objects
 }
 \examples{
 cpts <- segment(DataCPSim, method = "wbs")
@@ -44,4 +44,7 @@ as.ts(cpts)
 
 cpts <- segment(DataCPSim, method = "wbs")
 nobs(cpts$segmenter)
+}
+\seealso{
+\link[wbs:wbs-package]{wbs::wbs-package}
 }
