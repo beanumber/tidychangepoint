@@ -17,10 +17,12 @@ changepoints.default <- function(x, ...) {
   attr(x, "cpt_true")
 }
 
-#' Convert a wild-caught segmenter object into a `segmenter` object
-#' @param object An object resulting from a changepoint detection algorithm.
-#' @param ... currently ignored
-#' @family tidychangepoint-generics
+#' @rdname as.model
+#' @details
+#'   - [as.segmenter()] converts a wild-caught segmenter of any class into a
+#'   `seg_cpt` object
+#' @return
+#'   - [as.segmenter()] returns a [seg_cpt] object
 #' @export
 as.segmenter <- function(object, ...) UseMethod("as.segmenter")
 
@@ -107,8 +109,15 @@ model_args.default <- function(object, ...) {
 }
 
 #' Convert a segmenter to a model object
+#' @description
+#' Convert segmenters into models or standardized segmenters
+#' 
 #' @param object A segmenter object, typically returned by [segment()]
 #' @param ... currently ignored
+#' @details
+#'   - [as.model()] converts a segmenter object into a [mod_cpt] model object
+#' @return 
+#'   - [as.model()] returns a [mod_cpt] model object
 #' @export
 as.model <- function(object, ...) UseMethod("as.model")
 

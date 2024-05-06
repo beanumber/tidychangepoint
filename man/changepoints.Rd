@@ -59,13 +59,11 @@ changepoints(cpts$segmenter)
 \code{\link[wbs:changepoints]{wbs::changepoints()}}
 
 Other tidychangepoint-generics: 
-\code{\link{as.segmenter}()},
 \code{\link{diagnose.mod_cpt}()},
 \code{\link{exceedances}()},
 \code{\link{fitness.seg_basket}()}
 
 Other tidychangepoint-generics: 
-\code{\link{as.segmenter}()},
 \code{\link{diagnose.mod_cpt}()},
 \code{\link{exceedances}()},
 \code{\link{fitness.seg_basket}()}

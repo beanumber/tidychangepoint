@@ -195,6 +195,11 @@ vec_cast.logLik.logLik <- function(x, to, ...) {
 #' @rdname as.model
 #' @param x An object, typically returned by `fit_*()`
 #' @export
+#' @details
+#'   - [is_model()] checks to see if a model object implements all of the 
+#'   S3 methods necessary to be considered a model. 
+#' @return 
+#'   - [is_model()] a `logical` vector of length 1
 #' @examples
 #' x <- fit_nhpp(CET, tau = 330)
 #' is_model(x)
@@ -205,6 +210,11 @@ is_model <- function(x, ...) {
 
 #' @rdname as.model
 #' @export
+#' @details
+#'   - [is_segmenter()] checks to see if a segmenter object implements all of the 
+#'   S3 methods necessary to be considered a segmenter. 
+#' @return 
+#'   - [is_segmenter()] a `logical` vector of length 1
 #' @examples
 #' x <- segment(CET, method = "pelt")
 #' is_segmenter(x$segmenter)
