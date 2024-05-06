@@ -30,15 +30,15 @@ Regression-based model fitting
 }
 \details{
 \itemize{
-\item \link{fit_lmshift_ar1}: will apply auto-regressive lag 1 errors
+\item \code{\link[=fit_lmshift_ar1]{fit_lmshift_ar1()}}: will apply auto-regressive lag 1 errors
 }
 
 \itemize{
-\item \link{fit_trendshift}: will fit a line in each region
+\item \code{\link[=fit_trendshift]{fit_trendshift()}}: will fit a line in each region
 }
 
 \itemize{
-\item \link{fit_trendshift_ar1}: will fit a line in each region and autoregress lag 1 errors
+\item \code{\link[=fit_trendshift_ar1]{fit_trendshift_ar1()}}: will fit a line in each region and autoregress lag 1 errors
 }
 }
 \examples{

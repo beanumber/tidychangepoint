@@ -39,12 +39,24 @@ data set.}
 
 \item{...}{currently ignored}
 }
+\value{
+A \code{mod_cpt} object
+}
 \description{
-Base class for changepoint models
+Create changepoint detection model objects
+}
+\details{
+Changepoint detectio models know how they were created, on what data set,
+about the optimal changepoint set found, and the parameters that were fit
+to the model.
+Methods for various generic reporting functions are provided.
 }
 \examples{
 cpt <- mod_cpt(CET)
 str(cpt)
 as.ts(cpt)
 changepoints(cpt)
+}
+\seealso{
+\code{\link[=as.ts.mod_cpt]{as.ts.mod_cpt()}}
 }

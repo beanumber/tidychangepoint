@@ -39,7 +39,7 @@ model_variance(object, ...)
 }
 \arguments{
 \item{x}{A \code{mod_cpt} object, typically the output from one of the \verb{fit_*()}
-functions}
+functions or \code{\link[=as.model]{as.model()}}}
 
 \item{...}{some methods for this generic function require additional
    arguments.}
@@ -48,7 +48,14 @@ functions}
    contribution to a log-likelihood value, can be extracted.}
 }
 \description{
-Methods for mod_cpt objects
+Methods for generic functions applied to \code{\link[=mod_cpt]{mod_cpt()}} objects
+}
+\details{
+All changepoint detection models inherit from \link{class-mod_cpt}: the
+base class for changepoint detection models.
+These models are created by one of the \verb{fit_*()} functions, or by
+\code{\link[=as.model]{as.model()}}.
+The methods documented here work on these objects.
 }
 \examples{
 cpts <- fit_meanshift_norm(DataCPSim, tau = 365)
@@ -67,6 +74,8 @@ plot(fit_lmshift(CET, tau = 330, deg_poly = 2))
 plot(fit_lmshift(CET, tau = 330, deg_poly = 10))
 }
 \seealso{
+\code{\link[=mod_cpt]{mod_cpt()}}
+
 \code{\link[broom:reexports]{broom::augment()}}
 
 \code{\link[broom:reexports]{broom::tidy()}}

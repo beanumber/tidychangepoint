@@ -1,6 +1,15 @@
 globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".fitted", ".resid"))
 
 #' Base class for changepoint models
+#' 
+#' @description
+#' Create changepoint detection model objects
+#' @details
+#' Changepoint detection models know how they were created, on what data set,
+#' about the optimal changepoint set found, and the parameters that were fit
+#' to the model. 
+#' Methods for various generic reporting functions are provided. 
+#' 
 #' @export
 #' @param x a numeric vector coercible into a `ts` object
 #' @param tau indices of the changepoint set
@@ -13,6 +22,8 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".fitted", ".resid"))
 #' data set. 
 #' @param model_name A `character` vector giving the model's name. 
 #' @param ... currently ignored
+#' @returns A `mod_cpt` object
+#' @seealso [as.ts.mod_cpt()], [as.model()]
 #' @examples
 #' cpt <- mod_cpt(CET)
 #' str(cpt)
@@ -63,8 +74,19 @@ mod_cpt <- function(x, ...) {
 
 #' Methods for mod_cpt objects
 #' @name mod_cpt-generics
+#' 
+#' @description 
+#' Methods for generic functions applied to [mod_cpt()] objects
+#' 
 #' @param x A `mod_cpt` object, typically the output from one of the `fit_*()`
-#' functions
+#' functions or [as.model()]
+#' @details
+#' All changepoint detection models inherit from [class-mod_cpt]: the 
+#' base class for changepoint detection models. 
+#' These models are created by one of the `fit_*()` functions, or by 
+#' [as.model()]. 
+#' The methods documented here work on these objects. 
+#' @seealso [mod_cpt()]
 #' @export
 #' @examples
 #' cpts <- fit_meanshift_norm(DataCPSim, tau = 365)
