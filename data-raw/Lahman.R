@@ -21,6 +21,7 @@ mlb_hrs <- Batting |>
   arrange(yearID, lgID) |>
   summarize(hr_rate_diff = diff(hr_rate)) |>
   pull(hr_rate_diff) |>
-  ts(start = 1925, frequency = 1)
+  ts(start = 1925, frequency = 1) |>
+  xts::as.xts()
   
 usethis::use_data(mlb_hrs, overwrite = TRUE, compress = "xz")

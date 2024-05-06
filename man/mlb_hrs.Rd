@@ -5,7 +5,7 @@
 \alias{mlb_hrs}
 \title{Differences between leagues in Major League Baseball}
 \format{
-An object of class \code{ts} of length 98.
+An object of class \code{xts} (inherits from \code{zoo}) with 98 rows and 1 columns.
 }
 \usage{
 mlb_hrs
