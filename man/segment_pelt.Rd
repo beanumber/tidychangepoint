@@ -20,3 +20,12 @@ See, for example, \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}}.}
 \description{
 Segmenting functions for the PELT algorithm
 }
+\examples{
+res <- segment_pelt(DataCPSim)
+summary(res)
+str(res)
+plot(res)
+segment_pelt(as.ts(CET))
+segment_pelt(as.ts(CET), penalty = "BIC")
+segment_pelt(as.ts(CET), model_fn = fit_meanvar, penalty = "BIC")
+}

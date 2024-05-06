@@ -8,7 +8,7 @@
 #' See, for example, [fit_meanshift_norm()].
 #' @param penalty_fn A function that evaluates the changepoint set returned by
 #' `model_fn`. We provide [AIC()], [BIC()], [MBIC()], [MDL()], and [BMDL()].
-#' @param ... arguments passed to [changepoint::meanvar()]
+#' @param ... arguments passed to [changepoint::cpt.meanvar()]
 #' @export
 #' @examples
 #' res <- segment_pelt(DataCPSim)

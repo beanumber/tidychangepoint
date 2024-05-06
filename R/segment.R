@@ -101,7 +101,7 @@ segment.ts <- function(x, method = "null", ...) {
   begin <- Sys.time()
   
   if (method == "pelt") {
-    seg <- changepoint::cpt.meanvar(data = x, method = "PELT", ...)
+    seg <- segment_pelt(x, ...)
   }
   if (method == "binseg") {
     seg <- changepoint::cpt.meanvar(data = x, method = "BinSeg", ...)
