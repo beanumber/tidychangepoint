@@ -88,13 +88,13 @@ sets in univariate time series.</p>
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
     
 
-<p>An object of class <code>tidycpt</code>. Every <code>tidycpt</code> object contains:</p><ul><li><p><code>segmenter</code>: The object returned by the underlying function.</p></li>
-<li><p><code>nhpp</code>: A <code>tbl_df</code> showing the best fit parameters for each region, as
-defined by the changepoint set returned by <code><a href="changepoints.html">changepoints()</a></code> when called
-on the <code>segmenter</code>. These parameters
-are fit using the non-homogeneous Poisson process model in <code><a href="fit_nhpp.html">fit_nhpp()</a></code>.
-This object also has class <code>nhpp</code>.</p></li>
+<p>An object of class <code>tidycpt</code>. Every <code>tidycpt</code> object contains:</p><ul><li><p><code>segmenter</code>: The object returned by the underlying changepoint
+detection algorithm.</p></li>
+<li><p><code>model</code>: A model object inheriting from <code>mod_cpt</code>, as created by
+<code><a href="as.model.html">as.model()</a></code> when called
+on the <code>segmenter</code>.</p></li>
 <li><p><code>elapsed_time</code>: The clock time that passed while the algorithm was running.</p></li>
+<li><p><code>time_index</code>: If available, the labels for the time indices of the time series.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -109,18 +109,19 @@ on the value of the <code>method</code> argument:</p><ul><li><p><code>pelt</code
 <code><a href="https://rdrr.io/pkg/changepoint/man/cpt.meanvar.html" class="external-link">changepoint::cpt.meanvar()</a></code>. The <code>segmenter</code> is of class <code>cpt</code>.</p></li>
 <li><p><code>wbs</code>: Uses the Wild Binary Segmentation algorithm as implemented by
 <code><a href="https://rdrr.io/pkg/wbs/man/wbs.html" class="external-link">wbs::wbs()</a></code>. The <code>segmenter</code> is of class <code>wbs</code>.</p></li>
-<li><p><code>ga</code>: Uses the Genetic algorithm implemented by
+<li><p><code>ga</code>: Uses the Genetic algorithm implemented by <code><a href="segment_ga.html">segment_ga()</a></code>, which wraps
 <code><a href="https://github.com/luca-scr/GA/reference/ga.html" class="external-link">GA::ga()</a></code>. The <code>segmenter</code> is of class <code>tidyga</code>.</p></li>
 <li><p><code>taimal</code>: Uses the Genetic BMDL heuristic as implemented by
 <code><a href="segment_taimal.html">segment_taimal()</a></code>. The <code>segmenter</code> is of class <code><a href="new_seg_basket.html">seg_basket()</a></code>.</p></li>
 <li><p><code>manual</code>: Uses the vector of changepoints in the <code>tau</code> argument.
-The <code>segmenter</code> is of class <code><a href="new_seg_basket.html">seg_basket()</a></code>`.</p></li>
+The <code>segmenter</code> is of class <code><a href="new_seg_cpt.html">seg_cpt()</a></code>`.</p></li>
 <li><p><code>null</code>: The default. Uses no changepoints.
-The <code>segmenter</code> is of class <code><a href="new_seg_basket.html">seg_basket()</a></code>`.</p></li>
+The <code>segmenter</code> is of class <code><a href="new_seg_cpt.html">seg_cpt()</a></code>`.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/changepoint/man/cpt.meanvar.html" class="external-link">changepoint::cpt.meanvar()</a></code>, <code><a href="https://rdrr.io/pkg/wbs/man/wbs.html" class="external-link">wbs::wbs()</a></code>, <code><a href="https://github.com/luca-scr/GA/reference/ga.html" class="external-link">GA::ga()</a></code></p></div>
+    <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/changepoint/man/cpt.meanvar.html" class="external-link">changepoint::cpt.meanvar()</a></code>, <code><a href="https://rdrr.io/pkg/wbs/man/wbs.html" class="external-link">wbs::wbs()</a></code>, <code><a href="https://github.com/luca-scr/GA/reference/ga.html" class="external-link">GA::ga()</a></code>,
+<code><a href="segment_ga.html">segment_ga()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -518,7 +519,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_basket.html">seg_b
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.007604837 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.007029772 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -907,7 +908,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_basket.html">seg_b
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.2174177 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.2157125 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -1288,7 +1289,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_basket.html">seg_b
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.009634018 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.009178162 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -1666,7 +1667,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_basket.html">seg_b
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.6178672 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.1969838 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -2040,7 +2041,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_basket.html">seg_b
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.1059549 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.1148317 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -2559,7 +2560,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_basket.html">seg_b
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.003620625 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.003266335 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"class")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "tidycpt"</span>
@@ -2840,7 +2841,7 @@ The <code>segmenter</code> is of class <code><a href="new_seg_basket.html">seg_b
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "mod_cpt"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.01275516 secs</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Time difference of 0.01242137 secs</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> $time_index</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    [1] "2018-01-01" "2018-01-02" "2018-01-03" "2018-01-04" "2018-01-05"</span>
