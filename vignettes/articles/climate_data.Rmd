@@ -47,7 +47,7 @@ Compare this with the changepoint set discovered by the algorithm:
 
 ```{r}
 changepoints(trend_wn)
-changepoints_labels(trend_wn)
+changepoints(trend_wn, use_labels = TRUE)
 ```
 
 The `fitness()` function returns a named vector with the value of the objective function from the discovered changepoint set. 

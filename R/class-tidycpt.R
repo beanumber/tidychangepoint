@@ -5,15 +5,11 @@ globalVariables(c(
 ))
 
 #' @rdname changepoints
+#' @param use_labels return the time labels for the changepoints instead of the
+#' indices. 
 #' @export
-changepoints.tidycpt <- function(x, ...) {
-  changepoints(x$segmenter)
-}
-
-#' @rdname changepoints
-#' @export
-changepoints_labels <- function(x, ...) {
-  if (length(x$time_index) == length(as.ts(x))) {
+changepoints.tidycpt <- function(x, use_labels = FALSE, ...) {
+  if (use_labels && length(x$time_index) == length(as.ts(x))) {
     x$time_index[changepoints(x)]
   } else {
     changepoints(x$segmenter)

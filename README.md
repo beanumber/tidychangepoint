@@ -49,16 +49,16 @@ returns the set of changepoint indices.
 changepoints(x)
 ```
 
-    ## [1] 237 330
+    ## [1] 329
 
 If the original time series has time labels, we can also retrieve that
 information.
 
 ``` r
-changepoints_labels(x)
+changepoints(x, use_labels = TRUE)
 ```
 
-    ## [1] "1895-01-01" "1988-01-01"
+    ## [1] "1987-01-01"
 
 The `fitness()` function returns the both the value and the name of the
 objective function that the algorithm used to find the optimal
@@ -69,7 +69,7 @@ fitness(x)
 ```
 
     ##     MBIC 
-    ## 643.5292
+    ## 680.2363
 
 ## Citation
 

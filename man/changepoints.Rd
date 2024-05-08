@@ -7,7 +7,6 @@
 \alias{changepoints.seg_basket}
 \alias{changepoints.seg_cpt}
 \alias{changepoints.tidycpt}
-\alias{changepoints_labels}
 \alias{changepoints}
 \alias{changepoints.default}
 \alias{seg_params}
@@ -22,9 +21,7 @@
 
 \method{changepoints}{seg_cpt}(x, ...)
 
-\method{changepoints}{tidycpt}(x, ...)
-
-changepoints_labels(x, ...)
+\method{changepoints}{tidycpt}(x, use_labels = FALSE, ...)
 
 changepoints(x, ...)
 
@@ -42,6 +39,9 @@ seg_params(x, ...)
 \item{x}{A \code{tidycpt} object}
 
 \item{...}{arguments passed to methods}
+
+\item{use_labels}{return the time labels for the changepoints instead of the
+indices.}
 }
 \description{
 Not to be confused with \code{\link[wbs:changepoints]{wbs::changepoints()}}, which returns different
