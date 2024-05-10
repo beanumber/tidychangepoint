@@ -138,7 +138,7 @@ nobs.seg_cpt <- function(object, ...) {
 #' @rdname seg-cpt-generics
 #' @export
 print.seg_cpt <- function(x, ...) {
-  str(x)
+  utils::str(x)
 }
 
 #' @rdname seg-cpt-generics

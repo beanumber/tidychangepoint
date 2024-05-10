@@ -4,18 +4,15 @@
 \alias{segment_pelt}
 \title{Segment a time series using the PELT algorithm}
 \usage{
-segment_pelt(x, model_fn = fit_meanshift_norm, ...)
+segment_pelt(x, model_fn = fit_meanvar, ...)
 }
 \arguments{
 \item{x}{A time series}
 
 \item{model_fn}{A \code{character} or \code{name} coercible into a \code{\link[=fun_cpt]{fun_cpt()}} function.
-See, for example, \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}}.}
+See, for example, \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}}. The default is \code{\link[=fit_meanvar]{fit_meanvar()}}.}
 
 \item{...}{arguments passed to \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}}
-
-\item{penalty_fn}{A function that evaluates the changepoint set returned by
-\code{model_fn}. We provide \code{\link[=AIC]{AIC()}}, \code{\link[=BIC]{BIC()}}, \code{\link[=MBIC]{MBIC()}}, \code{\link[=MDL]{MDL()}}, and \code{\link[=BMDL]{BMDL()}}.}
 }
 \description{
 Segmenting functions for the PELT algorithm
