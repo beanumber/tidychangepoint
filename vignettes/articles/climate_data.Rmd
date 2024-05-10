@@ -124,7 +124,7 @@ Note that the model being fit here is the NHPP model, along with the BMDL penalt
 ```{r bog-cpt}
 bog_cpt <- bogota_pm |>
   segment(
-    method = "ga-taimal",
+    method = "ga-coen",
     maxiter = 50,
     run = 10
   )
@@ -188,7 +188,7 @@ mde_estaction <- mde_rain_monthly_estacion |>
 
  mods <- mde_estaction |>
   group_split() |>
-  purrr::map(~segment(.x$mean_rainfall, method = "taimal", threshold = 10))
+  purrr::map(~segment(.x$mean_rainfall, method = "coen", threshold = 10))
 
 mods |>
   purrr::map(plot)

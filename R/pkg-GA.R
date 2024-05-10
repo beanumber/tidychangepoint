@@ -92,7 +92,7 @@ nobs.ga <- function(object, ...) {
 #' @param ... currently ignored
 #' @export
 #' @examples
-#' x <- segment(DataCPSim, method = "ga-taimal", maxiter = 5)
+#' x <- segment(DataCPSim, method = "ga-coen", maxiter = 5)
 #' plot(x$segmenter)
 plot.tidyga <- function(x, ...) {
   methods <- c("null", "pelt")

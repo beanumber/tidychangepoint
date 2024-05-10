@@ -26,7 +26,7 @@ Diagnose the fit of a segmented time series
 }
 \examples{
 diagnose(fit_meanshift_norm(CET, tau = 330))
-x <- segment(DataCPSim, method = "taimal", num_generations = 3)
+x <- segment(DataCPSim, method = "coen", num_generations = 3)
 plot(x$segmenter)
 diagnose(x$segmenter)
 diagnose(segment(DataCPSim))

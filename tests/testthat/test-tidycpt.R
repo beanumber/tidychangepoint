@@ -141,5 +141,5 @@ test_that("penalties work", {
 
 
 test_that("modeling works", {
-  x <- segment(CET, method = "ga-taimal", maxiter = 5)
+  x <- segment(CET, method = "ga-coen", maxiter = 5)
 })

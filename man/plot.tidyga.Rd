@@ -15,6 +15,6 @@
 Plot GA information
 }
 \examples{
-x <- segment(DataCPSim, method = "ga-taimal", maxiter = 5)
+x <- segment(DataCPSim, method = "ga-coen", maxiter = 5)
 plot(x$segmenter)
 }

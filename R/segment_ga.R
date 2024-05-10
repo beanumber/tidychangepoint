@@ -93,7 +93,7 @@ segment_ga_shi <- function(x, ...) {
 
 #' @rdname segment_ga
 #' @details
-#'   - [segment_ga_taimal()]: Coen's algorithm is the one used in 
+#'   - [segment_ga_coen()]: Coen's algorithm is the one used in 
 #'   \doi{10.1007/978-3-031-47372-2_20}.
 #' Note that the speed of the algorithm is highly sensitive to the size of the 
 #' changepoint sets under consideration, with large changepoint sets being slow. 
@@ -105,10 +105,10 @@ segment_ga_shi <- function(x, ...) {
 #' @export
 #' @examples
 #' \dontrun{
-#' x <- segment(method = "ga-taimal", maxiter = 50)
+#' x <- segment(method = "ga-coen", maxiter = 50)
 #' }
 #' 
-segment_ga_taimal <- function(x, ...) {
+segment_ga_coen <- function(x, ...) {
   segment_ga(
     x, model_fn = fit_nhpp, penalty_fn = BMDL, 
     population = build_gabin_population(x), popSize = 50, ...

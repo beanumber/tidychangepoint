@@ -98,7 +98,7 @@ model_name.character <- function(object, ...) {
 #' @return - [model_args()]: A named `list` of arguments, or `NULL`
 #' @family modeling
 #' @examples
-#' x <- segment(CET, method = "ga-taimal", maxiter = 3)
+#' x <- segment(CET, method = "ga-coen", maxiter = 3)
 #' model_args(x$segmenter)
 model_args <- function(object, ...) UseMethod("model_args")
 
@@ -126,7 +126,7 @@ as.model <- function(object, ...) UseMethod("as.model")
 #' @examples
 #' cpt <- segment(DataCPSim, method = "ga", maxiter = 5)
 #' as.model(cpt$segmenter)
-#' cpt <- segment(DataCPSim, method = "ga-taimal", model_fn_args = list(threshold = 80), maxiter = 5)
+#' cpt <- segment(DataCPSim, method = "ga-coen", model_fn_args = list(threshold = 80), maxiter = 5)
 #' as.model(cpt$segmenter)$model_params
 as.model.default <- function(object, ...) {
   f <- whomademe(object)

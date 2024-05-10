@@ -1,5 +1,5 @@
 ---
-title: "Using Taimal's algorithm"
+title: "Using Coen's algorithm"
 ---
 
 ```{r, include = FALSE}
@@ -17,10 +17,10 @@ library(tidychangepoint)
 plot(bogota_pm)
 ```
 
-## Using the original implementation of Taimal's algorithm
+## Using the original implementation of Coen's algorithm
 
 ```{r}
-x <- segment(bogota_pm, method = "taimal", num_generations = 5)
+x <- segment(bogota_pm, method = "coen", num_generations = 5)
 changepoints(x)
 plot(x)
 ```
@@ -28,7 +28,7 @@ plot(x)
 ## Using the GA implementation of Taimal's algorithm
 
 ```{r}
-y <- segment(bogota_pm, method = "ga-taimal", maxiter = 50, run = 10)
+y <- segment(bogota_pm, method = "ga-coen", maxiter = 50, run = 10)
 changepoints(y)
 plot(y)
 diagnose(y$model)
@@ -47,7 +47,7 @@ You can also experiment with the `popSize` argument to `segment()`.
 ```{r}
 z <- segment(
   bogota_pm, 
-  method = "ga-taimal", 
+  method = "ga-coen", 
   maxiter = 5,
   model_fn_args = list(threshold = 50)
 )

@@ -3,7 +3,7 @@
 \name{segment_ga}
 \alias{segment_ga}
 \alias{segment_ga_shi}
-\alias{segment_ga_taimal}
+\alias{segment_ga_coen}
 \alias{segment_ga_random}
 \title{Segment a time series using a genetic algorithm}
 \usage{
@@ -17,7 +17,7 @@ segment_ga(
 
 segment_ga_shi(x, ...)
 
-segment_ga_taimal(x, ...)
+segment_ga_coen(x, ...)
 
 segment_ga_random(x, ...)
 }
@@ -47,7 +47,7 @@ to \code{\link[GA:ga]{GA::ga()}} using the dots.
 }
 
 \itemize{
-\item \code{\link[=segment_ga_taimal]{segment_ga_taimal()}}: Coen's algorithm is the one used in
+\item \code{\link[=segment_ga_coen]{segment_ga_coen()}}: Coen's algorithm is the one used in
 \doi{10.1007/978-3-031-47372-2_20}.
 Note that the speed of the algorithm is highly sensitive to the size of the
 changepoint sets under consideration, with large changepoint sets being slow.
@@ -91,7 +91,7 @@ y <- segment(CET, method = "ga", model_fn = fit_lmshift, penalty_fn = BIC,
 }
 
 \dontrun{
-x <- segment(method = "ga-taimal", maxiter = 50)
+x <- segment(method = "ga-coen", maxiter = 50)
 }
 
 x <- segment(CET, method = "random")
