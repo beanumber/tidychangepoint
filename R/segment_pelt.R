@@ -15,7 +15,7 @@
 #' plot(res)
 #' segment_pelt(as.ts(CET))
 #' segment_pelt(as.ts(CET), penalty = "BIC")
-#' segment_pelt(as.ts(CET), model_fn = fit_meanvar, penalty = "BIC")
+#' segment_pelt(as.ts(CET), model_fn = fit_meanshift_norm, penalty = "BIC")
 
 segment_pelt <- function(x, model_fn = fit_meanvar, ...) {
   if (!inherits(model_fn, "fun_cpt")) {

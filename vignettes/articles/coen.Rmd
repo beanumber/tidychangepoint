@@ -25,7 +25,7 @@ changepoints(x)
 plot(x)
 ```
 
-## Using the GA implementation of Taimal's algorithm
+## Using the GA implementation of Coen's algorithm
 
 ```{r}
 y <- segment(bogota_pm, method = "ga-coen", maxiter = 50, run = 10)

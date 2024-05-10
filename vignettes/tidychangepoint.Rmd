@@ -28,7 +28,7 @@ Changepoint sets are computed using the `segment()` function, which takes a nume
 `segment()` always returns a `tidycpt` object. 
 
 ```{r}
-x <- segment(DataCPSim, method = "pelt", model_fn = fit_meanvar)
+x <- segment(DataCPSim, method = "pelt")
 class(x)
 ```
 
