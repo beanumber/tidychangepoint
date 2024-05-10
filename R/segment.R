@@ -97,7 +97,7 @@ segment.numeric <- function(x, method = "null", ...) {
 
 segment.ts <- function(x, method = "null", ...) {
   args <- list(...)
-  message(paste("method:", method))
+#  message(paste("method:", method))
   begin <- Sys.time()
   
   if (method == "pelt") {
