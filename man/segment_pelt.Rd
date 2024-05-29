@@ -19,9 +19,8 @@ Segmenting functions for the PELT algorithm
 }
 \examples{
 res <- segment_pelt(DataCPSim)
-summary(res)
+res
 str(res)
-plot(res)
 segment_pelt(as.ts(CET))
 segment_pelt(as.ts(CET), penalty = "BIC")
 segment_pelt(as.ts(CET), model_fn = fit_meanshift_norm, penalty = "BIC")
