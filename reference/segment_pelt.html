@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9037</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9038</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -74,9 +74,23 @@ See, for example, <code><a href="fit_meanshift.html">fit_meanshift_norm()</a></c
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">segment_pelt</span><span class="op">(</span><span class="va">DataCPSim</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Length  Class   Mode </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      1    cpt     S4 </span>
+<span class="r-in"><span><span class="va">res</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Class 'cpt' : Changepoint Object</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Wed Apr 24 21:56:29 2024 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created Using changepoint version 2.2.4 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint type      : Change in mean and variance </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Method of analysis    : PELT </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Test Statistic  : Normal </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Type of penalty       : MBIC with value, 27.99769 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Minimum Segment Length : 2 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Maximum no. of cpts   : Inf </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint Locations : 547 822 972 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Formal class 'cpt' [package "changepoint"] with 12 slots</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ data.set : Time-Series [1:1096] from 1 to 1096: 35.5 29 35.6 33 29.5 ...</span>
@@ -93,8 +107,6 @@ See, for example, <code><a href="fit_meanshift.html">fit_meanshift_norm()</a></c
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ variance: num [1:4] 127 371 921 2406</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ date     : chr "Wed Apr 24 21:56:29 2024"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ version  : chr "2.2.4"</span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in as.double(y):</span> cannot coerce type 'S4' to vector of type 'double'</span>
 <span class="r-in"><span><span class="fu">segment_pelt</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/ts.html" class="external-link">as.ts</a></span><span class="op">(</span><span class="va">CET</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Class 'cpt' : Changepoint Object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
