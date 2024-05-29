@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9036</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9037</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/climate_data.html">Climate data in tidychangepoint</a>
-    <a class="dropdown-item" href="../articles/taimal.html">Using Taimal's algorithm</a>
+    <a class="dropdown-item" href="../articles/coen.html">Using Coen's algorithm</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -97,9 +97,14 @@
         <dd>Initialize populations in genetic algorithms</dd>
       </dl><dl><dt>
           
-          <code><a href="changepoints.html">changepoints_labels()</a></code> <code><a href="changepoints.html">changepoints()</a></code> <code><a href="changepoints.html">seg_params()</a></code> 
+          <code><a href="changepoints.html">changepoints()</a></code> <code><a href="changepoints.html">seg_params()</a></code> 
         </dt>
         <dd>Extract changepoints</dd>
+      </dl><dl><dt>
+          
+          <code><a href="class-mod_cpt.html">new_mod_cpt()</a></code> <code><a href="class-mod_cpt.html">validate_mod_cpt()</a></code> <code><a href="class-mod_cpt.html">mod_cpt()</a></code> 
+        </dt>
+        <dd>Base class for changepoint models</dd>
       </dl><dl><dt>
           
           <code><a href="compare_models.html">compare_models()</a></code> <code><a href="compare_models.html">compare_algorithms()</a></code> 
@@ -197,11 +202,6 @@
         <dd>Class for model-fitting functions</dd>
       </dl><dl><dt>
           
-          <code><a href="new_mod_cpt.html">new_mod_cpt()</a></code> <code><a href="new_mod_cpt.html">validate_mod_cpt()</a></code> <code><a href="new_mod_cpt.html">mod_cpt()</a></code> 
-        </dt>
-        <dd>Base class for changepoint models</dd>
-      </dl><dl><dt>
-          
           <code><a href="new_seg_basket.html">new_seg_basket()</a></code> <code><a href="new_seg_basket.html">validate_seg_basket()</a></code> <code><a href="new_seg_basket.html">seg_basket()</a></code> <code><a href="new_seg_basket.html">evaluate_cpts()</a></code> 
         </dt>
         <dd>Default class for candidate changepoint sets</dd>
@@ -237,7 +237,7 @@
         <dd>Segment a time series using a variety of algorithms</dd>
       </dl><dl><dt>
           
-          <code><a href="segment_ga.html">segment_ga()</a></code> <code><a href="segment_ga.html">segment_ga_shi()</a></code> <code><a href="segment_ga.html">segment_ga_taimal()</a></code> <code><a href="segment_ga.html">segment_ga_random()</a></code> 
+          <code><a href="segment_ga.html">segment_ga()</a></code> <code><a href="segment_ga.html">segment_ga_shi()</a></code> <code><a href="segment_ga.html">segment_ga_coen()</a></code> <code><a href="segment_ga.html">segment_ga_random()</a></code> 
         </dt>
         <dd>Segment a time series using a genetic algorithm</dd>
       </dl><dl><dt>
@@ -245,6 +245,11 @@
           <code><a href="segment_manual.html">segment_manual()</a></code> 
         </dt>
         <dd>Manually segment a time series</dd>
+      </dl><dl><dt>
+          
+          <code><a href="segment_pelt.html">segment_pelt()</a></code> 
+        </dt>
+        <dd>Segment a time series using the PELT algorithm</dd>
       </dl><dl><dt>
           
           <code><a href="tbl_coef.html">tbl_coef()</a></code> 

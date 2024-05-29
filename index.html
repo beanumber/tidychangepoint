@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9036</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9037</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="articles/climate_data.html">Climate data in tidychangepoint</a>
-    <a class="dropdown-item" href="articles/taimal.html">Using Taimal's algorithm</a>
+    <a class="dropdown-item" href="articles/coen.html">Using Coen's algorithm</a>
   </div>
 </li>
       </ul>
@@ -90,7 +90,7 @@
 <div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">## [1] 237 330</span></span></code></pre></div>
 <p>If the original time series has time labels, we can also retrieve that information.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/changepoints.html">changepoints_labels</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/changepoints.html">changepoints</a></span><span class="op">(</span><span class="va">x</span>, use_labels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## [1] "1895-01-01" "1988-01-01"</span></span></code></pre></div>
 <p>The <code><a href="reference/fitness.html">fitness()</a></code> function returns the both the value and the name of the objective function that the algorithm used to find the optimal changepoint set.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
@@ -103,26 +103,24 @@
 </h2>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"tidychangepoint"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="do">## To cite package 'tidychangepoint' in publications use:</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a><span class="do">##   Taimal CA, Suárez-Sierra BM, Rivera JC (2023). "An Exploration of</span></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="do">##   Genetic Algorithms Operators for the Detection of Multiple</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="do">##   Change-Points of Exceedances Using Non-homogeneous Poisson Processes</span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="do">##   and Bayesian Methods." In _Colombian Conference on Computing_,</span></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="do">##   230-258. Springer. doi:10.1007/978-3-031-47372-2_20</span></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="do">##   &lt;https://doi.org/10.1007/978-3-031-47372-2_20&gt;.</span></span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="do">## A BibTeX entry for LaTeX users is</span></span>
-<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="do">##   @InProceedings{,</span></span>
-<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="do">##     title = {An Exploration of Genetic Algorithms Operators for the Detection of Multiple Change-Points of Exceedances Using Non-homogeneous Poisson Processes and Bayesian Methods},</span></span>
-<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="do">##     author = {Carlos A Taimal and Biviana Marcela Suárez-Sierra and Juan Carlos Rivera},</span></span>
-<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="do">##     booktitle = {Colombian Conference on Computing},</span></span>
-<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="do">##     year = {2023},</span></span>
-<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="do">##     pages = {230--258},</span></span>
-<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="do">##     organization = {Springer},</span></span>
-<span id="cb12-19"><a href="#cb12-19" tabindex="-1"></a><span class="do">##     doi = {10.1007/978-3-031-47372-2_20},</span></span>
-<span id="cb12-20"><a href="#cb12-20" tabindex="-1"></a><span class="do">##   }</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="do">## Warning in citation("tidychangepoint"): could not determine year for</span></span>
+<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="do">## 'tidychangepoint' from package DESCRIPTION file</span></span>
+<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
+<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="do">## To cite package 'tidychangepoint' in publications use:</span></span>
+<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="do">##   Baumer B, Suarez Sierra B, Coen A, Taimal C (????). _tidychangepoint:</span></span>
+<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="do">##   Facilitate Changepoint Detection Analysis in a Tidy Framework_. R</span></span>
+<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="do">##   package version 0.0.0.9037,</span></span>
+<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="do">##   &lt;https://beanumber.github.io/tidychangepoint/&gt;.</span></span>
+<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="do">## A BibTeX entry for LaTeX users is</span></span>
+<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="do">##   @Manual{,</span></span>
+<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="do">##     title = {tidychangepoint: Facilitate Changepoint Detection Analysis in a Tidy Framework},</span></span>
+<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="do">##     author = {Benjamin S. Baumer and Biviana Marcela {Suarez Sierra} and Arrigo Coen and Carlos A. Taimal},</span></span>
+<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="do">##     note = {R package version 0.0.0.9037},</span></span>
+<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="do">##     url = {https://beanumber.github.io/tidychangepoint/},</span></span>
+<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="do">##   }</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="license">

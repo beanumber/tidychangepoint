@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9036</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9037</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -28,7 +28,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/climate_data.html">Climate data in tidychangepoint</a>
-    <a class="dropdown-item" href="../articles/taimal.html">Using Taimal's algorithm</a>
+    <a class="dropdown-item" href="../articles/coen.html">Using Coen's algorithm</a>
   </div>
 </li>
       </ul><form class="form-inline my-2 my-lg-0" role="search">
@@ -117,7 +117,6 @@ not necessarily the actual functions used by the segmenter.</p>
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">CET</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> method: pelt</span>
 <span class="r-in"><span><span class="fu">model_name</span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">segmenter</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "meanvar"</span>
 <span class="r-in"><span><span class="fu"><a href="new_fun_cpt.html">whomademe</a></span><span class="op">(</span><span class="fu">model_name</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -134,7 +133,7 @@ not necessarily the actual functions used by the segmenter.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mod_cpt(x &lt;- as.ts(x), tau = tau, region_params = region_params, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         model_params = c(), fitted_values = fitted_values, model_name = "meanvar")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x56512cb6e838&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x56313bddec28&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:tidychangepoint&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"model_name")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "meanvar"</span>

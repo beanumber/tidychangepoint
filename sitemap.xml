@@ -10,10 +10,10 @@
     <loc>https://beanumber.github.io/tidychangepoint/articles/climate_data.html</loc>
   </url>
   <url>
-    <loc>https://beanumber.github.io/tidychangepoint/articles/index.html</loc>
+    <loc>https://beanumber.github.io/tidychangepoint/articles/coen.html</loc>
   </url>
   <url>
-    <loc>https://beanumber.github.io/tidychangepoint/articles/taimal.html</loc>
+    <loc>https://beanumber.github.io/tidychangepoint/articles/index.html</loc>
   </url>
   <url>
     <loc>https://beanumber.github.io/tidychangepoint/articles/tidychangepoint.html</loc>
@@ -50,6 +50,9 @@
   </url>
   <url>
     <loc>https://beanumber.github.io/tidychangepoint/reference/changepoints.html</loc>
+  </url>
+  <url>
+    <loc>https://beanumber.github.io/tidychangepoint/reference/class-mod_cpt.html</loc>
   </url>
   <url>
     <loc>https://beanumber.github.io/tidychangepoint/reference/compare_models.html</loc>
@@ -115,9 +118,6 @@
     <loc>https://beanumber.github.io/tidychangepoint/reference/new_fun_cpt.html</loc>
   </url>
   <url>
-    <loc>https://beanumber.github.io/tidychangepoint/reference/new_mod_cpt.html</loc>
-  </url>
-  <url>
     <loc>https://beanumber.github.io/tidychangepoint/reference/new_seg_basket.html</loc>
   </url>
   <url>
@@ -142,13 +142,16 @@
     <loc>https://beanumber.github.io/tidychangepoint/reference/segment.html</loc>
   </url>
   <url>
+    <loc>https://beanumber.github.io/tidychangepoint/reference/segment_coen.html</loc>
+  </url>
+  <url>
     <loc>https://beanumber.github.io/tidychangepoint/reference/segment_ga.html</loc>
   </url>
   <url>
     <loc>https://beanumber.github.io/tidychangepoint/reference/segment_manual.html</loc>
   </url>
   <url>
-    <loc>https://beanumber.github.io/tidychangepoint/reference/segment_taimal.html</loc>
+    <loc>https://beanumber.github.io/tidychangepoint/reference/segment_pelt.html</loc>
   </url>
   <url>
     <loc>https://beanumber.github.io/tidychangepoint/reference/tbl_coef.html</loc>

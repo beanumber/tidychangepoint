@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9036</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9037</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -45,7 +45,7 @@
   <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
   <div class="dropdown-menu" aria-labelledby="dropdown-articles">
     <a class="dropdown-item" href="../articles/climate_data.html">Climate data in tidychangepoint</a>
-    <a class="dropdown-item" href="../articles/taimal.html">Using Taimal's algorithm</a>
+    <a class="dropdown-item" href="../articles/coen.html">Using Coen's algorithm</a>
   </div>
 </li>
       </ul>
@@ -92,7 +92,6 @@ you use. <code><a href="../reference/segment.html">segment()</a></code> always r
 object.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/segment.html">segment</a></span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; method: pelt</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] "tidycpt"</span></span></code></pre></div>
 <p>Various methods are available for <code>tidycpt</code> objects. For
@@ -158,7 +157,7 @@ function that was used.</li>
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
 <span><span class="co">#&gt;   pkg      version algorithm seg_params model_name criteria fitness elapsed_time</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> changep… 2.2.4   PELT      <span style="color: #949494;">&lt;list [1]&gt;</span> meanvar    MBIC       <span style="text-decoration: underline;">9</span>403. 0.06 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> changep… 2.2.4   PELT      <span style="color: #949494;">&lt;list [1]&gt;</span> meanvar    MBIC       <span style="text-decoration: underline;">9</span>403. 0.062 secs</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="other-methods">Other methods<a class="anchor" aria-label="anchor" href="#other-methods"></a>
@@ -228,7 +227,8 @@ these values is the focus of ongoing work.</p>
 <code>cpt.meanvar()</code> function from the <code>changepoint</code>
 package.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">segmenter</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/as.model.html">as.segmenter</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Formal class 'cpt' [package "changepoint"] with 12 slots</span></span>
 <span><span class="co">#&gt;   ..@ data.set : Time-Series [1:1096] from 1 to 1096: 35.5 29 35.6 33 29.5 ...</span></span>
@@ -243,7 +243,7 @@ package.</p>
 <span><span class="co">#&gt;   ..@ param.est:List of 2</span></span>
 <span><span class="co">#&gt;   .. ..$ mean    : num [1:4] 35.3 58.2 96.8 156.5</span></span>
 <span><span class="co">#&gt;   .. ..$ variance: num [1:4] 127 371 921 2406</span></span>
-<span><span class="co">#&gt;   ..@ date     : chr "Wed Apr 24 22:13:43 2024"</span></span>
+<span><span class="co">#&gt;   ..@ date     : chr "Wed Apr 24 21:56:29 2024"</span></span>
 <span><span class="co">#&gt;   ..@ version  : chr "2.2.4"</span></span></code></pre></div>
 <p>In addition to the generic functions listed above,
 <strong>segmenters</strong> implement methods for the generic functions
@@ -256,7 +256,8 @@ package.</p>
 <p>The <code>model</code> object in this case is created by
 <code><a href="../reference/fit_meanvar.html">fit_meanvar()</a></code>, and is of class <code>mod_cpt</code>.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span><span class="op">$</span><span class="va">model</span> <span class="op">|&gt;</span></span>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu"><a href="../reference/as.model.html">as.model</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; List of 6</span></span>
 <span><span class="co">#&gt;  $ data         : Time-Series [1:1096] from 1 to 1096: 35.5 29 35.6 33 29.5 ...</span></span>
