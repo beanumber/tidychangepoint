@@ -55,7 +55,7 @@ If the original time series has time labels, we can also retrieve that
 information.
 
 ``` r
-changepoints_labels(x)
+changepoints(x, use_labels = TRUE)
 ```
 
     ## [1] "1895-01-01" "1988-01-01"
@@ -77,23 +77,21 @@ fitness(x)
 citation("tidychangepoint")
 ```
 
+    ## Warning in citation("tidychangepoint"): could not determine year for
+    ## 'tidychangepoint' from package DESCRIPTION file
+
     ## To cite package 'tidychangepoint' in publications use:
     ## 
-    ##   Taimal CA, Suárez-Sierra BM, Rivera JC (2023). "An Exploration of
-    ##   Genetic Algorithms Operators for the Detection of Multiple
-    ##   Change-Points of Exceedances Using Non-homogeneous Poisson Processes
-    ##   and Bayesian Methods." In _Colombian Conference on Computing_,
-    ##   230-258. Springer. doi:10.1007/978-3-031-47372-2_20
-    ##   <https://doi.org/10.1007/978-3-031-47372-2_20>.
+    ##   Baumer B, Suarez Sierra B, Coen A, Taimal C (????). _tidychangepoint:
+    ##   Facilitate Changepoint Detection Analysis in a Tidy Framework_. R
+    ##   package version 0.0.0.9037,
+    ##   <https://beanumber.github.io/tidychangepoint/>.
     ## 
     ## A BibTeX entry for LaTeX users is
     ## 
-    ##   @InProceedings{,
-    ##     title = {An Exploration of Genetic Algorithms Operators for the Detection of Multiple Change-Points of Exceedances Using Non-homogeneous Poisson Processes and Bayesian Methods},
-    ##     author = {Carlos A Taimal and Biviana Marcela Suárez-Sierra and Juan Carlos Rivera},
-    ##     booktitle = {Colombian Conference on Computing},
-    ##     year = {2023},
-    ##     pages = {230--258},
-    ##     organization = {Springer},
-    ##     doi = {10.1007/978-3-031-47372-2_20},
+    ##   @Manual{,
+    ##     title = {tidychangepoint: Facilitate Changepoint Detection Analysis in a Tidy Framework},
+    ##     author = {Benjamin S. Baumer and Biviana Marcela {Suarez Sierra} and Arrigo Coen and Carlos A. Taimal},
+    ##     note = {R package version 0.0.0.9037},
+    ##     url = {https://beanumber.github.io/tidychangepoint/},
     ##   }

@@ -1,7 +1,8 @@
-globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".fitted", ".resid"))
+globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".fitted", ".resid"
+                  , "xintercept"))
 
 #' Base class for changepoint models
-#' 
+#' @name class-mod_cpt
 #' @description
 #' Create changepoint detection model objects
 #' @details
@@ -50,7 +51,7 @@ new_mod_cpt <- function(x = numeric(),
   )
 }
 
-#' @rdname new_mod_cpt
+#' @rdname class-mod_cpt
 #' @export
 
 validate_mod_cpt <- function(x) {
@@ -64,7 +65,7 @@ validate_mod_cpt <- function(x) {
   x
 }
 
-#' @rdname new_mod_cpt
+#' @rdname class-mod_cpt
 #' @export
 
 mod_cpt <- function(x, ...) {
@@ -294,7 +295,11 @@ plot.mod_cpt <- function(x, ...) {
     #      ggplot2::aes(xmin = begin, xmax = end, ymin = 0, ymax = Inf, x = NULL, y = NULL),
     #      fill = "grey90"
     #    ) +
-    ggplot2::geom_vline(data = regions, ggplot2::aes(xintercept = end), linetype = 2) +
+    ggplot2::geom_vline(
+      data = tibble::tibble(xintercept = unique(c(1, changepoints(x), nobs(x)))),
+      ggplot2::aes(xintercept = xintercept), 
+      linetype = 2
+    ) +
     ggplot2::geom_hline(yintercept = mean(as.ts(x)), linetype = 3) +
     ggplot2::geom_rug(sides = "l") +
     ggplot2::geom_line() + 
@@ -328,7 +333,7 @@ plot.mod_cpt <- function(x, ...) {
 #' @rdname mod_cpt-generics
 #' @export
 print.mod_cpt <- function(x, ...) {
-  str(x)
+  utils::str(x)
 }
 
 #' @rdname diagnose

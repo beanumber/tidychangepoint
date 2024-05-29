@@ -1,8 +1,8 @@
 test_that("performance comparison works", {
   skip()
   x <- segment(DataCPSim, method = "pelt")
-  #  y <- segment(DataCPSim, method = "taimal", num_generations = 20)
-  y <- segment(DataCPSim, method = "ga-taimal", maxiter = 20)
+  #  y <- segment(DataCPSim, method = "coen", num_generations = 20)
+  y <- segment(DataCPSim, method = "ga-coen", maxiter = 20)
   z <- segment(DataCPSim, method = "random", model_fn = fit_nhpp, penalty_fn = BMDL, popSize = 20)
   
   expect_gt(BMDL(fit_nhpp(DataCPSim, changepoints(x))), BMDL(y$model))

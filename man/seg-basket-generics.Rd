@@ -35,9 +35,9 @@ plot_cpt_repeated(x, i = nrow(x$basket))
 Methods for seg_basket objects
 }
 \examples{
-x <- segment(DataCPSim, method = "taimal", num_generations = 3)
+x <- segment(DataCPSim, method = "coen", num_generations = 3)
 plot_best_chromosome(x$segmenter)
-x <- segment(DataCPSim, method = "taimal", num_generations = 3)
+x <- segment(DataCPSim, method = "coen", num_generations = 3)
 plot_cpt_repeated(x$segmenter)
 plot_cpt_repeated(x$segmenter, 5)
 }

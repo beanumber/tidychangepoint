@@ -46,7 +46,7 @@ changepoints(x)
 If the original time series has time labels, we can also retrieve that information. 
 
 ```{r}
-changepoints_labels(x)
+changepoints(x, use_labels = TRUE)
 ```
 
 

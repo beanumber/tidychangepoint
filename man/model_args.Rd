@@ -42,7 +42,7 @@ the model fitting function when it was called. These are especially
 important when using a genetic algorithm.
 }
 \examples{
-x <- segment(CET, method = "ga-taimal", maxiter = 3)
+x <- segment(CET, method = "ga-coen", maxiter = 3)
 model_args(x$segmenter)
 }
 \seealso{

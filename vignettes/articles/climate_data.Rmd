@@ -47,7 +47,8 @@ Compare this with the changepoint set discovered by the algorithm:
 
 ```{r}
 changepoints(trend_wn)
-changepoints_labels(trend_wn)
+changepoints(trend_wn, use_labels = TRUE) |>
+  as_year()
 ```
 
 The `fitness()` function returns a named vector with the value of the objective function from the discovered changepoint set. 
@@ -77,7 +78,9 @@ It is important to note that only one of these metrics (in this case, BIC) is ac
 :::
 
 ```{r}
-glance(trend_wn$model)
+trend_wn |>
+  as.model() |>
+  glance()
 ```
 
 The `plot()` function returns an informative plot of the original time series, with the changepoint set and the corresponding regions demarcated. 
@@ -124,7 +127,7 @@ Note that the model being fit here is the NHPP model, along with the BMDL penalt
 ```{r bog-cpt}
 bog_cpt <- bogota_pm |>
   segment(
-    method = "ga-taimal",
+    method = "ga-coen",
     maxiter = 50,
     run = 10
   )
@@ -141,7 +144,9 @@ plot(bog_cpt, use_time_index = TRUE)
 We compare the quality of the fit of the NHPP model using `diagnose()`.
 
 ```{r diagnose}
-diagnose(bog_cpt$model)
+bog_cpt |>
+  as.model() |>
+  diagnose()
 ```
 
 ## Medellín rainfall
@@ -188,7 +193,7 @@ mde_estaction <- mde_rain_monthly_estacion |>
 
  mods <- mde_estaction |>
   group_split() |>
-  purrr::map(~segment(.x$mean_rainfall, method = "taimal", threshold = 10))
+  purrr::map(~segment(.x$mean_rainfall, method = "coen", threshold = 10))
 
 mods |>
   purrr::map(plot)

@@ -213,7 +213,7 @@ plot.seg_basket <- function(x, ...) {
 #' @rdname diagnose
 #' @export
 #' @examples
-#' x <- segment(DataCPSim, method = "taimal", num_generations = 3)
+#' x <- segment(DataCPSim, method = "coen", num_generations = 3)
 #' plot(x$segmenter)
 #' diagnose(x$segmenter)
 diagnose.seg_basket <- function(x, ...) {
@@ -228,7 +228,7 @@ diagnose.seg_basket <- function(x, ...) {
 #' @rdname seg-basket-generics
 #' @export
 #' @examples
-#' x <- segment(DataCPSim, method = "taimal", num_generations = 3)
+#' x <- segment(DataCPSim, method = "coen", num_generations = 3)
 #' plot_best_chromosome(x$segmenter)
 plot_best_chromosome <- function(x) {
   d <- x$basket |> 
@@ -260,7 +260,7 @@ plot_best_chromosome <- function(x) {
 #' @param i index of basket to show
 #' @export
 #' @examples
-#' x <- segment(DataCPSim, method = "taimal", num_generations = 3)
+#' x <- segment(DataCPSim, method = "coen", num_generations = 3)
 #' plot_cpt_repeated(x$segmenter)
 #' plot_cpt_repeated(x$segmenter, 5)
 plot_cpt_repeated <- function(x, i = nrow(x$basket)) {

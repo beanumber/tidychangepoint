@@ -94,7 +94,8 @@ Nevertheless, squaring these values is the focus of ongoing work.
 In the example above, the `segmenter` is of class `cpt`, because `segment()` simply wraps the `cpt.meanvar()` function from the `changepoint` package. 
 
 ```{r}
-x$segmenter |>
+x |>
+  as.segmenter() |>
   str()
 ```
 
@@ -105,7 +106,8 @@ In addition to the generic functions listed above, **segmenters** implement meth
 The `model` object in this case is created by `fit_meanvar()`, and is of class `mod_cpt`. 
 
 ```{r}
-x$model |>
+x |>
+  as.model() |>
   str()
 ```
 
