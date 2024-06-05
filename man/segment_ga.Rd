@@ -73,10 +73,10 @@ plot(res)
 x <- segment(CET, method = "ga-shi", maxiter = 50)
 str(x)
 # GeneticBMDL
-y <- segment(CET, method = "ga-gbmdl", maxiter = 20)
+y <- segment(CET, method = "ga-coen", maxiter = 20)
 changepoints(y)
 
-z <- segment(CET, method = "ga-gbmdl", maxiter = 10, model_fn_args = list(threshold = 2))
+z <- segment(CET, method = "ga-coen", maxiter = 10, model_fn_args = list(threshold = 2))
 changepoints(z)
 }
 \dontrun{

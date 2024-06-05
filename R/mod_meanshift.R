@@ -24,6 +24,11 @@ fit_meanshift <- function(x, tau, distribution = "norm", ...) {
   y <- as.numeric(as.ts(x))
   N <- length(y) # length of the series
   m <- length(tau) # Number of CPTs
+  if (!is_valid_tau(tau, N)) {
+    stop("Invalid changepoint set")
+  } else {
+    tau <- unique(tau)
+  }
   
   y_seg <- y |>
     split_by_tau(tau)

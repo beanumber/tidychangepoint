@@ -5,7 +5,12 @@
 #' @examples
 #' fit_meanvar(CET, tau = c(42, 330))
 
-fit_meanvar <- function(x, tau, ...) {
+fit_meanvar <- function(x, tau, ...) { 
+  if (!is_valid_tau(tau, length(x))) {
+    stop("Invalid changepoint set")
+  } else {
+    tau <- unique(tau)
+  }
   regions <- x |> 
     as.ts() |>
     split_by_tau(tau)

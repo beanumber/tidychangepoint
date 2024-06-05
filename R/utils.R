@@ -23,6 +23,7 @@ unpad_tau <- function(padded_tau) {
 #' @examples
 #' is_valid_tau(0, length(DataCPSim))
 #' is_valid_tau(1, length(DataCPSim))
+#' is_valid_tau(c(42, 42), length(DataCPSim))
 #' is_valid_tau(826, length(DataCPSim))
 #' is_valid_tau(1096, length(DataCPSim))
 #' is_valid_tau(1097, length(DataCPSim))

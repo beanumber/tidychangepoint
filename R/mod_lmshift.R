@@ -23,18 +23,17 @@ globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic",
 #' glance(fit_lmshift_ar1(CET, tau = ids))
 #' glance(fit_lmshift_ar1(CET, tau = ids, deg_poly = 1))
 #' glance(fit_lmshift_ar1(CET, tau = ids, deg_poly = 2))
-#' fit_lmshift(CET, tau = 0)
-#' fit_lmshift(CET, tau = 1)
-#' fit_lmshift(CET, tau = 362)
-#' fit_lmshift(CET, tau = 363)
-#' fit_lmshift(CET, tau = NA)
 #' fit_lmshift(CET, tau = NULL)
 #' fit_lmshift(CET, tau = c(42, 42))
 
 fit_lmshift <- function(x, tau, deg_poly = 0, ...) {
   n <- length(x)
   ds <- data.frame(y = as.ts(x), t = 1:n)
-  tau <- validate_tau(tau, n)
+  if (!is_valid_tau(tau, n)) {
+    stop("Invalid changepoint set")
+  } else {
+    tau <- unique(tau)
+  }
   if (length(tau) < 1) {
     form <- "y ~ 1"
     model_name <- "null"

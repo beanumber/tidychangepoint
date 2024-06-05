@@ -45,7 +45,8 @@ test_that("BMDL works", {
   expect_s3_class(logLik(nhpp), "logLik")
   expect_type(BMDL(nhpp), "double")
 
-  expect_identical(fit_nhpp(y, c(0, 500, 2000))$region_params, fit_nhpp(y, 500)$region_params)
+  expect_error(fit_nhpp(y, c(0, 500, 2000))$region_params)
+  expect_s3_class(fit_nhpp(y, 500)$region_params, "tbl")
   
   z <- segment(DataCPSim, method = "null")
   nhpp <- fit_nhpp(as.ts(z), changepoints(z))

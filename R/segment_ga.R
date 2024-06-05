@@ -21,10 +21,10 @@
 #' x <- segment(CET, method = "ga-shi", maxiter = 50)
 #' str(x)
 #' # GeneticBMDL
-#' y <- segment(CET, method = "ga-gbmdl", maxiter = 20)
+#' y <- segment(CET, method = "ga-coen", maxiter = 20)
 #' changepoints(y)
 #' 
-#' z <- segment(CET, method = "ga-gbmdl", maxiter = 10, model_fn_args = list(threshold = 2))
+#' z <- segment(CET, method = "ga-coen", maxiter = 10, model_fn_args = list(threshold = 2))
 #' changepoints(z)
 #' }
 
@@ -42,7 +42,11 @@ segment_ga <- function(x,
   
   obj_fun <- function(tau_binary_vec) {
     tau <- binary2tau(tau_binary_vec)
-    -penalty_fn(model_fn(as.ts(x), tau, threshold = model_fn_args[["threshold"]]))
+    
+    tryCatch(
+      -penalty_fn(model_fn(as.ts(x), tau, threshold = model_fn_args[["threshold"]])),
+      error = function(cnd) -Inf
+    )
   }
   memoise::memoise(obj_fun)
   

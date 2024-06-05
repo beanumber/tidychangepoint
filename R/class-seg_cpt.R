@@ -57,7 +57,7 @@ validate_seg_cpt <- function(x) {
   if (!stats::is.ts(as.ts(x))) {
     stop("data attribute is not coercible into a ts object.")
   }
-  if (!is.integer(changepoints(x)) && all(changepoints(x) %in% 1:nobs(x))) {
+  if (!(is.integer(changepoints(x)) && is_valid_tau(changepoints(x), nobs(x)))) {
     stop("changepoint set is invalid")
   }
   if (!is.double(fitness(x)) && names(fitness(x)) && length(fitness(x) == 1)) {

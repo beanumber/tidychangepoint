@@ -61,6 +61,12 @@ fit_nhpp_region <- function(exc, tau_left, tau_right,
 #' fit_nhpp(DataCPSim, tau = changepoints(segment(DataCPSim, method = "pelt")))
 
 fit_nhpp <- function(x, tau, ...) {
+  n <- length(x)
+  if (!is_valid_tau(tau, n)) {
+    stop("Invalid changepoint set")
+  } else {
+    tau <- unique(tau)
+  }
   args <- list(...)
   if (is.numeric(args[["threshold"]])) {
     threshold <- args[["threshold"]]
@@ -69,7 +75,7 @@ fit_nhpp <- function(x, tau, ...) {
   }
 #  message(paste("threshold:", threshold))
   exc <- exceedances(x, threshold = threshold)
-  padded_tau <- pad_tau(tau, length(x))
+  padded_tau <- pad_tau(tau, n)
   exc_by_tau <- exc |>
     split(cut_inclusive(exc, padded_tau))
 

@@ -141,5 +141,19 @@ test_that("penalties work", {
 
 
 test_that("modeling works", {
-  x <- segment(CET, method = "ga-coen", maxiter = 5)
+  expect_error(fit_meanshift_norm(CET, tau = 0))
+  expect_error(fit_meanshift_norm(CET, tau = 1))
+  expect_error(fit_meanshift_norm(CET, tau = length(CET)))
+  expect_equal(
+    fit_meanshift_norm(CET, tau = c(42, 42)) |>
+      changepoints() |>
+      length(),
+    1
+  )
+  expect_error(segment(CET, method = "manual", tau = 0))
+  expect_error(segment(CET, method = "manual", tau = 1))
+  expect_error(segment(CET, method = "manual", tau = length(CET)))
+  
+#  x <- segment(CET, method = "ga-coen", maxiter = 5)
+#  x <- segment(mlb_hrs, method = "ga-shi", maxiter = 50)
 })
