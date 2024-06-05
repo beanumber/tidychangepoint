@@ -12,7 +12,7 @@ information."><!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/lib
     
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9038</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9039</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,86 +116,86 @@ indices.</p></dd>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">cpts</span> <span class="op">&lt;-</span> <span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"ga"</span>, maxiter <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">changepoints</span><span class="op">(</span><span class="va">cpts</span><span class="op">$</span><span class="va">segmenter</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    x1    x2    x3    x5    x7    x9   x12   x17   x20   x21   x22   x23   x24 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>     1     2     3     5     7     9    12    17    20    21    22    23    24 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   x25   x29   x30   x33   x34   x38   x43   x44   x45   x46   x47   x48   x51 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    25    29    30    33    34    38    43    44    45    46    47    48    51 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   x56   x58   x59   x63   x64   x65   x66   x69   x71   x76   x80   x90   x94 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    56    58    59    63    64    65    66    69    71    76    80    90    94 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   x95   x96   x98   x99  x101  x107  x113  x120  x123  x124  x128  x130  x133 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    95    96    98    99   101   107   113   120   123   124   128   130   133 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x136  x145  x146  x147  x148  x149  x150  x151  x156  x159  x161  x162  x163 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   136   145   146   147   148   149   150   151   156   159   161   162   163 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x164  x165  x167  x169  x171  x173  x175  x178  x179  x183  x184  x189  x190 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   164   165   167   169   171   173   175   178   179   183   184   189   190 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x191  x195  x199  x202  x211  x212  x213  x215  x216  x217  x219  x220  x221 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   191   195   199   202   211   212   213   215   216   217   219   220   221 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x223  x225  x226  x227  x228  x230  x233  x235  x236  x239  x240  x241  x243 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   223   225   226   227   228   230   233   235   236   239   240   241   243 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x245  x249  x251  x252  x253  x256  x259  x260  x263  x266  x269  x272  x273 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   245   249   251   252   253   256   259   260   263   266   269   272   273 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x277  x278  x279  x283  x284  x285  x286  x287  x289  x290  x292  x300  x301 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   277   278   279   283   284   285   286   287   289   290   292   300   301 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x302  x303  x307  x309  x310  x311  x314  x315  x316  x319  x320  x324  x325 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   302   303   307   309   310   311   314   315   316   319   320   324   325 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x328  x329  x332  x333  x336  x339  x342  x346  x348  x353  x356  x358  x361 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   328   329   332   333   336   339   342   346   348   353   356   358   361 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x364  x366  x368  x369  x370  x372  x377  x382  x384  x387  x388  x389  x390 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   364   366   368   369   370   372   377   382   384   387   388   389   390 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x394  x399  x401  x404  x405  x408  x409  x412  x414  x416  x417  x418  x421 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   394   399   401   404   405   408   409   412   414   416   417   418   421 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x422  x423  x425  x426  x427  x428  x433  x442  x444  x447  x448  x456  x458 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   422   423   425   426   427   428   433   442   444   447   448   456   458 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x461  x465  x466  x467  x470  x471  x472  x473  x476  x477  x479  x480  x482 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   461   465   466   467   470   471   472   473   476   477   479   480   482 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x483  x484  x488  x489  x490  x492  x497  x498  x499  x500  x502  x504  x505 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   483   484   488   489   490   492   497   498   499   500   502   504   505 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x506  x508  x509  x510  x511  x513  x515  x519  x524  x526  x528  x530  x531 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   506   508   509   510   511   513   515   519   524   526   528   530   531 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x534  x537  x538  x539  x540  x541  x546  x548  x549  x554  x555  x556  x557 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   534   537   538   539   540   541   546   548   549   554   555   556   557 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x560  x562  x563  x564  x565  x566  x567  x571  x575  x578  x584  x588  x591 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   560   562   563   564   565   566   567   571   575   578   584   588   591 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x594  x595  x596  x599  x600  x601  x603  x605  x606  x608  x611  x612  x614 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   594   595   596   599   600   601   603   605   606   608   611   612   614 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x616  x617  x620  x622  x623  x624  x625  x627  x628  x631  x633  x636  x637 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   616   617   620   622   623   624   625   627   628   631   633   636   637 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x639  x641  x648  x651  x652  x653  x654  x655  x657  x660  x661  x665  x667 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   639   641   648   651   652   653   654   655   657   660   661   665   667 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x671  x676  x677  x679  x682  x684  x685  x689  x692  x693  x695  x697  x699 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   671   676   677   679   682   684   685   689   692   693   695   697   699 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x700  x702  x703  x704  x707  x712  x713  x714  x716  x718  x724  x726  x731 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   700   702   703   704   707   712   713   714   716   718   724   726   731 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x732  x734  x735  x736  x737  x738  x739  x740  x742  x743  x744  x745  x746 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   732   734   735   736   737   738   739   740   742   743   744   745   746 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x747  x754  x757  x762  x763  x766  x770  x775  x780  x783  x785  x786  x791 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   747   754   757   762   763   766   770   775   780   783   785   786   791 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x794  x795  x796  x798  x799  x801  x807  x808  x809  x810  x811  x814  x815 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   794   795   796   798   799   801   807   808   809   810   811   814   815 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x816  x817  x818  x823  x824  x825  x826  x829  x831  x835  x836  x837  x838 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   816   817   818   823   824   825   826   829   831   835   836   837   838 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x839  x841  x842  x843  x844  x846  x847  x848  x850  x851  x852  x855  x858 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   839   841   842   843   844   846   847   848   850   851   852   855   858 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x860  x861  x863  x866  x867  x872  x874  x877  x879  x881  x882  x884  x888 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   860   861   863   866   867   872   874   877   879   881   882   884   888 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x890  x891  x893  x902  x906  x907  x909  x911  x912  x914  x915  x917  x921 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   890   891   893   902   906   907   909   911   912   914   915   917   921 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x923  x924  x925  x927  x928  x930  x931  x933  x935  x936  x937  x939  x943 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   923   924   925   927   928   930   931   933   935   936   937   939   943 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x945  x949  x952  x953  x954  x955  x956  x961  x962  x964  x965  x966  x967 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   945   949   952   953   954   955   956   961   962   964   965   966   967 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x971  x972  x974  x975  x978  x979  x981  x984  x985  x987  x990  x994  x996 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   971   972   974   975   978   979   981   984   985   987   990   994   996 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  x998 x1000 x1001 x1002 x1005 x1006 x1007 x1010 x1012 x1018 x1019 x1020 x1023 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   998  1000  1001  1002  1005  1006  1007  1010  1012  1018  1019  1020  1023 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x1025 x1026 x1027 x1029 x1030 x1031 x1032 x1033 x1034 x1035 x1036 x1040 x1041 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1025  1026  1027  1029  1030  1031  1032  1033  1034  1035  1036  1040  1041 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x1042 x1044 x1048 x1050 x1053 x1056 x1057 x1059 x1060 x1066 x1069 x1071 x1072 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1042  1044  1048  1050  1053  1056  1057  1059  1060  1066  1069  1071  1072 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x1073 x1074 x1076 x1078 x1079 x1081 x1083 x1085 x1086 x1087 x1088 x1090 x1091 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1073  1074  1076  1078  1079  1081  1083  1085  1086  1087  1088  1090  1091 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> x1095 x1096 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  1095  1096 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    x2    x3    x7    x9   x11   x15   x18   x20   x24   x25   x27   x28   x30 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     2     3     7     9    11    15    18    20    24    25    27    28    30 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   x32   x35   x39   x40   x41   x43   x45   x48   x49   x50   x51   x52   x54 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    32    35    39    40    41    43    45    48    49    50    51    52    54 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   x55   x58   x60   x61   x64   x66   x67   x69   x70   x71   x72   x76   x83 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    55    58    60    61    64    66    67    69    70    71    72    76    83 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   x86   x87   x89   x90   x93   x98   x99  x100  x103  x106  x107  x109  x110 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    86    87    89    90    93    98    99   100   103   106   107   109   110 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x113  x114  x118  x119  x120  x121  x125  x128  x129  x133  x135  x141  x143 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   113   114   118   119   120   121   125   128   129   133   135   141   143 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x144  x145  x149  x150  x153  x156  x159  x160  x162  x163  x164  x166  x167 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   144   145   149   150   153   156   159   160   162   163   164   166   167 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x169  x170  x171  x172  x178  x181  x184  x187  x188  x189  x191  x192  x193 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   169   170   171   172   178   181   184   187   188   189   191   192   193 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x198  x203  x204  x205  x207  x210  x212  x221  x223  x224  x231  x233  x235 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   198   203   204   205   207   210   212   221   223   224   231   233   235 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x238  x240  x241  x248  x249  x251  x253  x256  x257  x259  x260  x261  x264 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   238   240   241   248   249   251   253   256   257   259   260   261   264 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x265  x274  x275  x276  x277  x281  x282  x283  x284  x286  x288  x290  x294 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   265   274   275   276   277   281   282   283   284   286   288   290   294 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x295  x297  x304  x307  x311  x312  x313  x315  x319  x320  x321  x322  x324 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   295   297   304   307   311   312   313   315   319   320   321   322   324 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x325  x326  x331  x333  x335  x337  x338  x339  x341  x342  x345  x347  x351 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   325   326   331   333   335   337   338   339   341   342   345   347   351 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x352  x354  x355  x358  x359  x362  x363  x365  x367  x369  x370  x373  x374 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   352   354   355   358   359   362   363   365   367   369   370   373   374 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x376  x377  x379  x382  x383  x385  x389  x390  x392  x393  x396  x397  x398 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   376   377   379   382   383   385   389   390   392   393   396   397   398 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x402  x404  x406  x407  x408  x410  x411  x412  x416  x417  x418  x420  x421 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   402   404   406   407   408   410   411   412   416   417   418   420   421 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x423  x425  x426  x431  x433  x437  x438  x441  x444  x446  x447  x448  x450 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   423   425   426   431   433   437   438   441   444   446   447   448   450 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x451  x452  x454  x455  x458  x459  x462  x463  x465  x467  x468  x471  x475 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   451   452   454   455   458   459   462   463   465   467   468   471   475 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x477  x481  x482  x483  x484  x485  x494  x496  x498  x499  x501  x504  x508 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   477   481   482   483   484   485   494   496   498   499   501   504   508 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x509  x511  x516  x519  x521  x522  x524  x531  x534  x536  x542  x543  x545 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   509   511   516   519   521   522   524   531   534   536   542   543   545 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x548  x552  x553  x554  x555  x559  x564  x565  x566  x568  x572  x573  x574 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   548   552   553   554   555   559   564   565   566   568   572   573   574 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x577  x578  x579  x583  x584  x585  x587  x591  x594  x595  x597  x599  x601 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   577   578   579   583   584   585   587   591   594   595   597   599   601 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x605  x607  x609  x610  x612  x614  x615  x617  x622  x623  x626  x627  x628 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   605   607   609   610   612   614   615   617   622   623   626   627   628 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x629  x630  x634  x635  x638  x641  x644  x645  x646  x649  x653  x655  x662 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   629   630   634   635   638   641   644   645   646   649   653   655   662 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x663  x664  x668  x672  x673  x675  x679  x682  x683  x684  x685  x689  x690 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   663   664   668   672   673   675   679   682   683   684   685   689   690 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x693  x695  x698  x702  x703  x704  x706  x707  x710  x711  x712  x713  x714 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   693   695   698   702   703   704   706   707   710   711   712   713   714 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x716  x720  x721  x723  x725  x726  x729  x731  x732  x735  x737  x738  x739 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   716   720   721   723   725   726   729   731   732   735   737   738   739 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x741  x744  x749  x750  x751  x752  x753  x758  x759  x764  x765  x766  x767 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   741   744   749   750   751   752   753   758   759   764   765   766   767 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x768  x769  x774  x778  x780  x783  x786  x793  x794  x797  x802  x804  x805 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   768   769   774   778   780   783   786   793   794   797   802   804   805 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x807  x809  x811  x814  x815  x818  x821  x823  x825  x826  x827  x829  x832 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   807   809   811   814   815   818   821   823   825   826   827   829   832 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x834  x839  x840  x842  x843  x844  x845  x846  x848  x849  x850  x852  x854 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   834   839   840   842   843   844   845   846   848   849   850   852   854 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x858  x861  x863  x865  x866  x868  x870  x875  x876  x879  x883  x884  x885 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   858   861   863   865   866   868   870   875   876   879   883   884   885 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x886  x889  x891  x892  x893  x895  x897  x899  x900  x902  x903  x906  x907 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   886   889   891   892   893   895   897   899   900   902   903   906   907 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x908  x916  x917  x918  x922  x928  x929  x930  x931  x932  x934  x936  x937 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   908   916   917   918   922   928   929   930   931   932   934   936   937 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x941  x943  x945  x946  x949  x951  x952  x955  x961  x963  x964  x965  x966 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   941   943   945   946   949   951   952   955   961   963   964   965   966 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x967  x968  x969  x971  x972  x973  x974  x976  x978  x980  x982  x983  x986 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   967   968   969   971   972   973   974   976   978   980   982   983   986 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  x994  x995  x996  x997 x1005 x1006 x1007 x1009 x1013 x1014 x1019 x1021 x1022 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   994   995   996   997  1005  1006  1007  1009  1013  1014  1019  1021  1022 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x1023 x1024 x1025 x1028 x1029 x1032 x1033 x1035 x1037 x1038 x1039 x1042 x1043 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1023  1024  1025  1028  1029  1032  1033  1035  1037  1038  1039  1042  1043 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x1046 x1047 x1049 x1051 x1052 x1054 x1055 x1056 x1057 x1058 x1059 x1061 x1062 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1046  1047  1049  1051  1052  1054  1055  1056  1057  1058  1059  1061  1062 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x1063 x1066 x1069 x1072 x1073 x1074 x1075 x1076 x1079 x1080 x1082 x1084 x1091 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1063  1066  1069  1072  1073  1074  1075  1076  1079  1080  1082  1084  1091 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> x1095 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  1095 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">cpts</span> <span class="op">&lt;-</span> <span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"wbs"</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu">changepoints</span><span class="op">(</span><span class="va">cpts</span><span class="op">$</span><span class="va">segmenter</span><span class="op">)</span></span></span>

@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9038</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9039</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -122,6 +122,12 @@ not necessarily the actual functions used by the segmenter.</p>
 <span class="r-in"><span><span class="fu"><a href="new_fun_cpt.html">whomademe</a></span><span class="op">(</span><span class="fu">model_name</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (x, tau, ...) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     if (!is_valid_tau(tau, length(x))) {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         stop("Invalid changepoint set")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     else {</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>         tau &lt;- unique(tau)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     }</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     regions &lt;- split_by_tau(as.ts(x), tau)</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     region_mods &lt;- purrr::map(regions, ~fit_meanshift_norm(.x, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         tau = NULL))</span>
@@ -133,7 +139,7 @@ not necessarily the actual functions used by the segmenter.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mod_cpt(x &lt;- as.ts(x), tau = tau, region_params = region_params, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         model_params = c(), fitted_values = fitted_values, model_name = "meanvar")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x55c02fc1cc38&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5620b3f14ca0&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:tidychangepoint&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"model_name")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "meanvar"</span>

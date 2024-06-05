@@ -26,7 +26,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9038</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.0.9039</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -121,18 +121,18 @@ this case).</p>
 algorithm:</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/changepoints.html">changepoints</a></span><span class="op">(</span><span class="va">trend_wn</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">##  x34  x42 x263 x331 </span></span>
-<span><span class="co">##   34   42  263  331</span></span></code></pre>
+<pre><code><span><span class="co">##  x30  x41 x266 x331 </span></span>
+<span><span class="co">##   30   41  266  331</span></span></code></pre>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/changepoints.html">changepoints</a></span><span class="op">(</span><span class="va">trend_wn</span>, use_labels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/pad_tau.html">as_year</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## [1] "1692" "1700" "1921" "1989"</span></span></code></pre>
+<pre><code><span><span class="co">## [1] "1688" "1699" "1924" "1989"</span></span></code></pre>
 <p>The <code><a href="../reference/fitness.html">fitness()</a></code> function returns a named vector with the
 value of the objective function from the discovered changepoint set.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="../reference/fitness.html">fitness</a></span><span class="op">(</span><span class="va">trend_wn</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">##      BIC </span></span>
-<span><span class="co">## 655.8318</span></span></code></pre>
+<span><span class="co">## 653.2597</span></span></code></pre>
 <p>Information about the regions, including their means, are shown by
 the <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> function.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
@@ -140,10 +140,10 @@ the <code><a href="https://generics.r-lib.org/reference/tidy.html" class="extern
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5 × 9</span></span></span>
 <span><span class="co">##   region    num_obs   min   max  mean    sd begin   end param_mu</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> [0,34)         33  7.86 10.2   8.83 0.554     0    34     8.83</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">2</span> [34,42)         8  7.29  8.83  8.03 0.531    34    42     8.03</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">3</span> [42,263)      221  6.86 10.5   9.17 0.591    42   263     9.17</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">4</span> [263,331)      68  8.52 10.6   9.51 0.458   263   331     9.51</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> [0,30)         29  7.88 10.2   8.89 0.543     0    30     8.89</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">2</span> [30,41)        11  7.29  8.94  8.08 0.496    30    41     8.08</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">3</span> [41,266)      225  6.86 10.5   9.17 0.593    41   266     9.17</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">4</span> [266,331)      65  8.52 10.6   9.52 0.437   266   331     9.52</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">5</span> [331,362]      32  8.86 11.0  10.3  0.497   331   362    10.3</span></span></code></pre>
 <p>By default, <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> returns a summary of the
 <strong>segmenter</strong> that produced the discovered changepoint set.
@@ -154,7 +154,7 @@ the segmenter.</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
 <span><span class="co">##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;pckg_vrs&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> meanshift… BIC         656. 9.441 secs</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> meanshift… BIC         653. 9.459 secs</span></span></code></pre>
 <p>However, we can also run <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> on the model resulting
 from the discovered changepoint set. This provides information about the
 model and its fit, including the values of various alternative model
@@ -170,7 +170,7 @@ BIC) is actually the one used by the segmenter!</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
 <span><span class="co">##   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> tidych… 0.0.0.… meanshif… <span style="color: #949494;">&lt;dbl&gt;</span>         4 0.552  -<span style="color: #BB0000;">298.</span>  617.  656.  657.  666.</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> tidych… 0.0.0.… meanshif… <span style="color: #949494;">&lt;dbl&gt;</span>         4 0.550  -<span style="color: #BB0000;">297.</span>  614.  653.  654.  664.</span></span></code></pre>
 <p>The <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function returns an informative plot of the
 original time series, with the changepoint set and the corresponding
 regions demarcated.</p>
@@ -238,7 +238,7 @@ NHPP model, along with the BMDL penalty function.</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
 <span><span class="co">##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;pckg_vrs&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> nhpp       BMDL       <span style="text-decoration: underline;">2</span>095. 13.646 secs</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> nhpp       BMDL       <span style="text-decoration: underline;">1</span>987. 33.267 secs</span></span></code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bog_cpt</span>, use_time_index <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>
