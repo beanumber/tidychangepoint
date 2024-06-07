@@ -2,13 +2,13 @@
 % Please edit documentation in R/pkg-wbs.R
 \name{wbs-generics}
 \alias{wbs-generics}
-\alias{as.segmenter.wbs}
+\alias{as.seg_cpt.wbs}
 \alias{as.ts.wbs}
 \alias{nobs.wbs}
 \alias{seg_params.wbs}
 \title{Compatibility layer for wbs}
 \usage{
-\method{as.segmenter}{wbs}(object, ...)
+\method{as.seg_cpt}{wbs}(object, ...)
 
 \method{as.ts}{wbs}(x, ...)
 
@@ -28,9 +28,9 @@ Methods for generic functions applied to \code{wbs} objects
 }
 \examples{
 cpts <- segment(DataCPSim, method = "wbs")
-x <- cpts$segmenter
+x <- as.segmenter(cpts)
 class(x)
-as.segmenter(x)
+as.seg_cpt(x)
 as.ts(x) 
 changepoints(x)
 fitness(x)

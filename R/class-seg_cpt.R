@@ -17,7 +17,7 @@
 #' changepoints(x)
 #' 
 #' y <- segment(CET, method = "pelt")
-#' z <- as.segmenter(y$segmenter)
+#' z <- as.seg_cpt(y$segmenter)
 #' class(z)
 #' fitness(x)
 #' glance(z)
@@ -76,7 +76,7 @@ seg_cpt <- function(x, ...) {
 
 #' @rdname seg-cpt-generics
 #' @export
-as.segmenter.seg_cpt <- function(object, ...) {
+as.seg_cpt.seg_cpt <- function(object, ...) {
   object
 }
 

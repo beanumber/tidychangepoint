@@ -74,8 +74,9 @@ tidy.tidycpt <- function(x, ...) {
 #' @seealso [broom::glance()]
 #' @export
 glance.tidycpt <- function(x, ...) {
-  x$segmenter |>
+  x |>
     as.segmenter() |>
+    as.seg_cpt()
     glance() |>
     dplyr::mutate(
       elapsed_time = round(x$elapsed_time, 3)

@@ -2,13 +2,13 @@
 % Please edit documentation in R/pkg-GA.R
 \name{ga-generics}
 \alias{ga-generics}
-\alias{as.segmenter.ga}
+\alias{as.seg_cpt.ga}
 \alias{as.ts.ga}
 \alias{nobs.ga}
 \alias{seg_params.ga}
 \title{Compatibility layer for GA}
 \usage{
-\method{as.segmenter}{ga}(object, ...)
+\method{as.seg_cpt}{ga}(object, ...)
 
 \method{as.ts}{ga}(x, ...)
 
@@ -28,9 +28,9 @@ Methods for generic functions applied to \code{ga} objects
 }
 \examples{
 cpts <- segment(DataCPSim, method = "ga", maxiter = 10)
-x <- cpts$segmenter
+x <- as.segmenter(cpts)
 class(x)
-as.segmenter(x)
+as.seg_cpt(x)
 as.ts(x) 
 changepoints(x)
 fitness(x)

@@ -4,6 +4,7 @@
 \alias{as.model.tidycpt}
 \alias{as.segmenter.tidycpt}
 \alias{as.segmenter}
+\alias{as.seg_cpt}
 \alias{as.model}
 \alias{as.model.default}
 \alias{is_model}
@@ -15,6 +16,8 @@
 \method{as.segmenter}{tidycpt}(object, ...)
 
 as.segmenter(object, ...)
+
+as.seg_cpt(object, ...)
 
 as.model(object, ...)
 
@@ -33,7 +36,11 @@ is_segmenter(object, ...)
 }
 \value{
 \itemize{
-\item \code{\link[=as.segmenter]{as.segmenter()}} returns a \link{seg_cpt} object
+\item \code{\link[=as.segmenter]{as.segmenter()}} returns a segmenter object
+}
+
+\itemize{
+\item \code{\link[=as.seg_cpt]{as.seg_cpt()}} returns a \link{seg_cpt} object
 }
 
 \itemize{
@@ -61,7 +68,11 @@ Convert segmenters into models or standardized segmenters
 }
 
 \itemize{
-\item \code{\link[=as.segmenter]{as.segmenter()}} converts a wild-caught segmenter of any class into a
+\item \code{\link[=as.segmenter]{as.segmenter()}} returns the segmenter of a \code{tidycpt} object
+}
+
+\itemize{
+\item \code{\link[=as.seg_cpt]{as.seg_cpt()}} converts a wild-caught segmenter of any class into a
 \code{seg_cpt} object
 }
 

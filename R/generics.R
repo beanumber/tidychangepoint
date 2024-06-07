@@ -19,12 +19,20 @@ changepoints.default <- function(x, ...) {
 
 #' @rdname as.model
 #' @details
-#'   - [as.segmenter()] converts a wild-caught segmenter of any class into a
-#'   `seg_cpt` object
+#'   - [as.segmenter()] returns the segmenter of a `tidycpt` object
 #' @return
-#'   - [as.segmenter()] returns a [seg_cpt] object
+#'   - [as.segmenter()] returns a segmenter object
 #' @export
 as.segmenter <- function(object, ...) UseMethod("as.segmenter")
+
+#' @rdname as.model
+#' @details
+#'   - [as.seg_cpt()] converts a wild-caught segmenter of any class into a
+#'   `seg_cpt` object
+#' @return
+#'   - [as.seg_cpt()] returns a [seg_cpt] object
+#' @export
+as.seg_cpt <- function(object, ...) UseMethod("as.seg_cpt")
 
 #' Compute exceedances of a threshold for a time series
 #' 

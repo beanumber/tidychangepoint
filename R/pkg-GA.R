@@ -11,9 +11,9 @@ globalVariables(c("median", "q1", "q3"))
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "ga", maxiter = 10)
-#' x <- cpts$segmenter
+#' x <- as.segmenter(cpts)
 #' class(x)
-#' as.segmenter(x)
+#' as.seg_cpt(x)
 #' as.ts(x) 
 #' changepoints(x)
 #' fitness(x)
@@ -21,7 +21,7 @@ globalVariables(c("median", "q1", "q3"))
 #' model_args(x)
 #' nobs(x)
 #' seg_params(x)
-as.segmenter.ga <- function(object, ...) {
+as.seg_cpt.ga <- function(object, ...) {
   seg_cpt(
     x = as.ts(object),
     pkg = "GA",

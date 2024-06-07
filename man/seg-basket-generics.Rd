@@ -2,7 +2,7 @@
 % Please edit documentation in R/class-seg_basket.R
 \name{seg-basket-generics}
 \alias{seg-basket-generics}
-\alias{as.segmenter.seg_basket}
+\alias{as.seg_cpt.seg_basket}
 \alias{as.ts.seg_basket}
 \alias{best_cpt}
 \alias{plot.seg_basket}
@@ -10,7 +10,7 @@
 \alias{plot_cpt_repeated}
 \title{Methods for seg_basket objects}
 \usage{
-\method{as.segmenter}{seg_basket}(object, ...)
+\method{as.seg_cpt}{seg_basket}(object, ...)
 
 \method{as.ts}{seg_basket}(x, ...)
 

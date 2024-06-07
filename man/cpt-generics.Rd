@@ -2,14 +2,14 @@
 % Please edit documentation in R/pkg-changepoint.R
 \name{cpt-generics}
 \alias{cpt-generics}
-\alias{as.segmenter.cpt}
+\alias{as.seg_cpt.cpt}
 \alias{as.ts.cpt}
 \alias{logLik.cpt}
 \alias{nobs.cpt}
 \alias{seg_params.cpt}
 \title{Compatibility layer for changepoint}
 \usage{
-\method{as.segmenter}{cpt}(object, ...)
+\method{as.seg_cpt}{cpt}(object, ...)
 
 \method{as.ts}{cpt}(x, ...)
 
@@ -31,9 +31,9 @@ Methods for generic functions applied to \code{cpt} objects
 }
 \examples{
 cpts <- segment(DataCPSim, method = "pelt")
-x <- cpts$segmenter
+x <- as.segmenter(cpts)
 class(x)
-as.segmenter(x)
+as.seg_cpt(x)
 as.ts(x) 
 changepoints(x)
 fitness(x)

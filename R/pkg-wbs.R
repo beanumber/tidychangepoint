@@ -9,9 +9,9 @@
 #' @seealso [wbs::wbs-package]
 #' @examples
 #' cpts <- segment(DataCPSim, method = "wbs")
-#' x <- cpts$segmenter
+#' x <- as.segmenter(cpts)
 #' class(x)
-#' as.segmenter(x)
+#' as.seg_cpt(x)
 #' as.ts(x) 
 #' changepoints(x)
 #' fitness(x)
@@ -20,7 +20,7 @@
 #' nobs(x)
 #' seg_params(x)
 #' 
-as.segmenter.wbs <- function(object, ...) {
+as.seg_cpt.wbs <- function(object, ...) {
   seg_cpt(
     x = as.ts(object),
     pkg = "wbs",

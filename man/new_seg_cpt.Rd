@@ -52,7 +52,7 @@ as.ts(x)
 changepoints(x)
 
 y <- segment(CET, method = "pelt")
-z <- as.segmenter(y$segmenter)
+z <- as.seg_cpt(y$segmenter)
 class(z)
 fitness(x)
 glance(z)

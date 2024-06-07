@@ -11,9 +11,9 @@
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "pelt")
-#' x <- cpts$segmenter
+#' x <- as.segmenter(cpts)
 #' class(x)
-#' as.segmenter(x)
+#' as.seg_cpt(x)
 #' as.ts(x) 
 #' changepoints(x)
 #' fitness(x)
@@ -23,7 +23,7 @@
 #' nobs(x)
 #' seg_params(x)
 #' 
-as.segmenter.cpt <- function(object, ...) {
+as.seg_cpt.cpt <- function(object, ...) {
   seg_cpt(
     x = as.ts(object),
     pkg = "changepoint",

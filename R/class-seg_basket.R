@@ -54,7 +54,7 @@ seg_basket <- function(x, ...) {
 #' @param object A `seg_basket` object
 #' @param ... arguments passed to methods
 #' @export
-as.segmenter.seg_basket <- function(object, ...) {
+as.seg_cpt.seg_basket <- function(object, ...) {
   seg_cpt(
     x = as.ts(object$data),
     pkg = "tidychangepoint",
