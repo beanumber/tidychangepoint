@@ -151,10 +151,8 @@ This includes the fitness, the elapsed time, and the parameters used by
 the segmenter.</p>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">trend_wn</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
-<span><span class="co">##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;pckg_vrs&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> meanshift… BIC         653. 9.459 secs</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 0 × 1</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 1 variable: elapsed_time &lt;drtn&gt;</span></span></span></code></pre>
 <p>However, we can also run <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> on the model resulting
 from the discovered changepoint set. This provides information about the
 model and its fit, including the values of various alternative model
@@ -235,10 +233,8 @@ NHPP model, along with the BMDL penalty function.</p>
 <pre><code><span><span class="co">## Seeding initial population with probability: 0.0145985401459854</span></span></code></pre>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">bog_cpt</span><span class="op">)</span></span></code></pre></div>
-<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
-<span><span class="co">##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time</span></span>
-<span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;pckg_vrs&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> nhpp       BMDL       <span style="text-decoration: underline;">1</span>987. 33.267 secs</span></span></code></pre>
+<pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 0 × 1</span></span></span>
+<span><span class="co">## <span style="color: #949494;"># ℹ 1 variable: elapsed_time &lt;drtn&gt;</span></span></span></code></pre>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bog_cpt</span>, use_time_index <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>

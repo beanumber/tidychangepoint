@@ -82,7 +82,7 @@
         <dd>Maximum Descriptive Length</dd>
       </dl><dl><dt>
           
-          <code><a href="as.model.html">as.segmenter()</a></code> <code><a href="as.model.html">as.model()</a></code> <code><a href="as.model.html">is_model()</a></code> <code><a href="as.model.html">is_segmenter()</a></code> 
+          <code><a href="as.model.html">as.segmenter()</a></code> <code><a href="as.model.html">as.seg_cpt()</a></code> <code><a href="as.model.html">as.model()</a></code> <code><a href="as.model.html">is_model()</a></code> <code><a href="as.model.html">is_segmenter()</a></code> 
         </dt>
         <dd>Convert a segmenter to a model object</dd>
       </dl><dl><dt>
@@ -112,7 +112,7 @@
         <dd>Compare various models for a give changepoint set</dd>
       </dl><dl><dt>
           
-          <code><a href="cpt-generics.html">as.segmenter(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">as.ts(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">logLik(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">nobs(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">seg_params(<i>&lt;cpt&gt;</i>)</a></code> 
+          <code><a href="cpt-generics.html">as.seg_cpt(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">as.ts(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">logLik(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">nobs(<i>&lt;cpt&gt;</i>)</a></code> <code><a href="cpt-generics.html">seg_params(<i>&lt;cpt&gt;</i>)</a></code> 
         </dt>
         <dd>Compatibility layer for changepoint</dd>
       </dl><dl><dt>
@@ -157,7 +157,7 @@
         <dd>Retrieve the optimal fitness (or objective function) value used by an algorithm</dd>
       </dl><dl><dt>
           
-          <code><a href="ga-generics.html">as.segmenter(<i>&lt;ga&gt;</i>)</a></code> <code><a href="ga-generics.html">as.ts(<i>&lt;ga&gt;</i>)</a></code> <code><a href="ga-generics.html">nobs(<i>&lt;ga&gt;</i>)</a></code> <code><a href="ga-generics.html">seg_params(<i>&lt;ga&gt;</i>)</a></code> 
+          <code><a href="ga-generics.html">as.seg_cpt(<i>&lt;ga&gt;</i>)</a></code> <code><a href="ga-generics.html">as.ts(<i>&lt;ga&gt;</i>)</a></code> <code><a href="ga-generics.html">nobs(<i>&lt;ga&gt;</i>)</a></code> <code><a href="ga-generics.html">seg_params(<i>&lt;ga&gt;</i>)</a></code> 
         </dt>
         <dd>Compatibility layer for GA</dd>
       </dl><dl><dt>
@@ -222,12 +222,12 @@
         <dd>Plot GA information</dd>
       </dl><dl><dt>
           
-          <code><a href="seg-basket-generics.html">as.segmenter(<i>&lt;seg_basket&gt;</i>)</a></code> <code><a href="seg-basket-generics.html">as.ts(<i>&lt;seg_basket&gt;</i>)</a></code> <code><a href="seg-basket-generics.html">best_cpt()</a></code> <code><a href="seg-basket-generics.html">plot(<i>&lt;seg_basket&gt;</i>)</a></code> <code><a href="seg-basket-generics.html">plot_best_chromosome()</a></code> <code><a href="seg-basket-generics.html">plot_cpt_repeated()</a></code> 
+          <code><a href="seg-basket-generics.html">as.seg_cpt(<i>&lt;seg_basket&gt;</i>)</a></code> <code><a href="seg-basket-generics.html">as.ts(<i>&lt;seg_basket&gt;</i>)</a></code> <code><a href="seg-basket-generics.html">best_cpt()</a></code> <code><a href="seg-basket-generics.html">plot(<i>&lt;seg_basket&gt;</i>)</a></code> <code><a href="seg-basket-generics.html">plot_best_chromosome()</a></code> <code><a href="seg-basket-generics.html">plot_cpt_repeated()</a></code> 
         </dt>
         <dd>Methods for seg_basket objects</dd>
       </dl><dl><dt>
           
-          <code><a href="seg-cpt-generics.html">as.segmenter(<i>&lt;seg_cpt&gt;</i>)</a></code> <code><a href="seg-cpt-generics.html">as.ts(<i>&lt;seg_cpt&gt;</i>)</a></code> <code><a href="seg-cpt-generics.html">glance(<i>&lt;seg_cpt&gt;</i>)</a></code> <code><a href="seg-cpt-generics.html">nobs(<i>&lt;seg_cpt&gt;</i>)</a></code> <code><a href="seg-cpt-generics.html">print(<i>&lt;seg_cpt&gt;</i>)</a></code> <code><a href="seg-cpt-generics.html">seg_params(<i>&lt;seg_cpt&gt;</i>)</a></code> 
+          <code><a href="seg-cpt-generics.html">as.seg_cpt(<i>&lt;seg_cpt&gt;</i>)</a></code> <code><a href="seg-cpt-generics.html">as.ts(<i>&lt;seg_cpt&gt;</i>)</a></code> <code><a href="seg-cpt-generics.html">glance(<i>&lt;seg_cpt&gt;</i>)</a></code> <code><a href="seg-cpt-generics.html">nobs(<i>&lt;seg_cpt&gt;</i>)</a></code> <code><a href="seg-cpt-generics.html">print(<i>&lt;seg_cpt&gt;</i>)</a></code> <code><a href="seg-cpt-generics.html">seg_params(<i>&lt;seg_cpt&gt;</i>)</a></code> 
         </dt>
         <dd>Methods for seg_cpt objects</dd>
       </dl><dl><dt>
@@ -267,7 +267,7 @@
         <dd>Generic functions for tidycpt objects</dd>
       </dl><dl><dt>
           
-          <code><a href="wbs-generics.html">as.segmenter(<i>&lt;wbs&gt;</i>)</a></code> <code><a href="wbs-generics.html">as.ts(<i>&lt;wbs&gt;</i>)</a></code> <code><a href="wbs-generics.html">nobs(<i>&lt;wbs&gt;</i>)</a></code> <code><a href="wbs-generics.html">seg_params(<i>&lt;wbs&gt;</i>)</a></code> 
+          <code><a href="wbs-generics.html">as.seg_cpt(<i>&lt;wbs&gt;</i>)</a></code> <code><a href="wbs-generics.html">as.ts(<i>&lt;wbs&gt;</i>)</a></code> <code><a href="wbs-generics.html">nobs(<i>&lt;wbs&gt;</i>)</a></code> <code><a href="wbs-generics.html">seg_params(<i>&lt;wbs&gt;</i>)</a></code> 
         </dt>
         <dd>Compatibility layer for wbs</dd>
       </dl></div>
