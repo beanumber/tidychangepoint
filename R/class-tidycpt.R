@@ -76,7 +76,7 @@ tidy.tidycpt <- function(x, ...) {
 glance.tidycpt <- function(x, ...) {
   x |>
     as.segmenter() |>
-    as.seg_cpt()
+    as.seg_cpt() |>
     glance() |>
     dplyr::mutate(
       elapsed_time = round(x$elapsed_time, 3)

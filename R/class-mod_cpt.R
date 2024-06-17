@@ -116,18 +116,17 @@ nobs.mod_cpt <- function(object, ...) {
 #' @export
 logLik.mod_cpt <- function(object, ...) {
   sigma_hatsq <- model_variance(object)
-  N <- nobs(object)
+  if ("durbin_watson" %in% names(object)) {
+    N <- nobs(object) - 1
+  } else {
+    N <- nobs(object)
+  }
   ll <- -N * (log(sigma_hatsq) + 1 + log(2 * pi)) / 2
   as.logLik(object, ll)
 }
 
 as.logLik <- function(object, ll = 0) {
   m <- length(object$tau)
-  if ("durbin_watson" %in% names(object)) {
-    N <- nobs(object) - 1
-  } else {
-    N <- nobs(object)
-  }
   num_params_per_region <- object |>
     coef() |>
     dplyr::select(dplyr::contains("param_")) |>
@@ -141,7 +140,7 @@ as.logLik <- function(object, ll = 0) {
   attr(ll, "num_params_per_region") <- num_params_per_region
   attr(ll, "num_model_params") <- num_model_params
   attr(ll, "df") <- m + num_params_per_region * (m + 1) + num_model_params
-  attr(ll, "nobs") <- N
+  attr(ll, "nobs") <- nobs(object)
   attr(ll, "tau") <- object$tau
   class(ll) <- "logLik"
   return(ll)

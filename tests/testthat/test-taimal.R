@@ -1,5 +1,5 @@
 test_that("gbmdl works", {
-  x <- segment(DataCPSim, method = "coen", num_generations = 3)
+  expect_warning(x <- segment(DataCPSim, method = "coen", num_generations = 3), "deprecated")
   expect_s3_class(x, "tidycpt")
   expect_s3_class(x$segmenter, "cpt_gbmdl")
   expect_s3_class(x$segmenter, "seg_basket")
@@ -12,8 +12,8 @@ test_that("gbmdl works", {
 
   expect_true(all(c("logLik", "AIC", "BIC", "MBIC", "MDL") %in% names(x$segmenter$basket)))
   
-  expect_true(is_segmenter(x$segmenter))
-  expect_true(is_model(x$model))
+  expect_true(is_segmenter(as.seg_cpt(as.segmenter(x))))
+  expect_true(is_model(as.model(x)))
   
   expect_s3_class(evaluate_cpts(x$segmenter), "tbl_df")
   expect_s3_class(evaluate_cpts(list(), .data = DataCPSim, model_fn = fit_nhpp), "tbl_df")
@@ -25,7 +25,7 @@ test_that("gbmdl works", {
 
 test_that("params works", {
   # Validador de la dimensiones de cosas de distribucion a priori
-  x <- segment(DataCPSim, method = "coen", num_generations = 2)
+  expect_warning(x <- segment(DataCPSim, method = "coen", num_generations = 3), "deprecated")
   if (x$segmenter$seg_params$nhpp_dist %in% c("W", "MO", "GO")) {
     dim_a_priori <- 2
   } else {
