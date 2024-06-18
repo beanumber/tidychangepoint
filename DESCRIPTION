@@ -1,5 +1,5 @@
 Package: tidychangepoint
-Title: Facilitate Changepoint Detection Analysis in a Tidy Framework
+Title: A Tidy Framework for Changepoint Detection Analysis
 Version: 0.0.1
 Authors@R: c(
     person("Benjamin S.", "Baumer", email = "ben.baumer@gmail.com", 
@@ -21,11 +21,12 @@ Authors@R: c(
     )
   )
 Description: Changepoint detection algorithms for R are widespread but have
-    different interfaces and reporting conventions. This makes the comparative
-    analysis of results difficult. Tidychangepoint solves this problem by 
-    providing a unified interface for several different changepoint detection 
-    algorithms. It also provides consistent numerical and graphical reporting 
-    using the broom and ggplot2 packages. 
+    different interfaces and reporting conventions. 
+    This makes the comparative analysis of results difficult. 
+    We solve this problem by providing a tidy, unified interface for several 
+    different changepoint detection algorithms. 
+    We also provide consistent numerical and graphical reporting leveraging 
+    the 'broom' and 'ggplot2' packages. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
