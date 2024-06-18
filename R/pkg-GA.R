@@ -92,8 +92,10 @@ nobs.ga <- function(object, ...) {
 #' @param ... currently ignored
 #' @export
 #' @examples
+#' \dontrun{
 #' x <- segment(DataCPSim, method = "ga-coen", maxiter = 5)
 #' plot(x$segmenter)
+#' }
 plot.tidyga <- function(x, ...) {
   methods <- c("null", "pelt")
   penalty <- names(fitness(x))

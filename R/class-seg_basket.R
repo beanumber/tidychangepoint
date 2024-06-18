@@ -213,9 +213,11 @@ plot.seg_basket <- function(x, ...) {
 #' @rdname diagnose
 #' @export
 #' @examples
+#' \dontrun{
 #' x <- segment(DataCPSim, method = "coen", num_generations = 3)
 #' plot(x$segmenter)
 #' diagnose(x$segmenter)
+#' }
 diagnose.seg_basket <- function(x, ...) {
   patchwork::wrap_plots(
     plot_best_chromosome(x),

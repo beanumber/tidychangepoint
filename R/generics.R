@@ -134,8 +134,10 @@ as.model <- function(object, ...) UseMethod("as.model")
 #' @examples
 #' cpt <- segment(DataCPSim, method = "ga", maxiter = 5)
 #' as.model(cpt$segmenter)
+#' \dontrun{
 #' cpt <- segment(DataCPSim, method = "ga-coen", model_fn_args = list(threshold = 80), maxiter = 5)
 #' as.model(cpt$segmenter)$model_params
+#' }
 as.model.default <- function(object, ...) {
   f <- whomademe(object)
   args <- c(list(x = as.ts(object), tau = changepoints(object)), model_args(object), list(...))
