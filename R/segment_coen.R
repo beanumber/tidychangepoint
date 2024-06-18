@@ -340,12 +340,17 @@ muta_k_cp_BMDL <- function(mat_cp, x) {
 #' sim_1_cp_BMDL(exceedances(rlnorm_ts_1))
 #' sim_1_cp_BMDL(exceedances(rlnorm_ts_2))
 #' sim_1_cp_BMDL(exceedances(rlnorm_ts_3))
+#' sim_1_cp_BMDL(exceedances(bogota_pm))
 #'
 sim_1_cp_BMDL <- function(x, max_num_cp = 20, prob_inicial = 0.06) {
   # Primero simulamos una binomial que va a ser el número de puntos de cambio
   m <- min(stats::rbinom(1, length(x), prob_inicial), max_num_cp - 3)
   # Simulamos los puntos de cambio uniformemente aleatorios
-  valores_cp <- sort(sample(x[-length(x)], size = m, replace = F))
+  good <- x[-length(x)]
+  if (1 %in% good) {
+    good <- good[2:length(good)]
+  }
+  valores_cp <- sort(sample(good, size = m, replace = F))
   # Genera cromosoma con estructura manejable
   ans <- c(m, 1, valores_cp, max(x), rep(0, max_num_cp - m - 3))
   return(ans)

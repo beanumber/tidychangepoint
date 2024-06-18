@@ -71,7 +71,12 @@ fitness(x)
     ##     MBIC 
     ## 643.5292
 
-## Citation
+## References
+
+Please read [the full
+paper](https://beanumber.github.io/changepoint-paper/) for more details.
+
+To cite the package, use the following information:
 
 ``` r
 citation("tidychangepoint")
@@ -84,7 +89,7 @@ citation("tidychangepoint")
     ## 
     ##   Baumer B, Suarez Sierra B, Coen A, Taimal C (????). _tidychangepoint:
     ##   Facilitate Changepoint Detection Analysis in a Tidy Framework_. R
-    ##   package version 0.0.0.9037,
+    ##   package version 0.0.1,
     ##   <https://beanumber.github.io/tidychangepoint/>.
     ## 
     ## A BibTeX entry for LaTeX users is
@@ -92,6 +97,6 @@ citation("tidychangepoint")
     ##   @Manual{,
     ##     title = {tidychangepoint: Facilitate Changepoint Detection Analysis in a Tidy Framework},
     ##     author = {Benjamin S. Baumer and Biviana Marcela {Suarez Sierra} and Arrigo Coen and Carlos A. Taimal},
-    ##     note = {R package version 0.0.0.9037},
+    ##     note = {R package version 0.0.1},
     ##     url = {https://beanumber.github.io/tidychangepoint/},
     ##   }

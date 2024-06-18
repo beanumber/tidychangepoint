@@ -1,6 +1,9 @@
 ---
 title: "Using Coen's algorithm"
+bibliography: refs.bib
 ---
+
+Please see @baumer2024tidy for more details. 
 
 ```{r, include = FALSE}
 knitr::opts_chunk$set(

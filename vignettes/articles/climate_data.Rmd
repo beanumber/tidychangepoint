@@ -3,7 +3,7 @@ title: "Climate data in tidychangepoint"
 bibliography: refs.bib
 ---
 
-The `tidychangepoint` package provides three climate-related time series. 
+The `tidychangepoint` package [@baumer2024tidy] provides three climate-related time series. 
 
 ```{r setup}
 library(tidychangepoint)

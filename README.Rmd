@@ -57,7 +57,11 @@ fitness(x)
 ```
 
 
-## Citation
+## References
+
+Please read [the full paper](https://beanumber.github.io/changepoint-paper/) for more details. 
+
+To cite the package, use the following information:
 
 ```{r}
 citation("tidychangepoint")

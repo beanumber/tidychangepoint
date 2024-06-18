@@ -171,6 +171,7 @@ sim_1_cp_BMDL(exceedances(DataCPSim))
 sim_1_cp_BMDL(exceedances(rlnorm_ts_1))
 sim_1_cp_BMDL(exceedances(rlnorm_ts_2))
 sim_1_cp_BMDL(exceedances(rlnorm_ts_3))
+sim_1_cp_BMDL(exceedances(bogota_pm))
 
 sim_k_cp_BMDL(DataCPSim)
 
