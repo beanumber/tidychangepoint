@@ -190,8 +190,10 @@ seg_params.ga <- function(x, ...) {
 #' @export
 #' @seealso [GA::gabin_Population()], [segment_ga()]
 #' @examples
+#' \dontrun{
 #' f <- build_gabin_population(CET)
 #' segment(CET, method = "ga", population = f)
+#' }
 
 build_gabin_population <- function(x, ...) {
   p <- list(

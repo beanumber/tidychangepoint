@@ -34,6 +34,6 @@ Variables:
 }
 }
 \references{
-\href{https://www.openstreetmap.org/index.html?mlat=6.244747&mlon=-75.574828&zoom=12}{OpenStreetMap}
+\href{https://www.openstreetmap.org/?mlat=6.244747&mlon=-75.574828&zoom=12}{OpenStreetMap}
 }
 \keyword{datasets}
