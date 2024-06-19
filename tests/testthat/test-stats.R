@@ -52,7 +52,15 @@ test_that("values match", {
   expect_equal(round(MDL(trend_wn), 2), 653.07)
 
   trend_ar1 <- fit_trendshift_ar1(CET, tau = ids)
+  
+  resid_wn <- residuals(trend_wn)
+  resid_ar1 <- residuals(trend_ar1)
+  expect_gt(var(resid_wn - resid_ar1), 0)
+#  tidychangepoint:::autoregress_errors(trend_wn) |>
+#    residuals()
+  
   expect_equal(round(trend_ar1$model_params[["sigma_hatsq"]], 3), 0.290)
+  
 # https://github.com/beanumber/tidychangepoint/issues/73
   expect_equal(round(as.numeric(logLik(trend_ar1))), round(-288.80))
   expect_equal(round(BIC(trend_ar1)), round(654.19))

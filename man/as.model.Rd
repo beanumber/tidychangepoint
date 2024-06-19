@@ -93,8 +93,10 @@ S3 methods necessary to be considered a segmenter.
 \examples{
 cpt <- segment(DataCPSim, method = "ga", maxiter = 5)
 as.model(cpt$segmenter)
+\dontrun{
 cpt <- segment(DataCPSim, method = "ga-coen", model_fn_args = list(threshold = 80), maxiter = 5)
 as.model(cpt$segmenter)$model_params
+}
 x <- fit_nhpp(CET, tau = 330)
 is_model(x)
 x <- segment(CET, method = "pelt")

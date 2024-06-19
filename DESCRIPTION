@@ -3,7 +3,7 @@ Title: A Tidy Framework for Changepoint Detection Analysis
 Version: 0.0.1
 Authors@R: c(
     person("Benjamin S.", "Baumer", email = "ben.baumer@gmail.com", 
-      role = c("aut", "cre"), comment = c(ORCID = "0000-0002-3279-0516")),
+      role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-3279-0516")),
     person(
       "Biviana Marcela", "Suarez Sierra", email = "bmsuarezs@eafit.edu.co", 
       role = c("aut"), comment = c(ORCID = "0000-0003-2151-3537")

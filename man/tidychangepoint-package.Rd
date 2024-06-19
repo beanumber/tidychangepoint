@@ -4,9 +4,9 @@
 \name{tidychangepoint-package}
 \alias{tidychangepoint}
 \alias{tidychangepoint-package}
-\title{tidychangepoint: Facilitate Changepoint Detection Analysis in a Tidy Framework}
+\title{tidychangepoint: A Tidy Framework for Changepoint Detection Analysis}
 \description{
-Changepoint detection algorithms for R are widespread but have different interfaces and reporting conventions. This makes the comparative analysis of results difficult. Tidychangepoint solves this problem by providing a unified interface for several different changepoint detection algorithms. It also provides consistent numerical and graphical reporting using the broom and ggplot2 packages.
+Changepoint detection algorithms for R are widespread but have different interfaces and reporting conventions. This makes the comparative analysis of results difficult. We solve this problem by providing a tidy, unified interface for several different changepoint detection algorithms. We also provide consistent numerical and graphical reporting leveraging the 'broom' and 'ggplot2' packages.
 }
 \seealso{
 Useful links:

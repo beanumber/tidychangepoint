@@ -15,6 +15,8 @@
 Plot GA information
 }
 \examples{
+\dontrun{
 x <- segment(DataCPSim, method = "ga-coen", maxiter = 5)
 plot(x$segmenter)
+}
 }
