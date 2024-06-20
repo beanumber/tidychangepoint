@@ -253,9 +253,9 @@ autoregress_errors <- function(mod, ...) {
   
   y <- as.ts(mod)
   
-  phi_hat <- sum(utils::head(resid, -1) * utils::tail(resid, -1)) / sum(resid^2)
-  d <- sum((utils::head(resid, -1) - utils::tail(resid, -1))^2) / sum(resid^2)
-  y_hat <- fitted(mod) + c(0, phi_hat * utils::head(resid, -1))
+  phi_hat <- sum(resid[-1] * resid[-n] ) / sum(resid^2)
+  d <- sum((resid[-n] - resid[-1])^2) / sum(resid^2)
+  y_hat <- fitted(mod) + c(0, phi_hat * resid[-n])
   sigma_hatsq <- sum((y - y_hat)^2) / n
   
   out <- mod
