@@ -5,61 +5,49 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta name="description" content="tidychangepoint">
 <title>Climate data in tidychangepoint • tidychangepoint</title>
 <script src="../deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="../deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><!-- Font Awesome icons --><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/all.min.css" integrity="sha256-mmgLkCYLUQbXn0B1SRqzHar6dCnv9oZFPEC1g1cwlkk=" crossorigin="anonymous">
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.12.1/css/v4-shims.min.css" integrity="sha256-wZjR52fzng1pJHwx4aV2AO3yyTOXrcDW7jBpJtTwVxw=" crossorigin="anonymous">
-<!-- bootstrap-toc --><script src="https://cdn.jsdelivr.net/gh/afeld/bootstrap-toc@v1.0.1/dist/bootstrap-toc.min.js" integrity="sha256-4veVQbu7//Lk5TSmc7YV48MxtMy98e26cf5MrgZYnwo=" crossorigin="anonymous"></script><!-- headroom.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/headroom.min.js" integrity="sha256-AsUX4SJE1+yuDu5+mAVzJbuYNPHj/WroHuZ8Ir/CkE0=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/headroom/0.11.0/jQuery.headroom.min.js" integrity="sha256-ZX/yNShbjqsohH1k95liqY9Gd8uOiE1S4vZc+9KQ1K4=" crossorigin="anonymous"></script><!-- clipboard.js --><script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.11/clipboard.min.js" integrity="sha512-7O5pXpc0oCRrxk8RUfDYFgn0nO1t+jLuIOQdOMRp4APB7uZ4vSjspzp5y6YDtDs4VzUSTbWzBFZ/LKJhnyFOKw==" crossorigin="anonymous" referrerpolicy="no-referrer"></script><!-- search --><script src="https://cdnjs.cloudflare.com/ajax/libs/fuse.js/6.4.6/fuse.js" integrity="sha512-zv6Ywkjyktsohkbp9bb45V6tEMoWhzFzXis+LrMehmJZZSys19Yxf1dopHx7WzIKxr5tK2dVcYmaCk2uqdjF4A==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/autocomplete.js/0.38.0/autocomplete.jquery.min.js" integrity="sha512-GU9ayf+66Xx2TmpxqJpliWbT5PiGYxpaG8rfnBEk1LL8l1KGkRShhngwdXK1UgqhAzWpZHSiYPc09/NwDQIGyg==" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mark.js/8.11.1/mark.min.js" integrity="sha512-5CYOlHXGh6QpOFA/TeTylKLWfB3ftPsde7AnmhuitiTX4K5SqCLBeKro6sPS8ilsz1Q4NRx3v8Ko2IBiszzdww==" crossorigin="anonymous"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Climate data in tidychangepoint">
-<meta property="og:description" content="tidychangepoint">
-<!-- mathjax --><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js" integrity="sha256-nvJJv9wWKEm88qvoQl9ekL2J+k/RWIsaSScxxlsrv8k=" crossorigin="anonymous"></script><script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/config/TeX-AMS-MML_HTMLorMML.js" integrity="sha256-84DKXVJXs0/F8OTMzX4UR909+jtl4G7SPypPavF+GfA=" crossorigin="anonymous"></script><!--[if lt IE 9]>
-<script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
-<script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
-<![endif]-->
+<script src="../deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="../deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
+<link href="../deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="../deps/headroom-0.11.0/headroom.min.js"></script><script src="../deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="../deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="../deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="../deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="../deps/search-1.0.0/fuse.min.js"></script><script src="../deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="../pkgdown.js"></script><meta property="og:title" content="Climate data in tidychangepoint">
 </head>
 <body>
     <a href="#main" class="visually-hidden-focusable">Skip to contents</a>
-    
 
-    <nav class="navbar fixed-top navbar-light navbar-expand-lg bg-light" data-bs-theme="light"><div class="container">
-    
+
+    <nav class="navbar navbar-expand-lg fixed-top bg-light" data-bs-theme="light" aria-label="Site navigation"><div class="container">
+
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
     <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
 
-    
+
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto">
-<li class="nav-item">
-  <a class="nav-link" href="../articles/tidychangepoint.html">Get started</a>
-</li>
-<li class="nav-item">
-  <a class="nav-link" href="../reference/index.html">Reference</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../articles/tidychangepoint.html">Get started</a></li>
+<li class="nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
 <li class="active nav-item dropdown">
-  <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown" role="button" aria-expanded="false" aria-haspopup="true" id="dropdown-articles">Articles</a>
-  <div class="dropdown-menu" aria-labelledby="dropdown-articles">
-    <a class="dropdown-item" href="../articles/climate_data.html">Climate data in tidychangepoint</a>
-    <a class="dropdown-item" href="../articles/coen.html">Using Coen's algorithm</a>
-  </div>
+  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
+  <ul class="dropdown-menu" aria-labelledby="dropdown-articles">
+<li><a class="dropdown-item" href="../articles/climate_data.html">Climate data in tidychangepoint</a></li>
+    <li><a class="dropdown-item" href="../articles/coen.html">Using Coen's algorithm</a></li>
+  </ul>
 </li>
-<li class="nav-item">
-  <a class="nav-link" href="../news/index.html">Changelog</a>
-</li>
+<li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul>
-<form class="form-inline my-2 my-lg-0" role="search">
-        <input type="search" class="form-control me-sm-2" aria-label="Toggle navigation" name="search-input" data-search-index="../search.json" id="search-input" placeholder="Search for" autocomplete="off">
-</form>
-
-      <ul class="navbar-nav"></ul>
+<ul class="navbar-nav">
+<li class="nav-item"><form class="form-inline" role="search">
+ <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json">
+</form></li>
+      </ul>
 </div>
 
-    
+
   </div>
 </nav><div class="container template-article">
 
@@ -68,10 +56,11 @@
 
 <div class="row">
   <main id="main" class="col-md-9"><div class="page-header">
-      <img src="" class="logo" alt=""><h1>Climate data in tidychangepoint</h1>
+
+      <h1>Climate data in tidychangepoint</h1>
             
       
-      
+
       <div class="d-none name"><code>climate_data.Rmd</code></div>
     </div>
 
@@ -100,14 +89,18 @@ random, results vary. Shi, et al. used a <code>maxiter</code> value of
 50,000 in order to obtain the results used in the paper. Here, we use a
 much lower value solely in the interest of computational speed. Note
 that this algorithm is fitting a “meanshift” model, which estimates the
-mean <span class="math inline">\(\mu_i\)</span> for each of the regions
-defined by the changepoint set. The objective function employs the
-<code>BIC</code> penalty. One departure from Shi’s implementation is the
-use of the <code><a href="../reference/build_gabin_population.html">log_gabin_population()</a></code> function to generate the
-first generation of 200 (i.e. <code>popSize</code>) possible changepoint
-sets. Each data point is chosen uniformly at random with probability
-equal to <span class="math inline">\(\ln{N}\)</span>, where <span class="math inline">\(N\)</span> is the number of observations (362, in
-this case).</p>
+mean
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msub><mi>μ</mi><mi>i</mi></msub><annotation encoding="application/x-tex">\mu_i</annotation></semantics></math>
+for each of the regions defined by the changepoint set. The objective
+function employs the <code>BIC</code> penalty. One departure from Shi’s
+implementation is the use of the <code><a href="../reference/build_gabin_population.html">log_gabin_population()</a></code>
+function to generate the first generation of 200
+(i.e. <code>popSize</code>) possible changepoint sets. Each data point
+is chosen uniformly at random with probability equal to
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo>ln</mo><mi>N</mi></mrow><annotation encoding="application/x-tex">\ln{N}</annotation></semantics></math>,
+where
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mi>N</mi><annotation encoding="application/x-tex">N</annotation></semantics></math>
+is the number of observations (362, in this case).</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">trend_wn</span> <span class="op">&lt;-</span> <span class="va">CET</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/segment.html">segment</a></span><span class="op">(</span></span>
@@ -140,6 +133,9 @@ value of the objective function from the discovered changepoint set.</p>
 the <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> function.</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">trend_wn</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Registered S3 method overwritten by 'tsibble':</span></span>
+<span><span class="co">##   method               from </span></span>
+<span><span class="co">##   as_tibble.grouped_df dplyr</span></span></code></pre>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5 × 9</span></span></span>
 <span><span class="co">##   region    num_obs   min   max  mean    sd begin   end param_mu</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
@@ -152,12 +148,12 @@ the <code><a href="https://generics.r-lib.org/reference/tidy.html" class="extern
 <strong>segmenter</strong> that produced the discovered changepoint set.
 This includes the fitness, the elapsed time, and the parameters used by
 the segmenter.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">trend_wn</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
 <span><span class="co">##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;pckg_vrs&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> meanshift… BIC         653. 9.822 secs</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> meanshift… BIC         653. 9.661 secs</span></span></code></pre>
 <p>However, we can also run <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> on the model resulting
 from the discovered changepoint set. This provides information about the
 model and its fit, including the values of various alternative model
@@ -166,7 +162,7 @@ fitting metrics.</p>
 <p>It is important to note that only one of these metrics (in this case,
 BIC) is actually the one used by the segmenter!</p>
 </div>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">trend_wn</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/as.model.html">as.model</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -177,7 +173,7 @@ BIC) is actually the one used by the segmenter!</p>
 <p>The <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function returns an informative plot of the
 original time series, with the changepoint set and the corresponding
 regions demarcated.</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">trend_wn</span>, use_time_index <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>
 <span><span class="co">## Adding another scale for <span style="color: #00BB00;">x</span>, which will replace the existing scale.</span></span></code></pre>
@@ -186,15 +182,18 @@ regions demarcated.</p>
 <h4 id="comparison-to-reported-values">Comparison to reported values<a class="anchor" aria-label="anchor" href="#comparison-to-reported-values"></a>
 </h4>
 <p>The changepoint set reported by <span class="citation">Shi et al.
-(2022)</span> is <span class="math inline">\(\{1700, 1739,
-1988\}\)</span>. For that configuration with the trendshift model with
-white noise errors, Table 2 of <span class="citation">Shi et al.
-(2022)</span> reports model variance <span class="math inline">\(\hat{\sigma}^2\)</span> of 0.291, a log-likelihood
-of -290.02, BIC of 650.74, and MDL of 653.07.</p>
+(2022)</span> is
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><mrow><mo stretchy="false" form="prefix">{</mo><mn>1700</mn><mo>,</mo><mn>1739</mn><mo>,</mo><mn>1988</mn><mo stretchy="false" form="postfix">}</mo></mrow><annotation encoding="application/x-tex">\{1700, 1739, 1988\}</annotation></semantics></math>.
+For that configuration with the trendshift model with white noise
+errors, Table 2 of <span class="citation">Shi et al. (2022)</span>
+reports model variance
+<math display="inline" xmlns="http://www.w3.org/1998/Math/MathML"><semantics><msup><mover><mi>σ</mi><mo accent="true">̂</mo></mover><mn>2</mn></msup><annotation encoding="application/x-tex">\hat{\sigma}^2</annotation></semantics></math>
+of 0.291, a log-likelihood of -290.02, BIC of 650.74, and MDL of
+653.07.</p>
 <p>Fitting the trendshift model with white noise errors and running the
 <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> function reveals an exact match to the reported
 figures.</p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">target_cpts</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">1700</span>, <span class="fl">1739</span>, <span class="fl">1988</span><span class="op">)</span></span>
 <span><span class="va">ids</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pad_tau.html">time2tau</a></span><span class="op">(</span><span class="va">target_cpts</span>, <span class="fu"><a href="../reference/pad_tau.html">as_year</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/time.html" class="external-link">time</a></span><span class="op">(</span><span class="va">CET</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="va">CET</span> <span class="op">|&gt;</span></span>
@@ -206,7 +205,7 @@ figures.</p>
 <span><span class="co">## <span style="color: #BCBCBC;">1</span> tidych… 0.0.1   trendshi… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.539  -<span style="color: #BB0000;">290.</span>  604.  651.  626.  653.</span></span></code></pre>
 <p>Modifying the model to incorporate AR(1) lagged errors also matches
 the figures from Table 2.</p>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">CET</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/fit_lmshift.html">fit_trendshift_ar1</a></span><span class="op">(</span>tau <span class="op">=</span> <span class="va">ids</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -222,13 +221,13 @@ the figures from Table 2.</p>
 <p>The <code>bogota_pm</code> data set contains daily measurement on
 particulate matter in Bogotá, Colombia over the three-year period from
 2018–2020.</p>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bogota_pm</span><span class="op">)</span></span></code></pre></div>
 <p><img src="climate_data_files/figure-html/bogota-plot-1.png" width="700"></p>
 <p>Here, we use the genetic algorithm from <span class="citation">Taimal, Suárez-Sierra, and Rivera (2023)</span> to
 identify changepoint sets. Note that the model being fit here is the
 NHPP model, along with the BMDL penalty function.</p>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bog_cpt</span> <span class="op">&lt;-</span> <span class="va">bogota_pm</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/segment.html">segment</a></span><span class="op">(</span></span>
 <span>    method <span class="op">=</span> <span class="st">"ga-coen"</span>,</span>
@@ -236,20 +235,20 @@ NHPP model, along with the BMDL penalty function.</p>
 <span>    run <span class="op">=</span> <span class="fl">10</span></span>
 <span>  <span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Seeding initial population with probability: 0.0145985401459854</span></span></code></pre>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">bog_cpt</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
 <span><span class="co">##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;pckg_vrs&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> nhpp       BMDL       <span style="text-decoration: underline;">1</span>987. 33.462 secs</span></span></code></pre>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> nhpp       BMDL       <span style="text-decoration: underline;">1</span>987. 33.507 secs</span></span></code></pre>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bog_cpt</span>, use_time_index <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>
 <span><span class="co">## Adding another scale for <span style="color: #00BB00;">x</span>, which will replace the existing scale.</span></span></code></pre>
 <p><img src="climate_data_files/figure-html/bogota-results-1.png" width="700"></p>
 <p>We compare the quality of the fit of the NHPP model using
 <code><a href="../reference/diagnose.html">diagnose()</a></code>.</p>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">bog_cpt</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/as.model.html">as.model</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/diagnose.html">diagnose</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
@@ -261,13 +260,13 @@ NHPP model, along with the BMDL penalty function.</p>
 <p>The times series <code>mde_rain_monthly</code> contains monthly
 precipitation readings from locations in and around the city of
 Medellín, Colombia.</p>
-<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mde_rain_monthly</span><span class="op">)</span></span></code></pre></div>
 <p><img src="climate_data_files/figure-html/mde_rain-1.png" width="700"></p>
 <p>Here, we fit the deterministic PELT algorithm <span class="citation">(Killick and Eckley 2014)</span>.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mde_cpt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/segment.html">segment</a></span><span class="op">(</span><span class="va">mde_rain_monthly</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mde_cpt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/segment.html">segment</a></span><span class="op">(</span><span class="va">mde_rain_monthly</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mde_cpt</span>, use_time_index <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>
 <span><span class="co">## Adding another scale for <span style="color: #00BB00;">x</span>, which will replace the existing scale.</span></span></code></pre>
@@ -302,7 +301,7 @@ Conference on Computing</em>, 230–58. Springer. <a href="https://doi.org/10.10
 </div>
 </div>
 </div>
-  </main><aside class="col-md-3"><nav id="toc"><h2>On this page</h2>
+  </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside>
 </div>
 
@@ -313,15 +312,15 @@ Conference on Computing</em>, 230–58. Springer. <a href="https://doi.org/10.10
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.9.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
 </div>
 
     </footer>
 </div>
 
-  
 
-  
+
+
 
   </body>
 </html>
