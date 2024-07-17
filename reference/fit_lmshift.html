@@ -75,8 +75,21 @@ fit. Passed to <code><a href="https://rdrr.io/r/stats/poly.html" class="external
 
 </dl></div>
     <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>A <a href="class-mod_cpt.html">class-mod_cpt</a> object</p>
+    </div>
+    <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-
+    <p>These model-fitting functions use <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">stats::lm()</a></code> to fit the corresponding
+regression model to a time series, using the changepoints specified by the
+<code>tau</code> argument.
+Each changepoint is treated as a categorical fixed-effect, while the <code>deg_poly</code>
+argument controls the degree of the polynomial that interacts with those
+fixed-effects.
+For example, setting <code>deg_poly</code> equal to 0 will return the same model as
+calling <code><a href="fit_meanshift.html">fit_meanshift()</a></code>, but the latter is faster for larger changepoint
+sets because it doesn't have to fit all of the regression models.</p>
+<p>Setting <code>deg_poly</code> equal to 1 fits the <code>trendshift</code> model.</p>
 <ul><li><p><code>fit_lmshift_ar1()</code>: will apply auto-regressive lag 1 errors</p></li>
 </ul><ul><li><p><code>fit_trendshift()</code>: will fit a line in each region</p></li>
 </ul><ul><li><p><code>fit_trendshift_ar1()</code>: will fit a line in each region and autoregress lag 1 errors</p></li>
