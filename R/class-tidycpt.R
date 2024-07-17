@@ -171,12 +171,15 @@ diagnose.tidycpt <- function(x, ...) {
 }
 
 #' Obtain a descriptive filename for a tidycpt object
-#' @inheritParams diagnose
+#' @param x A `tidycpt` object
 #' @param data_name_slug character string that will identify the data set used
 #' in the file name
 #' @export
+#' @returns A `character` string giving a unique file name.
 #' @examples
-#' file_name(segment(DataCPSim, method = "pelt"))
+#' DataCPSim |>
+#'   segment(method = "pelt") |>
+#'   file_name()
 
 file_name <- function(x, data_name_slug = "data") {
   glance(x) |>

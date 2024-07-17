@@ -38,6 +38,16 @@ Should match R distribution function naming conventions
 \description{
 Fast implementation of meanshift model
 }
+\details{
+\code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}} returns the same model as \code{\link[=fit_lmshift]{fit_lmshift()}} with the
+\code{deg_poly} argument set to 0.
+However, it is faster on large changepoint sets.
+
+\code{\link[=fit_meanshift_lnorm]{fit_meanshift_lnorm()}} fit the meanshift model with the assumption of
+log-normally distributed data.
+
+\code{\link[=fit_meanshift_norm_ar1]{fit_meanshift_norm_ar1()}} applies autoregressive errors.
+}
 \examples{
 tau <- c(365, 826)
 mod <- fit_meanshift_norm_ar1(DataCPSim, tau)

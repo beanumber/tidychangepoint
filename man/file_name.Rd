@@ -7,14 +7,19 @@
 file_name(x, data_name_slug = "data")
 }
 \arguments{
-\item{x}{An object ihat implements a \code{\link[=diagnose]{diagnose()}} method}
+\item{x}{A \code{tidycpt} object}
 
 \item{data_name_slug}{character string that will identify the data set used
 in the file name}
+}
+\value{
+A \code{character} string giving a unique file name.
 }
 \description{
 Obtain a descriptive filename for a tidycpt object
 }
 \examples{
-file_name(segment(DataCPSim, method = "pelt"))
+DataCPSim |>
+  segment(method = "pelt") |>
+  file_name()
 }

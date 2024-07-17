@@ -7,7 +7,22 @@ globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic",
 #' @param deg_poly integer indicating the degree of the polynomial spline to be
 #' fit. Passed to [stats::poly()].
 #' @param ... arguments passed to [stats::lm()]
+#' @details
+#' These model-fitting functions use [stats::lm()] to fit the corresponding 
+#' regression model to a time series, using the changepoints specified by the 
+#'  `tau` argument. 
+#' Each changepoint is treated as a categorical fixed-effect, while the `deg_poly`
+#' argument controls the degree of the polynomial that interacts with those
+#' fixed-effects. 
+#' For example, setting `deg_poly` equal to 0 will return the same model as 
+#' calling [fit_meanshift()], but the latter is faster for larger changepoint
+#' sets because it doesn't have to fit all of the regression models. 
+#' 
+#' Setting `deg_poly` equal to 1 fits the `trendshift` model. 
+#' 
+#' 
 #' @export
+#' @returns A [class-mod_cpt] object
 #' @family model-fitting
 #' @examples
 #' tau <- c(365, 826)
@@ -87,7 +102,7 @@ fit_lmshift_ar1 <- function(x, tau, ...) {
 #' - [fit_trendshift()]: will fit a line in each region
 #' @export
 fit_trendshift <- function(x, tau, ...) {
-  fit_lmshift(x, tau,  deg_poly = 1, ...)
+  fit_lmshift(x, tau, deg_poly = 1, ...)
 }
 
 #' @rdname fit_lmshift

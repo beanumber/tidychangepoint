@@ -25,10 +25,25 @@ fit. Passed to \code{\link[stats:poly]{stats::poly()}}.}
 
 \item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
 }
+\value{
+A \link{class-mod_cpt} object
+}
 \description{
 Regression-based model fitting
 }
 \details{
+These model-fitting functions use \code{\link[stats:lm]{stats::lm()}} to fit the corresponding
+regression model to a time series, using the changepoints specified by the
+\code{tau} argument.
+Each changepoint is treated as a categorical fixed-effect, while the \code{deg_poly}
+argument controls the degree of the polynomial that interacts with those
+fixed-effects.
+For example, setting \code{deg_poly} equal to 0 will return the same model as
+calling \code{\link[=fit_meanshift]{fit_meanshift()}}, but the latter is faster for larger changepoint
+sets because it doesn't have to fit all of the regression models.
+
+Setting \code{deg_poly} equal to 1 fits the \code{trendshift} model.
+
 \itemize{
 \item \code{\link[=fit_lmshift_ar1]{fit_lmshift_ar1()}}: will apply auto-regressive lag 1 errors
 }

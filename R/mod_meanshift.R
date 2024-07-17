@@ -5,6 +5,17 @@
 #' Should match R distribution function naming conventions 
 #' (e.g., "norm" for the Normal distribution, etc.)
 #' @export
+#' @details
+#' [fit_meanshift_norm()] returns the same model as [fit_lmshift()] with the 
+#' `deg_poly` argument set to 0. 
+#' However, it is faster on large changepoint sets. 
+#' 
+#' [fit_meanshift_lnorm()] fit the meanshift model with the assumption of 
+#' log-normally distributed data. 
+#' 
+#' [fit_meanshift_norm_ar1()] applies autoregressive errors. 
+#' 
+#' @returns A [class-mod_cpt] object.
 #' @family model-fitting
 #' @author Xueheng Shi
 #' @examples
