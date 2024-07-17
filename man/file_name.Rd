@@ -7,7 +7,7 @@
 file_name(x, data_name_slug = "data")
 }
 \arguments{
-\item{x}{A \code{tidycpt} object}
+\item{x}{An object ihat implements a \code{\link[=diagnose]{diagnose()}} method}
 
 \item{data_name_slug}{character string that will identify the data set used
 in the file name}

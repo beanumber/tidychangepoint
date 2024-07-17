@@ -25,6 +25,10 @@ exceedances(x, ...)
 
 \item{threshold}{A value above which to exceed. Default is the \code{\link[=mean]{mean()}}}
 }
+\value{
+An ordered \code{integer} vector giving the indices of the values of \code{x}
+that exceed the \code{threshold}.
+}
 \description{
 Compute exceedances of a threshold for a time series
 }

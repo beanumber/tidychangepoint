@@ -83,9 +83,10 @@ glance.tidycpt <- function(x, ...) {
     )
 }
 
-#' Compare various models for a give changepoint set
+#' Compare various models or algorithms for a given changepoint set
 #' @inheritParams diagnose
 #' @param ... currently ignored
+#' @returns A [tibble::tbl_df-class]
 #' @export
 compare_models <- function(x, ...) {
   list(

@@ -6,4 +6,4 @@
 
 - All checks are passing on R-release and R-devel on both Windows and Ubuntu.
 
-- We switched from the MIT license to the GPLv3 license. This was an oversight -- we had meant to use GPL all along. 
+- We switched from the MIT license to the GPLv3 license. This was an oversight -- we had meant to use GPL all along. <https://github.com/beanumber/tidychangepoint/commit/02300d4a7d2d10bcc10369cb8e114ea8b52ee44d>

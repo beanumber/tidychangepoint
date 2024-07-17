@@ -17,9 +17,12 @@
 diagnose(x, ...)
 }
 \arguments{
-\item{x}{A \code{tidycpt} object}
+\item{x}{An object ihat implements a \code{\link[=diagnose]{diagnose()}} method}
 
 \item{...}{currently ignored}
+}
+\value{
+A \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} object
 }
 \description{
 Diagnose the fit of a segmented time series

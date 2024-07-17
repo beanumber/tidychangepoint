@@ -36,14 +36,18 @@ seg_params(x, ...)
 \method{changepoints}{wbs}(x, ...)
 }
 \arguments{
-\item{x}{A \code{tidycpt} object}
+\item{x}{An object that implements a \code{\link[=changepoints]{changepoints()}} method}
 
 \item{...}{arguments passed to methods}
 
 \item{use_labels}{return the time labels for the changepoints instead of the
 indices.}
 }
+\value{
+a numeric vector of changepoint indices
+}
 \description{
+Retrieve the indices of the changepoints identified by an algorithm or model.
 Not to be confused with \code{\link[wbs:changepoints]{wbs::changepoints()}}, which returns different
 information.
 }

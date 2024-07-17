@@ -1,11 +1,12 @@
 #' Extract changepoints
 #' 
-#' @param x A `tidycpt` object
+#' @param x An object that implements a [changepoints()] method
 #' @param ... arguments passed to methods
 #' @description
+#' Retrieve the indices of the changepoints identified by an algorithm or model.
 #' Not to be confused with [wbs::changepoints()], which returns different
 #' information. 
-#' 
+#' @returns a numeric vector of changepoint indices
 #' @seealso [wbs::changepoints()]
 #' @family tidychangepoint-generics
 #' @export
@@ -20,7 +21,7 @@ changepoints.default <- function(x, ...) {
 #' @rdname as.model
 #' @details
 #'   - [as.segmenter()] returns the segmenter of a `tidycpt` object
-#' @return
+#' @returns
 #'   - [as.segmenter()] returns a segmenter object
 #' @export
 as.segmenter <- function(object, ...) UseMethod("as.segmenter")
@@ -38,6 +39,8 @@ as.seg_cpt <- function(object, ...) UseMethod("as.seg_cpt")
 #' 
 #' @inheritParams segment
 #' @family tidychangepoint-generics
+#' @returns An ordered `integer` vector giving the indices of the values of `x`
+#' that exceed the `threshold`.
 #' @export
 exceedances <- function(x, ...) UseMethod("exceedances")
 
@@ -223,8 +226,9 @@ BMDL.default <- function(object, ...) {
 evaluate_cpts <- function(x, ...) UseMethod("evaluate_cpts")
 
 #' Diagnose the fit of a segmented time series
-#' @param x A `tidycpt` object
+#' @param x An object ihat implements a [diagnose()] method
 #' @param ... currently ignored
+#' @returns A [ggplot2::ggplot()] object
 #' @family tidychangepoint-generics
 #' @export
 diagnose <- function(x, ...) UseMethod("diagnose")

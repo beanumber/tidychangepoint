@@ -3,17 +3,20 @@
 \name{compare_models}
 \alias{compare_models}
 \alias{compare_algorithms}
-\title{Compare various models for a give changepoint set}
+\title{Compare various models or algorithms for a given changepoint set}
 \usage{
 compare_models(x, ...)
 
 compare_algorithms(x, ...)
 }
 \arguments{
-\item{x}{A \code{tidycpt} object}
+\item{x}{An object ihat implements a \code{\link[=diagnose]{diagnose()}} method}
 
 \item{...}{currently ignored}
 }
+\value{
+A \link[tibble:tbl_df-class]{tibble::tbl_df}
+}
 \description{
-Compare various models for a give changepoint set
+Compare various models or algorithms for a given changepoint set
 }
