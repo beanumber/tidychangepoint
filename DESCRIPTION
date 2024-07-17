@@ -3,7 +3,8 @@ Title: A Tidy Framework for Changepoint Detection Analysis
 Version: 0.0.1
 Authors@R: c(
     person("Benjamin S.", "Baumer", email = "ben.baumer@gmail.com", 
-      role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-3279-0516")),
+      role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-3279-0516")
+    ),
     person(
       "Biviana Marcela", "Suarez Sierra", email = "bmsuarezs@eafit.edu.co", 
       role = c("aut"), comment = c(ORCID = "0000-0003-2151-3537")
@@ -27,7 +28,7 @@ Description: Changepoint detection algorithms for R are widespread but have
     different changepoint detection algorithms. 
     We also provide consistent numerical and graphical reporting leveraging 
     the 'broom' and 'ggplot2' packages. 
-License: MIT + file LICENSE
+License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
