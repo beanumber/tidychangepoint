@@ -45,7 +45,7 @@
     <div class="section level2">
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="co"># S3 method for class 'wbs'</span></span>
-<span><span class="fu"><a href="as.model.html">as.seg_cpt</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span><span class="fu"><a href="as.segmenter.html">as.seg_cpt</a></span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'wbs'</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/stats/ts.html" class="external-link">as.ts</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">...</span><span class="op">)</span></span>
@@ -81,15 +81,15 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">cpts</span> <span class="op">&lt;-</span> <span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"wbs"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="as.model.html">as.segmenter</a></span><span class="op">(</span><span class="va">cpts</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="as.segmenter.html">as.segmenter</a></span><span class="op">(</span><span class="va">cpts</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "wbs"</span>
-<span class="r-in"><span><span class="fu"><a href="as.model.html">as.seg_cpt</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="as.segmenter.html">as.seg_cpt</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ data        : Time-Series [1:1096] from 1 to 1096: 35.5 29 35.6 33 29.5 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ pkg         : chr "wbs"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ algorithm   : chr "Wild BinSeg"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ changepoints: int [1:14] 547 822 939 972 981 982 997 999 1031 1033 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ changepoints: int [1:14] 547 822 939 972 980 982 997 999 1031 1033 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitness     : Named num 0</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr "MBIC"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ seg_params  :List of 1</span>
@@ -266,7 +266,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1086]  85.79995 220.96699 127.18015 215.14311 190.93505 156.44133 164.06449</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1093] 164.81190  85.39927 179.14410 135.09159</span>
 <span class="r-in"><span><span class="fu"><a href="changepoints.html">changepoints</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  547  822  939  972  981  982  997  999 1031 1033 1040 1041 1063 1066</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  547  822  939  972  980  982  997  999 1031 1033 1040 1041 1063 1066</span>
 <span class="r-in"><span><span class="fu"><a href="fitness.html">fitness</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> MBIC </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    0 </span>
