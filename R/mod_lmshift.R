@@ -127,10 +127,19 @@ fit_lmshift_ar1 <- fun_cpt("fit_lmshift_ar1")
 #' @returns A [tibble::tbl_df-class] object containing the fitted coefficients.
 #' @export
 #' @examples
+#' # Convert a time series into a data frame with indices
 #' ds <- data.frame(y = as.ts(CET), t = 1:length(CET))
+#' 
+#' # Retrieve the coefficients from a null model
 #' tbl_coef(lm(y ~ 1, data = ds))
+#' 
+#' # Retrieve the coefficients from a two changepoint model
 #' tbl_coef(lm(y ~ (t >= 42) + (t >= 81), data = ds))
+#' 
+#' # Retrieve the coefficients from a trendshift model
 #' tbl_coef(lm(y ~ poly(t, 1, raw = TRUE) * (t >= 42) + poly(t, 1, raw = TRUE) * (t >= 81), data = ds))
+#' 
+#' # Retrieve the coefficients from a quadratic model
 #' tbl_coef(lm(y ~ poly(t, 2, raw = TRUE) * (t >= 42) + poly(t, 2, raw = TRUE) * (t >= 81), data = ds))
 
 tbl_coef <- function(mod, ...) {

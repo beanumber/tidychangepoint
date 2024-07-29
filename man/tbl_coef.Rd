@@ -18,9 +18,18 @@ A \link[tibble:tbl_df-class]{tibble::tbl_df} object containing the fitted coeffi
 Format the coefficients from a linear model as a tibble
 }
 \examples{
+# Convert a time series into a data frame with indices
 ds <- data.frame(y = as.ts(CET), t = 1:length(CET))
+
+# Retrieve the coefficients from a null model
 tbl_coef(lm(y ~ 1, data = ds))
+
+# Retrieve the coefficients from a two changepoint model
 tbl_coef(lm(y ~ (t >= 42) + (t >= 81), data = ds))
+
+# Retrieve the coefficients from a trendshift model
 tbl_coef(lm(y ~ poly(t, 1, raw = TRUE) * (t >= 42) + poly(t, 1, raw = TRUE) * (t >= 81), data = ds))
+
+# Retrieve the coefficients from a quadratic model
 tbl_coef(lm(y ~ poly(t, 2, raw = TRUE) * (t >= 42) + poly(t, 2, raw = TRUE) * (t >= 81), data = ds))
 }
