@@ -26,16 +26,7 @@ segment(x, method = "null", ...)
 \item{...}{arguments passed to methods}
 }
 \value{
-An object of class \code{tidycpt}. Every \code{tidycpt} object contains:
-\itemize{
-\item \code{segmenter}: The object returned by the underlying changepoint
-detection algorithm.
-\item \code{model}: A model object inheriting from \code{mod_cpt}, as created by
-\code{\link[=as.model]{as.model()}} when called
-on the \code{segmenter}.
-\item \code{elapsed_time}: The clock time that passed while the algorithm was running.
-\item \code{time_index}: If available, the labels for the time indices of the time series.
-}
+An object of class \linkS4class{tidycpt}.
 }
 \description{
 A wrapper function that encapsulates various algorithms for detecting changepoint

@@ -4,6 +4,24 @@ globalVariables(c(
   "lower", "upper", "model", "elapsed_time"
 ))
 
+#' Container class for `tidycpt` objects
+#' @name tidycpt-class
+#' @details Every `tidycpt` object contains:
+#' - `segmenter`: The object returned by the underlying changepoint
+#' detection algorithm. These can be of arbitrary class. Use [as.segmenter()]
+#' to retrieve them. 
+#' - `model`: A model object inheriting from [mod_cpt-class], as created by
+#' [as.model()] when called on the `segmenter`. 
+#' - `elapsed_time`: The clock time that passed while the algorithm was running.
+#' - `time_index`: If available, the labels for the time indices of the time series.
+#' @examples
+#' # Segment a time series using PELT
+#' x <- segment(CET, method = "pelt")
+#' class(x)
+#' str(x)
+#' 
+NULL
+
 #' @rdname changepoints
 #' @param use_labels return the time labels for the changepoints instead of the
 #' indices. 

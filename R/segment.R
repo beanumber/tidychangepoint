@@ -49,14 +49,7 @@ segment.numeric <- function(x, method = "null", ...) {
 
 #' @rdname segment
 #' @export
-#' @return An object of class `tidycpt`. Every `tidycpt` object contains:
-#' - `segmenter`: The object returned by the underlying changepoint
-#' detection algorithm.  
-#' - `model`: A model object inheriting from `mod_cpt`, as created by
-#' [as.model()] when called 
-#'   on the `segmenter`. 
-#' - `elapsed_time`: The clock time that passed while the algorithm was running.
-#' - `time_index`: If available, the labels for the time indices of the time series.
+#' @return An object of class [tidycpt-class]. 
 #' @details Currently, [segment()] can use the following algorithms, depending
 #' on the value of the `method` argument:
 #' - `pelt`: Uses the PELT algorithm as implemented in 
