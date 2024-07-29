@@ -26,7 +26,7 @@ fit. Passed to \code{\link[stats:poly]{stats::poly()}}.}
 \item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
 }
 \value{
-A \link{class-mod_cpt} object
+A \linkS4class{mod_cpt} object
 }
 \description{
 Regression-based model fitting

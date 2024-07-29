@@ -12,7 +12,12 @@ segment_pelt(x, model_fn = fit_meanvar, ...)
 \item{model_fn}{A \code{character} or \code{name} coercible into a \code{\link[=fun_cpt]{fun_cpt()}} function.
 See, for example, \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}}. The default is \code{\link[=fit_meanvar]{fit_meanvar()}}.}
 
-\item{...}{arguments passed to \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}}
+\item{...}{arguments passed to \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}} or
+\code{\link[changepoint:cpt.mean]{changepoint::cpt.mean()}}}
+}
+\value{
+A \code{cpt} object returned by \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}} or
+\code{\link[changepoint:cpt.mean]{changepoint::cpt.mean()}}
 }
 \description{
 Segmenting functions for the PELT algorithm

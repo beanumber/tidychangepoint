@@ -1,9 +1,11 @@
 globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".data"))
 
 #' Default class for candidate changepoint sets
+#' @name seg_basket-class
+#' @returns A [seg_basket-class] object.
 #' @export
-#' @inheritParams new_seg_cpt
-#' @param cpt_list a possibly empty `list()` of candidate changepoints
+#' @inheritParams seg_cpt-class
+#' @param cpt_list a possibly empty [list()] of candidate changepoints
 #' @examples
 #' seg <- seg_basket(DataCPSim, cpt_list = list(c(365), c(330, 839)))
 #' str(seg)

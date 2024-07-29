@@ -1,15 +1,17 @@
 #' Base class for segmenters
+#' @name seg_cpt-class
 #' @export
-#' @param x a numeric vector coercible into a `ts` object
+#' @param x a numeric vector coercible into a [stats::ts()] object
 #' @param pkg name of the package providing the segmenter
 #' @param algorithm Algorithm used to find the changepoints
-#' @param changepoints a possibly empty `list()` of candidate changepoints
+#' @param changepoints a possibly empty [list()] of candidate changepoints
 #' @param fitness A named `double` vector whose name reflects the penalty applied
-#' @param seg_params a possibly empty `list()` of segmenter parameters
+#' @param seg_params a possibly empty [list()] of segmenter parameters
 #' @param model_name character indicating the model used to find the changepoints. 
 #' @param penalty character indicating the name of the penalty function used to
 #' find the changepoints.
 #' @param ... currently ignored
+#' @returns A [seg_cpt-class] object.
 #' @examples
 #' x <- seg_cpt(DataCPSim, pkg = "tidychangepoint", changepoints = c(330))
 #' str(x)

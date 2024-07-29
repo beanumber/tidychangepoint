@@ -10,6 +10,9 @@
 #' `model_fn`. We provide [AIC()], [BIC()], [MBIC()], [MDL()], and [BMDL()].
 #' @param model_fn_args A [list()] of parameters passed to `model_fn`
 #' @param ... arguments passed to [GA::ga()]
+#' @returns A `tidyga` object. This is just a [GA::ga()] object with an additional
+#' slot for `data` (the original time series) and `model_fn_args` (captures
+#' the `model_fn` and `penalty_fn` arguments).
 #' @export
 #' @examples
 #' \dontrun{

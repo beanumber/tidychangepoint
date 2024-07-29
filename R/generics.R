@@ -53,6 +53,7 @@ exceedances.default <- function(x, ...) {
 #' Retrieve the optimal fitness (or objective function) value used by an algorithm
 #' @inheritParams as.model
 #' @family tidychangepoint-generics
+#' @returns A named `double` vector.
 #' @export
 fitness <- function(object, ...) UseMethod("fitness")
 

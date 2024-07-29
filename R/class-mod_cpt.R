@@ -2,7 +2,7 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".fitted", ".resid"
                   , "xintercept"))
 
 #' Base class for changepoint models
-#' @name class-mod_cpt
+#' @name mod_cpt-class
 #' @description
 #' Create changepoint detection model objects
 #' @details
@@ -23,7 +23,7 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".fitted", ".resid"
 #' data set. 
 #' @param model_name A `character` vector giving the model's name. 
 #' @param ... currently ignored
-#' @returns A `mod_cpt` object
+#' @returns A [mod_cpt-class] object
 #' @seealso [as.ts.mod_cpt()], [as.model()]
 #' @examples
 #' cpt <- mod_cpt(CET)
@@ -51,7 +51,7 @@ new_mod_cpt <- function(x = numeric(),
   )
 }
 
-#' @rdname class-mod_cpt
+#' @rdname mod_cpt-class
 #' @export
 
 validate_mod_cpt <- function(x) {
@@ -65,7 +65,7 @@ validate_mod_cpt <- function(x) {
   x
 }
 
-#' @rdname class-mod_cpt
+#' @rdname mod_cpt-class
 #' @export
 
 mod_cpt <- function(x, ...) {
@@ -82,7 +82,7 @@ mod_cpt <- function(x, ...) {
 #' @param x A `mod_cpt` object, typically the output from one of the `fit_*()`
 #' functions or [as.model()]
 #' @details
-#' All changepoint detection models inherit from [class-mod_cpt]: the 
+#' All changepoint detection models inherit from [mod_cpt-class]: the 
 #' base class for changepoint detection models. 
 #' These models are created by one of the `fit_*()` functions, or by 
 #' [as.model()]. 

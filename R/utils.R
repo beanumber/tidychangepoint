@@ -105,6 +105,7 @@ cut_inclusive <- function(x, tau) {
 #' @param sd Standard deviation passed to [stats::rnorm()]
 #' @param seed Value passed to [base::set.seed()]
 #' @export
+#' @returns A [stats::ts()] object
 #' @seealso [DataCPSim]
 #' @examples
 #' x <- test_set()
@@ -177,6 +178,7 @@ as_year <- function(x) {
 #' @inheritParams vctrs::vec_ptype2
 #' @seealso [stats::logLik()]
 #' @keywords internal
+#' @returns A [stats::logLik()] vector.
 #' @examples
 #' a <- logLik(lm(mpg ~ disp, data = mtcars))
 #' b <- logLik(lm(mpg ~ am, data = mtcars))

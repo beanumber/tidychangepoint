@@ -13,6 +13,9 @@ fit_meanvar(x, tau, ...)
 
 \item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
 }
+\value{
+A \linkS4class{mod_cpt} object.
+}
 \description{
 Fit a model for mean and variance
 }

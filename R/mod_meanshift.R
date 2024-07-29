@@ -15,7 +15,7 @@
 #' 
 #' [fit_meanshift_norm_ar1()] applies autoregressive errors. 
 #' 
-#' @returns A [class-mod_cpt] object.
+#' @returns A [mod_cpt-class] object.
 #' @family model-fitting
 #' @author Xueheng Shi
 #' @examples

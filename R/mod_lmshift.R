@@ -22,7 +22,7 @@ globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic",
 #' 
 #' 
 #' @export
-#' @returns A [class-mod_cpt] object
+#' @returns A [mod_cpt-class] object
 #' @family model-fitting
 #' @examples
 #' tau <- c(365, 826)
@@ -124,6 +124,7 @@ fit_lmshift_ar1 <- fun_cpt("fit_lmshift_ar1")
 #' Format the coefficients from a linear model as a tibble
 #' @param mod An `lm` model object
 #' @param ... currently ignored
+#' @returns A [tibble::tbl_df-class] object containing the fitted coefficients.
 #' @export
 #' @examples
 #' ds <- data.frame(y = as.ts(CET), t = 1:length(CET))

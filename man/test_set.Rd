@@ -13,6 +13,9 @@ test_set(n = 1, sd = 1, seed = NULL)
 
 \item{seed}{Value passed to \code{\link[base:Random]{base::set.seed()}}}
 }
+\value{
+A \code{\link[stats:ts]{stats::ts()}} object
+}
 \description{
 Simulate time series with known changepoint sets
 }

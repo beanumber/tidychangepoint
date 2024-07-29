@@ -31,6 +31,9 @@ fitness(object, ...)
 
 \item{...}{currently ignored}
 }
+\value{
+A named \code{double} vector.
+}
 \description{
 Retrieve the optimal fitness (or objective function) value used by an algorithm
 }

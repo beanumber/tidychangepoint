@@ -90,6 +90,7 @@ nobs.ga <- function(object, ...) {
 #' Plot GA information
 #' @param x A `tidyga` object
 #' @param ... currently ignored
+#' @returns A [ggplot2::ggplot()] object.
 #' @export
 #' @examples
 #' \dontrun{

@@ -34,6 +34,11 @@ See, for example, \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}}.}
 
 \item{...}{arguments passed to \code{\link[GA:ga]{GA::ga()}}}
 }
+\value{
+A \code{tidyga} object. This is just a \code{\link[GA:ga]{GA::ga()}} object with an additional
+slot for \code{data} (the original time series) and \code{model_fn_args} (captures
+the \code{model_fn} and \code{penalty_fn} arguments).
+}
 \description{
 Segmenting functions for various genetic algorithms
 }

@@ -11,6 +11,9 @@
 
 \item{...}{currently ignored}
 }
+\value{
+A \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} object.
+}
 \description{
 Plot GA information
 }

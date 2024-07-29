@@ -16,6 +16,9 @@
 
 \item{to}{Type to cast to. If \code{NULL}, \code{x} will be returned as is.}
 }
+\value{
+A \code{\link[stats:logLik]{stats::logLik()}} vector.
+}
 \description{
 Vectors implementation for logLik
 }

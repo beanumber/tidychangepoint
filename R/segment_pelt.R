@@ -6,7 +6,10 @@
 #' @param x A time series
 #' @param model_fn A `character` or `name` coercible into a [fun_cpt()] function. 
 #' See, for example, [fit_meanshift_norm()]. The default is [fit_meanvar()].
-#' @param ... arguments passed to [changepoint::cpt.meanvar()]
+#' @param ... arguments passed to [changepoint::cpt.meanvar()] or 
+#' [changepoint::cpt.mean()]
+#' @returns A `cpt` object returned by [changepoint::cpt.meanvar()] or 
+#' [changepoint::cpt.mean()]
 #' @export
 #' @examples
 #' res <- segment_pelt(DataCPSim)
