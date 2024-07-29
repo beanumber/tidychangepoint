@@ -1,26 +1,7 @@
 globalVariables(c("median", "q1", "q3"))
-#' Compatibility layer for GA
-#' @name ga-generics
-#' 
-#' @description
-#' Methods for generic functions applied to `ga` objects
-#' 
-#' @param x A `GA` object returned by [GA::ga()]
-#' @param ... arguments passed to methods
-#' @seealso [GA::GA-package]
+
+#' @rdname as.segmenter
 #' @export
-#' @examples
-#' cpts <- segment(DataCPSim, method = "ga", maxiter = 10)
-#' x <- as.segmenter(cpts)
-#' class(x)
-#' as.seg_cpt(x)
-#' as.ts(x) 
-#' changepoints(x)
-#' fitness(x)
-#' model_name(x)
-#' model_args(x)
-#' nobs(x)
-#' seg_params(x)
 as.seg_cpt.ga <- function(object, ...) {
   seg_cpt(
     x = as.ts(object),

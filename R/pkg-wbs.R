@@ -1,24 +1,5 @@
-#' Compatibility layer for wbs
-#' @name wbs-generics
-#' 
-#' @description
-#' Methods for generic functions applied to `wbs` objects
-#' @param x A `wbs` object returned by [wbs::wbs()]
-#' @param ... arguments passed to methods
+#' @rdname as.segmenter
 #' @export
-#' @seealso [wbs::wbs-package]
-#' @examples
-#' cpts <- segment(DataCPSim, method = "wbs")
-#' x <- as.segmenter(cpts)
-#' class(x)
-#' as.seg_cpt(x)
-#' as.ts(x) 
-#' changepoints(x)
-#' fitness(x)
-#' model_name(x)
-#' model_args(x)
-#' nobs(x)
-#' seg_params(x)
 #' 
 as.seg_cpt.wbs <- function(object, ...) {
   seg_cpt(

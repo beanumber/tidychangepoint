@@ -136,7 +136,15 @@ residuals.mod_cpt <- function(object, ...) {
   object$data - fitted(object)
 }
 
-#' @rdname mod_cpt-generics
+#' Compute model variance
+#' @param object A model object implementing [residuals()] and [nobs()]
+#' @param ... currently ignored
+#' @details
+#' Using the generic functions [residuals()] and [nobs()], this function 
+#' computes the variance of the residuals. 
+#' 
+#' Note that unlike [stats::var()], it does not use \eqn{n-1} as the denominator.
+#' @returns A `double` vector of length 1
 #' @export
 model_variance <- function(object, ...) {
   sum(residuals(object)^2) / nobs(object)
@@ -313,7 +321,7 @@ plot.mod_cpt <- function(x, ...) {
 }
 
 
-#' @rdname mod_cpt-generics
+#' @rdname reexports
 #' @export
 print.mod_cpt <- function(x, ...) {
   utils::str(x)

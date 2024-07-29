@@ -1,17 +1,7 @@
 globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".data"))
 
-#' Default class for candidate changepoint sets
-#' @name seg_basket-class
-#' @returns A [seg_basket-class] object.
+#' @rdname seg_basket
 #' @export
-#' @inheritParams seg_cpt-class
-#' @param cpt_list a possibly empty [list()] of candidate changepoints
-#' @examples
-#' seg <- seg_basket(DataCPSim, cpt_list = list(c(365), c(330, 839)))
-#' str(seg)
-#' as.ts(seg)
-#' changepoints(seg)
-#' fitness(seg)
 new_seg_basket <- function(x = numeric(), 
                             algorithm = NA, 
                             cpt_list = list(), 
@@ -33,9 +23,6 @@ new_seg_basket <- function(x = numeric(),
   )
 }
 
-#' @rdname new_seg_basket
-#' @export
-
 validate_seg_basket <- function(x) {
   if (!stats::is.ts(as.ts(x))) {
     stop("data attribute is not coercible into a ts object.")
@@ -43,9 +30,17 @@ validate_seg_basket <- function(x) {
   x
 }
 
-#' @rdname new_seg_basket
+#' Default class for candidate changepoint sets
+#' @returns A [seg_basket()] object.
 #' @export
-
+#' @inheritParams seg_cpt
+#' @param cpt_list a possibly empty [list()] of candidate changepoints
+#' @examples
+#' seg <- seg_basket(DataCPSim, cpt_list = list(c(365), c(330, 839)))
+#' str(seg)
+#' as.ts(seg)
+#' changepoints(seg)
+#' fitness(seg)
 seg_basket <- function(x, ...) {
   obj <- new_seg_basket(x, ...)
   validate_seg_basket(obj)
@@ -104,7 +99,7 @@ fitness.seg_basket <- function(object, ...) {
   out
 }
 
-#' @rdname new_seg_basket
+#' @rdname evaluate_cpts
 #' @param model_fn Name of the function to fit the model. 
 #' See, for examples, [fit_meanshift()].
 #' @export
@@ -112,7 +107,7 @@ evaluate_cpts.seg_basket <- function(x, ...) {
   evaluate_cpts(x$basket, .data = as.ts(x), model_fn = whomademe(x), ...)
 }
 
-#' @rdname new_seg_basket
+#' @rdname evaluate_cpts
 #' @param .data A time series
 #' @export
 evaluate_cpts.list <- function(x, .data, model_fn, ...) {
@@ -120,7 +115,7 @@ evaluate_cpts.list <- function(x, .data, model_fn, ...) {
     evaluate_cpts(.data = .data, model_fn = model_fn, ...)
 }
 
-#' @rdname new_seg_basket
+#' @rdname evaluate_cpts
 #' @export
 evaluate_cpts.tbl_df <- function(x, .data, model_fn, ...) {
   if (!stats::is.ts(as.ts(.data))) {

@@ -108,12 +108,15 @@ compare_algorithms <- function(x, ...) {
     dplyr::arrange(elapsed_time)
 }
 
-#' @rdname tidycpt-generics
+#' @rdname reexports
 #' @param use_time_index Should the x-axis labels be the time indices? Or the 
 #' time labels? 
 #' @export
 #' @examples
+#' # Plot a segmented time series
 #' plot(segment(CET, method = "pelt"))
+#' 
+#' # Plot a segmented time series and show the time labels on the x-axis
 #' plot(segment(CET, method = "pelt"), use_time_index = TRUE)
 plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
   g <- plot(x$model)

@@ -40,7 +40,7 @@ as.segmenter <- function(object, ...) UseMethod("as.segmenter")
 #' @rdname as.segmenter
 #' @details
 #' [as.seg_cpt()] takes a wild-caught `segmenter` object of arbitrary class 
-#' and converts it into a [seg_cpt-class] object. 
+#' and converts it into a [seg_cpt()] object. 
 #' @return
 #'   - [as.seg_cpt()] returns a [seg_cpt] object
 #' @export
@@ -273,7 +273,11 @@ BMDL.default <- function(object, ...) {
   BMDL(logLik(object))
 }
 
-#' @rdname new_seg_basket
+#' Evaluate candidate changepoints sets
+#' @param x An object to evaluate
+#' @param ... arguments passed to methods
+#' @export
+#' @keywords internal
 #' @export
 evaluate_cpts <- function(x, ...) UseMethod("evaluate_cpts")
 

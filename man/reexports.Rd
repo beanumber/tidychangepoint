@@ -14,6 +14,7 @@
 \alias{tidy.mod_cpt}
 \alias{glance.mod_cpt}
 \alias{plot.mod_cpt}
+\alias{print.mod_cpt}
 \alias{as.ts.seg_basket}
 \alias{plot.seg_basket}
 \alias{as.ts.seg_cpt}
@@ -24,6 +25,7 @@
 \alias{augment.tidycpt}
 \alias{tidy.tidycpt}
 \alias{glance.tidycpt}
+\alias{plot.tidycpt}
 \alias{print.tidycpt}
 \alias{as.ts.ga}
 \alias{nobs.ga}
@@ -70,6 +72,8 @@
 
 \method{plot}{mod_cpt}(x, ...)
 
+\method{print}{mod_cpt}(x, ...)
+
 \method{as.ts}{seg_basket}(x, ...)
 
 \method{plot}{seg_basket}(x, ...)
@@ -90,6 +94,8 @@
 
 \method{glance}{tidycpt}(x, ...)
 
+\method{plot}{tidycpt}(x, use_time_index = FALSE, ...)
+
 \method{print}{tidycpt}(x, ...)
 
 \method{as.ts}{ga}(x, ...)
@@ -106,6 +112,10 @@
 
 \method{nobs}{wbs}(object, ...)
 }
+\arguments{
+\item{use_time_index}{Should the x-axis labels be the time indices? Or the
+time labels?}
+}
 \examples{
 # Plot a meanshift model fit
 plot(fit_meanshift_norm(CET, tau = 330))
@@ -119,6 +129,11 @@ plot(fit_lmshift(CET, tau = 330, deg_poly = 2))
 #' # Plot a 4th degree polynomial model fit
 plot(fit_lmshift(CET, tau = 330, deg_poly = 10))
 
+# Plot a segmented time series
+plot(segment(CET, method = "pelt"))
+
+# Plot a segmented time series and show the time labels on the x-axis
+plot(segment(CET, method = "pelt"), use_time_index = TRUE)
 }
 \keyword{internal}
 \description{

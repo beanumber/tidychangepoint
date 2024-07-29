@@ -1,32 +1,5 @@
-#' Base class for segmenters
-#' @name seg_cpt-class
+#' @rdname seg_cpt
 #' @export
-#' @param x a numeric vector coercible into a [stats::ts()] object
-#' @param pkg name of the package providing the segmenter
-#' @param algorithm Algorithm used to find the changepoints
-#' @param changepoints a possibly empty [list()] of candidate changepoints
-#' @param fitness A named `double` vector whose name reflects the penalty applied
-#' @param seg_params a possibly empty [list()] of segmenter parameters
-#' @param model_name character indicating the model used to find the changepoints. 
-#' @param penalty character indicating the name of the penalty function used to
-#' find the changepoints.
-#' @param ... currently ignored
-#' @returns A [seg_cpt-class] object.
-#' @examples
-#' x <- seg_cpt(DataCPSim, pkg = "tidychangepoint", changepoints = c(330))
-#' str(x)
-#' as.ts(x)
-#' changepoints(x)
-#' 
-#' y <- segment(CET, method = "pelt")
-#' z <- as.seg_cpt(y$segmenter)
-#' class(z)
-#' fitness(x)
-#' glance(z)
-#' model_name(z)
-#' model_args(z)
-#' nobs(z)
-#' seg_params(z)
 
 new_seg_cpt <- function(x = numeric(), 
                         pkg = character(),
@@ -52,9 +25,6 @@ new_seg_cpt <- function(x = numeric(),
   )
 }
 
-#' @rdname new_seg_cpt
-#' @export
-
 validate_seg_cpt <- function(x) {
   if (!stats::is.ts(as.ts(x))) {
     stop("data attribute is not coercible into a ts object.")
@@ -68,15 +38,26 @@ validate_seg_cpt <- function(x) {
   x
 }
 
-#' @rdname new_seg_cpt
+#' Base class for segmenters
 #' @export
+#' @param x a numeric vector coercible into a [stats::ts()] object
+#' @param pkg name of the package providing the segmenter
+#' @param algorithm Algorithm used to find the changepoints
+#' @param changepoints a possibly empty [list()] of candidate changepoints
+#' @param fitness A named `double` vector whose name reflects the penalty applied
+#' @param seg_params a possibly empty [list()] of segmenter parameters
+#' @param model_name character indicating the model used to find the changepoints. 
+#' @param penalty character indicating the name of the penalty function used to
+#' find the changepoints.
+#' @param ... currently ignored
+#' @returns A [seg_cpt] object.
 
 seg_cpt <- function(x, ...) {
   obj <- new_seg_cpt(x, ...)
   validate_seg_cpt(obj)
 }
 
-#' @rdname seg-cpt-generics
+#' @rdname as.segmenter
 #' @export
 as.seg_cpt.seg_cpt <- function(object, ...) {
   object

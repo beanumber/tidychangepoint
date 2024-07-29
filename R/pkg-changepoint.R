@@ -1,28 +1,6 @@
-#' Compatibility layer for changepoint
-#' @name cpt-generics
-#' 
-#' @description
-#' Methods for generic functions applied to `cpt` objects
-#' 
-#' @param x A `cpt` object returned by [changepoint::cpt.meanvar()]
-#' @param object A `cpt` object.
-#' @param ... arguments passed to methods
-#' @seealso [changepoint::changepoint-package]
+#' @rdname as.segmenter
 #' @export
-#' @examples
-#' cpts <- segment(DataCPSim, method = "pelt")
-#' x <- as.segmenter(cpts)
-#' class(x)
-#' as.seg_cpt(x)
-#' as.ts(x) 
-#' changepoints(x)
-#' fitness(x)
-#' logLik(x)
-#' model_name(x)
-#' model_args(x)
-#' nobs(x)
-#' seg_params(x)
-#' 
+
 as.seg_cpt.cpt <- function(object, ...) {
   seg_cpt(
     x = as.ts(object),
