@@ -2,33 +2,21 @@
 % Please edit documentation in R/class-tidycpt.R, R/generics.R, R/utils.R
 \name{as.model.tidycpt}
 \alias{as.model.tidycpt}
-\alias{as.segmenter.tidycpt}
-\alias{as.segmenter}
-\alias{as.seg_cpt}
 \alias{as.model}
 \alias{as.model.default}
 \alias{is_model}
-\alias{is_segmenter}
-\title{Convert a segmenter to a model object}
+\title{Convert, retrieve, or verify a model object}
 \usage{
 \method{as.model}{tidycpt}(object, ...)
-
-\method{as.segmenter}{tidycpt}(object, ...)
-
-as.segmenter(object, ...)
-
-as.seg_cpt(object, ...)
 
 as.model(object, ...)
 
 \method{as.model}{default}(object, ...)
 
 is_model(x, ...)
-
-is_segmenter(object, ...)
 }
 \arguments{
-\item{object}{A segmenter object, typically returned by \code{\link[=segment]{segment()}}}
+\item{object}{A \linkS4class{tidycpt} object, typically returned by \code{\link[=segment]{segment()}}}
 
 \item{...}{currently ignored}
 
@@ -36,69 +24,49 @@ is_segmenter(object, ...)
 }
 \value{
 \itemize{
-\item \code{\link[=as.segmenter]{as.segmenter()}} returns a segmenter object
-}
-
-\itemize{
-\item \code{\link[=as.seg_cpt]{as.seg_cpt()}} returns a \link{seg_cpt} object
-}
-
-\itemize{
-\item \code{\link[=as.model]{as.model()}} returns a \link{mod_cpt} model object
+\item \code{\link[=as.model]{as.model()}} returns a \linkS4class{mod_cpt} model object
 }
 
 \itemize{
 \item \code{\link[=is_model]{is_model()}} a \code{logical} vector of length 1
 }
-
-\itemize{
-\item \code{\link[=is_segmenter]{is_segmenter()}} a \code{logical} vector of length 1
-}
 }
 \description{
-Convert segmenters into models or standardized segmenters
+Convert, retrieve, or verify a model object
 }
 \details{
-\itemize{
-\item \code{\link[=as.model.tidycpt]{as.model.tidycpt()}} returns the \code{model} object of a \code{tidycpt} object
-}
+\linkS4class{tidycpt} objects have a \code{model} component.
+The functions documented here are convenience utility functions
+for working with the \code{model} components.
+\code{\link[=as.model]{as.model()}} is especially useful in pipelines to avoid having to use
+the \code{$} or \code{[} notation for subsetting.
 
-\itemize{
-\item \code{\link[=as.segmenter.tidycpt]{as.segmenter.tidycpt()}} returns the \code{segmenter} object of a \code{tidycpt} object
-}
+When applied to a \linkS4class{tidycpt} object, \code{\link[=as.model]{as.model()}} simply returns the
+\code{model} component of that object.
+However, when applied to a \code{segmenter} object, \code{\link[=as.model]{as.model()}} attempts to
+converts that object into a \linkS4class{mod_cpt} model object.
 
-\itemize{
-\item \code{\link[=as.segmenter]{as.segmenter()}} returns the segmenter of a \code{tidycpt} object
-}
-
-\itemize{
-\item \code{\link[=as.seg_cpt]{as.seg_cpt()}} converts a wild-caught segmenter of any class into a
-\code{seg_cpt} object
-}
-
-\itemize{
-\item \code{\link[=as.model]{as.model()}} converts a segmenter object into a \link{mod_cpt} model object
-}
-
-\itemize{
-\item \code{\link[=is_model]{is_model()}} checks to see if a model object implements all of the
+\code{\link[=is_model]{is_model()}} checks to see if a model object implements all of the
 S3 methods necessary to be considered a model.
 }
-
-\itemize{
-\item \code{\link[=is_segmenter]{is_segmenter()}} checks to see if a segmenter object implements all of the
-S3 methods necessary to be considered a segmenter.
-}
-}
 \examples{
-cpt <- segment(DataCPSim, method = "ga", maxiter = 5)
-as.model(cpt$segmenter)
-\dontrun{
-cpt <- segment(DataCPSim, method = "ga-coen", model_fn_args = list(threshold = 80), maxiter = 5)
-as.model(cpt$segmenter)$model_params
-}
+# Segment a time series using PELT
+x <- segment(CET, method = "pelt")
+
+# Retrieve the model component
+x |> 
+  as.model()
+
+# Explicitly convert the segmenter to a model
+x |>
+  as.segmenter() |>
+  as.model()
+
+# Is that model valid? 
+x |>
+  as.model() |>
+  is_model()
+# Fit a model directly, without using [segment()]
 x <- fit_nhpp(CET, tau = 330)
 is_model(x)
-x <- segment(CET, method = "pelt")
-is_segmenter(x$segmenter)
 }

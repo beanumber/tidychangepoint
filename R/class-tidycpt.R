@@ -26,18 +26,12 @@ as.ts.tidycpt <- function(x, ...) {
 }
 
 #' @rdname as.model
-#' @details
-#'   - [as.model.tidycpt()] returns the `model` object of a `tidycpt` object
-#' 
 #' @export
 as.model.tidycpt <- function(object, ...) {
   object$model
 }
 
-#' @rdname as.model
-#' @details
-#'   - [as.segmenter.tidycpt()] returns the `segmenter` object of a `tidycpt` object
-#' 
+#' @rdname as.segmenter
 #' @export
 as.segmenter.tidycpt <- function(object, ...) {
   object$segmenter

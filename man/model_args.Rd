@@ -23,7 +23,7 @@ model_args(object, ...)
 \method{model_args}{wbs}(object, ...)
 }
 \arguments{
-\item{object}{A segmenter object, typically returned by \code{\link[=segment]{segment()}}}
+\item{object}{A \linkS4class{tidycpt} object, typically returned by \code{\link[=segment]{segment()}}}
 
 \item{...}{currently ignored}
 }

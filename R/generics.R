@@ -18,18 +18,29 @@ changepoints.default <- function(x, ...) {
   attr(x, "cpt_true")
 }
 
-#' @rdname as.model
+#' Convert, retrieve, or verify a segmenter object
+#' @param object A [tidycpt-class] object
+#' @param ... Arguments passed to methods
 #' @details
-#'   - [as.segmenter()] returns the segmenter of a `tidycpt` object
+#' [tidycpt-class] objects have a `segmenter` component (that is typically
+#' created by a class to [segment()]). 
+#' The functions documented here are convenience utility functions
+#' for working with the `segmenter` components. 
+#' [as.segmenter()] is especially useful in pipelines to avoid having to use 
+#' the `$` or `[` notation for subsetting.
+#' 
+#' [as.segmenter()] simply returns the segmenter of a `tidycpt` object.
 #' @returns
-#'   - [as.segmenter()] returns a segmenter object
+#'   - [as.segmenter()] returns the `segmenter` object of a `tidycpt` object. 
+#'   Note that this could be of
+#'   any class, depending on the class returned by the segmenting function.
 #' @export
 as.segmenter <- function(object, ...) UseMethod("as.segmenter")
 
-#' @rdname as.model
+#' @rdname as.segmenter
 #' @details
-#'   - [as.seg_cpt()] converts a wild-caught segmenter of any class into a
-#'   `seg_cpt` object
+#' [as.seg_cpt()] takes a wild-caught `segmenter` object of arbitrary class 
+#' and converts it into a [seg_cpt-class] object. 
 #' @return
 #'   - [as.seg_cpt()] returns a [seg_cpt] object
 #' @export
@@ -120,28 +131,45 @@ model_args.default <- function(object, ...) {
   object$model_fn_args
 }
 
-#' Convert a segmenter to a model object
-#' @description
-#' Convert segmenters into models or standardized segmenters
-#' 
-#' @param object A segmenter object, typically returned by [segment()]
+#' Convert, retrieve, or verify a model object
+#' @param object A [tidycpt-class] object, typically returned by [segment()]
 #' @param ... currently ignored
 #' @details
-#'   - [as.model()] converts a segmenter object into a [mod_cpt] model object
+#' [tidycpt-class] objects have a `model` component.
+#' The functions documented here are convenience utility functions
+#' for working with the `model` components. 
+#' [as.model()] is especially useful in pipelines to avoid having to use 
+#' the `$` or `[` notation for subsetting.
+#' 
+#' When applied to a [tidycpt-class] object, [as.model()] simply returns the 
+#' `model` component of that object.
+#' However, when applied to a `segmenter` object, [as.model()] attempts to 
+#' converts that object into a [mod_cpt-class] model object.
 #' @return 
-#'   - [as.model()] returns a [mod_cpt] model object
+#'   - [as.model()] returns a [mod_cpt-class] model object
 #' @export
 as.model <- function(object, ...) UseMethod("as.model")
 
 #' @rdname as.model
 #' @export
 #' @examples
-#' cpt <- segment(DataCPSim, method = "ga", maxiter = 5)
-#' as.model(cpt$segmenter)
-#' \dontrun{
-#' cpt <- segment(DataCPSim, method = "ga-coen", model_fn_args = list(threshold = 80), maxiter = 5)
-#' as.model(cpt$segmenter)$model_params
-#' }
+#' # Segment a time series using PELT
+#' x <- segment(CET, method = "pelt")
+#' 
+#' # Retrieve the model component
+#' x |> 
+#'   as.model()
+#' 
+#' # Explicitly convert the segmenter to a model
+#' x |>
+#'   as.segmenter() |>
+#'   as.model()
+#' 
+#' # Is that model valid? 
+#' x |>
+#'   as.model() |>
+#'   is_model()
+#'   
 as.model.default <- function(object, ...) {
   f <- whomademe(object)
   args <- c(list(x = as.ts(object), tau = changepoints(object)), model_args(object), list(...))

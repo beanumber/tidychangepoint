@@ -200,11 +200,13 @@ vec_cast.logLik.logLik <- function(x, to, ...) {
 #' @param x An object, typically returned by `fit_*()`
 #' @export
 #' @details
-#'   - [is_model()] checks to see if a model object implements all of the 
-#'   S3 methods necessary to be considered a model. 
+#' [is_model()] checks to see if a model object implements all of the 
+#' S3 methods necessary to be considered a model. 
 #' @return 
 #'   - [is_model()] a `logical` vector of length 1
 #' @examples
+#' 
+#' # Fit a model directly, without using [segment()]
 #' x <- fit_nhpp(CET, tau = 330)
 #' is_model(x)
 is_model <- function(x, ...) {
@@ -212,16 +214,35 @@ is_model <- function(x, ...) {
   implements_all_methods(x, req)
 }
 
-#' @rdname as.model
+#' @rdname as.segmenter
 #' @export
 #' @details
-#'   - [is_segmenter()] checks to see if a segmenter object implements all of the 
-#'   S3 methods necessary to be considered a segmenter. 
+#' [is_segmenter()] checks to see if a segmenter object implements all of the 
+#' S3 methods necessary to be considered a segmenter. 
 #' @return 
 #'   - [is_segmenter()] a `logical` vector of length 1
 #' @examples
+#' # Segment a time series using PELT
 #' x <- segment(CET, method = "pelt")
-#' is_segmenter(x$segmenter)
+#' 
+#' # Return the segmenter component
+#' x |>
+#'   as.segmenter()
+#'   
+#' # Note the class of this object could be anything
+#' x |>
+#'   as.segmenter() |>
+#'   class()
+#'   
+#' # Convert the segmenter into the standardized seg_cpt class
+#' x |>
+#'   as.segmenter() |>
+#'   as.seg_cpt()
+#' 
+#' # Is the segmenter valid?
+#' x |>
+#'   as.segmenter() |>
+#'   is_segmenter()
 is_segmenter <- function(object, ...) {
   req <- c(common, segs_only)
   implements_all_methods(object, req)
