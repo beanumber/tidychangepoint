@@ -104,11 +104,11 @@ on the value of the <code>method</code> argument:</p><ul><li><p><code>pelt</code
 <li><p><code>ga</code>: Uses the Genetic algorithm implemented by <code><a href="segment_ga.html">segment_ga()</a></code>, which wraps
 <code><a href="https://github.com/luca-scr/GA/reference/ga.html" class="external-link">GA::ga()</a></code>. The <code>segmenter</code> is of class <code>tidyga</code>.</p></li>
 <li><p><code>coen</code>: Uses Coen's heuristic as implemented by
-<code><a href="segment_coen.html">segment_coen()</a></code>. The <code>segmenter</code> is of class <code>seg_basket()</code>.</p></li>
+<code><a href="segment_coen.html">segment_coen()</a></code>. The <code>segmenter</code> is of class <code><a href="seg_basket.html">seg_basket()</a></code>.</p></li>
 <li><p><code>manual</code>: Uses the vector of changepoints in the <code>tau</code> argument.
-The <code>segmenter</code> is of class <code>seg_cpt()</code>`.</p></li>
+The <code>segmenter</code> is of class <code><a href="seg_cpt.html">seg_cpt()</a></code>`.</p></li>
 <li><p><code>null</code>: The default. Uses no changepoints.
-The <code>segmenter</code> is of class <code>seg_cpt()</code>`.</p></li>
+The <code>segmenter</code> is of class <code><a href="seg_cpt.html">seg_cpt()</a></code>`.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -144,7 +144,7 @@ The <code>segmenter</code> is of class <code>seg_cpt()</code>`.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pkg      version algorithm seg_params model_name criteria fitness elapsed_time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidycha… 0.0.1   manual    <span style="color: #949494;">&lt;list [0]&gt;</span> meanshift… BIC       <span style="text-decoration: underline;">11</span>503. 0.004 secs  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidycha… 0.0.1   manual    <span style="color: #949494;">&lt;list [0]&gt;</span> meanshift… BIC       <span style="text-decoration: underline;">11</span>503. 0.003 secs  </span>
 <span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A tidycpt object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Class 'cpt' : Changepoint Object</span>
@@ -301,13 +301,13 @@ The <code>segmenter</code> is of class <code>seg_cpt()</code>`.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21] "bestSol"       "fitnessValue"  "solution"     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:1096] from 1 to 1096: 35.5 29 35.6 33 29.5 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : int [1:5] 12 73 535 818 978</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [6 × 2] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region  : chr [1:6] "[0,12)" "[12,73)" "[73,535)" "[535,818)" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu: num [1:6] 34.7 35.7 35.2 57.3 96.9 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : Named num 579</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : int [1:8] 295 354 395 578 817 951 986 1017</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [9 × 2] (S3: tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region  : chr [1:9] "[0,295)" "[295,354)" "[354,395)" "[395,578)" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu: num [1:9] 36 34.7 35.5 38.1 58.2 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : Named num 594</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr "sigma_hatsq"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:1096] 34.7 34.7 34.7 34.7 34.7 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:1096] 36 36 36 36 36 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanshift_norm"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
 <span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"manual"</span>, tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">826</span><span class="op">)</span><span class="op">)</span></span></span>

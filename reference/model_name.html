@@ -79,7 +79,7 @@
 
 
 <dl><dt id="arg-object">object<a class="anchor" aria-label="anchor" href="#arg-object"></a></dt>
-<dd><p>A tidycpt object, typically returned by <code><a href="segment.html">segment()</a></code></p></dd>
+<dd><p>A <code>segmenter</code> object.</p></dd>
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
@@ -109,10 +109,19 @@ not necessarily the actual functions used by the segmenter.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">CET</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu">model_name</span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">segmenter</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Segment a time series using PELT</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">CET</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Retrieve the name of the model from the segmenter</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="as.segmenter.html">as.segmenter</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">model_name</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "meanvar"</span>
-<span class="r-in"><span><span class="fu"><a href="new_fun_cpt.html">whomademe</a></span><span class="op">(</span><span class="fu">model_name</span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># What function created the model? </span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">model_name</span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="new_fun_cpt.html">whomademe</a></span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> function (x, tau, ...) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> {</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     if (!is_valid_tau(tau, length(x))) {</span>
@@ -132,7 +141,7 @@ not necessarily the actual functions used by the segmenter.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mod_cpt(x &lt;- as.ts(x), tau = tau, region_params = region_params, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         model_params = c(), fitted_values = fitted_values, model_name = "meanvar")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x557a27563f30&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5607223bc1a8&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:tidychangepoint&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"model_name")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "meanvar"</span>
@@ -140,8 +149,13 @@ not necessarily the actual functions used by the segmenter.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "fun_cpt"</span>
 <span class="r-in"><span><span class="fu">model_name</span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">segmenter</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "meanvar"</span>
-<span class="r-in"><span><span class="fu">model_name</span><span class="op">(</span><span class="va">x</span><span class="op">$</span><span class="va">model</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Retrieve the name of the model from the model</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu"><a href="as.model.html">as.model</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span></span>
+<span class="r-in"><span>  <span class="fu">model_name</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "meanvar"</span>
+<span class="r-in"><span>  </span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

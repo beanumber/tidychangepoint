@@ -19,8 +19,8 @@
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/build_gabin_population.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/changepoints.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/compare_models.html</loc></url>
-<url><loc>https://beanumber.github.io/tidychangepoint/reference/cpt-generics.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/diagnose.html</loc></url>
+<url><loc>https://beanumber.github.io/tidychangepoint/reference/evaluate_cpts.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/evolve_gbmdl.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/exceedances.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/file_name.html</loc></url>
@@ -29,23 +29,22 @@
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/fit_meanvar.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/fit_nhpp.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/fitness.html</loc></url>
-<url><loc>https://beanumber.github.io/tidychangepoint/reference/ga-generics.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/imusaokomoto.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/iweibull.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/mde_rain.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/mlb_hrs.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/mod_cpt-class.html</loc></url>
-<url><loc>https://beanumber.github.io/tidychangepoint/reference/mod_cpt-generics.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/model_args.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/model_name.html</loc></url>
+<url><loc>https://beanumber.github.io/tidychangepoint/reference/model_variance.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/new_fun_cpt.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/pad_tau.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/plot.tidyga.html</loc></url>
+<url><loc>https://beanumber.github.io/tidychangepoint/reference/plot_best_chromosome.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/reexports.html</loc></url>
-<url><loc>https://beanumber.github.io/tidychangepoint/reference/seg-basket-generics.html</loc></url>
-<url><loc>https://beanumber.github.io/tidychangepoint/reference/seg-cpt-generics.html</loc></url>
-<url><loc>https://beanumber.github.io/tidychangepoint/reference/seg_basket-class.html</loc></url>
-<url><loc>https://beanumber.github.io/tidychangepoint/reference/seg_cpt-class.html</loc></url>
+<url><loc>https://beanumber.github.io/tidychangepoint/reference/seg_basket.html</loc></url>
+<url><loc>https://beanumber.github.io/tidychangepoint/reference/seg_cpt.html</loc></url>
+<url><loc>https://beanumber.github.io/tidychangepoint/reference/seg_params.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/segment.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/segment_coen.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/segment_ga.html</loc></url>
@@ -54,8 +53,6 @@
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/tbl_coef.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/test_set.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/tidychangepoint-package.html</loc></url>
-<url><loc>https://beanumber.github.io/tidychangepoint/reference/tidycpt-generics.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/vec_ptype2.logLik.logLik.html</loc></url>
-<url><loc>https://beanumber.github.io/tidychangepoint/reference/wbs-generics.html</loc></url>
 </urlset>
 
