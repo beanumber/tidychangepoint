@@ -3,15 +3,9 @@
 \name{cpt-generics}
 \alias{cpt-generics}
 \alias{as.seg_cpt.cpt}
-\alias{logLik.cpt}
-\alias{nobs.cpt}
 \title{Compatibility layer for changepoint}
 \usage{
 \method{as.seg_cpt}{cpt}(object, ...)
-
-\method{logLik}{cpt}(object, ...)
-
-\method{nobs}{cpt}(object, ...)
 }
 \arguments{
 \item{object}{A \code{cpt} object.}

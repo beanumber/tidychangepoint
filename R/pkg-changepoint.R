@@ -36,7 +36,7 @@ as.seg_cpt.cpt <- function(object, ...) {
 }
 
 
-#' @rdname as.ts.tidycpt
+#' @rdname reexports
 #' @export
 as.ts.cpt <- function(x, ...) {
   as.ts(x@data.set)
@@ -58,7 +58,7 @@ fitness.cpt <- function(object, ...) {
   out
 }
 
-#' @rdname cpt-generics
+#' @rdname reexports
 #' @export
 logLik.cpt <- function(object, ...) {
   #  message("intercepting...")
@@ -89,8 +89,7 @@ model_args.cpt <- function(object, ...) {
   NULL
 }
 
-#' @rdname cpt-generics
-#' @param object A `cpt` object.
+#' @rdname reexports
 #' @export
 nobs.cpt <- function(object, ...) {
   length(as.ts(object))

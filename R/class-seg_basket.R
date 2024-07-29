@@ -68,7 +68,7 @@ as.seg_cpt.seg_basket <- function(object, ...) {
   )
 }
 
-#' @rdname as.ts.tidycpt
+#' @rdname reexports
 #' @export
 as.ts.seg_basket <- function(x, ...) {
   x$data
@@ -168,7 +168,7 @@ model_name.seg_basket <- function(object, ...) {
   object$model_name
 }
 
-#' @rdname seg-basket-generics
+#' @rdname reexports
 #' @export
 plot.seg_basket <- function(x, ...) {
   methods <- c("null", "pelt")

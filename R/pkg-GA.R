@@ -33,12 +33,8 @@ as.seg_cpt.ga <- function(object, ...) {
   )
 }
 
-#' @rdname as.ts.tidycpt
+#' @rdname reexports
 #' @export
-#' @examples
-#' cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
-#' as.ts(cpts)
-#' 
 as.ts.ga <- function(x, ...) {
   x@data
 }
@@ -80,12 +76,8 @@ model_args.ga <- function(object, ...) {
   object@model_fn_args
 }
 
-#' @rdname ga-generics
-#' @param object A `ga` object.
+#' @rdname reexports
 #' @export
-#' @examples
-#' cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
-#' nobs(cpts$segmenter)
 nobs.ga <- function(object, ...) {
   length(as.ts(object))
 }

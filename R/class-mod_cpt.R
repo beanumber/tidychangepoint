@@ -78,20 +78,19 @@ mod_cpt <- function(x, ...) {
   validate_mod_cpt(obj)
 }
 
-#' @rdname as.ts.tidycpt
+#' @rdname reexports
 #' @export
 as.ts.mod_cpt <- function(x, ...) {
   as.ts(x$data)
 }
 
-#' @rdname nobs.tidycpt
+#' @rdname reexports
 #' @export
 nobs.mod_cpt <- function(object, ...) {
   length(as.ts(object))
 }
 
-#' @rdname logLik.mod_cpt
-#' @inheritParams stats::logLik
+#' @rdname reexports
 #' @export
 logLik.mod_cpt <- function(object, ...) {
   sigma_hatsq <- model_variance(object)
@@ -125,13 +124,13 @@ as.logLik <- function(object, ll = 0) {
   return(ll)
 }
 
-#' @rdname fitted.mod_cpt
+#' @rdname reexports
 #' @export
 fitted.mod_cpt <- function(object, ...) {
   object$fitted_values
 }
 
-#' @rdname mod_cpt-generics
+#' @rdname reexports
 #' @export
 residuals.mod_cpt <- function(object, ...) {
   object$data - fitted(object)
@@ -143,7 +142,7 @@ model_variance <- function(object, ...) {
   sum(residuals(object)^2) / nobs(object)
 }
 
-#' @rdname mod_cpt-generics
+#' @rdname reexports
 #' @export
 coef.mod_cpt <- function(object, ...) {
   object$region_params
@@ -163,8 +162,7 @@ changepoints.mod_cpt <- function(x, ...) {
     as.integer()
 }
 
-#' @rdname mod_cpt-generics
-#' @seealso [broom::augment()]
+#' @rdname reexports
 #' @export
 augment.mod_cpt <- function(x, ...) {
   tau <- changepoints(x)
@@ -178,8 +176,7 @@ augment.mod_cpt <- function(x, ...) {
     dplyr::group_by(region)
 }
 
-#' @rdname mod_cpt-generics
-#' @seealso [broom::tidy()]
+#' @rdname reexports
 #' @export
 tidy.mod_cpt <- function(x, ...) {
   tau <- changepoints(x)
@@ -208,7 +205,7 @@ tidy.mod_cpt <- function(x, ...) {
     dplyr::inner_join(coef(x), by = "region")
 }
 
-#' @rdname mod_cpt-generics
+#' @rdname reexports
 #' @export
 glance.mod_cpt <- function(x, ...) {
   tibble::tibble(
@@ -247,13 +244,21 @@ autoregress_errors <- function(mod, ...) {
 }
 
 
-#' @rdname mod_cpt-generics
+#' @rdname reexports
 #' @export
 #' @examples
+#' # Plot a meanshift model fit
 #' plot(fit_meanshift_norm(CET, tau = 330))
+#' 
+#' #' # Plot a trendshift model fit
 #' plot(fit_trendshift(CET, tau = 330))
+#' 
+#' #' # Plot a quadratic polynomial model fit
 #' plot(fit_lmshift(CET, tau = 330, deg_poly = 2))
+#' 
+#' #' # Plot a 4th degree polynomial model fit
 #' plot(fit_lmshift(CET, tau = 330, deg_poly = 10))
+#' 
 plot.mod_cpt <- function(x, ...) {
   regions <- tidy(x)
   m <- length(changepoints(x))

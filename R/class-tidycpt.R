@@ -16,11 +16,7 @@ changepoints.tidycpt <- function(x, use_labels = FALSE, ...) {
   }
 }
 
-#' Retrieve a time series from a more complex object
-#' @param x An object coercible into a time series. See [stats::as.ts()].
-#' @param ... arguments passed to methods
-#' @returns A [stats::ts()] object. 
-#' @seealso [stats::ts()]
+#' @rdname reexports
 #' @export
 as.ts.tidycpt <- function(x, ...) {
   as.ts(x$segmenter)
@@ -51,22 +47,19 @@ model_name.tidycpt <- function(object, ...) {
   model_name(object$segmenter, ...)
 }
 
-#' @rdname tidycpt-generics
-#' @seealso [broom::augment()]
+#' @rdname reexports
 #' @export
 augment.tidycpt <- function(x, ...) {
   augment(x$model)
 }
 
-#' @rdname tidycpt-generics
-#' @seealso [broom::tidy()]
+#' @rdname reexports
 #' @export
 tidy.tidycpt <- function(x, ...) {
   tidy(x$model)
 }
 
-#' @rdname tidycpt-generics
-#' @seealso [broom::glance()]
+#' @rdname reexports
 #' @export
 glance.tidycpt <- function(x, ...) {
   x |>
@@ -145,7 +138,7 @@ plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
   g
 }
 
-#' @rdname tidycpt-generics
+#' @rdname reexports
 #' @export
 print.tidycpt <- function(x, ...) {
   cat("A tidycpt object\n")

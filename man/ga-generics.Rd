@@ -3,16 +3,11 @@
 \name{ga-generics}
 \alias{ga-generics}
 \alias{as.seg_cpt.ga}
-\alias{nobs.ga}
 \title{Compatibility layer for GA}
 \usage{
 \method{as.seg_cpt}{ga}(object, ...)
-
-\method{nobs}{ga}(object, ...)
 }
 \arguments{
-\item{object}{A \code{ga} object.}
-
 \item{...}{arguments passed to methods}
 
 \item{x}{A \code{GA} object returned by \code{\link[GA:ga]{GA::ga()}}}
@@ -32,8 +27,6 @@ model_name(x)
 model_args(x)
 nobs(x)
 seg_params(x)
-cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
-nobs(cpts$segmenter)
 }
 \seealso{
 \link[GA:GA-package]{GA::GA-package}

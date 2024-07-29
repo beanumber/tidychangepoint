@@ -82,7 +82,7 @@ as.seg_cpt.seg_cpt <- function(object, ...) {
   object
 }
 
-#' @rdname as.ts.tidycpt
+#' @rdname reexports
 #' @export
 as.ts.seg_cpt <- function(x, ...) {
   as.ts(x$data)
@@ -101,7 +101,7 @@ fitness.seg_cpt <- function(object, ...) {
   object$fitness
 }
 
-#' @rdname seg-cpt-generics
+#' @rdname reexports
 #' @export
 glance.seg_cpt <- function(x, ...) {
   tibble::tibble(
@@ -127,14 +127,13 @@ model_args.seg_cpt <- function(object, ...) {
   NA
 }
 
-#' @rdname seg-cpt-generics
-#' @param object A `seg_cpt` object
+#' @rdname reexports
 #' @export
 nobs.seg_cpt <- function(object, ...) {
   length(as.ts(object))
 }
 
-#' @rdname seg-cpt-generics
+#' @rdname reexports
 #' @export
 print.seg_cpt <- function(x, ...) {
   utils::str(x)

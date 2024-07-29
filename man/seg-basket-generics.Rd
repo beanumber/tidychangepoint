@@ -4,7 +4,6 @@
 \alias{seg-basket-generics}
 \alias{as.seg_cpt.seg_basket}
 \alias{best_cpt}
-\alias{plot.seg_basket}
 \alias{plot_best_chromosome}
 \alias{plot_cpt_repeated}
 \title{Methods for seg_basket objects}
@@ -12,8 +11,6 @@
 \method{as.seg_cpt}{seg_basket}(object, ...)
 
 best_cpt(x, ...)
-
-\method{plot}{seg_basket}(x, ...)
 
 plot_best_chromosome(x)
 

@@ -32,12 +32,8 @@ as.seg_cpt.wbs <- function(object, ...) {
   )
 }
 
-#' @rdname as.ts.tidycpt
+#' @rdname reexports
 #' @export
-#' @examples
-#' cpts <- segment(DataCPSim, method = "wbs")
-#' as.ts(cpts)
-#' 
 as.ts.wbs <- function(x, ...) {
   as.ts(x$x)
 }
@@ -69,12 +65,8 @@ fitness.wbs <- function(object, ...) {
   out
 }
 
-#' @rdname wbs-generics
-#' @param object A `cpt` object.
+#' @rdname reexports
 #' @export
-#' @examples
-#' cpts <- segment(DataCPSim, method = "wbs")
-#' nobs(cpts$segmenter)
 nobs.wbs <- function(object, ...) {
   length(as.ts(object))
 }
