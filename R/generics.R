@@ -63,7 +63,8 @@ exceedances.default <- function(x, ...) {
 
 #' Retrieve the optimal fitness (or objective function) value used by an 
 #' algorithm
-#' @param object A `segmenter` object.  
+#' @param object A `segmenter` object.
+#' @param ... currently ignored
 #' @details
 #' 
 #' Segmenting algorithms use a **fitness** metric, typically through the use of
@@ -86,7 +87,7 @@ fitness <- function(object, ...) UseMethod("fitness")
 #' 
 #' @family tidychangepoint-generics
 #' @export
-seg_params <- function(x, ...) UseMethod("seg_params")
+seg_params <- function(object, ...) UseMethod("seg_params")
 
 #' Retrieve the name of the model that a segmenter or model used
 #' 
@@ -104,11 +105,25 @@ seg_params <- function(x, ...) UseMethod("seg_params")
 #' @export
 #' @family modeling
 #' @examples
+#' # Segment a time series using PELT
 #' x <- segment(CET, method = "pelt")
+#' 
+#' # Retrieve the name of the model from the segmenter
+#' x |>
+#'   as.segmenter() |>
+#'   model_name()
+#' 
+#' # What function created the model? 
+#' x |>
+#'   model_name() |>
+#'   whomademe()
 #' model_name(x$segmenter)
-#' whomademe(model_name(x))
-#' model_name(x$segmenter)
-#' model_name(x$model)
+#' 
+#' # Retrieve the name of the model from the model
+#' x |>
+#'   as.model() |>
+#'   model_name()
+#'   
 model_name <- function(object, ...) UseMethod("model_name")
 
 #' @rdname model_name

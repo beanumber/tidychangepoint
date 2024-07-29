@@ -20,5 +20,6 @@ Compute model variance
 \details{
 Using the generic functions \code{\link[=residuals]{residuals()}} and \code{\link[=nobs]{nobs()}}, this function
 computes the variance of the residuals.
+
 Note that unlike \code{\link[stats:cor]{stats::var()}}, it does not use \eqn{n-1} as the denominator.
 }

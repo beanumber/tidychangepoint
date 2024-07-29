@@ -129,14 +129,14 @@ plot.tidyga <- function(x, ...) {
 
 #' @rdname seg_params
 #' @export
-seg_params.ga <- function(x, ...) {
+seg_params.ga <- function(object, ...) {
   list(
-    popSize = x@popSize,
-    iter = x@iter,
-    elitism = x@elitism,
-    pcrossover = x@pcrossover,
-    pmutation = x@pmutation,
-    model_fn_args = model_args(x)
+    popSize = object@popSize,
+    iter = object@iter,
+    elitism = object@elitism,
+    pcrossover = object@pcrossover,
+    pmutation = object@pmutation,
+    model_fn_args = model_args(object)
   )
 }
 

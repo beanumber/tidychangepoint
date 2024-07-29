@@ -10,7 +10,7 @@ compare_models(x, ...)
 compare_algorithms(x, ...)
 }
 \arguments{
-\item{x}{A \linkS4class{tidycpt} object, or a \code{model} or \code{segmenter}}
+\item{x}{A \linkS4class{tidycpt} object}
 
 \item{...}{currently ignored}
 }
@@ -19,4 +19,28 @@ A \link[tibble:tbl_df-class]{tibble::tbl_df}
 }
 \description{
 Compare various models or algorithms for a given changepoint set
+}
+\details{
+A \linkS4class{tidycpt} object has a set of changepoints returned by the
+algorithm that segmented the time series.
+That changepoint set was obtained using a specific model.
+Treating this changepoint set as fixed, the \code{\link[=compare_models]{compare_models()}} function
+fits several common changepoint models to the time series and changepoint
+set, and returns the results of \code{\link[=glance]{glance()}}.
+Comparing the fits of various models could lead to improved understanding.
+
+Alternatively, \code{\link[=compare_algorithms]{compare_algorithms()}} runs several fast changepoint detection
+algorithms on the original time series, and consolidates the results.
+}
+\examples{
+
+# Segment a times series using PELT
+x <- segment(CET, method = "pelt")
+
+# Compare models
+compare_models(x)
+
+# Compare algorithms
+compare_algorithms(x)
+
 }

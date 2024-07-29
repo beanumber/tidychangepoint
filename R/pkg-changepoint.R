@@ -82,10 +82,10 @@ nobs.cpt <- function(object, ...) {
 #'   as.segmenter() |>
 #'   seg_params()
 #' 
-seg_params.cpt <- function(x, ...) {
+seg_params.cpt <- function(object, ...) {
   list(
-    test_stat = x@test.stat,
-    num_cpts_max = x@ncpts.max,
-    min_seg_length = x@minseglen
+    test_stat = object@test.stat,
+    num_cpts_max = object@ncpts.max,
+    min_seg_length = object@minseglen
   )
 }

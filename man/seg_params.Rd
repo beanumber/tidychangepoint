@@ -9,15 +9,20 @@
 \alias{seg_params.wbs}
 \title{Retrieve parameters from a segmenter}
 \usage{
-\method{seg_params}{seg_cpt}(x, ...)
+\method{seg_params}{seg_cpt}(object, ...)
 
-seg_params(x, ...)
+seg_params(object, ...)
 
-\method{seg_params}{ga}(x, ...)
+\method{seg_params}{ga}(object, ...)
 
-\method{seg_params}{cpt}(x, ...)
+\method{seg_params}{cpt}(object, ...)
 
-\method{seg_params}{wbs}(x, ...)
+\method{seg_params}{wbs}(object, ...)
+}
+\arguments{
+\item{object}{A \code{segmenter} object.}
+
+\item{...}{currently ignored}
 }
 \value{
 A named \code{list} of parameters with their values.

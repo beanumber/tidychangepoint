@@ -29,6 +29,8 @@ fitness(object, ...)
 }
 \arguments{
 \item{object}{A \code{segmenter} object.}
+
+\item{...}{currently ignored}
 }
 \value{
 A named \code{double} vector with the fitness value.

@@ -122,6 +122,6 @@ print.seg_cpt <- function(x, ...) {
 
 #' @rdname seg_params
 #' @export
-seg_params.seg_cpt <- function(x, ...) {
-  x$seg_params
+seg_params.seg_cpt <- function(object, ...) {
+  object$seg_params
 }

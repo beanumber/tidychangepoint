@@ -46,10 +46,7 @@ seg_basket <- function(x, ...) {
   validate_seg_basket(obj)
 }
 
-#' Methods for seg_basket objects
-#' @name seg-basket-generics
-#' @param object A `seg_basket` object
-#' @param ... arguments passed to methods
+#' @name as.segmenter
 #' @export
 as.seg_cpt.seg_basket <- function(object, ...) {
   seg_cpt(
@@ -69,8 +66,6 @@ as.ts.seg_basket <- function(x, ...) {
   x$data
 }
 
-#' @rdname seg-basket-generics
-#' @export
 best_cpt <- function(x, ...) {
   x$basket |>
     dplyr::arrange(.data[[x$penalty]]) |>
@@ -226,12 +221,24 @@ diagnose.seg_basket <- function(x, ...) {
 }
 
 
-#' @rdname seg-basket-generics
+#' Diagnostic plots for `seg_basket` objects
+#' @param x A [seg_basket()] object
+#' @description
+#' [seg_basket()] objects contain baskets of candidate changepoint sets. 
+#' 
+#' [plot_best_chromosome()] shows how the size of the candidate changepoint
+#' sets change across the generations of evolution. 
+#' 
 #' @export
 #' @examples
 #' \dontrun{
+#' # Segment a time series using Coen's algorithm
 #' x <- segment(DataCPSim, method = "coen", num_generations = 3)
-#' plot_best_chromosome(x$segmenter)
+#' 
+#' # Plot the size of the sets during the evolution
+#' x |>
+#'   as.segmenter() |>
+#'   plot_best_chromosome()
 #' }
 plot_best_chromosome <- function(x) {
   d <- x$basket |> 
@@ -259,13 +266,23 @@ plot_best_chromosome <- function(x) {
     )
 }
 
-#' @rdname seg-basket-generics
+#' @rdname plot_best_chromosome
 #' @param i index of basket to show
+#' @description
+#' 
+#' [plot_cpt_repeated()] shows how frequently individual observations appear in
+#' the best candidate changepoint sets in each generation. 
+#' 
 #' @export
 #' @examples
 #' \dontrun{
+#' # Segment a time series using Coen's algorithm
 #' x <- segment(DataCPSim, method = "coen", num_generations = 3)
+#' 
+#' # Plot overall frequency of appearance of changepoints
 #' plot_cpt_repeated(x$segmenter)
+#' 
+#' # Plot frequency of appearance only up to a specific generation
 #' plot_cpt_repeated(x$segmenter, 5)
 #' }
 plot_cpt_repeated <- function(x, i = nrow(x$basket)) {

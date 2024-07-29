@@ -66,13 +66,13 @@ model_args.wbs <- function(object, ...) {
 
 #' @rdname seg_params
 #' @export
-seg_params.wbs <- function(x, ...) {
+seg_params.wbs <- function(object, ...) {
   list(
-    M = x$M,
-    integrated = x$integrated,
-    rand_intervals = x$rand.intervals,
-    threshold = x$cpt$th,
-    Kmax = x$cpt$Kmax,
-    sigma = x$cpt$sigma
+    M = object$M,
+    integrated = object$integrated,
+    rand_intervals = object$rand.intervals,
+    threshold = object$cpt$th,
+    Kmax = object$cpt$Kmax,
+    sigma = object$cpt$sigma
   )
 }

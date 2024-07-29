@@ -72,10 +72,30 @@ glance.tidycpt <- function(x, ...) {
 }
 
 #' Compare various models or algorithms for a given changepoint set
-#' @inheritParams diagnose
+#' @param x A [tidycpt-class] object
 #' @param ... currently ignored
+#' @details
+#' A [tidycpt-class] object has a set of changepoints returned by the 
+#' algorithm that segmented the time series. 
+#' That changepoint set was obtained using a specific model. 
+#' Treating this changepoint set as fixed, the [compare_models()] function
+#' fits several common changepoint models to the time series and changepoint 
+#' set, and returns the results of [glance()]. 
+#' Comparing the fits of various models could lead to improved understanding.  
+#' 
 #' @returns A [tibble::tbl_df-class]
 #' @export
+#' @examples
+#' 
+#' # Segment a times series using PELT
+#' x <- segment(CET, method = "pelt")
+#' 
+#' # Compare models
+#' compare_models(x)
+#' 
+#' # Compare algorithms
+#' compare_algorithms(x)
+#' 
 compare_models <- function(x, ...) {
   list(
     x$model,
@@ -93,6 +113,10 @@ compare_models <- function(x, ...) {
 }
 
 #' @rdname compare_models
+#' @details
+#' Alternatively, [compare_algorithms()] runs several fast changepoint detection
+#' algorithms on the original time series, and consolidates the results.
+#' 
 #' @export
 compare_algorithms <- function(x, ...) {
   others <- list(

@@ -37,6 +37,8 @@ model_name(object, ...)
 }
 \arguments{
 \item{object}{A \code{segmenter} object.}
+
+\item{...}{currently ignored}
 }
 \value{
 \itemize{
@@ -56,11 +58,25 @@ not necessarily the actual functions used by the segmenter.
 Models also implement \code{model_name()}.
 }
 \examples{
+# Segment a time series using PELT
 x <- segment(CET, method = "pelt")
+
+# Retrieve the name of the model from the segmenter
+x |>
+  as.segmenter() |>
+  model_name()
+
+# What function created the model? 
+x |>
+  model_name() |>
+  whomademe()
 model_name(x$segmenter)
-whomademe(model_name(x))
-model_name(x$segmenter)
-model_name(x$model)
+
+# Retrieve the name of the model from the model
+x |>
+  as.model() |>
+  model_name()
+  
 }
 \seealso{
 Other modeling: 
