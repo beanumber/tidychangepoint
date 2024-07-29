@@ -80,14 +80,8 @@ sets in univariate time series.</p>
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>An object of class <code>tidycpt</code>. Every <code>tidycpt</code> object contains:</p><ul><li><p><code>segmenter</code>: The object returned by the underlying changepoint
-detection algorithm.</p></li>
-<li><p><code>model</code>: A model object inheriting from <code>mod_cpt</code>, as created by
-<code><a href="as.model.html">as.model()</a></code> when called
-on the <code>segmenter</code>.</p></li>
-<li><p><code>elapsed_time</code>: The clock time that passed while the algorithm was running.</p></li>
-<li><p><code>time_index</code>: If available, the labels for the time indices of the time series.</p></li>
-</ul></div>
+    <p>An object of class <a href="tidycpt-class.html">tidycpt</a>.</p>
+    </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Currently, <code>segment()</code> can use the following algorithms, depending
@@ -144,7 +138,7 @@ The <code>segmenter</code> is of class <code><a href="seg_cpt.html">seg_cpt()</a
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 8</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pkg      version algorithm seg_params model_name criteria fitness elapsed_time</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidycha… 0.0.1   manual    <span style="color: #949494;">&lt;list [0]&gt;</span> meanshift… BIC       <span style="text-decoration: underline;">11</span>503. 0.003 secs  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidycha… 0.0.1   manual    <span style="color: #949494;">&lt;list [0]&gt;</span> meanshift… BIC       <span style="text-decoration: underline;">11</span>503. 0.004 secs  </span>
 <span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A tidycpt object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Class 'cpt' : Changepoint Object</span>
