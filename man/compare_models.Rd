@@ -10,7 +10,7 @@ compare_models(x, ...)
 compare_algorithms(x, ...)
 }
 \arguments{
-\item{x}{An object ihat implements a \code{\link[=diagnose]{diagnose()}} method}
+\item{x}{A \linkS4class{tidycpt} object, or a \code{model} or \code{segmenter}}
 
 \item{...}{currently ignored}
 }

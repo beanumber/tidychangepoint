@@ -215,10 +215,13 @@ plot.seg_basket <- function(x, ...) {
 #' @export
 #' @examples
 #' \dontrun{
+#' # For Coen's algorithm, show the histogram of changepoint selections
 #' x <- segment(DataCPSim, method = "coen", num_generations = 3)
-#' plot(x$segmenter)
-#' diagnose(x$segmenter)
+#' x |>
+#'   as.segmenter() |>
+#'   diagnose()
 #' }
+#' 
 diagnose.seg_basket <- function(x, ...) {
   patchwork::wrap_plots(
     plot_best_chromosome(x),

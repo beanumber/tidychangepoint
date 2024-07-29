@@ -322,7 +322,9 @@ print.mod_cpt <- function(x, ...) {
 #' @rdname diagnose
 #' @export
 #' @examples
-#' diagnose(fit_meanshift_norm(CET, tau = 330))
+#' # For meanshift models, show the distribution of the residuals by region
+#' fit_meanshift_norm(CET, tau = 330) |>
+#'   diagnose()
 diagnose.mod_cpt <- function(x, ...) {
   ggplot2::ggplot(
     data = augment(x), 

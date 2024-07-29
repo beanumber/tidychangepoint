@@ -149,11 +149,15 @@ print.tidycpt <- function(x, ...) {
 #' @rdname diagnose
 #' @export
 #' @examples
+#' # Show various iterations of diagnostic plots
 #' diagnose(segment(DataCPSim))
 #' diagnose(segment(DataCPSim, method = "single-best"))
 #' diagnose(segment(DataCPSim, method = "pelt"))
+#' 
+#' # Show diagnostic plots for test sets
 #' diagnose(segment(test_set()))
 #' diagnose(segment(test_set(n = 2, sd = 4), method = "pelt"))
+#' 
 diagnose.tidycpt <- function(x, ...) {
   patchwork::wrap_plots(plot(x), diagnose(x$model), ncol = 1)
 }

@@ -278,8 +278,12 @@ BMDL.default <- function(object, ...) {
 evaluate_cpts <- function(x, ...) UseMethod("evaluate_cpts")
 
 #' Diagnose the fit of a segmented time series
-#' @param x An object ihat implements a [diagnose()] method
+#' @param x A [tidycpt-class] object, or a `model` or `segmenter`
 #' @param ... currently ignored
+#' @description
+#' 
+#' Depending on the input, this function returns a diagnostic plot. 
+#' 
 #' @returns A [ggplot2::ggplot()] object
 #' @family tidychangepoint-generics
 #' @export

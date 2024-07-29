@@ -221,12 +221,13 @@ mcdf <- function(x, dist = "weibull") {
   out$m
 }
 
-#' @rdname fit_nhpp
+#' @rdname diagnose
 #' @export
 #' @examples
+#' # For NHPP models, show the growth in the number of exceedances
 #' diagnose(fit_nhpp(DataCPSim, tau = 826))
 #' diagnose(fit_nhpp(DataCPSim, tau = 826, threshold = 200))
-
+#' 
 diagnose.nhpp <- function(x, ...) {
   n <- nobs(x)
   
