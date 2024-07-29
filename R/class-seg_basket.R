@@ -68,8 +68,7 @@ as.seg_cpt.seg_basket <- function(object, ...) {
   )
 }
 
-#' @rdname seg-basket-generics
-#' @param x A `seg_basket` object
+#' @rdname as.ts.tidycpt
 #' @export
 as.ts.seg_basket <- function(x, ...) {
   x$data

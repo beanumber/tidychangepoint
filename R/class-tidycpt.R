@@ -16,10 +16,11 @@ changepoints.tidycpt <- function(x, use_labels = FALSE, ...) {
   }
 }
 
-#' Generic functions for tidycpt objects
-#' @name tidycpt-generics
-#' @param x An `tidycpt` object, typically the output from [segment()]`
+#' Retrieve a time series from a more complex object
+#' @param x An object coercible into a time series. See [stats::as.ts()].
 #' @param ... arguments passed to methods
+#' @returns A [stats::ts()] object. 
+#' @seealso [stats::ts()]
 #' @export
 as.ts.tidycpt <- function(x, ...) {
   as.ts(x$segmenter)

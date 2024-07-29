@@ -16,7 +16,7 @@ as.seg_cpt(object, ...)
 is_segmenter(object, ...)
 }
 \arguments{
-\item{object}{A \linkS4class{tidycpt} object}
+\item{object}{A \linkS4class{tidycpt} or \code{segmenter} object}
 
 \item{...}{Arguments passed to methods}
 }

@@ -3,18 +3,12 @@
 \name{ga-generics}
 \alias{ga-generics}
 \alias{as.seg_cpt.ga}
-\alias{as.ts.ga}
 \alias{nobs.ga}
-\alias{seg_params.ga}
 \title{Compatibility layer for GA}
 \usage{
 \method{as.seg_cpt}{ga}(object, ...)
 
-\method{as.ts}{ga}(x, ...)
-
 \method{nobs}{ga}(object, ...)
-
-\method{seg_params}{ga}(x, ...)
 }
 \arguments{
 \item{object}{A \code{ga} object.}
@@ -38,9 +32,6 @@ model_name(x)
 model_args(x)
 nobs(x)
 seg_params(x)
-cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
-as.ts(cpts)
-
 cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
 nobs(cpts$segmenter)
 }

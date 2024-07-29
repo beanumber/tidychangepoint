@@ -23,27 +23,31 @@ model_args(object, ...)
 \method{model_args}{wbs}(object, ...)
 }
 \arguments{
-\item{object}{A \linkS4class{tidycpt} object, typically returned by \code{\link[=segment]{segment()}}}
-
-\item{...}{currently ignored}
+\item{object}{A \code{segmenter} object.}
 }
 \value{
-\itemize{
-\item \code{\link[=model_args]{model_args()}}: A named \code{list} of arguments, or \code{NULL}
-}
+A named \code{list} of arguments, or \code{NULL}
 }
 \description{
 Retrieve the arguments that a model-fitting function used
 }
 \details{
-Every segmenter uses a model-fitting function, and these functions sometimes
-take arguments. \code{\link[=model_args]{model_args()}} recovers the arguments that were passed to
-the model fitting function when it was called. These are especially
+Every model is fit by a model-fitting function, and these functions sometimes
+take arguments.
+\code{\link[=model_args]{model_args()}} recovers the arguments that were passed to
+the model fitting function when it was called.
+These are especially
 important when using a genetic algorithm.
 }
 \examples{
+# Segment a time series using Coen's algorithm
 x <- segment(CET, method = "ga-coen", maxiter = 3)
-model_args(x$segmenter)
+
+# Recover the arguments passed to the model-fitting function
+x |>
+  as.segmenter() |>
+  model_args()
+  
 }
 \seealso{
 Other modeling: 

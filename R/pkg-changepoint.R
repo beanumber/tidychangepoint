@@ -36,7 +36,7 @@ as.seg_cpt.cpt <- function(object, ...) {
 }
 
 
-#' @rdname cpt-generics
+#' @rdname as.ts.tidycpt
 #' @export
 as.ts.cpt <- function(x, ...) {
   as.ts(x@data.set)
@@ -96,8 +96,15 @@ nobs.cpt <- function(object, ...) {
   length(as.ts(object))
 }
 
-#' @rdname cpt-generics
+#' @rdname seg_params
 #' @export
+#' @examples
+#' # Segment a time series using PELT
+#' x <- segment(CET, method = "pelt")
+#' x |>
+#'   as.segmenter() |>
+#'   seg_params()
+#' 
 seg_params.cpt <- function(x, ...) {
   list(
     test_stat = x@test.stat,

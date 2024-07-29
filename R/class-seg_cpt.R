@@ -82,10 +82,7 @@ as.seg_cpt.seg_cpt <- function(object, ...) {
   object
 }
 
-#' Methods for seg_cpt objects
-#' @name seg-cpt-generics
-#' @param x An `seg_cpt` object
-#' @param ... arguments passed to methods
+#' @rdname as.ts.tidycpt
 #' @export
 as.ts.seg_cpt <- function(x, ...) {
   as.ts(x$data)
@@ -143,7 +140,7 @@ print.seg_cpt <- function(x, ...) {
   utils::str(x)
 }
 
-#' @rdname seg-cpt-generics
+#' @rdname seg_params
 #' @export
 seg_params.seg_cpt <- function(x, ...) {
   x$seg_params

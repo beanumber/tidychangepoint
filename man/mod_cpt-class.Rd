@@ -51,6 +51,11 @@ Changepoint detection models know how they were created, on what data set,
 about the optimal changepoint set found, and the parameters that were fit
 to the model.
 Methods for various generic reporting functions are provided.
+
+All changepoint detection models inherit from \linkS4class{mod_cpt}: the
+base class for changepoint detection models.
+These models are created by one of the \verb{fit_*()} functions, or by
+\code{\link[=as.model]{as.model()}}.
 }
 \examples{
 cpt <- mod_cpt(CET)

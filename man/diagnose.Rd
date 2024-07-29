@@ -44,6 +44,7 @@ diagnose(segment(test_set(n = 2, sd = 4), method = "pelt"))
 Other tidychangepoint-generics: 
 \code{\link{changepoints.mod_cpt}()},
 \code{\link{exceedances}()},
-\code{\link{fitness.seg_basket}()}
+\code{\link{fitness.seg_basket}()},
+\code{\link{seg_params.seg_cpt}()}
 }
 \concept{tidychangepoint-generics}

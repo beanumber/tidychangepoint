@@ -3,7 +3,6 @@
 \name{seg-basket-generics}
 \alias{seg-basket-generics}
 \alias{as.seg_cpt.seg_basket}
-\alias{as.ts.seg_basket}
 \alias{best_cpt}
 \alias{plot.seg_basket}
 \alias{plot_best_chromosome}
@@ -11,8 +10,6 @@
 \title{Methods for seg_basket objects}
 \usage{
 \method{as.seg_cpt}{seg_basket}(object, ...)
-
-\method{as.ts}{seg_basket}(x, ...)
 
 best_cpt(x, ...)
 
@@ -26,8 +23,6 @@ plot_cpt_repeated(x, i = nrow(x$basket))
 \item{object}{A \code{seg_basket} object}
 
 \item{...}{arguments passed to methods}
-
-\item{x}{A \code{seg_basket} object}
 
 \item{i}{index of basket to show}
 }

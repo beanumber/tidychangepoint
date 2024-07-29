@@ -36,9 +36,7 @@ model_name(object, ...)
 \method{model_name}{wbs}(object, ...)
 }
 \arguments{
-\item{object}{A \linkS4class{tidycpt} object, typically returned by \code{\link[=segment]{segment()}}}
-
-\item{...}{currently ignored}
+\item{object}{A \code{segmenter} object.}
 }
 \value{
 \itemize{

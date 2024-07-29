@@ -32,7 +32,7 @@ as.seg_cpt.wbs <- function(object, ...) {
   )
 }
 
-#' @rdname wbs-generics
+#' @rdname as.ts.tidycpt
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "wbs")
@@ -57,7 +57,10 @@ changepoints.wbs <- function(x, ...) {
 #' @rdname fitness
 #' @export
 #' @examples
+#' # Segment a time series using Wild Binary Segmentation
 #' x <- segment(DataCPSim, method = "wbs")
+#' 
+#' # Retrive its fitness
 #' fitness(x)
 #' 
 fitness.wbs <- function(object, ...) {
@@ -88,7 +91,7 @@ model_args.wbs <- function(object, ...) {
   NULL
 }
 
-#' @rdname wbs-generics
+#' @rdname seg_params
 #' @export
 seg_params.wbs <- function(x, ...) {
   list(

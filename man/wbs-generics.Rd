@@ -3,18 +3,12 @@
 \name{wbs-generics}
 \alias{wbs-generics}
 \alias{as.seg_cpt.wbs}
-\alias{as.ts.wbs}
 \alias{nobs.wbs}
-\alias{seg_params.wbs}
 \title{Compatibility layer for wbs}
 \usage{
 \method{as.seg_cpt}{wbs}(object, ...)
 
-\method{as.ts}{wbs}(x, ...)
-
 \method{nobs}{wbs}(object, ...)
-
-\method{seg_params}{wbs}(x, ...)
 }
 \arguments{
 \item{object}{A \code{cpt} object.}
@@ -38,9 +32,6 @@ model_name(x)
 model_args(x)
 nobs(x)
 seg_params(x)
-
-cpts <- segment(DataCPSim, method = "wbs")
-as.ts(cpts)
 
 cpts <- segment(DataCPSim, method = "wbs")
 nobs(cpts$segmenter)

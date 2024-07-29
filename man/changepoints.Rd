@@ -9,7 +9,6 @@
 \alias{changepoints.tidycpt}
 \alias{changepoints}
 \alias{changepoints.default}
-\alias{seg_params}
 \alias{changepoints.ga}
 \alias{changepoints.cpt}
 \alias{changepoints.wbs}
@@ -26,8 +25,6 @@
 changepoints(x, ...)
 
 \method{changepoints}{default}(x, ...)
-
-seg_params(x, ...)
 
 \method{changepoints}{ga}(x, ...)
 
@@ -65,11 +62,7 @@ changepoints(cpts$segmenter)
 Other tidychangepoint-generics: 
 \code{\link{diagnose.mod_cpt}()},
 \code{\link{exceedances}()},
-\code{\link{fitness.seg_basket}()}
-
-Other tidychangepoint-generics: 
-\code{\link{diagnose.mod_cpt}()},
-\code{\link{exceedances}()},
-\code{\link{fitness.seg_basket}()}
+\code{\link{fitness.seg_basket}()},
+\code{\link{seg_params.seg_cpt}()}
 }
 \concept{tidychangepoint-generics}

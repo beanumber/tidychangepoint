@@ -10,7 +10,8 @@
 \alias{fitness.ga}
 \alias{fitness.cpt}
 \alias{fitness.wbs}
-\title{Retrieve the optimal fitness (or objective function) value used by an algorithm}
+\title{Retrieve the optimal fitness (or objective function) value used by an
+algorithm}
 \usage{
 \method{fitness}{seg_basket}(object, ...)
 
@@ -27,21 +28,33 @@ fitness(object, ...)
 \method{fitness}{wbs}(object, ...)
 }
 \arguments{
-\item{object}{A \linkS4class{tidycpt} object, typically returned by \code{\link[=segment]{segment()}}}
-
-\item{...}{currently ignored}
+\item{object}{A \code{segmenter} object.}
 }
 \value{
-A named \code{double} vector.
+A named \code{double} vector with the fitness value.
 }
 \description{
-Retrieve the optimal fitness (or objective function) value used by an algorithm
+Retrieve the optimal fitness (or objective function) value used by an
+algorithm
+}
+\details{
+Segmenting algorithms use a \strong{fitness} metric, typically through the use of
+a penalized objective function, to determine which changepoint sets are more
+or less optimal.
+This function returns the value of that metric for the changepoint set
+implied by the object provided.
 }
 \examples{
+# Segment a times series using a genetic algorithm
 x <- segment(DataCPSim, method = "ga", maxiter = 10)
+
+# Retrieve its fitness value
 fitness(x)
 
+# Segment a time series using Wild Binary Segmentation
 x <- segment(DataCPSim, method = "wbs")
+
+# Retrive its fitness
 fitness(x)
 
 }
@@ -49,6 +62,7 @@ fitness(x)
 Other tidychangepoint-generics: 
 \code{\link{changepoints.mod_cpt}()},
 \code{\link{diagnose.mod_cpt}()},
-\code{\link{exceedances}()}
+\code{\link{exceedances}()},
+\code{\link{seg_params.seg_cpt}()}
 }
 \concept{tidychangepoint-generics}

@@ -40,6 +40,7 @@ fit_nhpp(DataCPSim, tau = 826, threshold = 200) |> exceedances()
 Other tidychangepoint-generics: 
 \code{\link{changepoints.mod_cpt}()},
 \code{\link{diagnose.mod_cpt}()},
-\code{\link{fitness.seg_basket}()}
+\code{\link{fitness.seg_basket}()},
+\code{\link{seg_params.seg_cpt}()}
 }
 \concept{tidychangepoint-generics}

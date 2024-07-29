@@ -11,6 +11,11 @@ globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".fitted", ".resid"
 #' to the model. 
 #' Methods for various generic reporting functions are provided. 
 #' 
+#' All changepoint detection models inherit from [mod_cpt-class]: the 
+#' base class for changepoint detection models. 
+#' These models are created by one of the `fit_*()` functions, or by 
+#' [as.model()]. 
+#' 
 #' @export
 #' @param x a numeric vector coercible into a `ts` object
 #' @param tau indices of the changepoint set
@@ -73,45 +78,19 @@ mod_cpt <- function(x, ...) {
   validate_mod_cpt(obj)
 }
 
-#' Methods for mod_cpt objects
-#' @name mod_cpt-generics
-#' 
-#' @description 
-#' Methods for generic functions applied to [mod_cpt()] objects
-#' 
-#' @param x A `mod_cpt` object, typically the output from one of the `fit_*()`
-#' functions or [as.model()]
-#' @details
-#' All changepoint detection models inherit from [mod_cpt-class]: the 
-#' base class for changepoint detection models. 
-#' These models are created by one of the `fit_*()` functions, or by 
-#' [as.model()]. 
-#' The methods documented here work on these objects. 
-#' @seealso [mod_cpt()]
+#' @rdname as.ts.tidycpt
 #' @export
-#' @examples
-#' cpts <- fit_meanshift_norm(DataCPSim, tau = 365)
-#' as.ts(cpts)
-#' nobs(cpts)
-#' logLik(cpts)
-#' fitted(cpts)
-#' residuals(cpts)
-#' changepoints(cpts)
-#' augment(cpts)
-#' tidy(cpts)
-#' glance(cpts)
-
 as.ts.mod_cpt <- function(x, ...) {
   as.ts(x$data)
 }
 
-#' @rdname mod_cpt-generics
+#' @rdname nobs.tidycpt
 #' @export
 nobs.mod_cpt <- function(object, ...) {
   length(as.ts(object))
 }
 
-#' @rdname mod_cpt-generics
+#' @rdname logLik.mod_cpt
 #' @inheritParams stats::logLik
 #' @export
 logLik.mod_cpt <- function(object, ...) {
@@ -146,7 +125,7 @@ as.logLik <- function(object, ll = 0) {
   return(ll)
 }
 
-#' @rdname mod_cpt-generics
+#' @rdname fitted.mod_cpt
 #' @export
 fitted.mod_cpt <- function(object, ...) {
   object$fitted_values

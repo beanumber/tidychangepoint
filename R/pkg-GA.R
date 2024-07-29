@@ -33,7 +33,7 @@ as.seg_cpt.ga <- function(object, ...) {
   )
 }
 
-#' @rdname ga-generics
+#' @rdname as.ts.tidycpt
 #' @export
 #' @examples
 #' cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
@@ -56,7 +56,10 @@ changepoints.ga <- function(x, ...) {
 #' @rdname fitness
 #' @export
 #' @examples
+#' # Segment a times series using a genetic algorithm
 #' x <- segment(DataCPSim, method = "ga", maxiter = 10)
+#' 
+#' # Retrieve its fitness value
 #' fitness(x)
 #' 
 fitness.ga <- function(object, ...) {
@@ -151,7 +154,7 @@ plot.tidyga <- function(x, ...) {
 
 
 
-#' @rdname ga-generics
+#' @rdname seg_params
 #' @export
 seg_params.ga <- function(x, ...) {
   list(

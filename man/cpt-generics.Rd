@@ -3,21 +3,15 @@
 \name{cpt-generics}
 \alias{cpt-generics}
 \alias{as.seg_cpt.cpt}
-\alias{as.ts.cpt}
 \alias{logLik.cpt}
 \alias{nobs.cpt}
-\alias{seg_params.cpt}
 \title{Compatibility layer for changepoint}
 \usage{
 \method{as.seg_cpt}{cpt}(object, ...)
 
-\method{as.ts}{cpt}(x, ...)
-
 \method{logLik}{cpt}(object, ...)
 
 \method{nobs}{cpt}(object, ...)
-
-\method{seg_params}{cpt}(x, ...)
 }
 \arguments{
 \item{object}{A \code{cpt} object.}

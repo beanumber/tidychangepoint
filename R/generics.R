@@ -19,7 +19,7 @@ changepoints.default <- function(x, ...) {
 }
 
 #' Convert, retrieve, or verify a segmenter object
-#' @param object A [tidycpt-class] object
+#' @param object A [tidycpt-class] or `segmenter` object
 #' @param ... Arguments passed to methods
 #' @details
 #' [tidycpt-class] objects have a `segmenter` component (that is typically
@@ -61,14 +61,29 @@ exceedances.default <- function(x, ...) {
   exceedances(as.ts(x), ...)
 }
 
-#' Retrieve the optimal fitness (or objective function) value used by an algorithm
-#' @inheritParams as.model
+#' Retrieve the optimal fitness (or objective function) value used by an 
+#' algorithm
+#' @param object A `segmenter` object.  
+#' @details
+#' 
+#' Segmenting algorithms use a **fitness** metric, typically through the use of
+#' a penalized objective function, to determine which changepoint sets are more
+#' or less optimal. 
+#' This function returns the value of that metric for the changepoint set 
+#' implied by the object provided. 
+#' 
 #' @family tidychangepoint-generics
-#' @returns A named `double` vector.
+#' @returns A named `double` vector with the fitness value.
 #' @export
 fitness <- function(object, ...) UseMethod("fitness")
 
-#' @rdname changepoints
+#' Retrieve parameters from a segmenter
+#' @inheritParams fitness
+#' @details
+#' Most segmenting algorithms have parameters. 
+#' This function retrieves an informative set of those parameter values.
+#' @returns A named `list` of parameters with their values. 
+#' 
 #' @family tidychangepoint-generics
 #' @export
 seg_params <- function(x, ...) UseMethod("seg_params")
@@ -111,18 +126,26 @@ model_name.character <- function(object, ...) {
 #' Retrieve the arguments that a model-fitting function used
 #' 
 #' @details
-#' Every segmenter uses a model-fitting function, and these functions sometimes
-#' take arguments. [model_args()] recovers the arguments that were passed to 
-#' the model fitting function when it was called. These are especially 
+#' Every model is fit by a model-fitting function, and these functions sometimes
+#' take arguments. 
+#' [model_args()] recovers the arguments that were passed to 
+#' the model fitting function when it was called. 
+#' These are especially 
 #' important when using a genetic algorithm. 
 #' 
 #' @inheritParams fitness
 #' @export
-#' @return - [model_args()]: A named `list` of arguments, or `NULL`
+#' @return A named `list` of arguments, or `NULL`
 #' @family modeling
 #' @examples
+#' # Segment a time series using Coen's algorithm
 #' x <- segment(CET, method = "ga-coen", maxiter = 3)
-#' model_args(x$segmenter)
+#' 
+#' # Recover the arguments passed to the model-fitting function
+#' x |>
+#'   as.segmenter() |>
+#'   model_args()
+#'   
 model_args <- function(object, ...) UseMethod("model_args")
 
 #' @rdname model_args

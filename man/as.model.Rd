@@ -66,6 +66,8 @@ x |>
 x |>
   as.model() |>
   is_model()
+  
+
 # Fit a model directly, without using [segment()]
 x <- fit_nhpp(CET, tau = 330)
 is_model(x)
