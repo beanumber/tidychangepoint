@@ -5,16 +5,7 @@
 \alias{unpad_tau}
 \alias{is_valid_tau}
 \alias{validate_tau}
-\alias{binary2tau}
-\alias{tau2binary}
-\alias{tau2time}
-\alias{time2tau}
-\alias{cut_inclusive}
-\alias{split_by_tau}
-\alias{regions_by_tau}
-\alias{deg_free}
-\alias{as_year}
-\title{Utility functions}
+\title{Pad and unpad changepoint sets}
 \usage{
 pad_tau(tau, n)
 
@@ -23,40 +14,35 @@ unpad_tau(padded_tau)
 is_valid_tau(tau, n)
 
 validate_tau(tau, n)
-
-binary2tau(x)
-
-tau2binary(tau, n)
-
-tau2time(tau, index)
-
-time2tau(cpts, index)
-
-cut_inclusive(x, tau)
-
-split_by_tau(x, tau)
-
-regions_by_tau(n, tau)
-
-deg_free(x)
-
-as_year(x)
 }
 \arguments{
-\item{tau}{a numeric vector of changepoints}
+\item{tau}{a numeric vector of changepoint indices}
 
 \item{n}{the length of the original time series}
 
 \item{padded_tau}{Output from \code{\link[=pad_tau]{pad_tau()}}}
+}
+\value{
+\itemize{
+\item \code{\link[=pad_tau]{pad_tau()}}: an \code{integer} vector that starts with 0 and ends in \eqn{n}.
+}
 
-\item{x}{A numeric vector}
+\itemize{
+\item \code{\link[=unpad_tau]{unpad_tau()}}: an \code{integer} vector stripped of its first and last entries.
+}
 
-\item{index}{Index of times, typically returned by \code{\link[stats:time]{stats::time()}}}
+\itemize{
+\item \code{\link[=is_valid_tau]{is_valid_tau()}}: a \code{logical} if all of the entries are between 2 and
+\eqn{n-1}.
+}
 
-\item{cpts}{Time series observation labels to be converted to indices}
+\itemize{
+\item \code{\link[=validate_tau]{validate_tau()}}: an \code{integer} vector with only the \code{\link[base:unique]{base::unique()}}
+entries between 2 and \eqn{n-1}, inclusive.
+}
 }
 \description{
-Utility functions
+Pad and unpad changepoint sets
 }
 \examples{
 is_valid_tau(0, length(DataCPSim))
@@ -74,18 +60,4 @@ validate_tau(1096, length(DataCPSim))
 validate_tau(1097, length(DataCPSim))
 validate_tau(c(-4, 0, 1, 4, 5, 5, 824, 1096, 1097, 182384), length(DataCPSim))
 
-binary2tau(c(0, 0, 1, 0, 1))
-binary2tau(round(runif(10)))
-
-tau2binary(c(7, 17), n = 24)
-tau2binary(binary2tau(c(0, 0, 1, 1, 0, 1)), n = 6)
-tau2time(c(42, 81, 330), index = as_year(time(CET)))
-time2tau(c(1700, 1739, 1988), index = as_year(time(CET)))
-split_by_tau(DataCPSim, c(365, 826))
-regions_by_tau(1096, c(365, 826))
-deg_free(segment(DataCPSim)$model)
-as_year("1988-01-01")
-}
-\seealso{
-\code{\link[stats:time]{stats::time()}}
 }

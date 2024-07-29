@@ -1,6 +1,8 @@
-#' Utility functions
-#' @param tau a numeric vector of changepoints
+#' Pad and unpad changepoint sets
+#' @param tau a numeric vector of changepoint indices
 #' @param n the length of the original time series
+#' @returns 
+#'   - [pad_tau()]: an `integer` vector that starts with 0 and ends in \eqn{n}.
 #' @export
 pad_tau <- function(tau, n) {
   if (!is_valid_tau(tau, n)) {
@@ -11,6 +13,8 @@ pad_tau <- function(tau, n) {
 
 #' @rdname pad_tau
 #' @param padded_tau Output from [pad_tau()]
+#' @returns 
+#'   - [unpad_tau()]: an `integer` vector stripped of its first and last entries.
 #' @export
 unpad_tau <- function(padded_tau) {
   padded_tau |>
@@ -20,6 +24,9 @@ unpad_tau <- function(padded_tau) {
 
 #' @rdname pad_tau
 #' @export
+#' @returns 
+#'   - [is_valid_tau()]: a `logical` if all of the entries are between 2 and 
+#'   \eqn{n-1}.
 #' @examples
 #' is_valid_tau(0, length(DataCPSim))
 #' is_valid_tau(1, length(DataCPSim))
@@ -35,6 +42,9 @@ is_valid_tau <- function(tau, n) {
 
 #' @rdname pad_tau
 #' @export
+#' @returns 
+#'   - [validate_tau()]: an `integer` vector with only the [base::unique()] 
+#'   entries between 2 and \eqn{n-1}, inclusive.  
 #' @examples
 #' validate_tau(0, length(DataCPSim))
 #' validate_tau(1, length(DataCPSim))
@@ -51,7 +61,7 @@ validate_tau <- function(tau, n) {
 }
 
 
-#' @rdname pad_tau
+#' Convert changepoint sets to binary strings and time indices
 #' @export
 #' @examples
 #' binary2tau(c(0, 0, 1, 0, 1))
@@ -62,7 +72,7 @@ binary2tau <- function(x) {
   which(x == 1)
 }
 
-#' @rdname pad_tau
+#' @rdname binary2tau
 #' @export
 #' @examples
 #' tau2binary(c(7, 17), n = 24)
@@ -73,7 +83,7 @@ tau2binary <- function(tau, n) {
   out
 }
 
-#' @rdname pad_tau
+#' @rdname binary2tau
 #' @param index Index of times, typically returned by [stats::time()]
 #' @seealso [stats::time()]
 #' @export
@@ -83,7 +93,7 @@ tau2time <- function(tau, index) {
   index[tau]
 }
 
-#' @rdname pad_tau
+#' @rdname binary2tau
 #' @param cpts Time series observation labels to be converted to indices
 #' @export
 #' @examples
@@ -93,7 +103,7 @@ time2tau <- function(cpts, index) {
 }
 
 
-#' @rdname pad_tau
+#' Use a changepoint set to break a time series into regions
 #' @param x A numeric vector
 #' @export
 cut_inclusive <- function(x, tau) {
@@ -131,7 +141,7 @@ test_set <- function(n = 1, sd = 1, seed = NULL) {
   return(out)
 }
 
-#' @rdname pad_tau
+#' @rdname cut_inclusive
 #' @export
 #' @examples
 #' split_by_tau(DataCPSim, c(365, 826))
@@ -142,7 +152,7 @@ split_by_tau <- function(x, tau) {
   split(x, idx)
 }
 
-#' @rdname pad_tau
+#' @rdname cut_inclusive
 #' @export
 #' @examples
 #' regions_by_tau(1096, c(365, 826))
@@ -152,19 +162,29 @@ regions_by_tau <- function(n, tau) {
     levels()
 }
 
-#' @rdname pad_tau
+#' Retrieve the degrees of freedom from a `logLik` object
+#' @param x An object that implements a method for [stats::logLik()].
+#' @returns The `df` attribute of the [stats::logLik()] of the given object.
 #' @export
 #' @examples
-#' deg_free(segment(DataCPSim)$model)
-
+#' # Retrieve the degrees of freedom model a changepoint model
+#' DataCPSim |>
+#'   segment() |>
+#'   as.model() |>
+#'   deg_free()
+#'   
 deg_free <- function(x) {
   attr(logLik(x), "df")
 }
 
-#' @rdname pad_tau
+#' Convert a date into a year
+#' @param x an object coercible into a [base::Date]. See [base::as.Date()].
 #' @export
+#' @returns A `character` vector representing the years of the input
 #' @examples
+#' # Retrieve only the year
 #' as_year("1988-01-01")
+#' 
 
 as_year <- function(x) {
   x |> 
