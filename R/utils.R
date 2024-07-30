@@ -1,6 +1,23 @@
-#' Pad and unpad changepoint sets
+#' Pad and unpad changepoint sets with boundary points
 #' @param tau a numeric vector of changepoint indices
 #' @param n the length of the original time series
+#' @details
+#' If a time series contains \eqn{n} observations, we label them from 1 
+#' to \eqn{n}. 
+#' Neither the 1st point nor the \eqn{n}th point can be a changepoint, since the
+#' regions they create on one side would be empty. 
+#' However, for dividing the time series into non-empty segments, we start with 
+#' 1, add \eqn{n+1}, and then divide the half-open interval \eqn{[1, n+1)} into
+#' half-open subintervals that define the regions. 
+#' 
+#' [pad_tau()] ensures that 1 and \eqn{n+1} are included. 
+#' 
+#' [unpad_tau()] removes 1 and \eqn{n+1}, should they exist.
+#' 
+#' [is_valid_tau()] checks to see if the supplied set of changepoints is valid
+#' 
+#' [validate_tau()] removes duplicates and boundary values.
+#' 
 #' @returns 
 #'   - [pad_tau()]: an `integer` vector that starts with 0 and ends in \eqn{n}.
 #' @export
@@ -28,10 +45,15 @@ unpad_tau <- function(padded_tau) {
 #'   - [is_valid_tau()]: a `logical` if all of the entries are between 2 and 
 #'   \eqn{n-1}.
 #' @examples
+#' # Anything less than 2 is not allowed
 #' is_valid_tau(0, length(DataCPSim))
 #' is_valid_tau(1, length(DataCPSim))
+#' 
+#' # Duplicates are allowed
 #' is_valid_tau(c(42, 42), length(DataCPSim))
 #' is_valid_tau(826, length(DataCPSim))
+#' 
+#' # Anything greater than \eqn{n} (in this case 1096) is not allowed
 #' is_valid_tau(1096, length(DataCPSim))
 #' is_valid_tau(1097, length(DataCPSim))
 #' 
@@ -46,12 +68,19 @@ is_valid_tau <- function(tau, n) {
 #'   - [validate_tau()]: an `integer` vector with only the [base::unique()] 
 #'   entries between 2 and \eqn{n-1}, inclusive.  
 #' @examples
+#' # Anything less than 2 is not allowed
 #' validate_tau(0, length(DataCPSim))
 #' validate_tau(1, length(DataCPSim))
 #' validate_tau(826, length(DataCPSim))
+#' 
+#' # Duplicates are removed
 #' validate_tau(c(826, 826), length(DataCPSim))
+#' 
+#' # Anything greater than \eqn{n} (in this case 1096) is not allowed
 #' validate_tau(1096, length(DataCPSim))
 #' validate_tau(1097, length(DataCPSim))
+#' 
+#' # Fix many problems
 #' validate_tau(c(-4, 0, 1, 4, 5, 5, 824, 1096, 1097, 182384), length(DataCPSim))
 #' 
 validate_tau <- function(tau, n) {
@@ -61,9 +90,23 @@ validate_tau <- function(tau, n) {
 }
 
 
-#' Convert changepoint sets to binary strings and time indices
+#' Convert changepoint sets to binary strings
+#' @param x A binary string that encodes a changepoint set. See 
+#' [GA::gabin_Population()].
+#' @details
+#' 
+#' In order to use [GA::ga()] in a genetic algorithm, we need to encoude a 
+#' changepoint set as a binary string. 
+#' 
+#' [binary2tau()] takes a binary string representation of a changepoint set and
+#' converts it into a set of changepoint indices. 
+#' 
+#' @returns
+#'   - [binary2tau()]: an `integer` vector
+#'   
 #' @export
 #' @examples
+#' # Recover changepoint set indices from binary strings
 #' binary2tau(c(0, 0, 1, 0, 1))
 #' binary2tau(round(runif(10)))
 #' 
@@ -73,41 +116,114 @@ binary2tau <- function(x) {
 }
 
 #' @rdname binary2tau
+#' @inheritParams pad_tau
+#' @details
+#' 
+#' [tau2binary()] takes a set of changepoint indices the number of observations
+#' in the time series and converts them into a binary string representation of
+#' that changepoint set. 
+#' 
+#' @returns
+#'   - [tau2binary()]: an `integer` vector of length `n`
+#' 
 #' @export
 #' @examples
+#' # Recover binary strings from changepoint set indices
 #' tau2binary(c(7, 17), n = 24)
 #' tau2binary(binary2tau(c(0, 0, 1, 1, 0, 1)), n = 6)
+#' 
 tau2binary <- function(tau, n) {
   out <- rep(0, times = n)
   out[tau] <- 1
   out
 }
 
-#' @rdname binary2tau
+#' Convert changepoint sets to time indices
+#' @inheritParams tau2binary
 #' @param index Index of times, typically returned by [stats::time()]
-#' @seealso [stats::time()]
+#' @seealso [stats::time()], [as_year()]
 #' @export
+#' @returns
+#'   - [tau2time()]: a `character` of time labels
 #' @examples
+#' # Recover the years from a set of changepoint indices
 #' tau2time(c(42, 81, 330), index = as_year(time(CET)))
+#' 
 tau2time <- function(tau, index) {
   index[tau]
 }
 
-#' @rdname binary2tau
+#' @rdname tau2time
 #' @param cpts Time series observation labels to be converted to indices
 #' @export
+#' @returns
+#'   - [time2tau()]: an `integer` vector of changepoint indices
 #' @examples
+#' # Recover the changepoint set indices from the years
 #' time2tau(c(1700, 1739, 1988), index = as_year(time(CET)))
+#' 
 time2tau <- function(cpts, index) {
   match(cpts, index)
 }
 
-
 #' Use a changepoint set to break a time series into regions
 #' @param x A numeric vector
+#' @inheritParams pad_tau
+#' @details
+#' A changepoint set `tau` of length \eqn{k} breaks a time series of length 
+#' \eqn{n} into \eqn{k+1} non-empty regions.
+#' These non-empty regions can be defined by half-open intervals, starting with
+#' 1 and ending with \eqn{n+1}. 
+#' 
+#' [cut_inclusive()] splits a set of indices into a [base::factor()] of 
+#' half-open intervals
+#' 
+#' @returns 
+#'   - [cut_inclusive()] a [base::factor()] of half-open intervals
+#' 
 #' @export
+#' @examples
+#' n <- length(CET)
+#' 
+#' # Return a factor of intervals
+#' cut_inclusive(1:n, tau = pad_tau(c(42, 81, 330), n))
+#' 
 cut_inclusive <- function(x, tau) {
   cut(x, breaks = tau, include.lowest = TRUE, right = FALSE)
+}
+
+#' @rdname cut_inclusive
+#' @details
+#' [split_by_tau()] splits a time series into a named [base::list()] of numeric
+#' vectors
+#' @returns 
+#'   - [split_by_tau()] a named [base::list()] of numeric
+#' vectors
+#' 
+#' @export
+#' @examples
+#' # Return a list of observations
+#' split_by_tau(DataCPSim, c(365, 826))
+#' 
+split_by_tau <- function(x, tau) {
+  tau <- validate_tau(tau, n = length(x))
+  idx <- cut_inclusive(1:length(x), pad_tau(tau, length(x)))
+  split(x, idx)
+}
+
+#' @rdname cut_inclusive
+#' @export
+#' @details
+#' [regions_by_tau()] returns the intervals that define the regions
+#' @returns 
+#'   - [regions_by_tau()] a `character` of intervals
+#' @examples
+#' # Return a character of factor labels
+#' regions_by_tau(1096, c(365, 826))
+#' 
+regions_by_tau <- function(n, tau) {
+  cut_inclusive(1:n, pad_tau(tau, n)) |>
+    levels()
 }
 
 #' Simulate time series with known changepoint sets
@@ -139,27 +255,6 @@ test_set <- function(n = 1, sd = 1, seed = NULL) {
     stats::as.ts()
   attr(out, "cpt_true") <- tau
   return(out)
-}
-
-#' @rdname cut_inclusive
-#' @export
-#' @examples
-#' split_by_tau(DataCPSim, c(365, 826))
-
-split_by_tau <- function(x, tau) {
-  tau <- validate_tau(tau, n = length(x))
-  idx <- cut_inclusive(1:length(x), pad_tau(tau, length(x)))
-  split(x, idx)
-}
-
-#' @rdname cut_inclusive
-#' @export
-#' @examples
-#' regions_by_tau(1096, c(365, 826))
-
-regions_by_tau <- function(n, tau) {
-  cut_inclusive(1:n, pad_tau(tau, n)) |>
-    levels()
 }
 
 #' Retrieve the degrees of freedom from a `logLik` object

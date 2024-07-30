@@ -5,7 +5,7 @@
 \alias{unpad_tau}
 \alias{is_valid_tau}
 \alias{validate_tau}
-\title{Pad and unpad changepoint sets}
+\title{Pad and unpad changepoint sets with boundary points}
 \usage{
 pad_tau(tau, n)
 
@@ -42,22 +42,51 @@ entries between 2 and \eqn{n-1}, inclusive.
 }
 }
 \description{
-Pad and unpad changepoint sets
+Pad and unpad changepoint sets with boundary points
+}
+\details{
+If a time series contains \eqn{n} observations, we label them from 1
+to \eqn{n}.
+Neither the 1st point nor the \eqn{n}th point can be a changepoint, since the
+regions they create on one side would be empty.
+However, for dividing the time series into non-empty segments, we start with
+1, add \eqn{n+1}, and then divide the half-open interval \eqn{[1, n+1)} into
+half-open subintervals that define the regions.
+
+\code{\link[=pad_tau]{pad_tau()}} ensures that 1 and \eqn{n+1} are included.
+
+\code{\link[=unpad_tau]{unpad_tau()}} removes 1 and \eqn{n+1}, should they exist.
+
+\code{\link[=is_valid_tau]{is_valid_tau()}} checks to see if the supplied set of changepoints is valid
+
+\code{\link[=validate_tau]{validate_tau()}} removes duplicates and boundary values.
 }
 \examples{
+# Anything less than 2 is not allowed
 is_valid_tau(0, length(DataCPSim))
 is_valid_tau(1, length(DataCPSim))
+
+# Duplicates are allowed
 is_valid_tau(c(42, 42), length(DataCPSim))
 is_valid_tau(826, length(DataCPSim))
+
+# Anything greater than \eqn{n} (in this case 1096) is not allowed
 is_valid_tau(1096, length(DataCPSim))
 is_valid_tau(1097, length(DataCPSim))
 
+# Anything less than 2 is not allowed
 validate_tau(0, length(DataCPSim))
 validate_tau(1, length(DataCPSim))
 validate_tau(826, length(DataCPSim))
+
+# Duplicates are removed
 validate_tau(c(826, 826), length(DataCPSim))
+
+# Anything greater than \eqn{n} (in this case 1096) is not allowed
 validate_tau(1096, length(DataCPSim))
 validate_tau(1097, length(DataCPSim))
+
+# Fix many problems
 validate_tau(c(-4, 0, 1, 4, 5, 5, 824, 1096, 1097, 182384), length(DataCPSim))
 
 }
