@@ -1,6 +1,6 @@
 #' Extract changepoints
 #' 
-#' @param x A [tidycpt-class], `segmenter`, or [mod_cpt-class] object
+#' @param x A [tidycpt-class], `segmenter`, or [mod_cpt] object
 #' @param ... arguments passed to methods
 #' @description
 #' Retrieve the indices of the changepoints identified by an algorithm or model.
@@ -50,7 +50,7 @@ as.segmenter <- function(object, ...) UseMethod("as.segmenter")
 #' @rdname as.segmenter
 #' @details
 #' [as.seg_cpt()] takes a wild-caught `segmenter` object of arbitrary class 
-#' and converts it into a [seg_cpt()] object. 
+#' and converts it into a [seg_cpt] object. 
 #' @return
 #'   - [as.seg_cpt()] returns a [seg_cpt] object
 #' @export
@@ -192,9 +192,9 @@ model_args.default <- function(object, ...) {
 #' When applied to a [tidycpt-class] object, [as.model()] simply returns the 
 #' `model` component of that object.
 #' However, when applied to a `segmenter` object, [as.model()] attempts to 
-#' converts that object into a [mod_cpt-class] model object.
+#' converts that object into a [mod_cpt] model object.
 #' @return 
-#'   - [as.model()] returns a [mod_cpt-class] model object
+#'   - [as.model()] returns a [mod_cpt] model object
 #' @export
 as.model <- function(object, ...) UseMethod("as.model")
 

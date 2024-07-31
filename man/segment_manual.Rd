@@ -11,7 +11,7 @@ segment_manual(x, tau, ...)
 
 \item{tau}{a set of indices representing a changepoint set}
 
-\item{...}{arguments passed to \code{\link[=seg_cpt]{seg_cpt()}}}
+\item{...}{arguments passed to \link{seg_cpt}}
 }
 \value{
 A \link{seg_cpt} object

@@ -14,7 +14,7 @@ fit_meanvar(x, tau, ...)
 \item{...}{currently ignored}
 }
 \value{
-A \linkS4class{mod_cpt} object.
+A \link{mod_cpt} object.
 }
 \description{
 Fit a model for mean and variance

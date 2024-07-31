@@ -24,7 +24,7 @@ is_model(x, ...)
 }
 \value{
 \itemize{
-\item \code{\link[=as.model]{as.model()}} returns a \linkS4class{mod_cpt} model object
+\item \code{\link[=as.model]{as.model()}} returns a \link{mod_cpt} model object
 }
 
 \itemize{
@@ -44,7 +44,7 @@ the \code{$} or \code{[} notation for subsetting.
 When applied to a \linkS4class{tidycpt} object, \code{\link[=as.model]{as.model()}} simply returns the
 \code{model} component of that object.
 However, when applied to a \code{segmenter} object, \code{\link[=as.model]{as.model()}} attempts to
-converts that object into a \linkS4class{mod_cpt} model object.
+converts that object into a \link{mod_cpt} model object.
 
 \code{\link[=is_model]{is_model()}} checks to see if a model object implements all of the
 S3 methods necessary to be considered a model.

@@ -56,7 +56,7 @@ fun_cpt <- function(x, ...) {
 #' [model_name()].
 #' @param ... currently ignored
 #' @details
-#' Model objects (inheriting from [mod_cpt-class]) know the name of the function
+#' Model objects (inheriting from [mod_cpt]) know the name of the function
 #' that created them. 
 #' [whomademe()] returns that function. 
 #' 

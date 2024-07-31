@@ -4,7 +4,7 @@
 #' Segmenting functions for the PELT algorithm
 #' 
 #' @param x A time series
-#' @param model_fn A `character` or `name` coercible into a [fun_cpt()] function. 
+#' @param model_fn A `character` or `name` coercible into a [fun_cpt] function. 
 #' See, for example, [fit_meanshift_norm()]. The default is [fit_meanvar()].
 #' @param ... arguments passed to [changepoint::cpt.meanvar()] or 
 #' [changepoint::cpt.mean()]

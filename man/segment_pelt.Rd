@@ -9,7 +9,7 @@ segment_pelt(x, model_fn = fit_meanvar, ...)
 \arguments{
 \item{x}{A time series}
 
-\item{model_fn}{A \code{character} or \code{name} coercible into a \code{\link[=fun_cpt]{fun_cpt()}} function.
+\item{model_fn}{A \code{character} or \code{name} coercible into a \link{fun_cpt} function.
 See, for example, \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}}. The default is \code{\link[=fit_meanvar]{fit_meanvar()}}.}
 
 \item{...}{arguments passed to \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}} or

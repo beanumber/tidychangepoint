@@ -27,7 +27,7 @@ Should match R distribution function naming conventions
 \item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
 }
 \value{
-A \linkS4class{mod_cpt} object.
+A \link{mod_cpt} object.
 }
 \description{
 Fast implementation of meanshift model

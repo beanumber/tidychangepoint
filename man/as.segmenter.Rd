@@ -2,11 +2,11 @@
 % Please edit documentation in R/class-seg_basket.R, R/class-seg_cpt.R,
 %   R/class-tidycpt.R, R/generics.R, R/pkg-GA.R, R/pkg-changepoint.R,
 %   R/pkg-wbs.R, R/utils.R
-\name{as.segmenter}
-\alias{as.segmenter}
+\name{as.seg_cpt.seg_basket}
 \alias{as.seg_cpt.seg_basket}
 \alias{as.seg_cpt.seg_cpt}
 \alias{as.segmenter.tidycpt}
+\alias{as.segmenter}
 \alias{as.seg_cpt}
 \alias{as.seg_cpt.ga}
 \alias{as.seg_cpt.cpt}
@@ -66,7 +66,7 @@ the \code{$} or \code{[} notation for subsetting.
 \code{\link[=as.segmenter]{as.segmenter()}} simply returns the segmenter of a \code{tidycpt} object.
 
 \code{\link[=as.seg_cpt]{as.seg_cpt()}} takes a wild-caught \code{segmenter} object of arbitrary class
-and converts it into a \code{\link[=seg_cpt]{seg_cpt()}} object.
+and converts it into a \link{seg_cpt} object.
 
 \code{\link[=is_segmenter]{is_segmenter()}} checks to see if a segmenter object implements all of the
 S3 methods necessary to be considered a segmenter.

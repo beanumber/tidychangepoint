@@ -19,7 +19,7 @@ A \code{function}
 Recover the function that created a model
 }
 \details{
-Model objects (inheriting from \linkS4class{mod_cpt}) know the name of the function
+Model objects (inheriting from \link{mod_cpt}) know the name of the function
 that created them.
 \code{\link[=whomademe]{whomademe()}} returns that function.
 }

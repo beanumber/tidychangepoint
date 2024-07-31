@@ -62,9 +62,9 @@ this function is deprecated.
 \code{\link[=segment_ga_random]{segment_ga_random()}}.
 The \code{segmenter} is of class \code{tidyga}.
 \item \code{manual}: Uses the vector of changepoints in the \code{tau} argument.
-The \code{segmenter} is of class \code{\link[=seg_cpt]{seg_cpt()}}`.
+The \code{segmenter} is of class \link{seg_cpt}`.
 \item \code{null}: The default. Uses no changepoints.
-The \code{segmenter} is of class \code{\link[=seg_cpt]{seg_cpt()}}`.
+The \code{segmenter} is of class \link{seg_cpt}`.
 }
 }
 \examples{

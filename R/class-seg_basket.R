@@ -46,7 +46,7 @@ seg_basket <- function(x, ...) {
   validate_seg_basket(obj)
 }
 
-#' @name as.segmenter
+#' @rdname as.segmenter
 #' @export
 as.seg_cpt.seg_basket <- function(object, ...) {
   seg_cpt(

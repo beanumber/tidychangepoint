@@ -14,7 +14,7 @@ fit_nhpp(x, tau, ...)
 \item{...}{currently ignored}
 }
 \value{
-An \code{nhpp} object, which inherits from \linkS4class{mod_cpt}.
+An \code{nhpp} object, which inherits from \link{mod_cpt}.
 }
 \description{
 Fit a non-homogeneous Poisson process model to the exceedances of a time series.

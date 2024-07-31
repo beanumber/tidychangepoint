@@ -10,7 +10,7 @@ globalVariables(c(
 #' - `segmenter`: The object returned by the underlying changepoint
 #' detection algorithm. These can be of arbitrary class. Use [as.segmenter()]
 #' to retrieve them. 
-#' - `model`: A model object inheriting from [mod_cpt-class], as created by
+#' - `model`: A model object inheriting from [mod_cpt], as created by
 #' [as.model()] when called on the `segmenter`. 
 #' - `elapsed_time`: The clock time that passed while the algorithm was running.
 #' - `time_index`: If available, the labels for the time indices of the time series.
@@ -102,7 +102,7 @@ glance.tidycpt <- function(x, ...) {
 #' set, and returns the results of [glance()]. 
 #' Comparing the fits of various models could lead to improved understanding.  
 #' 
-#' @returns A [tibble::tbl_df-class]
+#' @returns A [tibble::tbl_df]
 #' @export
 #' @examples
 #' 

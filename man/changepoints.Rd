@@ -33,7 +33,7 @@ changepoints(x, ...)
 \method{changepoints}{wbs}(x, ...)
 }
 \arguments{
-\item{x}{A \linkS4class{tidycpt}, \code{segmenter}, or \linkS4class{mod_cpt} object}
+\item{x}{A \linkS4class{tidycpt}, \code{segmenter}, or \link{mod_cpt} object}
 
 \item{...}{arguments passed to methods}
 

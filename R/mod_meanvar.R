@@ -9,7 +9,7 @@
 #' region \eqn{j}.
 #' 
 #' 
-#' @returns A [mod_cpt-class] object.
+#' @returns A [mod_cpt] object.
 #' @family model-fitting
 #' @seealso [changepoint::cpt.meanvar()]
 #' @examples

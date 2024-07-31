@@ -22,7 +22,7 @@ globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic",
 #' 
 #' 
 #' @export
-#' @returns A [mod_cpt-class] object
+#' @returns A [mod_cpt] object
 #' @family model-fitting
 #' @examples
 #' # Manually specify a changepoint set
@@ -138,7 +138,7 @@ fit_lmshift_ar1 <- fun_cpt("fit_lmshift_ar1")
 #' Format the coefficients from a linear model as a tibble
 #' @param mod An `lm` model object
 #' @param ... currently ignored
-#' @returns A [tibble::tbl_df-class] object containing the fitted coefficients.
+#' @returns A [tibble::tbl_df] object containing the fitted coefficients.
 #' @export
 #' @examples
 #' # Convert a time series into a data frame with indices

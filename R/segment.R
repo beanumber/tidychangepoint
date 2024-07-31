@@ -73,9 +73,9 @@ segment.numeric <- function(x, method = "null", ...) {
 #'   [segment_ga_random()]. 
 #'   The `segmenter` is of class `tidyga`. 
 #' - `manual`: Uses the vector of changepoints in the `tau` argument. 
-#'   The `segmenter` is of class [seg_cpt()]`.
+#'   The `segmenter` is of class [seg_cpt]`.
 #' - `null`: The default. Uses no changepoints. 
-#'   The `segmenter` is of class [seg_cpt()]`.
+#'   The `segmenter` is of class [seg_cpt]`.
 #' @seealso [changepoint::cpt.meanvar()], [wbs::wbs()], [GA::ga()], 
 #' [segment_ga()]
 #' @examples

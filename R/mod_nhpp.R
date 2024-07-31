@@ -56,7 +56,7 @@ fit_nhpp_region <- function(exc, tau_left, tau_right,
 #' @param x A time series
 #' @param tau A vector of changepoints
 #' @param ... currently ignored
-#' @returns An `nhpp` object, which inherits from [mod_cpt-class]. 
+#' @returns An `nhpp` object, which inherits from [mod_cpt]. 
 #' 
 #' @export
 #' @family model-fitting

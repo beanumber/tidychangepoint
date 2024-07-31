@@ -3,7 +3,7 @@
 #' Segment a time series by manually inputting the changepoint set
 #' 
 #' @inheritParams fit_meanshift_norm
-#' @param ... arguments passed to [seg_cpt()]
+#' @param ... arguments passed to [seg_cpt]
 #' @export
 #' @details
 #' Sometimes you want to see how a manually input set of changepoints performs. 

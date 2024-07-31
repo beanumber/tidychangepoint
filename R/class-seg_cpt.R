@@ -1,6 +1,5 @@
 #' @rdname seg_cpt
 #' @export
-
 new_seg_cpt <- function(x = numeric(), 
                         pkg = character(),
                         algorithm = NA, 
@@ -51,7 +50,6 @@ validate_seg_cpt <- function(x) {
 #' find the changepoints.
 #' @param ... currently ignored
 #' @returns A [seg_cpt] object.
-
 seg_cpt <- function(x, ...) {
   obj <- new_seg_cpt(x, ...)
   validate_seg_cpt(obj)

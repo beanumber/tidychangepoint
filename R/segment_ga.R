@@ -4,7 +4,7 @@
 #' Segmenting functions for various genetic algorithms
 #' 
 #' @param x A time series
-#' @param model_fn A `character` or `name` coercible into a [fun_cpt()] function. 
+#' @param model_fn A `character` or `name` coercible into a [fun_cpt] function. 
 #' See, for example, [fit_meanshift_norm()].
 #' @param penalty_fn A function that evaluates the changepoint set returned by
 #' `model_fn`. We provide [AIC()], [BIC()], [MBIC()], [MDL()], and [BMDL()].

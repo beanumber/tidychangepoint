@@ -1,41 +1,8 @@
 globalVariables(c("bmdl", "nhpp", "cpt_length", "value", ".fitted", ".resid"
                   , "xintercept"))
 
-#' Base class for changepoint models
-#' @name mod_cpt-class
-#' @description
-#' Create changepoint detection model objects
-#' @details
-#' Changepoint detection models know how they were created, on what data set,
-#' about the optimal changepoint set found, and the parameters that were fit
-#' to the model. 
-#' Methods for various generic reporting functions are provided. 
-#' 
-#' All changepoint detection models inherit from [mod_cpt-class]: the 
-#' base class for changepoint detection models. 
-#' These models are created by one of the `fit_*()` functions, or by 
-#' [as.model()]. 
-#' 
+#' @rdname mod_cpt
 #' @export
-#' @param x a numeric vector coercible into a `ts` object
-#' @param tau indices of the changepoint set
-#' @param region_params A [tibble::tibble()] with one row for each region 
-#' defined by the changepoint set `tau`. Each variable represents a parameter
-#' estimated in that region. 
-#' @param model_params A numeric vector of parameters estimated by the model
-#' across the entire data set (not just in each region). 
-#' @param fitted_values Fitted values returned by the model on the original
-#' data set. 
-#' @param model_name A `character` vector giving the model's name. 
-#' @param ... currently ignored
-#' @returns A [mod_cpt-class] object
-#' @seealso [as.ts.mod_cpt()], [as.model()]
-#' @examples
-#' cpt <- mod_cpt(CET)
-#' str(cpt)
-#' as.ts(cpt)
-#' changepoints(cpt)
-
 new_mod_cpt <- function(x = numeric(), 
                        tau = integer(),
                        region_params = tibble::tibble(),
@@ -56,9 +23,8 @@ new_mod_cpt <- function(x = numeric(),
   )
 }
 
-#' @rdname mod_cpt-class
+#' @rdname mod_cpt
 #' @export
-
 validate_mod_cpt <- function(x) {
   if (!stats::is.ts(as.ts(x))) {
     stop("data attribute is not coercible into a ts object.")
@@ -70,9 +36,39 @@ validate_mod_cpt <- function(x) {
   x
 }
 
-#' @rdname mod_cpt-class
+#' Base class for changepoint models
+#' @description
+#' Create changepoint detection model objects
+#' @details
+#' Changepoint detection models know how they were created, on what data set,
+#' about the optimal changepoint set found, and the parameters that were fit
+#' to the model. 
+#' Methods for various generic reporting functions are provided. 
+#' 
+#' All changepoint detection models inherit from [mod_cpt]: the 
+#' base class for changepoint detection models. 
+#' These models are created by one of the `fit_*()` functions, or by 
+#' [as.model()]. 
+#' 
 #' @export
-
+#' @param x a numeric vector coercible into a `ts` object
+#' @param tau indices of the changepoint set
+#' @param region_params A [tibble::tibble()] with one row for each region 
+#' defined by the changepoint set `tau`. Each variable represents a parameter
+#' estimated in that region. 
+#' @param model_params A numeric vector of parameters estimated by the model
+#' across the entire data set (not just in each region). 
+#' @param fitted_values Fitted values returned by the model on the original
+#' data set. 
+#' @param model_name A `character` vector giving the model's name. 
+#' @param ... currently ignored
+#' @returns A [mod_cpt] object
+#' @seealso [as.model()]
+#' @examples
+#' cpt <- mod_cpt(CET)
+#' str(cpt)
+#' as.ts(cpt)
+#' changepoints(cpt)
 mod_cpt <- function(x, ...) {
   obj <- new_mod_cpt(x, ...)
   validate_mod_cpt(obj)
