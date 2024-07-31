@@ -25,22 +25,36 @@ globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic",
 #' @returns A [mod_cpt-class] object
 #' @family model-fitting
 #' @examples
+#' # Manually specify a changepoint set
 #' tau <- c(365, 826)
+#' 
+#' # Fit the model
 #' mod <- fit_lmshift(DataCPSim, tau)
+#' 
+#' # Retrieve model parameters
 #' logLik(mod)
 #' deg_free(mod)
 #' 
+#' # Manually specify a changepoint set
 #' cpts <- c(1700, 1739, 1988)
 #' ids <- time2tau(cpts, as_year(time(CET)))
+#' 
+#' # Fit the model
 #' mod <- fit_lmshift(CET, tau = ids)
+#' 
+#' # View model parameters
 #' glance(mod)
 #' glance(fit_lmshift(CET, tau = ids, deg_poly = 1))
 #' glance(fit_lmshift_ar1(CET, tau = ids))
 #' glance(fit_lmshift_ar1(CET, tau = ids, deg_poly = 1))
 #' glance(fit_lmshift_ar1(CET, tau = ids, deg_poly = 2))
+#' 
+#' # Empty changepoint sets are allowed
 #' fit_lmshift(CET, tau = NULL)
+#' 
+#' # Duplicate changepoints are removed
 #' fit_lmshift(CET, tau = c(42, 42))
-
+#' 
 fit_lmshift <- function(x, tau, deg_poly = 0, ...) {
   n <- length(x)
   ds <- data.frame(y = as.ts(x), t = 1:n)

@@ -33,7 +33,7 @@ changepoints(x, ...)
 \method{changepoints}{wbs}(x, ...)
 }
 \arguments{
-\item{x}{An object that implements a \code{\link[=changepoints]{changepoints()}} method}
+\item{x}{A \linkS4class{tidycpt}, \code{segmenter}, or \linkS4class{mod_cpt} object}
 
 \item{...}{arguments passed to methods}
 
@@ -41,12 +41,21 @@ changepoints(x, ...)
 indices.}
 }
 \value{
-a numeric vector of changepoint indices
+a numeric vector of changepoint indices, or, if \code{use_labels} is
+\code{TRUE}, a \code{character} of time labels.
 }
 \description{
 Retrieve the indices of the changepoints identified by an algorithm or model.
-Not to be confused with \code{\link[wbs:changepoints]{wbs::changepoints()}}, which returns different
-information.
+}
+\details{
+\linkS4class{tidycpt} objects, as well as their \code{segmenter} and \code{model} components,
+implement \code{\link[=changepoints]{changepoints()}} methods.
+
+Note that this function is not to be confused with \code{\link[wbs:changepoints]{wbs::changepoints()}},
+which returns different information.
+
+For the \code{default} method, \code{\link[=changepoints]{changepoints()}} will attempt to return the
+\code{cpt_true} attribute, which is set by \code{\link[=test_set]{test_set()}}.
 }
 \examples{
 cpts <- segment(DataCPSim, method = "ga", maxiter = 5)

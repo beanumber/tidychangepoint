@@ -11,7 +11,7 @@ fit_meanvar(x, tau, ...)
 
 \item{tau}{a set of indices representing a changepoint set}
 
-\item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
+\item{...}{currently ignored}
 }
 \value{
 A \linkS4class{mod_cpt} object.
@@ -19,10 +19,20 @@ A \linkS4class{mod_cpt} object.
 \description{
 Fit a model for mean and variance
 }
+\details{
+In a mean-variance model, both the means and variances are allowed to vary
+across regions.
+Thus, this model fits a separate \eqn{\mu_j} and \eqn{\sigma_j} for each
+region \eqn{j}.
+}
 \examples{
+# Fit a mean-variance model
 fit_meanvar(CET, tau = c(42, 330))
+
 }
 \seealso{
+\code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}
+
 Other model-fitting: 
 \code{\link{fit_lmshift}()},
 \code{\link{fit_meanshift}()},

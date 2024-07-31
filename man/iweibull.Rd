@@ -4,10 +4,6 @@
 \alias{iweibull}
 \alias{mweibull}
 \alias{parameters_weibull}
-\alias{log_likelihood_region_weibull}
-\alias{log_prior_region_weibull}
-\alias{D_log_prior_region_weibull}
-\alias{D_log_likelihood_region_weibull}
 \title{Weibull distribution functions}
 \usage{
 iweibull(x, shape, scale = 1)
@@ -15,14 +11,6 @@ iweibull(x, shape, scale = 1)
 mweibull(x, shape, scale = 1)
 
 parameters_weibull(...)
-
-log_likelihood_region_weibull(t, tau_left, tau_right, theta)
-
-log_prior_region_weibull(theta, params = parameters_weibull())
-
-D_log_prior_region_weibull(theta, params = parameters_weibull())
-
-D_log_likelihood_region_weibull(t, tau_left, tau_right, theta)
 }
 \arguments{
 \item{x}{A numeric vector}
@@ -32,28 +20,36 @@ D_log_likelihood_region_weibull(t, tau_left, tau_right, theta)
 \item{scale}{Scale parameter for Weibull distribution. See \code{\link[stats:Weibull]{stats::dweibull()}}.}
 
 \item{...}{currently ignored}
-
-\item{t}{vector of exceedances}
-
-\item{tau_left}{valor del primer punto de cambio}
-
-\item{tau_right}{valor del segundo punto de cambio}
-
-\item{theta}{vector de parámetros de verosimilitud del NHPP}
-
-\item{params}{Possibly modified output from \code{\link[=parameters_weibull]{parameters_weibull()}}}
 }
 \value{
-regresa la evaluación
-
-regresa la evaluación
+A numeric vector
 }
 \description{
 Weibull distribution functions
 }
+\details{
+Intensity function for the Weibull distribution.
+\deqn{
+   iweibull(x) = \left( \frac{shape}{scale} \right) \cdot 
+                 \left( \frac{x}{scale} \right)^{shape - 1}
+ }
+
+Mean intensity function for the Weibull distribution.
+\deqn{
+   mweibull(x) = \left( \frac{x}{scale} \right)^{shape}
+ }
+
+\code{\link[=parameters_weibull]{parameters_weibull()}} returns a \code{list()} with two components: \code{shape}
+and \code{scale}, each of which is a \code{list()} of distribution parameters.
+These parameters are used to define the prior distributions for the
+hyperparameters.
+}
 \examples{
+# Compute the intensities and plot them
 iweibull(1, shape = 1, scale = 1)
 plot(x = 1:10, y = iweibull(1:10, shape = 2, scale = 2))
+
+# Compute various values of the distribution
 mweibull(1, shape = 1, scale = 1)
 plot(x = 1:10, y = mweibull(1:10, shape = 1, scale = 1))
 plot(x = 1:10, y = mweibull(1:10, shape = 1, scale = 2))
@@ -62,13 +58,12 @@ plot(x = 1:10, y = mweibull(1:10, shape = 0.5, scale = 100))
 plot(x = 1:10, y = mweibull(1:10, shape = 2, scale = 2))
 plot(x = 1:10, y = mweibull(1:10, shape = 2, scale = 100))
 
-log_likelihood_region_weibull(DataCPSim, 0, 575, theta = c(0.5, 2))
+# Generate prior distribution hyperparameters
+parameters_weibull()
 
-log_prior_region_weibull(theta = c(0.5, 2))
-D_log_prior_region_weibull(theta = c(0.5, 2))
-
-D_log_likelihood_region_weibull(DataCPSim, 0, 575, theta = c(0.5, 2))
 }
 \seealso{
 \code{\link[stats:Weibull]{stats::dweibull()}}
+
+\code{\link[stats:GammaDist]{stats::dgamma()}}
 }

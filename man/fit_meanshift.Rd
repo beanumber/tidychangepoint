@@ -52,17 +52,31 @@ log-normally distributed data.
 \code{\link[=fit_meanshift_norm_ar1]{fit_meanshift_norm_ar1()}} applies autoregressive errors.
 }
 \examples{
+# Manually specify a changepoint set
 tau <- c(365, 826)
+
+# Fit the model
 mod <- fit_meanshift_norm_ar1(DataCPSim, tau)
+
+# View model parameters
 logLik(mod)
 deg_free(mod)
 
+# Manually specify a changepoint set
 cpts <- c(1700, 1739, 1988)
 ids <- time2tau(cpts, as_year(time(CET)))
+
+# Fit the model
 mod <- fit_meanshift_norm(CET, tau = ids)
+
+# Review model parameters
 glance(mod)
+
+# Fit an autoregressive model
 mod <- fit_meanshift_norm_ar1(CET, tau = ids)
+# Review model parameters
 glance(mod)
+
 }
 \seealso{
 Other model-fitting: 
@@ -72,6 +86,6 @@ Other model-fitting:
 \code{\link{new_fun_cpt}()}
 }
 \author{
-Xueheng Shi
+Xueheng Shi, Ben Baumer
 }
 \concept{model-fitting}

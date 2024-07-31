@@ -2,11 +2,11 @@
 #' @docType data
 #' @description
 #' Particulate matter of less than 2.5 microns of diameter in Bogotá, Colombia.
+#' @details
 #' Daily readings from 2018-2020 are included. 
 #' 
 #' @examples
 #' class(bogota_pm)
-#' 
 #' 
 "bogota_pm"
 
@@ -55,7 +55,8 @@
 #' Simulated time series data
 #' @docType data
 #' @details
-#' - `DataCPSim`: Simulated time series.
+#' - `DataCPSim`: Simulated time series of the same length as [bogota_pm].
+#' @seealso [bogota_pm]
 #' 
 "DataCPSim"
 

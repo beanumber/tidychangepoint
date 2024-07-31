@@ -145,8 +145,13 @@ fit_nhpp <- fun_cpt("fit_nhpp")
 #' @param threshold A value above which to exceed. Default is the [mean()]
 #' @export
 #' @examples
-#' fit_nhpp(DataCPSim, tau = 826) |> exceedances()
-#' fit_nhpp(DataCPSim, tau = 826, threshold = 200) |> exceedances()
+#' # Retrieve exceedances of the series mean
+#' fit_nhpp(DataCPSim, tau = 826) |> 
+#'   exceedances()
+#' 
+#' # Retrieve exceedances of a supplied threshold
+#' fit_nhpp(DataCPSim, tau = 826, threshold = 200) |> 
+#'   exceedances()
 exceedances.nhpp <- function(x, ...) {
   t <- x$model_params[["threshold"]]
   exceedances(as.ts(x), threshold = t, ...)

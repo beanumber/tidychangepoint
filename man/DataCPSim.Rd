@@ -35,7 +35,7 @@ Randomly-generated time series data, using the \code{\link[stats:Lognormal]{stat
 }
 \details{
 \itemize{
-\item \code{DataCPSim}: Simulated time series.
+\item \code{DataCPSim}: Simulated time series of the same length as \link{bogota_pm}.
 }
 }
 \examples{
@@ -46,6 +46,8 @@ changepoints(rlnorm_ts_1)
 
 }
 \seealso{
+\link{bogota_pm}
+
 \code{\link[stats:ts]{stats::ts()}}, \code{\link[=test_set]{test_set()}}
 }
 \keyword{datasets}

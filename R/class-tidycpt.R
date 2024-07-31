@@ -208,12 +208,17 @@ diagnose.tidycpt <- function(x, ...) {
 }
 
 #' Obtain a descriptive filename for a tidycpt object
-#' @param x A `tidycpt` object
+#' @param x A [tidycpt-class] object
 #' @param data_name_slug character string that will identify the data set used
 #' in the file name
+#' @details
+#' [file_name()] generates a random, unique string indicating the algorithm and 
+#' [fitness()] for a [tidycpt-class] object.
+#' 
 #' @export
 #' @returns A `character` string giving a unique file name.
 #' @examples
+#' # Generate a unique name for the file
 #' DataCPSim |>
 #'   segment(method = "pelt") |>
 #'   file_name()
@@ -225,7 +230,7 @@ file_name <- function(x, data_name_slug = "data") {
       label = paste(
         data_name_slug, 
         algorithm,
-        floor(MDL(x$model)),
+        floor(fitness(x)),
         seg_params(x$segmenter) |> cli::hash_obj_md5(),
         sep = "_"
       ),

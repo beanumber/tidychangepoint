@@ -38,6 +38,7 @@ Given a changepoint set \eqn{\tau}, the BMDL is:
 where \eqn{P_{MDL}(\tau)} is the \code{\link[=MDL]{MDL()}} penalty.
 }
 \examples{
+# Compute the BMDL
 BMDL(fit_nhpp(DataCPSim, tau = NULL))
 BMDL(fit_nhpp(DataCPSim, tau = c(365, 830)))
 }

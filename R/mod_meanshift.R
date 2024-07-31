@@ -17,20 +17,33 @@
 #' 
 #' @returns A [mod_cpt-class] object.
 #' @family model-fitting
-#' @author Xueheng Shi
+#' @author Xueheng Shi, Ben Baumer
 #' @examples
+#' # Manually specify a changepoint set
 #' tau <- c(365, 826)
+#' 
+#' # Fit the model
 #' mod <- fit_meanshift_norm_ar1(DataCPSim, tau)
+#' 
+#' # View model parameters
 #' logLik(mod)
 #' deg_free(mod)
 #' 
+#' # Manually specify a changepoint set
 #' cpts <- c(1700, 1739, 1988)
 #' ids <- time2tau(cpts, as_year(time(CET)))
+#' 
+#' # Fit the model
 #' mod <- fit_meanshift_norm(CET, tau = ids)
+#' 
+#' # Review model parameters
 #' glance(mod)
+#' 
+#' # Fit an autoregressive model
 #' mod <- fit_meanshift_norm_ar1(CET, tau = ids)
+#' # Review model parameters
 #' glance(mod)
-
+#' 
 fit_meanshift <- function(x, tau, distribution = "norm", ...) {
   y <- as.numeric(as.ts(x))
   N <- length(y) # length of the series

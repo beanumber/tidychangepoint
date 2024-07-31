@@ -1,11 +1,21 @@
 #' Fit a model for mean and variance
 #' @inheritParams fit_meanshift
+#' @param ... currently ignored
 #' @export
+#' @details
+#' In a mean-variance model, both the means and variances are allowed to vary
+#' across regions. 
+#' Thus, this model fits a separate \eqn{\mu_j} and \eqn{\sigma_j} for each 
+#' region \eqn{j}.
+#' 
+#' 
 #' @returns A [mod_cpt-class] object.
 #' @family model-fitting
+#' @seealso [changepoint::cpt.meanvar()]
 #' @examples
+#' # Fit a mean-variance model
 #' fit_meanvar(CET, tau = c(42, 330))
-
+#' 
 fit_meanvar <- function(x, tau, ...) { 
   if (!is_valid_tau(tau, length(x))) {
     stop("Invalid changepoint set")

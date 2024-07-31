@@ -33,8 +33,13 @@ that exceed the \code{threshold}.
 Compute exceedances of a threshold for a time series
 }
 \examples{
-fit_nhpp(DataCPSim, tau = 826) |> exceedances()
-fit_nhpp(DataCPSim, tau = 826, threshold = 200) |> exceedances()
+# Retrieve exceedances of the series mean
+fit_nhpp(DataCPSim, tau = 826) |> 
+  exceedances()
+
+# Retrieve exceedances of a supplied threshold
+fit_nhpp(DataCPSim, tau = 826, threshold = 200) |> 
+  exceedances()
 }
 \seealso{
 Other tidychangepoint-generics: 

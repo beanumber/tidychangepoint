@@ -1,18 +1,28 @@
 #' Extract changepoints
 #' 
-#' @param x An object that implements a [changepoints()] method
+#' @param x A [tidycpt-class], `segmenter`, or [mod_cpt-class] object
 #' @param ... arguments passed to methods
 #' @description
 #' Retrieve the indices of the changepoints identified by an algorithm or model.
-#' Not to be confused with [wbs::changepoints()], which returns different
-#' information. 
-#' @returns a numeric vector of changepoint indices
+#' 
+#' @details
+#' [tidycpt-class] objects, as well as their `segmenter` and `model` components,
+#' implement [changepoints()] methods. 
+#' 
+#' Note that this function is not to be confused with [wbs::changepoints()], 
+#' which returns different information. 
+#' @returns a numeric vector of changepoint indices, or, if `use_labels` is 
+#' `TRUE`, a `character` of time labels. 
 #' @seealso [wbs::changepoints()]
 #' @family tidychangepoint-generics
 #' @export
 changepoints <- function(x, ...) UseMethod("changepoints")
 
 #' @rdname changepoints
+#' @details
+#' For the `default` method, [changepoints()] will attempt to return the 
+#' `cpt_true` attribute, which is set by [test_set()].
+#' 
 #' @export
 changepoints.default <- function(x, ...) {
   attr(x, "cpt_true")
@@ -282,6 +292,7 @@ BMDL <- function(object, ...) UseMethod("BMDL")
 #' @rdname BMDL
 #' @export
 #' @examples
+#' # Compute the BMDL
 #' BMDL(fit_nhpp(DataCPSim, tau = NULL))
 #' BMDL(fit_nhpp(DataCPSim, tau = c(365, 830)))
 BMDL.default <- function(object, ...) {

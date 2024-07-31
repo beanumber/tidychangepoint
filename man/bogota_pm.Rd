@@ -12,11 +12,12 @@ bogota_pm
 }
 \description{
 Particulate matter of less than 2.5 microns of diameter in Bogotá, Colombia.
+}
+\details{
 Daily readings from 2018-2020 are included.
 }
 \examples{
 class(bogota_pm)
-
 
 }
 \keyword{datasets}

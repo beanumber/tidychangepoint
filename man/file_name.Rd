@@ -7,7 +7,7 @@
 file_name(x, data_name_slug = "data")
 }
 \arguments{
-\item{x}{A \code{tidycpt} object}
+\item{x}{A \linkS4class{tidycpt} object}
 
 \item{data_name_slug}{character string that will identify the data set used
 in the file name}
@@ -18,7 +18,12 @@ A \code{character} string giving a unique file name.
 \description{
 Obtain a descriptive filename for a tidycpt object
 }
+\details{
+\code{\link[=file_name]{file_name()}} generates a random, unique string indicating the algorithm and
+\code{\link[=fitness]{fitness()}} for a \linkS4class{tidycpt} object.
+}
 \examples{
+# Generate a unique name for the file
 DataCPSim |>
   segment(method = "pelt") |>
   file_name()
