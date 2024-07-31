@@ -25,6 +25,9 @@ evaluate_cpts(x, ...)
 \item{model_fn}{Name of the function to fit the model.
 See, for examples, \code{\link[=fit_meanshift]{fit_meanshift()}}.}
 }
+\value{
+A \link[tibble:tbl_df-class]{tibble::tbl_df}
+}
 \description{
 Evaluate candidate changepoints sets
 }

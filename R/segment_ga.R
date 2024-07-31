@@ -126,7 +126,7 @@ segment_ga_coen <- function(x, ...) {
 #' @details
 #'   - [segment_ga_random()]: Randomly select candidate changepoint sets. This 
 #'   is implemented as a genetic algorithm with only one generation (i.e., 
-#'   `maxiter = 1`. Note
+#'   `maxiter = 1`). Note
 #'   that this function uses [log_gabin_population()] by default. 
 #' 
 #' @export

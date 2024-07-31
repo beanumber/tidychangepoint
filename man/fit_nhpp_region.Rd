@@ -17,7 +17,17 @@ fit_nhpp_region(exc, tau_left, tau_right, params = parameters_weibull(), ...)
 
 \item{...}{arguments passed to \code{\link[stats:optim]{stats::optim()}}}
 }
+\value{
+Modified output from \code{\link[stats:optim]{stats::optim()}}.
+}
 \description{
 Fit an NHPP model to one specific region
+}
+\details{
+This is an internal function not to be called by users.
+Use \code{\link[=fit_nhpp]{fit_nhpp()}}.
+}
+\seealso{
+\code{\link[=fit_nhpp]{fit_nhpp()}}
 }
 \keyword{internal}

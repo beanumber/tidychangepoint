@@ -37,6 +37,7 @@ Currently, \code{\link[=segment]{segment()}} can use the following algorithms, d
 on the value of the \code{method} argument:
 \itemize{
 \item \code{pelt}: Uses the PELT algorithm as implemented in
+\code{\link[=segment_pelt]{segment_pelt()}}, which wraps either \code{\link[changepoint:cpt.mean]{changepoint::cpt.mean()}} or
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
 \item \code{binseg}: Uses the Binary Segmentation algorithm as implemented by
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
@@ -46,10 +47,20 @@ on the value of the \code{method} argument:
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
 \item \code{wbs}: Uses the Wild Binary Segmentation algorithm as implemented by
 \code{\link[wbs:wbs]{wbs::wbs()}}. The \code{segmenter} is of class \code{wbs}.
-\item \code{ga}: Uses the Genetic algorithm implemented by \code{\link[=segment_ga]{segment_ga()}}, which wraps
+\item \code{ga}: Uses the Ggnetic algorithm implemented by \code{\link[=segment_ga]{segment_ga()}}, which wraps
 \code{\link[GA:ga]{GA::ga()}}. The \code{segmenter} is of class \code{tidyga}.
+\item \code{ga-shi}: Uses the genetic algorithm implemented by \code{\link[=segment_ga_shi]{segment_ga_shi()}},
+which wraps
+\code{\link[=segment_ga]{segment_ga()}}. The \code{segmenter} is of class \code{tidyga}.
+\item \code{ga-coen}: Uses Coen's heuristic as implemented by \code{\link[=segment_ga_coen]{segment_ga_coen()}}.
+The \code{segmenter} is of class \code{tidyga}. This implementation supersedes the
+following one.
 \item \code{coen}: Uses Coen's heuristic as implemented by
-\code{\link[=segment_coen]{segment_coen()}}. The \code{segmenter} is of class \code{\link[=seg_basket]{seg_basket()}}.
+\code{\link[=segment_coen]{segment_coen()}}. The \code{segmenter} is of class \code{\link[=seg_basket]{seg_basket()}}. Note that
+this function is deprecated.
+\item \code{random}: Uses a random basket of changepoints as implemented by
+\code{\link[=segment_ga_random]{segment_ga_random()}}.
+The \code{segmenter} is of class \code{tidyga}.
 \item \code{manual}: Uses the vector of changepoints in the \code{tau} argument.
 The \code{segmenter} is of class \code{\link[=seg_cpt]{seg_cpt()}}`.
 \item \code{null}: The default. Uses no changepoints.
@@ -57,23 +68,23 @@ The \code{segmenter} is of class \code{\link[=seg_cpt]{seg_cpt()}}`.
 }
 }
 \examples{
-mod_null <- segment(DataCPSim)
-augment(mod_null)
-tidy(mod_null)
-glance(mod_null)
+# Segment a time series using PELT
 segment(DataCPSim, method = "pelt")
-segment(DataCPSim, method = "pelt", penalty = "AIC")
-segment(DataCPSim, method = "binseg", penalty = "AIC")
-segment(DataCPSim, method = "segneigh", penalty = "BIC")
+
+# Segment a time series using PELT and the BIC penalty
+segment(DataCPSim, method = "pelt", penalty = "BIC")
+
+# Segment a time series using Binary Segmentation
+segment(DataCPSim, method = "binseg", penalty = "BIC")
+
+# Segment a time series using a random changepoint set
 segment(DataCPSim, method = "random")
+
+# Segment a time series using a manually-specified changepoint set
 segment(DataCPSim, method = "manual", tau = c(826))
-two_cpts <- segment(DataCPSim, method = "manual", tau = c(365, 826))
-plot(two_cpts)
-diagnose(two_cpts)
-segment(bogota_pm, method = "pelt")
-\dontrun{
-x <- segment(DataCPSim, method = "gbmdl", num_generations = 10)
-}
+
+# Segment a time series using a null changepoint set
+segment(DataCPSim)
 
 }
 \seealso{

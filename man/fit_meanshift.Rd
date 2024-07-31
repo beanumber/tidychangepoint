@@ -2,15 +2,12 @@
 % Please edit documentation in R/mod_meanshift.R
 \name{fit_meanshift}
 \alias{fit_meanshift}
-\alias{fit_meanshift2}
 \alias{fit_meanshift_norm}
 \alias{fit_meanshift_lnorm}
 \alias{fit_meanshift_norm_ar1}
 \title{Fast implementation of meanshift model}
 \usage{
 fit_meanshift(x, tau, distribution = "norm", ...)
-
-fit_meanshift2(x, tau, ...)
 
 fit_meanshift_norm(x, tau, ...)
 

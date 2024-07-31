@@ -10,6 +10,12 @@ globalVariables(c(
 #' @param tau_right right-most changepoint
 #' @param params Output from [parameters_weibull()]
 #' @param ... arguments passed to [stats::optim()]
+#' @details
+#' This is an internal function not to be called by users.
+#' Use [fit_nhpp()].
+#' 
+#' @returns Modified output from [stats::optim()].
+#' @seealso [fit_nhpp()]
 fit_nhpp_region <- function(exc, tau_left, tau_right, 
                                 params = parameters_weibull(), ...) {
   # Definimos las funciones que vamos a utilizar para encontrar el mínimo

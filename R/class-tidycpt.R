@@ -14,6 +14,7 @@ globalVariables(c(
 #' [as.model()] when called on the `segmenter`. 
 #' - `elapsed_time`: The clock time that passed while the algorithm was running.
 #' - `time_index`: If available, the labels for the time indices of the time series.
+#' @returns A [tidycpt-class] object.
 #' @examples
 #' # Segment a time series using PELT
 #' x <- segment(CET, method = "pelt")

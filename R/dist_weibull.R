@@ -85,6 +85,7 @@ parameters_weibull <- function(...) {
 #' @param tau_right Right endpoint of the region
 #' @param theta numeric vector of parameters for the NHPP model
 #' @keywords internal
+#' @returns A numeric vector
 #' 
 log_likelihood_region_weibull <- function(t, tau_left, tau_right, theta) {
   (tau_left^theta[1] - tau_right^theta[1]) / theta[2]^theta[1] +

@@ -26,6 +26,9 @@ D_log_likelihood_region_weibull(t, tau_left, tau_right, theta)
 
 \item{params}{Possibly modified output from \code{\link[=parameters_weibull]{parameters_weibull()}}}
 }
+\value{
+A numeric vector
+}
 \description{
 Log-Likelihood functions for regions (Weibull)
 }

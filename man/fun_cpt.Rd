@@ -17,6 +17,9 @@ fun_cpt(x, ...)
 
 \item{...}{currently ignored}
 }
+\value{
+A \link{fun_cpt} object.
+}
 \description{
 Class for model-fitting functions
 }
@@ -25,9 +28,9 @@ All model-fitting functions must be registered through a call to \code{\link[=fu
 
 All model-fitting functions must take at least three arguments:
 \itemize{
-\item \code{x} (a time series),
-\item \code{tau} (a set of changepoint indices)
-\item \code{...}.
+\item \code{x}: a time series,
+\item \code{tau}: a set of changepoint indices
+\item \code{...}: other arguments passed to methods
 }
 
 See \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}},

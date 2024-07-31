@@ -14,7 +14,7 @@ segment_manual(x, tau, ...)
 \item{...}{arguments passed to \code{\link[=seg_cpt]{seg_cpt()}}}
 }
 \value{
-A \code{seg_cpt} object
+A \link{seg_cpt} object
 }
 \description{
 Segment a time series by manually inputting the changepoint set
@@ -22,11 +22,12 @@ Segment a time series by manually inputting the changepoint set
 \details{
 Sometimes you want to see how a manually input set of changepoints performs.
 This function takes a time series and a changepoint detection set as inputs
-and returns a \code{seg_cpt} object representing the segmenter.
+and returns a \link{seg_cpt} object representing the segmenter.
 Note that by default \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}} is used to fit the model and
 \code{\link[=BIC]{BIC()}} is used as the penalized objective function.
 }
 \examples{
+# Segment a time series manually
 segment_manual(CET, tau = c(84, 330))
 segment_manual(CET, tau = NULL)
 

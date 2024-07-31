@@ -64,7 +64,7 @@ for this purpose by default.
 \itemize{
 \item \code{\link[=segment_ga_random]{segment_ga_random()}}: Randomly select candidate changepoint sets. This
 is implemented as a genetic algorithm with only one generation (i.e.,
-\code{maxiter = 1}. Note
+\code{maxiter = 1}). Note
 that this function uses \code{\link[=log_gabin_population]{log_gabin_population()}} by default.
 }
 }

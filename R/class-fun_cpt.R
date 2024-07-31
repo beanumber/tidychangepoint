@@ -29,13 +29,14 @@ validate_fun_cpt <- function(x) {
 #' 
 #' All model-fitting functions must take at least three arguments: 
 #' 
-#' - `x` (a time series), 
-#' - `tau` (a set of changepoint indices)
-#' - `...`. 
+#' - `x`: a time series, 
+#' - `tau`: a set of changepoint indices
+#' - `...`: other arguments passed to methods
 #' 
 #' See [fit_meanshift_norm()], 
 #' 
 #' @family model-fitting
+#' @returns A [fun_cpt] object.
 #' @examples
 #' # Register a model-fitting function
 #' f <- fun_cpt("fit_meanvar")

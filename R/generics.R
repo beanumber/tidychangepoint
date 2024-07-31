@@ -303,6 +303,7 @@ BMDL.default <- function(object, ...) {
 #' @param x An object to evaluate
 #' @param ... arguments passed to methods
 #' @export
+#' @returns A [tibble::tbl_df]
 #' @keywords internal
 #' @export
 evaluate_cpts <- function(x, ...) UseMethod("evaluate_cpts")

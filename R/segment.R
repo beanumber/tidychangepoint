@@ -8,12 +8,7 @@
 #' @param method a character string indicating the algorithm to use. See Details.
 #' @param ... arguments passed to methods
 #' @export
-#' @examples
-#' mod_null <- segment(DataCPSim)
-#' augment(mod_null)
-#' tidy(mod_null)
-#' glance(mod_null)
-
+#' 
 segment <- function(x, method = "null", ...) UseMethod("segment")
 
 #' @rdname segment
@@ -53,6 +48,7 @@ segment.numeric <- function(x, method = "null", ...) {
 #' @details Currently, [segment()] can use the following algorithms, depending
 #' on the value of the `method` argument:
 #' - `pelt`: Uses the PELT algorithm as implemented in 
+#'   [segment_pelt()], which wraps either [changepoint::cpt.mean()] or 
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
 #' - `binseg`: Uses the Binary Segmentation algorithm as implemented by 
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
@@ -62,10 +58,20 @@ segment.numeric <- function(x, method = "null", ...) {
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
 #' - `wbs`: Uses the Wild Binary Segmentation algorithm as implemented by 
 #'   [wbs::wbs()]. The `segmenter` is of class `wbs`.
-#' - `ga`: Uses the Genetic algorithm implemented by [segment_ga()], which wraps
+#' - `ga`: Uses the Ggnetic algorithm implemented by [segment_ga()], which wraps
 #'   [GA::ga()]. The `segmenter` is of class `tidyga`.
+#' - `ga-shi`: Uses the genetic algorithm implemented by [segment_ga_shi()], 
+#'   which wraps
+#'   [segment_ga()]. The `segmenter` is of class `tidyga`.
+#' - `ga-coen`: Uses Coen's heuristic as implemented by [segment_ga_coen()]. 
+#'   The `segmenter` is of class `tidyga`. This implementation supersedes the
+#'   following one.
 #' - `coen`: Uses Coen's heuristic as implemented by 
-#'   [segment_coen()]. The `segmenter` is of class [seg_basket()].
+#'   [segment_coen()]. The `segmenter` is of class [seg_basket()]. Note that 
+#'   this function is deprecated. 
+#' - `random`: Uses a random basket of changepoints as implemented by 
+#'   [segment_ga_random()]. 
+#'   The `segmenter` is of class `tidyga`. 
 #' - `manual`: Uses the vector of changepoints in the `tau` argument. 
 #'   The `segmenter` is of class [seg_cpt()]`.
 #' - `null`: The default. Uses no changepoints. 
@@ -73,21 +79,24 @@ segment.numeric <- function(x, method = "null", ...) {
 #' @seealso [changepoint::cpt.meanvar()], [wbs::wbs()], [GA::ga()], 
 #' [segment_ga()]
 #' @examples
+#' # Segment a time series using PELT
 #' segment(DataCPSim, method = "pelt")
-#' segment(DataCPSim, method = "pelt", penalty = "AIC")
-#' segment(DataCPSim, method = "binseg", penalty = "AIC")
-#' segment(DataCPSim, method = "segneigh", penalty = "BIC")
-#' segment(DataCPSim, method = "random")
-#' segment(DataCPSim, method = "manual", tau = c(826))
-#' two_cpts <- segment(DataCPSim, method = "manual", tau = c(365, 826))
-#' plot(two_cpts)
-#' diagnose(two_cpts)
-#' segment(bogota_pm, method = "pelt")
-#' \dontrun{
-#' x <- segment(DataCPSim, method = "gbmdl", num_generations = 10)
-#' }
 #' 
-
+#' # Segment a time series using PELT and the BIC penalty
+#' segment(DataCPSim, method = "pelt", penalty = "BIC")
+#' 
+#' # Segment a time series using Binary Segmentation
+#' segment(DataCPSim, method = "binseg", penalty = "BIC")
+#' 
+#' # Segment a time series using a random changepoint set
+#' segment(DataCPSim, method = "random")
+#' 
+#' # Segment a time series using a manually-specified changepoint set
+#' segment(DataCPSim, method = "manual", tau = c(826))
+#' 
+#' # Segment a time series using a null changepoint set
+#' segment(DataCPSim)
+#' 
 segment.ts <- function(x, method = "null", ...) {
   args <- list(...)
 #  message(paste("method:", method))
