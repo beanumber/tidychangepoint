@@ -65,20 +65,21 @@
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>A <code>seg_cpt</code> object</p>
+    <p>A <a href="seg_cpt.html">seg_cpt</a> object</p>
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Sometimes you want to see how a manually input set of changepoints performs.
 This function takes a time series and a changepoint detection set as inputs
-and returns a <code>seg_cpt</code> object representing the segmenter.
+and returns a <a href="seg_cpt.html">seg_cpt</a> object representing the segmenter.
 Note that by default <code><a href="fit_meanshift.html">fit_meanshift_norm()</a></code> is used to fit the model and
 <code><a href="https://rdrr.io/r/stats/AIC.html" class="external-link">BIC()</a></code> is used as the penalized objective function.</p>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">segment_manual</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">84</span>, <span class="fl">330</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Segment a time series manually</span></span></span>
+<span class="r-in"><span><span class="fu">segment_manual</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">84</span>, <span class="fl">330</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ data        : Time-Series [1:362] from 1 to 362: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ pkg         : chr "tidychangepoint"</span>

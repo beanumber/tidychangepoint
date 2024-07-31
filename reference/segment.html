@@ -86,6 +86,7 @@ sets in univariate time series.</p>
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>Currently, <code>segment()</code> can use the following algorithms, depending
 on the value of the <code>method</code> argument:</p><ul><li><p><code>pelt</code>: Uses the PELT algorithm as implemented in
+<code><a href="segment_pelt.html">segment_pelt()</a></code>, which wraps either <code><a href="https://rdrr.io/pkg/changepoint/man/cpt.mean.html" class="external-link">changepoint::cpt.mean()</a></code> or
 <code><a href="https://rdrr.io/pkg/changepoint/man/cpt.meanvar.html" class="external-link">changepoint::cpt.meanvar()</a></code>. The <code>segmenter</code> is of class <code>cpt</code>.</p></li>
 <li><p><code>binseg</code>: Uses the Binary Segmentation algorithm as implemented by
 <code><a href="https://rdrr.io/pkg/changepoint/man/cpt.meanvar.html" class="external-link">changepoint::cpt.meanvar()</a></code>. The <code>segmenter</code> is of class <code>cpt</code>.</p></li>
@@ -95,10 +96,20 @@ on the value of the <code>method</code> argument:</p><ul><li><p><code>pelt</code
 <code><a href="https://rdrr.io/pkg/changepoint/man/cpt.meanvar.html" class="external-link">changepoint::cpt.meanvar()</a></code>. The <code>segmenter</code> is of class <code>cpt</code>.</p></li>
 <li><p><code>wbs</code>: Uses the Wild Binary Segmentation algorithm as implemented by
 <code><a href="https://rdrr.io/pkg/wbs/man/wbs.html" class="external-link">wbs::wbs()</a></code>. The <code>segmenter</code> is of class <code>wbs</code>.</p></li>
-<li><p><code>ga</code>: Uses the Genetic algorithm implemented by <code><a href="segment_ga.html">segment_ga()</a></code>, which wraps
+<li><p><code>ga</code>: Uses the Ggnetic algorithm implemented by <code><a href="segment_ga.html">segment_ga()</a></code>, which wraps
 <code><a href="https://github.com/luca-scr/GA/reference/ga.html" class="external-link">GA::ga()</a></code>. The <code>segmenter</code> is of class <code>tidyga</code>.</p></li>
+<li><p><code>ga-shi</code>: Uses the genetic algorithm implemented by <code><a href="segment_ga.html">segment_ga_shi()</a></code>,
+which wraps
+<code><a href="segment_ga.html">segment_ga()</a></code>. The <code>segmenter</code> is of class <code>tidyga</code>.</p></li>
+<li><p><code>ga-coen</code>: Uses Coen's heuristic as implemented by <code><a href="segment_ga.html">segment_ga_coen()</a></code>.
+The <code>segmenter</code> is of class <code>tidyga</code>. This implementation supersedes the
+following one.</p></li>
 <li><p><code>coen</code>: Uses Coen's heuristic as implemented by
-<code><a href="segment_coen.html">segment_coen()</a></code>. The <code>segmenter</code> is of class <code><a href="seg_basket.html">seg_basket()</a></code>.</p></li>
+<code><a href="segment_coen.html">segment_coen()</a></code>. The <code>segmenter</code> is of class <code><a href="seg_basket.html">seg_basket()</a></code>. Note that
+this function is deprecated.</p></li>
+<li><p><code>random</code>: Uses a random basket of changepoints as implemented by
+<code><a href="segment_ga.html">segment_ga_random()</a></code>.
+The <code>segmenter</code> is of class <code>tidyga</code>.</p></li>
 <li><p><code>manual</code>: Uses the vector of changepoints in the <code>tau</code> argument.
 The <code>segmenter</code> is of class <code><a href="seg_cpt.html">seg_cpt()</a></code>`.</p></li>
 <li><p><code>null</code>: The default. Uses no changepoints.
@@ -112,33 +123,7 @@ The <code>segmenter</code> is of class <code><a href="seg_cpt.html">seg_cpt()</a
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">mod_null</span> <span class="op">&lt;-</span> <span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/augment.html" class="external-link">augment</a></span><span class="op">(</span><span class="va">mod_null</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tsibble: 1,096 x 5 [1]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># Groups:    region [1]</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    index     y region      .fitted .resid</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;fct&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span>     1  35.5 [0,1.1e+03]    63.2 -<span style="color: #BB0000;">27.7</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span>     2  29.0 [0,1.1e+03]    63.2 -<span style="color: #BB0000;">34.2</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span>     3  35.6 [0,1.1e+03]    63.2 -<span style="color: #BB0000;">27.5</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span>     4  33.0 [0,1.1e+03]    63.2 -<span style="color: #BB0000;">30.2</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span>     5  29.5 [0,1.1e+03]    63.2 -<span style="color: #BB0000;">33.6</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span>     6  25.4 [0,1.1e+03]    63.2 -<span style="color: #BB0000;">37.8</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span>     7  28.8 [0,1.1e+03]    63.2 -<span style="color: #BB0000;">34.3</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span>     8  50.3 [0,1.1e+03]    63.2 -<span style="color: #BB0000;">12.9</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span>     9  24.9 [0,1.1e+03]    63.2 -<span style="color: #BB0000;">38.2</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span>    10  58.9 [0,1.1e+03]    63.2  -<span style="color: #BB0000;">4.28</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># ℹ 1,086 more rows</span></span>
-<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">mod_null</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 9</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   region      num_obs   min   max  mean    sd begin   end param_mu</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>         <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> [0,1.1e+03]    <span style="text-decoration: underline;">1</span>096  13.7  299.  63.2  45.7     0  <span style="text-decoration: underline;">1</span>096     63.2</span>
-<span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="va">mod_null</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   pkg      version algorithm seg_params model_name criteria fitness elapsed_time</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidycha… 0.0.1   manual    <span style="color: #949494;">&lt;list [0]&gt;</span> meanshift… BIC       <span style="text-decoration: underline;">11</span>503. 0.004 secs  </span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Segment a time series using PELT</span></span></span>
 <span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A tidycpt object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Class 'cpt' : Changepoint Object</span>
@@ -169,7 +154,9 @@ The <code>segmenter</code> is of class <code><a href="seg_cpt.html">seg_cpt()</a
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:1096] 35.3 35.3 35.3 35.3 35.3 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanvar"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
-<span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"pelt"</span>, penalty <span class="op">=</span> <span class="st">"AIC"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Segment a time series using PELT and the BIC penalty</span></span></span>
+<span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"pelt"</span>, penalty <span class="op">=</span> <span class="st">"BIC"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A tidycpt object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Class 'cpt' : Changepoint Object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
@@ -183,24 +170,25 @@ The <code>segmenter</code> is of class <code><a href="seg_cpt.html">seg_cpt()</a
 <span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint type      : Change in mean and variance </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method of analysis    : PELT </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Test Statistic  : Normal </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Type of penalty       : AIC with value, 6 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Type of penalty       : BIC with value, 20.99827 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Minimum Segment Length : 2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Maximum no. of cpts   : Inf </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Number of changepoints: 205 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint Locations : 547 822 972 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:1096] from 1 to 1096: 35.5 29 35.6 33 29.5 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : int [1:205] 4 7 10 13 15 17 19 27 30 32 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [206 × 3] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region           : chr [1:206] "[0,4)" "[4,7)" "[7,10)" "[10,13)" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu         : num [1:206] 33.4 29.3 34.7 41 37.7 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_sigma_hatsq: Named num [1:206] 9.59 9.59 124.55 162.27 26.02 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "names")= chr [1:206] "[0,4)" "[4,7)" "[7,10)" "[10,13)" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : int [1:3] 547 822 972</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [4 × 3] (S3: tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region           : chr [1:4] "[0,547)" "[547,822)" "[822,972)" "[972,1.1e+03]"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu         : num [1:4] 35.3 58.1 96.7 155.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_sigma_hatsq: Named num [1:4] 127 372 924 2442</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "names")= chr [1:4] "[0,547)" "[547,822)" "[822,972)" "[972,1.1e+03]"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:1096] 33.4 33.4 33.4 29.3 29.3 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:1096] 35.3 35.3 35.3 35.3 35.3 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanvar"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
-<span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"binseg"</span>, penalty <span class="op">=</span> <span class="st">"AIC"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>The number of changepoints identified is Q, it is advised to increase Q to make sure changepoints have not been missed.</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Segment a time series using Binary Segmentation</span></span></span>
+<span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"binseg"</span>, penalty <span class="op">=</span> <span class="st">"BIC"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A tidycpt object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Class 'cpt' : Changepoint Object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 14 slots with names</span>
@@ -214,10 +202,10 @@ The <code>segmenter</code> is of class <code><a href="seg_cpt.html">seg_cpt()</a
 <span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint type      : Change in mean and variance </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method of analysis    : BinSeg </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Test Statistic  : Normal </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Type of penalty       : AIC with value, 6 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Type of penalty       : BIC with value, 20.99827 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Minimum Segment Length : 2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Maximum no. of cpts   : 5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint Locations : 547 809 813 822 972 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint Locations : 547 809 972 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Range of segmentations:</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      [,1] [,2] [,3] [,4] [,5]</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  809   NA   NA   NA   NA</span>
@@ -229,55 +217,18 @@ The <code>segmenter</code> is of class <code><a href="seg_cpt.html">seg_cpt()</a
 <span class="r-out co"><span class="r-pr">#&gt;</span>  For penalty values: 1485.679 462.0479 160.3649 15.04514 15.04514 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:1096] from 1 to 1096: 35.5 29 35.6 33 29.5 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : int [1:5] 547 809 813 822 972</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [6 × 3] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region           : chr [1:6] "[0,547)" "[547,809)" "[809,813)" "[813,822)" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu         : num [1:6] 35.3 57.9 83.9 52.5 96.7 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_sigma_hatsq: Named num [1:6] 127 341 2182 122 924 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "names")= chr [1:6] "[0,547)" "[547,809)" "[809,813)" "[813,822)" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:1096] 35.3 35.3 35.3 35.3 35.3 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanvar"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
-<span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"segneigh"</span>, penalty <span class="op">=</span> <span class="st">"BIC"</span><span class="op">)</span></span></span>
-<span class="r-wrn co"><span class="r-pr">#&gt;</span> <span class="warning">Warning: </span>SegNeigh is computationally slow, use PELT instead</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> A tidycpt object</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Class 'cpt' : Changepoint Object</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 14 slots with names</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               cpts.full pen.value.full data.set cpttype method test.stat pen.type pen.value minseglen cpts ncpts.max param.est date version </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Wed Apr 24 21:56:29 2024 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created Using changepoint version 2.2.4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint type      : Change in mean and variance </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Method of analysis    : SegNeigh </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Test Statistic  : Normal </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Type of penalty       : BIC with value, 20.99827 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Minimum Segment Length : 2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maximum no. of cpts   : 5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint Locations : 547 822 972 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Range of segmentations:</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>      [,1] [,2] [,3] [,4] [,5]</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  809   NA   NA   NA   NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [2,]  547  822   NA   NA   NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [3,]  547  822  972   NA   NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4,]  547  822  939  980   NA</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  For penalty values: 1485.679 475.6009 152.0772 15.72419 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:1096] from 1 to 1096: 35.5 29 35.6 33 29.5 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : int [1:3] 547 822 972</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : int [1:3] 547 809 972</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [4 × 3] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region           : chr [1:4] "[0,547)" "[547,822)" "[822,972)" "[972,1.1e+03]"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu         : num [1:4] 35.3 58.1 96.7 155.9</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_sigma_hatsq: Named num [1:4] 127 372 924 2442</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "names")= chr [1:4] "[0,547)" "[547,822)" "[822,972)" "[972,1.1e+03]"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region           : chr [1:4] "[0,547)" "[547,809)" "[809,972)" "[972,1.1e+03]"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu         : num [1:4] 35.3 57.9 94 155.9</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_sigma_hatsq: Named num [1:4] 127 341 1015 2442</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "names")= chr [1:4] "[0,547)" "[547,809)" "[809,972)" "[972,1.1e+03]"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:1096] 35.3 35.3 35.3 35.3 35.3 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanvar"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Segment a time series using a random changepoint set</span></span></span>
 <span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"random"</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Seeding initial population with probability: 0.0063863343681642</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A tidycpt object</span>
@@ -304,6 +255,8 @@ The <code>segmenter</code> is of class <code><a href="seg_cpt.html">seg_cpt()</a
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:1096] 36 36 36 36 36 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanshift_norm"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Segment a time series using a manually-specified changepoint set</span></span></span>
 <span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"manual"</span>, tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">826</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A tidycpt object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 8</span>
@@ -328,44 +281,32 @@ The <code>segmenter</code> is of class <code><a href="seg_cpt.html">seg_cpt()</a
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:1096] 43.2 43.2 43.2 43.2 43.2 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanshift_norm"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
-<span class="r-in"><span><span class="va">two_cpts</span> <span class="op">&lt;-</span> <span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"manual"</span>, tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">365</span>, <span class="fl">826</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">two_cpts</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="segment-1.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu"><a href="diagnose.html">diagnose</a></span><span class="op">(</span><span class="va">two_cpts</span><span class="op">)</span></span></span>
-<span class="r-plt img"><img src="segment-2.png" alt="" width="700" height="433"></span>
-<span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">bogota_pm</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Segment a time series using a null changepoint set</span></span></span>
+<span class="r-in"><span><span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> A tidycpt object</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Class 'cpt' : Changepoint Object</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Wed Apr 24 21:56:29 2024 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created Using changepoint version 2.2.4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint type      : Change in mean and variance </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Method of analysis    : PELT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Test Statistic  : Normal </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Type of penalty       : MBIC with value, 27.99769 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Minimum Segment Length : 2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maximum no. of cpts   : Inf </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint Locations : 12 14 393 468 821 1023 1025 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ data        : Time-Series [1:1096] from 1 to 1096: 35.5 29 35.6 33 29.5 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ pkg         : chr "tidychangepoint"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ algorithm   : chr "manual"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ changepoints: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitness     : Named num 11503</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr "BIC"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ seg_params  : list()</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name  : chr "meanshift_norm"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ penalty     : chr "BIC"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "seg_cpt"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:1096] from 1 to 1096: 39.3 27.7 30.3 33.6 32.9 20.1 23.7 23.5 29.2 27.6 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : int [1:7] 12 14 393 468 821 1023 1025</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [8 × 3] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region           : chr [1:8] "[0,12)" "[12,14)" "[14,393)" "[393,468)" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu         : num [1:8] 28.9 16.6 28.1 44.5 30.7 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_sigma_hatsq: Named num [1:8] 26.1 174.2 147.4 309.4 200 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "names")= chr [1:8] "[0,12)" "[12,14)" "[14,393)" "[393,468)" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:1096] 28.9 28.9 28.9 28.9 28.9 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanvar"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:1096] from 1 to 1096: 35.5 29 35.6 33 29.5 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : int(0) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [1 × 2] (S3: tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region  : chr "[0,1.1e+03]"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu: num 63.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : Named num 2089</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr "sigma_hatsq"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:1096] 63.2 63.2 63.2 63.2 63.2 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanshift_norm"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
-<span class="r-in"><span><span class="kw">if</span> <span class="op">(</span><span class="cn">FALSE</span><span class="op">)</span> <span class="op">{</span> <span class="co"># \dontrun{</span></span></span>
-<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu">segment</span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"gbmdl"</span>, num_generations <span class="op">=</span> <span class="fl">10</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="op">}</span> <span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
