@@ -87,7 +87,7 @@ Each changepoint is treated as a categorical fixed-effect, while the <code>deg_p
 argument controls the degree of the polynomial that interacts with those
 fixed-effects.
 For example, setting <code>deg_poly</code> equal to 0 will return the same model as
-calling <code><a href="fit_meanshift.html">fit_meanshift()</a></code>, but the latter is faster for larger changepoint
+calling <code><a href="fit_meanshift.html">fit_meanshift_norm()</a></code>, but the latter is faster for larger changepoint
 sets because it doesn't have to fit all of the regression models.</p>
 <p>Setting <code>deg_poly</code> equal to 1 fits the <code>trendshift</code> model.</p>
 <ul><li><p><code>fit_lmshift_ar1()</code>: will apply auto-regressive lag 1 errors</p></li>
