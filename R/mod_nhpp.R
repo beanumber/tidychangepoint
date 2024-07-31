@@ -3,15 +3,13 @@ globalVariables(c(
   "cum_m_net", "idx", "intensity", "param_alpha", "param_beta"
 ))
 
-#' @rdname fit_nhpp
+#' Fit an NHPP model to one specific region
+#' @keywords internal
 #' @param exc Output from [exceedances()]
 #' @param tau_left left-most changepoint
 #' @param tau_right right-most changepoint
 #' @param params Output from [parameters_weibull()]
 #' @param ... arguments passed to [stats::optim()]
-#' @export
-#' @examples
-#' fit_nhpp_region(exceedances(DataCPSim), 0, 575)
 fit_nhpp_region <- function(exc, tau_left, tau_right, 
                                 params = parameters_weibull(), ...) {
   # Definimos las funciones que vamos a utilizar para encontrar el mínimo
@@ -43,23 +41,30 @@ fit_nhpp_region <- function(exc, tau_left, tau_right,
 
 #' Fit a non-homogeneous Poisson process model to the exceedances of a time series. 
 #' 
-#' @description
-#' Any times series can be modeled as a non-homogeneous Poisson process of the
-#' locations of the exceedances of the mean of the series. This function
-#' uses the [BMDL()] criteria to determine the best fit parameters for each 
-#' region defined by the changepoint set returned by [changepoints()].
+#' @details
+#' Any time series can be modeled as a non-homogeneous Poisson process of the
+#' locations of the [exceedances] of a threshold in the series. 
+#' This function uses the [BMDL] criteria to determine the best fit 
+#' parameters for each 
+#' region defined by the changepoint set `tau`.
 #' @param x A time series
-#' @param tau A vector of changepoints. 
-#' @return A `tbl_df` with each row representing one region. 
+#' @param tau A vector of changepoints
+#' @param ... currently ignored
+#' @returns An `nhpp` object, which inherits from [mod_cpt-class]. 
 #' 
 #' @export
 #' @family model-fitting
 #' @examples
+#' # Fit an NHPP model using the mean as a threshold
 #' fit_nhpp(DataCPSim, tau = 826)
+#' 
+#' # Fit an NHPP model using other thresholds
 #' fit_nhpp(DataCPSim, tau = 826, threshold = 20)
 #' fit_nhpp(DataCPSim, tau = 826, threshold = 200)
+#' 
+#' # Fit an NHPP model using changepoints determined by PELT
 #' fit_nhpp(DataCPSim, tau = changepoints(segment(DataCPSim, method = "pelt")))
-
+#' 
 fit_nhpp <- function(x, tau, ...) {
   n <- length(x)
   if (!is_valid_tau(tau, n)) {
@@ -142,7 +147,7 @@ fit_nhpp <- function(x, tau, ...) {
 fit_nhpp <- fun_cpt("fit_nhpp")
 
 #' @rdname exceedances
-#' @param threshold A value above which to exceed. Default is the [mean()]
+#' @param threshold A value above which to exceed. Default is the [mean].
 #' @export
 #' @examples
 #' # Retrieve exceedances of the series mean
@@ -157,8 +162,7 @@ exceedances.nhpp <- function(x, ...) {
   exceedances(as.ts(x), threshold = t, ...)
 }
 
-#' @rdname fit_nhpp
-#' @param object An `nhpp` object
+#' @rdname reexports
 #' @export
 logLik.nhpp <- function(object, ...) {
   ll <- sum(object$region_params[["logLik"]])
@@ -173,7 +177,7 @@ BMDL.nhpp <- function(object, ...) {
   MDL(object) - 2 * logPrior
 }
 
-#' @rdname fit_nhpp
+#' @rdname reexports
 #' @export
 glance.nhpp <- function(x, ...) {
   out <- NextMethod()
@@ -183,16 +187,25 @@ glance.nhpp <- function(x, ...) {
     )
 }
 
-#' @rdname fit_nhpp
-#' @param x An `nhpp` object
-#' @param dist Name of the distribution
+#' Cumulative distribution of the exceedances of a time series
+#' @inheritParams plot_intensity
+#' @param dist Name of the distribution. Currently only `weibull` is implemented.
 #' @export
-#' @return a numeric vector of length equal to the [exceedances] of `x`
+#' @returns a numeric vector of length equal to the [exceedances] of `x`
+#' @seealso [plot_intensity()]
 #' @examples
+#' # Fit an NHPP model using the mean as a threshold
 #' nhpp <- fit_nhpp(DataCPSim, tau = 826)
+#' 
+#' # Compute the cumulative exceedances of the mean
 #' mcdf(nhpp)
+#' 
+#' # Fit an NHPP model using another threshold
 #' nhpp <- fit_nhpp(DataCPSim, tau = 826, threshold = 200)
+#' 
+#' # Compute the cumulative exceedances of the threshold
 #' mcdf(nhpp)
+#' 
 mcdf <- function(x, dist = "weibull") {
   if (dist == "weibull") {
     d <- mweibull
@@ -272,13 +285,22 @@ diagnose.nhpp <- function(x, ...) {
 }
 
 
-#' @rdname fit_nhpp
+#' Plot the intensity of an NHPP fit
+#' @param x An NHPP `model` returned by [fit_nhpp()]
+#' @param ... currently ignored
+#' @returns A [ggplot2::ggplot()] object
 #' @export
 #' @examples
+#' # Plot the estimated intensity function
 #' plot_intensity(fit_nhpp(DataCPSim, tau = 826))
+#' 
+#' # Segment a time series using PELT
 #' mod <- segment(bogota_pm, method = "pelt")
+#' 
+#' # Plot the estimated intensity function for the NHPP model using the 
+#' # changepoints found by PELT
 #' plot_intensity(fit_nhpp(bogota_pm, tau = changepoints(mod)))
-
+#' 
 plot_intensity <- function(x, ...) {
   z <- x |>
     tidy() |>

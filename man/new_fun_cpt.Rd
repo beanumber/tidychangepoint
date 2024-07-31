@@ -47,7 +47,7 @@ Other model-fitting:
 \code{\link{fit_lmshift}()},
 \code{\link{fit_meanshift}()},
 \code{\link{fit_meanvar}()},
-\code{\link{fit_nhpp_region}()}
+\code{\link{fit_nhpp}()}
 
 Other modeling: 
 \code{\link{model_args.seg_cpt}()},

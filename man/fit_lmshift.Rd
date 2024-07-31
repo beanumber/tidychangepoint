@@ -92,7 +92,7 @@ fit_lmshift(CET, tau = c(42, 42))
 Other model-fitting: 
 \code{\link{fit_meanshift}()},
 \code{\link{fit_meanvar}()},
-\code{\link{fit_nhpp_region}()},
+\code{\link{fit_nhpp}()},
 \code{\link{new_fun_cpt}()}
 }
 \concept{model-fitting}

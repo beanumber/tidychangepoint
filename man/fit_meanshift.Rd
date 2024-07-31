@@ -82,7 +82,7 @@ glance(mod)
 Other model-fitting: 
 \code{\link{fit_lmshift}()},
 \code{\link{fit_meanvar}()},
-\code{\link{fit_nhpp_region}()},
+\code{\link{fit_nhpp}()},
 \code{\link{new_fun_cpt}()}
 }
 \author{
