@@ -52,7 +52,7 @@
     <p>Every <code>tidycpt</code> object contains:</p><ul><li><p><code>segmenter</code>: The object returned by the underlying changepoint
 detection algorithm. These can be of arbitrary class. Use <code><a href="as.segmenter.html">as.segmenter()</a></code>
 to retrieve them.</p></li>
-<li><p><code>model</code>: A model object inheriting from <a href="mod_cpt-class.html">mod_cpt</a>, as created by
+<li><p><code>model</code>: A model object inheriting from <a href="mod_cpt.html">mod_cpt</a>, as created by
 <code><a href="as.model.html">as.model()</a></code> when called on the <code>segmenter</code>.</p></li>
 <li><p><code>elapsed_time</code>: The clock time that passed while the algorithm was running.</p></li>
 <li><p><code>time_index</code>: If available, the labels for the time indices of the time series.</p></li>
@@ -93,7 +93,7 @@ to retrieve them.</p></li>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ fitted_values: num [1:362] 8.8 8.8 8.8 8.8 8.8 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ model_name   : chr "meanvar"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "class")= chr "mod_cpt"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ elapsed_time: 'difftime' num 0.00910496711730957</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ elapsed_time: 'difftime' num 0.00911521911621094</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "units")= chr "secs"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ time_index  : Date[1:362], format: "1659-01-01" "1660-01-01" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "tidycpt"</span>
