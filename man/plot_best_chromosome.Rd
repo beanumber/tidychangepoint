@@ -14,7 +14,13 @@ plot_cpt_repeated(x, i = nrow(x$basket))
 
 \item{i}{index of basket to show}
 }
+\value{
+A \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} object
+}
 \description{
+Diagnostic plots for \code{seg_basket} objects
+}
+\details{
 \code{\link[=seg_basket]{seg_basket()}} objects contain baskets of candidate changepoint sets.
 
 \code{\link[=plot_best_chromosome]{plot_best_chromosome()}} shows how the size of the candidate changepoint

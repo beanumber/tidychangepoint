@@ -223,13 +223,14 @@ diagnose.seg_basket <- function(x, ...) {
 
 #' Diagnostic plots for `seg_basket` objects
 #' @param x A [seg_basket()] object
-#' @description
+#' @details
 #' [seg_basket()] objects contain baskets of candidate changepoint sets. 
 #' 
 #' [plot_best_chromosome()] shows how the size of the candidate changepoint
 #' sets change across the generations of evolution. 
 #' 
 #' @export
+#' @returns A [ggplot2::ggplot()] object
 #' @examples
 #' \dontrun{
 #' # Segment a time series using Coen's algorithm
@@ -268,7 +269,7 @@ plot_best_chromosome <- function(x) {
 
 #' @rdname plot_best_chromosome
 #' @param i index of basket to show
-#' @description
+#' @details
 #' 
 #' [plot_cpt_repeated()] shows how frequently individual observations appear in
 #' the best candidate changepoint sets in each generation. 
