@@ -65,6 +65,7 @@ glance(mod)
 
 # Fit an autoregressive model
 mod <- fit_meanshift_norm_ar1(CET, tau = ids)
+
 # Review model parameters
 glance(mod)
 

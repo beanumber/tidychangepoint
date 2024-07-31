@@ -15,7 +15,7 @@ globalVariables(c("adj.r.squared", "df", "df.residual", "p.value", "statistic",
 #' argument controls the degree of the polynomial that interacts with those
 #' fixed-effects. 
 #' For example, setting `deg_poly` equal to 0 will return the same model as 
-#' calling [fit_meanshift()], but the latter is faster for larger changepoint
+#' calling [fit_meanshift_norm()], but the latter is faster for larger changepoint
 #' sets because it doesn't have to fit all of the regression models. 
 #' 
 #' Setting `deg_poly` equal to 1 fits the `trendshift` model. 

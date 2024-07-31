@@ -92,7 +92,7 @@ test_that("values match", {
 test_that("model performance", {
   skip()
   bench::mark(
-    m1 = fit_meanshift(CET, tau = ids), 
+    m1 = fit_meanshift_norm(CET, tau = ids), 
     m2 = fit_meanshift2(CET, ids), 
     lm = fit_lmshift(CET, ids), 
     check = FALSE

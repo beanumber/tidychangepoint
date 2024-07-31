@@ -39,7 +39,7 @@ Each changepoint is treated as a categorical fixed-effect, while the \code{deg_p
 argument controls the degree of the polynomial that interacts with those
 fixed-effects.
 For example, setting \code{deg_poly} equal to 0 will return the same model as
-calling \code{\link[=fit_meanshift]{fit_meanshift()}}, but the latter is faster for larger changepoint
+calling \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}}, but the latter is faster for larger changepoint
 sets because it doesn't have to fit all of the regression models.
 
 Setting \code{deg_poly} equal to 1 fits the \code{trendshift} model.

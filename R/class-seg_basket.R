@@ -96,7 +96,7 @@ fitness.seg_basket <- function(object, ...) {
 
 #' @rdname evaluate_cpts
 #' @param model_fn Name of the function to fit the model. 
-#' See, for examples, [fit_meanshift()].
+#' See, for examples, [fit_meanshift_norm()].
 #' @export
 evaluate_cpts.seg_basket <- function(x, ...) {
   evaluate_cpts(x$basket, .data = as.ts(x), model_fn = whomademe(x), ...)

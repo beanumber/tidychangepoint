@@ -23,7 +23,7 @@ evaluate_cpts(x, ...)
 \item{.data}{A time series}
 
 \item{model_fn}{Name of the function to fit the model.
-See, for examples, \code{\link[=fit_meanshift]{fit_meanshift()}}.}
+See, for examples, \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}}.}
 }
 \value{
 A \link[tibble:tbl_df-class]{tibble::tbl_df}
