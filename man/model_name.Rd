@@ -41,9 +41,7 @@ model_name(object, ...)
 \item{...}{currently ignored}
 }
 \value{
-\itemize{
-\item \code{\link[=model_name]{model_name()}}: A \code{character} vector of length 1.
-}
+A \code{character} vector of length 1.
 }
 \description{
 Retrieve the name of the model that a segmenter or model used
@@ -81,6 +79,6 @@ x |>
 \seealso{
 Other modeling: 
 \code{\link{model_args.seg_cpt}()},
-\code{\link{new_fun_cpt}()}
+\code{\link{whomademe}()}
 }
 \concept{modeling}

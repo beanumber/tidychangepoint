@@ -54,6 +54,6 @@ x |>
 \seealso{
 Other modeling: 
 \code{\link{model_name.mod_cpt}()},
-\code{\link{new_fun_cpt}()}
+\code{\link{whomademe}()}
 }
 \concept{modeling}

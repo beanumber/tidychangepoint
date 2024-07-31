@@ -4,7 +4,6 @@
 \alias{new_fun_cpt}
 \alias{validate_fun_cpt}
 \alias{fun_cpt}
-\alias{whomademe}
 \title{Class for model-fitting functions}
 \usage{
 new_fun_cpt(x, ...)
@@ -12,35 +11,36 @@ new_fun_cpt(x, ...)
 validate_fun_cpt(x)
 
 fun_cpt(x, ...)
-
-whomademe(x, ...)
 }
 \arguments{
-\item{x}{A \code{character} giving the name of a model. Typically the result of
-\code{\link[=model_name]{model_name()}}.}
+\item{x}{a \code{character} giving the name of a model-fitting function}
 
 \item{...}{currently ignored}
-}
-\value{
-\itemize{
-\item \code{\link[=whomademe]{whomademe()}}: A function
-}
 }
 \description{
 Class for model-fitting functions
 }
 \details{
+All model-fitting functions must be registered through a call to \code{\link[=fun_cpt]{fun_cpt()}}.
+
 All model-fitting functions must take at least three arguments:
-\code{x} (a time series),
-\code{tau} (a set of changepoint indices), and the dots \code{...}.
+\itemize{
+\item \code{x} (a time series),
+\item \code{tau} (a set of changepoint indices)
+\item \code{...}.
+}
+
 See \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}},
 }
 \examples{
+# Register a model-fitting function
 f <- fun_cpt("fit_meanvar")
+
+# Verify that it now has class `fun_cpt`
 str(f)
+
+# Use it
 f(CET, 42)
-f <- whomademe(fit_meanshift_norm(CET, tau = 42))
-str(f)
 }
 \seealso{
 Other model-fitting: 
@@ -48,10 +48,5 @@ Other model-fitting:
 \code{\link{fit_meanshift}()},
 \code{\link{fit_meanvar}()},
 \code{\link{fit_nhpp}()}
-
-Other modeling: 
-\code{\link{model_args.seg_cpt}()},
-\code{\link{model_name.mod_cpt}()}
 }
 \concept{model-fitting}
-\concept{modeling}

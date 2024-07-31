@@ -5,7 +5,6 @@
 \alias{fit_meanshift2}
 \alias{fit_meanshift_norm}
 \alias{fit_meanshift_lnorm}
-\alias{logLik.meanshift_lnorm}
 \alias{fit_meanshift_norm_ar1}
 \title{Fast implementation of meanshift model}
 \usage{
@@ -16,8 +15,6 @@ fit_meanshift2(x, tau, ...)
 fit_meanshift_norm(x, tau, ...)
 
 fit_meanshift_lnorm(x, tau, ...)
-
-\method{logLik}{meanshift_lnorm}(object, ...)
 
 fit_meanshift_norm_ar1(x, tau, ...)
 }
@@ -31,9 +28,6 @@ Should match R distribution function naming conventions
 (e.g., "norm" for the Normal distribution, etc.)}
 
 \item{...}{arguments passed to \code{\link[stats:lm]{stats::lm()}}}
-
-\item{object}{any object from which a log-likelihood value, or a
-   contribution to a log-likelihood value, can be extracted.}
 }
 \value{
 A \linkS4class{mod_cpt} object.
