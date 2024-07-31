@@ -60,7 +60,7 @@
 
 
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
-<dd><p>arguments passed to <code><a href="https://rdrr.io/r/stats/lm.html" class="external-link">stats::lm()</a></code></p></dd>
+<dd><p>currently ignored</p></dd>
 
 </dl></div>
     <div class="section level2">
@@ -68,8 +68,16 @@
     <p>A <a href="mod_cpt-class.html">mod_cpt</a> object.</p>
     </div>
     <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>In a mean-variance model, both the means and variances are allowed to vary
+across regions.
+Thus, this model fits a separate \(\mu_j\) and \(\sigma_j\) for each
+region \(j\).</p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p>Other model-fitting:
+    <div class="dont-index"><p><code><a href="https://rdrr.io/pkg/changepoint/man/cpt.meanvar.html" class="external-link">changepoint::cpt.meanvar()</a></code></p>
+<p>Other model-fitting:
 <code><a href="fit_lmshift.html">fit_lmshift</a>()</code>,
 <code><a href="fit_meanshift.html">fit_meanshift</a>()</code>,
 <code><a href="fit_nhpp.html">fit_nhpp_region</a>()</code>,
@@ -78,7 +86,8 @@
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">fit_meanvar</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">42</span>, <span class="fl">330</span><span class="op">)</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Fit a mean-variance model</span></span></span>
+<span class="r-in"><span><span class="fu">fit_meanvar</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">42</span>, <span class="fl">330</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:362] from 1 to 362: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : num [1:2] 42 330</span>
@@ -91,6 +100,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:362] 8.68 8.68 8.68 8.68 8.68 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanvar"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

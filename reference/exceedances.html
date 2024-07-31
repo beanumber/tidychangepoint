@@ -91,7 +91,9 @@ that exceed the <code>threshold</code>.</p>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="fit_nhpp.html">fit_nhpp</a></span><span class="op">(</span><span class="va">DataCPSim</span>, tau <span class="op">=</span> <span class="fl">826</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">exceedances</span><span class="op">(</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Retrieve exceedances of the series mean</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="fit_nhpp.html">fit_nhpp</a></span><span class="op">(</span><span class="va">DataCPSim</span>, tau <span class="op">=</span> <span class="fl">826</span><span class="op">)</span> <span class="op">|&gt;</span> </span></span>
+<span class="r-in"><span>  <span class="fu">exceedances</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   [1]   20   51   60  221  226  233  271  308  354  415  488  548  553  556  557</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [16]  561  562  566  571  575  581  583  589  590  596  598  604  605  609  613</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [31]  614  615  618  619  621  623  628  629  633  634  642  645  646  647  649</span>
@@ -116,7 +118,10 @@ that exceed the <code>threshold</code>.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [316] 1052 1053 1054 1055 1056 1057 1058 1059 1060 1061 1062 1063 1064 1065 1066</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [331] 1067 1068 1069 1070 1071 1072 1073 1074 1075 1076 1077 1078 1079 1080 1081</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [346] 1082 1083 1084 1085 1086 1087 1088 1089 1090 1091 1092 1093 1094 1095 1096</span>
-<span class="r-in"><span><span class="fu"><a href="fit_nhpp.html">fit_nhpp</a></span><span class="op">(</span><span class="va">DataCPSim</span>, tau <span class="op">=</span> <span class="fl">826</span>, threshold <span class="op">=</span> <span class="fl">200</span><span class="op">)</span> <span class="op">|&gt;</span> <span class="fu">exceedances</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Retrieve exceedances of a supplied threshold</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="fit_nhpp.html">fit_nhpp</a></span><span class="op">(</span><span class="va">DataCPSim</span>, tau <span class="op">=</span> <span class="fl">826</span>, threshold <span class="op">=</span> <span class="fl">200</span><span class="op">)</span> <span class="op">|&gt;</span> </span></span>
+<span class="r-in"><span>  <span class="fu">exceedances</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  [1]  953  973  982  988  998  999 1003 1007 1018 1032 1033 1039 1041 1049 1055</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [16] 1058 1064 1066 1070 1087 1089</span>
 </code></pre></div>

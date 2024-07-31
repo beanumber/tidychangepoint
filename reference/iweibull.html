@@ -48,15 +48,7 @@
 <span></span>
 <span><span class="fu">mweibull</span><span class="op">(</span><span class="va">x</span>, <span class="va">shape</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">parameters_weibull</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">log_likelihood_region_weibull</span><span class="op">(</span><span class="va">t</span>, <span class="va">tau_left</span>, <span class="va">tau_right</span>, <span class="va">theta</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">log_prior_region_weibull</span><span class="op">(</span><span class="va">theta</span>, params <span class="op">=</span> <span class="fu">parameters_weibull</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">D_log_prior_region_weibull</span><span class="op">(</span><span class="va">theta</span>, params <span class="op">=</span> <span class="fu">parameters_weibull</span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">D_log_likelihood_region_weibull</span><span class="op">(</span><span class="va">t</span>, <span class="va">tau_left</span>, <span class="va">tau_right</span>, <span class="va">theta</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">parameters_weibull</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -78,43 +70,42 @@
 <dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
 <dd><p>currently ignored</p></dd>
 
-
-<dt id="arg-t">t<a class="anchor" aria-label="anchor" href="#arg-t"></a></dt>
-<dd><p>vector of exceedances</p></dd>
-
-
-<dt id="arg-tau-left">tau_left<a class="anchor" aria-label="anchor" href="#arg-tau-left"></a></dt>
-<dd><p>valor del primer punto de cambio</p></dd>
-
-
-<dt id="arg-tau-right">tau_right<a class="anchor" aria-label="anchor" href="#arg-tau-right"></a></dt>
-<dd><p>valor del segundo punto de cambio</p></dd>
-
-
-<dt id="arg-theta">theta<a class="anchor" aria-label="anchor" href="#arg-theta"></a></dt>
-<dd><p>vector de parámetros de verosimilitud del NHPP</p></dd>
-
-
-<dt id="arg-params">params<a class="anchor" aria-label="anchor" href="#arg-params"></a></dt>
-<dd><p>Possibly modified output from <code>parameters_weibull()</code></p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
-    <p>regresa la evaluación</p>
-<p>regresa la evaluación</p>
+    <p>A numeric vector</p>
+    </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>Intensity function for the Weibull distribution.
+$$
+   iweibull(x) = \left( \frac{shape}{scale} \right) \cdot
+                 \left( \frac{x}{scale} \right)^{shape - 1}
+ $$</p>
+<p>Mean intensity function for the Weibull distribution.
+$$
+   mweibull(x) = \left( \frac{x}{scale} \right)^{shape}
+ $$</p>
+<p><code>parameters_weibull()</code> returns a <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> with two components: <code>shape</code>
+and <code>scale</code>, each of which is a <code><a href="https://rdrr.io/r/base/list.html" class="external-link">list()</a></code> of distribution parameters.
+These parameters are used to define the prior distributions for the
+hyperparameters.</p>
     </div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/r/stats/Weibull.html" class="external-link">stats::dweibull()</a></code></p></div>
+    <div class="dont-index"><p><code><a href="https://rdrr.io/r/stats/Weibull.html" class="external-link">stats::dweibull()</a></code></p>
+<p><code><a href="https://rdrr.io/r/stats/GammaDist.html" class="external-link">stats::dgamma()</a></code></p></div>
     </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">iweibull</span><span class="op">(</span><span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Compute the intensities and plot them</span></span></span>
+<span class="r-in"><span><span class="fu">iweibull</span><span class="op">(</span><span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, y <span class="op">=</span> <span class="fu">iweibull</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, shape <span class="op">=</span> <span class="fl">2</span>, scale <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="iweibull-1.png" alt="" width="700" height="433"></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Compute various values of the distribution</span></span></span>
 <span class="r-in"><span><span class="fu">mweibull</span><span class="op">(</span><span class="fl">1</span>, shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, y <span class="op">=</span> <span class="fu">mweibull</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, shape <span class="op">=</span> <span class="fl">1</span>, scale <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
@@ -130,16 +121,49 @@
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span>x <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, y <span class="op">=</span> <span class="fu">mweibull</span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span>, shape <span class="op">=</span> <span class="fl">2</span>, scale <span class="op">=</span> <span class="fl">100</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-plt img"><img src="iweibull-7.png" alt="" width="700" height="433"></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">log_likelihood_region_weibull</span><span class="op">(</span><span class="va">DataCPSim</span>, <span class="fl">0</span>, <span class="fl">575</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -3319.222</span>
+<span class="r-in"><span><span class="co"># Generate prior distribution hyperparameters</span></span></span>
+<span class="r-in"><span><span class="fu">parameters_weibull</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $shape</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $shape$dist</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "gamma"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $shape$shape</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $shape$rate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $shape$initial_value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.1</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $shape$lower_bound</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1e-04</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $shape$upper_bound</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 10</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $scale</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $scale$dist</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "gamma"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $scale$shape</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 3</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $scale$rate</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1.2</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $scale$initial_value</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 0.5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $scale$lower_bound</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1e-08</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> $scale$upper_bound</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 1e+05</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">log_prior_region_weibull</span><span class="op">(</span>theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] -7.054518</span>
-<span class="r-in"><span><span class="fu">D_log_prior_region_weibull</span><span class="op">(</span>theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1]  1.0 -2.9</span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">D_log_likelihood_region_weibull</span><span class="op">(</span><span class="va">DataCPSim</span>, <span class="fl">0</span>, <span class="fl">575</span>, theta <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">0.5</span>, <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 5661.784 -269.761</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
