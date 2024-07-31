@@ -5,7 +5,7 @@ articles:
   articles/climate_data: climate_data.html
   articles/coen: coen.html
   tidychangepoint: tidychangepoint.html
-last_built: 2024-07-31T13:57Z
+last_built: 2024-07-31T14:20Z
 urls:
   reference: https://beanumber.github.io/tidychangepoint/reference
   article: https://beanumber.github.io/tidychangepoint/articles
