@@ -149,7 +149,7 @@ fit_meanshift_lnorm <- function(x, tau, ...) {
   return(out)
 }
 
-#' @rdname fit_meanshift
+#' @rdname reexports
 #' @inheritParams stats::logLik
 #' @export
 logLik.meanshift_lnorm <- function(object, ...) {

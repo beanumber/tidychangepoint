@@ -110,7 +110,7 @@ seg_params <- function(object, ...) UseMethod("seg_params")
 #' 
 #' Models also implement `model_name()`. 
 #' 
-#' @return - [model_name()]: A `character` vector of length 1.
+#' @return A `character` vector of length 1.
 #' @inheritParams fitness
 #' @export
 #' @family modeling
