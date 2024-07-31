@@ -34,6 +34,7 @@
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/fit_nhpp.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/fit_nhpp_region.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/fitness.html</loc></url>
+<url><loc>https://beanumber.github.io/tidychangepoint/reference/fun_cpt.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/iweibull.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/log_likelihood_region_weibull.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/mcdf.html</loc></url>
@@ -43,7 +44,6 @@
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/model_args.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/model_name.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/model_variance.html</loc></url>
-<url><loc>https://beanumber.github.io/tidychangepoint/reference/new_fun_cpt.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/pad_tau.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/plot.tidyga.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/plot_best_chromosome.html</loc></url>
@@ -63,5 +63,6 @@
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/tidychangepoint-package.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/tidycpt-class.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/vec_ptype2.logLik.logLik.html</loc></url>
+<url><loc>https://beanumber.github.io/tidychangepoint/reference/whomademe.html</loc></url>
 </urlset>
 
