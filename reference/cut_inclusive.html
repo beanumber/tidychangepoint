@@ -46,9 +46,7 @@
     <h2 id="ref-usage">Usage<a class="anchor" aria-label="anchor" href="#ref-usage"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">cut_inclusive</span><span class="op">(</span><span class="va">x</span>, <span class="va">tau</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu">split_by_tau</span><span class="op">(</span><span class="va">x</span>, <span class="va">tau</span><span class="op">)</span></span>
-<span></span>
-<span><span class="fu">regions_by_tau</span><span class="op">(</span><span class="va">n</span>, <span class="va">tau</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">split_by_tau</span><span class="op">(</span><span class="va">x</span>, <span class="va">tau</span><span class="op">)</span></span></code></pre></div>
     </div>
 
     <div class="section level2">
@@ -62,10 +60,6 @@
 <dt id="arg-tau">tau<a class="anchor" aria-label="anchor" href="#arg-tau"></a></dt>
 <dd><p>a numeric vector of changepoint indices</p></dd>
 
-
-<dt id="arg-n">n<a class="anchor" aria-label="anchor" href="#arg-n"></a></dt>
-<dd><p>the length of the original time series</p></dd>
-
 </dl></div>
     <div class="section level2">
     <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
@@ -73,7 +67,6 @@
 <ul><li><p><code>cut_inclusive()</code> a <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">base::factor()</a></code> of half-open intervals</p></li>
 </ul><ul><li><p><code>split_by_tau()</code> a named <code><a href="https://rdrr.io/r/base/list.html" class="external-link">base::list()</a></code> of numeric
 vectors</p></li>
-</ul><ul><li><p><code>regions_by_tau()</code> a <code>character</code> of intervals</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
@@ -85,7 +78,6 @@ These non-empty regions can be defined by half-open intervals, starting with
 half-open intervals</p>
 <p><code>split_by_tau()</code> splits a time series into a named <code><a href="https://rdrr.io/r/base/list.html" class="external-link">base::list()</a></code> of numeric
 vectors</p>
-<p><code>regions_by_tau()</code> returns the intervals that define the regions</p>
     </div>
 
     <div class="section level2">
@@ -307,10 +299,6 @@ vectors</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [260] 145.28928  85.79995 220.96699 127.18015 215.14311 190.93505 156.44133</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [267] 164.06449 164.81190  85.39927 179.14410 135.09159</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="co"># Return a character of factor labels</span></span></span>
-<span class="r-in"><span><span class="fu">regions_by_tau</span><span class="op">(</span><span class="fl">1096</span>, <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">365</span>, <span class="fl">826</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "[0,365)"       "[365,826)"     "[826,1.1e+03]"</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
