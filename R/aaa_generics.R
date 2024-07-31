@@ -1,5 +1,4 @@
 #' Extract changepoints
-#' 
 #' @param x A [tidycpt-class], `segmenter`, or [mod_cpt] object
 #' @param ... arguments passed to methods
 #' @description
@@ -14,7 +13,7 @@
 #' @returns a numeric vector of changepoint indices, or, if `use_labels` is 
 #' `TRUE`, a `character` of time labels. 
 #' @seealso [wbs::changepoints()]
-#' @family tidychangepoint-generics
+#' @family tidycpt-generics
 #' @export
 changepoints <- function(x, ...) UseMethod("changepoints")
 
@@ -40,6 +39,7 @@ changepoints.default <- function(x, ...) {
 #' the `$` or `[` notation for subsetting.
 #' 
 #' [as.segmenter()] simply returns the segmenter of a `tidycpt` object.
+#' @family tidycpt-generics
 #' @returns
 #'   - [as.segmenter()] returns the `segmenter` object of a `tidycpt` object. 
 #'   Note that this could be of
@@ -51,6 +51,7 @@ as.segmenter <- function(object, ...) UseMethod("as.segmenter")
 #' @details
 #' [as.seg_cpt()] takes a wild-caught `segmenter` object of arbitrary class 
 #' and converts it into a [seg_cpt] object. 
+#' @family segmenter-functions
 #' @return
 #'   - [as.seg_cpt()] returns a [seg_cpt] object
 #' @export
@@ -59,7 +60,6 @@ as.seg_cpt <- function(object, ...) UseMethod("as.seg_cpt")
 #' Compute exceedances of a threshold for a time series
 #' 
 #' @inheritParams segment
-#' @family tidychangepoint-generics
 #' @returns An ordered `integer` vector giving the indices of the values of `x`
 #' that exceed the `threshold`.
 #' @export
@@ -83,7 +83,8 @@ exceedances.default <- function(x, ...) {
 #' This function returns the value of that metric for the changepoint set 
 #' implied by the object provided. 
 #' 
-#' @family tidychangepoint-generics
+#' @family tidycpt-generics
+#' @family segmenter-functions
 #' @returns A named `double` vector with the fitness value.
 #' @export
 fitness <- function(object, ...) UseMethod("fitness")
@@ -95,7 +96,7 @@ fitness <- function(object, ...) UseMethod("fitness")
 #' This function retrieves an informative set of those parameter values.
 #' @returns A named `list` of parameters with their values. 
 #' 
-#' @family tidychangepoint-generics
+#' @family segmenter-functions
 #' @export
 seg_params <- function(object, ...) UseMethod("seg_params")
 
@@ -113,7 +114,8 @@ seg_params <- function(object, ...) UseMethod("seg_params")
 #' @return A `character` vector of length 1.
 #' @inheritParams fitness
 #' @export
-#' @family modeling
+#' @family model-fitting
+#' @family tidycpt-generics
 #' @examples
 #' # Segment a time series using PELT
 #' x <- segment(CET, method = "pelt")
@@ -161,7 +163,8 @@ model_name.character <- function(object, ...) {
 #' @inheritParams fitness
 #' @export
 #' @return A named `list` of arguments, or `NULL`
-#' @family modeling
+#' @family model-fitting
+#' @family segmenter-functions
 #' @examples
 #' # Segment a time series using Coen's algorithm
 #' x <- segment(CET, method = "ga-coen", maxiter = 3)
@@ -193,6 +196,7 @@ model_args.default <- function(object, ...) {
 #' `model` component of that object.
 #' However, when applied to a `segmenter` object, [as.model()] attempts to 
 #' converts that object into a [mod_cpt] model object.
+#' @family tidycpt-generics
 #' @return 
 #'   - [as.model()] returns a [mod_cpt] model object
 #' @export
@@ -316,6 +320,6 @@ evaluate_cpts <- function(x, ...) UseMethod("evaluate_cpts")
 #' Depending on the input, this function returns a diagnostic plot. 
 #' 
 #' @returns A [ggplot2::ggplot()] object
-#' @family tidychangepoint-generics
+#' @family tidycpt-generics
 #' @export
 diagnose <- function(x, ...) UseMethod("diagnose")

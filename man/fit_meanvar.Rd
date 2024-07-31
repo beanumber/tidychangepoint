@@ -37,6 +37,9 @@ Other model-fitting:
 \code{\link{fit_lmshift}()},
 \code{\link{fit_meanshift}()},
 \code{\link{fit_nhpp}()},
-\code{\link{new_fun_cpt}()}
+\code{\link{model_args}()},
+\code{\link{model_name}()},
+\code{\link{new_fun_cpt}()},
+\code{\link{whomademe}()}
 }
 \concept{model-fitting}

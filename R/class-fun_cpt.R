@@ -61,7 +61,7 @@ fun_cpt <- function(x, ...) {
 #' [whomademe()] returns that function. 
 #' 
 #' @returns A `function`
-#' @family modeling
+#' @family model-fitting
 #' @export
 #' @examples
 #' # Get the function that made a model

@@ -30,8 +30,13 @@ str(f)
 
 }
 \seealso{
-Other modeling: 
-\code{\link{model_args.seg_cpt}()},
-\code{\link{model_name.mod_cpt}()}
+Other model-fitting: 
+\code{\link{fit_lmshift}()},
+\code{\link{fit_meanshift}()},
+\code{\link{fit_meanvar}()},
+\code{\link{fit_nhpp}()},
+\code{\link{model_args}()},
+\code{\link{model_name}()},
+\code{\link{new_fun_cpt}()}
 }
-\concept{modeling}
+\concept{model-fitting}
