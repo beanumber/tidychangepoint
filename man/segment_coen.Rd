@@ -48,10 +48,8 @@ A \code{cpt_gbmdl} object
 This implementation is deprecated. Please see \code{\link[=segment_ga_coen]{segment_ga_coen()}}
 }
 \examples{
-\dontrun{
-x <- segment_coen(DataCPSim, num_generations = 10)
-# |>
-x <- segment_ga_coen(DataCPSim, maxiter = 10)
+\donttest{
+x <- segment_coen(DataCPSim, num_generations = 5)
 }
 
 }

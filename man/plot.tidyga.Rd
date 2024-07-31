@@ -18,7 +18,7 @@ A \code{\link[ggplot2:ggplot]{ggplot2::ggplot()}} object.
 Plot GA information
 }
 \examples{
-\dontrun{
+\donttest{
 x <- segment(DataCPSim, method = "ga-coen", maxiter = 5)
 plot(x$segmenter)
 }

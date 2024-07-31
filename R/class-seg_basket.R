@@ -204,7 +204,7 @@ plot.seg_basket <- function(x, ...) {
 #' @rdname diagnose
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # For Coen's algorithm, show the histogram of changepoint selections
 #' x <- segment(DataCPSim, method = "coen", num_generations = 3)
 #' x |>
@@ -232,7 +232,7 @@ diagnose.seg_basket <- function(x, ...) {
 #' @export
 #' @returns A [ggplot2::ggplot()] object
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Segment a time series using Coen's algorithm
 #' x <- segment(DataCPSim, method = "coen", num_generations = 3)
 #' 
@@ -276,7 +276,7 @@ plot_best_chromosome <- function(x) {
 #' 
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' # Segment a time series using Coen's algorithm
 #' x <- segment(DataCPSim, method = "coen", num_generations = 3)
 #' 

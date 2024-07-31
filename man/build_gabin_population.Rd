@@ -41,10 +41,11 @@ probability to the natural logarithm of the length of the time series.
 }
 }
 \examples{
-\dontrun{
+# Build a function to generate the population
 f <- build_gabin_population(CET)
-segment(CET, method = "ga", population = f)
-}
+
+# Segment the time series using the population generation function
+segment(CET, method = "ga", population = f, maxiter = 5)
 f <- log_gabin_population(CET)
 segment(CET, method = "ga", population = f, maxiter = 10)
 }

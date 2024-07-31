@@ -69,7 +69,7 @@ nobs.ga <- function(object, ...) {
 #' @returns A [ggplot2::ggplot()] object.
 #' @export
 #' @examples
-#' \dontrun{
+#' \donttest{
 #' x <- segment(DataCPSim, method = "ga-coen", maxiter = 5)
 #' plot(x$segmenter)
 #' }
@@ -169,10 +169,12 @@ seg_params.ga <- function(object, ...) {
 #' @export
 #' @seealso [GA::gabin_Population()], [segment_ga()]
 #' @examples
-#' \dontrun{
+#' # Build a function to generate the population
 #' f <- build_gabin_population(CET)
-#' segment(CET, method = "ga", population = f)
-#' }
+#' 
+#' # Segment the time series using the population generation function
+#' segment(CET, method = "ga", population = f, maxiter = 5)
+
 
 build_gabin_population <- function(x, ...) {
   p <- list(

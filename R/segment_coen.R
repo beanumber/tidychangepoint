@@ -54,10 +54,8 @@ globalVariables(
 #' @keywords internal
 #' @export
 #' @examples
-#' \dontrun{
-#' x <- segment_coen(DataCPSim, num_generations = 10)
-#' # |>
-#' x <- segment_ga_coen(DataCPSim, maxiter = 10)
+#' \donttest{
+#' x <- segment_coen(DataCPSim, num_generations = 5)
 #' }
 #' 
 segment_coen <- function(x, 

@@ -43,11 +43,18 @@ the \code{model_fn} and \code{penalty_fn} arguments).
 Segmenting functions for various genetic algorithms
 }
 \details{
+\code{\link[=segment_ga]{segment_ga()}} uses the genetic algorithm in \code{\link[GA:ga]{GA::ga()}} to "evolve" a random
+set of candidate changepoint sets, using the penalized objective function
+specified by \code{penalty_fn}.
+By default, the normal \code{meanshift} model is fit (see \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}})
+and the \link{BIC} penalty is applied.
+
 \itemize{
 \item \code{\link[=segment_ga_shi]{segment_ga_shi()}}: Shi's algorithm is the algorithm used in
 \doi{10.1175/JCLI-D-21-0489.1}.
 Note that in order to achieve the reported results you have to run the algorithm
-for a really long time. Pass the values \code{maxiter} = 50000 and \code{run} = 10000
+for a really long time.
+Pass the values \code{maxiter} = 50000 and \code{run} = 10000
 to \code{\link[GA:ga]{GA::ga()}} using the dots.
 }
 
@@ -69,19 +76,24 @@ that this function uses \code{\link[=log_gabin_population]{log_gabin_population(
 }
 }
 \examples{
-\dontrun{
-res <- segment_ga(DataCPSim, maxiter = 10)
+# Segment a time series using a genetic algorithm
+res <- segment_ga(CET, maxiter = 5)
 summary(res)
 str(res)
 plot(res)
-# Shi's algorithm
-x <- segment(CET, method = "ga-shi", maxiter = 50)
+
+\donttest{
+# Segment a time series using Shi's algorithm
+x <- segment(CET, method = "ga-shi", maxiter = 5)
 str(x)
-# GeneticBMDL
-y <- segment(CET, method = "ga-coen", maxiter = 20)
+
+# Segment a time series using Coen's algorithm
+y <- segment(CET, method = "ga-coen", maxiter = 5)
 changepoints(y)
 
-z <- segment(CET, method = "ga-coen", maxiter = 10, model_fn_args = list(threshold = 2))
+# Segment a time series using Coen's algorithm and an arbitrary threshold
+z <- segment(CET, method = "ga-coen", maxiter = 5, 
+             model_fn_args = list(threshold = 2))
 changepoints(z)
 }
 \dontrun{
@@ -89,10 +101,12 @@ changepoints(z)
 x <- segment(CET, method = "ga-shi", maxiter = 500, run = 100)
 changepoints(x)
 
+# This will also take a really long time!
 y <- segment(CET, method = "ga", model_fn = fit_lmshift, penalty_fn = BIC, 
-  popSize = 200, maxiter = 5000, run = 1000, model_fn_args = list(trends = TRUE), 
-  population = build_gabin_population(CET))
-
+  popSize = 200, maxiter = 5000, run = 1000, 
+  model_fn_args = list(trends = TRUE), 
+  population = build_gabin_population(CET)
+)
 }
 
 \dontrun{

@@ -30,7 +30,7 @@ sets change across the generations of evolution.
 the best candidate changepoint sets in each generation.
 }
 \examples{
-\dontrun{
+\donttest{
 # Segment a time series using Coen's algorithm
 x <- segment(DataCPSim, method = "coen", num_generations = 3)
 
@@ -39,7 +39,7 @@ x |>
   as.segmenter() |>
   plot_best_chromosome()
 }
-\dontrun{
+\donttest{
 # Segment a time series using Coen's algorithm
 x <- segment(DataCPSim, method = "coen", num_generations = 3)
 

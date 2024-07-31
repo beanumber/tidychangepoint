@@ -22,11 +22,20 @@ A \code{cpt} object returned by \code{\link[changepoint:cpt.meanvar]{changepoint
 \description{
 Segmenting functions for the PELT algorithm
 }
+\details{
+This function wraps either \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}} or
+\code{\link[changepoint:cpt.mean]{changepoint::cpt.mean()}}.
+}
 \examples{
+# Segment a time series using PELT
 res <- segment_pelt(DataCPSim)
 res
 str(res)
-segment_pelt(as.ts(CET))
-segment_pelt(as.ts(CET), penalty = "BIC")
-segment_pelt(as.ts(CET), model_fn = fit_meanshift_norm, penalty = "BIC")
+
+# Segment as time series while specifying a penalty function
+segment_pelt(DataCPSim, penalty = "BIC")
+
+# Segment a time series while specifying a meanshift normal model
+segment_pelt(DataCPSim, model_fn = fit_meanshift_norm, penalty = "BIC")
+
 }

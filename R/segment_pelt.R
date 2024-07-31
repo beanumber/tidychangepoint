@@ -8,17 +8,25 @@
 #' See, for example, [fit_meanshift_norm()]. The default is [fit_meanvar()].
 #' @param ... arguments passed to [changepoint::cpt.meanvar()] or 
 #' [changepoint::cpt.mean()]
+#' @details
+#' This function wraps either [changepoint::cpt.meanvar()] or 
+#' [changepoint::cpt.mean()].
+#' 
 #' @returns A `cpt` object returned by [changepoint::cpt.meanvar()] or 
 #' [changepoint::cpt.mean()]
 #' @export
 #' @examples
+#' # Segment a time series using PELT
 #' res <- segment_pelt(DataCPSim)
 #' res
 #' str(res)
-#' segment_pelt(as.ts(CET))
-#' segment_pelt(as.ts(CET), penalty = "BIC")
-#' segment_pelt(as.ts(CET), model_fn = fit_meanshift_norm, penalty = "BIC")
-
+#' 
+#' # Segment as time series while specifying a penalty function
+#' segment_pelt(DataCPSim, penalty = "BIC")
+#' 
+#' # Segment a time series while specifying a meanshift normal model
+#' segment_pelt(DataCPSim, model_fn = fit_meanshift_norm, penalty = "BIC")
+#' 
 segment_pelt <- function(x, model_fn = fit_meanvar, ...) {
   if (!inherits(model_fn, "fun_cpt")) {
     model_fn <- fun_cpt(model_fn)

@@ -34,7 +34,7 @@ Depending on the input, this function returns a diagnostic plot.
 # For meanshift models, show the distribution of the residuals by region
 fit_meanshift_norm(CET, tau = 330) |>
   diagnose()
-\dontrun{
+\donttest{
 # For Coen's algorithm, show the histogram of changepoint selections
 x <- segment(DataCPSim, method = "coen", num_generations = 3)
 x |>
