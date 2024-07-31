@@ -211,21 +211,6 @@ split_by_tau <- function(x, tau) {
   split(x, idx)
 }
 
-#' @rdname cut_inclusive
-#' @export
-#' @details
-#' [regions_by_tau()] returns the intervals that define the regions
-#' @returns 
-#'   - [regions_by_tau()] a `character` of intervals
-#' @examples
-#' # Return a character of factor labels
-#' regions_by_tau(1096, c(365, 826))
-#' 
-regions_by_tau <- function(n, tau) {
-  cut_inclusive(1:n, pad_tau(tau, n)) |>
-    levels()
-}
-
 #' Simulate time series with known changepoint sets
 #' @param n Number of true changepoints in set
 #' @param sd Standard deviation passed to [stats::rnorm()]

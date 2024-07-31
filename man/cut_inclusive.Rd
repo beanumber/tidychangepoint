@@ -3,21 +3,16 @@
 \name{cut_inclusive}
 \alias{cut_inclusive}
 \alias{split_by_tau}
-\alias{regions_by_tau}
 \title{Use a changepoint set to break a time series into regions}
 \usage{
 cut_inclusive(x, tau)
 
 split_by_tau(x, tau)
-
-regions_by_tau(n, tau)
 }
 \arguments{
 \item{x}{A numeric vector}
 
 \item{tau}{a numeric vector of changepoint indices}
-
-\item{n}{the length of the original time series}
 }
 \value{
 \itemize{
@@ -27,10 +22,6 @@ regions_by_tau(n, tau)
 \itemize{
 \item \code{\link[=split_by_tau]{split_by_tau()}} a named \code{\link[base:list]{base::list()}} of numeric
 vectors
-}
-
-\itemize{
-\item \code{\link[=regions_by_tau]{regions_by_tau()}} a \code{character} of intervals
 }
 }
 \description{
@@ -47,8 +38,6 @@ half-open intervals
 
 \code{\link[=split_by_tau]{split_by_tau()}} splits a time series into a named \code{\link[base:list]{base::list()}} of numeric
 vectors
-
-\code{\link[=regions_by_tau]{regions_by_tau()}} returns the intervals that define the regions
 }
 \examples{
 n <- length(CET)
@@ -58,8 +47,5 @@ cut_inclusive(1:n, tau = pad_tau(c(42, 81, 330), n))
 
 # Return a list of observations
 split_by_tau(DataCPSim, c(365, 826))
-
-# Return a character of factor labels
-regions_by_tau(1096, c(365, 826))
 
 }
