@@ -70,10 +70,16 @@ See, for example, <code><a href="fit_meanshift.html">fit_meanshift_norm()</a></c
     <p>A <code>cpt</code> object returned by <code><a href="https://rdrr.io/pkg/changepoint/man/cpt.meanvar.html" class="external-link">changepoint::cpt.meanvar()</a></code> or
 <code><a href="https://rdrr.io/pkg/changepoint/man/cpt.mean.html" class="external-link">changepoint::cpt.mean()</a></code></p>
     </div>
+    <div class="section level2">
+    <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
+    <p>This function wraps either <code><a href="https://rdrr.io/pkg/changepoint/man/cpt.meanvar.html" class="external-link">changepoint::cpt.meanvar()</a></code> or
+<code><a href="https://rdrr.io/pkg/changepoint/man/cpt.mean.html" class="external-link">changepoint::cpt.mean()</a></code>.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
-    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">segment_pelt</span><span class="op">(</span><span class="va">DataCPSim</span><span class="op">)</span></span></span>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Segment a time series using PELT</span></span></span>
+<span class="r-in"><span><span class="va">res</span> <span class="op">&lt;-</span> <span class="fu">segment_pelt</span><span class="op">(</span><span class="va">DataCPSim</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">res</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Class 'cpt' : Changepoint Object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
@@ -107,7 +113,9 @@ See, for example, <code><a href="fit_meanshift.html">fit_meanshift_norm()</a></c
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ variance: num [1:4] 127 371 921 2406</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ date     : chr "Wed Apr 24 21:56:29 2024"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ version  : chr "2.2.4"</span>
-<span class="r-in"><span><span class="fu">segment_pelt</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/ts.html" class="external-link">as.ts</a></span><span class="op">(</span><span class="va">CET</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Segment as time series while specifying a penalty function</span></span></span>
+<span class="r-in"><span><span class="fu">segment_pelt</span><span class="op">(</span><span class="va">DataCPSim</span>, penalty <span class="op">=</span> <span class="st">"BIC"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Class 'cpt' : Changepoint Object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est </span>
@@ -120,28 +128,13 @@ See, for example, <code><a href="fit_meanshift.html">fit_meanshift_norm()</a></c
 <span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint type      : Change in mean and variance </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method of analysis    : PELT </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Test Statistic  : Normal </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Type of penalty       : MBIC with value, 23.56658 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Type of penalty       : BIC with value, 20.99827 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Minimum Segment Length : 2 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Maximum no. of cpts   : Inf </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint Locations : 55 57 309 311 330 </span>
-<span class="r-in"><span><span class="fu">segment_pelt</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/ts.html" class="external-link">as.ts</a></span><span class="op">(</span><span class="va">CET</span><span class="op">)</span>, penalty <span class="op">=</span> <span class="st">"BIC"</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Class 'cpt' : Changepoint Object</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Wed Apr 24 21:56:29 2024 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created Using changepoint version 2.2.4 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint type      : Change in mean and variance </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Method of analysis    : PELT </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Test Statistic  : Normal </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Type of penalty       : BIC with value, 17.67493 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Minimum Segment Length : 2 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Maximum no. of cpts   : Inf </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint Locations : 55 57 234 309 311 330 </span>
-<span class="r-in"><span><span class="fu">segment_pelt</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/ts.html" class="external-link">as.ts</a></span><span class="op">(</span><span class="va">CET</span><span class="op">)</span>, model_fn <span class="op">=</span> <span class="va">fit_meanshift_norm</span>, penalty <span class="op">=</span> <span class="st">"BIC"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint Locations : 547 822 972 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Segment a time series while specifying a meanshift normal model</span></span></span>
+<span class="r-in"><span><span class="fu">segment_pelt</span><span class="op">(</span><span class="va">DataCPSim</span>, model_fn <span class="op">=</span> <span class="va">fit_meanshift_norm</span>, penalty <span class="op">=</span> <span class="st">"BIC"</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Class 'cpt' : Changepoint Object</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est </span>
@@ -154,10 +147,11 @@ See, for example, <code><a href="fit_meanshift.html">fit_meanshift_norm()</a></c
 <span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint type      : Change in mean </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Method of analysis    : PELT </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Test Statistic  : Normal </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Type of penalty       : BIC with value, 11.78329 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Type of penalty       : BIC with value, 13.99884 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Minimum Segment Length : 1 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Maximum no. of cpts   : Inf </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Changepoint Locations : 43 329 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Number of changepoints: 873 </span>
+<span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
