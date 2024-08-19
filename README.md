@@ -3,11 +3,21 @@
 
 <!-- badges: start -->
 [![R-CMD-check](https://github.com/beanumber/tidychangepoint/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/beanumber/tidychangepoint/actions/workflows/R-CMD-check.yaml)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/tidychangepoint)](https://CRAN.R-project.org/package=tidychangepoint)
+[![CRAN RStudio mirror
+downloads](https://cranlogs.r-pkg.org/badges/tidychangepoint)](https://www.r-pkg.org/pkg/tidychangepoint)
 <!-- badges: end -->
 
 ## Usage
 
-To install `tidychangepoint`:
+To install `tidychangepoint` from CRAN:
+
+``` r
+install.packages("tidychangepoint")
+```
+
+To install the development version of `tidychangepoint`:
 
 ``` r
 remotes::install_github("beanumber/tidychangepoint")
@@ -88,14 +98,13 @@ citation("tidychangepoint")
     ## To cite package 'tidychangepoint' in publications use:
     ## 
     ##   Baumer B, Suarez Sierra B, Coen A, Taimal C (????). _tidychangepoint:
-    ##   Facilitate Changepoint Detection Analysis in a Tidy Framework_. R
-    ##   package version 0.0.1,
-    ##   <https://beanumber.github.io/tidychangepoint/>.
+    ##   A Tidy Framework for Changepoint Detection Analysis_. R package
+    ##   version 0.0.1, <https://beanumber.github.io/tidychangepoint/>.
     ## 
     ## A BibTeX entry for LaTeX users is
     ## 
     ##   @Manual{,
-    ##     title = {tidychangepoint: Facilitate Changepoint Detection Analysis in a Tidy Framework},
+    ##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},
     ##     author = {Benjamin S. Baumer and Biviana Marcela {Suarez Sierra} and Arrigo Coen and Carlos A. Taimal},
     ##     note = {R package version 0.0.1},
     ##     url = {https://beanumber.github.io/tidychangepoint/},

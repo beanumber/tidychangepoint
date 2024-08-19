@@ -5,12 +5,21 @@ output: github_document
 # tidychangepoint
 
   <!-- badges: start -->
-  [![R-CMD-check](https://github.com/beanumber/tidychangepoint/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/beanumber/tidychangepoint/actions/workflows/R-CMD-check.yaml)
+[![R-CMD-check](https://github.com/beanumber/tidychangepoint/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/beanumber/tidychangepoint/actions/workflows/R-CMD-check.yaml)
+[![CRAN status](https://www.r-pkg.org/badges/version/tidychangepoint)](https://CRAN.R-project.org/package=tidychangepoint)
+[![CRAN RStudio mirror
+downloads](https://cranlogs.r-pkg.org/badges/tidychangepoint)](https://www.r-pkg.org/pkg/tidychangepoint)
   <!-- badges: end -->
 
 ## Usage
 
-To install `tidychangepoint`:
+To install `tidychangepoint` from CRAN:
+
+```{r, eval=FALSE}
+install.packages("tidychangepoint")
+```
+
+To install the development version of `tidychangepoint`:
 
 ```{r, eval=FALSE}
 remotes::install_github("beanumber/tidychangepoint")
