@@ -61,11 +61,14 @@
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
 </h2>
-<p>To install <code>tidychangepoint</code>:</p>
+<p>To install <code>tidychangepoint</code> from CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"tidychangepoint"</span><span class="op">)</span></span></code></pre></div>
+<p>To install the development version of <code>tidychangepoint</code>:</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"beanumber/tidychangepoint"</span><span class="op">)</span></span></code></pre></div>
 <p>To load it:</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://beanumber.github.io/tidychangepoint/">tidychangepoint</a></span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -73,49 +76,48 @@
 </h2>
 <p>The <code>tidychangepoint</code> package allows you to use any number of algorithms for detecting changepoint sets in univariate time series with a common, <code>tidyverse</code>-compliant interface. Currently, algorithms from <code>changepoint</code>, <code>wbs</code>, and several genetic algorithms made accessible via <code>GA</code> are supported. It also provides model-fitting procedures for commonly-used parametric models, tools for computing various penalty functions, and graphical diagnostic displays.</p>
 <p>Changepoint sets are computed using the <code><a href="reference/segment.html">segment()</a></code> function, which takes a numeric vector that is coercible into a <code>ts</code> object, and a string indicating the algorithm you wish you use. <code><a href="reference/segment.html">segment()</a></code> always returns a <code>tidycpt</code> object.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/segment.html">segment</a></span><span class="op">(</span><span class="va">CET</span>, method <span class="op">=</span> <span class="st">"pelt"</span>, minseglen <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb4"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb4-1"><a href="#cb4-1" tabindex="-1"></a><span class="do">## [1] "tidycpt"</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">## [1] "tidycpt"</span></span></code></pre></div>
 <p>Various methods are available for <code>tidycpt</code> objects. For example, <code><a href="https://rdrr.io/r/stats/ts.html" class="external-link">as.ts()</a></code> returns the original data as <code>ts</code> object, and <code><a href="reference/changepoints.html">changepoints()</a></code> returns the set of changepoint indices.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/changepoints.html">changepoints</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb6"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" tabindex="-1"></a><span class="do">## [1] 237 330</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="do">## [1] 237 330</span></span></code></pre></div>
 <p>If the original time series has time labels, we can also retrieve that information.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/changepoints.html">changepoints</a></span><span class="op">(</span><span class="va">x</span>, use_labels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb8"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" tabindex="-1"></a><span class="do">## [1] "1895-01-01" "1988-01-01"</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="do">## [1] "1895-01-01" "1988-01-01"</span></span></code></pre></div>
 <p>The <code><a href="reference/fitness.html">fitness()</a></code> function returns the both the value and the name of the objective function that the algorithm used to find the optimal changepoint set.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fitness.html">fitness</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb10"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" tabindex="-1"></a><span class="do">##     MBIC </span></span>
-<span id="cb10-2"><a href="#cb10-2" tabindex="-1"></a><span class="do">## 643.5292</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="do">##     MBIC </span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="do">## 643.5292</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <p>Please read <a href="https://beanumber.github.io/changepoint-paper/" class="external-link">the full paper</a> for more details.</p>
 <p>To cite the package, use the following information:</p>
-<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"tidychangepoint"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb12"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" tabindex="-1"></a><span class="do">## Warning in citation("tidychangepoint"): could not determine year for</span></span>
-<span id="cb12-2"><a href="#cb12-2" tabindex="-1"></a><span class="do">## 'tidychangepoint' from package DESCRIPTION file</span></span>
-<span id="cb12-3"><a href="#cb12-3" tabindex="-1"></a></span>
-<span id="cb12-4"><a href="#cb12-4" tabindex="-1"></a><span class="do">## To cite package 'tidychangepoint' in publications use:</span></span>
-<span id="cb12-5"><a href="#cb12-5" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb12-6"><a href="#cb12-6" tabindex="-1"></a><span class="do">##   Baumer B, Suarez Sierra B, Coen A, Taimal C (????). _tidychangepoint:</span></span>
-<span id="cb12-7"><a href="#cb12-7" tabindex="-1"></a><span class="do">##   Facilitate Changepoint Detection Analysis in a Tidy Framework_. R</span></span>
-<span id="cb12-8"><a href="#cb12-8" tabindex="-1"></a><span class="do">##   package version 0.0.1,</span></span>
-<span id="cb12-9"><a href="#cb12-9" tabindex="-1"></a><span class="do">##   &lt;https://beanumber.github.io/tidychangepoint/&gt;.</span></span>
-<span id="cb12-10"><a href="#cb12-10" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb12-11"><a href="#cb12-11" tabindex="-1"></a><span class="do">## A BibTeX entry for LaTeX users is</span></span>
-<span id="cb12-12"><a href="#cb12-12" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb12-13"><a href="#cb12-13" tabindex="-1"></a><span class="do">##   @Manual{,</span></span>
-<span id="cb12-14"><a href="#cb12-14" tabindex="-1"></a><span class="do">##     title = {tidychangepoint: Facilitate Changepoint Detection Analysis in a Tidy Framework},</span></span>
-<span id="cb12-15"><a href="#cb12-15" tabindex="-1"></a><span class="do">##     author = {Benjamin S. Baumer and Biviana Marcela {Suarez Sierra} and Arrigo Coen and Carlos A. Taimal},</span></span>
-<span id="cb12-16"><a href="#cb12-16" tabindex="-1"></a><span class="do">##     note = {R package version 0.0.1},</span></span>
-<span id="cb12-17"><a href="#cb12-17" tabindex="-1"></a><span class="do">##     url = {https://beanumber.github.io/tidychangepoint/},</span></span>
-<span id="cb12-18"><a href="#cb12-18" tabindex="-1"></a><span class="do">##   }</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="do">## Warning in citation("tidychangepoint"): could not determine year for</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="do">## 'tidychangepoint' from package DESCRIPTION file</span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="do">## To cite package 'tidychangepoint' in publications use:</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="do">##   Baumer B, Suarez Sierra B, Coen A, Taimal C (????). _tidychangepoint:</span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="do">##   A Tidy Framework for Changepoint Detection Analysis_. R package</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="do">##   version 0.0.1, &lt;https://beanumber.github.io/tidychangepoint/&gt;.</span></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="do">## A BibTeX entry for LaTeX users is</span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="do">##   @Manual{,</span></span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="do">##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},</span></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="do">##     author = {Benjamin S. Baumer and Biviana Marcela {Suarez Sierra} and Arrigo Coen and Carlos A. Taimal},</span></span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="do">##     note = {R package version 0.0.1},</span></span>
+<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a><span class="do">##     url = {https://beanumber.github.io/tidychangepoint/},</span></span>
+<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="do">##   }</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -156,6 +158,8 @@
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
 <li><a href="https://github.com/beanumber/tidychangepoint/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/beanumber/tidychangepoint/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+<li><a href="https://CRAN.R-project.org/package=tidychangepoint" class="external-link"><img src="https://www.r-pkg.org/badges/version/tidychangepoint" alt="CRAN status"></a></li>
+<li><a href="https://www.r-pkg.org/pkg/tidychangepoint" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/tidychangepoint" alt="CRAN RStudio mirror downloads"></a></li>
 </ul>
 </div>
 
