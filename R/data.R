@@ -85,6 +85,13 @@
 #' Differences between leagues in Major League Baseball
 #' @docType data
 #' @description
-#' The difference in home runs hit per plate appearance between the 
-#' American League and the National League from 1925 to 2022. 
-"mlb_hrs"
+#' The difference in various statistics between the 
+#' American League and the National League from 1925 to 2023.
+#' Statistics include:
+#'   - `PA`: The total number of plate appearances
+#'   - `hr_rate_diff`: The difference in home runs per plate appearance
+#'   - `bavg_dff`: The difference in batting average
+#'   - `obp_diff`: The difference in on-base percentage
+#'   - `slg_diff`: The difference in slugging percentage
+#' @source The `Lahman` package
+"mlb_diffs"
