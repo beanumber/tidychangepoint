@@ -8,8 +8,8 @@
 <title>A Tidy Framework for Changepoint Detection Analysis • tidychangepoint</title>
 <script src="deps/jquery-3.6.0/jquery-3.6.0.min.js"></script><meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 <link href="deps/bootstrap-5.3.1/bootstrap.min.css" rel="stylesheet">
-<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
-<link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
+<script src="deps/bootstrap-5.3.1/bootstrap.bundle.min.js"></script><link href="deps/font-awesome-6.5.2/css/all.min.css" rel="stylesheet">
+<link href="deps/font-awesome-6.5.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="A Tidy Framework for Changepoint Detection Analysis">
 <meta name="description" content="Changepoint detection algorithms for R are widespread but have different interfaces and reporting conventions. This makes the comparative analysis of results difficult. We solve this problem by providing a tidy, unified interface for several different changepoint detection algorithms. We also provide consistent numerical and graphical reporting leveraging the broom and ggplot2 packages.">
 <meta property="og:description" content="Changepoint detection algorithms for R are widespread but have different interfaces and reporting conventions. This makes the comparative analysis of results difficult. We solve this problem by providing a tidy, unified interface for several different changepoint detection algorithms. We also provide consistent numerical and graphical reporting leveraging the broom and ggplot2 packages.">
@@ -101,23 +101,21 @@
 <p>To cite the package, use the following information:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"tidychangepoint"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="do">## Warning in citation("tidychangepoint"): could not determine year for</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="do">## 'tidychangepoint' from package DESCRIPTION file</span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="do">## To cite package 'tidychangepoint' in publications use:</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="do">##   Baumer B, Suarez Sierra B, Coen A, Taimal C (????). _tidychangepoint:</span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="do">##   A Tidy Framework for Changepoint Detection Analysis_. R package</span></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="do">##   version 0.0.1, &lt;https://beanumber.github.io/tidychangepoint/&gt;.</span></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="do">## A BibTeX entry for LaTeX users is</span></span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="do">##   @Manual{,</span></span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="do">##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},</span></span>
-<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="do">##     author = {Benjamin S. Baumer and Biviana Marcela {Suarez Sierra} and Arrigo Coen and Carlos A. Taimal},</span></span>
-<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="do">##     note = {R package version 0.0.1},</span></span>
-<span id="cb13-16"><a href="#cb13-16" tabindex="-1"></a><span class="do">##     url = {https://beanumber.github.io/tidychangepoint/},</span></span>
-<span id="cb13-17"><a href="#cb13-17" tabindex="-1"></a><span class="do">##   }</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="do">## To cite package 'tidychangepoint' in publications use:</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="do">##   Baumer B, Suarez Sierra B, Coen A, Taimal C (2024). _tidychangepoint:</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="do">##   A Tidy Framework for Changepoint Detection Analysis_. R package</span></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="do">##   version 0.0.1, &lt;https://CRAN.R-project.org/package=tidychangepoint&gt;.</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="do">## A BibTeX entry for LaTeX users is</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="do">##   @Manual{,</span></span>
+<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="do">##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},</span></span>
+<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="do">##     author = {Benjamin S. Baumer and Biviana Marcela {Suarez Sierra} and Arrigo Coen and Carlos A. Taimal},</span></span>
+<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="do">##     year = {2024},</span></span>
+<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="do">##     note = {R package version 0.0.1},</span></span>
+<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="do">##     url = {https://CRAN.R-project.org/package=tidychangepoint},</span></span>
+<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="do">##   }</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -172,7 +170,7 @@
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.0.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.1.</p>
 </div>
 
     </footer>

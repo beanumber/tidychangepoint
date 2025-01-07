@@ -1,11 +1,11 @@
 pandoc: 3.1.11
-pkgdown: 2.1.0
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   articles/climate_data: climate_data.html
   articles/coen: coen.html
   tidychangepoint: tidychangepoint.html
-last_built: 2024-08-19T15:47Z
+last_built: 2025-01-07T14:14Z
 urls:
   reference: https://beanumber.github.io/tidychangepoint/reference
   article: https://beanumber.github.io/tidychangepoint/articles
