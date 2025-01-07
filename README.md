@@ -92,20 +92,18 @@ To cite the package, use the following information:
 citation("tidychangepoint")
 ```
 
-    ## Warning in citation("tidychangepoint"): could not determine year for
-    ## 'tidychangepoint' from package DESCRIPTION file
-
     ## To cite package 'tidychangepoint' in publications use:
     ## 
-    ##   Baumer B, Suarez Sierra B, Coen A, Taimal C (????). _tidychangepoint:
+    ##   Baumer B, Suarez Sierra B, Coen A, Taimal C (2024). _tidychangepoint:
     ##   A Tidy Framework for Changepoint Detection Analysis_. R package
-    ##   version 0.0.1, <https://beanumber.github.io/tidychangepoint/>.
+    ##   version 0.0.1, <https://CRAN.R-project.org/package=tidychangepoint>.
     ## 
     ## A BibTeX entry for LaTeX users is
     ## 
     ##   @Manual{,
     ##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},
     ##     author = {Benjamin S. Baumer and Biviana Marcela {Suarez Sierra} and Arrigo Coen and Carlos A. Taimal},
+    ##     year = {2024},
     ##     note = {R package version 0.0.1},
-    ##     url = {https://beanumber.github.io/tidychangepoint/},
+    ##     url = {https://CRAN.R-project.org/package=tidychangepoint},
     ##   }
