@@ -84,21 +84,50 @@ fitness(x)
 ## Algorithmic coverage
 
 ``` r
-tidycpt_coverage() |>
+ls_methods()
+```
+
+    ## # A tibble: 12 × 5
+    ##    method      pkg             segmenter_class helper              wraps        
+    ##    <chr>       <chr>           <chr>           <chr>               <chr>        
+    ##  1 pelt        changepoint     cpt             segment_pelt()      changepoint:…
+    ##  2 binseg      changepoint     cpt             <NA>                changepoint:…
+    ##  3 segneigh    changepoint     cpt             <NA>                changepoint:…
+    ##  4 single-best changepoint     cpt             <NA>                changepoint:…
+    ##  5 wbs         wbs             wbs             <NA>                wbs::wbs()   
+    ##  6 ga          GA              tidyga          segment_ga()        GA::ga()     
+    ##  7 ga-shi      GA              tidyga          segment_ga_shi()    segment_ga() 
+    ##  8 ga-coen     GA              tidyga          segment_ga_coen()   segment_ga() 
+    ##  9 coen        tidychangepoint seg_basket      segment_coen()      Note that th…
+    ## 10 random      GA              tidyga          segment_ga_random() segment_ga() 
+    ## 11 manual      tidychangepoint seg_cpt         segment_manual()    <NA>         
+    ## 12 null        tidychangepoint seg_cpt         segment_manual()    <NA>
+
+``` r
+ls_coverage() |>
+    dplyr::group_by(method) |>
+    dplyr::summarize(
+      models = paste(unique(model), collapse = ", "),
+      penalties = paste(unique(penalty), collapse = ", ")
+    ) |>
+    dplyr::arrange(method) |>
   knitr::kable()
 ```
 
-| method | pkg | version | segmenter_class | models | penalties | helper | wraps |
-|:---|:---|:---|:---|:---|:---|:---|:---|
-| ga | GA | 3.2.4 | tidyga | fit_lmshift, fit_lmshift_ar1, fit_meanshift, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanshift_region, fit_meanshift2, fit_meanvar, fit_nhpp, fit_nhpp_region, fit_trendshift, fit_trendshift_ar1 | AIC, BIC, MBIC, MDL | segment_ga() | GA::ga() |
-| ga-coen | GA | 3.2.4 | tidyga | fit_nhpp | BMDL | segment_ga_coen() | segment_ga() |
-| ga-shi | GA | 3.2.4 | tidyga | fit_meanshift_norm_ar1 | BIC | segment_ga_shi() | segment_ga() |
-| random | GA | 3.2.4 | tidyga | fit_lmshift, fit_lmshift_ar1, fit_meanshift, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanshift_region, fit_meanshift2, fit_meanvar, fit_nhpp, fit_nhpp_region, fit_trendshift, fit_trendshift_ar1 | AIC, BIC, MBIC, MDL | segment_ga_random() | segment_ga() |
-| binseg | changepoint | 2.3 | cpt | fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS | NA | changepoint::cpt.meanvar() |
-| pelt | changepoint | 2.3 | cpt | fit_meanshift_norm, fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS | segment_pelt() | changepoint::cpt.mean() or changepoint::cpt.meanvar() |
-| segneigh | changepoint | 2.3 | cpt | fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS | NA | changepoint::cpt.meanvar() |
-| single-best | changepoint | 2.3 | cpt | fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS | NA | changepoint::cpt.meanvar() |
-| wbs | wbs | 1.4.1 | wbs | NA | NA | NA | wbs::wbs(). |
+| method | models | penalties |
+|:---|:---|:---|
+| binseg | fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS |
+| coen | fit_nhpp | BMDL |
+| ga | fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1 | AIC, BIC, MBIC, MDL |
+| ga-coen | fit_nhpp | BMDL |
+| ga-shi | fit_meanshift_norm_ar1 | BIC |
+| manual | fit_meanshift_norm | BIC |
+| null | fit_meanshift_norm | BIC |
+| pelt | fit_meanshift_norm, fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS |
+| random | fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1 | AIC, BIC, MBIC, MDL |
+| segneigh | fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS |
+| single-best | fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS |
+| wbs | NA | NA |
 
 ## References
 
@@ -116,15 +145,15 @@ citation("tidychangepoint")
 
     ## To cite package 'tidychangepoint' in publications use:
     ## 
-    ##   Baumer B, Suarez Sierra B, Coen A, Taimal C (????). _tidychangepoint:
+    ##   Baumer B, Suárez Sierra B, Coen A, Taimal C (????). _tidychangepoint:
     ##   A Tidy Framework for Changepoint Detection Analysis_. R package
-    ##   version 0.0.1, <https://beanumber.github.io/tidychangepoint/>.
+    ##   version 0.0.1.9000, <https://beanumber.github.io/tidychangepoint/>.
     ## 
     ## A BibTeX entry for LaTeX users is
     ## 
     ##   @Manual{,
     ##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},
-    ##     author = {Benjamin S. Baumer and Biviana Marcela {Suarez Sierra} and Arrigo Coen and Carlos A. Taimal},
-    ##     note = {R package version 0.0.1},
+    ##     author = {Benjamin S. Baumer and Biviana Marcela {Suárez Sierra} and Arrigo Coen and Carlos A. Taimal},
+    ##     note = {R package version 0.0.1.9000},
     ##     url = {https://beanumber.github.io/tidychangepoint/},
     ##   }

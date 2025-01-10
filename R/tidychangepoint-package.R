@@ -10,22 +10,33 @@ globalVariables(c("helper", "models", "penalties", "penalty", "pkg",
 NULL
 
 #' Algorithmic coverage through tidychangepoint
-#' @returns A [tibble::tibble] showing the coverage of `tidychangepoint`
+#' @returns A [tibble::tibble] or `character`
 #' 
 #' @export
 #' @examples
-#' tidycpt_coverage()
+#' # List packages supported by tidychangepoint
+#' ls_pkgs()
 #' 
 
-tidycpt_coverage <- function() {
-  pkgs <- tibble::tibble(
+ls_pkgs <- function() {
+  tibble::tibble(
     pkg = c("tidychangepoint", "changepoint", "wbs", "GA")
   ) |>
     dplyr::mutate(
       version = purrr::map_chr(pkg, ~as.character(utils::packageVersion(.x))),
     )
-  
-  segment_methods <- tibble::tribble(
+}
+
+#' @rdname ls_pkgs
+#' @export
+#' @seealso [segment()]
+#' @examples
+#' # List methods supported by segment()
+#' ls_methods()
+#' 
+
+ls_methods <- function() {
+  tibble::tribble(
     ~method, ~pkg, ~segmenter_class, ~helper, ~wraps,
     "pelt", "changepoint", "cpt", "segment_pelt()", "changepoint::cpt.mean() or changepoint::cpt.meanvar()",
     "binseg", "changepoint", "cpt", NA, "changepoint::cpt.meanvar()",
@@ -40,26 +51,54 @@ tidycpt_coverage <- function() {
     "manual", "tidychangepoint", "seg_cpt", "segment_manual()", NA,
     "null", "tidychangepoint", "seg_cpt", "segment_manual()", NA
   )
-  
-  cpt_penalties <- c("None", "SIC", "BIC", "MBIC", "AIC", "Hannan-Quinn", "Asymptotic", "Manual", "CROPS")
-  methods <- dplyr::bind_rows(
+}
+
+#' @rdname ls_pkgs
+#' @export
+#' @examples
+#' # List penalty functions provided by tidychangepoint
+#' ls_penalties()
+#' 
+ls_penalties <- function() {
+  c("AIC", "BIC", "MBIC", "MDL", "BMDL")
+}
+
+#' @rdname ls_pkgs
+#' @export
+#' @examples
+#' # List penalty functions supported by changepoint
+#' ls_cpt_penalties()
+#' 
+ls_cpt_penalties <- function() {
+  c("None", "SIC", "BIC", "MBIC", "AIC", "Hannan-Quinn", "Asymptotic", "Manual", "CROPS")
+}
+
+#' @rdname ls_pkgs
+#' @export
+#' @examples
+#' # List combinations of method, model, and penalty supported by tidychangepoint
+#' ls_coverage()
+#' 
+ls_coverage <- function() {
+  dplyr::bind_rows(
     # PELT
     expand.grid(
       method = "pelt",
       model = c("fit_meanshift_norm", "fit_meanvar"),
-      penalty = cpt_penalties
+      penalty = ls_cpt_penalties()
     ),
     # BinSeg, SegNeigh, single-best
     expand.grid(
       method = c("binseg", "segneigh", "single-best"),
       model = c("fit_meanvar"),
-      penalty = cpt_penalties
+      penalty = ls_cpt_penalties()
     ),
     # GA
     expand.grid(
       method = c("ga", "random"),
       model = tidychangepoint:::ls_models(),
-      penalty = c("AIC", "BIC", "MBIC", "MDL")
+      penalty = ls_penalties() |> 
+        stringr::str_subset("BMDL", negate = TRUE)
     ),
     # special-cases
     tibble::tribble(
@@ -72,14 +111,4 @@ tidycpt_coverage <- function() {
       "null", "fit_meanshift_norm", "BIC"
     )
   )
-  methods |>
-    dplyr::group_by(method) |>
-    dplyr::summarize(
-      models = paste(unique(model), collapse = ", "),
-      penalties = paste(unique(penalty), collapse = ", ")
-    ) |>
-    dplyr::full_join(segment_methods, by = "method") |>
-    dplyr::left_join(pkgs, by = "pkg") |>
-    dplyr::select(method, pkg, version, segmenter_class, models, penalties, helper, wraps) |>
-    dplyr::arrange(pkg, method)
 }

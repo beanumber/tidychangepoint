@@ -68,7 +68,14 @@ fitness(x)
 ## Algorithmic coverage
 
 ```{r}
-tidycpt_coverage() |>
+ls_methods()
+ls_coverage() |>
+    dplyr::group_by(method) |>
+    dplyr::summarize(
+      models = paste(unique(model), collapse = ", "),
+      penalties = paste(unique(penalty), collapse = ", ")
+    ) |>
+    dplyr::arrange(method) |>
   knitr::kable()
 ```
 
