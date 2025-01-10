@@ -11,9 +11,26 @@ exceedances.double <- function(x, threshold = mean(x, na.rm = TRUE), ...) {
   which(x > threshold, ...)
 }
 
+#' @rdname HQC
+#' @inheritParams stats::logLik
+#' @details
+#' Computes the Hannan-Quinn information criterion for a model \eqn{M}
+#' \deqn{
+#'   HQC(\tau, M(y|\hat{\theta}_{\tau})) = 2k \cdot \ln{\ln{n}} - 2 \cdot L_M(y|\hat{\theta}_\tau) \,,
+#' }
+#' where \eqn{k} is the number of parameters and \eqn{n} is the number of observations.
+#' @export
+#' @examples
+#' HQC(fit_meanshift_norm_ar1(CET, tau = c(42, 330)))
+#' HQC(fit_trendshift(CET, tau = c(42, 81, 330)))
+HQC.logLik <- function(object, ...) {
+  -2 * as.numeric(object) + attr(object, "df") * log(log(nobs(object))) |>
+    as.double()
+}
+
 #' @rdname MDL
 #' @details
-#'  These quantites should be [base::attributes()] of the object returned by 
+#'  These quantities should be [base::attributes()] of the object returned by 
 #'  [logLik()].
 #' @inheritParams stats::logLik
 #' @export

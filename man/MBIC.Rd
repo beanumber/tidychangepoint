@@ -34,6 +34,8 @@ Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
 
 Other penalty-functions: 
 \code{\link{BMDL}()},
-\code{\link{MDL}()}
+\code{\link{HQC}()},
+\code{\link{MDL}()},
+\code{\link{SIC}()}
 }
 \concept{penalty-functions}

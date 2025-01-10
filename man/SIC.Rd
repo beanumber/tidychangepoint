@@ -16,4 +16,11 @@ SIC(fit_meanvar(CET, tau = NULL))
 }
 \seealso{
 \code{\link[stats:AIC]{stats::BIC()}}
+
+Other penalty-functions: 
+\code{\link{BMDL}()},
+\code{\link{HQC}()},
+\code{\link{MBIC}()},
+\code{\link{MDL}()}
 }
+\concept{penalty-functions}

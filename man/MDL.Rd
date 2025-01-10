@@ -36,7 +36,7 @@ where \eqn{a(\theta)} is the number of parameters in \eqn{\theta} that are
 fit in each region, and \eqn{b(\theta)} is the number of parameters
 fit to the model as a whole.
 
-These quantites should be \code{\link[base:attributes]{base::attributes()}} of the object returned by
+These quantities should be \code{\link[base:attributes]{base::attributes()}} of the object returned by
 \code{\link[=logLik]{logLik()}}.
 }
 \examples{
@@ -46,6 +46,8 @@ MDL(fit_trendshift(CET, tau = c(42, 81, 330)))
 \seealso{
 Other penalty-functions: 
 \code{\link{BMDL}()},
-\code{\link{MBIC}()}
+\code{\link{HQC}()},
+\code{\link{MBIC}()},
+\code{\link{SIC}()}
 }
 \concept{penalty-functions}

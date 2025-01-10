@@ -228,6 +228,22 @@ as.model.default <- function(object, ...) {
   do.call(f, args)
 }
 
+#' Hannan–Quinn information criterion
+#' @seealso [stats::BIC()], [stats::AIC()]
+#' @export
+#' @family penalty-functions
+#' @examples
+#' # Compute the HQC
+#' HQC(fit_meanvar(CET, tau = NULL))
+#' 
+HQC <- function(object, ...) UseMethod("HQC")
+
+#' @rdname HQC
+#' @export
+HQC.default <- function(object, ...) {
+  HQC(logLik(object))
+}
+
 #' Modified Bayesian Information Criterion
 #' 
 #' @description
@@ -306,6 +322,7 @@ BMDL.default <- function(object, ...) {
 #' Schwarz information criterion
 #' @seealso [stats::BIC()]
 #' @export
+#' @family penalty-functions
 #' @examples
 #' # The SIC is just the BIC
 #' SIC(fit_meanvar(CET, tau = NULL))
