@@ -60,7 +60,7 @@ ls_methods <- function() {
 #' ls_penalties()
 #' 
 ls_penalties <- function() {
-  c("AIC", "BIC", "MBIC", "MDL", "BMDL")
+  c("SIC", "AIC", "BIC", "HQC", "MBIC", "MDL", "BMDL")
 }
 
 #' @rdname ls_pkgs
@@ -70,7 +70,7 @@ ls_penalties <- function() {
 #' ls_cpt_penalties()
 #' 
 ls_cpt_penalties <- function() {
-  c("None", "SIC", "BIC", "MBIC", "AIC", "Hannan-Quinn", "Asymptotic", "Manual", "CROPS")
+  c("None", "SIC", "BIC", "MBIC", "AIC", "HQC", "Asymptotic", "Manual", "CROPS")
 }
 
 #' @rdname ls_pkgs
