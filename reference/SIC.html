@@ -48,8 +48,26 @@
     </div>
 
     <div class="section level2">
+    <h2 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h2>
+
+
+<dl><dt id="arg-object">object<a class="anchor" aria-label="anchor" href="#arg-object"></a></dt>
+<dd><p>a fitted model object for which there exists a
+    <code>logLik</code> method to extract the corresponding log-likelihood, or
+    an object inheriting from class <code>logLik</code>.</p></dd>
+
+
+<dt id="arg--">...<a class="anchor" aria-label="anchor" href="#arg--"></a></dt>
+<dd><p>optionally more fitted model objects.</p></dd>
+
+</dl></div>
+    <div class="section level2">
+    <h2 id="value">Value<a class="anchor" aria-label="anchor" href="#value"></a></h2>
+    <p>The value of <code><a href="https://rdrr.io/r/stats/AIC.html" class="external-link">stats::BIC()</a></code></p>
+    </div>
+    <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
-    <div class="dont-index"><p><code><a href="https://rdrr.io/r/stats/AIC.html" class="external-link">stats::BIC()</a></code></p>
+    <div class="dont-index"><p><code><a href="https://rdrr.io/r/stats/AIC.html" class="external-link">stats::BIC()</a></code>, <code><a href="https://rdrr.io/r/stats/AIC.html" class="external-link">stats::AIC()</a></code></p>
 <p>Other penalty-functions:
 <code><a href="BMDL.html">BMDL</a>()</code>,
 <code><a href="HQC.html">HQC</a>()</code>,
@@ -61,6 +79,8 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># The SIC is just the BIC</span></span></span>
 <span class="r-in"><span><span class="fu">SIC</span><span class="op">(</span><span class="fu"><a href="fit_meanvar.html">fit_meanvar</a></span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 758.8046</span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/stats/AIC.html" class="external-link">BIC</a></span><span class="op">(</span><span class="fu"><a href="fit_meanvar.html">fit_meanvar</a></span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] 758.8046</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
