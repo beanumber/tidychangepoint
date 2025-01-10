@@ -55,18 +55,21 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">tidycpt_coverage</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 9 × 8</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   method      pkg         version segmenter_class models  penalties helper wraps</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> ga          GA          3.2.4   tidyga          fit_lm… AIC, BIC… segme… GA::…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> ga-coen     GA          3.2.4   tidyga          fit_nh… BMDL      segme… segm…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> ga-shi      GA          3.2.4   tidyga          fit_me… BIC       segme… segm…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> random      GA          3.2.4   tidyga          fit_lm… AIC, BIC… segme… segm…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> binseg      changepoint 2.3     cpt             fit_me… None, SI… <span style="color: #BB0000;">NA</span>     chan…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> pelt        changepoint 2.3     cpt             fit_me… None, SI… segme… chan…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">7</span> segneigh    changepoint 2.3     cpt             fit_me… None, SI… <span style="color: #BB0000;">NA</span>     chan…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">8</span> single-best changepoint 2.3     cpt             fit_me… None, SI… <span style="color: #BB0000;">NA</span>     chan…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">9</span> wbs         wbs         1.4.1   wbs             NA      NA        <span style="color: #BB0000;">NA</span>     wbs:…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 12 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    method      pkg         version segmenter_class models penalties helper wraps</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> ga          GA          3.2.4   tidyga          fit_l… AIC, BIC… segme… GA::…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 2</span> ga-coen     GA          3.2.4   tidyga          fit_n… BMDL      segme… segm…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 3</span> ga-shi      GA          3.2.4   tidyga          fit_m… BIC       segme… segm…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 4</span> random      GA          3.2.4   tidyga          fit_l… AIC, BIC… segme… segm…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 5</span> binseg      changepoint 2.3     cpt             fit_m… None, SI… <span style="color: #BB0000;">NA</span>     chan…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 6</span> pelt        changepoint 2.3     cpt             fit_m… None, SI… segme… chan…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 7</span> segneigh    changepoint 2.3     cpt             fit_m… None, SI… <span style="color: #BB0000;">NA</span>     chan…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 8</span> single-best changepoint 2.3     cpt             fit_m… None, SI… <span style="color: #BB0000;">NA</span>     chan…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 9</span> coen        tidychange… 0.0.1.… seg_basket      fit_n… BMDL      segme… Note…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> manual      tidychange… 0.0.1.… seg_cpt         fit_m… BIC       segme… <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> null        tidychange… 0.0.1.… seg_cpt         fit_m… BIC       segme… <span style="color: #BB0000;">NA</span>   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> wbs         wbs         1.4.1   wbs             NA     NA        <span style="color: #BB0000;">NA</span>     wbs:…</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
