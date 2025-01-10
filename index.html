@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -95,27 +95,150 @@
 <span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="do">## 643.5292</span></span></code></pre></div>
 </div>
 <div class="section level2">
+<h2 id="algorithmic-coverage">Algorithmic coverage<a class="anchor" aria-label="anchor" href="#algorithmic-coverage"></a>
+</h2>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/tidycpt_coverage.html">tidycpt_coverage</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<table class="table">
+<colgroup>
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+<col width="12%">
+</colgroup>
+<thead><tr class="header">
+<th align="left">method</th>
+<th align="left">pkg</th>
+<th align="left">version</th>
+<th align="left">segmenter_class</th>
+<th align="left">models</th>
+<th align="left">penalties</th>
+<th align="left">helper</th>
+<th align="left">wraps</th>
+</tr></thead>
+<tbody>
+<tr class="odd">
+<td align="left">ga</td>
+<td align="left">GA</td>
+<td align="left">3.2.4</td>
+<td align="left">tidyga</td>
+<td align="left">fit_lmshift, fit_lmshift_ar1, fit_meanshift, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanshift_region, fit_meanshift2, fit_meanvar, fit_nhpp, fit_nhpp_region, fit_trendshift, fit_trendshift_ar1</td>
+<td align="left">AIC, BIC, MBIC, MDL</td>
+<td align="left">segment_ga()</td>
+<td align="left">GA::ga()</td>
+</tr>
+<tr class="even">
+<td align="left">ga-coen</td>
+<td align="left">GA</td>
+<td align="left">3.2.4</td>
+<td align="left">tidyga</td>
+<td align="left">fit_nhpp</td>
+<td align="left">BMDL</td>
+<td align="left">segment_ga_coen()</td>
+<td align="left">segment_ga()</td>
+</tr>
+<tr class="odd">
+<td align="left">ga-shi</td>
+<td align="left">GA</td>
+<td align="left">3.2.4</td>
+<td align="left">tidyga</td>
+<td align="left">fit_meanshift_norm_ar1</td>
+<td align="left">BIC</td>
+<td align="left">segment_ga_shi()</td>
+<td align="left">segment_ga()</td>
+</tr>
+<tr class="even">
+<td align="left">random</td>
+<td align="left">GA</td>
+<td align="left">3.2.4</td>
+<td align="left">tidyga</td>
+<td align="left">fit_lmshift, fit_lmshift_ar1, fit_meanshift, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanshift_region, fit_meanshift2, fit_meanvar, fit_nhpp, fit_nhpp_region, fit_trendshift, fit_trendshift_ar1</td>
+<td align="left">AIC, BIC, MBIC, MDL</td>
+<td align="left">segment_ga_random()</td>
+<td align="left">segment_ga()</td>
+</tr>
+<tr class="odd">
+<td align="left">binseg</td>
+<td align="left">changepoint</td>
+<td align="left">2.3</td>
+<td align="left">cpt</td>
+<td align="left">fit_meanvar</td>
+<td align="left">None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS</td>
+<td align="left">NA</td>
+<td align="left">changepoint::cpt.meanvar()</td>
+</tr>
+<tr class="even">
+<td align="left">pelt</td>
+<td align="left">changepoint</td>
+<td align="left">2.3</td>
+<td align="left">cpt</td>
+<td align="left">fit_meanshift_norm, fit_meanvar</td>
+<td align="left">None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS</td>
+<td align="left">segment_pelt()</td>
+<td align="left">changepoint::cpt.mean() or changepoint::cpt.meanvar()</td>
+</tr>
+<tr class="odd">
+<td align="left">segneigh</td>
+<td align="left">changepoint</td>
+<td align="left">2.3</td>
+<td align="left">cpt</td>
+<td align="left">fit_meanvar</td>
+<td align="left">None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS</td>
+<td align="left">NA</td>
+<td align="left">changepoint::cpt.meanvar()</td>
+</tr>
+<tr class="even">
+<td align="left">single-best</td>
+<td align="left">changepoint</td>
+<td align="left">2.3</td>
+<td align="left">cpt</td>
+<td align="left">fit_meanvar</td>
+<td align="left">None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS</td>
+<td align="left">NA</td>
+<td align="left">changepoint::cpt.meanvar()</td>
+</tr>
+<tr class="odd">
+<td align="left">wbs</td>
+<td align="left">wbs</td>
+<td align="left">1.4.1</td>
+<td align="left">wbs</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">NA</td>
+<td align="left">wbs::wbs().</td>
+</tr>
+</tbody>
+</table>
+</div>
+<div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <p>Please read <a href="https://beanumber.github.io/changepoint-paper/" class="external-link">the full paper</a> for more details.</p>
 <p>To cite the package, use the following information:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"tidychangepoint"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="do">## To cite package 'tidychangepoint' in publications use:</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="do">##   Baumer B, Suarez Sierra B, Coen A, Taimal C (2024). _tidychangepoint:</span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="do">##   A Tidy Framework for Changepoint Detection Analysis_. R package</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="do">##   version 0.0.1, &lt;https://CRAN.R-project.org/package=tidychangepoint&gt;.</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="do">## A BibTeX entry for LaTeX users is</span></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="do">##   @Manual{,</span></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="do">##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},</span></span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="do">##     author = {Benjamin S. Baumer and Biviana Marcela {Suarez Sierra} and Arrigo Coen and Carlos A. Taimal},</span></span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="do">##     year = {2024},</span></span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="do">##     note = {R package version 0.0.1},</span></span>
-<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="do">##     url = {https://CRAN.R-project.org/package=tidychangepoint},</span></span>
-<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="do">##   }</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" tabindex="-1"></a><span class="do">## Warning in citation("tidychangepoint"): could not determine year for</span></span>
+<span id="cb14-2"><a href="#cb14-2" tabindex="-1"></a><span class="do">## 'tidychangepoint' from package DESCRIPTION file</span></span>
+<span id="cb14-3"><a href="#cb14-3" tabindex="-1"></a></span>
+<span id="cb14-4"><a href="#cb14-4" tabindex="-1"></a><span class="do">## To cite package 'tidychangepoint' in publications use:</span></span>
+<span id="cb14-5"><a href="#cb14-5" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-6"><a href="#cb14-6" tabindex="-1"></a><span class="do">##   Baumer B, Suarez Sierra B, Coen A, Taimal C (????). _tidychangepoint:</span></span>
+<span id="cb14-7"><a href="#cb14-7" tabindex="-1"></a><span class="do">##   A Tidy Framework for Changepoint Detection Analysis_. R package</span></span>
+<span id="cb14-8"><a href="#cb14-8" tabindex="-1"></a><span class="do">##   version 0.0.1, &lt;https://beanumber.github.io/tidychangepoint/&gt;.</span></span>
+<span id="cb14-9"><a href="#cb14-9" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-10"><a href="#cb14-10" tabindex="-1"></a><span class="do">## A BibTeX entry for LaTeX users is</span></span>
+<span id="cb14-11"><a href="#cb14-11" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb14-12"><a href="#cb14-12" tabindex="-1"></a><span class="do">##   @Manual{,</span></span>
+<span id="cb14-13"><a href="#cb14-13" tabindex="-1"></a><span class="do">##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},</span></span>
+<span id="cb14-14"><a href="#cb14-14" tabindex="-1"></a><span class="do">##     author = {Benjamin S. Baumer and Biviana Marcela {Suarez Sierra} and Arrigo Coen and Carlos A. Taimal},</span></span>
+<span id="cb14-15"><a href="#cb14-15" tabindex="-1"></a><span class="do">##     note = {R package version 0.0.1},</span></span>
+<span id="cb14-16"><a href="#cb14-16" tabindex="-1"></a><span class="do">##     url = {https://beanumber.github.io/tidychangepoint/},</span></span>
+<span id="cb14-17"><a href="#cb14-17" tabindex="-1"></a><span class="do">##   }</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">
@@ -145,7 +268,7 @@
 <h2 data-toc-skip>Developers</h2>
 <ul class="list-unstyled">
 <li>Benjamin S. Baumer <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0002-3279-0516" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
-<li>Biviana Marcela Suarez Sierra <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-2151-3537" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li>Biviana Marcela Suárez Sierra <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0003-2151-3537" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Arrigo Coen <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0001-7798-7104" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li>Carlos A. Taimal <br><small class="roles"> Author </small> <a href="https://orcid.org/0000-0002-8716-1282" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
 <li><a href="authors.html">More about authors...</a></li>
@@ -166,7 +289,7 @@
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Benjamin S. Baumer, Biviana Marcela Suarez Sierra, Arrigo Coen, Carlos A. Taimal.</p>
+  <p>Developed by Benjamin S. Baumer, Biviana Marcela Suárez Sierra, Arrigo Coen, Carlos A. Taimal.</p>
 </div>
 
 <div class="pkgdown-footer-right">

@@ -9,7 +9,7 @@ sets in univariate time series."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,7 +96,7 @@ on the value of the <code>method</code> argument:</p><ul><li><p><code>pelt</code
 <code><a href="https://rdrr.io/pkg/changepoint/man/cpt.meanvar.html" class="external-link">changepoint::cpt.meanvar()</a></code>. The <code>segmenter</code> is of class <code>cpt</code>.</p></li>
 <li><p><code>wbs</code>: Uses the Wild Binary Segmentation algorithm as implemented by
 <code><a href="https://rdrr.io/pkg/wbs/man/wbs.html" class="external-link">wbs::wbs()</a></code>. The <code>segmenter</code> is of class <code>wbs</code>.</p></li>
-<li><p><code>ga</code>: Uses the Ggnetic algorithm implemented by <code><a href="segment_ga.html">segment_ga()</a></code>, which wraps
+<li><p><code>ga</code>: Uses the Genetic algorithm implemented by <code><a href="segment_ga.html">segment_ga()</a></code>, which wraps
 <code><a href="https://github.com/luca-scr/GA/reference/ga.html" class="external-link">GA::ga()</a></code>. The <code>segmenter</code> is of class <code>tidyga</code>.</p></li>
 <li><p><code>ga-shi</code>: Uses the genetic algorithm implemented by <code><a href="segment_ga.html">segment_ga_shi()</a></code>,
 which wraps
@@ -113,7 +113,7 @@ The <code>segmenter</code> is of class <code>tidyga</code>.</p></li>
 <li><p><code>manual</code>: Uses the vector of changepoints in the <code>tau</code> argument.
 The <code>segmenter</code> is of class <a href="seg_cpt.html">seg_cpt</a>`.</p></li>
 <li><p><code>null</code>: The default. Uses no changepoints.
-The <code>segmenter</code> is of class <a href="seg_cpt.html">seg_cpt</a>`.</p></li>
+The <code>segmenter</code> is of class <a href="seg_cpt.html">seg_cpt</a>.</p></li>
 </ul></div>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
@@ -130,7 +130,7 @@ The <code>segmenter</code> is of class <a href="seg_cpt.html">seg_cpt</a>`.</p><
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Fri Jan 10 12:55:22 2025 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Fri Jan 10 14:45:27 2025 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -162,7 +162,7 @@ The <code>segmenter</code> is of class <a href="seg_cpt.html">seg_cpt</a>`.</p><
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Fri Jan 10 12:55:22 2025 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Fri Jan 10 14:45:27 2025 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -194,7 +194,7 @@ The <code>segmenter</code> is of class <a href="seg_cpt.html">seg_cpt</a>`.</p><
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 14 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpts.full pen.value.full data.set cpttype method test.stat pen.type pen.value minseglen cpts ncpts.max param.est date version </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Fri Jan 10 12:55:22 2025 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Fri Jan 10 14:45:27 2025 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -315,7 +315,7 @@ The <code>segmenter</code> is of class <a href="seg_cpt.html">seg_cpt</a>`.</p><
 
 
     <footer><div class="pkgdown-footer-left">
-  <p>Developed by Benjamin S. Baumer, Biviana Marcela Suarez Sierra, Arrigo Coen, Carlos A. Taimal.</p>
+  <p>Developed by Benjamin S. Baumer, Biviana Marcela Suárez Sierra, Arrigo Coen, Carlos A. Taimal.</p>
 </div>
 
 <div class="pkgdown-footer-right">
