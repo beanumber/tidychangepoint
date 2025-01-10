@@ -31,11 +31,11 @@ tidycpt_coverage <- function() {
     "binseg", "changepoint", "cpt", NA, "changepoint::cpt.meanvar()",
     "segneigh", "changepoint", "cpt", NA, "changepoint::cpt.meanvar()",
     "single-best", "changepoint", "cpt", NA, "changepoint::cpt.meanvar()",
-    "wbs", "wbs", "wbs", NA, "wbs::wbs().",
+    "wbs", "wbs", "wbs", NA, "wbs::wbs()",
     "ga", "GA", "tidyga", "segment_ga()", "GA::ga()",
     "ga-shi", "GA", "tidyga", "segment_ga_shi()", "segment_ga()",
     "ga-coen", "GA", "tidyga", "segment_ga_coen()", "segment_ga()",
-    "coen", "tidychangepoint", "seg_basket", "segment_coen()", "Note that this function is deprecated.",
+    "coen", "tidychangepoint", "seg_basket", "segment_coen()", "Note that this algorithm is deprecated in favor of ga-coen.",
     "random", "GA", "tidyga", "segment_ga_random()", "segment_ga()",
     "manual", "tidychangepoint", "seg_cpt", "segment_manual()", NA,
     "null", "tidychangepoint", "seg_cpt", "segment_manual()", NA
@@ -58,7 +58,7 @@ tidycpt_coverage <- function() {
     # GA
     expand.grid(
       method = c("ga", "random"),
-      model = ls_models(),
+      model = tidychangepoint:::ls_models(),
       penalty = c("AIC", "BIC", "MBIC", "MDL")
     ),
     # special-cases
@@ -67,6 +67,9 @@ tidycpt_coverage <- function() {
       "wbs", NA, NA,
       "ga-shi", "fit_meanshift_norm_ar1", "BIC",
       "ga-coen", "fit_nhpp", "BMDL",
+      "coen", "fit_nhpp", "BMDL",
+      "manual", "fit_meanshift_norm", "BIC",
+      "null", "fit_meanshift_norm", "BIC"
     )
   )
   methods |>
@@ -75,7 +78,7 @@ tidycpt_coverage <- function() {
       models = paste(unique(model), collapse = ", "),
       penalties = paste(unique(penalty), collapse = ", ")
     ) |>
-    dplyr::left_join(segment_methods, by = "method") |>
+    dplyr::full_join(segment_methods, by = "method") |>
     dplyr::left_join(pkgs, by = "pkg") |>
     dplyr::select(method, pkg, version, segmenter_class, models, penalties, helper, wraps) |>
     dplyr::arrange(pkg, method)
