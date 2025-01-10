@@ -46,7 +46,7 @@ ls_methods <- function() {
     "ga", "GA", "tidyga", "segment_ga()", "GA::ga()",
     "ga-shi", "GA", "tidyga", "segment_ga_shi()", "segment_ga()",
     "ga-coen", "GA", "tidyga", "segment_ga_coen()", "segment_ga()",
-    "coen", "tidychangepoint", "seg_basket", "segment_coen()", "Note that this algorithm is deprecated in favor of ga-coen.",
+    "coen", "tidychangepoint", "seg_basket", "segment_coen()", NA,
     "random", "GA", "tidyga", "segment_ga_random()", "segment_ga()",
     "manual", "tidychangepoint", "seg_cpt", "segment_manual()", NA,
     "null", "tidychangepoint", "seg_cpt", "segment_manual()", NA
