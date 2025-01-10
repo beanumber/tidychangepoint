@@ -81,6 +81,25 @@ fitness(x)
     ##     MBIC 
     ## 643.5292
 
+## Algorithmic coverage
+
+``` r
+tidycpt_coverage() |>
+  knitr::kable()
+```
+
+| method | pkg | version | segmenter_class | models | penalties | helper | wraps |
+|:---|:---|:---|:---|:---|:---|:---|:---|
+| ga | GA | 3.2.4 | tidyga | fit_lmshift, fit_lmshift_ar1, fit_meanshift, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanshift_region, fit_meanshift2, fit_meanvar, fit_nhpp, fit_nhpp_region, fit_trendshift, fit_trendshift_ar1 | AIC, BIC, MBIC, MDL | segment_ga() | GA::ga() |
+| ga-coen | GA | 3.2.4 | tidyga | fit_nhpp | BMDL | segment_ga_coen() | segment_ga() |
+| ga-shi | GA | 3.2.4 | tidyga | fit_meanshift_norm_ar1 | BIC | segment_ga_shi() | segment_ga() |
+| random | GA | 3.2.4 | tidyga | fit_lmshift, fit_lmshift_ar1, fit_meanshift, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanshift_region, fit_meanshift2, fit_meanvar, fit_nhpp, fit_nhpp_region, fit_trendshift, fit_trendshift_ar1 | AIC, BIC, MBIC, MDL | segment_ga_random() | segment_ga() |
+| binseg | changepoint | 2.3 | cpt | fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS | NA | changepoint::cpt.meanvar() |
+| pelt | changepoint | 2.3 | cpt | fit_meanshift_norm, fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS | segment_pelt() | changepoint::cpt.mean() or changepoint::cpt.meanvar() |
+| segneigh | changepoint | 2.3 | cpt | fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS | NA | changepoint::cpt.meanvar() |
+| single-best | changepoint | 2.3 | cpt | fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS | NA | changepoint::cpt.meanvar() |
+| wbs | wbs | 1.4.1 | wbs | NA | NA | NA | wbs::wbs(). |
+
 ## References
 
 Please read [the full
@@ -92,18 +111,20 @@ To cite the package, use the following information:
 citation("tidychangepoint")
 ```
 
+    ## Warning in citation("tidychangepoint"): could not determine year for
+    ## 'tidychangepoint' from package DESCRIPTION file
+
     ## To cite package 'tidychangepoint' in publications use:
     ## 
-    ##   Baumer B, Suarez Sierra B, Coen A, Taimal C (2024). _tidychangepoint:
+    ##   Baumer B, Suarez Sierra B, Coen A, Taimal C (????). _tidychangepoint:
     ##   A Tidy Framework for Changepoint Detection Analysis_. R package
-    ##   version 0.0.1, <https://CRAN.R-project.org/package=tidychangepoint>.
+    ##   version 0.0.1, <https://beanumber.github.io/tidychangepoint/>.
     ## 
     ## A BibTeX entry for LaTeX users is
     ## 
     ##   @Manual{,
     ##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},
     ##     author = {Benjamin S. Baumer and Biviana Marcela {Suarez Sierra} and Arrigo Coen and Carlos A. Taimal},
-    ##     year = {2024},
     ##     note = {R package version 0.0.1},
-    ##     url = {https://CRAN.R-project.org/package=tidychangepoint},
+    ##     url = {https://beanumber.github.io/tidychangepoint/},
     ##   }

@@ -73,3 +73,12 @@ whomademe <- function(x, ...) {
     parse(text = _) |>
     eval()
 }
+
+#' List all available model-fitting functions
+
+ls_models <- function() {
+  rlang::ns_env("tidychangepoint") |>
+    rlang::env_names() |>
+    stringr::str_subset("fit_") |>
+    sort()
+}

@@ -65,6 +65,14 @@ The `fitness()` function returns the both the value and the name of the objectiv
 fitness(x)
 ```
 
+## Algorithmic coverage
+
+```{r}
+tidycpt_coverage() |>
+  knitr::kable()
+```
+
+
 
 ## References
 

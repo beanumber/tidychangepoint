@@ -58,7 +58,7 @@ segment.numeric <- function(x, method = "null", ...) {
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
 #' - `wbs`: Uses the Wild Binary Segmentation algorithm as implemented by 
 #'   [wbs::wbs()]. The `segmenter` is of class `wbs`.
-#' - `ga`: Uses the Ggnetic algorithm implemented by [segment_ga()], which wraps
+#' - `ga`: Uses the Genetic algorithm implemented by [segment_ga()], which wraps
 #'   [GA::ga()]. The `segmenter` is of class `tidyga`.
 #' - `ga-shi`: Uses the genetic algorithm implemented by [segment_ga_shi()], 
 #'   which wraps
@@ -75,7 +75,7 @@ segment.numeric <- function(x, method = "null", ...) {
 #' - `manual`: Uses the vector of changepoints in the `tau` argument. 
 #'   The `segmenter` is of class [seg_cpt]`.
 #' - `null`: The default. Uses no changepoints. 
-#'   The `segmenter` is of class [seg_cpt]`.
+#'   The `segmenter` is of class [seg_cpt].
 #' @seealso [changepoint::cpt.meanvar()], [wbs::wbs()], [GA::ga()], 
 #' [segment_ga()]
 #' @examples

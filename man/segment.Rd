@@ -47,7 +47,7 @@ on the value of the \code{method} argument:
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
 \item \code{wbs}: Uses the Wild Binary Segmentation algorithm as implemented by
 \code{\link[wbs:wbs]{wbs::wbs()}}. The \code{segmenter} is of class \code{wbs}.
-\item \code{ga}: Uses the Ggnetic algorithm implemented by \code{\link[=segment_ga]{segment_ga()}}, which wraps
+\item \code{ga}: Uses the Genetic algorithm implemented by \code{\link[=segment_ga]{segment_ga()}}, which wraps
 \code{\link[GA:ga]{GA::ga()}}. The \code{segmenter} is of class \code{tidyga}.
 \item \code{ga-shi}: Uses the genetic algorithm implemented by \code{\link[=segment_ga_shi]{segment_ga_shi()}},
 which wraps
@@ -64,7 +64,7 @@ The \code{segmenter} is of class \code{tidyga}.
 \item \code{manual}: Uses the vector of changepoints in the \code{tau} argument.
 The \code{segmenter} is of class \link{seg_cpt}`.
 \item \code{null}: The default. Uses no changepoints.
-The \code{segmenter} is of class \link{seg_cpt}`.
+The \code{segmenter} is of class \link{seg_cpt}.
 }
 }
 \examples{
