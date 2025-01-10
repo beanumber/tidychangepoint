@@ -74,7 +74,12 @@ whomademe <- function(x, ...) {
     eval()
 }
 
-#' List all available model-fitting functions
+#' @rdname ls_pkgs
+#' @export
+#' @examples
+#' # List all model-fitting functions
+#' ls_models()
+#' 
 
 ls_models <- function() {
   rlang::ns_env("tidychangepoint") |>
