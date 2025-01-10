@@ -8,7 +8,7 @@
 An object of class \code{tbl_ts} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 99 rows and 6 columns.
 }
 \source{
-The \code{Lahman} package]
+The \code{Lahman} package
 }
 \usage{
 mlb_diffs
