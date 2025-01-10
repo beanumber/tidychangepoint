@@ -303,6 +303,15 @@ BMDL.default <- function(object, ...) {
   BMDL(logLik(object))
 }
 
+#' Schwarz information criterion
+#' @seealso [stats::BIC()]
+#' @export
+#' @examples
+#' # The SIC is just the BIC
+#' SIC(fit_meanvar(CET, tau = NULL))
+#' 
+SIC <- BIC
+
 #' Evaluate candidate changepoints sets
 #' @param x An object to evaluate
 #' @param ... arguments passed to methods
