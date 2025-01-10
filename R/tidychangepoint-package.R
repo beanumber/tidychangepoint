@@ -96,7 +96,7 @@ ls_coverage <- function() {
     # GA
     expand.grid(
       method = c("ga", "random"),
-      model = tidychangepoint:::ls_models(),
+      model = ls_models(),
       penalty = ls_penalties() |> 
         stringr::str_subset("BMDL", negate = TRUE)
     ),

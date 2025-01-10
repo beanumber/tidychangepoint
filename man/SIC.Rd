@@ -6,16 +6,27 @@
 \usage{
 SIC(object, ...)
 }
+\arguments{
+\item{object}{a fitted model object for which there exists a
+    \code{logLik} method to extract the corresponding log-likelihood, or
+    an object inheriting from class \code{logLik}.}
+
+\item{...}{optionally more fitted model objects.}
+}
+\value{
+The value of \code{\link[stats:AIC]{stats::BIC()}}
+}
 \description{
 Schwarz information criterion
 }
 \examples{
 # The SIC is just the BIC
 SIC(fit_meanvar(CET, tau = NULL))
+BIC(fit_meanvar(CET, tau = NULL))
 
 }
 \seealso{
-\code{\link[stats:AIC]{stats::BIC()}}
+\code{\link[stats:AIC]{stats::BIC()}}, \code{\link[stats:AIC]{stats::AIC()}}
 
 Other penalty-functions: 
 \code{\link{BMDL}()},

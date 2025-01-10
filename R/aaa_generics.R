@@ -320,12 +320,15 @@ BMDL.default <- function(object, ...) {
 }
 
 #' Schwarz information criterion
-#' @seealso [stats::BIC()]
+#' @seealso [stats::BIC()], [stats::AIC()]
+#' @inheritParams stats::BIC
 #' @export
+#' @returns The value of [stats::BIC()]
 #' @family penalty-functions
 #' @examples
 #' # The SIC is just the BIC
 #' SIC(fit_meanvar(CET, tau = NULL))
+#' BIC(fit_meanvar(CET, tau = NULL))
 #' 
 SIC <- BIC
 
