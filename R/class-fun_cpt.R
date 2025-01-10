@@ -80,5 +80,6 @@ ls_models <- function() {
   rlang::ns_env("tidychangepoint") |>
     rlang::env_names() |>
     stringr::str_subset("fit_") |>
+    stringr::str_subset("shift2$|region$|meanshift$", negate = TRUE) |>
     sort()
 }
