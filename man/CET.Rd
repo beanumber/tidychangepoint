@@ -5,7 +5,7 @@
 \alias{CET}
 \title{Hadley Centre Central England Temperature}
 \format{
-An object of class \code{xts} (inherits from \code{zoo}) with 362 rows and 1 columns.
+An object of class \code{xts} (inherits from \code{zoo}) with 366 rows and 1 columns.
 }
 \source{
 \url{https://www.metoffice.gov.uk/hadobs/hadcet/}
