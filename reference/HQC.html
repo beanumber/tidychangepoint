@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -89,12 +89,12 @@ where \(k\) is the number of parameters and \(n\) is the number of observations.
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Compute the HQC</span></span></span>
 <span class="r-in"><span><span class="fu">HQC</span><span class="op">(</span><span class="fu"><a href="fit_meanvar.html">fit_meanvar</a></span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 750.5684</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 780.7158</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu">HQC</span><span class="op">(</span><span class="fu"><a href="fit_meanshift.html">fit_meanshift_norm_ar1</a></span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">42</span>, <span class="fl">330</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 628.041</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 635.8524</span>
 <span class="r-in"><span><span class="fu">HQC</span><span class="op">(</span><span class="fu"><a href="fit_lmshift.html">fit_trendshift</a></span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">42</span>, <span class="fl">81</span>, <span class="fl">330</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 601.3246</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 605.6614</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

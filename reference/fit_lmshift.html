@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -132,55 +132,55 @@ sets because it doesn't have to fit all of the regression models.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.1.… meanshift <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.575  -<span style="color: #BB0000;">313.</span>  642.  673.  672.  683.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.1.… meanshift <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.576  -<span style="color: #BB0000;">317.</span>  651.  682.  681.  692.</span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="fu">fit_lmshift</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="va">ids</span>, deg_poly <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.1.… trendshi… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.539  -<span style="color: #BB0000;">290.</span>  604.  651.  626.  653.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.1.… trendshi… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.538  -<span style="color: #BB0000;">292.</span>  608.  655.  630.  658.</span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="fu">fit_lmshift_ar1</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="va">ids</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.1.… meanshif… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.566  -<span style="color: #BB0000;">307.</span>  632.  667.  660.  676.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.1.… meanshif… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.567  -<span style="color: #BB0000;">311.</span>  640.  675.  668.  684.</span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="fu">fit_lmshift_ar1</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="va">ids</span>, deg_poly <span class="op">=</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.1.… trendshi… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.538  -<span style="color: #BB0000;">289.</span>  603.  654.  623.  656.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.1.… trendshi… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.537  -<span style="color: #BB0000;">291.</span>  608.  658.  628.  661.</span>
 <span class="r-in"><span><span class="fu"><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance</a></span><span class="op">(</span><span class="fu">fit_lmshift_ar1</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="va">ids</span>, deg_poly <span class="op">=</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 1 × 11</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.1.… splinesh… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.537  -<span style="color: #BB0000;">288.</span>  609.  675.  621.  670.</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidych… 0.0.1.… splinesh… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.535  -<span style="color: #BB0000;">290.</span>  613.  680.  625.  675.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Empty changepoint sets are allowed</span></span></span>
 <span class="r-in"><span><span class="fu">fit_lmshift</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:362] from 1 to 362: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:366] from 1 to 366: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [1 × 2] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region  : chr "[0,362]"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu: num 9.28</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : Named num 0.461</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region  : chr "[0,366]"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu: num 9.29</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : Named num 0.489</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr "sigma_hatsq"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: Named num [1:362] 9.28 9.28 9.28 9.28 9.28 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr [1:362] "1" "2" "3" "4" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: Named num [1:366] 9.29 9.29 9.29 9.29 9.29 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr [1:366] "1" "2" "3" "4" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "null"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Duplicate changepoints are removed</span></span></span>
 <span class="r-in"><span><span class="fu">fit_lmshift</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">42</span>, <span class="fl">42</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:362] from 1 to 362: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:366] from 1 to 366: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : num 42</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [2 × 2] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region  : chr [1:2] "[0,42)" "[42,362]"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu: num [1:2] 8.68 9.35</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : Named num 0.415</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region  : chr [1:2] "[0,42)" "[42,366]"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu: num [1:2] 8.68 9.37</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : Named num 0.442</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr "sigma_hatsq"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: Named num [1:362] 8.68 8.68 8.68 8.68 8.68 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr [1:362] "1" "2" "3" "4" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: Named num [1:366] 8.68 8.68 8.68 8.68 8.68 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr [1:366] "1" "2" "3" "4" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanshift"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
 <span class="r-in"><span></span></span>

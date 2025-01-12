@@ -9,7 +9,7 @@ sets in univariate time series."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">0.0.1.9002</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -130,7 +130,7 @@ The <code>segmenter</code> is of class <a href="seg_cpt.html">seg_cpt</a>.</p></
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Fri Jan 10 19:40:24 2025 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Sun Jan 12 20:08:19 2025 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -162,7 +162,7 @@ The <code>segmenter</code> is of class <a href="seg_cpt.html">seg_cpt</a>.</p></
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Fri Jan 10 19:40:24 2025 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Sun Jan 12 20:08:19 2025 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -194,7 +194,7 @@ The <code>segmenter</code> is of class <a href="seg_cpt.html">seg_cpt</a>.</p></
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 14 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpts.full pen.value.full data.set cpttype method test.stat pen.type pen.value minseglen cpts ncpts.max param.est date version </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Fri Jan 10 19:40:24 2025 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Sun Jan 12 20:08:19 2025 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -246,13 +246,13 @@ The <code>segmenter</code> is of class <a href="seg_cpt.html">seg_cpt</a>.</p></
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21] "bestSol"       "fitnessValue"  "solution"     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:1096] from 1 to 1096: 35.5 29 35.6 33 29.5 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : int [1:7] 34 107 369 553 840 875 933</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [8 × 2] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region  : chr [1:8] "[0,34)" "[34,107)" "[107,369)" "[369,553)" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu: num [1:8] 37.2 37.1 35.1 35.1 60.3 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : Named num 640</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : int [1:3] 652 885 975</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [4 × 2] (S3: tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region  : chr [1:4] "[0,652)" "[652,885)" "[885,975)" "[975,1.1e+03]"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu: num [1:4] 39 68.1 98.6 156.4</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : Named num 666</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr "sigma_hatsq"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:1096] 37.2 37.2 37.2 37.2 37.2 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:1096] 39 39 39 39 39 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanshift_norm"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
 <span class="r-in"><span></span></span>
