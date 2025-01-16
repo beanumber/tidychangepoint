@@ -5,7 +5,7 @@
 \alias{regions}
 \alias{regions.mod_cpt}
 \alias{regions.tidycpt}
-\title{Extract the regions from a \link{tidycpt} object}
+\title{Extract the regions from a \linkS4class{tidycpt} object}
 \usage{
 regions(x, ...)
 
@@ -22,7 +22,7 @@ regions(x, ...)
 A \code{\link[base:factor]{base::factor()}} of intervals indicating the region
 }
 \description{
-Extract the regions from a \link{tidycpt} object
+Extract the regions from a \linkS4class{tidycpt} object
 }
 \examples{
 
