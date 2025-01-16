@@ -173,7 +173,7 @@ augment.mod_cpt <- function(x, ...) {
   tibble::enframe(as.ts(x), name = "index", value = "y") |>
     tsibble::as_tsibble(index = index) |>
     dplyr::mutate(
-      region = cut_inclusive(index, pad_tau(tau, nobs(x))),
+      region = cut_by_tau(index, pad_tau(tau, nobs(x))),
       .fitted = fitted(x),
       .resid = residuals(x)
     ) |>

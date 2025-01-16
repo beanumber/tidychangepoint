@@ -77,13 +77,13 @@ test_that("utils works", {
   expect_s3_class(w, "factor")
   expect_match(levels(w), "^\\[.+\\,.+\\)$")
   
-  z <- cut_inclusive(x, y)
+  z <- cut_by_tau(x, y)
   expect_equal(length(z), length(x))
   expect_type(levels(z), "character")
   expect_length(levels(z), 2)
   expect_match(levels(z), "^\\[.+\\,.+\\)$")
   
-  z <- cut_inclusive(1:length(x), y)
+  z <- cut_by_tau(1:length(x), y)
   expect_equal(length(z), length(x))
   expect_type(levels(z), "character")
   expect_length(levels(z), 2)

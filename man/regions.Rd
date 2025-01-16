@@ -18,6 +18,9 @@ regions(x, ...)
 
 \item{...}{Currently ignored}
 }
+\value{
+A \code{\link[base:factor]{base::factor()}} of intervals indicating the region
+}
 \description{
 Extract the regions from a \link{tidycpt} object
 }

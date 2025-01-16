@@ -356,5 +356,6 @@ diagnose <- function(x, ...) UseMethod("diagnose")
 #' Extract the regions from a [tidycpt] object
 #' @param x An object that has regions
 #' @param ... Currently ignored
+#' @returns A [base::factor()] of intervals indicating the region 
 #' @export
 regions <- function(x, ...) UseMethod("regions")

@@ -40,6 +40,10 @@ validate_tau(tau, n)
 }
 
 \itemize{
+\item \code{\link[=regions_tau]{regions_tau()}}: A \code{\link[base:factor]{base::factor()}}
+}
+
+\itemize{
 \item \code{\link[=validate_tau]{validate_tau()}}: an \code{integer} vector with only the \code{\link[base:unique]{base::unique()}}
 entries between 2 and \eqn{n-1}, inclusive.
 }
