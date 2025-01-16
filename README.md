@@ -45,7 +45,7 @@ string indicating the algorithm you wish you use. `segment()` always
 returns a `tidycpt` object.
 
 ``` r
-x <- segment(CET, method = "pelt", minseglen = 3)
+x <- segment(CET, method = "pelt", model = fit_meanshift_norm, minseglen = 3)
 class(x)
 ```
 
@@ -59,7 +59,7 @@ returns the set of changepoint indices.
 changepoints(x)
 ```
 
-    ## [1] 237 344 347
+    ## [1] 330
 
 If the original time series has time labels, we can also retrieve that
 information.
@@ -68,7 +68,7 @@ information.
 changepoints(x, use_labels = TRUE)
 ```
 
-    ## [1] "1895-01-01" "2002-01-01" "2005-01-01"
+    ## [1] "1988-01-01"
 
 The `fitness()` function returns the both the value and the name of the
 objective function that the algorithm used to find the optimal
@@ -78,8 +78,24 @@ changepoint set.
 fitness(x)
 ```
 
-    ## MBIC 
-    ## -Inf
+    ##    MBIC 
+    ## 688.331
+
+The `tidy()` method shows the fitted parameters values for each region.
+
+``` r
+tidy(x)
+```
+
+    ## Registered S3 method overwritten by 'tsibble':
+    ##   method               from 
+    ##   as_tibble.grouped_df dplyr
+
+    ## # A tibble: 2 × 9
+    ##   region    num_obs   min   max  mean    sd begin   end param_mu
+    ##   <chr>       <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>    <dbl>
+    ## 1 [1,330)       329  6.86  10.6  9.17 0.615     1   330     9.17
+    ## 2 [330,367)      37  8.95  11.2 10.3  0.528   330   367    10.3
 
 ## Algorithmic coverage
 
@@ -105,12 +121,12 @@ ls_methods()
 
 ``` r
 ls_coverage() |>
-    dplyr::group_by(method) |>
-    dplyr::summarize(
-      models = paste(unique(model), collapse = ", "),
-      penalties = paste(unique(penalty), collapse = ", ")
-    ) |>
-    dplyr::arrange(method) |>
+  dplyr::group_by(method) |>
+  dplyr::summarize(
+    models = paste(unique(model), collapse = ", "),
+    penalties = paste(unique(penalty), collapse = ", ")
+  ) |>
+  dplyr::arrange(method) |>
   knitr::kable()
 ```
 
