@@ -34,4 +34,7 @@ explore a variety of temperature features.
 \item Parker, et al. (1992, \doi{10.1002/joc.3370120402})
 }
 }
+\seealso{
+\link[multitaper:CETmonthly]{multitaper::CETmonthly}
+}
 \keyword{datasets}
