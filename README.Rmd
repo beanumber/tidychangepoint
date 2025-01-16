@@ -41,7 +41,7 @@ Changepoint sets are computed using the `segment()` function, which takes a nume
 `segment()` always returns a `tidycpt` object. 
 
 ```{r, message=FALSE}
-x <- segment(CET, method = "pelt", minseglen = 3)
+x <- segment(CET, method = "pelt", model = fit_meanshift_norm, minseglen = 3)
 class(x)
 ```
 
@@ -58,24 +58,30 @@ If the original time series has time labels, we can also retrieve that informati
 changepoints(x, use_labels = TRUE)
 ```
 
-
 The `fitness()` function returns the both the value and the name of the objective function that the algorithm used to find the optimal changepoint set. 
 
 ```{r}
 fitness(x)
 ```
 
+The `tidy()` method shows the fitted parameters values for each region. 
+
+```{r}
+tidy(x)
+```
+
+
 ## Algorithmic coverage
 
 ```{r}
 ls_methods()
 ls_coverage() |>
-    dplyr::group_by(method) |>
-    dplyr::summarize(
-      models = paste(unique(model), collapse = ", "),
-      penalties = paste(unique(penalty), collapse = ", ")
-    ) |>
-    dplyr::arrange(method) |>
+  dplyr::group_by(method) |>
+  dplyr::summarize(
+    models = paste(unique(model), collapse = ", "),
+    penalties = paste(unique(penalty), collapse = ", ")
+  ) |>
+  dplyr::arrange(method) |>
   knitr::kable()
 ```
 

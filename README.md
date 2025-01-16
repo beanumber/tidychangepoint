@@ -59,7 +59,7 @@ returns the set of changepoint indices.
 changepoints(x)
 ```
 
-    ## [1] 237 330
+    ## [1] 237 344 347
 
 If the original time series has time labels, we can also retrieve that
 information.
@@ -68,7 +68,7 @@ information.
 changepoints(x, use_labels = TRUE)
 ```
 
-    ## [1] "1895-01-01" "1988-01-01"
+    ## [1] "1895-01-01" "2002-01-01" "2005-01-01"
 
 The `fitness()` function returns the both the value and the name of the
 objective function that the algorithm used to find the optimal
@@ -78,8 +78,8 @@ changepoint set.
 fitness(x)
 ```
 
-    ##     MBIC 
-    ## 643.5292
+    ## MBIC 
+    ## -Inf
 
 ## Algorithmic coverage
 
@@ -98,7 +98,7 @@ ls_methods()
     ##  6 ga          GA              tidyga          segment_ga()        GA::ga()     
     ##  7 ga-shi      GA              tidyga          segment_ga_shi()    segment_ga() 
     ##  8 ga-coen     GA              tidyga          segment_ga_coen()   segment_ga() 
-    ##  9 coen        tidychangepoint seg_basket      segment_coen()      Note that th…
+    ##  9 coen        tidychangepoint seg_basket      segment_coen()      <NA>         
     ## 10 random      GA              tidyga          segment_ga_random() segment_ga() 
     ## 11 manual      tidychangepoint seg_cpt         segment_manual()    <NA>         
     ## 12 null        tidychangepoint seg_cpt         segment_manual()    <NA>
@@ -116,17 +116,17 @@ ls_coverage() |>
 
 | method | models | penalties |
 |:---|:---|:---|
-| binseg | fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS |
+| binseg | fit_meanvar | None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS |
 | coen | fit_nhpp | BMDL |
-| ga | fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1 | AIC, BIC, MBIC, MDL |
+| ga | fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1 | SIC, AIC, BIC, HQC, MBIC, MDL |
 | ga-coen | fit_nhpp | BMDL |
 | ga-shi | fit_meanshift_norm_ar1 | BIC |
 | manual | fit_meanshift_norm | BIC |
 | null | fit_meanshift_norm | BIC |
-| pelt | fit_meanshift_norm, fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS |
-| random | fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1 | AIC, BIC, MBIC, MDL |
-| segneigh | fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS |
-| single-best | fit_meanvar | None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS |
+| pelt | fit_meanshift_norm, fit_meanvar | None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS |
+| random | fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1 | SIC, AIC, BIC, HQC, MBIC, MDL |
+| segneigh | fit_meanvar | None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS |
+| single-best | fit_meanvar | None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS |
 | wbs | NA | NA |
 
 ## References
@@ -147,13 +147,13 @@ citation("tidychangepoint")
     ## 
     ##   Baumer B, Suárez Sierra B, Coen A, Taimal C (????). _tidychangepoint:
     ##   A Tidy Framework for Changepoint Detection Analysis_. R package
-    ##   version 0.0.1.9000, <https://beanumber.github.io/tidychangepoint/>.
+    ##   version 0.0.1.9002, <https://beanumber.github.io/tidychangepoint/>.
     ## 
     ## A BibTeX entry for LaTeX users is
     ## 
     ##   @Manual{,
     ##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},
     ##     author = {Benjamin S. Baumer and Biviana Marcela {Suárez Sierra} and Arrigo Coen and Carlos A. Taimal},
-    ##     note = {R package version 0.0.1.9000},
+    ##     note = {R package version 0.0.1.9002},
     ##     url = {https://beanumber.github.io/tidychangepoint/},
     ##   }
