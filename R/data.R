@@ -96,3 +96,10 @@
 #'   - `slg_diff`: The difference in slugging percentage
 #' @source The `Lahman` package
 "mlb_diffs"
+
+#' Italian graduates
+#' @docType data
+#' @description
+#' Italian graduates
+#' @source <https://seriestoriche.istat.it/>
+"italy_grads"
