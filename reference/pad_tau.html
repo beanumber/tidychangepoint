@@ -50,6 +50,8 @@
 <span></span>
 <span><span class="fu">is_valid_tau</span><span class="op">(</span><span class="va">tau</span>, <span class="va">n</span><span class="op">)</span></span>
 <span></span>
+<span><span class="fu">regions_tau</span><span class="op">(</span><span class="va">tau</span>, <span class="va">n</span><span class="op">)</span></span>
+<span></span>
 <span><span class="fu">validate_tau</span><span class="op">(</span><span class="va">tau</span>, <span class="va">n</span><span class="op">)</span></span></code></pre></div>
     </div>
 
@@ -76,6 +78,7 @@
 </ul><ul><li><p><code>unpad_tau()</code>: an <code>integer</code> vector stripped of its first and last entries.</p></li>
 </ul><ul><li><p><code>is_valid_tau()</code>: a <code>logical</code> if all of the entries are between 2 and
 \(n-1\).</p></li>
+</ul><ul><li><p><code>regions_tau()</code>: A <code><a href="https://rdrr.io/r/base/factor.html" class="external-link">base::factor()</a></code></p></li>
 </ul><ul><li><p><code>validate_tau()</code>: an <code>integer</code> vector with only the <code><a href="https://rdrr.io/r/base/unique.html" class="external-link">base::unique()</a></code>
 entries between 2 and \(n-1\), inclusive.</p></li>
 </ul></div>
@@ -114,6 +117,10 @@ half-open subintervals that define the regions.</p>
 <span class="r-in"><span><span class="fu">is_valid_tau</span><span class="op">(</span><span class="fl">1097</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">DataCPSim</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] FALSE</span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Always return a factor with half-open intervals on the right</span></span></span>
+<span class="r-in"><span><span class="fu">regions_tau</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">42</span>, <span class="fl">330</span><span class="op">)</span>, <span class="fl">1096</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] [1,42)     [42,330)   [330,1097)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Levels: [1,42) [330,1097) [42,330)</span>
 <span class="r-in"><span><span class="co"># Anything less than 2 is not allowed</span></span></span>
 <span class="r-in"><span><span class="fu">validate_tau</span><span class="op">(</span><span class="fl">0</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">DataCPSim</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> numeric(0)</span>

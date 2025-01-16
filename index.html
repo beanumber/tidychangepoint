@@ -77,51 +77,63 @@
 <p>The <code>tidychangepoint</code> package allows you to use any number of algorithms for detecting changepoint sets in univariate time series with a common, <code>tidyverse</code>-compliant interface. Currently, algorithms from <code>changepoint</code>, <code>wbs</code>, and several genetic algorithms made accessible via <code>GA</code> are supported. It also provides model-fitting procedures for commonly-used parametric models, tools for computing various penalty functions, and graphical diagnostic displays.</p>
 <p>Changepoint sets are computed using the <code><a href="reference/segment.html">segment()</a></code> function, which takes a numeric vector that is coercible into a <code>ts</code> object, and a string indicating the algorithm you wish you use. <code><a href="reference/segment.html">segment()</a></code> always returns a <code>tidycpt</code> object.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/segment.html">segment</a></span><span class="op">(</span><span class="va">CET</span>, method <span class="op">=</span> <span class="st">"pelt"</span>, minseglen <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/segment.html">segment</a></span><span class="op">(</span><span class="va">CET</span>, method <span class="op">=</span> <span class="st">"pelt"</span>, model <span class="op">=</span> <span class="va">fit_meanshift_norm</span>, minseglen <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/class.html" class="external-link">class</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb5"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" tabindex="-1"></a><span class="do">## [1] "tidycpt"</span></span></code></pre></div>
 <p>Various methods are available for <code>tidycpt</code> objects. For example, <code><a href="https://rdrr.io/r/stats/ts.html" class="external-link">as.ts()</a></code> returns the original data as <code>ts</code> object, and <code><a href="reference/changepoints.html">changepoints()</a></code> returns the set of changepoint indices.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/changepoints.html">changepoints</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="do">## [1] 237 330</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" tabindex="-1"></a><span class="do">## [1] 330</span></span></code></pre></div>
 <p>If the original time series has time labels, we can also retrieve that information.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/changepoints.html">changepoints</a></span><span class="op">(</span><span class="va">x</span>, use_labels <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="do">## [1] "1895-01-01" "1988-01-01"</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" tabindex="-1"></a><span class="do">## [1] "1988-01-01"</span></span></code></pre></div>
 <p>The <code><a href="reference/fitness.html">fitness()</a></code> function returns the both the value and the name of the objective function that the algorithm used to find the optimal changepoint set.</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/fitness.html">fitness</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="do">##     MBIC </span></span>
-<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="do">## 643.5292</span></span></code></pre></div>
+<div class="sourceCode" id="cb11"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb11-1"><a href="#cb11-1" tabindex="-1"></a><span class="do">##    MBIC </span></span>
+<span id="cb11-2"><a href="#cb11-2" tabindex="-1"></a><span class="do">## 688.331</span></span></code></pre></div>
+<p>The <code><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy()</a></code> method shows the fitted parameters values for each region.</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://generics.r-lib.org/reference/tidy.html" class="external-link">tidy</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="do">## Registered S3 method overwritten by 'tsibble':</span></span>
+<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="do">##   method               from </span></span>
+<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="do">##   as_tibble.grouped_df dplyr</span></span>
+<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a></span>
+<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="do">## # A tibble: 2 × 9</span></span>
+<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="do">##   region    num_obs   min   max  mean    sd begin   end param_mu</span></span>
+<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="do">##   &lt;chr&gt;       &lt;int&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt; &lt;dbl&gt;    &lt;dbl&gt;</span></span>
+<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="do">## 1 [1,330)       329  6.86  10.6  9.17 0.615     1   330     9.17</span></span>
+<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="do">## 2 [330,367)      37  8.95  11.2 10.3  0.528   330   367    10.3</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="algorithmic-coverage">Algorithmic coverage<a class="anchor" aria-label="anchor" href="#algorithmic-coverage"></a>
 </h2>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/ls_pkgs.html">ls_methods</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb13"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" tabindex="-1"></a><span class="do">## # A tibble: 12 × 5</span></span>
-<span id="cb13-2"><a href="#cb13-2" tabindex="-1"></a><span class="do">##    method      pkg             segmenter_class helper              wraps        </span></span>
-<span id="cb13-3"><a href="#cb13-3" tabindex="-1"></a><span class="do">##    &lt;chr&gt;       &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;               &lt;chr&gt;        </span></span>
-<span id="cb13-4"><a href="#cb13-4" tabindex="-1"></a><span class="do">##  1 pelt        changepoint     cpt             segment_pelt()      changepoint:…</span></span>
-<span id="cb13-5"><a href="#cb13-5" tabindex="-1"></a><span class="do">##  2 binseg      changepoint     cpt             &lt;NA&gt;                changepoint:…</span></span>
-<span id="cb13-6"><a href="#cb13-6" tabindex="-1"></a><span class="do">##  3 segneigh    changepoint     cpt             &lt;NA&gt;                changepoint:…</span></span>
-<span id="cb13-7"><a href="#cb13-7" tabindex="-1"></a><span class="do">##  4 single-best changepoint     cpt             &lt;NA&gt;                changepoint:…</span></span>
-<span id="cb13-8"><a href="#cb13-8" tabindex="-1"></a><span class="do">##  5 wbs         wbs             wbs             &lt;NA&gt;                wbs::wbs()   </span></span>
-<span id="cb13-9"><a href="#cb13-9" tabindex="-1"></a><span class="do">##  6 ga          GA              tidyga          segment_ga()        GA::ga()     </span></span>
-<span id="cb13-10"><a href="#cb13-10" tabindex="-1"></a><span class="do">##  7 ga-shi      GA              tidyga          segment_ga_shi()    segment_ga() </span></span>
-<span id="cb13-11"><a href="#cb13-11" tabindex="-1"></a><span class="do">##  8 ga-coen     GA              tidyga          segment_ga_coen()   segment_ga() </span></span>
-<span id="cb13-12"><a href="#cb13-12" tabindex="-1"></a><span class="do">##  9 coen        tidychangepoint seg_basket      segment_coen()      Note that th…</span></span>
-<span id="cb13-13"><a href="#cb13-13" tabindex="-1"></a><span class="do">## 10 random      GA              tidyga          segment_ga_random() segment_ga() </span></span>
-<span id="cb13-14"><a href="#cb13-14" tabindex="-1"></a><span class="do">## 11 manual      tidychangepoint seg_cpt         segment_manual()    &lt;NA&gt;         </span></span>
-<span id="cb13-15"><a href="#cb13-15" tabindex="-1"></a><span class="do">## 12 null        tidychangepoint seg_cpt         segment_manual()    &lt;NA&gt;</span></span></code></pre></div>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/ls_pkgs.html">ls_methods</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="do">## # A tibble: 12 × 5</span></span>
+<span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="do">##    method      pkg             segmenter_class helper              wraps        </span></span>
+<span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="do">##    &lt;chr&gt;       &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;               &lt;chr&gt;        </span></span>
+<span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="do">##  1 pelt        changepoint     cpt             segment_pelt()      changepoint:…</span></span>
+<span id="cb15-5"><a href="#cb15-5" tabindex="-1"></a><span class="do">##  2 binseg      changepoint     cpt             &lt;NA&gt;                changepoint:…</span></span>
+<span id="cb15-6"><a href="#cb15-6" tabindex="-1"></a><span class="do">##  3 segneigh    changepoint     cpt             &lt;NA&gt;                changepoint:…</span></span>
+<span id="cb15-7"><a href="#cb15-7" tabindex="-1"></a><span class="do">##  4 single-best changepoint     cpt             &lt;NA&gt;                changepoint:…</span></span>
+<span id="cb15-8"><a href="#cb15-8" tabindex="-1"></a><span class="do">##  5 wbs         wbs             wbs             &lt;NA&gt;                wbs::wbs()   </span></span>
+<span id="cb15-9"><a href="#cb15-9" tabindex="-1"></a><span class="do">##  6 ga          GA              tidyga          segment_ga()        GA::ga()     </span></span>
+<span id="cb15-10"><a href="#cb15-10" tabindex="-1"></a><span class="do">##  7 ga-shi      GA              tidyga          segment_ga_shi()    segment_ga() </span></span>
+<span id="cb15-11"><a href="#cb15-11" tabindex="-1"></a><span class="do">##  8 ga-coen     GA              tidyga          segment_ga_coen()   segment_ga() </span></span>
+<span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="do">##  9 coen        tidychangepoint seg_basket      segment_coen()      &lt;NA&gt;         </span></span>
+<span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a><span class="do">## 10 random      GA              tidyga          segment_ga_random() segment_ga() </span></span>
+<span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a><span class="do">## 11 manual      tidychangepoint seg_cpt         segment_manual()    &lt;NA&gt;         </span></span>
+<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="do">## 12 null        tidychangepoint seg_cpt         segment_manual()    &lt;NA&gt;</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/ls_pkgs.html">ls_coverage</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span></span>
-<span>      models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span>,</span>
-<span>      penalties <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">penalty</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span></span>
-<span>    <span class="op">)</span> <span class="op">|&gt;</span></span>
-<span>    <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/summarise.html" class="external-link">summarize</a></span><span class="op">(</span></span>
+<span>    models <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">model</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span>,</span>
+<span>    penalties <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/paste.html" class="external-link">paste</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/unique.html" class="external-link">unique</a></span><span class="op">(</span><span class="va">penalty</span><span class="op">)</span>, collapse <span class="op">=</span> <span class="st">", "</span><span class="op">)</span></span>
+<span>  <span class="op">)</span> <span class="op">|&gt;</span></span>
+<span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/arrange.html" class="external-link">arrange</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">knitr</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/knitr/man/kable.html" class="external-link">kable</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <table class="table">
 <colgroup>
@@ -138,7 +150,7 @@
 <tr class="odd">
 <td align="left">binseg</td>
 <td align="left">fit_meanvar</td>
-<td align="left">None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS</td>
+<td align="left">None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS</td>
 </tr>
 <tr class="even">
 <td align="left">coen</td>
@@ -148,7 +160,7 @@
 <tr class="odd">
 <td align="left">ga</td>
 <td align="left">fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1</td>
-<td align="left">AIC, BIC, MBIC, MDL</td>
+<td align="left">SIC, AIC, BIC, HQC, MBIC, MDL</td>
 </tr>
 <tr class="even">
 <td align="left">ga-coen</td>
@@ -173,22 +185,22 @@
 <tr class="even">
 <td align="left">pelt</td>
 <td align="left">fit_meanshift_norm, fit_meanvar</td>
-<td align="left">None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS</td>
+<td align="left">None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS</td>
 </tr>
 <tr class="odd">
 <td align="left">random</td>
 <td align="left">fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1</td>
-<td align="left">AIC, BIC, MBIC, MDL</td>
+<td align="left">SIC, AIC, BIC, HQC, MBIC, MDL</td>
 </tr>
 <tr class="even">
 <td align="left">segneigh</td>
 <td align="left">fit_meanvar</td>
-<td align="left">None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS</td>
+<td align="left">None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS</td>
 </tr>
 <tr class="odd">
 <td align="left">single-best</td>
 <td align="left">fit_meanvar</td>
-<td align="left">None, SIC, BIC, MBIC, AIC, Hannan-Quinn, Asymptotic, Manual, CROPS</td>
+<td align="left">None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS</td>
 </tr>
 <tr class="even">
 <td align="left">wbs</td>
@@ -203,25 +215,25 @@
 </h2>
 <p>Please read <a href="https://beanumber.github.io/changepoint-paper/" class="external-link">the full paper</a> for more details.</p>
 <p>To cite the package, use the following information:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/citation.html" class="external-link">citation</a></span><span class="op">(</span><span class="st">"tidychangepoint"</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb16"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" tabindex="-1"></a><span class="do">## Warning in citation("tidychangepoint"): could not determine year for</span></span>
-<span id="cb16-2"><a href="#cb16-2" tabindex="-1"></a><span class="do">## 'tidychangepoint' from package DESCRIPTION file</span></span>
-<span id="cb16-3"><a href="#cb16-3" tabindex="-1"></a></span>
-<span id="cb16-4"><a href="#cb16-4" tabindex="-1"></a><span class="do">## To cite package 'tidychangepoint' in publications use:</span></span>
-<span id="cb16-5"><a href="#cb16-5" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb16-6"><a href="#cb16-6" tabindex="-1"></a><span class="do">##   Baumer B, Suárez Sierra B, Coen A, Taimal C (????). _tidychangepoint:</span></span>
-<span id="cb16-7"><a href="#cb16-7" tabindex="-1"></a><span class="do">##   A Tidy Framework for Changepoint Detection Analysis_. R package</span></span>
-<span id="cb16-8"><a href="#cb16-8" tabindex="-1"></a><span class="do">##   version 0.0.1.9000, &lt;https://beanumber.github.io/tidychangepoint/&gt;.</span></span>
-<span id="cb16-9"><a href="#cb16-9" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb16-10"><a href="#cb16-10" tabindex="-1"></a><span class="do">## A BibTeX entry for LaTeX users is</span></span>
-<span id="cb16-11"><a href="#cb16-11" tabindex="-1"></a><span class="do">## </span></span>
-<span id="cb16-12"><a href="#cb16-12" tabindex="-1"></a><span class="do">##   @Manual{,</span></span>
-<span id="cb16-13"><a href="#cb16-13" tabindex="-1"></a><span class="do">##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},</span></span>
-<span id="cb16-14"><a href="#cb16-14" tabindex="-1"></a><span class="do">##     author = {Benjamin S. Baumer and Biviana Marcela {Suárez Sierra} and Arrigo Coen and Carlos A. Taimal},</span></span>
-<span id="cb16-15"><a href="#cb16-15" tabindex="-1"></a><span class="do">##     note = {R package version 0.0.1.9000},</span></span>
-<span id="cb16-16"><a href="#cb16-16" tabindex="-1"></a><span class="do">##     url = {https://beanumber.github.io/tidychangepoint/},</span></span>
-<span id="cb16-17"><a href="#cb16-17" tabindex="-1"></a><span class="do">##   }</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" tabindex="-1"></a><span class="do">## Warning in citation("tidychangepoint"): could not determine year for</span></span>
+<span id="cb18-2"><a href="#cb18-2" tabindex="-1"></a><span class="do">## 'tidychangepoint' from package DESCRIPTION file</span></span>
+<span id="cb18-3"><a href="#cb18-3" tabindex="-1"></a></span>
+<span id="cb18-4"><a href="#cb18-4" tabindex="-1"></a><span class="do">## To cite package 'tidychangepoint' in publications use:</span></span>
+<span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="do">##   Baumer B, Suárez Sierra B, Coen A, Taimal C (????). _tidychangepoint:</span></span>
+<span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="do">##   A Tidy Framework for Changepoint Detection Analysis_. R package</span></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="do">##   version 0.0.1.9002, &lt;https://beanumber.github.io/tidychangepoint/&gt;.</span></span>
+<span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="do">## A BibTeX entry for LaTeX users is</span></span>
+<span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a><span class="do">## </span></span>
+<span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a><span class="do">##   @Manual{,</span></span>
+<span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a><span class="do">##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},</span></span>
+<span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a><span class="do">##     author = {Benjamin S. Baumer and Biviana Marcela {Suárez Sierra} and Arrigo Coen and Carlos A. Taimal},</span></span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a><span class="do">##     note = {R package version 0.0.1.9002},</span></span>
+<span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a><span class="do">##     url = {https://beanumber.github.io/tidychangepoint/},</span></span>
+<span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a><span class="do">##   }</span></span></code></pre></div>
 </div>
 </div>
   </main><aside class="col-md-3"><div class="links">

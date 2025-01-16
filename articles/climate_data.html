@@ -139,11 +139,11 @@ the <code><a href="https://generics.r-lib.org/reference/tidy.html" class="extern
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 5 × 9</span></span></span>
 <span><span class="co">##   region    num_obs   min   max  mean    sd begin   end param_mu</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> [0,34)         33  7.86 10.2   8.83 0.554     0    34     8.83</span></span>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> [1,34)         33  7.86 10.2   8.83 0.554     1    34     8.83</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">2</span> [34,41)         7  7.29  8.52  7.91 0.454    34    41     7.91</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">3</span> [41,252)      211  6.86 10.5   9.16 0.594    41   252     9.16</span></span>
 <span><span class="co">## <span style="color: #BCBCBC;">4</span> [252,336)      84  8.52 10.6   9.50 0.482   252   336     9.50</span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">5</span> [336,366]      31  8.95 11.2  10.4  0.507   336   366    10.4</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">5</span> [336,367)      31  8.95 11.2  10.4  0.507   336   367    10.4</span></span></code></pre>
 <p>By default, <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> returns a summary of the
 <strong>segmenter</strong> that produced the discovered changepoint set.
 This includes the fitness, the elapsed time, and the parameters used by
@@ -153,7 +153,7 @@ the segmenter.</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
 <span><span class="co">##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;pckg_vrs&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> meanshift… BIC         665. 17.045 secs</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> meanshift… BIC         665. 16.706 secs</span></span></code></pre>
 <p>However, we can also run <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> on the model resulting
 from the discovered changepoint set. This provides information about the
 model and its fit, including the values of various alternative model
@@ -240,7 +240,7 @@ NHPP model, along with the BMDL penalty function.</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
 <span><span class="co">##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;pckg_vrs&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> nhpp       BMDL       <span style="text-decoration: underline;">1</span>924. 34.806 secs</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> nhpp       BMDL       <span style="text-decoration: underline;">1</span>942. 25.163 secs</span></span></code></pre>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bog_cpt</span>, use_time_index <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>
@@ -252,6 +252,8 @@ NHPP model, along with the BMDL penalty function.</p>
 <code class="sourceCode R"><span><span class="va">bog_cpt</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/as.model.html">as.model</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu"><a href="../reference/diagnose.html">diagnose</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<pre><code><span><span class="co">## Warning: Removed 1 row containing missing values or values outside the scale range</span></span>
+<span><span class="co">## (`geom_vline()`).</span></span></code></pre>
 <p><img src="climate_data_files/figure-html/diagnose-1.png" width="700"></p>
 </div>
 <div class="section level3">
@@ -260,13 +262,13 @@ NHPP model, along with the BMDL penalty function.</p>
 <p>The times series <code>mde_rain_monthly</code> contains monthly
 precipitation readings from locations in and around the city of
 Medellín, Colombia.</p>
-<div class="sourceCode" id="cb32"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mde_rain_monthly</span><span class="op">)</span></span></code></pre></div>
 <p><img src="climate_data_files/figure-html/mde_rain-1.png" width="700"></p>
 <p>Here, we fit the deterministic PELT algorithm <span class="citation">(Killick and Eckley 2014)</span>.</p>
-<div class="sourceCode" id="cb33"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">mde_cpt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/segment.html">segment</a></span><span class="op">(</span><span class="va">mde_rain_monthly</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span></code></pre></div>
 <div class="sourceCode" id="cb34"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">mde_cpt</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/segment.html">segment</a></span><span class="op">(</span><span class="va">mde_rain_monthly</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb35"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">mde_cpt</span>, use_time_index <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>
 <span><span class="co">## Adding another scale for <span style="color: #00BB00;">x</span>, which will replace the existing scale.</span></span></code></pre>

@@ -23,7 +23,7 @@
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/build_gabin_population.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/changepoints.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/compare_models.html</loc></url>
-<url><loc>https://beanumber.github.io/tidychangepoint/reference/cut_inclusive.html</loc></url>
+<url><loc>https://beanumber.github.io/tidychangepoint/reference/cut_by_tau.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/deg_free.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/diagnose.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/evaluate_cpts.html</loc></url>
@@ -52,6 +52,7 @@
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/plot_best_chromosome.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/plot_intensity.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/reexports.html</loc></url>
+<url><loc>https://beanumber.github.io/tidychangepoint/reference/regions.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/seg_basket.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/seg_cpt.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/seg_params.html</loc></url>
