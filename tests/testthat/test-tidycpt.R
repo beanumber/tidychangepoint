@@ -47,13 +47,15 @@ test_that("utils works", {
   
   tau <- 826
   y <- pad_tau(tau, length(x))
-  expect_true(0 %in% y)
+  expect_true(1 %in% y)
   expect_true(all(tau %in% y))
-  expect_true(length(x) %in% y)
+  expect_true((length(x) + 1) %in% y)
   expect_equal(unpad_tau(y), tau)
   expect_false(0 %in% unpad_tau(y))
+  expect_false(1 %in% unpad_tau(y))
   expect_true(all(tau %in% y))
   expect_false(length(x) %in% unpad_tau(y))
+  expect_false((length(x) + 1) %in% unpad_tau(y))
   expect_equal(y, pad_tau(c(826, 283764), length(x)))
   
   expect_false(is_valid_tau(0, length(x)))
@@ -74,6 +76,7 @@ test_that("utils works", {
   expect_equal(length(z), length(x))
   expect_type(levels(z), "character")
   expect_length(levels(z), 2)
+  expect_match(levels(z), "^\\[.+\\,.+\\)$")
   
   z <- cut_inclusive(1:length(x), y)
   expect_equal(length(z), length(x))
