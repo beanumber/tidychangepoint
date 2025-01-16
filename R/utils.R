@@ -25,7 +25,7 @@ pad_tau <- function(tau, n) {
   if (!is_valid_tau(tau, n)) {
     tau <- tau[tau >= 1 & tau <= n]
   }
-  unique(c(0, tau, n))
+  unique(c(1, tau, n + 1))
 }
 
 #' @rdname pad_tau
@@ -60,6 +60,18 @@ unpad_tau <- function(padded_tau) {
 is_valid_tau <- function(tau, n) {
   # the first and last points cannot be changepoints!
   all(tau %in% 2:(n-1))
+}
+
+#' @rdname pad_tau
+#' @export
+#' @returns 
+#'   - [regions_tau()]: A [base::factor()]
+#' @examples
+#' # Always return a factor with half-open intervals on the right
+#' regions_tau(c(42, 330), 1096)
+regions_tau <- function(tau, n) {
+  paste0("[", c(1, tau), ",", c(tau, n + 1), ")") |>
+    factor()
 }
 
 #' @rdname pad_tau
@@ -175,24 +187,25 @@ time2tau <- function(cpts, index) {
 #' These non-empty regions can be defined by half-open intervals, starting with
 #' 1 and ending with \eqn{n+1}. 
 #' 
-#' [cut_inclusive()] splits a set of indices into a [base::factor()] of 
+#' [cut_by_tau()] splits a set of indices into a [base::factor()] of 
 #' half-open intervals
 #' 
 #' @returns 
-#'   - [cut_inclusive()] a [base::factor()] of half-open intervals
+#'   - [cut_by_tau()] a [base::factor()] of half-open intervals
 #' 
 #' @export
+#' @seealso [base::cut()]
 #' @examples
 #' n <- length(CET)
 #' 
 #' # Return a factor of intervals
-#' cut_inclusive(1:n, tau = pad_tau(c(42, 81, 330), n))
+#' cut_by_tau(1:n, tau = pad_tau(c(42, 81, 330), n))
 #' 
-cut_inclusive <- function(x, tau) {
-  cut(x, breaks = tau, include.lowest = TRUE, right = FALSE)
+cut_by_tau <- function(x, tau) {
+  cut(x, breaks = tau, include.lowest = FALSE, right = FALSE)
 }
 
-#' @rdname cut_inclusive
+#' @rdname cut_by_tau
 #' @details
 #' [split_by_tau()] splits a time series into a named [base::list()] of numeric
 #' vectors
@@ -200,6 +213,7 @@ cut_inclusive <- function(x, tau) {
 #'   - [split_by_tau()] a named [base::list()] of numeric
 #' vectors
 #' 
+#' @seealso [base::split()]
 #' @export
 #' @examples
 #' # Return a list of observations
@@ -207,7 +221,7 @@ cut_inclusive <- function(x, tau) {
 #' 
 split_by_tau <- function(x, tau) {
   tau <- validate_tau(tau, n = length(x))
-  idx <- cut_inclusive(1:length(x), pad_tau(tau, length(x)))
+  idx <- cut_by_tau(1:length(x), pad_tau(tau, length(x)))
   split(x, idx)
 }
 

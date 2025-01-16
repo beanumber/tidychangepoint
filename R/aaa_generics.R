@@ -352,3 +352,10 @@ evaluate_cpts <- function(x, ...) UseMethod("evaluate_cpts")
 #' @family tidycpt-generics
 #' @export
 diagnose <- function(x, ...) UseMethod("diagnose")
+
+#' Extract the regions from a [tidycpt-class] object
+#' @param x An object that has regions
+#' @param ... Currently ignored
+#' @returns A [base::factor()] of intervals indicating the region 
+#' @export
+regions <- function(x, ...) UseMethod("regions")

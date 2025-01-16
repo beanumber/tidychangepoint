@@ -88,7 +88,7 @@ fit_nhpp <- function(x, tau, ...) {
   exc <- exceedances(x, threshold = threshold)
   padded_tau <- pad_tau(tau, n)
   exc_by_tau <- exc |>
-    split(cut_inclusive(exc, padded_tau))
+    split(cut_by_tau(exc, padded_tau))
 
   regions_df <- tibble::tibble(
     region = names(exc_by_tau),
@@ -233,7 +233,7 @@ mcdf <- function(x, dist = "weibull") {
   
   out <- tibble::tibble(
     t = t,
-    region = cut_inclusive(t, tau_padded)
+    region = cut_by_tau(t, tau_padded)
   ) |>
     dplyr::left_join(theta_calc, by = "region") |>
     dplyr::mutate(

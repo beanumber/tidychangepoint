@@ -4,6 +4,7 @@
 \alias{pad_tau}
 \alias{unpad_tau}
 \alias{is_valid_tau}
+\alias{regions_tau}
 \alias{validate_tau}
 \title{Pad and unpad changepoint sets with boundary points}
 \usage{
@@ -12,6 +13,8 @@ pad_tau(tau, n)
 unpad_tau(padded_tau)
 
 is_valid_tau(tau, n)
+
+regions_tau(tau, n)
 
 validate_tau(tau, n)
 }
@@ -34,6 +37,10 @@ validate_tau(tau, n)
 \itemize{
 \item \code{\link[=is_valid_tau]{is_valid_tau()}}: a \code{logical} if all of the entries are between 2 and
 \eqn{n-1}.
+}
+
+\itemize{
+\item \code{\link[=regions_tau]{regions_tau()}}: A \code{\link[base:factor]{base::factor()}}
 }
 
 \itemize{
@@ -74,6 +81,8 @@ is_valid_tau(826, length(DataCPSim))
 is_valid_tau(1096, length(DataCPSim))
 is_valid_tau(1097, length(DataCPSim))
 
+# Always return a factor with half-open intervals on the right
+regions_tau(c(42, 330), 1096)
 # Anything less than 2 is not allowed
 validate_tau(0, length(DataCPSim))
 validate_tau(1, length(DataCPSim))

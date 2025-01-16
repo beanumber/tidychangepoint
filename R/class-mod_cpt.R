@@ -173,7 +173,7 @@ augment.mod_cpt <- function(x, ...) {
   tibble::enframe(as.ts(x), name = "index", value = "y") |>
     tsibble::as_tsibble(index = index) |>
     dplyr::mutate(
-      region = cut_inclusive(index, pad_tau(tau, nobs(x))),
+      region = cut_by_tau(index, pad_tau(tau, nobs(x))),
       .fitted = fitted(x),
       .resid = residuals(x)
     ) |>
@@ -321,6 +321,17 @@ plot.mod_cpt <- function(x, ...) {
 #' @export
 print.mod_cpt <- function(x, ...) {
   utils::str(x)
+}
+
+#' @rdname regions
+#' @export
+#' @examples
+#' 
+#' cpt <- fit_meanshift_norm(CET, tau = 330)
+#' regions(cpt)
+#' 
+regions.mod_cpt <- function(x, ...) {
+  regions_tau(changepoints(x), nobs(x))
 }
 
 #' @rdname diagnose
