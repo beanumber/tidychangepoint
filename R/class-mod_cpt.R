@@ -175,7 +175,7 @@ augment.mod_cpt <- function(x, ...) {
     dplyr::mutate(
       region = cut_inclusive(index, pad_tau(tau, nobs(x))),
       .fitted = fitted(x),
-      .resid = residuals(x)
+#      .resid = residuals(x)
     ) |>
     dplyr::group_by(region)
 }
@@ -321,6 +321,17 @@ plot.mod_cpt <- function(x, ...) {
 #' @export
 print.mod_cpt <- function(x, ...) {
   utils::str(x)
+}
+
+#' @rdname regions
+#' @export
+#' @examples
+#' 
+#' cpt <- fit_meanshift_norm(CET, tau = 330)
+#' regions(cpt)
+#' 
+regions.mod_cpt <- function(x, ...) {
+  tidy(x)[["region"]]
 }
 
 #' @rdname diagnose

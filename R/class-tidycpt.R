@@ -192,6 +192,12 @@ print.tidycpt <- function(x, ...) {
   print(x$model)
 }
 
+#' @rdname regions
+#' @export
+regions.tidycpt <- function(x, ...) {
+  regions(x$model)
+}
+
 #' @rdname diagnose
 #' @export
 #' @examples
