@@ -25,7 +25,7 @@ pad_tau <- function(tau, n) {
   if (!is_valid_tau(tau, n)) {
     tau <- tau[tau >= 1 & tau <= n]
   }
-  unique(c(0, tau, n))
+  unique(c(1, tau, n + 1))
 }
 
 #' @rdname pad_tau
@@ -189,7 +189,7 @@ time2tau <- function(cpts, index) {
 #' cut_inclusive(1:n, tau = pad_tau(c(42, 81, 330), n))
 #' 
 cut_inclusive <- function(x, tau) {
-  cut(x, breaks = tau, include.lowest = TRUE, right = FALSE)
+  cut(x, breaks = tau, include.lowest = FALSE, right = FALSE)
 }
 
 #' @rdname cut_inclusive
