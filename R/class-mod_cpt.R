@@ -331,7 +331,7 @@ print.mod_cpt <- function(x, ...) {
 #' regions(cpt)
 #' 
 regions.mod_cpt <- function(x, ...) {
-  tidy(x)[["region"]]
+  regions_tau(changepoints(x), nobs(x))
 }
 
 #' @rdname diagnose

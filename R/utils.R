@@ -64,6 +64,16 @@ is_valid_tau <- function(tau, n) {
 
 #' @rdname pad_tau
 #' @export
+#' @examples
+#' # Always return a factor with half-open intervals on the right
+#' regions_tau(c(42, 330), 1096)
+regions_tau <- function(tau, n) {
+  paste0("[", c(1, tau), ",", c(tau, n + 1), ")") |>
+    factor()
+}
+
+#' @rdname pad_tau
+#' @export
 #' @returns 
 #'   - [validate_tau()]: an `integer` vector with only the [base::unique()] 
 #'   entries between 2 and \eqn{n-1}, inclusive.  

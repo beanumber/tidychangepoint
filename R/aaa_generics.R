@@ -357,4 +357,4 @@ diagnose <- function(x, ...) UseMethod("diagnose")
 #' @param x An object that has regions
 #' @param ... Currently ignored
 #' @export
-regions <- function(x, ...) UseMethod("diagnose")
+regions <- function(x, ...) UseMethod("regions")

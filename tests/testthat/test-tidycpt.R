@@ -72,6 +72,11 @@ test_that("utils works", {
   expect_length(validate_tau(c(826, 826), length(x)), 1)
   expect_length(validate_tau(c(-4, 0, 1, 4, 5, 5, 824, 1096, 1097, 182384), length(x)), 3)
   
+  w <- regions_tau(tau, length(x))
+  expect_length(w, 2)
+  expect_s3_class(w, "factor")
+  expect_match(levels(w), "^\\[.+\\,.+\\)$")
+  
   z <- cut_inclusive(x, y)
   expect_equal(length(z), length(x))
   expect_type(levels(z), "character")
