@@ -175,7 +175,7 @@ augment.mod_cpt <- function(x, ...) {
     dplyr::mutate(
       region = cut_inclusive(index, pad_tau(tau, nobs(x))),
       .fitted = fitted(x),
-#      .resid = residuals(x)
+      .resid = residuals(x)
     ) |>
     dplyr::group_by(region)
 }
