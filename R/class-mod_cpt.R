@@ -309,10 +309,9 @@ plot.mod_cpt <- function(x, ...) {
       linetype = 3
     ) + 
     ggplot2::scale_x_continuous("Time Index (t)", breaks = b) +
-    ggplot2::scale_y_continuous("Original Measurement") + 
     ggplot2::labs(
-      title = "Original times series",
-      subtitle = paste("Mean value is", round(mean(as.ts(x), na.rm = TRUE), 2))
+#      title = "Original time series",
+      subtitle = paste("Global mean value is", round(mean(as.ts(x), na.rm = TRUE), 2))
     )
 }
 
