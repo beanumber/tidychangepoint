@@ -9,11 +9,17 @@ An object of class \code{tbl_ts} (inherits from \code{tbl_df}, \code{tbl}, \code
 }
 \source{
 \url{https://seriestoriche.istat.it/}
+
+Source: Istat- Ministero dell'istruzione pubblica, years 1926-1942
+
+Istat- Rilevazione sulle Università, years 1943-1997
+
+Miur- Rilevazione sulle Università, years 1998-2013
 }
 \usage{
 italy_grads
 }
 \description{
-Italian graduates
+Italian University graduates by disciplinary groups during the years 1926-2013.
 }
 \keyword{datasets}

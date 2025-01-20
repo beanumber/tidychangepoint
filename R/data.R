@@ -97,9 +97,12 @@
 #' @source The `Lahman` package
 "mlb_diffs"
 
-#' Italian graduates
+#' Italian University graduates by disciplinary groups from 1926-2013
 #' @docType data
 #' @description
-#' Italian graduates
+#' Italian University graduates by disciplinary groups during the years 1926-2013.
 #' @source <https://seriestoriche.istat.it/>
+#' @source Source: Istat- Ministero dell'istruzione pubblica, years 1926-1942
+#' @source Istat- Rilevazione sulle Università, years 1943-1997
+#' @source Miur- Rilevazione sulle Università, years 1998-2013
 "italy_grads"
