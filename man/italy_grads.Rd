@@ -3,7 +3,7 @@
 \docType{data}
 \name{italy_grads}
 \alias{italy_grads}
-\title{Italian graduates}
+\title{Italian University graduates by disciplinary groups from 1926-2013}
 \format{
 An object of class \code{tbl_ts} (inherits from \code{tbl_df}, \code{tbl}, \code{data.frame}) with 88 rows and 17 columns.
 }
