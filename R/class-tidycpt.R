@@ -161,7 +161,11 @@ compare_algorithms <- function(x, ...) {
 #' 
 #' # Plot a segmented time series and show the time labels on the x-axis
 #' plot(segment(CET, method = "pelt"), use_time_index = TRUE)
-plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
+#' 
+#' # Label the y-axis correctly
+#' segment(CET, method = "pelt") |>
+#'   plot(use_time_index = TRUE, ylab = "Degrees Celsius")
+plot.tidycpt <- function(x, use_time_index = FALSE, ylab = NULL, ...) {
   g <- plot(x$model)
   b <- g |>
     ggplot2::ggplot_build() |>
@@ -173,7 +177,14 @@ plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
       n <- length(t)
       indices <- 1:nobs(x$model)
       good <- t %in% indices
-      out <- x$time_index[ifelse(good, t, NA)] |>
+      out <- x$time_index[ifelse(good, t, NA)]
+      
+      # if it's just years, show only the years
+      if (all(lubridate::yday(out) == 1)) {
+        out <- lubridate::year(out)
+      }
+      
+      out <- out |>
         as.character()
       replace(out, is.na(out), "")
     }
@@ -181,6 +192,13 @@ plot.tidycpt <- function(x, use_time_index = FALSE, ...) {
     g <- g +
       ggplot2::scale_x_continuous("Time", breaks = b$breaks, labels = my_labels)
   }
+  
+  # ylab
+  if (!is.null(ylab)) {
+    g <- g +
+      ggplot2::scale_y_continuous(name = ylab)
+  }
+  
   g
 }
 
