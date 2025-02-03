@@ -97,7 +97,7 @@
 
 \method{glance}{tidycpt}(x, ...)
 
-\method{plot}{tidycpt}(x, use_time_index = FALSE, ...)
+\method{plot}{tidycpt}(x, use_time_index = FALSE, ylab = NULL, ...)
 
 \method{print}{tidycpt}(x, ...)
 
@@ -149,6 +149,10 @@ plot(segment(CET, method = "pelt"))
 
 # Plot a segmented time series and show the time labels on the x-axis
 plot(segment(CET, method = "pelt"), use_time_index = TRUE)
+
+# Label the y-axis correctly
+segment(CET, method = "pelt") |>
+  plot(use_time_index = TRUE, ylab = "Degrees Celsius")
 }
 \keyword{internal}
 \description{

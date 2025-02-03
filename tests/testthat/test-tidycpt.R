@@ -28,6 +28,7 @@ test_that("tidycpt works", {
   expect_s3_class(segment(bogota_pm, method = "manual", tau = c(500, 850)), "tidycpt")
   expect_error(segment(bogota_pm, method = "manual", cpts = c(500, 850)), "tau")
   
+  expect_s3_class(plot(segment(CET, method = "null"), use_time_index = TRUE), "gg")
 })
 
 test_that("regions works", {

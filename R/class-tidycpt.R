@@ -180,7 +180,7 @@ plot.tidycpt <- function(x, use_time_index = FALSE, ylab = NULL, ...) {
       out <- x$time_index[ifelse(good, t, NA)]
       
       # if it's just years, show only the years
-      if (all(lubridate::yday(out) == 1)) {
+      if (all(lubridate::yday(out) == 1, na.rm = TRUE)) {
         out <- lubridate::year(out)
       }
       
