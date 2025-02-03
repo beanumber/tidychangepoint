@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9001</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -153,7 +153,7 @@ the segmenter.</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
 <span><span class="co">##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;pckg_vrs&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> meanshift… BIC         665. 16.614 secs</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> meanshift… BIC         665. 16.907 secs</span></span></code></pre>
 <p>However, we can also run <code><a href="https://generics.r-lib.org/reference/glance.html" class="external-link">glance()</a></code> on the model resulting
 from the discovered changepoint set. This provides information about the
 model and its fit, including the values of various alternative model
@@ -169,7 +169,7 @@ BIC) is actually the one used by the segmenter!</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
 <span><span class="co">##   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> tidych… 1.0.0.… meanshif… <span style="color: #949494;">&lt;dbl&gt;</span>         4 0.553  -<span style="color: #BB0000;">303.</span>  626.  665.  666.  675.</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> tidych… 1.0.0   meanshif… <span style="color: #949494;">&lt;dbl&gt;</span>         4 0.553  -<span style="color: #BB0000;">303.</span>  626.  665.  666.  675.</span></span></code></pre>
 <p>The <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code> function returns an informative plot of the
 original time series, with the changepoint set and the corresponding
 regions demarcated.</p>
@@ -202,7 +202,7 @@ figures.</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
 <span><span class="co">##   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> tidych… 1.0.0.… trendshi… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.538  -<span style="color: #BB0000;">292.</span>  608.  655.  630.  658.</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> tidych… 1.0.0   trendshi… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.538  -<span style="color: #BB0000;">292.</span>  608.  655.  630.  658.</span></span></code></pre>
 <p>Modifying the model to incorporate AR(1) lagged errors also matches
 the figures from Table 2.</p>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
@@ -212,7 +212,7 @@ the figures from Table 2.</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 11</span></span></span>
 <span><span class="co">##   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;int&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span>  <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span></span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> tidych… 1.0.0.… trendshi… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.537  -<span style="color: #BB0000;">291.</span>  608.  658.  628.  661.</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> tidych… 1.0.0   trendshi… <span style="color: #949494;">&lt;dbl&gt;</span>         3 0.537  -<span style="color: #BB0000;">291.</span>  608.  658.  628.  661.</span></span></code></pre>
 </div>
 </div>
 <div class="section level3">
@@ -240,7 +240,7 @@ NHPP model, along with the BMDL penalty function.</p>
 <pre><code><span><span class="co">## <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
 <span><span class="co">##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time</span></span>
 <span><span class="co">##   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;pckg_vrs&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span></span>
-<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> nhpp       BMDL       <span style="text-decoration: underline;">1</span>942. 25.375 secs</span></span></code></pre>
+<span><span class="co">## <span style="color: #BCBCBC;">1</span> GA    3.2.4      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> nhpp       BMDL       <span style="text-decoration: underline;">1</span>942. 25.89 secs</span></span></code></pre>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">bog_cpt</span>, use_time_index <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
 <pre><code><span><span class="co">## Scale for <span style="color: #00BB00;">x</span> is already present.</span></span>
