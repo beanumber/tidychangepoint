@@ -37,11 +37,11 @@ changepoints.wbs <- function(x, ...) {
 #' # Segment a time series using Wild Binary Segmentation
 #' x <- segment(DataCPSim, method = "wbs")
 #' 
-#' # Retrive its fitness
+#' # Retrieve its fitness
 #' fitness(x)
 #' 
 fitness.wbs <- function(object, ...) {
-  out <- 0
+  out <- object$ic.curve$mbic.penalty[1]
   names(out) <- "MBIC"
   out
 }

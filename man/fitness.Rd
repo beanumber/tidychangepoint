@@ -56,7 +56,7 @@ fitness(x)
 # Segment a time series using Wild Binary Segmentation
 x <- segment(DataCPSim, method = "wbs")
 
-# Retrive its fitness
+# Retrieve its fitness
 fitness(x)
 
 }

@@ -1,3 +1,7 @@
+# tidychangepoint 1.0.1
+
+* `fitness.wbs()` returns the MBIC penalty value.
+
 # tidychangepoint 1.0.0
 
 * `mlb_diffs` is now a `tsibble` with various statistics.
