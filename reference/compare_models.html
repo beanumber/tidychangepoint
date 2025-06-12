@@ -102,9 +102,15 @@ algorithms on the original time series, and consolidates the results.</p>
 <span class="r-in"><span><span class="co"># Compare algorithms</span></span></span>
 <span class="r-in"><span><span class="fu">compare_algorithms</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> Seeding initial population with probability: 0.0161274134792387</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in purrr::map(unique(list(segment(as.ts(x), method = "pelt"), segment(as.ts(x),     method = "binseg"), segment(as.ts(x), method = "wbs"), segment(as.ts(x),     method = "random"), segment(as.ts(x), method = "null"))),     glance):</span> <span style="color: #00BBBB;">ℹ</span> In index: 3.</span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="font-weight: bold;">Caused by error in `names(out) &lt;- "MBIC"`:</span></span>
-<span class="r-err co"><span class="r-pr">#&gt;</span> <span style="color: #BBBB00;">!</span> attempt to set an attribute on NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 6 × 8</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   pkg      version algorithm seg_params model_name criteria fitness elapsed_time</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;pckg_&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidycha… 1.0.0.… manual    <span style="color: #949494;">&lt;list [0]&gt;</span> meanshift… BIC         789. 0.003 secs  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> changep… 2.3     BinSeg    <span style="color: #949494;">&lt;list [1]&gt;</span> meanvar    MBIC        653. 0.005 secs  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> changep… 2.3     PELT      <span style="color: #949494;">&lt;list [1]&gt;</span> meanvar    MBIC       -<span style="color: #BB0000;">Inf</span>  0.009 secs  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> changep… 2.3     PELT      <span style="color: #949494;">&lt;list [1]&gt;</span> meanvar    MBIC       -<span style="color: #BB0000;">Inf</span>  0.009 secs  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">5</span> wbs      1.4.1   Wild Bin… <span style="color: #949494;">&lt;list [1]&gt;</span> meanshift… MBIC       -<span style="color: #BB0000;">130.</span> 0.029 secs  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">6</span> GA       3.2.4   Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> meanshift… BIC         701. 0.112 secs  </span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
