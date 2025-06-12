@@ -41,7 +41,7 @@ changepoints.wbs <- function(x, ...) {
 #' fitness(x)
 #' 
 fitness.wbs <- function(object, ...) {
-  out <- object$ic.curve$mbic.penalty[1]
+  out <- object$cpt$ic.curve$mbic.penalty[1]
   names(out) <- "MBIC"
   out
 }
