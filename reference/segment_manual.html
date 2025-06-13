@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9002</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9003</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -80,9 +80,10 @@ Note that by default <code><a href="fit_meanshift.html">fit_meanshift_norm()</a>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Segment a time series manually</span></span></span>
 <span class="r-in"><span><span class="fu">segment_manual</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">84</span>, <span class="fl">330</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> List of 8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ data        : Time-Series [1:366] from 1 to 366: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ pkg         : chr "tidychangepoint"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ base_class  : chr(0) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ algorithm   : chr "manual"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ changepoints: num [1:2] 84 330</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitness     : Named num 697</span>
@@ -92,9 +93,10 @@ Note that by default <code><a href="fit_meanshift.html">fit_meanshift_norm()</a>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ penalty     : chr "BIC"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "seg_cpt"</span>
 <span class="r-in"><span><span class="fu">segment_manual</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> List of 8</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> List of 9</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ data        : Time-Series [1:366] from 1 to 366: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ pkg         : chr "tidychangepoint"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ base_class  : chr(0) </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ algorithm   : chr "manual"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ changepoints: NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitness     : Named num 789</span>
