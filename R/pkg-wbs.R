@@ -5,6 +5,7 @@ as.seg_cpt.wbs <- function(object, ...) {
   seg_cpt(
     x = as.ts(object),
     pkg = "wbs",
+    base_class = class(object),
     algorithm = "Wild BinSeg",
     changepoints = changepoints(object),
     seg_params = list(seg_params(object)),

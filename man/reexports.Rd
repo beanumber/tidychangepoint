@@ -15,18 +15,21 @@
 \alias{glance.mod_cpt}
 \alias{plot.mod_cpt}
 \alias{print.mod_cpt}
+\alias{summary.mod_cpt}
 \alias{as.ts.seg_basket}
 \alias{plot.seg_basket}
 \alias{as.ts.seg_cpt}
 \alias{glance.seg_cpt}
 \alias{nobs.seg_cpt}
 \alias{print.seg_cpt}
+\alias{summary.seg_cpt}
 \alias{as.ts.tidycpt}
 \alias{augment.tidycpt}
 \alias{tidy.tidycpt}
 \alias{glance.tidycpt}
 \alias{plot.tidycpt}
 \alias{print.tidycpt}
+\alias{summary.tidycpt}
 \alias{logLik.meanshift_lnorm}
 \alias{logLik.nhpp}
 \alias{glance.nhpp}
@@ -77,6 +80,8 @@
 
 \method{print}{mod_cpt}(x, ...)
 
+\method{summary}{mod_cpt}(object, ...)
+
 \method{as.ts}{seg_basket}(x, ...)
 
 \method{plot}{seg_basket}(x, ...)
@@ -89,6 +94,8 @@
 
 \method{print}{seg_cpt}(x, ...)
 
+\method{summary}{seg_cpt}(object, ...)
+
 \method{as.ts}{tidycpt}(x, ...)
 
 \method{augment}{tidycpt}(x, ...)
@@ -100,6 +107,8 @@
 \method{plot}{tidycpt}(x, use_time_index = FALSE, ylab = NULL, ...)
 
 \method{print}{tidycpt}(x, ...)
+
+\method{summary}{tidycpt}(object, ...)
 
 \method{logLik}{meanshift_lnorm}(object, ...)
 
@@ -153,6 +162,9 @@ plot(segment(CET, method = "pelt"), use_time_index = TRUE)
 # Label the y-axis correctly
 segment(CET, method = "pelt") |>
   plot(use_time_index = TRUE, ylab = "Degrees Celsius")
+# Summarize a tidycpt object
+summary(segment(CET, method = "pelt"))
+summary(segment(DataCPSim, method = "pelt"))
 }
 \keyword{internal}
 \description{

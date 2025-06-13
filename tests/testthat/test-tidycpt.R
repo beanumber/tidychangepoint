@@ -12,6 +12,7 @@ test_that("tidycpt works", {
   expect_type(changepoints(x), "integer")
   expect_s3_class(plot(x), "gg")
   expect_s3_class(diagnose(x), "patchwork")
+  expect_message(summary(x), "Summary")
   
   z <- segment(DataCPSim, method = "manual", tau = c(365, 826))
   expect_s3_class(z, "tidycpt")
@@ -24,6 +25,7 @@ test_that("tidycpt works", {
   expect_equal(length(changepoints(z)), 2)
   expect_s3_class(plot(z), "gg")
   expect_s3_class(diagnose(z), "patchwork")
+  expect_message(summary(z), "Summary")
   
   expect_s3_class(segment(bogota_pm, method = "manual", tau = c(500, 850)), "tidycpt")
   expect_error(segment(bogota_pm, method = "manual", cpts = c(500, 850)), "tau")

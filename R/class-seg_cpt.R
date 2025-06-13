@@ -2,6 +2,7 @@
 #' @export
 new_seg_cpt <- function(x = numeric(), 
                         pkg = character(),
+                        base_class = character(),
                         algorithm = NA, 
                         changepoints = integer(),
                         fitness = double(),
@@ -13,6 +14,7 @@ new_seg_cpt <- function(x = numeric(),
     list(
       data = stats::as.ts(x),
       pkg = pkg,
+      base_class = base_class,
       algorithm = algorithm,
       changepoints = changepoints,
       fitness = fitness,
@@ -41,6 +43,7 @@ validate_seg_cpt <- function(x) {
 #' @export
 #' @param x a numeric vector coercible into a [stats::ts()] object
 #' @param pkg name of the package providing the segmenter
+#' @param base_class class of the underlying object
 #' @param algorithm Algorithm used to find the changepoints
 #' @param changepoints a possibly empty [list()] of candidate changepoints
 #' @param fitness A named `double` vector whose name reflects the penalty applied
@@ -116,6 +119,30 @@ nobs.seg_cpt <- function(object, ...) {
 #' @export
 print.seg_cpt <- function(x, ...) {
   utils::str(x)
+}
+
+#' @rdname reexports
+#' @export
+summary.seg_cpt <- function(object, ...) {
+  cli::cli_h3(
+    paste(
+      "Segmenter (class {.emph", object$base_class, "})"
+      )
+  )
+  cli::cli_alert_info(
+    paste(
+      "A: Used the", object$algorithm, 
+      "algorithm from the {.emph", object$pkg, "} package."
+    )
+  )
+  fit <- fitness(object)
+  fit_val <- ifelse(abs(fit) == Inf, Inf, prettyunits::pretty_num(fit))
+  cli::cli_alert_info(
+    paste(
+      "f: Reported a fitness value of", fit_val, 
+      "using the", names(fit), "penalty."
+    )
+  )
 }
 
 #' @rdname seg_params

@@ -216,6 +216,33 @@ regions.tidycpt <- function(x, ...) {
   regions(x$model)
 }
 
+#' @rdname reexports
+#' @export
+#' @examples
+#' # Summarize a tidycpt object
+#' summary(segment(CET, method = "pelt"))
+#' summary(segment(DataCPSim, method = "pelt"))
+summary.tidycpt <- function(object, ...) {
+  cli::cli_h1("Summary of tidycpt object")
+  cli::cli_h3("Original time series")
+  data <- as.ts(object)
+  cli::cli_alert_info(
+    paste(
+      "y: Contains", length(data), 
+      "observations, ranging from", 
+      prettyunits::pretty_num(min(data)),
+      "to", prettyunits::pretty_num(max(data)), "."
+    )
+  )
+  cli::cli_h3("Changepoints")
+  cli::cli_alert_info(
+    paste("\u03c4: Found", length(changepoints(object)), "changepoint(s).")
+  )
+  summary(as.seg_cpt(object$segmenter))
+  summary(as.model(object))
+}
+
+
 #' @rdname diagnose
 #' @export
 #' @examples

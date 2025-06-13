@@ -8,6 +8,7 @@
 new_seg_cpt(
   x = numeric(),
   pkg = character(),
+  base_class = character(),
   algorithm = NA,
   changepoints = integer(),
   fitness = double(),
@@ -23,6 +24,8 @@ seg_cpt(x, ...)
 \item{x}{a numeric vector coercible into a \code{\link[stats:ts]{stats::ts()}} object}
 
 \item{pkg}{name of the package providing the segmenter}
+
+\item{base_class}{class of the underlying object}
 
 \item{algorithm}{Algorithm used to find the changepoints}
 

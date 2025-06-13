@@ -322,6 +322,22 @@ print.mod_cpt <- function(x, ...) {
   utils::str(x)
 }
 
+#' @rdname reexports
+#' @export
+summary.mod_cpt <- function(object, ...) {
+  cli::cli_h3("Model")
+  t <- tidy(object)
+  cli::cli_alert_info(
+    paste("M: Fit the {.emph", model_name(object), "} model.")
+  )
+  cli::cli_alert_info(
+    paste(
+      "\u03b8: Estimated", ncol(dplyr::select(t, dplyr::contains("param_"))), 
+      "parameter(s), for each of", nrow(t), "region(s)."
+    )
+  )
+}
+
 #' @rdname regions
 #' @export
 #' @examples

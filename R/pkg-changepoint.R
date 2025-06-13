@@ -5,6 +5,7 @@ as.seg_cpt.cpt <- function(object, ...) {
   seg_cpt(
     x = as.ts(object),
     pkg = "changepoint",
+    base_class = class(object),
     algorithm = object@method,
     changepoints = changepoints(object),
     seg_params = list(seg_params(object)),

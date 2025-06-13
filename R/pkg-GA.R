@@ -6,6 +6,7 @@ as.seg_cpt.ga <- function(object, ...) {
   seg_cpt(
     x = as.ts(object),
     pkg = "GA",
+    base_class = class(object),
     algorithm = "Genetic",
     changepoints = changepoints(object),
     seg_params = list(seg_params(object)),
