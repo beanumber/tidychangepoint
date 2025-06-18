@@ -45,7 +45,7 @@ index
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -266,37 +266,25 @@ time labels?</p></dd>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">CET</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary of tidycpt object</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Original time series </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> y: Contains 366 observations, ranging from 6.86  to 11.18  .</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Changepoints </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> τ: Found 5 changepoint(s).</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Segmenter (class <span style="font-style: italic;">cpt </span>) </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> A: Used the PELT algorithm from the <span style="font-style: italic;">changepoint </span> package.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> f: Reported a fitness value of Inf using the MBIC penalty.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Model </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> M: Fit the <span style="font-style: italic;">meanvar </span> model.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> θ: Estimated 2 parameter(s), for each of 6 region(s).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → y: Contains 366 observations, ranging from 6.86  to 11.18  .</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Segmenter (class <span style="font-style: italic;">cpt </span>)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → A: Used the PELT algorithm from the <span style="font-style: italic;">changepoint </span> package.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → τ: Found 5 changepoint(s).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → f: Reported a fitness value of Inf using the MBIC penalty.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Model</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → M: Fit the <span style="font-style: italic;">meanvar </span> model.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → θ: Estimated 2 parameter(s), for each of 6 region(s).</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/summary.html" class="external-link">summary</a></span><span class="op">(</span><span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"pelt"</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">──</span> <span style="font-weight: bold;">Summary of tidycpt object</span> <span style="color: #00BBBB;">───────────────────────────────────────────────────</span></span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Original time series </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> y: Contains 1096 observations, ranging from 13.67  to 298.98  .</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Changepoints </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> τ: Found 3 changepoint(s).</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Segmenter (class <span style="font-style: italic;">cpt </span>) </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> A: Used the PELT algorithm from the <span style="font-style: italic;">changepoint </span> package.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> f: Reported a fitness value of 9.40 k using the MBIC penalty.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> ── Model </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> M: Fit the <span style="font-style: italic;">meanvar </span> model.</span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> θ: Estimated 2 parameter(s), for each of 4 region(s).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → y: Contains 1096 observations, ranging from 13.67  to 298.98  .</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Segmenter (class <span style="font-style: italic;">cpt </span>)</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → A: Used the PELT algorithm from the <span style="font-style: italic;">changepoint </span> package.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → τ: Found 3 changepoint(s).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → f: Reported a fitness value of 9.40 k using the MBIC penalty.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Model</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → M: Fit the <span style="font-style: italic;">meanvar </span> model.</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → θ: Estimated 2 parameter(s), for each of 4 region(s).</span>
 </code></pre></div>
     </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -156,33 +156,15 @@ sets because it doesn't have to fit all of the regression models.</p>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Empty changepoint sets are allowed</span></span></span>
 <span class="r-in"><span><span class="fu">fit_lmshift</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="cn">NULL</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:366] from 1 to 366: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [1 × 2] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region  : chr "[1,367)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu: num 9.29</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : Named num 0.489</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr "sigma_hatsq"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: Named num [1:366] 9.29 9.29 9.29 9.29 9.29 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr [1:366] "1" "2" "3" "4" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "null"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Model: A <span style="font-style: italic;">null </span> model with 1 region(s).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Each region has 1 parameter(s).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → The model has 1 global parameter(s).</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Duplicate changepoints are removed</span></span></span>
 <span class="r-in"><span><span class="fu">fit_lmshift</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">42</span>, <span class="fl">42</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:366] from 1 to 366: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : num 42</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [2 × 2] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region  : chr [1:2] "[1,42)" "[42,367)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu: num [1:2] 8.68 9.37</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : Named num 0.442</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr "sigma_hatsq"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: Named num [1:366] 8.68 8.68 8.68 8.68 8.68 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "names")= chr [1:366] "1" "2" "3" "4" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanshift"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Model: A <span style="font-style: italic;">meanshift </span> model with 2 region(s).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Each region has 1 parameter(s).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → The model has 1 global parameter(s).</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

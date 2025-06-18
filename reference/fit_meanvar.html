@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9003</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9004</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -91,18 +91,9 @@ region \(j\).</p>
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># Fit a mean-variance model</span></span></span>
 <span class="r-in"><span><span class="fu">fit_meanvar</span><span class="op">(</span><span class="va">CET</span>, tau <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fl">42</span>, <span class="fl">330</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> List of 6</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ data         : Time-Series [1:366] from 1 to 366: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ tau          : num [1:2] 42 330</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ region_params: tibble [3 × 3] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region           : chr [1:3] "[1,42)" "[42,330)" "[330,367)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_mu         : num [1:3] 8.68 9.24 10.34</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ param_sigma_hatsq: Named num [1:3] 0.389 0.335 0.272</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "names")= chr [1:3] "[1,42)" "[42,330)" "[330,367)"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_params : NULL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ fitted_values: num [1:366] 8.68 8.68 8.68 8.68 8.68 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ model_name   : chr "meanvar"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "mod_cpt"</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Model: A <span style="font-style: italic;">meanvar </span> model with 3 region(s).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → Each region has 2 parameter(s).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> → The model has 0 global parameter(s).</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
