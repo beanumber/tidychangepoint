@@ -205,7 +205,7 @@ plot.tidycpt <- function(x, use_time_index = FALSE, ylab = NULL, ...) {
 #' @rdname reexports
 #' @export
 print.tidycpt <- function(x, ...) {
-  cat("A tidycpt object\n")
+  cli::cli_alert_info("A tidycpt object. Segmenter \u2193")
   print(x$segmenter)
   print(x$model)
 }
@@ -224,19 +224,14 @@ regions.tidycpt <- function(x, ...) {
 #' summary(segment(DataCPSim, method = "pelt"))
 summary.tidycpt <- function(object, ...) {
   cli::cli_h1("Summary of tidycpt object")
-  cli::cli_h3("Original time series")
   data <- as.ts(object)
-  cli::cli_alert_info(
+  cli::cli_alert(
     paste(
       "y: Contains", length(data), 
       "observations, ranging from", 
       prettyunits::pretty_num(min(data)),
       "to", prettyunits::pretty_num(max(data)), "."
     )
-  )
-  cli::cli_h3("Changepoints")
-  cli::cli_alert_info(
-    paste("\u03c4: Found", length(changepoints(object)), "changepoint(s).")
   )
   summary(as.seg_cpt(object$segmenter))
   summary(as.model(object))

@@ -319,21 +319,25 @@ plot.mod_cpt <- function(x, ...) {
 #' @rdname reexports
 #' @export
 print.mod_cpt <- function(x, ...) {
-  utils::str(x)
+  r_params <- ncol(dplyr::select(coef(x), dplyr::contains("param_")))
+  cli::cli_alert_info(
+    paste("Model: A {.emph", model_name(x), "} model with", length(regions(x)), "region(s).")
+  )
+  cli::cli_alert(paste("Each region has", r_params, "parameter(s)."))
+  cli::cli_alert(paste("The model has", length(x$model_params), "global parameter(s)."))
 }
 
 #' @rdname reexports
 #' @export
 summary.mod_cpt <- function(object, ...) {
-  cli::cli_h3("Model")
-  t <- tidy(object)
-  cli::cli_alert_info(
+  cli::cli_alert_info("Model")
+  cli::cli_alert(
     paste("M: Fit the {.emph", model_name(object), "} model.")
   )
-  cli::cli_alert_info(
+  cli::cli_alert(
     paste(
-      "\u03b8: Estimated", ncol(dplyr::select(t, dplyr::contains("param_"))), 
-      "parameter(s), for each of", nrow(t), "region(s)."
+      "\u03b8: Estimated", ncol(dplyr::select(coef(object), dplyr::contains("param_"))), 
+      "parameter(s), for each of", nrow(coef(object)), "region(s)."
     )
   )
 }

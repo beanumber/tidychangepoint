@@ -124,20 +124,23 @@ print.seg_cpt <- function(x, ...) {
 #' @rdname reexports
 #' @export
 summary.seg_cpt <- function(object, ...) {
-  cli::cli_h3(
+  cli::cli_alert_info(
     paste(
       "Segmenter (class {.emph", object$base_class, "})"
       )
   )
-  cli::cli_alert_info(
+  cli::cli_alert(
     paste(
       "A: Used the", object$algorithm, 
       "algorithm from the {.emph", object$pkg, "} package."
     )
   )
+  cli::cli_alert(
+    paste("\u03c4: Found", length(changepoints(object)), "changepoint(s).")
+  )
   fit <- fitness(object)
   fit_val <- ifelse(abs(fit) == Inf, Inf, prettyunits::pretty_num(fit))
-  cli::cli_alert_info(
+  cli::cli_alert(
     paste(
       "f: Reported a fitness value of", fit_val, 
       "using the", names(fit), "penalty."
