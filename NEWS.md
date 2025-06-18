@@ -2,6 +2,7 @@
 
 * `fitness.wbs()` returns the MBIC penalty value.
 * Added `summary()` methods for `tidycpt`, `seg_cpt`, and `mod_cpt` objects.
+* Improved output from `print()` methods.
 
 # tidychangepoint 1.0.0
 
