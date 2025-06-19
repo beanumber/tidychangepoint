@@ -9,7 +9,7 @@ sets in univariate time series."></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9004</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9005</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -96,6 +96,8 @@ on the value of the <code>method</code> argument:</p><ul><li><p><code>pelt</code
 <code><a href="https://rdrr.io/pkg/changepoint/man/cpt.meanvar.html" class="external-link">changepoint::cpt.meanvar()</a></code>. The <code>segmenter</code> is of class <code>cpt</code>.</p></li>
 <li><p><code>wbs</code>: Uses the Wild Binary Segmentation algorithm as implemented by
 <code><a href="https://rdrr.io/pkg/wbs/man/wbs.html" class="external-link">wbs::wbs()</a></code>. The <code>segmenter</code> is of class <code>wbs</code>.</p></li>
+<li><p><code>segmented</code>: Uses the segmented algorithm as implemented by
+<code><a href="https://rdrr.io/pkg/segmented/man/segmented.html" class="external-link">segmented::segmented()</a></code>. The <code>segmenter</code> is of class <code>segmented</code>.</p></li>
 <li><p><code>ga</code>: Uses the Genetic algorithm implemented by <code><a href="segment_ga.html">segment_ga()</a></code>, which wraps
 <code><a href="https://github.com/luca-scr/GA/reference/ga.html" class="external-link">GA::ga()</a></code>. The <code>segmenter</code> is of class <code>tidyga</code>.</p></li>
 <li><p><code>ga-shi</code>: Uses the genetic algorithm implemented by <code><a href="segment_ga.html">segment_ga_shi()</a></code>,
@@ -130,7 +132,7 @@ The <code>segmenter</code> is of class <a href="seg_cpt.html">seg_cpt</a>.</p></
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Wed Jun 18 18:14:44 2025 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Thu Jun 19 19:46:59 2025 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -153,7 +155,7 @@ The <code>segmenter</code> is of class <a href="seg_cpt.html">seg_cpt</a>.</p></
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 12 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Wed Jun 18 18:14:44 2025 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Thu Jun 19 19:46:59 2025 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -176,7 +178,7 @@ The <code>segmenter</code> is of class <a href="seg_cpt.html">seg_cpt</a>.</p></
 <span class="r-out co"><span class="r-pr">#&gt;</span>        ~~   : S4 class containing 14 slots with names</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>               cpts.full pen.value.full data.set cpttype method test.stat pen.type pen.value minseglen cpts ncpts.max param.est date version </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Wed Jun 18 18:14:44 2025 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Created on  : Thu Jun 19 19:46:59 2025 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> summary(.)  :</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> ----------</span>
@@ -217,7 +219,7 @@ The <code>segmenter</code> is of class <a href="seg_cpt.html">seg_cpt</a>.</p></
 <span class="r-out co"><span class="r-pr">#&gt;</span> [13] "suggestions"   "population"    "elitism"       "pcrossover"   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [17] "pmutation"     "optim"         "fitness"       "summary"      </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [21] "bestSol"       "fitnessValue"  "solution"     </span>
-<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Model: A <span style="font-style: italic;">meanshift_norm </span> model with 8 region(s).</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> <span style="color: #00BBBB;">ℹ</span> Model: A <span style="font-style: italic;">meanshift_norm </span> model with 7 region(s).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → Each region has 1 parameter(s).</span>
 <span class="r-msg co"><span class="r-pr">#&gt;</span> → The model has 1 global parameter(s).</span>
 <span class="r-in"><span></span></span>
