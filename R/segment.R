@@ -58,6 +58,8 @@ segment.numeric <- function(x, method = "null", ...) {
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
 #' - `wbs`: Uses the Wild Binary Segmentation algorithm as implemented by 
 #'   [wbs::wbs()]. The `segmenter` is of class `wbs`.
+#' - `segmented`: Uses the segmented algorithm as implemented by 
+#'   [segmented::segmented()]. The `segmenter` is of class `segmented`.
 #' - `ga`: Uses the Genetic algorithm implemented by [segment_ga()], which wraps
 #'   [GA::ga()]. The `segmenter` is of class `tidyga`.
 #' - `ga-shi`: Uses the genetic algorithm implemented by [segment_ga_shi()], 
@@ -116,6 +118,9 @@ segment.ts <- function(x, method = "null", ...) {
   }
   if (method == "wbs") {
     seg <- wbs::wbs(x, ...)
+  }
+  if (method == "segmented") {
+    seg <- segmented::segmented(x, ...)
   }
   if (method == "ga") {
     seg <- segment_ga(x, ...)

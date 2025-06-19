@@ -1,0 +1,12 @@
+test_that("segmented works", {
+  x <- segment(DataCPSim, method = "segmented")
+  expect_s3_class(x, "tidycpt")
+  expect_s3_class(x$segmenter, "segmented")
+  expect_s3_class(as.ts(x), "ts")
+  expect_s3_class(augment(x), "grouped_ts")
+  expect_s3_class(tidy(x), "tbl_df")
+  expect_s3_class(glance(x), "tbl_df")
+  expect_type(changepoints(x), "integer")
+  expect_true(is_segmenter(x$segmenter))
+  expect_true(is_model(x$model))
+})

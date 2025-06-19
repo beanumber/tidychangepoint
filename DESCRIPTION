@@ -1,6 +1,6 @@
 Package: tidychangepoint
 Title: A Tidy Framework for Changepoint Detection Analysis
-Version: 1.0.0.9004
+Version: 1.0.0.9005
 Authors@R: c(
     person("Benjamin S.", "Baumer", email = "ben.baumer@gmail.com", 
       role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-3279-0516")
@@ -48,6 +48,7 @@ Imports:
     purrr,
     rlang,
     scales,
+    segmented,
     stringr,
     tibble,
     tidyr,
