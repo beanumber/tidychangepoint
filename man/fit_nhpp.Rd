@@ -40,6 +40,7 @@ fit_nhpp(DataCPSim, tau = changepoints(segment(DataCPSim, method = "pelt")))
 }
 \seealso{
 Other model-fitting: 
+\code{\link{fit_arima}()},
 \code{\link{fit_lmshift}()},
 \code{\link{fit_meanshift}()},
 \code{\link{fit_meanvar}()},

@@ -47,6 +47,7 @@ f(CET, 42)
 }
 \seealso{
 Other model-fitting: 
+\code{\link{fit_arima}()},
 \code{\link{fit_lmshift}()},
 \code{\link{fit_meanshift}()},
 \code{\link{fit_meanvar}()},

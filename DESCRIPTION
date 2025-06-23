@@ -1,6 +1,6 @@
 Package: tidychangepoint
 Title: A Tidy Framework for Changepoint Detection Analysis
-Version: 1.0.0.9005
+Version: 1.0.0.9006
 Authors@R: c(
     person("Benjamin S.", "Baumer", email = "ben.baumer@gmail.com", 
       role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-3279-0516")
@@ -35,6 +35,7 @@ RoxygenNote: 7.3.2
 Imports:
     broom,
     changepoint,
+    changepointGA,
     cli,
     dplyr,
     GA,

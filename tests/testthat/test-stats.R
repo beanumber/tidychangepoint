@@ -99,4 +99,11 @@ test_that("model performance", {
     lm = fit_lmshift(CET, ids), 
     check = FALSE
   )
-}) 
+})
+
+
+test_that("arima works", {
+  x <- fit_arima(CET, tau = c(42, 330))
+  expect_true(is_model(x))
+  expect_s3_class(x, "mod_cpt")
+})

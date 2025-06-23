@@ -74,3 +74,60 @@ MBIC.logLik <- function(object, ...) {
   penalty - 2 * object |>
     as.double()
 }
+
+#' Fit an ARIMA model
+#' @inheritParams fit_meanshift
+#' @param ... currently ignored
+#' @export
+#' @details
+#' Fits an ARIMA model using [stats::arima()].
+#' 
+#' @returns A [mod_cpt] object.
+#' @family model-fitting
+#' @seealso [changepointGA::ARIMA.BIC()]
+#' @examples
+#' # Fit a mean-variance model
+#' fit_arima(CET, tau = c(42, 330))
+#' 
+fit_arima <- function(x, tau, ...) { 
+  if (!is_valid_tau(tau, length(x))) {
+    stop("Invalid changepoint set")
+  } else {
+    tau <- unique(tau)
+  }
+  regions <- x |> 
+    as.ts() |>
+    split_by_tau(tau)
+  
+  region_mods <- regions |>
+    purrr::map(~stats::arima(.x))
+  
+  fitted_values <- region_mods |>
+    purrr::map(~residuals(.x) + coef(.x)) |>
+    purrr::list_c() |>
+    as.double()
+  
+  pluck_params <- function(ar) {
+    data.frame(
+      "param_intercept" = as.double(ar$coef),
+      "param_sigma_hatsq" = as.double(ar$sigma2)
+    )
+  }
+  
+  region_params <- region_mods |>
+    purrr::map(pluck_params) |>
+    purrr::list_rbind() |>
+    dplyr::mutate(region = names(regions))
+  
+  mod_cpt(
+    x <- as.ts(x),
+    tau = tau,
+    region_params = region_params,
+    model_params = c(),
+    fitted_values = fitted_values,
+    model_name = "arima"
+  )
+}
+
+# Register model-fitting functions
+fit_arima <- fun_cpt("fit_arima")
