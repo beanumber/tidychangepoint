@@ -9,7 +9,7 @@ algorithm"></head><body>
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9006</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -62,6 +62,9 @@ algorithm</p>
 <span><span class="fu">fitness</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'cpt'</span></span>
+<span><span class="fu">fitness</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># S3 method for class 'cga'</span></span>
 <span><span class="fu">fitness</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># S3 method for class 'segmented'</span></span>
@@ -117,7 +120,15 @@ implied by the object provided.</p>
 <span class="r-in"><span><span class="co"># Retrieve its fitness value</span></span></span>
 <span class="r-in"><span><span class="fu">fitness</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      BIC </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16514.04 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16494.18 </span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Segment a times series using a genetic algorithm</span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"cga"</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="co"># Retrieve its fitness value</span></span></span>
+<span class="r-in"><span><span class="fu">fitness</span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>      BIC </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10068.19 </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># Segment a time series using Segmented</span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="segment.html">segment</a></span><span class="op">(</span><span class="va">DataCPSim</span>, method <span class="op">=</span> <span class="st">"segmented"</span><span class="op">)</span></span></span>

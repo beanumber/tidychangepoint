@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9005</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9006</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -70,16 +70,17 @@
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="co"># List all model-fitting functions</span></span></span>
 <span class="r-in"><span><span class="fu">ls_models</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1] "fit_lmshift"            "fit_lmshift_ar1"        "fit_meanshift_lnorm"   </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [4] "fit_meanshift_norm"     "fit_meanshift_norm_ar1" "fit_meanvar"           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [7] "fit_nhpp"               "fit_trendshift"         "fit_trendshift_ar1"    </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [1] "fit_arima"              "fit_lmshift"            "fit_lmshift_ar1"       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [4] "fit_meanshift_lnorm"    "fit_meanshift_norm"     "fit_meanshift_norm_ar1"</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  [7] "fit_meanvar"            "fit_nhpp"               "fit_trendshift"        </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [10] "fit_trendshift_ar1"    </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># List packages supported by tidychangepoint</span></span></span>
 <span class="r-in"><span><span class="fu">ls_pkgs</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 2</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   pkg             version   </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidychangepoint 1.0.0.9005</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidychangepoint 1.0.0.9006</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> changepoint     2.3       </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> wbs             1.4.1     </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> GA              3.2.4     </span>
@@ -159,120 +160,132 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 43       binseg            fit_meanvar      CROPS</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 44     segneigh            fit_meanvar      CROPS</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 45  single-best            fit_meanvar      CROPS</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 46           ga            fit_lmshift        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 47       random            fit_lmshift        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 48           ga        fit_lmshift_ar1        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 49       random        fit_lmshift_ar1        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 50           ga    fit_meanshift_lnorm        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 51       random    fit_meanshift_lnorm        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 52           ga     fit_meanshift_norm        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 53       random     fit_meanshift_norm        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 54           ga fit_meanshift_norm_ar1        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 55       random fit_meanshift_norm_ar1        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 56           ga            fit_meanvar        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 57       random            fit_meanvar        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 58           ga               fit_nhpp        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 59       random               fit_nhpp        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 60           ga         fit_trendshift        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 61       random         fit_trendshift        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 62           ga     fit_trendshift_ar1        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 63       random     fit_trendshift_ar1        SIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 64           ga            fit_lmshift        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 65       random            fit_lmshift        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 66           ga        fit_lmshift_ar1        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 67       random        fit_lmshift_ar1        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 68           ga    fit_meanshift_lnorm        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 69       random    fit_meanshift_lnorm        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 70           ga     fit_meanshift_norm        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 71       random     fit_meanshift_norm        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 72           ga fit_meanshift_norm_ar1        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 73       random fit_meanshift_norm_ar1        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 74           ga            fit_meanvar        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 75       random            fit_meanvar        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 76           ga               fit_nhpp        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 77       random               fit_nhpp        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 78           ga         fit_trendshift        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 79       random         fit_trendshift        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 80           ga     fit_trendshift_ar1        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 81       random     fit_trendshift_ar1        AIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 82           ga            fit_lmshift        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 83       random            fit_lmshift        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 84           ga        fit_lmshift_ar1        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 85       random        fit_lmshift_ar1        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 86           ga    fit_meanshift_lnorm        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 87       random    fit_meanshift_lnorm        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 88           ga     fit_meanshift_norm        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 89       random     fit_meanshift_norm        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 90           ga fit_meanshift_norm_ar1        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 91       random fit_meanshift_norm_ar1        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 92           ga            fit_meanvar        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 93       random            fit_meanvar        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 94           ga               fit_nhpp        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 95       random               fit_nhpp        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 96           ga         fit_trendshift        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 97       random         fit_trendshift        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 98           ga     fit_trendshift_ar1        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 99       random     fit_trendshift_ar1        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 100          ga            fit_lmshift        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 101      random            fit_lmshift        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 102          ga        fit_lmshift_ar1        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 103      random        fit_lmshift_ar1        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 104          ga    fit_meanshift_lnorm        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 105      random    fit_meanshift_lnorm        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 106          ga     fit_meanshift_norm        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 107      random     fit_meanshift_norm        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 108          ga fit_meanshift_norm_ar1        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 109      random fit_meanshift_norm_ar1        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 110          ga            fit_meanvar        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 111      random            fit_meanvar        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 112          ga               fit_nhpp        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 113      random               fit_nhpp        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 114          ga         fit_trendshift        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 115      random         fit_trendshift        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 116          ga     fit_trendshift_ar1        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 117      random     fit_trendshift_ar1        HQC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 118          ga            fit_lmshift       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 119      random            fit_lmshift       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 120          ga        fit_lmshift_ar1       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 121      random        fit_lmshift_ar1       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 122          ga    fit_meanshift_lnorm       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 123      random    fit_meanshift_lnorm       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 124          ga     fit_meanshift_norm       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 125      random     fit_meanshift_norm       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 126          ga fit_meanshift_norm_ar1       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 127      random fit_meanshift_norm_ar1       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 128          ga            fit_meanvar       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 129      random            fit_meanvar       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 130          ga               fit_nhpp       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 131      random               fit_nhpp       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 132          ga         fit_trendshift       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 133      random         fit_trendshift       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 134          ga     fit_trendshift_ar1       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 135      random     fit_trendshift_ar1       MBIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 136          ga            fit_lmshift        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 137      random            fit_lmshift        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 138          ga        fit_lmshift_ar1        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 139      random        fit_lmshift_ar1        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 140          ga    fit_meanshift_lnorm        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 141      random    fit_meanshift_lnorm        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 142          ga     fit_meanshift_norm        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 143      random     fit_meanshift_norm        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 144          ga fit_meanshift_norm_ar1        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 145      random fit_meanshift_norm_ar1        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 146          ga            fit_meanvar        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 147      random            fit_meanvar        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 148          ga               fit_nhpp        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 149      random               fit_nhpp        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 150          ga         fit_trendshift        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 151      random         fit_trendshift        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 152          ga     fit_trendshift_ar1        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 153      random     fit_trendshift_ar1        MDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 154         wbs                   &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 155      ga-shi fit_meanshift_norm_ar1        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 156     ga-coen               fit_nhpp       BMDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 157        coen               fit_nhpp       BMDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 158      manual     fit_meanshift_norm        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 159        null     fit_meanshift_norm        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 46           ga              fit_arima        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 47       random              fit_arima        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 48           ga            fit_lmshift        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 49       random            fit_lmshift        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 50           ga        fit_lmshift_ar1        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 51       random        fit_lmshift_ar1        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 52           ga    fit_meanshift_lnorm        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 53       random    fit_meanshift_lnorm        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 54           ga     fit_meanshift_norm        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 55       random     fit_meanshift_norm        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 56           ga fit_meanshift_norm_ar1        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 57       random fit_meanshift_norm_ar1        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 58           ga            fit_meanvar        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 59       random            fit_meanvar        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 60           ga               fit_nhpp        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 61       random               fit_nhpp        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 62           ga         fit_trendshift        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 63       random         fit_trendshift        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 64           ga     fit_trendshift_ar1        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 65       random     fit_trendshift_ar1        SIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 66           ga              fit_arima        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 67       random              fit_arima        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 68           ga            fit_lmshift        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 69       random            fit_lmshift        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 70           ga        fit_lmshift_ar1        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 71       random        fit_lmshift_ar1        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 72           ga    fit_meanshift_lnorm        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 73       random    fit_meanshift_lnorm        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 74           ga     fit_meanshift_norm        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 75       random     fit_meanshift_norm        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 76           ga fit_meanshift_norm_ar1        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 77       random fit_meanshift_norm_ar1        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 78           ga            fit_meanvar        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 79       random            fit_meanvar        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 80           ga               fit_nhpp        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 81       random               fit_nhpp        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 82           ga         fit_trendshift        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 83       random         fit_trendshift        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 84           ga     fit_trendshift_ar1        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 85       random     fit_trendshift_ar1        AIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 86           ga              fit_arima        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 87       random              fit_arima        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 88           ga            fit_lmshift        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 89       random            fit_lmshift        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 90           ga        fit_lmshift_ar1        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 91       random        fit_lmshift_ar1        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 92           ga    fit_meanshift_lnorm        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 93       random    fit_meanshift_lnorm        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 94           ga     fit_meanshift_norm        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95       random     fit_meanshift_norm        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 96           ga fit_meanshift_norm_ar1        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 97       random fit_meanshift_norm_ar1        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 98           ga            fit_meanvar        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 99       random            fit_meanvar        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 100          ga               fit_nhpp        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 101      random               fit_nhpp        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 102          ga         fit_trendshift        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 103      random         fit_trendshift        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 104          ga     fit_trendshift_ar1        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 105      random     fit_trendshift_ar1        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 106          ga              fit_arima        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 107      random              fit_arima        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 108          ga            fit_lmshift        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 109      random            fit_lmshift        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 110          ga        fit_lmshift_ar1        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 111      random        fit_lmshift_ar1        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 112          ga    fit_meanshift_lnorm        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 113      random    fit_meanshift_lnorm        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 114          ga     fit_meanshift_norm        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 115      random     fit_meanshift_norm        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 116          ga fit_meanshift_norm_ar1        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 117      random fit_meanshift_norm_ar1        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 118          ga            fit_meanvar        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 119      random            fit_meanvar        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 120          ga               fit_nhpp        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 121      random               fit_nhpp        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 122          ga         fit_trendshift        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 123      random         fit_trendshift        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 124          ga     fit_trendshift_ar1        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 125      random     fit_trendshift_ar1        HQC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 126          ga              fit_arima       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 127      random              fit_arima       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 128          ga            fit_lmshift       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 129      random            fit_lmshift       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 130          ga        fit_lmshift_ar1       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 131      random        fit_lmshift_ar1       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 132          ga    fit_meanshift_lnorm       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 133      random    fit_meanshift_lnorm       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 134          ga     fit_meanshift_norm       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 135      random     fit_meanshift_norm       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 136          ga fit_meanshift_norm_ar1       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 137      random fit_meanshift_norm_ar1       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 138          ga            fit_meanvar       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 139      random            fit_meanvar       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 140          ga               fit_nhpp       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 141      random               fit_nhpp       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 142          ga         fit_trendshift       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 143      random         fit_trendshift       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 144          ga     fit_trendshift_ar1       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 145      random     fit_trendshift_ar1       MBIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 146          ga              fit_arima        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 147      random              fit_arima        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 148          ga            fit_lmshift        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 149      random            fit_lmshift        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 150          ga        fit_lmshift_ar1        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 151      random        fit_lmshift_ar1        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 152          ga    fit_meanshift_lnorm        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 153      random    fit_meanshift_lnorm        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 154          ga     fit_meanshift_norm        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 155      random     fit_meanshift_norm        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 156          ga fit_meanshift_norm_ar1        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 157      random fit_meanshift_norm_ar1        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 158          ga            fit_meanvar        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 159      random            fit_meanvar        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 160          ga               fit_nhpp        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 161      random               fit_nhpp        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 162          ga         fit_trendshift        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 163      random         fit_trendshift        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 164          ga     fit_trendshift_ar1        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 165      random     fit_trendshift_ar1        MDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 166         wbs                   &lt;NA&gt;       &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 167      ga-shi fit_meanshift_norm_ar1        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 168     ga-coen               fit_nhpp       BMDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169        coen               fit_nhpp       BMDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 170      manual     fit_meanshift_norm        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171        null     fit_meanshift_norm        BIC</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>

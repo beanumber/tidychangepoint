@@ -30,6 +30,7 @@
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/evolve_gbmdl.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/exceedances.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/file_name.html</loc></url>
+<url><loc>https://beanumber.github.io/tidychangepoint/reference/fit_arima.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/fit_lmshift.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/fit_meanshift.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/fit_meanvar.html</loc></url>
@@ -58,6 +59,7 @@
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/seg_cpt.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/seg_params.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/segment.html</loc></url>
+<url><loc>https://beanumber.github.io/tidychangepoint/reference/segment_cga.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/segment_coen.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/segment_ga.html</loc></url>
 <url><loc>https://beanumber.github.io/tidychangepoint/reference/segment_manual.html</loc></url>
