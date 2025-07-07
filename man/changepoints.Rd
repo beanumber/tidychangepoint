@@ -67,9 +67,11 @@ For the \code{default} method, \code{\link[=changepoints]{changepoints()}} will 
 cpts <- segment(DataCPSim, method = "ga", maxiter = 5)
 changepoints(cpts$segmenter)
 
+\donttest{
+# Segment a times series using a genetic algorithm
 cpts <- segment(DataCPSim, method = "cga")
 changepoints(cpts$segmenter)
-
+}
 cpts <- segment(DataCPSim, method = "segmented")
 changepoints(cpts$segmenter)
 

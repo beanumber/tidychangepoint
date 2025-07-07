@@ -59,12 +59,13 @@ x <- segment(DataCPSim, method = "ga", maxiter = 10)
 # Retrieve its fitness value
 fitness(x)
 
+\donttest{
 # Segment a times series using a genetic algorithm
 x <- segment(DataCPSim, method = "cga")
 
 # Retrieve its fitness value
 fitness(x)
-
+}
 # Segment a time series using Segmented
 x <- segment(DataCPSim, method = "segmented")
 

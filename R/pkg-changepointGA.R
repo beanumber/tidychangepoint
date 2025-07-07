@@ -22,9 +22,11 @@ as.ts.cga <- function(x, ...) {
 #' @rdname changepoints
 #' @export
 #' @examples
+#' \donttest{
+#' # Segment a times series using a genetic algorithm
 #' cpts <- segment(DataCPSim, method = "cga")
 #' changepoints(cpts$segmenter)
-#' 
+#' }
 changepoints.cga <- function(x, ...) {
   x$overbestchrom |>
     utils::head(-1) |>
@@ -35,12 +37,13 @@ changepoints.cga <- function(x, ...) {
 #' @rdname fitness
 #' @export
 #' @examples
+#' \donttest{
 #' # Segment a times series using a genetic algorithm
 #' x <- segment(DataCPSim, method = "cga")
 #' 
 #' # Retrieve its fitness value
 #' fitness(x)
-#' 
+#' }
 fitness.cga <- function(object, ...) {
   out <- object$overbestfit
   names(out) <- "BIC"
