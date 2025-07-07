@@ -106,6 +106,8 @@ ls_coverage <- function() {
     tibble::tribble(
       ~method, ~model, ~penalty,
       "wbs", NA, NA,
+      "cga", NA, NA,
+      "segmented", NA, NA,
       "ga-shi", "fit_meanshift_norm_ar1", "BIC",
       "ga-coen", "fit_nhpp", "BMDL",
       "coen", "fit_nhpp", "BMDL",
