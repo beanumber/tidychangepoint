@@ -22,7 +22,7 @@
 
     <a class="navbar-brand me-2" href="index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.0.9007</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.1</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -111,7 +111,7 @@
 </h2>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/ls_pkgs.html">ls_methods</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="do">## # A tibble: 12 × 5</span></span>
+<div class="sourceCode" id="cb15"><pre class="sourceCode R"><code class="sourceCode r"><span id="cb15-1"><a href="#cb15-1" tabindex="-1"></a><span class="do">## # A tibble: 14 × 5</span></span>
 <span id="cb15-2"><a href="#cb15-2" tabindex="-1"></a><span class="do">##    method      pkg             segmenter_class helper              wraps        </span></span>
 <span id="cb15-3"><a href="#cb15-3" tabindex="-1"></a><span class="do">##    &lt;chr&gt;       &lt;chr&gt;           &lt;chr&gt;           &lt;chr&gt;               &lt;chr&gt;        </span></span>
 <span id="cb15-4"><a href="#cb15-4" tabindex="-1"></a><span class="do">##  1 pelt        changepoint     cpt             segment_pelt()      changepoint:…</span></span>
@@ -125,7 +125,9 @@
 <span id="cb15-12"><a href="#cb15-12" tabindex="-1"></a><span class="do">##  9 coen        tidychangepoint seg_basket      segment_coen()      &lt;NA&gt;         </span></span>
 <span id="cb15-13"><a href="#cb15-13" tabindex="-1"></a><span class="do">## 10 random      GA              tidyga          segment_ga_random() segment_ga() </span></span>
 <span id="cb15-14"><a href="#cb15-14" tabindex="-1"></a><span class="do">## 11 manual      tidychangepoint seg_cpt         segment_manual()    &lt;NA&gt;         </span></span>
-<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="do">## 12 null        tidychangepoint seg_cpt         segment_manual()    &lt;NA&gt;</span></span></code></pre></div>
+<span id="cb15-15"><a href="#cb15-15" tabindex="-1"></a><span class="do">## 12 null        tidychangepoint seg_cpt         segment_manual()    &lt;NA&gt;         </span></span>
+<span id="cb15-16"><a href="#cb15-16" tabindex="-1"></a><span class="do">## 13 segmented   segmented       segmented       &lt;NA&gt;                segmented::s…</span></span>
+<span id="cb15-17"><a href="#cb15-17" tabindex="-1"></a><span class="do">## 14 cga         changepointGA   cga             segment_cga()       changepointG…</span></span></code></pre></div>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/ls_pkgs.html">ls_coverage</a></span><span class="op">(</span><span class="op">)</span> <span class="op">|&gt;</span></span>
 <span>  <span class="fu">dplyr</span><span class="fu">::</span><span class="fu"><a href="https://dplyr.tidyverse.org/reference/group_by.html" class="external-link">group_by</a></span><span class="op">(</span><span class="va">method</span><span class="op">)</span> <span class="op">|&gt;</span></span>
@@ -159,7 +161,7 @@
 </tr>
 <tr class="odd">
 <td align="left">ga</td>
-<td align="left">fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1</td>
+<td align="left">fit_arima, fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1</td>
 <td align="left">SIC, AIC, BIC, HQC, MBIC, MDL</td>
 </tr>
 <tr class="even">
@@ -189,7 +191,7 @@
 </tr>
 <tr class="odd">
 <td align="left">random</td>
-<td align="left">fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1</td>
+<td align="left">fit_arima, fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1</td>
 <td align="left">SIC, AIC, BIC, HQC, MBIC, MDL</td>
 </tr>
 <tr class="even">
@@ -224,14 +226,14 @@
 <span id="cb18-5"><a href="#cb18-5" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb18-6"><a href="#cb18-6" tabindex="-1"></a><span class="do">##   Baumer B, Suárez Sierra B, Coen A, Taimal C (????). _tidychangepoint:</span></span>
 <span id="cb18-7"><a href="#cb18-7" tabindex="-1"></a><span class="do">##   A Tidy Framework for Changepoint Detection Analysis_. R package</span></span>
-<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="do">##   version 0.0.1.9002, &lt;https://beanumber.github.io/tidychangepoint/&gt;.</span></span>
+<span id="cb18-8"><a href="#cb18-8" tabindex="-1"></a><span class="do">##   version 1.0.0.9007, &lt;https://beanumber.github.io/tidychangepoint/&gt;.</span></span>
 <span id="cb18-9"><a href="#cb18-9" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb18-10"><a href="#cb18-10" tabindex="-1"></a><span class="do">## A BibTeX entry for LaTeX users is</span></span>
 <span id="cb18-11"><a href="#cb18-11" tabindex="-1"></a><span class="do">## </span></span>
 <span id="cb18-12"><a href="#cb18-12" tabindex="-1"></a><span class="do">##   @Manual{,</span></span>
 <span id="cb18-13"><a href="#cb18-13" tabindex="-1"></a><span class="do">##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},</span></span>
 <span id="cb18-14"><a href="#cb18-14" tabindex="-1"></a><span class="do">##     author = {Benjamin S. Baumer and Biviana Marcela {Suárez Sierra} and Arrigo Coen and Carlos A. Taimal},</span></span>
-<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a><span class="do">##     note = {R package version 0.0.1.9002},</span></span>
+<span id="cb18-15"><a href="#cb18-15" tabindex="-1"></a><span class="do">##     note = {R package version 1.0.0.9007},</span></span>
 <span id="cb18-16"><a href="#cb18-16" tabindex="-1"></a><span class="do">##     url = {https://beanumber.github.io/tidychangepoint/},</span></span>
 <span id="cb18-17"><a href="#cb18-17" tabindex="-1"></a><span class="do">##   }</span></span></code></pre></div>
 </div>
