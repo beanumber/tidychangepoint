@@ -119,7 +119,7 @@ ls_methods()
     ## 11 manual      tidychangepoint seg_cpt         segment_manual()    <NA>         
     ## 12 null        tidychangepoint seg_cpt         segment_manual()    <NA>         
     ## 13 segmented   segmented       segmented       <NA>                segmented::s…
-    ## 14 cga         changepointGA   cga             segment_cga()       changepointG…
+    ## 14 cptga       changepointGA   tidycptga       segment_cptga()     changepointG…
 
 ``` r
 ls_coverage() |>
@@ -135,8 +135,8 @@ ls_coverage() |>
 | method | models | penalties |
 |:---|:---|:---|
 | binseg | fit_meanvar | None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS |
-| cga | NA | NA |
 | coen | fit_nhpp | BMDL |
+| cptga | NA | NA |
 | ga | fit_arima, fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1 | SIC, AIC, BIC, HQC, MBIC, MDL |
 | ga-coen | fit_nhpp | BMDL |
 | ga-shi | fit_meanshift_norm_ar1 | BIC |
@@ -167,13 +167,13 @@ citation("tidychangepoint")
     ## 
     ##   Baumer B, Suárez Sierra B, Coen A, Taimal C (????). _tidychangepoint:
     ##   A Tidy Framework for Changepoint Detection Analysis_. R package
-    ##   version 1.0.1, <https://beanumber.github.io/tidychangepoint/>.
+    ##   version 1.0.2, <https://beanumber.github.io/tidychangepoint/>.
     ## 
     ## A BibTeX entry for LaTeX users is
     ## 
     ##   @Manual{,
     ##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},
     ##     author = {Benjamin S. Baumer and Biviana Marcela {Suárez Sierra} and Arrigo Coen and Carlos A. Taimal},
-    ##     note = {R package version 1.0.1},
+    ##     note = {R package version 1.0.2},
     ##     url = {https://beanumber.github.io/tidychangepoint/},
     ##   }

@@ -1,6 +1,6 @@
 #' @rdname as.segmenter
 #' @export
-as.seg_cpt.cga <- function(object, ...) {
+as.seg_cpt.cptga <- function(object, ...) {
   seg_cpt(
     x = as.ts(object),
     pkg = "changepointGA",
@@ -15,8 +15,8 @@ as.seg_cpt.cga <- function(object, ...) {
 
 #' @rdname reexports
 #' @export
-as.ts.cga <- function(x, ...) {
-  x$data
+as.ts.cptga <- function(x, ...) {
+  x@data
 }
 
 #' @rdname changepoints
@@ -24,11 +24,11 @@ as.ts.cga <- function(x, ...) {
 #' @examples
 #' \donttest{
 #' # Segment a times series using a genetic algorithm
-#' cpts <- segment(DataCPSim, method = "cga")
+#' cpts <- segment(DataCPSim, method = "cptga")
 #' changepoints(cpts$segmenter)
 #' }
-changepoints.cga <- function(x, ...) {
-  x$overbestchrom |>
+changepoints.cptga <- function(x, ...) {
+  x@overbestchrom |>
     utils::head(-1) |>
     utils::tail(-1) |>
     as.integer()
@@ -39,32 +39,48 @@ changepoints.cga <- function(x, ...) {
 #' @examples
 #' \donttest{
 #' # Segment a times series using a genetic algorithm
-#' x <- segment(DataCPSim, method = "cga")
+#' x <- segment(DataCPSim, method = "cptga")
 #' 
 #' # Retrieve its fitness value
 #' fitness(x)
 #' }
-fitness.cga <- function(object, ...) {
-  out <- object$overbestfit
+fitness.cptga <- function(object, ...) {
+  out <- object@overbestfit
   names(out) <- "BIC"
   out
 }
 
+#' @rdname model_args
+#' @export
+model_args.cptga <- function(object, ...) {
+  object@model_fn_args
+}
+
 #' @rdname model_name
 #' @export
-model_name.cga <- function(object, ...) {
+model_name.cptga <- function(object, ...) {
   "arima"
 }
 
 #' @rdname reexports
 #' @export
-nobs.cga <- function(object, ...) {
+nobs.cptga <- function(object, ...) {
   length(as.ts(object))
 }
 
 
 #' @rdname seg_params
 #' @export
-seg_params.cga <- function(object, ...) {
-  list()
+seg_params.cptga <- function(object, ...) {
+  list(
+    popSize = object@popSize,
+    minDist = object@minDist,
+    pchangepoint = object@pchangepoint,
+    pcrossover = object@pcrossover,
+    pmutation = object@pmutation,
+    mmax = object@mmax,
+    lmax = object@lmax,
+    maxgen = object@maxgen,
+    maxconv = object@maxconv
+  )
 }

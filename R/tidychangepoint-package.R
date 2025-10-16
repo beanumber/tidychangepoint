@@ -51,7 +51,7 @@ ls_methods <- function() {
     "manual", "tidychangepoint", "seg_cpt", "segment_manual()", NA,
     "null", "tidychangepoint", "seg_cpt", "segment_manual()", NA,
     "segmented", "segmented", "segmented", NA, "segmented::segmented()",
-    "cga", "changepointGA", "cga", "segment_cga()", "changepointGA::GA()"
+    "cptga", "changepointGA", "tidycptga", "segment_cptga()", "changepointGA::cptga()"
   )
 }
 
@@ -106,7 +106,7 @@ ls_coverage <- function() {
     tibble::tribble(
       ~method, ~model, ~penalty,
       "wbs", NA, NA,
-      "cga", NA, NA,
+      "cptga", NA, NA,
       "segmented", NA, NA,
       "ga-shi", "fit_meanshift_norm_ar1", "BIC",
       "ga-coen", "fit_nhpp", "BMDL",

@@ -60,8 +60,8 @@ segment.numeric <- function(x, method = "null", ...) {
 #'   [wbs::wbs()]. The `segmenter` is of class `wbs`.
 #' - `segmented`: Uses the segmented algorithm as implemented by 
 #'   [segmented::segmented()]. The `segmenter` is of class `segmented`.
-#' - `cga`: Uses the Genetic algorithm implemented by [segment_cga()], which wraps
-#'   [changepointGA::GA()]. The `segmenter` is of class `cga`.
+#' - `cptga`: Uses the Genetic algorithm implemented by [segment_cptga()], which wraps
+#'   [changepointGA::cptga()]. The `segmenter` is of class `tidycptga`.
 #' - `ga`: Uses the Genetic algorithm implemented by [segment_ga()], which wraps
 #'   [GA::ga()]. The `segmenter` is of class `tidyga`.
 #' - `ga-shi`: Uses the genetic algorithm implemented by [segment_ga_shi()], 
@@ -124,8 +124,8 @@ segment.ts <- function(x, method = "null", ...) {
   if (method == "segmented") {
     seg <- segmented::segmented(x, ...)
   }
-  if (method == "cga") {
-    seg <- segment_cga(x, ...)
+  if (method == "cptga") {
+    seg <- segment_cptga(x, ...)
   }
   if (method == "ga") {
     seg <- segment_ga(x, ...)

@@ -9,7 +9,7 @@
 \alias{fitness.tidycpt}
 \alias{fitness.ga}
 \alias{fitness.cpt}
-\alias{fitness.cga}
+\alias{fitness.cptga}
 \alias{fitness.segmented}
 \alias{fitness.wbs}
 \title{Retrieve the optimal fitness (or objective function) value used by an
@@ -27,7 +27,7 @@ fitness(object, ...)
 
 \method{fitness}{cpt}(object, ...)
 
-\method{fitness}{cga}(object, ...)
+\method{fitness}{cptga}(object, ...)
 
 \method{fitness}{segmented}(object, ...)
 
@@ -61,7 +61,7 @@ fitness(x)
 
 \donttest{
 # Segment a times series using a genetic algorithm
-x <- segment(DataCPSim, method = "cga")
+x <- segment(DataCPSim, method = "cptga")
 
 # Retrieve its fitness value
 fitness(x)

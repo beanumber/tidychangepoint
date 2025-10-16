@@ -11,7 +11,7 @@
 \alias{changepoints.tidycpt}
 \alias{changepoints.ga}
 \alias{changepoints.cpt}
-\alias{changepoints.cga}
+\alias{changepoints.cptga}
 \alias{changepoints.segmented}
 \alias{changepoints.wbs}
 \title{Extract changepoints}
@@ -32,7 +32,7 @@ changepoints(x, ...)
 
 \method{changepoints}{cpt}(x, ...)
 
-\method{changepoints}{cga}(x, ...)
+\method{changepoints}{cptga}(x, ...)
 
 \method{changepoints}{segmented}(x, ...)
 
@@ -69,7 +69,7 @@ changepoints(cpts$segmenter)
 
 \donttest{
 # Segment a times series using a genetic algorithm
-cpts <- segment(DataCPSim, method = "cga")
+cpts <- segment(DataCPSim, method = "cptga")
 changepoints(cpts$segmenter)
 }
 cpts <- segment(DataCPSim, method = "segmented")

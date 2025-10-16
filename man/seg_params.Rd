@@ -6,7 +6,7 @@
 \alias{seg_params.seg_cpt}
 \alias{seg_params.ga}
 \alias{seg_params.cpt}
-\alias{seg_params.cga}
+\alias{seg_params.cptga}
 \alias{seg_params.segmented}
 \alias{seg_params.wbs}
 \title{Retrieve parameters from a segmenter}
@@ -19,7 +19,7 @@ seg_params(object, ...)
 
 \method{seg_params}{cpt}(object, ...)
 
-\method{seg_params}{cga}(object, ...)
+\method{seg_params}{cptga}(object, ...)
 
 \method{seg_params}{segmented}(object, ...)
 

@@ -12,7 +12,7 @@
 \alias{model_name.tidycpt}
 \alias{model_name.ga}
 \alias{model_name.cpt}
-\alias{model_name.cga}
+\alias{model_name.cptga}
 \alias{model_name.segmented}
 \alias{model_name.wbs}
 \title{Retrieve the name of the model that a segmenter or model used}
@@ -35,7 +35,7 @@ model_name(object, ...)
 
 \method{model_name}{cpt}(object, ...)
 
-\method{model_name}{cga}(object, ...)
+\method{model_name}{cptga}(object, ...)
 
 \method{model_name}{segmented}(object, ...)
 

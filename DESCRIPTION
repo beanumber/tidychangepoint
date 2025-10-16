@@ -1,6 +1,6 @@
 Package: tidychangepoint
 Title: A Tidy Framework for Changepoint Detection Analysis
-Version: 1.0.1
+Version: 1.0.2
 Authors@R: c(
     person("Benjamin S.", "Baumer", email = "ben.baumer@gmail.com", 
       role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-3279-0516")
@@ -31,7 +31,7 @@ Description: Changepoint detection algorithms for R are widespread but have
 License: GPL (>= 3)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.2
+RoxygenNote: 7.3.3
 Imports:
     broom,
     changepoint,

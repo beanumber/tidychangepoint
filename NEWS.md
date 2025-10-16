@@ -1,3 +1,7 @@
+# tidychangepoint 1.0.2
+
+* Updated use of `changepointGA::GA()` to `changepointGA::cptga()`
+
 # tidychangepoint 1.0.1
 
 * Added preliminary support for ARIMA models. 

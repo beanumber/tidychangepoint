@@ -39,8 +39,8 @@
 \alias{as.ts.cpt}
 \alias{logLik.cpt}
 \alias{nobs.cpt}
-\alias{as.ts.cga}
-\alias{nobs.cga}
+\alias{as.ts.cptga}
+\alias{nobs.cptga}
 \alias{as.ts.segmented}
 \alias{nobs.segmented}
 \alias{as.ts.wbs}
@@ -131,9 +131,9 @@
 
 \method{nobs}{cpt}(object, ...)
 
-\method{as.ts}{cga}(x, ...)
+\method{as.ts}{cptga}(x, ...)
 
-\method{nobs}{cga}(object, ...)
+\method{nobs}{cptga}(object, ...)
 
 \method{as.ts}{segmented}(x, ...)
 

@@ -1,8 +1,8 @@
 test_that("changepointGA works", {
   skip()
-  x <- segment(CET, method = "cga")
+  x <- segment(CET, method = "cptga")
   expect_s3_class(x, "tidycpt")
-  expect_s3_class(x$segmenter, "cga")
+  expect_s4_class(x$segmenter, "cptga")
   expect_s3_class(as.ts(x), "ts")
   expect_s3_class(augment(x), "grouped_ts")
   expect_s3_class(tidy(x), "tbl_df")
