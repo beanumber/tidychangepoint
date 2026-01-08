@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -76,6 +76,9 @@
 <span><span class="co"># S3 method for class 'segmented'</span></span>
 <span><span class="fu">model_name</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
+<span><span class="co"># S3 method for class 'breakpointsfull'</span></span>
+<span><span class="fu">model_name</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span>
+<span></span>
 <span><span class="co"># S3 method for class 'wbs'</span></span>
 <span><span class="fu">model_name</span><span class="op">(</span><span class="va">object</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div>
     </div>
@@ -108,20 +111,20 @@ not necessarily the actual functions used by the segmenter.</p>
     <div class="section level2">
     <h2 id="see-also">See also<a class="anchor" aria-label="anchor" href="#see-also"></a></h2>
     <div class="dont-index"><p>Other model-fitting:
-<code><a href="fit_arima.html">fit_arima</a>()</code>,
-<code><a href="fit_lmshift.html">fit_lmshift</a>()</code>,
-<code><a href="fit_meanshift.html">fit_meanshift</a>()</code>,
-<code><a href="fit_meanvar.html">fit_meanvar</a>()</code>,
-<code><a href="fit_nhpp.html">fit_nhpp</a>()</code>,
-<code><a href="model_args.html">model_args</a>()</code>,
-<code><a href="fun_cpt.html">new_fun_cpt</a>()</code>,
-<code><a href="whomademe.html">whomademe</a>()</code></p>
+<code><a href="fit_arima.html">fit_arima()</a></code>,
+<code><a href="fit_lmshift.html">fit_lmshift()</a></code>,
+<code><a href="fit_meanshift.html">fit_meanshift()</a></code>,
+<code><a href="fit_meanvar.html">fit_meanvar()</a></code>,
+<code><a href="fit_nhpp.html">fit_nhpp()</a></code>,
+<code><a href="model_args.html">model_args()</a></code>,
+<code><a href="fun_cpt.html">new_fun_cpt()</a></code>,
+<code><a href="whomademe.html">whomademe()</a></code></p>
 <p>Other tidycpt-generics:
-<code><a href="as.model.html">as.model</a>()</code>,
-<code><a href="as.segmenter.html">as.segmenter</a>()</code>,
-<code><a href="changepoints.html">changepoints</a>()</code>,
-<code><a href="diagnose.html">diagnose</a>()</code>,
-<code><a href="fitness.html">fitness</a>()</code></p></div>
+<code><a href="as.model.html">as.model()</a></code>,
+<code><a href="as.segmenter.html">as.segmenter()</a></code>,
+<code><a href="changepoints.html">changepoints()</a></code>,
+<code><a href="diagnose.html">diagnose()</a></code>,
+<code><a href="fitness.html">fitness()</a></code></p></div>
     </div>
 
     <div class="section level2">
@@ -158,7 +161,7 @@ not necessarily the actual functions used by the segmenter.</p>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     mod_cpt(x &lt;- as.ts(x), tau = tau, region_params = region_params, </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>         model_params = c(), fitted_values = fitted_values, model_name = "meanvar")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> }</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x56384d892bb0&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x55ffb1b757d8&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:tidychangepoint&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> attr(,"model_name")</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> [1] "meanvar"</span>
@@ -184,7 +187,7 @@ not necessarily the actual functions used by the segmenter.</p>
 </div>
 
 <div class="pkgdown-footer-right">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.1.3.</p>
+  <p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.2.0.</p>
 </div>
 
     </footer></div>
