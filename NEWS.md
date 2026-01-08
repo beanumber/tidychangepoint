@@ -1,3 +1,7 @@
+# tidychangepoint 1.0.3
+
+* Added support for models from the `strucchange` package.
+
 # tidychangepoint 1.0.2
 
 * Updated use of `changepointGA::GA()` to `changepointGA::cptga()`

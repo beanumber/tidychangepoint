@@ -103,7 +103,7 @@ tidy(x)
 ls_methods()
 ```
 
-    ## # A tibble: 14 × 5
+    ## # A tibble: 15 × 5
     ##    method      pkg             segmenter_class helper              wraps        
     ##    <chr>       <chr>           <chr>           <chr>               <chr>        
     ##  1 pelt        changepoint     cpt             segment_pelt()      changepoint:…
@@ -118,8 +118,9 @@ ls_methods()
     ## 10 random      GA              tidyga          segment_ga_random() segment_ga() 
     ## 11 manual      tidychangepoint seg_cpt         segment_manual()    <NA>         
     ## 12 null        tidychangepoint seg_cpt         segment_manual()    <NA>         
-    ## 13 segmented   segmented       segmented       <NA>                segmented::s…
-    ## 14 cptga       changepointGA   tidycptga       segment_cptga()     changepointG…
+    ## 13 strucchange strucchange     breakpointsfull <NA>                strucchange:…
+    ## 14 segmented   segmented       segmented       <NA>                segmented::s…
+    ## 15 cptga       changepointGA   tidycptga       segment_cptga()     changepointG…
 
 ``` r
 ls_coverage() |>
@@ -147,6 +148,7 @@ ls_coverage() |>
 | segmented | NA | NA |
 | segneigh | fit_meanvar | None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS |
 | single-best | fit_meanvar | None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS |
+| strucchange | NA | NA |
 | wbs | NA | NA |
 
 ## References
@@ -167,13 +169,13 @@ citation("tidychangepoint")
     ## 
     ##   Baumer B, Suárez Sierra B, Coen A, Taimal C (????). _tidychangepoint:
     ##   A Tidy Framework for Changepoint Detection Analysis_. R package
-    ##   version 1.0.2, <https://beanumber.github.io/tidychangepoint/>.
+    ##   version 1.0.2.9000, <https://beanumber.github.io/tidychangepoint/>.
     ## 
     ## A BibTeX entry for LaTeX users is
     ## 
     ##   @Manual{,
     ##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},
     ##     author = {Benjamin S. Baumer and Biviana Marcela {Suárez Sierra} and Arrigo Coen and Carlos A. Taimal},
-    ##     note = {R package version 1.0.2},
+    ##     note = {R package version 1.0.2.9000},
     ##     url = {https://beanumber.github.io/tidychangepoint/},
     ##   }

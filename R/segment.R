@@ -58,6 +58,8 @@ segment.numeric <- function(x, method = "null", ...) {
 #'   [changepoint::cpt.meanvar()]. The `segmenter` is of class `cpt`.
 #' - `wbs`: Uses the Wild Binary Segmentation algorithm as implemented by 
 #'   [wbs::wbs()]. The `segmenter` is of class `wbs`.
+#' - `strucchange`: Uses the segmented algorithm as implemented by 
+#'   [strucchange::breakpoints()]. The `segmenter` is of class `breakpoints`.
 #' - `segmented`: Uses the segmented algorithm as implemented by 
 #'   [segmented::segmented()]. The `segmenter` is of class `segmented`.
 #' - `cptga`: Uses the Genetic algorithm implemented by [segment_cptga()], which wraps
@@ -120,6 +122,9 @@ segment.ts <- function(x, method = "null", ...) {
   }
   if (method == "wbs") {
     seg <- wbs::wbs(x, ...)
+  }
+  if (method == "strucchange") {
+    seg <- strucchange::breakpoints(stats::as.formula(eval(x) ~ 1), ...)
   }
   if (method == "segmented") {
     seg <- segmented::segmented(x, ...)

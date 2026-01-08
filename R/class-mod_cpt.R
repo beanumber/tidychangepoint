@@ -171,6 +171,7 @@ changepoints.mod_cpt <- function(x, ...) {
 augment.mod_cpt <- function(x, ...) {
   tau <- changepoints(x)
   tibble::enframe(as.ts(x), name = "index", value = "y") |>
+    dplyr::mutate(index = as.integer(index)) |>
     tsibble::as_tsibble(index = index) |>
     dplyr::mutate(
       region = cut_by_tau(index, pad_tau(tau, nobs(x))),

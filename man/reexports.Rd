@@ -2,7 +2,7 @@
 % Please edit documentation in R/class-mod_cpt.R, R/class-seg_basket.R,
 %   R/class-seg_cpt.R, R/class-tidycpt.R, R/mod_meanshift.R, R/mod_nhpp.R,
 %   R/pkg-GA.R, R/pkg-changepoint.R, R/pkg-changepointGA.R, R/pkg-segmented.R,
-%   R/pkg-wbs.R, R/reexports.R
+%   R/pkg-strucchange.R, R/pkg-wbs.R, R/reexports.R
 \docType{import}
 \name{as.ts.mod_cpt}
 \alias{as.ts.mod_cpt}
@@ -43,6 +43,8 @@
 \alias{nobs.cptga}
 \alias{as.ts.segmented}
 \alias{nobs.segmented}
+\alias{as.ts.breakpointsfull}
+\alias{nobs.breakpointsfull}
 \alias{as.ts.wbs}
 \alias{nobs.wbs}
 \alias{reexports}
@@ -138,6 +140,10 @@
 \method{as.ts}{segmented}(x, ...)
 
 \method{nobs}{segmented}(object, ...)
+
+\method{as.ts}{breakpointsfull}(x, ...)
+
+\method{nobs}{breakpointsfull}(object, ...)
 
 \method{as.ts}{wbs}(x, ...)
 

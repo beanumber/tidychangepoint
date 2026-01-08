@@ -50,6 +50,7 @@ ls_methods <- function() {
     "random", "GA", "tidyga", "segment_ga_random()", "segment_ga()",
     "manual", "tidychangepoint", "seg_cpt", "segment_manual()", NA,
     "null", "tidychangepoint", "seg_cpt", "segment_manual()", NA,
+    "strucchange", "strucchange", "breakpointsfull", NA, "strucchange::breakpoints()",
     "segmented", "segmented", "segmented", NA, "segmented::segmented()",
     "cptga", "changepointGA", "tidycptga", "segment_cptga()", "changepointGA::cptga()"
   )
@@ -107,6 +108,7 @@ ls_coverage <- function() {
       ~method, ~model, ~penalty,
       "wbs", NA, NA,
       "cptga", NA, NA,
+      "strucchange", NA, NA,
       "segmented", NA, NA,
       "ga-shi", "fit_meanshift_norm_ar1", "BIC",
       "ga-coen", "fit_nhpp", "BMDL",

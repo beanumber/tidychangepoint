@@ -47,6 +47,8 @@ on the value of the \code{method} argument:
 \code{\link[changepoint:cpt.meanvar]{changepoint::cpt.meanvar()}}. The \code{segmenter} is of class \code{cpt}.
 \item \code{wbs}: Uses the Wild Binary Segmentation algorithm as implemented by
 \code{\link[wbs:wbs]{wbs::wbs()}}. The \code{segmenter} is of class \code{wbs}.
+\item \code{strucchange}: Uses the segmented algorithm as implemented by
+\code{\link[strucchange:breakpoints]{strucchange::breakpoints()}}. The \code{segmenter} is of class \code{breakpoints}.
 \item \code{segmented}: Uses the segmented algorithm as implemented by
 \code{\link[segmented:segmented]{segmented::segmented()}}. The \code{segmenter} is of class \code{segmented}.
 \item \code{cptga}: Uses the Genetic algorithm implemented by \code{\link[=segment_cptga]{segment_cptga()}}, which wraps
