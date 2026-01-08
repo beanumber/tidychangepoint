@@ -40,16 +40,16 @@ ls_models()
 # List packages supported by tidychangepoint
 ls_pkgs()
 #> # A tibble: 4 × 2
-#>   pkg             version   
-#>   <chr>           <chr>     
-#> 1 tidychangepoint 1.0.2.9000
-#> 2 changepoint     2.3       
-#> 3 wbs             1.4.1     
-#> 4 GA              3.2.4     
+#>   pkg             version
+#>   <chr>           <chr>  
+#> 1 tidychangepoint 1.0.2  
+#> 2 changepoint     2.3    
+#> 3 wbs             1.4.1  
+#> 4 GA              3.2.4  
 
 # List methods supported by segment()
 ls_methods()
-#> # A tibble: 15 × 5
+#> # A tibble: 14 × 5
 #>    method      pkg             segmenter_class helper              wraps        
 #>    <chr>       <chr>           <chr>           <chr>               <chr>        
 #>  1 pelt        changepoint     cpt             segment_pelt()      changepoint:…
@@ -64,9 +64,8 @@ ls_methods()
 #> 10 random      GA              tidyga          segment_ga_random() segment_ga() 
 #> 11 manual      tidychangepoint seg_cpt         segment_manual()    NA           
 #> 12 null        tidychangepoint seg_cpt         segment_manual()    NA           
-#> 13 strucchange strucchange     breakpointsfull NA                  strucchange:…
-#> 14 segmented   segmented       segmented       NA                  segmented::s…
-#> 15 cptga       changepointGA   tidycptga       segment_cptga()     changepointG…
+#> 13 segmented   segmented       segmented       NA                  segmented::s…
+#> 14 cptga       changepointGA   tidycptga       segment_cptga()     changepointG…
 
 # List penalty functions provided by tidychangepoint
 ls_penalties()
@@ -247,11 +246,10 @@ ls_coverage()
 #> 165      random     fit_trendshift_ar1        MDL
 #> 166         wbs                   <NA>       <NA>
 #> 167       cptga                   <NA>       <NA>
-#> 168 strucchange                   <NA>       <NA>
-#> 169   segmented                   <NA>       <NA>
-#> 170      ga-shi fit_meanshift_norm_ar1        BIC
-#> 171     ga-coen               fit_nhpp       BMDL
-#> 172        coen               fit_nhpp       BMDL
-#> 173      manual     fit_meanshift_norm        BIC
-#> 174        null     fit_meanshift_norm        BIC
+#> 168   segmented                   <NA>       <NA>
+#> 169      ga-shi fit_meanshift_norm_ar1        BIC
+#> 170     ga-coen               fit_nhpp       BMDL
+#> 171        coen               fit_nhpp       BMDL
+#> 172      manual     fit_meanshift_norm        BIC
+#> 173        null     fit_meanshift_norm        BIC
 ```

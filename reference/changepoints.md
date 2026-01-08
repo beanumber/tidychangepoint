@@ -35,9 +35,6 @@ changepoints(x, ...)
 # S3 method for class 'segmented'
 changepoints(x, ...)
 
-# S3 method for class 'breakpointsfull'
-changepoints(x, ...)
-
 # S3 method for class 'wbs'
 changepoints(x, ...)
 ```
@@ -187,10 +184,6 @@ changepoints(cpts$segmenter)
 cpts <- segment(DataCPSim, method = "segmented")
 changepoints(cpts$segmenter)
 #> [1] 776
-
-cpts <- segment(DataCPSim, method = "strucchange")
-changepoints(cpts$segmenter)
-#> [1] 547 767 932
 
 cpts <- segment(DataCPSim, method = "wbs")
 changepoints(cpts$segmenter)

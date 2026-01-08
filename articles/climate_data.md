@@ -113,7 +113,7 @@ glance(trend_wn)
     ## # A tibble: 1 × 8
     ##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time
     ##   <chr> <pckg_vrs> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
-    ## 1 GA    3.2.4      Genetic   <list [1]> meanshift… BIC         665. 15.905 secs
+    ## 1 GA    3.2.4      Genetic   <list [1]> meanshift… BIC         665. 16.538 secs
 
 However, we can also run
 [`glance()`](https://generics.r-lib.org/reference/glance.html) on the
@@ -133,7 +133,7 @@ trend_wn |>
     ## # A tibble: 1 × 11
     ##   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
     ##   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-    ## 1 tidych… 1.0.2.… meanshif… <dbl>         4 0.553  -303.  626.  665.  666.  675.
+    ## 1 tidych… 1.0.2   meanshif… <dbl>         4 0.553  -303.  626.  665.  666.  675.
 
 The [`plot()`](https://rdrr.io/r/graphics/plot.default.html) function
 returns an informative plot of the original time series, with the
@@ -171,7 +171,7 @@ CET |>
     ## # A tibble: 1 × 11
     ##   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
     ##   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-    ## 1 tidych… 1.0.2.… trendshi… <dbl>         3 0.538  -292.  608.  655.  630.  658.
+    ## 1 tidych… 1.0.2   trendshi… <dbl>         3 0.538  -292.  608.  655.  630.  658.
 
 Modifying the model to incorporate AR(1) lagged errors also matches the
 figures from Table 2.
@@ -185,7 +185,7 @@ CET |>
     ## # A tibble: 1 × 11
     ##   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
     ##   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-    ## 1 tidych… 1.0.2.… trendshi… <dbl>         3 0.537  -291.  608.  658.  628.  661.
+    ## 1 tidych… 1.0.2   trendshi… <dbl>         3 0.537  -291.  608.  658.  628.  661.
 
 ### Bogotá particulate matter
 
@@ -220,7 +220,7 @@ glance(bog_cpt)
     ## # A tibble: 1 × 8
     ##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time
     ##   <chr> <pckg_vrs> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
-    ## 1 GA    3.2.4      Genetic   <list [1]> nhpp       BMDL       1942. 25.182 secs
+    ## 1 GA    3.2.4      Genetic   <list [1]> nhpp       BMDL       1942. 25.033 secs
 
 ``` r
 plot(bog_cpt, use_time_index = TRUE)

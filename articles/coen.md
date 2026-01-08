@@ -65,7 +65,7 @@ glance(y)
 #> # A tibble: 1 × 8
 #>   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time
 #>   <chr> <pckg_vrs> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
-#> 1 GA    3.2.4      Genetic   <list [1]> nhpp       BMDL       1918. 30.897 secs
+#> 1 GA    3.2.4      Genetic   <list [1]> nhpp       BMDL       1918. 30.02 secs
 ```
 
 ### Changing the threshold
@@ -119,7 +119,7 @@ glance(z)
 #> # A tibble: 1 × 8
 #>   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time
 #>   <chr> <pckg_vrs> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
-#> 1 GA    3.2.4      Genetic   <list [1]> nhpp       BMDL        609. 4.664 secs
+#> 1 GA    3.2.4      Genetic   <list [1]> nhpp       BMDL        609. 4.472 secs
 ```
 
 Baumer, Benjamin S., and Biviana Marcela Suarez Sierra. 2024.

@@ -105,27 +105,27 @@ glance(mod)
 #> # A tibble: 1 × 11
 #>   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
 #>   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 tidych… 1.0.2.… meanshift <dbl>         3 0.576  -317.  651.  682.  681.  692.
+#> 1 tidych… 1.0.2   meanshift <dbl>         3 0.576  -317.  651.  682.  681.  692.
 glance(fit_lmshift(CET, tau = ids, deg_poly = 1))
 #> # A tibble: 1 × 11
 #>   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
 #>   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 tidych… 1.0.2.… trendshi… <dbl>         3 0.538  -292.  608.  655.  630.  658.
+#> 1 tidych… 1.0.2   trendshi… <dbl>         3 0.538  -292.  608.  655.  630.  658.
 glance(fit_lmshift_ar1(CET, tau = ids))
 #> # A tibble: 1 × 11
 #>   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
 #>   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 tidych… 1.0.2.… meanshif… <dbl>         3 0.567  -311.  640.  675.  668.  684.
+#> 1 tidych… 1.0.2   meanshif… <dbl>         3 0.567  -311.  640.  675.  668.  684.
 glance(fit_lmshift_ar1(CET, tau = ids, deg_poly = 1))
 #> # A tibble: 1 × 11
 #>   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
 #>   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 tidych… 1.0.2.… trendshi… <dbl>         3 0.537  -291.  608.  658.  628.  661.
+#> 1 tidych… 1.0.2   trendshi… <dbl>         3 0.537  -291.  608.  658.  628.  661.
 glance(fit_lmshift_ar1(CET, tau = ids, deg_poly = 2))
 #> # A tibble: 1 × 11
 #>   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
 #>   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 tidych… 1.0.2.… splinesh… <dbl>         3 0.535  -290.  613.  680.  625.  675.
+#> 1 tidych… 1.0.2   splinesh… <dbl>         3 0.535  -290.  613.  680.  625.  675.
 
 # Empty changepoint sets are allowed
 fit_lmshift(CET, tau = NULL)

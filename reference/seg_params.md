@@ -22,9 +22,6 @@ seg_params(object, ...)
 # S3 method for class 'segmented'
 seg_params(object, ...)
 
-# S3 method for class 'breakpointsfull'
-seg_params(object, ...)
-
 # S3 method for class 'wbs'
 seg_params(object, ...)
 ```
