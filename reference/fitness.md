@@ -29,6 +29,9 @@ fitness(object, ...)
 # S3 method for class 'segmented'
 fitness(object, ...)
 
+# S3 method for class 'breakpointsfull'
+fitness(object, ...)
+
 # S3 method for class 'wbs'
 fitness(object, ...)
 ```
@@ -77,7 +80,7 @@ x <- segment(DataCPSim, method = "ga", maxiter = 10)
 # Retrieve its fitness value
 fitness(x)
 #>      BIC 
-#> 16494.18 
+#> 16441.07 
 
 # \donttest{
 # Segment a times series using a genetic algorithm
@@ -95,6 +98,14 @@ x <- segment(DataCPSim, method = "segmented")
 fitness(x)
 #>      MDL 
 #> 10190.17 
+
+# Segment a time series using Segmented
+x <- segment(DataCPSim, method = "strucchange")
+
+# Retrieve its fitness
+fitness(x)
+#>      RSS 
+#> 728167.9 
 
 # Segment a time series using Wild Binary Segmentation
 x <- segment(DataCPSim, method = "wbs")

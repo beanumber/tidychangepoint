@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -148,10 +148,10 @@ that this function uses <code><a href="build_gabin_population.html">log_gabin_po
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> GA results: </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Iterations             = 5 </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> Fitness function value = -2320.85 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> Fitness function value = -2280.566 </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Solution = </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>      x1 x2 x3 x4 x5 x6 x7 x8 x9 x10  ...  x365 x366</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0  0  0  0  1  1  0  1  1   0          1    0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1,]  0  0  0  0  1  1  0  1  1   0          0    0</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/utils/str.html" class="external-link">str</a></span><span class="op">(</span><span class="va">res</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> Formal class 'tidyga' [package "tidychangepoint"] with 23 slots</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ data         : Time-Series [1:366] from 1 to 366: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...</span>
@@ -166,21 +166,21 @@ that this function uses <code><a href="build_gabin_population.html">log_gabin_po
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ names        : chr [1:366] "x1" "x2" "x3" "x4" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ popSize      : num 50</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ iter         : int 5</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ run          : int 5</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ run          : int 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ maxiter      : num 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ suggestions  : logi[0 , 1:366] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ population   : num [1:50, 1:366] 0 1 0 1 1 0 1 1 1 1 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ population   : num [1:50, 1:366] 0 0 0 1 1 0 1 1 1 0 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ elitism      : int 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ pcrossover   : num 0.8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ pmutation    : num 0.1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ optim        : logi FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ fitness      : num [1:50] -2321 -Inf -2353 -Inf -Inf ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ summary      : num [1:5, 1:6] -2321 -2321 -2321 -2321 -2321 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ fitness      : num [1:50] -2281 -2672 -2321 -Inf -Inf ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ summary      : num [1:5, 1:6] -2321 -2321 -2321 -2281 -2281 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "dimnames")=List of 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. ..$ : NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. ..$ : chr [1:6] "max" "mean" "q3" "median" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ bestSol      : list()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ fitnessValue : num -2321</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ fitnessValue : num -2281</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..@ solution     : num [1, 1:366] 0 0 0 0 1 1 0 1 1 0 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "dimnames")=List of 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. ..$ : NULL</span>
@@ -209,35 +209,35 @@ that this function uses <code><a href="build_gabin_population.html">log_gabin_po
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ run          : int 1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ maxiter      : num 5</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ suggestions  : logi[0 , 1:366] </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ population   : num [1:200, 1:366] 0 0 0 0 0 0 0 0 0 0 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ population   : num [1:200, 1:366] 0 1 0 0 1 0 0 0 0 0 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ elitism      : int 10</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ pcrossover   : num 0.8</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ pmutation    : num 0.1</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ optim        : logi FALSE</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ fitness      : num [1:200] -Inf -2525 -Inf -Inf -2245 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ summary      : num [1:5, 1:6] -2208 -2200 -2200 -2200 -2194 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ fitness      : num [1:200] -Inf -Inf -Inf -Inf -Inf ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ summary      : num [1:5, 1:6] -2208 -2200 -2200 -2200 -2183 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. ..- attr(*, "dimnames")=List of 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..$ : NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..$ : chr [1:6] "max" "mean" "q3" "median" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ bestSol      : list()</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ fitnessValue : num -2194</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ solution     : num [1, 1:366] 0 0 0 0 0 0 0 1 1 1 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ fitnessValue : num -2183</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..@ solution     : num [1, 1:366] 0 1 0 0 1 0 1 0 0 1 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. ..- attr(*, "dimnames")=List of 2</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..$ : NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. .. .. ..$ : chr [1:366] "x1" "x2" "x3" "x4" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ model       :List of 7</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ data         : Time-Series [1:366] from 1 to 366: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ tau          : int [1:156] 8 9 10 12 15 16 18 19 21 22 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region_params: tibble [157 × 2] (S3: tbl_df/tbl/data.frame)</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ region  : chr [1:157] "[1,8)" "[8,9)" "[9,10)" "[10,12)" ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ param_mu: num [1:157] 9.08 9.86 8.52 9.27 8.95 ...</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ model_params : Named num [1:2] 0.146 -0.278</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ tau          : int [1:151] 2 5 7 10 15 16 17 20 23 24 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ region_params: tibble [152 × 2] (S3: tbl_df/tbl/data.frame)</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ region  : chr [1:152] "[1,2)" "[2,5)" "[5,7)" "[7,10)" ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..$ param_mu: num [1:152] 8.87 9.47 8.98 8.89 9.08 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ model_params : Named num [1:2] 0.167 -0.244</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   .. ..- attr(*, "names")= chr [1:2] "sigma_hatsq" "phi_hat"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ fitted_values: num [1:366] 9.08 9.13 9.07 8.88 8.95 ...</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ fitted_values: num [1:366] 8.87 9.47 9.56 9.39 8.97 ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ model_name   : chr "meanshift_norm_ar1"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ durbin_watson: num 2.55</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   ..$ durbin_watson: num 2.49</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "class")= chr "mod_cpt"</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  $ elapsed_time: 'difftime' num 0.960399627685547</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  $ elapsed_time: 'difftime' num 0.775640964508057</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   ..- attr(*, "units")= chr "secs"</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  $ time_index  : Date[1:366], format: "1659-01-01" "1660-01-01" ...</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  - attr(*, "class")= chr "tidycpt"</span>

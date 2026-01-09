@@ -58,15 +58,15 @@ Compare this with the changepoint set discovered by the algorithm:
 changepoints(trend_wn)
 ```
 
-    ##  x34  x41 x252 x336 
-    ##   34   41  252  336
+    ##  x34  x42 x269 x336 
+    ##   34   42  269  336
 
 ``` r
 changepoints(trend_wn, use_labels = TRUE) |>
   as_year()
 ```
 
-    ## [1] "1692" "1699" "1910" "1994"
+    ## [1] "1692" "1700" "1927" "1994"
 
 The
 [`fitness()`](https://beanumber.github.io/tidychangepoint/reference/fitness.md)
@@ -78,7 +78,7 @@ fitness(trend_wn)
 ```
 
     ##      BIC 
-    ## 664.5614
+    ## 667.6336
 
 Information about the regions, including their means, are shown by the
 [`tidy()`](https://generics.r-lib.org/reference/tidy.html) function.
@@ -95,9 +95,9 @@ tidy(trend_wn)
     ##   region    num_obs   min   max  mean    sd begin   end param_mu
     ##   <chr>       <int> <dbl> <dbl> <dbl> <dbl> <dbl> <dbl>    <dbl>
     ## 1 [1,34)         33  7.86 10.2   8.83 0.554     1    34     8.83
-    ## 2 [34,41)         7  7.29  8.52  7.91 0.454    34    41     7.91
-    ## 3 [41,252)      211  6.86 10.5   9.16 0.594    41   252     9.16
-    ## 4 [252,336)      84  8.52 10.6   9.50 0.482   252   336     9.50
+    ## 2 [34,42)         8  7.29  8.83  8.03 0.531    34    42     8.03
+    ## 3 [42,269)      227  6.86 10.5   9.18 0.592    42   269     9.18
+    ## 4 [269,336)      67  8.52 10.6   9.54 0.464   269   336     9.54
     ## 5 [336,367)      31  8.95 11.2  10.4  0.507   336   367    10.4
 
 By default,
@@ -113,7 +113,7 @@ glance(trend_wn)
     ## # A tibble: 1 × 8
     ##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time
     ##   <chr> <pckg_vrs> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
-    ## 1 GA    3.2.4      Genetic   <list [1]> meanshift… BIC         665. 16.538 secs
+    ## 1 GA    3.2.5      Genetic   <list [1]> meanshift… BIC         668. 8.341 secs
 
 However, we can also run
 [`glance()`](https://generics.r-lib.org/reference/glance.html) on the
@@ -133,7 +133,7 @@ trend_wn |>
     ## # A tibble: 1 × 11
     ##   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
     ##   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-    ## 1 tidych… 1.0.2   meanshif… <dbl>         4 0.553  -303.  626.  665.  666.  675.
+    ## 1 tidych… 1.0.2.… meanshif… <dbl>         4 0.556  -304.  629.  668.  669.  678.
 
 The [`plot()`](https://rdrr.io/r/graphics/plot.default.html) function
 returns an informative plot of the original time series, with the
@@ -171,7 +171,7 @@ CET |>
     ## # A tibble: 1 × 11
     ##   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
     ##   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-    ## 1 tidych… 1.0.2   trendshi… <dbl>         3 0.538  -292.  608.  655.  630.  658.
+    ## 1 tidych… 1.0.2.… trendshi… <dbl>         3 0.538  -292.  608.  655.  630.  658.
 
 Modifying the model to incorporate AR(1) lagged errors also matches the
 figures from Table 2.
@@ -185,7 +185,7 @@ CET |>
     ## # A tibble: 1 × 11
     ##   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
     ##   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-    ## 1 tidych… 1.0.2   trendshi… <dbl>         3 0.537  -291.  608.  658.  628.  661.
+    ## 1 tidych… 1.0.2.… trendshi… <dbl>         3 0.537  -291.  608.  658.  628.  661.
 
 ### Bogotá particulate matter
 
@@ -220,7 +220,7 @@ glance(bog_cpt)
     ## # A tibble: 1 × 8
     ##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time
     ##   <chr> <pckg_vrs> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
-    ## 1 GA    3.2.4      Genetic   <list [1]> nhpp       BMDL       1942. 25.033 secs
+    ## 1 GA    3.2.5      Genetic   <list [1]> nhpp       BMDL       1988. 28.032 secs
 
 ``` r
 plot(bog_cpt, use_time_index = TRUE)

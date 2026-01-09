@@ -71,6 +71,10 @@ the value of the `method` argument:
   [`wbs::wbs()`](https://rdrr.io/pkg/wbs/man/wbs.html). The `segmenter`
   is of class `wbs`.
 
+- `strucchange`: Uses the segmented algorithm as implemented by
+  [`strucchange::breakpoints()`](https://rdrr.io/pkg/strucchange/man/breakpoints.html).
+  The `segmenter` is of class `breakpoints`.
+
 - `segmented`: Uses the segmented algorithm as implemented by
   [`segmented::segmented()`](https://rdrr.io/pkg/segmented/man/segmented.html).
   The `segmenter` is of class `segmented`.
@@ -132,7 +136,7 @@ segment(DataCPSim, method = "pelt")
 #>        ~~   : S4 class containing 12 slots with names
 #>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est 
 #> 
-#> Created on  : Thu Jan  8 19:55:59 2026 
+#> Created on  : Fri Jan  9 13:22:27 2026 
 #> 
 #> summary(.)  :
 #> ----------
@@ -155,7 +159,7 @@ segment(DataCPSim, method = "pelt", penalty = "BIC")
 #>        ~~   : S4 class containing 12 slots with names
 #>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est 
 #> 
-#> Created on  : Thu Jan  8 19:55:59 2026 
+#> Created on  : Fri Jan  9 13:22:27 2026 
 #> 
 #> summary(.)  :
 #> ----------
@@ -178,7 +182,7 @@ segment(DataCPSim, method = "binseg", penalty = "BIC")
 #>        ~~   : S4 class containing 14 slots with names
 #>               cpts.full pen.value.full data.set cpttype method test.stat pen.type pen.value minseglen cpts ncpts.max param.est date version 
 #> 
-#> Created on  : Thu Jan  8 19:55:59 2026 
+#> Created on  : Fri Jan  9 13:22:27 2026 
 #> 
 #> summary(.)  :
 #> ----------

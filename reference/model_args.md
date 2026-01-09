@@ -25,6 +25,9 @@ model_args(object, ...)
 # S3 method for class 'segmented'
 model_args(object, ...)
 
+# S3 method for class 'breakpointsfull'
+model_args(object, ...)
+
 # S3 method for class 'wbs'
 model_args(object, ...)
 ```

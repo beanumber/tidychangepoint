@@ -147,6 +147,12 @@ as.ts(x, ...)
 # S3 method for class 'segmented'
 nobs(object, ...)
 
+# S3 method for class 'breakpointsfull'
+as.ts(x, ...)
+
+# S3 method for class 'breakpointsfull'
+nobs(object, ...)
+
 # S3 method for class 'wbs'
 as.ts(x, ...)
 

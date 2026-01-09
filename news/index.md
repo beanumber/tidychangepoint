@@ -1,5 +1,9 @@
 # Changelog
 
+## tidychangepoint 1.0.3
+
+- Added support for models from the `strucchange` package.
+
 ## tidychangepoint 1.0.2
 
 CRAN release: 2025-10-16

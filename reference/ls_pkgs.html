@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.2.9000</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -78,16 +78,16 @@
 <span class="r-in"><span><span class="co"># List packages supported by tidychangepoint</span></span></span>
 <span class="r-in"><span><span class="fu">ls_pkgs</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 4 × 2</span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   pkg             version</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidychangepoint 1.0.2  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> changepoint     2.3    </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> wbs             1.4.1  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> GA              3.2.4  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   pkg             version   </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">1</span> tidychangepoint 1.0.2.9000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">2</span> changepoint     2.3       </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">3</span> wbs             1.4.1     </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">4</span> GA              3.2.5     </span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># List methods supported by segment()</span></span></span>
 <span class="r-in"><span><span class="fu">ls_methods</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 14 × 5</span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #949494;"># A tibble: 15 × 5</span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    method      pkg             segmenter_class helper              wraps        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>       <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>           <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>               <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>        </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;"> 1</span> pelt        changepoint     cpt             segment_pelt()      changepoint:…</span>
@@ -102,8 +102,9 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">10</span> random      GA              tidyga          segment_ga_random() segment_ga() </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">11</span> manual      tidychangepoint seg_cpt         segment_manual()    <span style="color: #BB0000;">NA</span>           </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">12</span> null        tidychangepoint seg_cpt         segment_manual()    <span style="color: #BB0000;">NA</span>           </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> segmented   segmented       segmented       <span style="color: #BB0000;">NA</span>                  segmented::s…</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> cptga       changepointGA   tidycptga       segment_cptga()     changepointG…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">13</span> strucchange strucchange     breakpointsfull <span style="color: #BB0000;">NA</span>                  strucchange:…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">14</span> segmented   segmented       segmented       <span style="color: #BB0000;">NA</span>                  segmented::s…</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> <span style="color: #BCBCBC;">15</span> cptga       changepointGA   tidycptga       segment_cptga()     changepointG…</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># List penalty functions provided by tidychangepoint</span></span></span>
 <span class="r-in"><span><span class="fu">ls_penalties</span><span class="op">(</span><span class="op">)</span></span></span>
@@ -284,12 +285,13 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 165      random     fit_trendshift_ar1        MDL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 166         wbs                   &lt;NA&gt;       &lt;NA&gt;</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 167       cptga                   &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 168   segmented                   &lt;NA&gt;       &lt;NA&gt;</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 169      ga-shi fit_meanshift_norm_ar1        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 170     ga-coen               fit_nhpp       BMDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 171        coen               fit_nhpp       BMDL</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 172      manual     fit_meanshift_norm        BIC</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 173        null     fit_meanshift_norm        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 168 strucchange                   &lt;NA&gt;       &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 169   segmented                   &lt;NA&gt;       &lt;NA&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 170      ga-shi fit_meanshift_norm_ar1        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 171     ga-coen               fit_nhpp       BMDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 172        coen               fit_nhpp       BMDL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 173      manual     fit_meanshift_norm        BIC</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 174        null     fit_meanshift_norm        BIC</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
