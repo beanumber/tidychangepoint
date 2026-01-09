@@ -276,7 +276,7 @@ plot.mod_cpt <- function(x, ...) {
   }
   ggplot2::ggplot(
     data = augment(x), 
-    ggplot2::aes(x = index, y = y)
+    ggplot2::aes(x = index, y = y, group = region)
   ) +
     #    ggplot2::geom_rect(
     #      data = regions,
