@@ -162,6 +162,7 @@ time labels?}
 \examples{
 # Plot a meanshift model fit
 plot(fit_meanshift_norm(CET, tau = 330))
+plot(fit_meanshift_norm(CET, tau = 330), plot.title.position = "plot")
 
 #' # Plot a trendshift model fit
 plot(fit_trendshift(CET, tau = 330))

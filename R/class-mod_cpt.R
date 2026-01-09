@@ -254,6 +254,7 @@ autoregress_errors <- function(mod, ...) {
 #' @examples
 #' # Plot a meanshift model fit
 #' plot(fit_meanshift_norm(CET, tau = 330))
+#' plot(fit_meanshift_norm(CET, tau = 330), plot.title.position = "plot")
 #' 
 #' #' # Plot a trendshift model fit
 #' plot(fit_trendshift(CET, tau = 330))
@@ -265,8 +266,12 @@ autoregress_errors <- function(mod, ...) {
 #' plot(fit_lmshift(CET, tau = 330, deg_poly = 10))
 #' 
 plot.mod_cpt <- function(x, ...) {
+  dots <- list(...)
   regions <- tidy(x)
   m <- length(changepoints(x))
+  if (m > 2 && is.null(dots[["axis.text.x"]])) {
+    dots[["axis.text.x"]] <- ggplot2::element_text(angle = 45, vjust = 1, hjust = 1)
+  }
   breaks_default <- scales::extended_breaks(3)(1:nobs(x))
   b <- c(1, changepoints(x), nobs(x))
   if (m == 0) {
@@ -313,7 +318,8 @@ plot.mod_cpt <- function(x, ...) {
     ggplot2::labs(
 #      title = "Original time series",
       subtitle = paste("Global mean value is", round(mean(as.ts(x), na.rm = TRUE), 2))
-    )
+    ) +
+    do.call(ggplot2::theme, dots)
 }
 
 

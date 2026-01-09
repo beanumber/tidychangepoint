@@ -38,7 +38,7 @@ changepoints.tidycpt <- function(x, use_labels = FALSE, ...) {
 #' @rdname reexports
 #' @export
 as.ts.tidycpt <- function(x, ...) {
-  as.ts(x$segmenter)
+  as.ts(x$segmenter, ...)
 }
 
 #' @rdname as.model
@@ -57,7 +57,7 @@ as.segmenter.tidycpt <- function(object, ...) {
 #' @rdname fitness
 #' @export
 fitness.tidycpt <- function(object, ...) {
-  fitness(object$segmenter)
+  fitness(object$segmenter, ...)
 }
 
 #' @rdname model_name
@@ -69,13 +69,13 @@ model_name.tidycpt <- function(object, ...) {
 #' @rdname reexports
 #' @export
 augment.tidycpt <- function(x, ...) {
-  augment(x$model)
+  augment(x$model, ...)
 }
 
 #' @rdname reexports
 #' @export
 tidy.tidycpt <- function(x, ...) {
-  tidy(x$model)
+  tidy(x$model, ...)
 }
 
 #' @rdname reexports
@@ -84,7 +84,7 @@ glance.tidycpt <- function(x, ...) {
   x |>
     as.segmenter() |>
     as.seg_cpt() |>
-    glance() |>
+    glance(...) |>
     dplyr::mutate(
       elapsed_time = round(x$elapsed_time, 3)
     )
@@ -166,7 +166,7 @@ compare_algorithms <- function(x, ...) {
 #' segment(CET, method = "pelt") |>
 #'   plot(use_time_index = TRUE, ylab = "Degrees Celsius")
 plot.tidycpt <- function(x, use_time_index = FALSE, ylab = NULL, ...) {
-  g <- plot(x$model)
+  g <- plot(x$model, ...)
   b <- g |>
     ggplot2::ggplot_build() |>
     purrr::pluck("layout") |>
@@ -206,14 +206,14 @@ plot.tidycpt <- function(x, use_time_index = FALSE, ylab = NULL, ...) {
 #' @export
 print.tidycpt <- function(x, ...) {
   cli::cli_alert_info("A tidycpt object. Segmenter \u2193")
-  print(x$segmenter)
+  print(x$segmenter, ...)
   print(x$model)
 }
 
 #' @rdname regions
 #' @export
 regions.tidycpt <- function(x, ...) {
-  regions(x$model)
+  regions(x$model, ...)
 }
 
 #' @rdname reexports
@@ -234,7 +234,7 @@ summary.tidycpt <- function(object, ...) {
     )
   )
   summary(as.seg_cpt(object$segmenter))
-  summary(as.model(object))
+  summary(as.model(object), ...)
 }
 
 
@@ -251,7 +251,7 @@ summary.tidycpt <- function(object, ...) {
 #' diagnose(segment(test_set(n = 2, sd = 4), method = "pelt"))
 #' 
 diagnose.tidycpt <- function(x, ...) {
-  patchwork::wrap_plots(plot(x), diagnose(x$model), ncol = 1)
+  patchwork::wrap_plots(plot(x), diagnose(x$model, ...), ncol = 1)
 }
 
 #' Obtain a descriptive filename for a tidycpt object

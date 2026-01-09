@@ -1,6 +1,8 @@
 # tidychangepoint 1.0.3
 
 * Added support for models from the `strucchange` package.
+* Added group aesthetic to plots (@rpruim)
+* The dots (...) are passed more consistently
 
 # tidychangepoint 1.0.2
 
