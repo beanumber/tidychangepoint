@@ -73,8 +73,8 @@ compare_algorithms(x)
 #>   <chr>    <pckg_> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
 #> 1 tidycha… 1.0.2.… manual    <list [0]> meanshift… BIC         789. 0.003 secs  
 #> 2 changep… 2.3     BinSeg    <list [1]> meanvar    MBIC        653. 0.005 secs  
-#> 3 changep… 2.3     PELT      <list [1]> meanvar    MBIC       -Inf  0.009 secs  
-#> 4 changep… 2.3     PELT      <list [1]> meanvar    MBIC       -Inf  0.009 secs  
-#> 5 wbs      1.4.1   Wild Bin… <list [1]> meanshift… MBIC       -130. 0.023 secs  
-#> 6 GA       3.2.5   Genetic   <list [1]> meanshift… BIC         698. 0.102 secs  
+#> 3 changep… 2.3     PELT      <list [1]> meanvar    MBIC       -Inf  0.008 secs  
+#> 4 changep… 2.3     PELT      <list [1]> meanvar    MBIC       -Inf  0.008 secs  
+#> 5 wbs      1.4.1   Wild Bin… <list [1]> meanshift… MBIC       -130. 0.022 secs  
+#> 6 GA       3.2.5   Genetic   <list [1]> meanshift… BIC         698. 0.098 secs  
 ```

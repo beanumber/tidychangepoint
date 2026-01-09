@@ -54,7 +54,7 @@ res
 #>        ~~   : S4 class containing 12 slots with names
 #>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est 
 #> 
-#> Created on  : Fri Jan  9 13:22:51 2026 
+#> Created on  : Fri Jan  9 14:06:20 2026 
 #> 
 #> summary(.)  :
 #> ----------
@@ -80,7 +80,7 @@ str(res)
 #>   ..@ param.est:List of 2
 #>   .. ..$ mean    : num [1:4] 35.3 58.2 96.8 156.5
 #>   .. ..$ variance: num [1:4] 127 371 921 2406
-#>   ..@ date     : chr "Fri Jan  9 13:22:51 2026"
+#>   ..@ date     : chr "Fri Jan  9 14:06:20 2026"
 #>   ..@ version  : chr "2.3"
 
 # Segment as time series while specifying a penalty function
@@ -89,7 +89,7 @@ segment_pelt(DataCPSim, penalty = "BIC")
 #>        ~~   : S4 class containing 12 slots with names
 #>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est 
 #> 
-#> Created on  : Fri Jan  9 13:22:51 2026 
+#> Created on  : Fri Jan  9 14:06:20 2026 
 #> 
 #> summary(.)  :
 #> ----------
@@ -108,7 +108,7 @@ segment_pelt(DataCPSim, model_fn = fit_meanshift_norm, penalty = "BIC")
 #>        ~~   : S4 class containing 12 slots with names
 #>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est 
 #> 
-#> Created on  : Fri Jan  9 13:22:51 2026 
+#> Created on  : Fri Jan  9 14:06:20 2026 
 #> 
 #> summary(.)  :
 #> ----------

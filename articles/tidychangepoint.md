@@ -97,7 +97,7 @@ glance(x)
 #> # A tibble: 1 × 8
 #>   pkg      version algorithm seg_params model_name criteria fitness elapsed_time
 #>   <chr>    <pckg_> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
-#> 1 changep… 2.3     PELT      <list [1]> meanvar    MBIC       9403. 0.068 secs
+#> 1 changep… 2.3     PELT      <list [1]> meanvar    MBIC       9403. 0.063 secs
 ```
 
 ### Other methods
@@ -193,7 +193,7 @@ x |>
 #>   ..@ param.est:List of 2
 #>   .. ..$ mean    : num [1:4] 35.3 58.2 96.8 156.5
 #>   .. ..$ variance: num [1:4] 127 371 921 2406
-#>   ..@ date     : chr "Fri Jan  9 13:24:30 2026"
+#>   ..@ date     : chr "Fri Jan  9 14:07:54 2026"
 #>   ..@ version  : chr "2.3"
 ```
 
