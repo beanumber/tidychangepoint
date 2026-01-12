@@ -48,20 +48,8 @@
 \alias{as.ts.wbs}
 \alias{nobs.wbs}
 \alias{reexports}
-\alias{tidy}
-\alias{augment}
-\alias{glance}
-\alias{logLik}
-\alias{AIC}
-\alias{BIC}
-\alias{nobs}
-\alias{fitted}
-\alias{residuals}
-\alias{coef}
-\alias{time}
 \alias{vec_ptype2}
 \alias{vec_cast}
-\alias{index}
 \title{Objects exported from other packages}
 \usage{
 \method{as.ts}{mod_cpt}(x, ...)
@@ -191,12 +179,6 @@ These objects are imported from other packages. Follow the links
 below to see their documentation.
 
 \describe{
-  \item{broom}{\code{\link[broom:reexports]{augment}}, \code{\link[broom:reexports]{glance}}, \code{\link[broom:reexports]{tidy}}}
-
-  \item{stats}{\code{\link[stats]{AIC}}, \code{\link[stats:AIC]{BIC}}, \code{\link[stats]{coef}}, \code{\link[stats:fitted.values]{fitted}}, \code{\link[stats]{logLik}}, \code{\link[stats]{nobs}}, \code{\link[stats]{residuals}}, \code{\link[stats]{time}}}
-
   \item{vctrs}{\code{\link[vctrs]{vec_cast}}, \code{\link[vctrs]{vec_ptype2}}}
-
-  \item{zoo}{\code{\link[zoo]{index}}}
 }}
 

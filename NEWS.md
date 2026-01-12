@@ -4,6 +4,7 @@
 * Added group aesthetic to plots (@rpruim)
 * The dots (...) are passed more consistently
 * Moved `patchwork` to Suggests
+* Moved many reexports to imports
 
 # tidychangepoint 1.0.2
 
