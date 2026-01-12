@@ -71,10 +71,10 @@ compare_algorithms(x)
 #> # A tibble: 6 × 8
 #>   pkg      version algorithm seg_params model_name criteria fitness elapsed_time
 #>   <chr>    <pckg_> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
-#> 1 tidycha… 1.0.3   manual    <list [0]> meanshift… BIC         789. 0.003 secs  
-#> 2 changep… 2.3     BinSeg    <list [1]> meanvar    MBIC        653. 0.005 secs  
-#> 3 changep… 2.3     PELT      <list [1]> meanvar    MBIC       -Inf  0.008 secs  
+#> 1 changep… 2.3     BinSeg    <list [1]> meanvar    MBIC        653. 0.005 secs  
+#> 2 tidycha… 1.0.3   manual    <list [0]> meanshift… BIC         789. 0.008 secs  
+#> 3 changep… 2.3     PELT      <list [1]> meanvar    MBIC       -Inf  0.009 secs  
 #> 4 changep… 2.3     PELT      <list [1]> meanvar    MBIC       -Inf  0.009 secs  
-#> 5 wbs      1.4.1   Wild Bin… <list [1]> meanshift… MBIC       -130. 0.025 secs  
-#> 6 GA       3.2.5   Genetic   <list [1]> meanshift… BIC         698. 0.096 secs  
+#> 5 wbs      1.4.1   Wild Bin… <list [1]> meanshift… MBIC       -130. 0.029 secs  
+#> 6 GA       3.2.5   Genetic   <list [1]> meanshift… BIC         698. 0.094 secs  
 ```

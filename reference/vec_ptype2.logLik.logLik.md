@@ -39,10 +39,10 @@ A [`stats::logLik()`](https://rdrr.io/r/stats/logLik.html) vector.
 ``` r
 a <- logLik(lm(mpg ~ disp, data = mtcars))
 b <- logLik(lm(mpg ~ am, data = mtcars))
-vec_ptype2(a, b)
+vctrs::vec_ptype2(a, b)
 #> 'log Lik.'  (df=3)
 c(a, b)
 #> [1] -82.10469 -95.24219
-vec_cast(a, b)
+vctrs::vec_cast(a, b)
 #> 'log Lik.' -82.10469 (df=3)
 ```

@@ -9,11 +9,6 @@ to see their documentation.
   [`glance`](https://generics.r-lib.org/reference/glance.html),
   [`tidy`](https://generics.r-lib.org/reference/tidy.html)
 
-- vctrs:
-
-  [`vec_cast`](https://vctrs.r-lib.org/reference/vec_cast.html),
-  [`vec_ptype2`](https://vctrs.r-lib.org/reference/vec_ptype2.html)
-
 ## Usage
 
 ``` r

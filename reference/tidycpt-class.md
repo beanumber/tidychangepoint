@@ -49,7 +49,7 @@ str(x)
 #>   .. ..@ param.est:List of 2
 #>   .. .. ..$ mean    : num [1:6] 8.79 9.44 9.17 9.62 10.52 ...
 #>   .. .. ..$ variance: num [1:6] 0.368 0 0.366 0.256 0 ...
-#>   .. ..@ date     : chr "Mon Jan 12 17:06:18 2026"
+#>   .. ..@ date     : chr "Mon Jan 12 17:28:21 2026"
 #>   .. ..@ version  : chr "2.3"
 #>  $ model       :List of 6
 #>   ..$ data         : Time-Series [1:366] from 1 to 366: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...
@@ -63,7 +63,7 @@ str(x)
 #>   ..$ fitted_values: num [1:366] 8.8 8.8 8.8 8.8 8.8 ...
 #>   ..$ model_name   : chr "meanvar"
 #>   ..- attr(*, "class")= chr "mod_cpt"
-#>  $ elapsed_time: 'difftime' num 0.00810790061950684
+#>  $ elapsed_time: 'difftime' num 0.00816702842712402
 #>   ..- attr(*, "units")= chr "secs"
 #>  $ time_index  : Date[1:366], format: "1659-01-01" "1660-01-01" ...
 #>  - attr(*, "class")= chr "tidycpt"
