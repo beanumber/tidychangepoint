@@ -12,42 +12,6 @@ broom::augment
 broom::glance
 
 #' @export
-#' @importFrom stats as.ts
-stats::as.ts
-
-#' @export
-#' @importFrom stats logLik
-stats::logLik
-
-#' @export
-#' @importFrom stats AIC
-stats::AIC
-
-#' @export
-#' @importFrom stats BIC
-stats::BIC
-
-#' @export
-#' @importFrom stats nobs
-stats::nobs
-
-#' @export
-#' @importFrom stats fitted
-stats::fitted
-
-#' @export
-#' @importFrom stats residuals
-stats::residuals
-
-#' @export
-#' @importFrom stats coef
-stats::coef
-
-#' @export
-#' @importFrom stats time
-stats::time
-
-#' @export
 #' @importFrom vctrs vec_ptype2
 vctrs::vec_ptype2
 
