@@ -11,7 +11,11 @@ test_that("tidycpt works", {
   expect_s3_class(glance(x), "tbl_df")
   expect_type(changepoints(x), "integer")
   expect_s3_class(plot(x), "gg")
-  expect_s3_class(diagnose(x), "patchwork")
+  if (requireNamespace("patchwork", quietly = TRUE)) {
+    expect_s3_class(diagnose(x), "patchwork")
+  } else {
+    expect_s3_class(diagnose(x), "list")
+  }
   expect_message(summary(x), "Summary")
   
   z <- segment(DataCPSim, method = "manual", tau = c(365, 826))
@@ -24,7 +28,11 @@ test_that("tidycpt works", {
   expect_type(changepoints(z), "integer")
   expect_equal(length(changepoints(z)), 2)
   expect_s3_class(plot(z), "gg")
-  expect_s3_class(diagnose(z), "patchwork")
+  if (requireNamespace("patchwork", quietly = TRUE)) {
+    expect_s3_class(diagnose(z), "patchwork")
+  } else {
+    expect_s3_class(diagnose(z), "list")
+  }
   expect_message(summary(z), "Summary")
   
   expect_s3_class(segment(bogota_pm, method = "manual", tau = c(500, 850)), "tidycpt")

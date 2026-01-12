@@ -1,6 +1,6 @@
 Package: tidychangepoint
 Title: A Tidy Framework for Changepoint Detection Analysis
-Version: 1.0.2.9001
+Version: 1.0.3
 Authors@R: c(
     person("Benjamin S.", "Baumer", email = "ben.baumer@gmail.com", 
       role = c("aut", "cre", "cph"), comment = c(ORCID = "0000-0002-3279-0516")
@@ -44,7 +44,6 @@ Imports:
     lubridate,
     memoise,
     methods,
-    patchwork,
     prettyunits,
     purrr,
     rlang,
@@ -67,6 +66,7 @@ Suggests:
     knitr,
     here,
     multitaper,
+    patchwork,
     readr,
     rmarkdown,
     testthat (>= 3.0.0)

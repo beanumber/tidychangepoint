@@ -251,7 +251,11 @@ summary.tidycpt <- function(object, ...) {
 #' diagnose(segment(test_set(n = 2, sd = 4), method = "pelt"))
 #' 
 diagnose.tidycpt <- function(x, ...) {
-  patchwork::wrap_plots(plot(x), diagnose(x$model, ...), ncol = 1)
+  if (requireNamespace("patchwork", quietly = TRUE)) {
+    patchwork::wrap_plots(plot(x), diagnose(x$model, ...), ncol = 1) 
+  } else {
+    list(plot(x), diagnose(x$model, ...))
+  }
 }
 
 #' Obtain a descriptive filename for a tidycpt object

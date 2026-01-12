@@ -75,12 +75,13 @@ x <- segment(DataCPSim, method = "segmented")
 # Retrieve its fitness
 fitness(x)
 
+\donttest{
 # Segment a time series using Segmented
 x <- segment(DataCPSim, method = "strucchange")
 
 # Retrieve its fitness
 fitness(x)
-
+}
 # Segment a time series using Wild Binary Segmentation
 x <- segment(DataCPSim, method = "wbs")
 

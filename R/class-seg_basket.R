@@ -213,11 +213,15 @@ plot.seg_basket <- function(x, ...) {
 #' }
 #' 
 diagnose.seg_basket <- function(x, ...) {
-  patchwork::wrap_plots(
-    plot_best_chromosome(x),
-    plot_cpt_repeated(x),
-    ncol = 1
-  )
+  if (requireNamespace("patchwork", quietly = TRUE)) {
+    patchwork::wrap_plots(
+      plot_best_chromosome(x),
+      plot_cpt_repeated(x),
+      ncol = 1
+    )
+  } else {
+    list(plot_best_chromosome(x), plot_cpt_repeated(x))
+  }
 }
 
 

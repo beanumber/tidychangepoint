@@ -34,12 +34,13 @@ changepoints.breakpointsfull <- function(x, ...) {
 #' @rdname fitness
 #' @export
 #' @examples
+#' \donttest{
 #' # Segment a time series using Segmented
 #' x <- segment(DataCPSim, method = "strucchange")
 #' 
 #' # Retrieve its fitness
 #' fitness(x)
-#' 
+#' }
 fitness.breakpointsfull <- function(object, ...) {
   out <- strucchange::breakpoints(object)[["RSS"]]
   names(out) <- "RSS"
