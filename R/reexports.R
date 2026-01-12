@@ -6,8 +6,14 @@ vctrs::vec_ptype2
 #' @importFrom vctrs vec_cast
 vctrs::vec_cast
 
+#' @importFrom generics augment
 #' @export
-#' @importFrom xts as.xts
-as.ts.xts <- xts:::as.ts.xts
+generics::augment
 
+#' @importFrom generics tidy
+#' @export
+generics::tidy
 
+#' @importFrom generics glance
+#' @export
+generics::glance
