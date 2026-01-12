@@ -113,7 +113,7 @@ glance(trend_wn)
     ## # A tibble: 1 × 8
     ##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time
     ##   <chr> <pckg_vrs> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
-    ## 1 GA    3.2.5      Genetic   <list [1]> meanshift… BIC         668. 8.565 secs
+    ## 1 GA    3.2.5      Genetic   <list [1]> meanshift… BIC         668. 8.59 secs
 
 However, we can also run
 [`glance()`](https://generics.r-lib.org/reference/glance.html) on the
@@ -220,7 +220,7 @@ glance(bog_cpt)
     ## # A tibble: 1 × 8
     ##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time
     ##   <chr> <pckg_vrs> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
-    ## 1 GA    3.2.5      Genetic   <list [1]> nhpp       BMDL       1988. 27.093 secs
+    ## 1 GA    3.2.5      Genetic   <list [1]> nhpp       BMDL       1988. 27.37 secs
 
 ``` r
 plot(bog_cpt, use_time_index = TRUE)

@@ -115,7 +115,7 @@ x |>
 #>        ~~   : S4 class containing 12 slots with names
 #>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est 
 #> 
-#> Created on  : Mon Jan 12 17:26:48 2026 
+#> Created on  : Mon Jan 12 18:21:23 2026 
 #> 
 #> summary(.)  :
 #> ----------
