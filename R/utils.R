@@ -296,9 +296,9 @@ as_year <- function(x) {
 #' @examples
 #' a <- logLik(lm(mpg ~ disp, data = mtcars))
 #' b <- logLik(lm(mpg ~ am, data = mtcars))
-#' vec_ptype2(a, b)
+#' vctrs::vec_ptype2(a, b)
 #' c(a, b)
-#' vec_cast(a, b)
+#' vctrs::vec_cast(a, b)
 vec_ptype2.logLik.logLik <- function(x, y, ...) {
   x
 }

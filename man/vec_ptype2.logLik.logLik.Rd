@@ -25,9 +25,9 @@ Vectors implementation for logLik
 \examples{
 a <- logLik(lm(mpg ~ disp, data = mtcars))
 b <- logLik(lm(mpg ~ am, data = mtcars))
-vec_ptype2(a, b)
+vctrs::vec_ptype2(a, b)
 c(a, b)
-vec_cast(a, b)
+vctrs::vec_cast(a, b)
 }
 \seealso{
 \code{\link[stats:logLik]{stats::logLik()}}

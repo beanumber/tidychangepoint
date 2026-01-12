@@ -48,8 +48,6 @@
 \alias{as.ts.wbs}
 \alias{nobs.wbs}
 \alias{reexports}
-\alias{vec_ptype2}
-\alias{vec_cast}
 \alias{augment}
 \alias{tidy}
 \alias{glance}
@@ -183,7 +181,5 @@ below to see their documentation.
 
 \describe{
   \item{generics}{\code{\link[generics]{augment}}, \code{\link[generics]{glance}}, \code{\link[generics]{tidy}}}
-
-  \item{vctrs}{\code{\link[vctrs]{vec_cast}}, \code{\link[vctrs]{vec_ptype2}}}
 }}
 
