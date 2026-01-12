@@ -3,31 +3,16 @@
 These objects are imported from other packages. Follow the links below
 to see their documentation.
 
-- broom:
+- generics:
 
-  [`augment`](https://broom.tidymodels.org/reference/reexports.html),
-  [`glance`](https://broom.tidymodels.org/reference/reexports.html),
-  [`tidy`](https://broom.tidymodels.org/reference/reexports.html)
-
-- stats:
-
-  [`AIC`](https://rdrr.io/r/stats/AIC.html),
-  [`BIC`](https://rdrr.io/r/stats/AIC.html),
-  [`coef`](https://rdrr.io/r/stats/coef.html),
-  [`fitted`](https://rdrr.io/r/stats/fitted.values.html),
-  [`logLik`](https://rdrr.io/r/stats/logLik.html),
-  [`nobs`](https://rdrr.io/r/stats/nobs.html),
-  [`residuals`](https://rdrr.io/r/stats/residuals.html),
-  [`time`](https://rdrr.io/r/stats/time.html)
+  [`augment`](https://generics.r-lib.org/reference/augment.html),
+  [`glance`](https://generics.r-lib.org/reference/glance.html),
+  [`tidy`](https://generics.r-lib.org/reference/tidy.html)
 
 - vctrs:
 
   [`vec_cast`](https://vctrs.r-lib.org/reference/vec_cast.html),
   [`vec_ptype2`](https://vctrs.r-lib.org/reference/vec_ptype2.html)
-
-- zoo:
-
-  [`index`](https://rdrr.io/pkg/zoo/man/index.html)
 
 ## Usage
 

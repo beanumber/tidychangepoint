@@ -124,7 +124,7 @@ x |>
 #>     mod_cpt(x <- as.ts(x), tau = tau, region_params = region_params, 
 #>         model_params = c(), fitted_values = fitted_values, model_name = "meanvar")
 #> }
-#> <bytecode: 0x55fb2057be38>
+#> <bytecode: 0x55e1eb3b8b98>
 #> <environment: namespace:tidychangepoint>
 #> attr(,"model_name")
 #> [1] "meanvar"
