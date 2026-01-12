@@ -95,7 +95,7 @@ glance(mod)
 #> # A tibble: 1 × 11
 #>   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
 #>   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 tidych… 1.0.2.… meanshif… <dbl>         3 0.576  -317.  651.  682.  681.  692.
+#> 1 tidych… 1.0.3   meanshif… <dbl>         3 0.576  -317.  651.  682.  681.  692.
 
 # Fit an autoregressive model
 mod <- fit_meanshift_norm_ar1(CET, tau = ids)
@@ -105,5 +105,5 @@ glance(mod)
 #> # A tibble: 1 × 11
 #>   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
 #>   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-#> 1 tidych… 1.0.2.… meanshif… <dbl>         3 0.567  -311.  640.  675.  668.  684.
+#> 1 tidych… 1.0.3   meanshif… <dbl>         3 0.567  -311.  640.  675.  668.  684.
 ```

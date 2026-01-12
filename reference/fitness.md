@@ -99,6 +99,7 @@ fitness(x)
 #>      MDL 
 #> 10190.17 
 
+# \donttest{
 # Segment a time series using Segmented
 x <- segment(DataCPSim, method = "strucchange")
 
@@ -106,7 +107,7 @@ x <- segment(DataCPSim, method = "strucchange")
 fitness(x)
 #>      RSS 
 #> 728167.9 
-
+# }
 # Segment a time series using Wild Binary Segmentation
 x <- segment(DataCPSim, method = "wbs")
 

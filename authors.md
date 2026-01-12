@@ -19,12 +19,12 @@
 
 Baumer B, Suárez Sierra B, Coen A, Taimal C (2026). *tidychangepoint: A
 Tidy Framework for Changepoint Detection Analysis*. R package version
-1.0.2.9001, <https://beanumber.github.io/tidychangepoint/>.
+1.0.3, <https://beanumber.github.io/tidychangepoint/>.
 
     @Manual{,
       title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},
       author = {Benjamin S. Baumer and Biviana Marcela {Suárez Sierra} and Arrigo Coen and Carlos A. Taimal},
       year = {2026},
-      note = {R package version 1.0.2.9001},
+      note = {R package version 1.0.3},
       url = {https://beanumber.github.io/tidychangepoint/},
     }

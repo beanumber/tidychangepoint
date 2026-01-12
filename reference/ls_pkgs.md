@@ -40,12 +40,12 @@ ls_models()
 # List packages supported by tidychangepoint
 ls_pkgs()
 #> # A tibble: 4 × 2
-#>   pkg             version   
-#>   <chr>           <chr>     
-#> 1 tidychangepoint 1.0.2.9001
-#> 2 changepoint     2.3       
-#> 3 wbs             1.4.1     
-#> 4 GA              3.2.5     
+#>   pkg             version
+#>   <chr>           <chr>  
+#> 1 tidychangepoint 1.0.3  
+#> 2 changepoint     2.3    
+#> 3 wbs             1.4.1  
+#> 4 GA              3.2.5  
 
 # List methods supported by segment()
 ls_methods()

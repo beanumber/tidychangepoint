@@ -52,7 +52,7 @@ Other tidycpt-generics:
 ``` r
 # For meanshift models, show the distribution of the residuals by region
 fit_meanshift_norm(CET, tau = 330) |>
-  diagnose()
+diagnose()
 #> Registered S3 method overwritten by 'tsibble':
 #>   method               from 
 #>   as_tibble.grouped_df dplyr

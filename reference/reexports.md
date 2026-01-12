@@ -13,7 +13,6 @@ to see their documentation.
 
   [`AIC`](https://rdrr.io/r/stats/AIC.html),
   [`BIC`](https://rdrr.io/r/stats/AIC.html),
-  [`as.ts`](https://rdrr.io/r/stats/ts.html),
   [`coef`](https://rdrr.io/r/stats/coef.html),
   [`fitted`](https://rdrr.io/r/stats/fitted.values.html),
   [`logLik`](https://rdrr.io/r/stats/logLik.html),
