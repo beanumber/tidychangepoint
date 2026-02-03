@@ -295,7 +295,7 @@ plot.mod_cpt <- function(x, ...) {
     ) +
     ggplot2::geom_hline(yintercept = mean(as.ts(x)), linetype = 3) +
     ggplot2::geom_rug(sides = "l") +
-    ggplot2::geom_line() + 
+    ggplot2::geom_line(alpha = 0.5) + 
     ggplot2::geom_line(ggplot2::aes(y = .fitted), color = "red") + 
 #    ggplot2::geom_segment(
 #      data = regions,

@@ -1,6 +1,7 @@
 # tidychangepoint 1.0.4
 
 * Improved support for `segmented` algorithms `stepmented()` and `selgmented()`
+* Added `alpha` transparency to time series lines in `plot()`
 
 # tidychangepoint 1.0.3
 
