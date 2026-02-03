@@ -2,7 +2,7 @@
 
 ## tidychangepoint 1.0.4
 
-- Improved support for `segmented` algorithms `stepmented()` and
+- Improved support for `segmented` algorithms `stelpmented()` and
   `selgmented()`
 - Added `alpha` transparency to time series lines in
   [`plot()`](https://rdrr.io/r/graphics/plot.default.html)

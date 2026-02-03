@@ -132,10 +132,10 @@ summary(res)
 #> 
 #> GA results: 
 #> Iterations             = 5 
-#> Fitness function value = -2306.874 
+#> Fitness function value = -2268.62 
 #> Solution = 
 #>      x1 x2 x3 x4 x5 x6 x7 x8 x9 x10  ...  x365 x366
-#> [1,]  0  0  1  0  1  1  0  0  1   1          1    0
+#> [1,]  0  0  0  0  0  1  1  0  0   0          0    0
 str(res)
 #> Formal class 'tidyga' [package "tidychangepoint"] with 23 slots
 #>   ..@ data         : Time-Series [1:366] from 1 to 366: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...
@@ -153,19 +153,19 @@ str(res)
 #>   ..@ run          : int 1
 #>   ..@ maxiter      : num 5
 #>   ..@ suggestions  : logi[0 , 1:366] 
-#>   ..@ population   : num [1:50, 1:366] 1 1 0 0 1 0 0 1 0 1 ...
+#>   ..@ population   : num [1:50, 1:366] 0 0 1 1 0 0 0 0 0 1 ...
 #>   ..@ elitism      : int 2
 #>   ..@ pcrossover   : num 0.8
 #>   ..@ pmutation    : num 0.1
 #>   ..@ optim        : logi FALSE
-#>   ..@ fitness      : num [1:50] -Inf -Inf -2314 -2307 -Inf ...
-#>   ..@ summary      : num [1:5, 1:6] -2400 -2383 -2364 -2364 -2307 ...
+#>   ..@ fitness      : num [1:50] -Inf -2289 -Inf -Inf -2526 ...
+#>   ..@ summary      : num [1:5, 1:6] -2293 -2289 -2289 -2288 -2269 ...
 #>   .. ..- attr(*, "dimnames")=List of 2
 #>   .. .. ..$ : NULL
 #>   .. .. ..$ : chr [1:6] "max" "mean" "q3" "median" ...
 #>   ..@ bestSol      : list()
-#>   ..@ fitnessValue : num -2307
-#>   ..@ solution     : num [1, 1:366] 0 0 1 0 1 1 0 0 1 1 ...
+#>   ..@ fitnessValue : num -2269
+#>   ..@ solution     : num [1, 1:366] 0 0 0 0 0 1 1 0 0 0 ...
 #>   .. ..- attr(*, "dimnames")=List of 2
 #>   .. .. ..$ : NULL
 #>   .. .. ..$ : chr [1:366] "x1" "x2" "x3" "x4" ...
@@ -190,55 +190,56 @@ str(x)
 #>   .. ..@ names        : chr [1:366] "x1" "x2" "x3" "x4" ...
 #>   .. ..@ popSize      : num 200
 #>   .. ..@ iter         : int 5
-#>   .. ..@ run          : int 2
+#>   .. ..@ run          : int 1
 #>   .. ..@ maxiter      : num 5
 #>   .. ..@ suggestions  : logi[0 , 1:366] 
-#>   .. ..@ population   : num [1:200, 1:366] 0 1 0 0 0 1 1 0 0 0 ...
+#>   .. ..@ population   : num [1:200, 1:366] 0 0 0 0 0 1 0 0 1 0 ...
 #>   .. ..@ elitism      : int 10
 #>   .. ..@ pcrossover   : num 0.8
 #>   .. ..@ pmutation    : num 0.1
 #>   .. ..@ optim        : logi FALSE
-#>   .. ..@ fitness      : num [1:200] -Inf -Inf -Inf -2127 -2312 ...
-#>   .. ..@ summary      : num [1:5, 1:6] -2264 -2264 -2155 -2127 -2127 ...
+#>   .. ..@ fitness      : num [1:200] -Inf -2614 -Inf -2414 -2237 ...
+#>   .. ..@ summary      : num [1:5, 1:6] -2295 -2274 -2241 -2237 -2165 ...
 #>   .. .. ..- attr(*, "dimnames")=List of 2
 #>   .. .. .. ..$ : NULL
 #>   .. .. .. ..$ : chr [1:6] "max" "mean" "q3" "median" ...
 #>   .. ..@ bestSol      : list()
-#>   .. ..@ fitnessValue : num -2127
-#>   .. ..@ solution     : num [1, 1:366] 0 1 0 0 1 1 0 1 0 1 ...
+#>   .. ..@ fitnessValue : num -2165
+#>   .. ..@ solution     : num [1, 1:366] 0 0 0 1 1 1 0 1 0 1 ...
 #>   .. .. ..- attr(*, "dimnames")=List of 2
 #>   .. .. .. ..$ : NULL
 #>   .. .. .. ..$ : chr [1:366] "x1" "x2" "x3" "x4" ...
 #>  $ model       :List of 7
 #>   ..$ data         : Time-Series [1:366] from 1 to 366: 8.87 9.1 9.78 9.52 8.63 9.34 8.29 9.86 8.52 9.51 ...
-#>   ..$ tau          : int [1:154] 2 5 6 8 10 11 15 16 18 20 ...
-#>   ..$ region_params: tibble [155 × 2] (S3: tbl_df/tbl/data.frame)
-#>   .. ..$ region  : chr [1:155] "[1,2)" "[2,5)" "[5,6)" "[6,8)" ...
-#>   .. ..$ param_mu: num [1:155] 8.87 9.47 8.63 8.81 9.19 ...
-#>   ..$ model_params : Named num [1:2] 0.13 -0.358
+#>   ..$ tau          : int [1:158] 4 5 6 8 10 13 15 17 18 19 ...
+#>   ..$ region_params: tibble [159 × 2] (S3: tbl_df/tbl/data.frame)
+#>   .. ..$ region  : chr [1:159] "[1,4)" "[4,5)" "[5,6)" "[6,8)" ...
+#>   .. ..$ param_mu: num [1:159] 9.25 9.52 8.63 8.81 9.19 ...
+#>   ..$ model_params : Named num [1:2] 0.127 -0.314
 #>   .. ..- attr(*, "names")= chr [1:2] "sigma_hatsq" "phi_hat"
-#>   ..$ fitted_values: num [1:366] 8.87 9.47 9.6 9.35 8.61 ...
+#>   ..$ fitted_values: num [1:366] 9.25 9.37 9.3 9.35 8.63 ...
 #>   ..$ model_name   : chr "meanshift_norm_ar1"
-#>   ..$ durbin_watson: num 2.72
+#>   ..$ durbin_watson: num 2.63
 #>   ..- attr(*, "class")= chr "mod_cpt"
-#>  $ elapsed_time: 'difftime' num 0.988739013671875
+#>  $ elapsed_time: 'difftime' num 0.74266529083252
 #>   ..- attr(*, "units")= chr "secs"
 #>  $ time_index  : Date[1:366], format: "1659-01-01" "1660-01-01" ...
 #>  - attr(*, "class")= chr "tidycpt"
 
 # Segment a time series using Coen's algorithm
 y <- segment(CET, method = "ga-coen", maxiter = 5)
-#> Seeding initial population with probability: 0.0273224043715847
+#> Seeding initial population with probability: 0.0327868852459016
 changepoints(y)
-#> named integer(0)
+#>  x42 x110 x153 x162 x297 
+#>   42  110  153  162  297 
 
 # Segment a time series using Coen's algorithm and an arbitrary threshold
 z <- segment(CET, method = "ga-coen", maxiter = 5, 
              model_fn_args = list(threshold = 2))
-#> Seeding initial population with probability: 0.0273224043715847
+#> Seeding initial population with probability: 0.0245901639344262
 changepoints(z)
-#>  x14 x297 
-#>   14  297 
+#>  x52 x177 x192 
+#>   52  177  192 
 # }
 if (FALSE) { # \dontrun{
 # This will take a really long time!

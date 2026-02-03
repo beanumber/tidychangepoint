@@ -39,5 +39,5 @@ x <- test_set()
 plot(x)
 
 changepoints(x)
-#> [1] 742
+#> [1] 596
 ```

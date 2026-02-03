@@ -79,8 +79,8 @@ the value of the `method` argument:
   [`segmented::selgmented()`](https://rdrr.io/pkg/segmented/man/selgmented.html).
   The `segmenter` is of class `segmented`.
 
-- `stepmented`: Uses the stepmented algorithm as implemented by
-  [`segmented::stepmented()`](https://rdrr.io/pkg/segmented/man/stepmented.html).
+- `stelpmented`: Uses the stelpmented algorithm as implemented by
+  [`segmented::stelpmented()`](https://rdrr.io/pkg/segmented/man/selgmented.html).
   The `segmenter` is of class `stepmented`.
 
 - `cptga`: Uses the Genetic algorithm implemented by
@@ -140,7 +140,7 @@ segment(DataCPSim, method = "pelt")
 #>        ~~   : S4 class containing 12 slots with names
 #>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est 
 #> 
-#> Created on  : Tue Feb  3 15:22:48 2026 
+#> Created on  : Tue Feb  3 15:40:06 2026 
 #> 
 #> summary(.)  :
 #> ----------
@@ -163,7 +163,7 @@ segment(DataCPSim, method = "pelt", penalty = "BIC")
 #>        ~~   : S4 class containing 12 slots with names
 #>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est 
 #> 
-#> Created on  : Tue Feb  3 15:22:48 2026 
+#> Created on  : Tue Feb  3 15:40:06 2026 
 #> 
 #> summary(.)  :
 #> ----------
@@ -186,7 +186,7 @@ segment(DataCPSim, method = "binseg", penalty = "BIC")
 #>        ~~   : S4 class containing 14 slots with names
 #>               cpts.full pen.value.full data.set cpttype method test.stat pen.type pen.value minseglen cpts ncpts.max param.est date version 
 #> 
-#> Created on  : Tue Feb  3 15:22:48 2026 
+#> Created on  : Tue Feb  3 15:40:06 2026 
 #> 
 #> summary(.)  :
 #> ----------
@@ -227,7 +227,7 @@ segment(DataCPSim, method = "random")
 #> [13] "suggestions"   "population"    "elitism"       "pcrossover"   
 #> [17] "pmutation"     "optim"         "fitness"       "summary"      
 #> [21] "bestSol"       "fitnessValue"  "solution"     
-#> ℹ Model: A meanshift_norm  model with 10 region(s).
+#> ℹ Model: A meanshift_norm  model with 8 region(s).
 #> → Each region has 1 parameter(s).
 #> → The model has 1 global parameter(s).
 

@@ -75,7 +75,7 @@ Other segmenter-functions:
 ``` r
 # Segment a time series using Coen's algorithm
 x <- segment(CET, method = "ga-coen", maxiter = 3)
-#> Seeding initial population with probability: 0.0355191256830601
+#> Seeding initial population with probability: 0.0273224043715847
 
 # Recover the arguments passed to the model-fitting function
 x |>

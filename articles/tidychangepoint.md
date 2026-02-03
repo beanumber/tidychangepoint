@@ -193,7 +193,7 @@ x |>
 #>   ..@ param.est:List of 2
 #>   .. ..$ mean    : num [1:4] 35.3 58.2 96.8 156.5
 #>   .. ..$ variance: num [1:4] 127 371 921 2406
-#>   ..@ date     : chr "Tue Feb  3 15:24:48 2026"
+#>   ..@ date     : chr "Tue Feb  3 15:42:10 2026"
 #>   ..@ version  : chr "2.3"
 ```
 
