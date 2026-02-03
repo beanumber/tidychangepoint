@@ -62,8 +62,8 @@ segment.numeric <- function(x, method = "null", ...) {
 #'   [strucchange::breakpoints()]. The `segmenter` is of class `breakpoints`.
 #' - `selgmented`: Uses the selgmented algorithm as implemented by 
 #'   [segmented::selgmented()]. The `segmenter` is of class `segmented`.
-#' - `stepmented`: Uses the stepmented algorithm as implemented by 
-#'   [segmented::stepmented()]. The `segmenter` is of class `stepmented`.
+#' - `stelpmented`: Uses the stelpmented algorithm as implemented by 
+#'   [segmented::stelpmented()]. The `segmenter` is of class `stepmented`.
 #' - `cptga`: Uses the Genetic algorithm implemented by [segment_cptga()], which wraps
 #'   [changepointGA::cptga()]. The `segmenter` is of class `tidycptga`.
 #' - `ga`: Uses the Genetic algorithm implemented by [segment_ga()], which wraps
@@ -128,8 +128,8 @@ segment.ts <- function(x, method = "null", ...) {
   if (method == "strucchange") {
     seg <- strucchange::breakpoints(stats::as.formula(eval(x) ~ 1), ...)
   }
-  if (method == "stepmented") {
-    seg <- segmented::stepmented(x, ...)
+  if (method == "stelpmented") {
+    seg <- segmented::stelpmented(x, ...)
   }
   if (method == "selgmented") {
     seg <- segmented::selgmented(x, ...)

@@ -10,7 +10,7 @@ test_that("segmented works", {
   expect_true(is_segmenter(x$segmenter))
   expect_true(is_model(x$model))
   
-  y <- segment(DataCPSim, method = "stepmented")
+  y <- segment(DataCPSim, method = "stelpmented")
   expect_s3_class(y, "tidycpt")
   expect_s3_class(y$segmenter, "stepmented")
   expect_s3_class(as.ts(y), "ts")

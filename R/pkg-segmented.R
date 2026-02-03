@@ -22,7 +22,7 @@ as.seg_cpt.stepmented <- function(object, ...) {
     x = as.ts(object),
     pkg = "segmented",
     base_class = class(object),
-    algorithm = "stepmented",
+    algorithm = "stelpmented",
     changepoints = changepoints(object),
     seg_params = list(seg_params(object)),
     model = model_name(object),
@@ -40,8 +40,7 @@ as.ts.segmented <- function(x, ...) {
 #' @rdname reexports
 #' @export
 as.ts.stepmented <- function(x, ...) {
-  # where did the original data go???
-  fitted(x) + residuals(x) |>
+  stats::model.frame(x)[, 1] |>
     as.ts()
 }
 
@@ -61,11 +60,11 @@ changepoints.segmented <- function(x, ...) {
 #' @rdname changepoints
 #' @export
 #' @examples
-#' cpts <- segment(DataCPSim, method = "stepmented")
+#' cpts <- segment(DataCPSim, method = "stelpmented")
 #' changepoints(cpts$segmenter)
 #' 
 changepoints.stepmented <- function(x, ...) {
-  x$psi[[1, 1]] |>
+  x$psi[, 1] |>
     round() |>
     as.integer()
 }
