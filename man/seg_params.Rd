@@ -8,7 +8,7 @@
 \alias{seg_params.ga}
 \alias{seg_params.cpt}
 \alias{seg_params.cptga}
-\alias{seg_params.segmented}
+\alias{seg_params.lm}
 \alias{seg_params.breakpointsfull}
 \alias{seg_params.wbs}
 \title{Retrieve parameters from a segmenter}
@@ -23,7 +23,7 @@ seg_params(object, ...)
 
 \method{seg_params}{cptga}(object, ...)
 
-\method{seg_params}{segmented}(object, ...)
+\method{seg_params}{lm}(object, ...)
 
 \method{seg_params}{breakpointsfull}(object, ...)
 

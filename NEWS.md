@@ -1,3 +1,7 @@
+# tidychangepoint 1.0.4
+
+* Improved support for `segmented` algorithms `stepmented()` and `selgmented()`
+
 # tidychangepoint 1.0.3
 
 * Added support for models from the `strucchange` package.

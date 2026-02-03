@@ -9,7 +9,7 @@
 \alias{model_args.ga}
 \alias{model_args.cpt}
 \alias{model_args.cptga}
-\alias{model_args.segmented}
+\alias{model_args.lm}
 \alias{model_args.breakpointsfull}
 \alias{model_args.wbs}
 \title{Retrieve the arguments that a model-fitting function used}
@@ -26,7 +26,7 @@ model_args(object, ...)
 
 \method{model_args}{cptga}(object, ...)
 
-\method{model_args}{segmented}(object, ...)
+\method{model_args}{lm}(object, ...)
 
 \method{model_args}{breakpointsfull}(object, ...)
 

@@ -15,6 +15,7 @@
 \alias{model_name.cpt}
 \alias{model_name.cptga}
 \alias{model_name.segmented}
+\alias{model_name.stepmented}
 \alias{model_name.breakpointsfull}
 \alias{model_name.wbs}
 \title{Retrieve the name of the model that a segmenter or model used}
@@ -40,6 +41,8 @@ model_name(object, ...)
 \method{model_name}{cptga}(object, ...)
 
 \method{model_name}{segmented}(object, ...)
+
+\method{model_name}{stepmented}(object, ...)
 
 \method{model_name}{breakpointsfull}(object, ...)
 

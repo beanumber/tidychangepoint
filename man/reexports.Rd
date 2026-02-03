@@ -42,7 +42,7 @@
 \alias{as.ts.cptga}
 \alias{nobs.cptga}
 \alias{as.ts.segmented}
-\alias{nobs.segmented}
+\alias{as.ts.stepmented}
 \alias{as.ts.breakpointsfull}
 \alias{nobs.breakpointsfull}
 \alias{as.ts.wbs}
@@ -127,7 +127,7 @@
 
 \method{as.ts}{segmented}(x, ...)
 
-\method{nobs}{segmented}(object, ...)
+\method{as.ts}{stepmented}(x, ...)
 
 \method{as.ts}{breakpointsfull}(x, ...)
 

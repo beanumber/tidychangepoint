@@ -13,6 +13,7 @@
 \alias{as.seg_cpt.cpt}
 \alias{as.seg_cpt.cptga}
 \alias{as.seg_cpt.segmented}
+\alias{as.seg_cpt.stepmented}
 \alias{as.seg_cpt.breakpointsfull}
 \alias{as.seg_cpt.wbs}
 \alias{is_segmenter}
@@ -35,6 +36,8 @@ as.seg_cpt(object, ...)
 \method{as.seg_cpt}{cptga}(object, ...)
 
 \method{as.seg_cpt}{segmented}(object, ...)
+
+\method{as.seg_cpt}{stepmented}(object, ...)
 
 \method{as.seg_cpt}{breakpointsfull}(object, ...)
 

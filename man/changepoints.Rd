@@ -14,6 +14,7 @@
 \alias{changepoints.cpt}
 \alias{changepoints.cptga}
 \alias{changepoints.segmented}
+\alias{changepoints.stepmented}
 \alias{changepoints.breakpointsfull}
 \alias{changepoints.wbs}
 \title{Extract changepoints}
@@ -37,6 +38,8 @@ changepoints(x, ...)
 \method{changepoints}{cptga}(x, ...)
 
 \method{changepoints}{segmented}(x, ...)
+
+\method{changepoints}{stepmented}(x, ...)
 
 \method{changepoints}{breakpointsfull}(x, ...)
 
@@ -76,7 +79,10 @@ changepoints(cpts$segmenter)
 cpts <- segment(DataCPSim, method = "cptga")
 changepoints(cpts$segmenter)
 }
-cpts <- segment(DataCPSim, method = "segmented")
+cpts <- segment(DataCPSim, method = "selgmented")
+changepoints(cpts$segmenter)
+
+cpts <- segment(DataCPSim, method = "stepmented")
 changepoints(cpts$segmenter)
 
 cpts <- segment(DataCPSim, method = "strucchange")

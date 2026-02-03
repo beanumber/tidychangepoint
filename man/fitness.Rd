@@ -10,7 +10,7 @@
 \alias{fitness.ga}
 \alias{fitness.cpt}
 \alias{fitness.cptga}
-\alias{fitness.segmented}
+\alias{fitness.lm}
 \alias{fitness.breakpointsfull}
 \alias{fitness.wbs}
 \title{Retrieve the optimal fitness (or objective function) value used by an
@@ -30,7 +30,7 @@ fitness(object, ...)
 
 \method{fitness}{cptga}(object, ...)
 
-\method{fitness}{segmented}(object, ...)
+\method{fitness}{lm}(object, ...)
 
 \method{fitness}{breakpointsfull}(object, ...)
 
@@ -70,7 +70,7 @@ x <- segment(DataCPSim, method = "cptga")
 fitness(x)
 }
 # Segment a time series using Segmented
-x <- segment(DataCPSim, method = "segmented")
+x <- segment(DataCPSim, method = "selgmented")
 
 # Retrieve its fitness
 fitness(x)

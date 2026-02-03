@@ -49,8 +49,10 @@ on the value of the \code{method} argument:
 \code{\link[wbs:wbs]{wbs::wbs()}}. The \code{segmenter} is of class \code{wbs}.
 \item \code{strucchange}: Uses the segmented algorithm as implemented by
 \code{\link[strucchange:breakpoints]{strucchange::breakpoints()}}. The \code{segmenter} is of class \code{breakpoints}.
-\item \code{segmented}: Uses the segmented algorithm as implemented by
-\code{\link[segmented:segmented]{segmented::segmented()}}. The \code{segmenter} is of class \code{segmented}.
+\item \code{selgmented}: Uses the selgmented algorithm as implemented by
+\code{\link[segmented:selgmented]{segmented::selgmented()}}. The \code{segmenter} is of class \code{segmented}.
+\item \code{stepmented}: Uses the stepmented algorithm as implemented by
+\code{\link[segmented:stepmented]{segmented::stepmented()}}. The \code{segmenter} is of class \code{stepmented}.
 \item \code{cptga}: Uses the Genetic algorithm implemented by \code{\link[=segment_cptga]{segment_cptga()}}, which wraps
 \code{\link[changepointGA:cptga]{changepointGA::cptga()}}. The \code{segmenter} is of class \code{tidycptga}.
 \item \code{ga}: Uses the Genetic algorithm implemented by \code{\link[=segment_ga]{segment_ga()}}, which wraps
