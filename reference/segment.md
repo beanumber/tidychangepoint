@@ -75,9 +75,13 @@ the value of the `method` argument:
   [`strucchange::breakpoints()`](https://rdrr.io/pkg/strucchange/man/breakpoints.html).
   The `segmenter` is of class `breakpoints`.
 
-- `segmented`: Uses the segmented algorithm as implemented by
-  [`segmented::segmented()`](https://rdrr.io/pkg/segmented/man/segmented.html).
+- `selgmented`: Uses the selgmented algorithm as implemented by
+  [`segmented::selgmented()`](https://rdrr.io/pkg/segmented/man/selgmented.html).
   The `segmenter` is of class `segmented`.
+
+- `stepmented`: Uses the stepmented algorithm as implemented by
+  [`segmented::stepmented()`](https://rdrr.io/pkg/segmented/man/stepmented.html).
+  The `segmenter` is of class `stepmented`.
 
 - `cptga`: Uses the Genetic algorithm implemented by
   [`segment_cptga()`](https://beanumber.github.io/tidychangepoint/reference/segment_cptga.md),
@@ -136,7 +140,7 @@ segment(DataCPSim, method = "pelt")
 #>        ~~   : S4 class containing 12 slots with names
 #>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est 
 #> 
-#> Created on  : Mon Jan 12 18:22:31 2026 
+#> Created on  : Tue Feb  3 15:15:37 2026 
 #> 
 #> summary(.)  :
 #> ----------
@@ -159,7 +163,7 @@ segment(DataCPSim, method = "pelt", penalty = "BIC")
 #>        ~~   : S4 class containing 12 slots with names
 #>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est 
 #> 
-#> Created on  : Mon Jan 12 18:22:31 2026 
+#> Created on  : Tue Feb  3 15:15:37 2026 
 #> 
 #> summary(.)  :
 #> ----------
@@ -182,7 +186,7 @@ segment(DataCPSim, method = "binseg", penalty = "BIC")
 #>        ~~   : S4 class containing 14 slots with names
 #>               cpts.full pen.value.full data.set cpttype method test.stat pen.type pen.value minseglen cpts ncpts.max param.est date version 
 #> 
-#> Created on  : Mon Jan 12 18:22:31 2026 
+#> Created on  : Tue Feb  3 15:15:37 2026 
 #> 
 #> summary(.)  :
 #> ----------
@@ -223,7 +227,7 @@ segment(DataCPSim, method = "random")
 #> [13] "suggestions"   "population"    "elitism"       "pcrossover"   
 #> [17] "pmutation"     "optim"         "fitness"       "summary"      
 #> [21] "bestSol"       "fitnessValue"  "solution"     
-#> ℹ Model: A meanshift_norm  model with 7 region(s).
+#> ℹ Model: A meanshift_norm  model with 10 region(s).
 #> → Each region has 1 parameter(s).
 #> → The model has 1 global parameter(s).
 

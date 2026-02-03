@@ -42,7 +42,7 @@ ls_pkgs()
 #> # A tibble: 4 × 2
 #>   pkg             version
 #>   <chr>           <chr>  
-#> 1 tidychangepoint 1.0.3  
+#> 1 tidychangepoint 1.0.4  
 #> 2 changepoint     2.3    
 #> 3 wbs             1.4.1  
 #> 4 GA              3.2.5  

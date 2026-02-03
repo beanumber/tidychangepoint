@@ -30,6 +30,9 @@ as.seg_cpt(object, ...)
 # S3 method for class 'segmented'
 as.seg_cpt(object, ...)
 
+# S3 method for class 'stepmented'
+as.seg_cpt(object, ...)
+
 # S3 method for class 'breakpointsfull'
 as.seg_cpt(object, ...)
 
@@ -115,7 +118,7 @@ x |>
 #>        ~~   : S4 class containing 12 slots with names
 #>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est 
 #> 
-#> Created on  : Mon Jan 12 18:21:23 2026 
+#> Created on  : Tue Feb  3 15:14:35 2026 
 #> 
 #> summary(.)  :
 #> ----------

@@ -19,7 +19,7 @@ seg_params(object, ...)
 # S3 method for class 'cptga'
 seg_params(object, ...)
 
-# S3 method for class 'segmented'
+# S3 method for class 'lm'
 seg_params(object, ...)
 
 # S3 method for class 'breakpointsfull'

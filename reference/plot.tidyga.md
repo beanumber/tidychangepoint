@@ -30,7 +30,7 @@ object.
 ``` r
 # \donttest{
 x <- segment(DataCPSim, method = "ga-coen", maxiter = 5)
-#> Seeding initial population with probability: 0.0264598540145985
+#> Seeding initial population with probability: 0.0191605839416058
 plot(x$segmenter)
 
 # }

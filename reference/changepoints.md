@@ -35,6 +35,9 @@ changepoints(x, ...)
 # S3 method for class 'segmented'
 changepoints(x, ...)
 
+# S3 method for class 'stepmented'
+changepoints(x, ...)
+
 # S3 method for class 'breakpointsfull'
 changepoints(x, ...)
 
@@ -184,9 +187,22 @@ cpts <- segment(DataCPSim, method = "cptga")
 changepoints(cpts$segmenter)
 #> [1] 554 821 973
 # }
-cpts <- segment(DataCPSim, method = "segmented")
+cpts <- segment(DataCPSim, method = "selgmented")
+#> No. of breakpoints: 2 .. 3 .. 4 .. 5 .. 6 .. 7 .. 8 .. 9 .. 10 .. 
+#> 
+#> BIC to detect no. of breakpoints:
+#>        0        1        2        3        4        5        6        6 
+#> 10727.65 10225.17 10207.73 10221.65 10214.40 10225.80 10231.34 10204.84 
+#>        7        8        9 
+#> 10219.03 10231.46 10245.46 
+#> 
+#> No. of selected breakpoints: 4  (2 breakpoint(s) removed due to small slope diff)
 changepoints(cpts$segmenter)
-#> [1] 776
+#> [1]  566  760  927 1064
+
+cpts <- segment(DataCPSim, method = "stepmented")
+changepoints(cpts$segmenter)
+#> [1] 829
 
 cpts <- segment(DataCPSim, method = "strucchange")
 changepoints(cpts$segmenter)
@@ -194,6 +210,5 @@ changepoints(cpts$segmenter)
 
 cpts <- segment(DataCPSim, method = "wbs")
 changepoints(cpts$segmenter)
-#>  [1]  547  809  810  822  823  939  952  953  972  976  980  982  997  999 1031
-#> [16] 1032 1040 1041 1046 1063 1064 1065 1066 1086
+#>  [1]  547  822  972  997  999 1031 1033 1040 1041 1063 1066
 ```

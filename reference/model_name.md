@@ -37,6 +37,9 @@ model_name(object, ...)
 # S3 method for class 'segmented'
 model_name(object, ...)
 
+# S3 method for class 'stepmented'
+model_name(object, ...)
+
 # S3 method for class 'breakpointsfull'
 model_name(object, ...)
 
@@ -124,7 +127,7 @@ x |>
 #>     mod_cpt(x <- as.ts(x), tau = tau, region_params = region_params, 
 #>         model_params = c(), fitted_values = fitted_values, model_name = "meanvar")
 #> }
-#> <bytecode: 0x55f90bad55a0>
+#> <bytecode: 0x558116224378>
 #> <environment: namespace:tidychangepoint>
 #> attr(,"model_name")
 #> [1] "meanvar"

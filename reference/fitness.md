@@ -26,7 +26,7 @@ fitness(object, ...)
 # S3 method for class 'cptga'
 fitness(object, ...)
 
-# S3 method for class 'segmented'
+# S3 method for class 'lm'
 fitness(object, ...)
 
 # S3 method for class 'breakpointsfull'
@@ -80,7 +80,7 @@ x <- segment(DataCPSim, method = "ga", maxiter = 10)
 # Retrieve its fitness value
 fitness(x)
 #>      BIC 
-#> 16441.07 
+#> 16499.56 
 
 # \donttest{
 # Segment a times series using a genetic algorithm
@@ -89,15 +89,24 @@ x <- segment(DataCPSim, method = "cptga")
 # Retrieve its fitness value
 fitness(x)
 #>      BIC 
-#> 6989.921 
+#> 7005.834 
 # }
 # Segment a time series using Segmented
-x <- segment(DataCPSim, method = "segmented")
+x <- segment(DataCPSim, method = "selgmented")
+#> No. of breakpoints: 2 .. 3 .. 4 .. 5 .. 6 .. 7 .. 8 .. 9 .. 10 .. 
+#> 
+#> BIC to detect no. of breakpoints:
+#>        0        1        2        3        4        5        6        6 
+#> 10727.65 10225.17 10207.73 10221.65 10214.40 10225.80 10231.34 10204.84 
+#>        7        8        9 
+#> 10219.03 10231.46 10245.46 
+#> 
+#> No. of selected breakpoints: 4  (2 breakpoint(s) removed due to small slope diff)
 
 # Retrieve its fitness
 fitness(x)
-#>      MDL 
-#> 10190.17 
+#>      BIC 
+#> 10226.13 
 
 # \donttest{
 # Segment a time series using Segmented

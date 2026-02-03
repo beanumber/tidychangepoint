@@ -22,7 +22,7 @@ model_args(object, ...)
 # S3 method for class 'cptga'
 model_args(object, ...)
 
-# S3 method for class 'segmented'
+# S3 method for class 'lm'
 model_args(object, ...)
 
 # S3 method for class 'breakpointsfull'
@@ -75,7 +75,7 @@ Other segmenter-functions:
 ``` r
 # Segment a time series using Coen's algorithm
 x <- segment(CET, method = "ga-coen", maxiter = 3)
-#> Seeding initial population with probability: 0.0327868852459016
+#> Seeding initial population with probability: 0.0355191256830601
 
 # Recover the arguments passed to the model-fitting function
 x |>
