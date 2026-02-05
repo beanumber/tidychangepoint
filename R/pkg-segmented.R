@@ -60,9 +60,10 @@ changepoints.segmented <- function(x, ...) {
 #' @rdname changepoints
 #' @export
 #' @examples
+#' \donttest{
 #' cpts <- segment(DataCPSim, method = "stelpmented")
 #' changepoints(cpts$segmenter)
-#' 
+#' }
 changepoints.stepmented <- function(x, ...) {
   x$psi[, 1] |>
     round() |>

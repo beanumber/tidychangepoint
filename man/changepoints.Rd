@@ -82,9 +82,10 @@ changepoints(cpts$segmenter)
 cpts <- segment(DataCPSim, method = "selgmented")
 changepoints(cpts$segmenter)
 
+\donttest{
 cpts <- segment(DataCPSim, method = "stelpmented")
 changepoints(cpts$segmenter)
-
+}
 cpts <- segment(DataCPSim, method = "strucchange")
 changepoints(cpts$segmenter)
 

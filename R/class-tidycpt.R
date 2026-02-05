@@ -241,6 +241,7 @@ summary.tidycpt <- function(object, ...) {
 #' @rdname diagnose
 #' @export
 #' @examples
+#' \donttest{
 #' # Show various iterations of diagnostic plots
 #' diagnose(segment(DataCPSim))
 #' diagnose(segment(DataCPSim, method = "single-best"))
@@ -249,7 +250,7 @@ summary.tidycpt <- function(object, ...) {
 #' # Show diagnostic plots for test sets
 #' diagnose(segment(test_set()))
 #' diagnose(segment(test_set(n = 2, sd = 4), method = "pelt"))
-#' 
+#' }
 diagnose.tidycpt <- function(x, ...) {
   if (requireNamespace("patchwork", quietly = TRUE)) {
     patchwork::wrap_plots(plot(x), diagnose(x$model, ...), ncol = 1) 
