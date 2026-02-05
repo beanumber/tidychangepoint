@@ -74,6 +74,7 @@ x |>
 
 # }
 
+# \donttest{
 # Show various iterations of diagnostic plots
 diagnose(segment(DataCPSim))
 
@@ -87,7 +88,7 @@ diagnose(segment(test_set()))
 
 diagnose(segment(test_set(n = 2, sd = 4), method = "pelt"))
 
-
+# }
 # For NHPP models, show the growth in the number of exceedances
 diagnose(fit_nhpp(DataCPSim, tau = 826))
 #> Warning: Removed 1 row containing missing values or values outside the scale range
