@@ -20,7 +20,7 @@ NULL
 
 ls_pkgs <- function() {
   tibble::tibble(
-    pkg = c("tidychangepoint", "changepoint", "wbs", "GA")
+    pkg = c("tidychangepoint", "changepoint", "wbs", "GA", "strucchange", "segmented", "changepointGA")
   ) |>
     dplyr::mutate(
       version = purrr::map_chr(pkg, ~as.character(utils::packageVersion(.x))),
@@ -51,7 +51,8 @@ ls_methods <- function() {
     "manual", "tidychangepoint", "seg_cpt", "segment_manual()", NA,
     "null", "tidychangepoint", "seg_cpt", "segment_manual()", NA,
     "strucchange", "strucchange", "breakpointsfull", NA, "strucchange::breakpoints()",
-    "segmented", "segmented", "segmented", NA, "segmented::segmented()",
+    "selgmented", "segmented", "segmented", NA, "segmented::selgmented()",
+    "stelpmented", "segmented", "stepmented", NA, "segmented::stelpmented()",
     "cptga", "changepointGA", "tidycptga", "segment_cptga()", "changepointGA::cptga()"
   )
 }

@@ -169,13 +169,13 @@ citation("tidychangepoint")
     ## 
     ##   Baumer B, Suárez Sierra B, Coen A, Taimal C (????). _tidychangepoint:
     ##   A Tidy Framework for Changepoint Detection Analysis_. R package
-    ##   version 1.0.2.9000, <https://beanumber.github.io/tidychangepoint/>.
+    ##   version 1.0.4, <https://beanumber.github.io/tidychangepoint/>.
     ## 
     ## A BibTeX entry for LaTeX users is
     ## 
     ##   @Manual{,
     ##     title = {tidychangepoint: A Tidy Framework for Changepoint Detection Analysis},
     ##     author = {Benjamin S. Baumer and Biviana Marcela {Suárez Sierra} and Arrigo Coen and Carlos A. Taimal},
-    ##     note = {R package version 1.0.2.9000},
+    ##     note = {R package version 1.0.4},
     ##     url = {https://beanumber.github.io/tidychangepoint/},
     ##   }
