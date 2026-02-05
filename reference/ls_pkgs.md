@@ -39,17 +39,20 @@ ls_models()
 
 # List packages supported by tidychangepoint
 ls_pkgs()
-#> # A tibble: 4 × 2
+#> # A tibble: 7 × 2
 #>   pkg             version
 #>   <chr>           <chr>  
 #> 1 tidychangepoint 1.0.4  
 #> 2 changepoint     2.3    
 #> 3 wbs             1.4.1  
 #> 4 GA              3.2.5  
+#> 5 strucchange     1.5.4  
+#> 6 segmented       2.2.1  
+#> 7 changepointGA   0.1.3  
 
 # List methods supported by segment()
 ls_methods()
-#> # A tibble: 15 × 5
+#> # A tibble: 16 × 5
 #>    method      pkg             segmenter_class helper              wraps        
 #>    <chr>       <chr>           <chr>           <chr>               <chr>        
 #>  1 pelt        changepoint     cpt             segment_pelt()      changepoint:…
@@ -65,8 +68,9 @@ ls_methods()
 #> 11 manual      tidychangepoint seg_cpt         segment_manual()    NA           
 #> 12 null        tidychangepoint seg_cpt         segment_manual()    NA           
 #> 13 strucchange strucchange     breakpointsfull NA                  strucchange:…
-#> 14 segmented   segmented       segmented       NA                  segmented::s…
-#> 15 cptga       changepointGA   tidycptga       segment_cptga()     changepointG…
+#> 14 selgmented  segmented       segmented       NA                  segmented::s…
+#> 15 stelpmented segmented       stepmented      NA                  segmented::s…
+#> 16 cptga       changepointGA   tidycptga       segment_cptga()     changepointG…
 
 # List penalty functions provided by tidychangepoint
 ls_penalties()

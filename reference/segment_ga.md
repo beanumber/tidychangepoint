@@ -221,7 +221,7 @@ str(x)
 #>   ..$ model_name   : chr "meanshift_norm_ar1"
 #>   ..$ durbin_watson: num 2.63
 #>   ..- attr(*, "class")= chr "mod_cpt"
-#>  $ elapsed_time: 'difftime' num 0.74266529083252
+#>  $ elapsed_time: 'difftime' num 0.695784568786621
 #>   ..- attr(*, "units")= chr "secs"
 #>  $ time_index  : Date[1:366], format: "1659-01-01" "1660-01-01" ...
 #>  - attr(*, "class")= chr "tidycpt"
