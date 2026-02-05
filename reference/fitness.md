@@ -97,16 +97,16 @@ x <- segment(DataCPSim, method = "selgmented")
 #> 
 #> BIC to detect no. of breakpoints:
 #>        0        1        2        3        4        5        6        6 
-#> 10727.65 10225.17 10207.73 10221.65 10214.40 10225.80 10232.00 10238.75 
-#>        7        7        8 
-#> 10246.00 10246.01 10233.42 
+#> 10727.65 10225.17 10207.73 10221.65 10214.40 10225.80 10231.34 10204.84 
+#>        7        8        9 
+#> 10219.03 10231.46 10245.46 
 #> 
-#> No. of selected breakpoints: 2  
+#> No. of selected breakpoints: 4  (2 breakpoint(s) removed due to small slope diff)
 
 # Retrieve its fitness
 fitness(x)
 #>      BIC 
-#> 10207.73 
+#> 10226.13 
 
 # \donttest{
 # Segment a time series using Segmented

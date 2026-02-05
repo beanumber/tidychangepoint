@@ -140,7 +140,7 @@ segment(DataCPSim, method = "pelt")
 #>        ~~   : S4 class containing 12 slots with names
 #>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est 
 #> 
-#> Created on  : Thu Feb  5 15:32:52 2026 
+#> Created on  : Thu Feb  5 16:06:08 2026 
 #> 
 #> summary(.)  :
 #> ----------
@@ -163,7 +163,7 @@ segment(DataCPSim, method = "pelt", penalty = "BIC")
 #>        ~~   : S4 class containing 12 slots with names
 #>               cpttype date version data.set method test.stat pen.type pen.value minseglen cpts ncpts.max param.est 
 #> 
-#> Created on  : Thu Feb  5 15:32:52 2026 
+#> Created on  : Thu Feb  5 16:06:08 2026 
 #> 
 #> summary(.)  :
 #> ----------
@@ -186,7 +186,7 @@ segment(DataCPSim, method = "binseg", penalty = "BIC")
 #>        ~~   : S4 class containing 14 slots with names
 #>               cpts.full pen.value.full data.set cpttype method test.stat pen.type pen.value minseglen cpts ncpts.max param.est date version 
 #> 
-#> Created on  : Thu Feb  5 15:32:52 2026 
+#> Created on  : Thu Feb  5 16:06:08 2026 
 #> 
 #> summary(.)  :
 #> ----------
