@@ -1,3 +1,7 @@
+# tidychangepoint 1.0.5
+
+* Replaced `changepointGA::ARIMA.BIC` with `changepointGA::arima_bic()`
+
 # tidychangepoint 1.0.4
 
 * Improved support for `segmented` algorithms `stelpmented()` and `selgmented()`
