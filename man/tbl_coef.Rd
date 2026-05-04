@@ -12,7 +12,7 @@ tbl_coef(mod, ...)
 \item{...}{currently ignored}
 }
 \value{
-A \link[tibble:tbl_df-class]{tibble::tbl_df} object containing the fitted coefficients.
+A \link[tibble:tbl_df]{tibble::tbl_df} object containing the fitted coefficients.
 }
 \description{
 Format the coefficients from a linear model as a tibble

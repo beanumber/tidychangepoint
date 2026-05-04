@@ -4,7 +4,7 @@
 \alias{tidycpt-class}
 \title{Container class for \code{tidycpt} objects}
 \value{
-A \linkS4class{tidycpt} object.
+A \link[=tidycpt-class]{tidycpt} object.
 }
 \description{
 Container class for \code{tidycpt} objects

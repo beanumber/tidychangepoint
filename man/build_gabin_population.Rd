@@ -25,7 +25,7 @@ Build an initial population set for genetic algorithms
 Genetic algorithms require a method for randomly generating initial
 populations (i.e., a first generation).
 The default method used by \code{\link[GA:ga]{GA::ga()}} for changepoint detection is usually
-\code{\link[GA:ga_Population]{GA::gabin_Population()}}, which selects candidate changepoints uniformly at
+\code{\link[GA:gabin_Population]{GA::gabin_Population()}}, which selects candidate changepoints uniformly at
 random with probability 0.5.
 This leads to an initial population with excessively large candidate
 changepoint sets (on the order of \eqn{n/2}), which makes the genetic
@@ -50,5 +50,5 @@ f <- log_gabin_population(CET)
 segment(CET, method = "ga", population = f, maxiter = 10)
 }
 \seealso{
-\code{\link[GA:ga_Population]{GA::gabin_Population()}}, \code{\link[=segment_ga]{segment_ga()}}
+\code{\link[GA:gabin_Population]{GA::gabin_Population()}}, \code{\link[=segment_ga]{segment_ga()}}
 }

@@ -30,12 +30,12 @@ changepoint detection model.
 Zhang and Seigmmund (2007) for MBIC: \doi{10.1111/j.1541-0420.2006.00662.x}
 }
 \seealso{
-\code{\link[stats:AIC]{stats::BIC()}}
+\code{\link[stats:BIC]{stats::BIC()}}
 
-Other penalty-functions: 
-\code{\link{BMDL}()},
-\code{\link{HQC}()},
-\code{\link{MDL}()},
-\code{\link{SIC}()}
+Other penalty-functions:
+\code{\link[=BMDL]{BMDL()}},
+\code{\link[=HQC]{HQC()}},
+\code{\link[=MDL]{MDL()}},
+\code{\link[=SIC]{SIC()}}
 }
 \concept{penalty-functions}

@@ -14,7 +14,7 @@ SIC(object, ...)
 \item{...}{optionally more fitted model objects.}
 }
 \value{
-The value of \code{\link[stats:AIC]{stats::BIC()}}
+The value of \code{\link[stats:BIC]{stats::BIC()}}
 }
 \description{
 Schwarz information criterion
@@ -26,12 +26,12 @@ BIC(fit_meanvar(CET, tau = NULL))
 
 }
 \seealso{
-\code{\link[stats:AIC]{stats::BIC()}}, \code{\link[stats:AIC]{stats::AIC()}}
+\code{\link[stats:BIC]{stats::BIC()}}, \code{\link[stats:AIC]{stats::AIC()}}
 
-Other penalty-functions: 
-\code{\link{BMDL}()},
-\code{\link{HQC}()},
-\code{\link{MBIC}()},
-\code{\link{MDL}()}
+Other penalty-functions:
+\code{\link[=BMDL]{BMDL()}},
+\code{\link[=HQC]{HQC()}},
+\code{\link[=MBIC]{MBIC()}},
+\code{\link[=MDL]{MDL()}}
 }
 \concept{penalty-functions}

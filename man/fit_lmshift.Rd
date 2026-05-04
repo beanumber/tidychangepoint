@@ -89,14 +89,14 @@ fit_lmshift(CET, tau = c(42, 42))
 
 }
 \seealso{
-Other model-fitting: 
-\code{\link{fit_arima}()},
-\code{\link{fit_meanshift}()},
-\code{\link{fit_meanvar}()},
-\code{\link{fit_nhpp}()},
-\code{\link{model_args}()},
-\code{\link{model_name}()},
-\code{\link{new_fun_cpt}()},
-\code{\link{whomademe}()}
+Other model-fitting:
+\code{\link[=fit_arima]{fit_arima()}},
+\code{\link[=fit_meanshift]{fit_meanshift()}},
+\code{\link[=fit_meanvar]{fit_meanvar()}},
+\code{\link[=fit_nhpp]{fit_nhpp()}},
+\code{\link[=model_args]{model_args()}},
+\code{\link[=model_name]{model_name()}},
+\code{\link[=new_fun_cpt]{new_fun_cpt()}},
+\code{\link[=whomademe]{whomademe()}}
 }
 \concept{model-fitting}

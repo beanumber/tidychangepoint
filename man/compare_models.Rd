@@ -10,18 +10,18 @@ compare_models(x, ...)
 compare_algorithms(x, ...)
 }
 \arguments{
-\item{x}{A \linkS4class{tidycpt} object}
+\item{x}{A \link[=tidycpt-class]{tidycpt} object}
 
 \item{...}{currently ignored}
 }
 \value{
-A \link[tibble:tbl_df-class]{tibble::tbl_df}
+A \link[tibble:tbl_df]{tibble::tbl_df}
 }
 \description{
 Compare various models or algorithms for a given changepoint set
 }
 \details{
-A \linkS4class{tidycpt} object has a set of changepoints returned by the
+A \link[=tidycpt-class]{tidycpt} object has a set of changepoints returned by the
 algorithm that segmented the time series.
 That changepoint set was obtained using a specific model.
 Treating this changepoint set as fixed, the \code{\link[=compare_models]{compare_models()}} function

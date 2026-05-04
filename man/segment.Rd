@@ -26,7 +26,7 @@ segment(x, method = "null", ...)
 \item{...}{arguments passed to methods}
 }
 \value{
-An object of class \linkS4class{tidycpt}.
+An object of class \link[=tidycpt-class]{tidycpt}.
 }
 \description{
 A wrapper function that encapsulates various algorithms for detecting changepoint
@@ -52,7 +52,7 @@ on the value of the \code{method} argument:
 \item \code{selgmented}: Uses the selgmented algorithm as implemented by
 \code{\link[segmented:selgmented]{segmented::selgmented()}}. The \code{segmenter} is of class \code{segmented}.
 \item \code{stelpmented}: Uses the stelpmented algorithm as implemented by
-\code{\link[segmented:selgmented]{segmented::stelpmented()}}. The \code{segmenter} is of class \code{stepmented}.
+\code{\link[segmented:stelpmented]{segmented::stelpmented()}}. The \code{segmenter} is of class \code{stepmented}.
 \item \code{cptga}: Uses the Genetic algorithm implemented by \code{\link[=segment_cptga]{segment_cptga()}}, which wraps
 \code{\link[changepointGA:cptga]{changepointGA::cptga()}}. The \code{segmenter} is of class \code{tidycptga}.
 \item \code{ga}: Uses the Genetic algorithm implemented by \code{\link[=segment_ga]{segment_ga()}}, which wraps

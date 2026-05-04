@@ -26,7 +26,7 @@ rlnorm_ts_2
 rlnorm_ts_3
 }
 \description{
-Randomly-generated time series data, using the \code{\link[stats:Lognormal]{stats::rlnorm()}} function.
+Randomly-generated time series data, using the \code{\link[stats:rlnorm]{stats::rlnorm()}} function.
 \itemize{
 \item For \code{rlnorm_ts_1}, there is one changepoint located at 826.
 \item For \code{rlnorm_ts_2}, there are two changepoints, located at 366 and 731.

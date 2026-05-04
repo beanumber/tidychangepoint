@@ -20,7 +20,7 @@ diagnose(x, ...)
 \method{diagnose}{nhpp}(x, ...)
 }
 \arguments{
-\item{x}{A \linkS4class{tidycpt} object, or a \code{model} or \code{segmenter}}
+\item{x}{A \link[=tidycpt-class]{tidycpt} object, or a \code{model} or \code{segmenter}}
 
 \item{...}{currently ignored}
 }
@@ -58,11 +58,11 @@ diagnose(fit_nhpp(DataCPSim, tau = 826, threshold = 200))
 
 }
 \seealso{
-Other tidycpt-generics: 
-\code{\link{as.model}()},
-\code{\link{as.segmenter}()},
-\code{\link{changepoints}()},
-\code{\link{fitness}()},
-\code{\link{model_name}()}
+Other tidycpt-generics:
+\code{\link[=as.model]{as.model()}},
+\code{\link[=as.segmenter]{as.segmenter()}},
+\code{\link[=changepoints]{changepoints()}},
+\code{\link[=fitness]{fitness()}},
+\code{\link[=model_name]{model_name()}}
 }
 \concept{tidycpt-generics}

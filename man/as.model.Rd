@@ -16,7 +16,7 @@ as.model(object, ...)
 is_model(x, ...)
 }
 \arguments{
-\item{object}{A \linkS4class{tidycpt} object, typically returned by \code{\link[=segment]{segment()}}}
+\item{object}{A \link[=tidycpt-class]{tidycpt} object, typically returned by \code{\link[=segment]{segment()}}}
 
 \item{...}{currently ignored}
 
@@ -35,13 +35,13 @@ is_model(x, ...)
 Convert, retrieve, or verify a model object
 }
 \details{
-\linkS4class{tidycpt} objects have a \code{model} component.
+\link[=tidycpt-class]{tidycpt} objects have a \code{model} component.
 The functions documented here are convenience utility functions
 for working with the \code{model} components.
 \code{\link[=as.model]{as.model()}} is especially useful in pipelines to avoid having to use
 the \code{$} or \code{[} notation for subsetting.
 
-When applied to a \linkS4class{tidycpt} object, \code{\link[=as.model]{as.model()}} simply returns the
+When applied to a \link[=tidycpt-class]{tidycpt} object, \code{\link[=as.model]{as.model()}} simply returns the
 \code{model} component of that object.
 However, when applied to a \code{segmenter} object, \code{\link[=as.model]{as.model()}} attempts to
 converts that object into a \link{mod_cpt} model object.
@@ -73,11 +73,11 @@ x <- fit_nhpp(CET, tau = 330)
 is_model(x)
 }
 \seealso{
-Other tidycpt-generics: 
-\code{\link{as.segmenter}()},
-\code{\link{changepoints}()},
-\code{\link{diagnose}()},
-\code{\link{fitness}()},
-\code{\link{model_name}()}
+Other tidycpt-generics:
+\code{\link[=as.segmenter]{as.segmenter()}},
+\code{\link[=changepoints]{changepoints()}},
+\code{\link[=diagnose]{diagnose()}},
+\code{\link[=fitness]{fitness()}},
+\code{\link[=model_name]{model_name()}}
 }
 \concept{tidycpt-generics}

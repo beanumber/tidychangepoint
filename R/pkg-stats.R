@@ -84,7 +84,7 @@ MBIC.logLik <- function(object, ...) {
 #' 
 #' @returns A [mod_cpt] object.
 #' @family model-fitting
-#' @seealso [changepointGA::ARIMA.BIC()]
+#' @seealso [changepointGA::arima_bic()]
 #' @examples
 #' # Fit a mean-variance model
 #' fit_arima(CET, tau = c(42, 330))

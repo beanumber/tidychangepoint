@@ -7,7 +7,7 @@
 as_year(x)
 }
 \arguments{
-\item{x}{an object coercible into a \link[base:Dates]{base::Date}. See \code{\link[base:as.Date]{base::as.Date()}}.}
+\item{x}{an object coercible into a \link[base:Date]{base::Date}. See \code{\link[base:as.Date]{base::as.Date()}}.}
 }
 \value{
 A \code{character} vector representing the years of the input

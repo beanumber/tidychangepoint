@@ -90,22 +90,22 @@ x |>
   
 }
 \seealso{
-Other model-fitting: 
-\code{\link{fit_arima}()},
-\code{\link{fit_lmshift}()},
-\code{\link{fit_meanshift}()},
-\code{\link{fit_meanvar}()},
-\code{\link{fit_nhpp}()},
-\code{\link{model_args}()},
-\code{\link{new_fun_cpt}()},
-\code{\link{whomademe}()}
+Other model-fitting:
+\code{\link[=fit_arima]{fit_arima()}},
+\code{\link[=fit_lmshift]{fit_lmshift()}},
+\code{\link[=fit_meanshift]{fit_meanshift()}},
+\code{\link[=fit_meanvar]{fit_meanvar()}},
+\code{\link[=fit_nhpp]{fit_nhpp()}},
+\code{\link[=model_args]{model_args()}},
+\code{\link[=new_fun_cpt]{new_fun_cpt()}},
+\code{\link[=whomademe]{whomademe()}}
 
-Other tidycpt-generics: 
-\code{\link{as.model}()},
-\code{\link{as.segmenter}()},
-\code{\link{changepoints}()},
-\code{\link{diagnose}()},
-\code{\link{fitness}()}
+Other tidycpt-generics:
+\code{\link[=as.model]{as.model()}},
+\code{\link[=as.segmenter]{as.segmenter()}},
+\code{\link[=changepoints]{changepoints()}},
+\code{\link[=diagnose]{diagnose()}},
+\code{\link[=fitness]{fitness()}}
 }
 \concept{model-fitting}
 \concept{tidycpt-generics}

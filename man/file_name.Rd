@@ -7,7 +7,7 @@
 file_name(x, data_name_slug = "data")
 }
 \arguments{
-\item{x}{A \linkS4class{tidycpt} object}
+\item{x}{A \link[=tidycpt-class]{tidycpt} object}
 
 \item{data_name_slug}{character string that will identify the data set used
 in the file name}
@@ -20,7 +20,7 @@ Obtain a descriptive filename for a tidycpt object
 }
 \details{
 \code{\link[=file_name]{file_name()}} generates a random, unique string indicating the algorithm and
-\code{\link[=fitness]{fitness()}} for a \linkS4class{tidycpt} object.
+\code{\link[=fitness]{fitness()}} for a \link[=tidycpt-class]{tidycpt} object.
 }
 \examples{
 # Generate a unique name for the file

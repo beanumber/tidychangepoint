@@ -32,7 +32,7 @@ segment_cptga <- function(x, ...) {
   n <- length(as.ts(x))
 
   out <- changepointGA::cptga(
-    ObjFunc = changepointGA::ARIMA.BIC, 
+    ObjFunc = changepointGA::arima_bic, 
     N = n, 
     XMat = matrix(1, nrow = n, ncol = 1), 
     Xt = x,

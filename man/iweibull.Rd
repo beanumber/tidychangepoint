@@ -15,9 +15,9 @@ parameters_weibull(...)
 \arguments{
 \item{x}{A numeric vector}
 
-\item{shape}{Shape parameter for Weibull distribution. See \code{\link[stats:Weibull]{stats::dweibull()}}.}
+\item{shape}{Shape parameter for Weibull distribution. See \code{\link[stats:dweibull]{stats::dweibull()}}.}
 
-\item{scale}{Scale parameter for Weibull distribution. See \code{\link[stats:Weibull]{stats::dweibull()}}.}
+\item{scale}{Scale parameter for Weibull distribution. See \code{\link[stats:dweibull]{stats::dweibull()}}.}
 
 \item{...}{currently ignored}
 }
@@ -63,7 +63,7 @@ parameters_weibull()
 
 }
 \seealso{
-\code{\link[stats:Weibull]{stats::dweibull()}}
+\code{\link[stats:dweibull]{stats::dweibull()}}
 
-\code{\link[stats:GammaDist]{stats::dgamma()}}
+\code{\link[stats:dgamma]{stats::dgamma()}}
 }

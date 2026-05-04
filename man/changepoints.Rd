@@ -46,7 +46,7 @@ changepoints(x, ...)
 \method{changepoints}{wbs}(x, ...)
 }
 \arguments{
-\item{x}{A \linkS4class{tidycpt}, \code{segmenter}, or \link{mod_cpt} object}
+\item{x}{A \link[=tidycpt-class]{tidycpt}, \code{segmenter}, or \link{mod_cpt} object}
 
 \item{...}{arguments passed to methods}
 
@@ -61,7 +61,7 @@ a numeric vector of changepoint indices, or, if \code{use_labels} is
 Retrieve the indices of the changepoints identified by an algorithm or model.
 }
 \details{
-\linkS4class{tidycpt} objects, as well as their \code{segmenter} and \code{model} components,
+\link[=tidycpt-class]{tidycpt} objects, as well as their \code{segmenter} and \code{model} components,
 implement \code{\link[=changepoints]{changepoints()}} methods.
 
 Note that this function is not to be confused with \code{\link[wbs:changepoints]{wbs::changepoints()}},
@@ -96,11 +96,11 @@ changepoints(cpts$segmenter)
 \seealso{
 \code{\link[wbs:changepoints]{wbs::changepoints()}}
 
-Other tidycpt-generics: 
-\code{\link{as.model}()},
-\code{\link{as.segmenter}()},
-\code{\link{diagnose}()},
-\code{\link{fitness}()},
-\code{\link{model_name}()}
+Other tidycpt-generics:
+\code{\link[=as.model]{as.model()}},
+\code{\link[=as.segmenter]{as.segmenter()}},
+\code{\link[=diagnose]{diagnose()}},
+\code{\link[=fitness]{fitness()}},
+\code{\link[=model_name]{model_name()}}
 }
 \concept{tidycpt-generics}

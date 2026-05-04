@@ -26,7 +26,7 @@ evaluate_cpts(x, ...)
 See, for examples, \code{\link[=fit_meanshift_norm]{fit_meanshift_norm()}}.}
 }
 \value{
-A \link[tibble:tbl_df-class]{tibble::tbl_df}
+A \link[tibble:tbl_df]{tibble::tbl_df}
 }
 \description{
 Evaluate candidate changepoints sets

@@ -90,17 +90,17 @@ fitness(x)
 
 }
 \seealso{
-Other tidycpt-generics: 
-\code{\link{as.model}()},
-\code{\link{as.segmenter}()},
-\code{\link{changepoints}()},
-\code{\link{diagnose}()},
-\code{\link{model_name}()}
+Other tidycpt-generics:
+\code{\link[=as.model]{as.model()}},
+\code{\link[=as.segmenter]{as.segmenter()}},
+\code{\link[=changepoints]{changepoints()}},
+\code{\link[=diagnose]{diagnose()}},
+\code{\link[=model_name]{model_name()}}
 
-Other segmenter-functions: 
-\code{\link{as.segmenter}()},
-\code{\link{model_args}()},
-\code{\link{seg_params}()}
+Other segmenter-functions:
+\code{\link[=as.segmenter]{as.segmenter()}},
+\code{\link[=model_args]{model_args()}},
+\code{\link[=seg_params]{seg_params()}}
 }
 \concept{segmenter-functions}
 \concept{tidycpt-generics}

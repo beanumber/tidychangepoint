@@ -20,6 +20,7 @@ Useful links:
 
 Authors:
 \itemize{
+  \item Benjamin S. Baumer \email{ben.baumer@gmail.com} (\href{https://orcid.org/0000-0002-3279-0516}{ORCID}) [copyright holder]
   \item Biviana Marcela Suárez Sierra \email{bmsuarezs@eafit.edu.co} (\href{https://orcid.org/0000-0003-2151-3537}{ORCID})
   \item Arrigo Coen (\href{https://orcid.org/0000-0001-7798-7104}{ORCID})
   \item Carlos A. Taimal (\href{https://orcid.org/0000-0002-8716-1282}{ORCID})

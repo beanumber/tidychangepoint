@@ -9,9 +9,9 @@ test_set(n = 1, sd = 1, seed = NULL)
 \arguments{
 \item{n}{Number of true changepoints in set}
 
-\item{sd}{Standard deviation passed to \code{\link[stats:Normal]{stats::rnorm()}}}
+\item{sd}{Standard deviation passed to \code{\link[stats:rnorm]{stats::rnorm()}}}
 
-\item{seed}{Value passed to \code{\link[base:Random]{base::set.seed()}}}
+\item{seed}{Value passed to \code{\link[base:set.seed]{base::set.seed()}}}
 }
 \value{
 A \code{\link[stats:ts]{stats::ts()}} object

@@ -46,7 +46,7 @@ as.seg_cpt(object, ...)
 is_segmenter(object, ...)
 }
 \arguments{
-\item{object}{A \linkS4class{tidycpt} or \code{segmenter} object}
+\item{object}{A \link[=tidycpt-class]{tidycpt} or \code{segmenter} object}
 
 \item{...}{Arguments passed to methods}
 }
@@ -69,7 +69,7 @@ any class, depending on the class returned by the segmenting function.
 Convert, retrieve, or verify a segmenter object
 }
 \details{
-\linkS4class{tidycpt} objects have a \code{segmenter} component (that is typically
+\link[=tidycpt-class]{tidycpt} objects have a \code{segmenter} component (that is typically
 created by a class to \code{\link[=segment]{segment()}}).
 The functions documented here are convenience utility functions
 for working with the \code{segmenter} components.
@@ -108,17 +108,17 @@ x |>
   is_segmenter()
 }
 \seealso{
-Other tidycpt-generics: 
-\code{\link{as.model}()},
-\code{\link{changepoints}()},
-\code{\link{diagnose}()},
-\code{\link{fitness}()},
-\code{\link{model_name}()}
+Other tidycpt-generics:
+\code{\link[=as.model]{as.model()}},
+\code{\link[=changepoints]{changepoints()}},
+\code{\link[=diagnose]{diagnose()}},
+\code{\link[=fitness]{fitness()}},
+\code{\link[=model_name]{model_name()}}
 
-Other segmenter-functions: 
-\code{\link{fitness}()},
-\code{\link{model_args}()},
-\code{\link{seg_params}()}
+Other segmenter-functions:
+\code{\link[=fitness]{fitness()}},
+\code{\link[=model_args]{model_args()}},
+\code{\link[=seg_params]{seg_params()}}
 }
 \concept{segmenter-functions}
 \concept{tidycpt-generics}

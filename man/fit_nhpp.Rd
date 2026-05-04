@@ -39,14 +39,14 @@ fit_nhpp(DataCPSim, tau = changepoints(segment(DataCPSim, method = "pelt")))
 
 }
 \seealso{
-Other model-fitting: 
-\code{\link{fit_arima}()},
-\code{\link{fit_lmshift}()},
-\code{\link{fit_meanshift}()},
-\code{\link{fit_meanvar}()},
-\code{\link{model_args}()},
-\code{\link{model_name}()},
-\code{\link{new_fun_cpt}()},
-\code{\link{whomademe}()}
+Other model-fitting:
+\code{\link[=fit_arima]{fit_arima()}},
+\code{\link[=fit_lmshift]{fit_lmshift()}},
+\code{\link[=fit_meanshift]{fit_meanshift()}},
+\code{\link[=fit_meanvar]{fit_meanvar()}},
+\code{\link[=model_args]{model_args()}},
+\code{\link[=model_name]{model_name()}},
+\code{\link[=new_fun_cpt]{new_fun_cpt()}},
+\code{\link[=whomademe]{whomademe()}}
 }
 \concept{model-fitting}

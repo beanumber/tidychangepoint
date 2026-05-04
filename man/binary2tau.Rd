@@ -11,7 +11,7 @@ tau2binary(tau, n)
 }
 \arguments{
 \item{x}{A binary string that encodes a changepoint set. See
-\code{\link[GA:ga_Population]{GA::gabin_Population()}}.}
+\code{\link[GA:gabin_Population]{GA::gabin_Population()}}.}
 
 \item{tau}{a numeric vector of changepoint indices}
 

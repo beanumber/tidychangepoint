@@ -43,10 +43,10 @@ BMDL(fit_nhpp(DataCPSim, tau = NULL))
 BMDL(fit_nhpp(DataCPSim, tau = c(365, 830)))
 }
 \seealso{
-Other penalty-functions: 
-\code{\link{HQC}()},
-\code{\link{MBIC}()},
-\code{\link{MDL}()},
-\code{\link{SIC}()}
+Other penalty-functions:
+\code{\link[=HQC]{HQC()}},
+\code{\link[=MBIC]{MBIC()}},
+\code{\link[=MDL]{MDL()}},
+\code{\link[=SIC]{SIC()}}
 }
 \concept{penalty-functions}

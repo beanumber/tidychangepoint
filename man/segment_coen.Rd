@@ -17,7 +17,7 @@ segment_coen(
 )
 }
 \arguments{
-\item{x}{an object coercible into a time series object via \code{\link[stats:ts]{stats::as.ts()}}}
+\item{x}{an object coercible into a time series object via \code{\link[stats:as.ts]{stats::as.ts()}}}
 
 \item{num_generations}{Number of generations to evolve}
 

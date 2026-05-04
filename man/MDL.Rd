@@ -44,10 +44,10 @@ MDL(fit_meanshift_norm_ar1(CET, tau = c(42, 330)))
 MDL(fit_trendshift(CET, tau = c(42, 81, 330)))
 }
 \seealso{
-Other penalty-functions: 
-\code{\link{BMDL}()},
-\code{\link{HQC}()},
-\code{\link{MBIC}()},
-\code{\link{SIC}()}
+Other penalty-functions:
+\code{\link[=BMDL]{BMDL()}},
+\code{\link[=HQC]{HQC()}},
+\code{\link[=MBIC]{MBIC()}},
+\code{\link[=SIC]{SIC()}}
 }
 \concept{penalty-functions}

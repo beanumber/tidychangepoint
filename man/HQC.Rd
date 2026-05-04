@@ -37,12 +37,12 @@ HQC(fit_meanshift_norm_ar1(CET, tau = c(42, 330)))
 HQC(fit_trendshift(CET, tau = c(42, 81, 330)))
 }
 \seealso{
-\code{\link[stats:AIC]{stats::BIC()}}, \code{\link[stats:AIC]{stats::AIC()}}
+\code{\link[stats:BIC]{stats::BIC()}}, \code{\link[stats:AIC]{stats::AIC()}}
 
-Other penalty-functions: 
-\code{\link{BMDL}()},
-\code{\link{MBIC}()},
-\code{\link{MDL}()},
-\code{\link{SIC}()}
+Other penalty-functions:
+\code{\link[=BMDL]{BMDL()}},
+\code{\link[=MBIC]{MBIC()}},
+\code{\link[=MDL]{MDL()}},
+\code{\link[=SIC]{SIC()}}
 }
 \concept{penalty-functions}
