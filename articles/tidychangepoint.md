@@ -3,6 +3,7 @@
 ## Tidy methods for changepoint analysis
 
 ``` r
+
 library(tidychangepoint)
 ```
 
@@ -20,6 +21,7 @@ object, and a string indicating the algorithm you wish you use.
 always returns a `tidycpt` object.
 
 ``` r
+
 x <- segment(DataCPSim, method = "pelt")
 class(x)
 #> [1] "tidycpt"
@@ -32,6 +34,7 @@ as `ts` object, and
 returns the set of changepoint indices.
 
 ``` r
+
 changepoints(x)
 #> [1] 547 822 972
 ```
@@ -50,10 +53,8 @@ exists for `tidycpt` objects.
   by the changepoint set.
 
 ``` r
+
 augment(x)
-#> Registered S3 method overwritten by 'tsibble':
-#>   method               from 
-#>   as_tibble.grouped_df dplyr
 #> # A tsibble: 1,096 x 5 [1]
 #> # Groups:    region [4]
 #>    index     y region  .fitted  .resid
@@ -77,6 +78,7 @@ augment(x)
   `param_`.
 
 ``` r
+
 tidy(x)
 #> # A tibble: 4 × 10
 #>   region  num_obs   min   max  mean    sd begin   end param_mu param_sigma_hatsq
@@ -93,11 +95,12 @@ tidy(x)
   function that was used.
 
 ``` r
+
 glance(x)
 #> # A tibble: 1 × 8
 #>   pkg      version algorithm seg_params model_name criteria fitness elapsed_time
 #>   <chr>    <pckg_> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
-#> 1 changep… 2.3     PELT      <list [1]> meanvar    MBIC       9403. 0.23 secs
+#> 1 changep… 2.3     PELT      <list [1]> meanvar    MBIC       9403. 0.245 secs
 ```
 
 ### Other methods
@@ -108,6 +111,7 @@ defined by the changepoint set clearly demarcated, and the means within
 each region also indicated.
 
 ``` r
+
 plot(x)
 ```
 
@@ -124,6 +128,7 @@ returns a named vector with the value of the penalized objective
 function used.
 
 ``` r
+
 fitness(x)
 #>     MBIC 
 #> 9403.391
@@ -177,6 +182,7 @@ simply wraps the `cpt.meanvar()` function from the `changepoint`
 package.
 
 ``` r
+
 x |>
   as.segmenter() |>
   str()
@@ -193,7 +199,7 @@ x |>
 #>   ..@ param.est:List of 2
 #>   .. ..$ mean    : num [1:4] 35.3 58.2 96.8 156.5
 #>   .. ..$ variance: num [1:4] 127 371 921 2406
-#>   ..@ date     : chr "Thu Feb  5 20:48:27 2026"
+#>   ..@ date     : chr "Mon May  4 18:09:42 2026"
 #>   ..@ version  : chr "2.3"
 ```
 
@@ -211,6 +217,7 @@ The `model` object in this case is created by
 and is of class `mod_cpt`.
 
 ``` r
+
 x |>
   as.model() |>
   str()

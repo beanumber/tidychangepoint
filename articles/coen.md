@@ -3,10 +3,12 @@
 Please see Baumer and Suarez Sierra (2024) for more details.
 
 ``` r
+
 library(tidychangepoint)
 ```
 
 ``` r
+
 plot(bogota_pm)
 ```
 
@@ -15,6 +17,7 @@ plot(bogota_pm)
 ## Using the original implementation of Coen’s algorithm
 
 ``` r
+
 x <- segment(bogota_pm, method = "coen", num_generations = 5)
 #> Warning: `segment_coen()` was deprecated in tidychangepoint 0.0.1.
 #> ℹ Please use `segment_ga_coen()` instead.
@@ -27,9 +30,6 @@ x <- segment(bogota_pm, method = "coen", num_generations = 5)
 changepoints(x)
 #> [1]  306  491  612  708  739  773 1033
 plot(x)
-#> Registered S3 method overwritten by 'tsibble':
-#>   method               from 
-#>   as_tibble.grouped_df dplyr
 ```
 
 ![](coen_files/figure-html/unnamed-chunk-3-1.png)
@@ -37,6 +37,7 @@ plot(x)
 ## Using the GA implementation of Coen’s algorithm
 
 ``` r
+
 y <- segment(bogota_pm, method = "ga-coen", maxiter = 50, run = 10)
 #> Seeding initial population with probability: 0.0145985401459854
 changepoints(y)
@@ -48,6 +49,7 @@ plot(y)
 ![](coen_files/figure-html/unnamed-chunk-4-1.png)
 
 ``` r
+
 diagnose(y$model)
 #> Warning: Removed 1 row containing missing values or values outside the scale range
 #> (`geom_vline()`).
@@ -56,6 +58,7 @@ diagnose(y$model)
 ![](coen_files/figure-html/unnamed-chunk-4-2.png)
 
 ``` r
+
 tidy(y)
 #> # A tibble: 3 × 12
 #>   region      num_obs   min   max  mean    sd begin   end param_alpha param_beta
@@ -68,7 +71,7 @@ glance(y)
 #> # A tibble: 1 × 8
 #>   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time
 #>   <chr> <pckg_vrs> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
-#> 1 GA    3.2.5      Genetic   <list [1]> nhpp       BMDL       1934. 35.719 secs
+#> 1 GA    3.2.5      Genetic   <list [1]> nhpp       BMDL       1934. 37.102 secs
 ```
 
 ### Changing the threshold
@@ -84,6 +87,7 @@ higher. You can also experiment with the `popSize` argument to
 [`segment()`](https://beanumber.github.io/tidychangepoint/reference/segment.md).
 
 ``` r
+
 z <- segment(
   bogota_pm, 
   method = "ga-coen", 
@@ -100,6 +104,7 @@ plot(z)
 ![](coen_files/figure-html/unnamed-chunk-5-1.png)
 
 ``` r
+
 diagnose(z$model)
 #> Warning: Removed 1 row containing missing values or values outside the scale range
 #> (`geom_vline()`).
@@ -108,6 +113,7 @@ diagnose(z$model)
 ![](coen_files/figure-html/unnamed-chunk-5-2.png)
 
 ``` r
+
 tidy(z)
 #> # A tibble: 10 × 12
 #>    region     num_obs   min   max  mean    sd begin   end param_alpha param_beta
@@ -127,10 +133,10 @@ glance(z)
 #> # A tibble: 1 × 8
 #>   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time
 #>   <chr> <pckg_vrs> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
-#> 1 GA    3.2.5      Genetic   <list [1]> nhpp       BMDL        654. 4.833 secs
+#> 1 GA    3.2.5      Genetic   <list [1]> nhpp       BMDL        654. 4.934 secs
 ```
 
 Baumer, Benjamin S., and Biviana Marcela Suarez Sierra. 2024.
-“Tidychangepoint: A Unified Framework for Analyzing Changepoint
-Detection in Univariate Time Series.”
+*Tidychangepoint: A Unified Framework for Analyzing Changepoint
+Detection in Univariate Time Series*.
 <https://beanumber.github.io/changepoint-paper/>.

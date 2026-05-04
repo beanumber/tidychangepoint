@@ -53,12 +53,12 @@ summary(x)
 #> → y: Contains 366 observations, ranging from 6.86  to 11.18  .
 #> ℹ Segmenter (class tidycptga )
 #> → A: Used the Genetic algorithm from the changepointGA  package.
-#> → τ: Found 2 changepoint(s).
-#> → f: Reported a fitness value of -368.18  using the BIC penalty.
+#> → τ: Found 3 changepoint(s).
+#> → f: Reported a fitness value of -371.64  using the BIC penalty.
 #> ℹ Model
 #> → M: Fit the arima  model.
-#> → θ: Estimated 2 parameter(s), for each of 3 region(s).
+#> → θ: Estimated 2 parameter(s), for each of 4 region(s).
 changepoints(x)
-#> [1]  44 329
+#> [1]  42 253 331
 # }
 ```

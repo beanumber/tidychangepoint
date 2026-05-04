@@ -34,6 +34,7 @@ indicating the region
 ## Examples
 
 ``` r
+
 cpt <- fit_meanshift_norm(CET, tau = 330)
 regions(cpt)
 #> [1] [1,330)   [330,367)

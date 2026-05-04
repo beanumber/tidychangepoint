@@ -20,6 +20,9 @@ Useful links:
 
 Authors:
 
+- Benjamin S. Baumer <ben.baumer@gmail.com>
+  ([ORCID](https://orcid.org/0000-0002-3279-0516)) \[copyright holder\]
+
 - Biviana Marcela Suárez Sierra <bmsuarezs@eafit.edu.co>
   ([ORCID](https://orcid.org/0000-0003-2151-3537))
 

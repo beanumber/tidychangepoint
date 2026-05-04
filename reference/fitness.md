@@ -80,7 +80,7 @@ x <- segment(DataCPSim, method = "ga", maxiter = 10)
 # Retrieve its fitness value
 fitness(x)
 #>      BIC 
-#> 16257.74 
+#> 16580.24 
 
 # \donttest{
 # Segment a times series using a genetic algorithm

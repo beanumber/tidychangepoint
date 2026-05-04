@@ -5,18 +5,21 @@
 To install `tidychangepoint` from CRAN:
 
 ``` r
+
 install.packages("tidychangepoint")
 ```
 
 To install the development version of `tidychangepoint`:
 
 ``` r
+
 remotes::install_github("beanumber/tidychangepoint")
 ```
 
 To load it:
 
 ``` r
+
 library(tidychangepoint)
 ```
 
@@ -38,6 +41,7 @@ object, and a string indicating the algorithm you wish you use.
 always returns a `tidycpt` object.
 
 ``` r
+
 x <- segment(CET, method = "pelt", model = fit_meanshift_norm, minseglen = 3)
 class(x)
 ```
@@ -53,6 +57,7 @@ as `ts` object, and
 returns the set of changepoint indices.
 
 ``` r
+
 changepoints(x)
 ```
 
@@ -64,6 +69,7 @@ If the original time series has time labels, we can also retrieve that
 information.
 
 ``` r
+
 changepoints(x, use_labels = TRUE)
 ```
 
@@ -77,6 +83,7 @@ function returns the both the value and the name of the objective
 function that the algorithm used to find the optimal changepoint set.
 
 ``` r
+
 fitness(x)
 ```
 
@@ -89,6 +96,7 @@ The [`tidy()`](https://generics.r-lib.org/reference/tidy.html) method
 shows the fitted parameters values for each region.
 
 ``` r
+
 tidy(x)
 ```
 
@@ -107,6 +115,7 @@ tidy(x)
 ## Algorithmic coverage
 
 ``` r
+
 ls_methods()
 ```
 
@@ -132,6 +141,7 @@ ls_methods()
 ```
 
 ``` r
+
 ls_coverage() |>
   dplyr::group_by(method) |>
   dplyr::summarize(
@@ -142,23 +152,23 @@ ls_coverage() |>
   knitr::kable()
 ```
 
-| method      | models                                                                                                                                                              | penalties                                                 |
-|:------------|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------|:----------------------------------------------------------|
-| binseg      | fit_meanvar                                                                                                                                                         | None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS |
-| coen        | fit_nhpp                                                                                                                                                            | BMDL                                                      |
-| cptga       | NA                                                                                                                                                                  | NA                                                        |
-| ga          | fit_arima, fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1 | SIC, AIC, BIC, HQC, MBIC, MDL                             |
-| ga-coen     | fit_nhpp                                                                                                                                                            | BMDL                                                      |
-| ga-shi      | fit_meanshift_norm_ar1                                                                                                                                              | BIC                                                       |
-| manual      | fit_meanshift_norm                                                                                                                                                  | BIC                                                       |
-| null        | fit_meanshift_norm                                                                                                                                                  | BIC                                                       |
-| pelt        | fit_meanshift_norm, fit_meanvar                                                                                                                                     | None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS |
-| random      | fit_arima, fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1 | SIC, AIC, BIC, HQC, MBIC, MDL                             |
-| segmented   | NA                                                                                                                                                                  | NA                                                        |
-| segneigh    | fit_meanvar                                                                                                                                                         | None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS |
-| single-best | fit_meanvar                                                                                                                                                         | None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS |
-| strucchange | NA                                                                                                                                                                  | NA                                                        |
-| wbs         | NA                                                                                                                                                                  | NA                                                        |
+| method | models | penalties |
+|:---|:---|:---|
+| binseg | fit_meanvar | None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS |
+| coen | fit_nhpp | BMDL |
+| cptga | NA | NA |
+| ga | fit_arima, fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1 | SIC, AIC, BIC, HQC, MBIC, MDL |
+| ga-coen | fit_nhpp | BMDL |
+| ga-shi | fit_meanshift_norm_ar1 | BIC |
+| manual | fit_meanshift_norm | BIC |
+| null | fit_meanshift_norm | BIC |
+| pelt | fit_meanshift_norm, fit_meanvar | None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS |
+| random | fit_arima, fit_lmshift, fit_lmshift_ar1, fit_meanshift_lnorm, fit_meanshift_norm, fit_meanshift_norm_ar1, fit_meanvar, fit_nhpp, fit_trendshift, fit_trendshift_ar1 | SIC, AIC, BIC, HQC, MBIC, MDL |
+| segmented | NA | NA |
+| segneigh | fit_meanvar | None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS |
+| single-best | fit_meanvar | None, SIC, BIC, MBIC, AIC, HQC, Asymptotic, Manual, CROPS |
+| strucchange | NA | NA |
+| wbs | NA | NA |
 
 ## References
 
@@ -168,6 +178,7 @@ paper](https://beanumber.github.io/changepoint-paper/) for more details.
 To cite the package, use the following information:
 
 ``` r
+
 citation("tidychangepoint")
 ```
 

@@ -1,6 +1,13 @@
 # Changelog
 
+## tidychangepoint 1.0.5
+
+- Replaced `changepointGA::ARIMA.BIC` with
+  [`changepointGA::arima_bic()`](https://rdrr.io/pkg/changepointGA/man/arima_bic.html)
+
 ## tidychangepoint 1.0.4
+
+CRAN release: 2026-02-05
 
 - Improved support for `segmented` algorithms `stelpmented()` and
   `selgmented()`
@@ -52,7 +59,7 @@ CRAN release: 2025-01-31
 - Added
   [`regions()`](https://beanumber.github.io/tidychangepoint/reference/regions.md)
   generic function
-- Padding is always 1 and $n + 1$, and intervals are always closed on
+- Padding is always 1 and $`n+1`$, and intervals are always closed on
   the left and open on the right.
 - `cut_inclusive()` is now
   [`cut_by_tau()`](https://beanumber.github.io/tidychangepoint/reference/cut_by_tau.md).

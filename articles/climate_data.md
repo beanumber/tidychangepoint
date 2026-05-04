@@ -4,6 +4,7 @@ The `tidychangepoint` package (Baumer and Suarez Sierra 2024) provides
 three climate-related time series.
 
 ``` r
+
 library(tidychangepoint)
 ```
 
@@ -17,6 +18,7 @@ These data go back to 1659, and a simple plot illustrates the increase
 in temperature in recent years.
 
 ``` r
+
 plot(CET)
 ```
 
@@ -28,16 +30,17 @@ since the genetic algorithm is random, results vary. Shi, et al. used a
 `maxiter` value of 50,000 in order to obtain the results used in the
 paper. Here, we use a much lower value solely in the interest of
 computational speed. Note that this algorithm is fitting a “meanshift”
-model, which estimates the mean $\mu_{i}$ for each of the regions
+model, which estimates the mean $`\mu_i`$ for each of the regions
 defined by the changepoint set. The objective function employs the `BIC`
 penalty. One departure from Shi’s implementation is the use of the
 [`log_gabin_population()`](https://beanumber.github.io/tidychangepoint/reference/build_gabin_population.md)
 function to generate the first generation of 200 (i.e. `popSize`)
 possible changepoint sets. Each data point is chosen uniformly at random
-with probability equal to $\ln N$, where $N$ is the number of
+with probability equal to $`\ln{N}`$, where $`N`$ is the number of
 observations (362, in this case).
 
 ``` r
+
 trend_wn <- CET |>
   segment(
     method = "ga", 
@@ -55,6 +58,7 @@ trend_wn <- CET |>
 Compare this with the changepoint set discovered by the algorithm:
 
 ``` r
+
 changepoints(trend_wn)
 ```
 
@@ -62,6 +66,7 @@ changepoints(trend_wn)
     ##   34   42  269  336
 
 ``` r
+
 changepoints(trend_wn, use_labels = TRUE) |>
   as_year()
 ```
@@ -74,6 +79,7 @@ function returns a named vector with the value of the objective function
 from the discovered changepoint set.
 
 ``` r
+
 fitness(trend_wn)
 ```
 
@@ -84,12 +90,9 @@ Information about the regions, including their means, are shown by the
 [`tidy()`](https://generics.r-lib.org/reference/tidy.html) function.
 
 ``` r
+
 tidy(trend_wn)
 ```
-
-    ## Registered S3 method overwritten by 'tsibble':
-    ##   method               from 
-    ##   as_tibble.grouped_df dplyr
 
     ## # A tibble: 5 × 9
     ##   region    num_obs   min   max  mean    sd begin   end param_mu
@@ -107,13 +110,14 @@ set. This includes the fitness, the elapsed time, and the parameters
 used by the segmenter.
 
 ``` r
+
 glance(trend_wn)
 ```
 
     ## # A tibble: 1 × 8
     ##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time
     ##   <chr> <pckg_vrs> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
-    ## 1 GA    3.2.5      Genetic   <list [1]> meanshift… BIC         668. 8.202 secs
+    ## 1 GA    3.2.5      Genetic   <list [1]> meanshift… BIC         668. 8.498 secs
 
 However, we can also run
 [`glance()`](https://generics.r-lib.org/reference/glance.html) on the
@@ -125,6 +129,7 @@ It is important to note that only one of these metrics (in this case,
 BIC) is actually the one used by the segmenter!
 
 ``` r
+
 trend_wn |>
   as.model() |>
   glance()
@@ -133,13 +138,14 @@ trend_wn |>
     ## # A tibble: 1 × 11
     ##   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
     ##   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-    ## 1 tidych… 1.0.4   meanshif… <dbl>         4 0.556  -304.  629.  668.  669.  678.
+    ## 1 tidych… 1.0.5   meanshif… <dbl>         4 0.556  -304.  629.  668.  669.  678.
 
 The [`plot()`](https://rdrr.io/r/graphics/plot.default.html) function
 returns an informative plot of the original time series, with the
 changepoint set and the corresponding regions demarcated.
 
 ``` r
+
 plot(trend_wn, use_time_index = TRUE)
 ```
 
@@ -151,9 +157,9 @@ plot(trend_wn, use_time_index = TRUE)
 #### Comparison to reported values
 
 The changepoint set reported by Shi et al. (2022) is
-$\{ 1700,1739,1988\}$. For that configuration with the trendshift model
-with white noise errors, Table 2 of Shi et al. (2022) reports model
-variance ${\widehat{\sigma}}^{2}$ of 0.291, a log-likelihood of -290.02,
+$`\{1700, 1739, 1988\}`$. For that configuration with the trendshift
+model with white noise errors, Table 2 of Shi et al. (2022) reports
+model variance $`\hat{\sigma}^2`$ of 0.291, a log-likelihood of -290.02,
 BIC of 650.74, and MDL of 653.07.
 
 Fitting the trendshift model with white noise errors and running the
@@ -161,6 +167,7 @@ Fitting the trendshift model with white noise errors and running the
 reveals an exact match to the reported figures.
 
 ``` r
+
 target_cpts <- c(1700, 1739, 1988)
 ids <- time2tau(target_cpts, as_year(time(CET)))
 CET |>
@@ -171,12 +178,13 @@ CET |>
     ## # A tibble: 1 × 11
     ##   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
     ##   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-    ## 1 tidych… 1.0.4   trendshi… <dbl>         3 0.538  -292.  608.  655.  630.  658.
+    ## 1 tidych… 1.0.5   trendshi… <dbl>         3 0.538  -292.  608.  655.  630.  658.
 
 Modifying the model to incorporate AR(1) lagged errors also matches the
 figures from Table 2.
 
 ``` r
+
 CET |>
   fit_trendshift_ar1(tau = ids) |>
   glance()
@@ -185,7 +193,7 @@ CET |>
     ## # A tibble: 1 × 11
     ##   pkg     version algorithm params num_cpts  rmse logLik   AIC   BIC  MBIC   MDL
     ##   <chr>   <pckg_> <chr>     <list>    <int> <dbl>  <dbl> <dbl> <dbl> <dbl> <dbl>
-    ## 1 tidych… 1.0.4   trendshi… <dbl>         3 0.537  -291.  608.  658.  628.  661.
+    ## 1 tidych… 1.0.5   trendshi… <dbl>         3 0.537  -291.  608.  658.  628.  661.
 
 ### Bogotá particulate matter
 
@@ -193,16 +201,18 @@ The `bogota_pm` data set contains daily measurement on particulate
 matter in Bogotá, Colombia over the three-year period from 2018–2020.
 
 ``` r
+
 plot(bogota_pm)
 ```
 
 ![](climate_data_files/figure-html/bogota-plot-1.png)
 
-Here, we use the genetic algorithm from Taimal, Suárez-Sierra, and
-Rivera (2023) to identify changepoint sets. Note that the model being
-fit here is the NHPP model, along with the BMDL penalty function.
+Here, we use the genetic algorithm from Taimal et al. (2023) to identify
+changepoint sets. Note that the model being fit here is the NHPP model,
+along with the BMDL penalty function.
 
 ``` r
+
 bog_cpt <- bogota_pm |>
   segment(
     method = "ga-coen",
@@ -214,15 +224,17 @@ bog_cpt <- bogota_pm |>
     ## Seeding initial population with probability: 0.0145985401459854
 
 ``` r
+
 glance(bog_cpt)
 ```
 
     ## # A tibble: 1 × 8
     ##   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time
     ##   <chr> <pckg_vrs> <chr>     <list>     <chr>      <chr>      <dbl> <drtn>      
-    ## 1 GA    3.2.5      Genetic   <list [1]> nhpp       BMDL       1988. 26.374 secs
+    ## 1 GA    3.2.5      Genetic   <list [1]> nhpp       BMDL       1988. 27.347 secs
 
 ``` r
+
 plot(bog_cpt, use_time_index = TRUE)
 ```
 
@@ -235,6 +247,7 @@ We compare the quality of the fit of the NHPP model using
 [`diagnose()`](https://beanumber.github.io/tidychangepoint/reference/diagnose.md).
 
 ``` r
+
 bog_cpt |>
   as.model() |>
   diagnose()
@@ -251,6 +264,7 @@ The times series `mde_rain_monthly` contains monthly precipitation
 readings from locations in and around the city of Medellín, Colombia.
 
 ``` r
+
 plot(mde_rain_monthly)
 ```
 
@@ -259,10 +273,12 @@ plot(mde_rain_monthly)
 Here, we fit the deterministic PELT algorithm (Killick and Eckley 2014).
 
 ``` r
+
 mde_cpt <- segment(mde_rain_monthly, method = "pelt")
 ```
 
 ``` r
+
 plot(mde_cpt, use_time_index = TRUE)
 ```
 
@@ -274,8 +290,8 @@ plot(mde_cpt, use_time_index = TRUE)
 ## References
 
 Baumer, Benjamin S., and Biviana Marcela Suarez Sierra. 2024.
-“Tidychangepoint: A Unified Framework for Analyzing Changepoint
-Detection in Univariate Time Series.”
+*Tidychangepoint: A Unified Framework for Analyzing Changepoint
+Detection in Univariate Time Series*.
 <https://beanumber.github.io/changepoint-paper/>.
 
 Killick, Rebecca, and Idris A. Eckley. 2014. “changepoint: An R Package
@@ -290,5 +306,5 @@ Series.” *Journal of Climate* 35 (19): 6329–42.
 Taimal, Carlos A, Biviana Marcela Suárez-Sierra, and Juan Carlos Rivera.
 2023. “An Exploration of Genetic Algorithms Operators for the Detection
 of Multiple Change-Points of Exceedances Using Non-Homogeneous Poisson
-Processes and Bayesian Methods.” In *Colombian Conference on Computing*,
-230–58. Springer. <https://doi.org/10.1007/978-3-031-47372-2_20>.
+Processes and Bayesian Methods.” *Colombian Conference on Computing*,
+230–58. <https://doi.org/10.1007/978-3-031-47372-2_20>.

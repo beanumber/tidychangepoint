@@ -75,7 +75,7 @@ segment(CET, method = "ga", population = f, maxiter = 5)
 #> [13] "suggestions"   "population"    "elitism"       "pcrossover"   
 #> [17] "pmutation"     "optim"         "fitness"       "summary"      
 #> [21] "bestSol"       "fitnessValue"  "solution"     
-#> ℹ Model: A meanshift_norm  model with 5 region(s).
+#> ℹ Model: A meanshift_norm  model with 4 region(s).
 #> → Each region has 1 parameter(s).
 #> → The model has 1 global parameter(s).
 f <- log_gabin_population(CET)
@@ -94,7 +94,7 @@ segment(CET, method = "ga", population = f, maxiter = 10)
 #> [13] "suggestions"   "population"    "elitism"       "pcrossover"   
 #> [17] "pmutation"     "optim"         "fitness"       "summary"      
 #> [21] "bestSol"       "fitnessValue"  "solution"     
-#> ℹ Model: A meanshift_norm  model with 6 region(s).
+#> ℹ Model: A meanshift_norm  model with 4 region(s).
 #> → Each region has 1 parameter(s).
 #> → The model has 1 global parameter(s).
 ```

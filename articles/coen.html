@@ -20,7 +20,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">tidychangepoint</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.4</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.0.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -88,10 +88,7 @@
 <span><span class="co">#&gt;   |                                                                    |                                                            |   0%  |                                                                    |===============                                             |  25%  |                                                                    |==============================                              |  50%  |                                                                    |=============================================               |  75%  |                                                                    |============================================================| 100%</span></span>
 <span><span class="fu"><a href="../reference/changepoints.html">changepoints</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1]  306  491  612  708  739  773 1033</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Registered S3 method overwritten by 'tsibble':</span></span>
-<span><span class="co">#&gt;   method               from </span></span>
-<span><span class="co">#&gt;   as_tibble.grouped_df dplyr</span></span></code></pre></div>
+<span><span class="fu"><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></code></pre></div>
 <p><img src="coen_files/figure-html/unnamed-chunk-3-1.png" class="r-plt" alt="" width="700"></p>
 </div>
 <div class="section level2">
@@ -123,7 +120,7 @@
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
 <span><span class="co">#&gt;   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;pckg_vrs&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> GA    3.2.5      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> nhpp       BMDL       <span style="text-decoration: underline;">1</span>934. 35.719 secs</span></span></code></pre></div>
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> GA    3.2.5      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> nhpp       BMDL       <span style="text-decoration: underline;">1</span>934. 37.102 secs</span></span></code></pre></div>
 <div class="section level3">
 <h3 id="changing-the-threshold">Changing the threshold<a class="anchor" aria-label="anchor" href="#changing-the-threshold"></a>
 </h3>
@@ -174,12 +171,12 @@ experiment with the <code>popSize</code> argument to
 <span><span class="co">#&gt; <span style="color: #949494;"># A tibble: 1 × 8</span></span></span>
 <span><span class="co">#&gt;   pkg   version    algorithm seg_params model_name criteria fitness elapsed_time</span></span>
 <span><span class="co">#&gt;   <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span> <span style="color: #949494; font-style: italic;">&lt;pckg_vrs&gt;</span> <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;list&gt;</span>     <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;chr&gt;</span>      <span style="color: #949494; font-style: italic;">&lt;dbl&gt;</span> <span style="color: #949494; font-style: italic;">&lt;drtn&gt;</span>      </span></span>
-<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> GA    3.2.5      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> nhpp       BMDL        654. 4.833 secs</span></span></code></pre></div>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<span><span class="co">#&gt; <span style="color: #BCBCBC;">1</span> GA    3.2.5      Genetic   <span style="color: #949494;">&lt;list [1]&gt;</span> nhpp       BMDL        654. 4.934 secs</span></span></code></pre></div>
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-baumer2024tidy" class="csl-entry">
 Baumer, Benjamin S., and Biviana Marcela Suarez Sierra. 2024.
-<span>“Tidychangepoint: A Unified Framework for Analyzing Changepoint
-Detection in Univariate Time Series.”</span> <a href="https://beanumber.github.io/changepoint-paper/" class="external-link">https://beanumber.github.io/changepoint-paper/</a>.
+<em>Tidychangepoint: A Unified Framework for Analyzing Changepoint
+Detection in Univariate Time Series</em>. <a href="https://beanumber.github.io/changepoint-paper/" class="external-link">https://beanumber.github.io/changepoint-paper/</a>.
 </div>
 </div>
 </div>

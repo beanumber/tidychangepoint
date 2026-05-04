@@ -35,7 +35,7 @@ Fits an ARIMA model using
 
 ## See also
 
-[`changepointGA::ARIMA.BIC()`](https://rdrr.io/pkg/changepointGA/man/ARIMA.BIC.html)
+[`changepointGA::arima_bic()`](https://rdrr.io/pkg/changepointGA/man/arima_bic.html)
 
 Other model-fitting:
 [`fit_lmshift()`](https://beanumber.github.io/tidychangepoint/reference/fit_lmshift.md),

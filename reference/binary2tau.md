@@ -54,7 +54,7 @@ representation of that changepoint set.
 binary2tau(c(0, 0, 1, 0, 1))
 #> [1] 3 5
 binary2tau(round(runif(10)))
-#> [1]  2  4  5  7  8 10
+#> [1]  2  3  9 10
 
 # Recover binary strings from changepoint set indices
 tau2binary(c(7, 17), n = 24)
